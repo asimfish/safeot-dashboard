@@ -1,5 +1,5 @@
 {
- "updated": "2026-09-05T02:25:00",
+ "updated": "2026-09-05T03:09:44",
  "goals": [
   {
    "id": "G1",
@@ -22,11 +22,11 @@
   {
    "id": "G3",
    "name": "异构多约束 SOTA",
-   "pct": 70,
+   "pct": 90,
    "status": "run",
-   "summary": "硬(花瓶不可逆)/ 软(hazards 可恢复)分通道在 PG2/CG2 成立,c 旋钮压软成本 28.8 -> 0.9;VLA 侧多成本类型已覆盖",
-   "evidence": "CG2 .75g c.02/.05/.10 软 28.8/3.2/0.9;G4 §10",
-   "next": "把多约束 SOTA(SDAC/SRCPO)拉进 312 集严格协议对照;PB2(双硬通道)三族同协议趴地,不做主张"
+   "summary": "硬/软分通道成立;多约束 SOTA SDAC/SRCPO 已上 312 集协议:PG2 1.72@13.7% / 5.19@33.7%,CG2 7.89@42.3% / 8.64@53.9%,被全部方法支配",
+   "evidence": "HARVEST §23;tab_frontier(38 臂);CG2 .75g c 扫描软 28.8/3.2/0.9",
+   "next": "PB2 三族趴地不做主张;剩余 = 写作(异构基准叙事)"
   },
   {
    "id": "G4",
@@ -48,12 +48,17 @@
   }
  ],
  "focus": [
-  "G1 加密扫描 13 路在跑(~08:30);G3 SDAC/SRCPO 312 集协议 18 车道在跑(~03:30)",
-  "看板已上线并接 launchd 10 分钟推送;Mac 休眠期间服务器快照停更",
-  "写作:FRONTIER_WRITEUP_EN.md + tab_frontier.tex 并入论文主文(队列 #4)",
-  "【待 owner 决策】论文实验章节是否切换为 typed 实现叙事(草稿 sec_frontier.tex 已就位,未 \\input 进主文)"
+  "G1 加密扫描 13 路在跑(负载高,~10:00 落地)",
+  "G3 多约束 SOTA 严格协议完成:SDAC/SRCPO 逐集违规 13-54%",
+  "【待 owner 决策】论文实验章节是否切换为 typed 实现叙事(sec_frontier.tex 已含 SDAC/SRCPO 段)"
  ],
  "verdicts": [
+  {
+   "date": "09-05",
+   "topic": "多约束 SOTA",
+   "verdict": "SDAC/SRCPO 终档同预算严格协议:回报与 W0 锚点一致,逐集硬违规 13-54%,被 FDPI/SAC 族/typed 全部支配;期望聚合预算对不可逆通道无机制",
+   "evidence": "HARVEST §23;fig_frontier_paper"
+  },
   {
    "date": "09-05",
    "topic": "基线自身前沿",
@@ -140,9 +145,9 @@
   {
    "goal": "G3",
    "task": "SDAC/SRCPO 检查点盘点 -> 能否复用 312 集协议评估",
-   "status": "run",
-   "eta": "09-05 ~03:30",
-   "note": "SDAC/SRCPO 终档 model_2000000(与我方同 2M 步)18 车道 x 3 块 x 104 集在跑;流水线已接入"
+   "status": "done",
+   "eta": "-",
+   "note": "54 块到齐;结论:多约束 SOTA 逐集违规 13-54%,被全部方法支配"
   },
   {
    "goal": "G1/G5",
@@ -174,6 +179,10 @@
   }
  ],
  "changelog": [
+  {
+   "time": "09-05 03:09",
+   "text": "SDAC/SRCPO 54 块收齐入图入表(38 合并臂);G3 升至 90%"
+  },
   {
    "time": "09-05 02:25",
    "text": "论文前沿章节草稿 sec_frontier.tex 完成并独立编译通过;映射表把 (δ, 门控, c) 落到 (S 膨胀, transition 级容量, D 吸收)"
