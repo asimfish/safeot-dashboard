@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SafeOT ????</title>
+<style>
+  :root { color-scheme: light; --blue:#2563eb; --green:#059669; --amber:#d97706; --red:#dc2626; --muted:#64748b; --line:#d7dbe0; }
+  * { box-sizing: border-box; }
+  body { margin:0; color:#1a1a2e; background:#fafbfc; font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif; line-height:1.55; }
+  .layout { display:flex; max-width:1680px; margin:0 auto; }
+  nav.sidebar { position:sticky; top:0; align-self:flex-start; width:220px; min-height:100vh; padding:16px 10px; border-right:1px solid var(--line); background:#f8fafc; font-size:12.5px; }
+  nav.sidebar a { display:block; padding:4px 8px; color:#334155; text-decoration:none; border-radius:4px; }
+  nav.sidebar a:hover { background:#e2e8f0; }
+  nav.sidebar .nav-title { font-weight:700; margin:8px 0 4px; color:#1e293b; }
+  main.content { flex:1; padding:24px 18px 40px; max-width:1460px; }
+  h1 { font-size:23px; border-bottom:3px solid var(--blue); padding-bottom:8px; margin-bottom:6px; }
+  h2 { margin-top:30px; padding:7px 10px; border-left:4px solid var(--blue); background:#eef2ff; font-size:17px; }
+  h3 { margin:18px 0 6px; font-size:14.5px; color:#334155; }
+  .meta,.small { color:var(--muted); font-size:12px; }
+  .banner { display:grid; grid-template-columns:repeat(5,1fr); gap:12px; margin:14px 0; }
+  .card { padding:12px 14px; border:1px solid var(--line); border-radius:8px; background:#fff; }
+  .card .t { font-weight:700; font-size:13px; color:#1e293b; }
+  .card .pct { font-size:22px; font-weight:700; margin:2px 0; }
+  .bar { height:8px; background:#e5e7eb; border-radius:4px; overflow:hidden; margin:4px 0 6px; }
+  .bar > i { display:block; height:100%; background:var(--blue); }
+  .pill { display:inline-block; padding:1px 8px; border-radius:10px; font-size:11px; font-weight:600; color:#fff; }
+  .pill.done { background:var(--green); } .pill.run { background:var(--blue); } .pill.wait { background:var(--amber); } .pill.neg { background:var(--red); } .pill.idle { background:var(--muted); }
+  .table-wrap { overflow-x:auto; border:1px solid var(--line); background:#fff; margin-bottom:8px; border-radius:6px; }
+  table { width:100%; border-collapse:collapse; font-size:12.5px; }
+  th { padding:6px 8px; color:#fff; background:#1e293b; text-align:left; white-space:nowrap; }
+  td { padding:5px 8px; border-top:1px solid #eef0f3; vertical-align:top; }
+  tr:hover td { background:#f8fafc; }
+  td.num { text-align:right; font-variant-numeric:tabular-nums; white-space:nowrap; }
+  .ok { color:var(--green); font-weight:600; } .bad { color:var(--red); font-weight:600; } .warn { color:var(--amber); font-weight:600; }
+  .gpu { display:inline-block; width:44px; text-align:center; padding:2px 0; border-radius:4px; font-size:11px; margin:1px; color:#fff; background:#9ca3af; }
+  .gpu.busy { background:var(--blue); } .gpu.other { background:#a78bfa; }
+  figure { margin:10px 0; background:#fff; border:1px solid var(--line); border-radius:6px; padding:8px; }
+  figure img { width:100%; max-width:1200px; display:block; }
+  figcaption { font-size:12px; color:var(--muted); margin-top:6px; }
+  ul.q { margin:6px 0; padding-left:20px; font-size:13px; } ul.q li { margin:3px 0; }
+  code { background:#f1f5f9; padding:1px 4px; border-radius:3px; font-size:12px; }
+  .stale { color:var(--red); }
+</style>
+</head>
+<body>
+<div class="layout">
+<nav class="sidebar">
+  <div class="nav-title">??</div>
+  <a href="#sec0">§0 ?????</a>
+  <a href="#secS">§S ???????</a>
+  <a href="#sec1">§1 ????(????)</a>
+  <a href="#sec2">§2 ????</a>
+  <a href="#sec3">§3 G4 VLA ??</a>
+  <a href="#sec4">§4 ????(?????)</a>
+  <a href="#sec5">§5 ????</a>
+  <a href="#sec6">§6 ????</a>
+  <div class="nav-title" style="margin-top:14px">???</div>
+  <a href="https://github.com/asimfish/safeot-dashboard/tree/data" target="_blank">data ??(JSON ??)</a>
+  <a href="https://github.com/asimfish/safeot-dashboard" target="_blank">??</a>
+</nav>
+<main class="content">
+  <h1>SafeOT ????</h1>
+  <div class="meta">???? <span id="upd-status">—</span> · ????? <span id="upd-runs">—</span> · ??? 60 ??????? · <span id="stale" class="stale"></span></div>
+
+  <h2 id="sec0">§0 ?????</h2>
+  <div class="banner" id="goals"></div>
+  <h3>????</h3>
+  <ul class="q" id="focus"></ul>
+
+  <h2 id="secS">§S ???????</h2>
+  <div class="table-wrap"><table id="gpu"><thead><tr><th>???</th><th>?</th><th>????</th><th>??</th></tr></thead><tbody></tbody></table></div>
+  <h3>????</h3>
+  <div class="table-wrap"><table id="runs"><thead><tr><th>run</th><th>??</th><th>??/??</th><th>??</th><th>?? 32 ???</th><th>104 ???</th><th>?????</th></tr></thead><tbody></tbody></table></div>
+  <h3>??????</h3>
+  <ul class="q" id="lanes"></ul>
+
+  <h2 id="sec1">§1 ????(???312 ?/?????????? FDPI ?????)</h2>
+  <figure><img id="fig" alt="frontier"><figcaption>?? vs ??????????=typed(???),??=???? 25/?;??=FDPI,???=SAC-Lag,???=SAC-Pen;??=???????????;???=typed ??? Pareto ???</figcaption></figure>
+  <div class="table-wrap"><table id="frontier"><thead><tr><th>??</th><th>??</th><th>??</th><th>n</th><th>??</th><th>???</th><th>??</th><th>???/?</th><th>???</th></tr></thead><tbody></tbody></table></div>
+
+  <h2 id="sec2">§2 ????</h2>
+  <div class="table-wrap"><table id="verdicts"><thead><tr><th>??</th><th>??</th><th>??</th><th>??</th></tr></thead><tbody></tbody></table></div>
+
+  <h2 id="sec3">§3 G4 VLA ??(Safety-CHORES,n=4 ??)</h2>
+  <div class="table-wrap"><table id="vla"><thead><tr><th>??</th><th>?? SR / ??</th><th>?? SR / ??</th><th>?SR</th><th>???</th><th>??</th></tr></thead><tbody></tbody></table></div>
+
+  <h2 id="sec4">§4 ????(?????;??????)</h2>
+  <div class="table-wrap"><table id="queue"><thead><tr><th>#</th><th>??</th><th>??</th><th>??</th><th>??</th><th>??</th></tr></thead><tbody></tbody></table></div>
+
+  <h2 id="sec5">§5 ????</h2>
+  <div class="table-wrap"><table id="changelog"><thead><tr><th>??</th><th>??</th></tr></thead><tbody></tbody></table></div>
+
+  <h2 id="sec6">§6 ????</h2>
+  <ul class="q">
+    <li>?????(<code>runs.json</code>:GPU????????/??/???)? Mac ? <code>update_dashboard.sh</code> ? 10 ?? SSH ?????? <code>data</code> ??;Mac ????????,??????????????</li>
+    <li>????(<code>status.json</code>:???????????????????)? agent ??????????;?????????? <code>frontier_arms.csv</code> ???????</li>
+    <li>???/?(<code>frontier_pooled.json</code>?<code>fig_frontier_paper.png</code>)? <code>auto_verify ? make_frontier_csv ? make_paper_fig</code> ?????????</li>
+    <li>????:?????????? 3 ???×104 ????????????? 25/?;?????????</li>
+  </ul>
+</main>
+</div>
+<script>
+const RAW = "https://raw.githubusercontent.com/asimfish/safeot-dashboard/data/";
+const $ = (s) => document.querySelector(s);
+const esc = (s) => String(s ?? "").replace(/[&<>]/g, (c) => ({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+const pill = (st) => { const m = {done:"??", run:"??", wait:"??", neg:"???", idle:"??"}; return `<span class="pill ${st}">${m[st] || st}</span>`; };
+const fmtAge = (iso) => { if (!iso) return "—"; const m = Math.round((Date.now() - new Date(iso)) / 60000); return `${iso.replace("T"," ").slice(0,16)}(${m < 60 ? m + " ???" : (m/60).toFixed(1) + " ???"})`; };
+async function getJSON(f) { const r = await fetch(RAW + f + "?v=" + Math.floor(Date.now()/60000), {cache:"no-store"}); if (!r.ok) throw new Error(f); return r.json(); }
+
+function renderStatus(s) {
+  $("#upd-status").textContent = fmtAge(s.updated);
+  $("#goals").innerHTML = s.goals.map(g => `<div class="card"><div class="t">${esc(g.id)} ${esc(g.name)}</div><div class="pct">${g.pct}%</div><div class="bar"><i style="width:${g.pct}%"></i></div>${pill(g.status)} <span class="small">${esc(g.summary)}</span><div class="small" style="margin-top:4px">??:${esc(g.evidence)}</div>${g.next ? `<div class="small">???:${esc(g.next)}</div>` : ""}</div>`).join("");
+  $("#focus").innerHTML = s.focus.map(x => `<li>${esc(x)}</li>`).join("");
+  $("#verdicts tbody").innerHTML = s.verdicts.map(v => `<tr><td>${esc(v.date)}</td><td>${esc(v.topic)}</td><td>${esc(v.verdict)}</td><td class="small">${esc(v.evidence)}</td></tr>`).join("");
+  $("#vla tbody").innerHTML = s.vla.map(v => `<tr><td>${esc(v.task)}</td><td class="num">${esc(v.base)}</td><td class="num">${esc(v.gated)}</td><td class="num">${esc(v.dsr)}</td><td class="num">${esc(v.dcost)}</td><td>${esc(v.verdict)}</td></tr>`).join("");
+  $("#queue tbody").innerHTML = s.queue.map((q, i) => `<tr><td>${i+1}</td><td>${esc(q.goal)}</td><td>${esc(q.task)}</td><td>${pill(q.status)}</td><td>${esc(q.eta)}</td><td class="small">${esc(q.note)}</td></tr>`).join("");
+  $("#changelog tbody").innerHTML = s.changelog.map(c => `<tr><td style="white-space:nowrap">${esc(c.time)}</td><td>${esc(c.text)}</td></tr>`).join("");
+}
+function renderRuns(r) {
+  $("#upd-runs").textContent = fmtAge(r.updated);
+  const ageMin = (Date.now() - new Date(r.updated)) / 60000;
+  $("#stale").textContent = ageMin > 40 ? `???????? ${(ageMin/60).toFixed(1)} ??(Mac ????????????)` : "";
+  $("#gpu tbody").innerHTML = (r.gpu || []).map(srv => `<tr><td>${esc(srv.server)}</td><td>${srv.cards.map(c => `<span class="gpu ${c.mine ? "busy" : (c.used_mb > 2000 ? "other" : "")}" title="${c.used_mb} MiB">g${c.idx} ${Math.round(c.used_mb/1024)}G</span>`).join("")}</td><td class="num">${srv.cards.filter(c=>c.used_mb>2000).length}/${srv.cards.length} ??</td><td class="small">${esc(srv.note)}</td></tr>`).join("");
+  const rows = (r.runs || []).sort((a,b) => (a.done - b.done) || a.name.localeCompare(b.name));
+  $("#runs tbody").innerHTML = rows.length ? rows.map(x => `<tr><td><code>${esc(x.name)}</code></td><td>${esc(x.task)}</td><td>${esc(x.variant)}</td><td class="num">${x.ckpts}/10${x.done ? " ?" : ""}</td><td class="small">${esc(x.scan)}</td><td class="small">${esc(x.confirm)}</td><td class="small">${esc(x.blocks)}</td></tr>`).join("") : `<tr><td colspan="7" class="small">?????</td></tr>`;
+  $("#lanes").innerHTML = (r.lanes && r.lanes.length) ? r.lanes.map(l => `<li><code>${esc(l)}</code></li>`).join("") : "<li class='small'>?????</li>";
+}
+function renderFrontier(f) {
+  $("#fig").src = RAW + "fig_frontier_paper.png?v=" + Math.floor(Date.now()/600000);
+  const T = {pg2:"PointGoal2", cg2:"CarGoal2", pb2:"PointButton2"};
+  $("#frontier tbody").innerHTML = f.rows.map(x => `<tr><td>${T[x.task] || x.task}</td><td>${esc(x.method)}</td><td>${esc(x.knob)}</td><td class="num">${x.n}</td><td class="num">${x.eps}</td><td class="num ${x.rate <= 1 ? "ok" : (x.rate <= 3 ? "warn" : "bad")}">${x.rate.toFixed(2)}%</td><td class="num">${x.ret.toFixed(2)}</td><td class="num">${x.soft.toFixed(1)}</td><td>${x.soft <= 25 ? "?" : "?"}</td></tr>`).join("");
+}
+async function refresh() {
+  try { renderStatus(await getJSON("status.json")); } catch (e) { $("#upd-status").textContent = "????"; }
+  try { renderRuns(await getJSON("runs.json")); } catch (e) { $("#upd-runs").textContent = "????"; }
+  try { renderFrontier(await getJSON("frontier_pooled.json")); } catch (e) { console.warn(e); }
+}
+refresh(); setInterval(refresh, 60000);
+</script>
+</body>
+</html>
