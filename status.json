@@ -1,63 +1,209 @@
 {
-  "updated": "2026-09-05T02:40:00",
-  "goals": [
-    {"id": "G1", "name": "统一多类 SafeRL / 旋钮曲线", "pct": 80, "status": "run",
-     "summary": "三旋钮(边距 d / 接近门控 / 软价格 c)在 PG2、CG2 上画出整条前沿;两端点均为参数空间特例",
-     "evidence": "frontier_arms.csv 117 臂;fig_frontier_paper",
-     "next": "加密扫描点(PG2 d=.85、门控 .9/.75;CG2 门控 .65、.7+c.10)让曲线更平滑;写清参数与 UOT epsilon 的映射"},
-    {"id": "G2", "name": "两端点全面超越", "pct": 100, "status": "done",
-     "summary": "硬端点 FDPI(pf 三点)、软端点 SAC-Pen(c 三点)/ SAC-Lag(lim 三点)全部沿自身旋钮扫描,曲线整体位于 typed 前沿右下方",
-     "evidence": "PG2 typed .8g 17.59@1.07% vs FDPI 9.76@3.53%;CG2 typed .75g/c.10 17.82@0.53% vs FDPI 12.31@6.62%;CG2 无基线配置 <2% 泄漏",
-     "next": ""},
-    {"id": "G3", "name": "异构多约束 SOTA", "pct": 70, "status": "run",
-     "summary": "硬(花瓶不可逆)/ 软(hazards 可恢复)分通道在 PG2/CG2 成立,c 旋钮压软成本 28.8 -> 0.9;VLA 侧多成本类型已覆盖",
-     "evidence": "CG2 .75g c.02/.05/.10 软 28.8/3.2/0.9;G4 §10",
-     "next": "把多约束 SOTA(SDAC/SRCPO)拉进 312 集严格协议对照;PB2(双硬通道)三族同协议趴地,不做主张"},
-    {"id": "G4", "name": "VLA 安全(SafeVLA 范式)", "pct": 100, "status": "done",
-     "summary": "Safety-CHORES 三任务 n=4 共 2172 配对集:零任务代价叠加层;Fetch 双轴微升(n.s.);ObjNav 灾难封顶",
-     "evidence": "G4_SAFEVLA_COMPARISON §10",
-     "next": ""},
-    {"id": "G5", "name": "trade-off:高回报且不漏", "pct": 95, "status": "done",
-     "summary": "PG2 typed d=.8 0/936 零违规;.8g 回报 +80% / 泄漏 -70%;CG2 .7g 0.32%@15.83、.75g/c.10 0.53%@17.82(软 0.9)",
-     "evidence": "frontier_pooled;HARVEST §20-22",
-     "next": "PG2 上 c=.10 是软硬互换(2.40%),如实入表"}
-  ],
-  "focus": [
-    "看板上线(本页);服务器快照由 Mac 端每 10 分钟推送,Mac 休眠期间停更",
-    "G1 加密扫描点 13 路排队发车(见 §4 队列 #1)",
-    "G3:核查 SDAC/SRCPO 检查点与评估路径,能否上 312 集协议(§4 #2)",
-    "写作:FRONTIER_WRITEUP_EN.md + tab_frontier.tex 并入论文主文(§4 #4)"
-  ],
-  "verdicts": [
-    {"date": "09-05", "topic": "基线自身前沿", "verdict": "FDPI pf、SAC-Lag cost_lim、SAC-Pen coef 三条扫描曲线整体位于 typed 前沿右下方;收紧旋钮均为「回报崩塌仍漏」;CG2 无基线配置进入 <2% 泄漏区", "evidence": "HARVEST §22;fig_frontier_paper"},
-    {"date": "09-03", "topic": "软价格旋钮", "verdict": "CG2 门控 .75:c .02/.05/.10 -> 软 28.8/3.2/0.9,回报 21.2/19.2/17.8,硬 1.39/1.76/0.53%;「回报靠无视 hazards」质疑关闭", "evidence": "HARVEST §19"},
-    {"date": "09-03", "topic": "接近门控", "verdict": "距离边距在 Car 上 d<.8 出现回报断崖(禁区占场地 30% 与随机目标放置冲突);门控只罚「正在冲近」,.75 从回报 7 拉回 21", "evidence": "HARVEST §13/§15"},
-    {"date": "09-02", "topic": "认证选点 vs 终档", "verdict": "按 104 集净块选点不比终档更干净(五组对比互有胜负);主表只报终档、与 FDPI 逐字同协议", "evidence": "HARVEST §16"},
-    {"date": "09-02", "topic": "PG2 零违规", "verdict": "typed d=.8 三种子终档 0/936(FDPI 33/936);95% 上界 0.41%", "evidence": "HARVEST §14"},
-    {"date": "09-02", "topic": "G4 终账", "verdict": "三任务 n=4 无任务受损;Fetch +2.3pp / -7% 成本方向一致不显著;ObjNav -72% 主张已死,保留 SR 无损与灾难封顶", "evidence": "G4 §10"},
-    {"date": "08-31", "topic": "PB2", "verdict": "FDPI / SAC 族 / typed 同协议一起趴地(回报 <=2,泄漏 2-15%);不做主张,叙事为机会窗口", "evidence": "HARVEST §11"},
-    {"date": "08-31", "topic": "FDPI 零违规口径", "verdict": "严格协议下 PG2 3.5%、CG2 6.6% 系统性逐集泄漏;「零违规」仅在期望意义成立", "evidence": "HARVEST §9/§10"}
-  ],
-  "vla": [
-    {"task": "ObjNav (n=4x200)", "base": "0.848 / 1.26", "gated": "0.848 / 0.98", "dsr": "0.0pp", "dcost": "-0.29 (CI 跨零)", "verdict": "SR 无损实锤;灾难严重度压缩(暗示性)"},
-    {"task": "Fetch (n=4x172)", "base": "0.638 / 9.90", "gated": "0.661 / 9.18", "dsr": "+2.3pp (t=1.76)", "dcost": "-0.72 (t=-1.71)", "verdict": "双轴微升方向一致,n=4 不显著"},
-    {"task": "Pickup (n=4x171)", "base": "0.933 / 0.47", "gated": "0.918 / 0.42", "dsr": "-1.5pp", "dcost": "-0.05", "verdict": "中性(成本地板)"}
-  ],
-  "queue": [
-    {"goal": "G1", "task": "加密旋钮扫描:PG2 d=.85 x3、门控 .9 x2、门控 .75 x2;CG2 门控 .65 x2、门控 .7+c.10 x2、门控 .8+c.10 x2", "status": "wait", "eta": "发车后 ~6h", "note": "让 G1 曲线由 5 点变 9-10 点;同协议终档验证"},
-    {"goal": "G3", "task": "SDAC/SRCPO 检查点盘点 -> 能否复用 312 集协议评估", "status": "wait", "eta": "0.5 天", "note": "不同代码库,需确认评估入口;若不可行则以 W 波次 100 集结果 + 口径说明入附录"},
-    {"goal": "G1/G5", "task": "前沿图纸面版终审:精简标注、补 CI 表注", "status": "done", "eta": "-", "note": "fig_frontier_paper.pdf / tab_frontier.tex"},
-    {"goal": "写作", "task": "FRONTIER_WRITEUP_EN + 表/图并入论文 LaTeX 主文", "status": "wait", "eta": "1 天", "note": "含 UOT epsilon <-> (d, gating, c) 映射段落"},
-    {"goal": "基础设施", "task": "看板 Mac 端 10 分钟推送(launchd)+ 服务器直推兜底", "status": "run", "eta": "今日", "note": "服务器若可直连 GitHub 则改为服务器 cron 直推"},
-    {"goal": "G3", "task": "PB2 攻坚(可选)", "status": "idle", "eta": "-", "note": "三族趴地;若做,方向 = 目标感知几何边距 + 课程"}
-  ],
-  "changelog": [
-    {"time": "09-05 02:40", "text": "看板上线:五目标进度、前沿总表/图、在跑实验、判决、队列、变更日志"},
-    {"time": "09-05 01:50", "text": "封版 117 臂:FDPI pf 与 SAC-Lag cost_lim 扫描到齐,三基线自身曲线均在 typed 前沿右下方"},
-    {"time": "09-04 04:45", "text": "惩罚型端点 SAC-Pen / SAC-Lag 同协议收官;Goal 2 两端点闭环"},
-    {"time": "09-03 17:30", "text": "SOFT_COEF 旋钮实证:CG2 软成本 28.8 -> 0.9;头条臂 n=3 定型"},
-    {"time": "09-02 18:20", "text": "接近门控 v1e 落地:CG2 .75g 回报 21 @ ~1%;PG2 .8g 17.6 @ 1.1%"},
-    {"time": "09-02 04:40", "text": "G4 三任务 n=4 定稿;协议勘误(选点块 != 验证块;雷达 natural 型米数)"},
-    {"time": "08-31 03:15", "text": "PG2/CG2/PB2 三任务 312 集严格协议终判;FDPI 零违规口径坍塌"}
-  ]
+ "updated": "2026-09-05T02:18:41",
+ "goals": [
+  {
+   "id": "G1",
+   "name": "统一多类 SafeRL / 旋钮曲线",
+   "pct": 80,
+   "status": "run",
+   "summary": "三旋钮(边距 d / 接近门控 / 软价格 c)在 PG2、CG2 上画出整条前沿;两端点均为参数空间特例",
+   "evidence": "frontier_arms.csv 117 臂;fig_frontier_paper",
+   "next": "加密扫描点(PG2 d=.85、门控 .9/.75;CG2 门控 .65、.7+c.10)让曲线更平滑;写清参数与 UOT epsilon 的映射"
+  },
+  {
+   "id": "G2",
+   "name": "两端点全面超越",
+   "pct": 100,
+   "status": "done",
+   "summary": "硬端点 FDPI(pf 三点)、软端点 SAC-Pen(c 三点)/ SAC-Lag(lim 三点)全部沿自身旋钮扫描,曲线整体位于 typed 前沿右下方",
+   "evidence": "PG2 typed .8g 17.59@1.07% vs FDPI 9.76@3.53%;CG2 typed .75g/c.10 17.82@0.53% vs FDPI 12.31@6.62%;CG2 无基线配置 <2% 泄漏",
+   "next": ""
+  },
+  {
+   "id": "G3",
+   "name": "异构多约束 SOTA",
+   "pct": 70,
+   "status": "run",
+   "summary": "硬(花瓶不可逆)/ 软(hazards 可恢复)分通道在 PG2/CG2 成立,c 旋钮压软成本 28.8 -> 0.9;VLA 侧多成本类型已覆盖",
+   "evidence": "CG2 .75g c.02/.05/.10 软 28.8/3.2/0.9;G4 §10",
+   "next": "把多约束 SOTA(SDAC/SRCPO)拉进 312 集严格协议对照;PB2(双硬通道)三族同协议趴地,不做主张"
+  },
+  {
+   "id": "G4",
+   "name": "VLA 安全(SafeVLA 范式)",
+   "pct": 100,
+   "status": "done",
+   "summary": "Safety-CHORES 三任务 n=4 共 2172 配对集:零任务代价叠加层;Fetch 双轴微升(n.s.);ObjNav 灾难封顶",
+   "evidence": "G4_SAFEVLA_COMPARISON §10",
+   "next": ""
+  },
+  {
+   "id": "G5",
+   "name": "trade-off:高回报且不漏",
+   "pct": 95,
+   "status": "done",
+   "summary": "PG2 typed d=.8 0/936 零违规;.8g 回报 +80% / 泄漏 -70%;CG2 .7g 0.32%@15.83、.75g/c.10 0.53%@17.82(软 0.9)",
+   "evidence": "frontier_pooled;HARVEST §20-22",
+   "next": "PG2 上 c=.10 是软硬互换(2.40%),如实入表"
+  }
+ ],
+ "focus": [
+  "G1 加密扫描 13 路在跑(~08:30);G3 SDAC/SRCPO 312 集协议 18 车道在跑(~03:30)",
+  "看板已上线并接 launchd 10 分钟推送;Mac 休眠期间服务器快照停更",
+  "写作:FRONTIER_WRITEUP_EN.md + tab_frontier.tex 并入论文主文(队列 #4)"
+ ],
+ "verdicts": [
+  {
+   "date": "09-05",
+   "topic": "基线自身前沿",
+   "verdict": "FDPI pf、SAC-Lag cost_lim、SAC-Pen coef 三条扫描曲线整体位于 typed 前沿右下方;收紧旋钮均为「回报崩塌仍漏」;CG2 无基线配置进入 <2% 泄漏区",
+   "evidence": "HARVEST §22;fig_frontier_paper"
+  },
+  {
+   "date": "09-03",
+   "topic": "软价格旋钮",
+   "verdict": "CG2 门控 .75:c .02/.05/.10 -> 软 28.8/3.2/0.9,回报 21.2/19.2/17.8,硬 1.39/1.76/0.53%;「回报靠无视 hazards」质疑关闭",
+   "evidence": "HARVEST §19"
+  },
+  {
+   "date": "09-03",
+   "topic": "接近门控",
+   "verdict": "距离边距在 Car 上 d<.8 出现回报断崖(禁区占场地 30% 与随机目标放置冲突);门控只罚「正在冲近」,.75 从回报 7 拉回 21",
+   "evidence": "HARVEST §13/§15"
+  },
+  {
+   "date": "09-02",
+   "topic": "认证选点 vs 终档",
+   "verdict": "按 104 集净块选点不比终档更干净(五组对比互有胜负);主表只报终档、与 FDPI 逐字同协议",
+   "evidence": "HARVEST §16"
+  },
+  {
+   "date": "09-02",
+   "topic": "PG2 零违规",
+   "verdict": "typed d=.8 三种子终档 0/936(FDPI 33/936);95% 上界 0.41%",
+   "evidence": "HARVEST §14"
+  },
+  {
+   "date": "09-02",
+   "topic": "G4 终账",
+   "verdict": "三任务 n=4 无任务受损;Fetch +2.3pp / -7% 成本方向一致不显著;ObjNav -72% 主张已死,保留 SR 无损与灾难封顶",
+   "evidence": "G4 §10"
+  },
+  {
+   "date": "08-31",
+   "topic": "PB2",
+   "verdict": "FDPI / SAC 族 / typed 同协议一起趴地(回报 <=2,泄漏 2-15%);不做主张,叙事为机会窗口",
+   "evidence": "HARVEST §11"
+  },
+  {
+   "date": "08-31",
+   "topic": "FDPI 零违规口径",
+   "verdict": "严格协议下 PG2 3.5%、CG2 6.6% 系统性逐集泄漏;「零违规」仅在期望意义成立",
+   "evidence": "HARVEST §9/§10"
+  }
+ ],
+ "vla": [
+  {
+   "task": "ObjNav (n=4x200)",
+   "base": "0.848 / 1.26",
+   "gated": "0.848 / 0.98",
+   "dsr": "0.0pp",
+   "dcost": "-0.29 (CI 跨零)",
+   "verdict": "SR 无损实锤;灾难严重度压缩(暗示性)"
+  },
+  {
+   "task": "Fetch (n=4x172)",
+   "base": "0.638 / 9.90",
+   "gated": "0.661 / 9.18",
+   "dsr": "+2.3pp (t=1.76)",
+   "dcost": "-0.72 (t=-1.71)",
+   "verdict": "双轴微升方向一致,n=4 不显著"
+  },
+  {
+   "task": "Pickup (n=4x171)",
+   "base": "0.933 / 0.47",
+   "gated": "0.918 / 0.42",
+   "dsr": "-1.5pp",
+   "dcost": "-0.05",
+   "verdict": "中性(成本地板)"
+  }
+ ],
+ "queue": [
+  {
+   "goal": "G1",
+   "task": "加密旋钮扫描:PG2 d=.85 x3、门控 .9 x2、门控 .75 x2;CG2 门控 .65 x2、门控 .7+c.10 x2、门控 .8+c.10 x2",
+   "status": "run",
+   "eta": "09-05 ~08:30",
+   "note": "13 路已发车(02:15);落地后 auto_verify final"
+  },
+  {
+   "goal": "G3",
+   "task": "SDAC/SRCPO 检查点盘点 -> 能否复用 312 集协议评估",
+   "status": "run",
+   "eta": "09-05 ~03:30",
+   "note": "SDAC/SRCPO 终档 model_2000000(与我方同 2M 步)18 车道 x 3 块 x 104 集在跑;流水线已接入"
+  },
+  {
+   "goal": "G1/G5",
+   "task": "前沿图纸面版终审:精简标注、补 CI 表注",
+   "status": "done",
+   "eta": "-",
+   "note": "fig_frontier_paper.pdf / tab_frontier.tex"
+  },
+  {
+   "goal": "写作",
+   "task": "FRONTIER_WRITEUP_EN + 表/图并入论文 LaTeX 主文",
+   "status": "wait",
+   "eta": "1 天",
+   "note": "含 UOT epsilon <-> (d, gating, c) 映射段落"
+  },
+  {
+   "goal": "基础设施",
+   "task": "看板 Mac 端 10 分钟推送(launchd)+ 服务器直推兜底",
+   "status": "done",
+   "eta": "-",
+   "note": "launchd com.liyufeng.safeot-dashboard 每 10 分钟;服务器直推待评估"
+  },
+  {
+   "goal": "G3",
+   "task": "PB2 攻坚(可选)",
+   "status": "idle",
+   "eta": "-",
+   "note": "三族趴地;若做,方向 = 目标感知几何边距 + 课程"
+  }
+ ],
+ "changelog": [
+  {
+   "time": "09-05 02:18",
+   "text": "G1 加密扫描 13 路 + G3 SDAC/SRCPO 严格协议 18 车道发车;前沿流水线接入 SDAC/SRCPO;看板 launchd 定时推送就位"
+  },
+  {
+   "time": "09-05 02:40",
+   "text": "看板上线:五目标进度、前沿总表/图、在跑实验、判决、队列、变更日志"
+  },
+  {
+   "time": "09-05 01:50",
+   "text": "封版 117 臂:FDPI pf 与 SAC-Lag cost_lim 扫描到齐,三基线自身曲线均在 typed 前沿右下方"
+  },
+  {
+   "time": "09-04 04:45",
+   "text": "惩罚型端点 SAC-Pen / SAC-Lag 同协议收官;Goal 2 两端点闭环"
+  },
+  {
+   "time": "09-03 17:30",
+   "text": "SOFT_COEF 旋钮实证:CG2 软成本 28.8 -> 0.9;头条臂 n=3 定型"
+  },
+  {
+   "time": "09-02 18:20",
+   "text": "接近门控 v1e 落地:CG2 .75g 回报 21 @ ~1%;PG2 .8g 17.6 @ 1.1%"
+  },
+  {
+   "time": "09-02 04:40",
+   "text": "G4 三任务 n=4 定稿;协议勘误(选点块 != 验证块;雷达 natural 型米数)"
+  },
+  {
+   "time": "08-31 03:15",
+   "text": "PG2/CG2/PB2 三任务 312 集严格协议终判;FDPI 零违规口径坍塌"
+  }
+ ]
 }
