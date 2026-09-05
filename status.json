@@ -1,5 +1,5 @@
 {
- "updated": "2026-09-05T18:24:12",
+ "updated": "2026-09-05T18:40:55",
  "goals": [
   {
    "id": "G1",
@@ -48,9 +48,10 @@
   }
  ],
  "focus": [
-  "五目标实验侧全部收官(G1 95 / G2 100 / G3 90 / G4 100 / G5 95);机器空闲",
-  "【待 owner 决策】论文实验主线切换为 typed 叙事 + 提供 08-30 ICLR 源路径",
-  "可选:PB2 攻坚;SAC-Lag/FDPI 更多种子"
+  "看板 v2:服务器实时表(每卡显存/利用率/正在跑什么)+ 实验矩阵(51 格)+ 基准协议表 + 并行 agent 镜像",
+  "五目标实验侧收官(G1 95 / G2 100 / G3 90 / G4 100 / G5 95);30109 当前被 asbs/openvla/curvex 等项目占满 CPU(load ~180),SafeOT 无在跑训练",
+  "并行 agent(SafeOT-Dual,SafeTransport/results/safeot_dual_fdpi)在 GPU7 跑 PG2/CG2 LP soft-mode,85 个 run 目录,已只读镜像到 §5",
+  "【待 owner 决策】论文实验主线切换 + 08-30 ICLR 源路径"
  ],
  "verdicts": [
   {
@@ -186,6 +187,10 @@
  ],
  "changelog": [
   {
+   "time": "09-05 18:40",
+   "text": "看板 v2 上线:服务器实时表(30109 + 阿里云,每卡显存/利用率/项目标签)、实验矩阵(plan.json x 快照自动合并)、基准与协议表、并行 agent 只读镜像"
+  },
+  {
    "time": "09-05 18:24",
    "text": "G1 加密扫描 13 臂收齐,typed 全曲线 22 点;图表刷新(44 合并臂);G1 升至 95%"
   },
@@ -232,6 +237,44 @@
   {
    "time": "08-31 03:15",
    "text": "PG2/CG2/PB2 三任务 312 集严格协议终判;FDPI 零违规口径坍塌"
+  }
+ ],
+ "datasets": [
+  {
+   "bench": "Safety-Gymnasium L2",
+   "task": "PointGoal2 (PG2)",
+   "channels": "vases_contact(硬,不可逆)/ hazards(软,可恢复)",
+   "budget": "软预算 25/集;2M 步",
+   "protocol": "终档、零选点、3 块 x 104 集 = 312 集/种子、逐集硬通道计数、Wilson 95% CI",
+   "baselines": "FDPI(pf .02/.1/.5)、SAC-Lag(lim .02/.1/.5)、SAC-Pen(c 1/5/20)、SDAC、SRCPO",
+   "status": "完成(typed 10 点 + 基线 11 臂)"
+  },
+  {
+   "bench": "Safety-Gymnasium L2",
+   "task": "CarGoal2 (CG2)",
+   "channels": "vases_contact(硬)/ hazards(软)",
+   "budget": "软预算 25/集;2M 步",
+   "protocol": "同上",
+   "baselines": "同上",
+   "status": "完成(typed 12 点 + 基线 11 臂)"
+  },
+  {
+   "bench": "Safety-Gymnasium L2",
+   "task": "PointButton2 (PB2)",
+   "channels": "buttons + gremlins(双硬)/ hazards(软)",
+   "budget": "软预算 25/集;2M 步",
+   "protocol": "同上",
+   "baselines": "FDPI、SAC 族、SDAC、SRCPO",
+   "status": "三族同协议趴地,不做主张"
+  },
+  {
+   "bench": "Safety-CHORES (SafeVLA)",
+   "task": "ObjNav / Fetch / Pickup",
+   "channels": "blind / danger / corner / fragile / critical(多类型成本)",
+   "budget": "SafeVLA 官方 minival;n=4 种子配对",
+   "protocol": "同权重同集配对评测(200/172/171 集 x 4 种子),SR 与总成本,bootstrap CI",
+   "baselines": "SPOC、FLaRe、FLaRe-RS、ISA(SafeVLA)",
+   "status": "完成 n=4:零任务代价叠加层"
   }
  ]
 }
