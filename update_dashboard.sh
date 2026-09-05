@@ -31,6 +31,9 @@ if [ "${1:-}" != "--no-server" ]; then
   else
     rm -f aliyun_gpu.json.tmp; echo "$(ts) aliyun unreachable" >> "$LOG"
   fi
+  if timeout 120 ssh -o BatchMode=yes -o ConnectTimeout=20 $R3 "cd /home/dataset-local/liyufeng/goal34_prep/sota_h2h && python3 collect_dashboard.py" >/dev/null 2>&1; then
+    timeout 60 scp -q $R3:/home/dataset-local/liyufeng/goal34_prep/logs/dash_runs.json volc_runs.json 2>/dev/null && echo "$(ts) volc runs ok" >> "$LOG"
+  fi
   if timeout 60 ssh -o BatchMode=yes -o ConnectTimeout=20 $R3 "python3 ~/research_storage/safeot/tools/collect_gpu.py" > volc_gpu.json.tmp 2>/dev/null && [ -s volc_gpu.json.tmp ]; then
     mv volc_gpu.json.tmp volc_gpu.json; echo "$(ts) volc snapshot ok" >> "$LOG"
   else
@@ -51,6 +54,20 @@ if os.path.exists("aliyun_gpu.json"):
               "snap_time": time.strftime("%Y-%m-%dT%H:%M:%S", time.localtime(os.path.getmtime("aliyun_gpu.json")))})
     srv.append(a)
 r["servers"] = srv
+# merge volc runs (tag server; dedupe by name, prefer more ckpts)
+for x in r.get("runs", []):
+    x.setdefault("server", "30109")
+if os.path.exists("volc_runs.json"):
+    vr = json.load(open("volc_runs.json"))
+    have = {x["name"]: x for x in r["runs"]}
+    for x in vr.get("runs", []):
+        if x["variant"] in ("sdac", "srcpo"):
+            continue
+        x["server"] = "volc"
+        if x["name"] not in have or x["ckpts"] > have[x["name"]]["ckpts"]:
+            have[x["name"]] = x
+    r["runs"] = list(have.values())
+    r["lanes"] = r.get("lanes", []) + ["volc: " + l for l in vr.get("lanes", [])]
 json.dump(r, open("runs.json", "w"), ensure_ascii=False, indent=1)
 PY
   python3 "$TOOLS/build_matrix.py" "$DATA" >/dev/null 2>&1 || echo "$(ts) build_matrix failed" >> "$LOG"
