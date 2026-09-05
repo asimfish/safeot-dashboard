@@ -1,18 +1,18 @@
 {
- "updated": "2026-09-05T21:55:09",
+ "updated": "2026-09-05T22:05:22",
  "servers": [
   {
    "name": "tianyiyun-30109",
    "desc": "8x A100-80G, 128 核; SafeRL 训练/评估主力(共享账号,多项目并行)",
    "host": "ide-650ef93f23324f04881bde87cf05d6c1-0f2fcc",
-   "load": "100.60",
+   "load": "170.48",
    "ncpu": 128,
    "cards": [
     {
      "idx": 0,
      "used_mb": 42353,
      "total_mb": 81920,
-     "util": 96,
+     "util": 76,
      "mine": false,
      "procs": [
       "dppo: run.py --config-name=ft_ppo_diffusion_mlp_armC_",
@@ -22,34 +22,36 @@
     },
     {
      "idx": 1,
-     "used_mb": 57527,
+     "used_mb": 41405,
      "total_mb": 81920,
-     "util": 68,
+     "util": 59,
      "mine": false,
      "procs": [
-      "asbs: e0_paired_fork_runtime.py --config-name sim_libero.yaml",
-      "other: train.py --config-name train_diffusion_transforme"
+      "other: train.py --config-name train_diffusion_transforme",
+      "asbs: e0_paired_fork_runtime.py --config-name sim_libero.yaml"
      ]
     },
     {
      "idx": 2,
-     "used_mb": 37923,
+     "used_mb": 41401,
      "total_mb": 81920,
-     "util": 70,
+     "util": 64,
      "mine": false,
      "procs": [
-      "other: train.py --config-name train_diffusion_transforme"
+      "other: train.py --config-name train_diffusion_transforme",
+      "asbs: e0_paired_fork_runtime.py --config-name sim_libero.yaml"
      ]
     },
     {
      "idx": 3,
-     "used_mb": 40997,
+     "used_mb": 44474,
      "total_mb": 81920,
-     "util": 65,
+     "util": 8,
      "mine": false,
      "procs": [
       "dppo: run.py --config-name=ft_ppo_diffusion_mlp",
       "other: train.py --config-name train_diffusion_transforme",
+      "asbs: e0_paired_fork_runtime.py --config-name sim_libero.yaml",
       "dppo: rollout_record.py --seed 2000"
      ]
     },
@@ -57,41 +59,41 @@
      "idx": 4,
      "used_mb": 61542,
      "total_mb": 81920,
-     "util": 3,
+     "util": 1,
      "mine": false,
      "procs": [
       "other: VLLM::Worker_TP1",
-      "dppo: rollout_record.py --seed 2000"
+      "dppo: rollout_record.py --seed 3000"
      ]
     },
     {
      "idx": 5,
-     "used_mb": 38331,
+     "used_mb": 41809,
      "total_mb": 81920,
-     "util": 78,
+     "util": 95,
      "mine": false,
      "procs": [
       "other: train.py --config-name train_diffusion_transforme",
+      "asbs: e0_paired_fork_runtime.py --config-name sim_libero.yaml",
       "dppo: rollout_record.py --seed 3000"
      ]
     },
     {
      "idx": 6,
-     "used_mb": 70548,
+     "used_mb": 69995,
      "total_mb": 81920,
-     "util": 15,
+     "util": 8,
      "mine": true,
      "procs": [
       "other: VLLM::Worker_TP0",
-      "safeot: fdpi_safeot_dual.py --env SafetyPointGoal2-v0 --seed 3",
-      "dppo: rollout_record.py --seed 3000"
+      "safeot: fdpi_safeot_dual.py --env SafetyPointGoal2-v0 --seed 3"
      ]
     },
     {
      "idx": 7,
      "used_mb": 40359,
      "total_mb": 81920,
-     "util": 38,
+     "util": 28,
      "mine": true,
      "procs": [
       "safeot: fdpi_safeot_dual.py --env SafetyPointGoal2-v0 --seed 1 --env",
@@ -105,7 +107,7 @@
   },
   {
    "host": "di-20260831162150-5ll6n",
-   "load": "36.97",
+   "load": "39.54",
    "ncpu": 26,
    "cards": [
     {
@@ -120,7 +122,7 @@
     },
     {
      "idx": 1,
-     "used_mb": 34796,
+     "used_mb": 25124,
      "total_mb": 81920,
      "util": 100,
      "mine": false,
@@ -131,18 +133,18 @@
    ],
    "name": "volc-a100",
    "desc": "2x A100-80G, 128 核, 3PB vepfs; SafeRL 第二算力(DP/ACT 训练共用 GPU); 环境部署中",
-   "snap_time": "2026-09-05T21:55:14"
+   "snap_time": "2026-09-05T22:05:27"
   },
   {
    "host": "dsw-1008180-7cb5796fcd-xt4lh",
-   "load": "34.05",
+   "load": "33.19",
    "ncpu": 184,
    "cards": [
     {
      "idx": 0,
-     "used_mb": 2169,
+     "used_mb": 2185,
      "total_mb": 98304,
-     "util": 0,
+     "util": 94,
      "mine": false,
      "procs": [
       "other: act_train_ppu.py --seed 3952"
@@ -150,9 +152,9 @@
     },
     {
      "idx": 1,
-     "used_mb": 2169,
+     "used_mb": 2185,
      "total_mb": 98304,
-     "util": 0,
+     "util": 52,
      "mine": false,
      "procs": [
       "other: act_train_ppu.py --seed 3953"
@@ -160,9 +162,9 @@
     },
     {
      "idx": 2,
-     "used_mb": 2169,
+     "used_mb": 2185,
      "total_mb": 98304,
-     "util": 32,
+     "util": 66,
      "mine": false,
      "procs": [
       "other: act_train_ppu.py --seed 3952"
@@ -170,9 +172,9 @@
     },
     {
      "idx": 3,
-     "used_mb": 2177,
+     "used_mb": 2185,
      "total_mb": 98304,
-     "util": 100,
+     "util": 8,
      "mine": false,
      "procs": [
       "other: act_train_ppu.py --seed 3952"
@@ -180,9 +182,9 @@
     },
     {
      "idx": 4,
-     "used_mb": 2169,
+     "used_mb": 2185,
      "total_mb": 98304,
-     "util": 0,
+     "util": 26,
      "mine": false,
      "procs": [
       "other: act_train_ppu.py --seed 3952"
@@ -190,9 +192,9 @@
     },
     {
      "idx": 5,
-     "used_mb": 2169,
+     "used_mb": 2185,
      "total_mb": 98304,
-     "util": 0,
+     "util": 26,
      "mine": false,
      "procs": [
       "other: act_train_ppu.py --seed 3953"
@@ -200,9 +202,9 @@
     },
     {
      "idx": 6,
-     "used_mb": 2169,
+     "used_mb": 2185,
      "total_mb": 98304,
-     "util": 76,
+     "util": 78,
      "mine": false,
      "procs": [
       "other: act_train_ppu.py --seed 3952"
@@ -210,9 +212,9 @@
     },
     {
      "idx": 7,
-     "used_mb": 2169,
+     "used_mb": 2185,
      "total_mb": 98304,
-     "util": 88,
+     "util": 78,
      "mine": false,
      "procs": [
       "other: act_train_ppu.py --seed 3951"
@@ -220,9 +222,9 @@
     },
     {
      "idx": 8,
-     "used_mb": 2169,
+     "used_mb": 2185,
      "total_mb": 98304,
-     "util": 100,
+     "util": 0,
      "mine": false,
      "procs": [
       "other: act_train_ppu.py --seed 3952"
@@ -230,7 +232,7 @@
     },
     {
      "idx": 9,
-     "used_mb": 2169,
+     "used_mb": 2185,
      "total_mb": 98304,
      "util": 100,
      "mine": false,
@@ -240,9 +242,9 @@
     },
     {
      "idx": 10,
-     "used_mb": 2169,
+     "used_mb": 2185,
      "total_mb": 98304,
-     "util": 76,
+     "util": 74,
      "mine": false,
      "procs": [
       "other: act_train_ppu.py --seed 3951"
@@ -291,7 +293,7 @@
    ],
    "name": "aliyun-ppu",
    "desc": "16x PPU-ZW810E 96G, 184 核; VLA(Safety-CHORES)评测; 共享(act_train 等他人任务)",
-   "snap_time": "2026-09-05T21:55:13"
+   "snap_time": "2026-09-05T22:05:26"
   }
  ],
  "runs": [
@@ -3586,14 +3588,14 @@
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788614508.2323668
+    "mtime": 1788616765.6508453
    },
    {
     "name": "PB2_fdpi_lp_r2_s2",
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788614500.7493384
+    "mtime": 1788616705.097616
    },
    {
     "name": "PB2_fdpi_lp_r2_s3",
@@ -3649,21 +3651,21 @@
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788614568.5655982
+    "mtime": 1788616859.6972015
    },
    {
     "name": "PG2_fdpi_fixed_r2_s2",
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788614562.7945762
+    "mtime": 1788616836.8951151
    },
    {
     "name": "PG2_fdpi_fixed_r2_s3",
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788614464.1782
+    "mtime": 1788616516.719903
    },
    {
     "name": "PG2_fdpi_fixed_s1",
@@ -3859,21 +3861,21 @@
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788614462.4461935
+    "mtime": 1788616528.3859472
    },
    {
     "name": "PG2_fdpi_raw_r2_s2",
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788614461.1361885
+    "mtime": 1788616448.3026452
    },
    {
     "name": "PG2_fdpi_raw_r2_s3",
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788614510.0703738
+    "mtime": 1788616867.1042297
    },
    {
     "name": "PG2_fdpi_raw_s1",
