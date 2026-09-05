@@ -1,5 +1,5 @@
 {
- "updated": "2026-09-05T19:14:13",
+ "updated": "2026-09-05T21:25:54",
  "goals": [
   {
    "id": "G1",
@@ -48,7 +48,7 @@
   }
  ],
  "focus": [
-  "新一波实验:PB2 门控几何边距 4 路已在 30109 发车(v1f .35/.50、v1fW .45/.60 x2 种子)——门控在 Car 上救回断崖,PB2 的 v1d 塌正是未门控",
+  "volc-a100 已投产:PB2 门控几何边距 6 路(s1-3 x 两档)+ PointPush2 试点 8 路(typed 3 臂 x2 + FDPI x2)在跑,~5h;30109 龟速 PB2 路已停",
   "volc-a100 接入:代码已同步、venv 安装中(pypi.org 直连);就绪后承载扫描点第三种子 + PointPush2 第三任务波(fork 的 Push2 已修复 Pillars 缺失)",
   "30109 CPU 被 asbs/openvla/curvex 占满(load ~180),SafeOT 新训练会慢;并行 agent SafeOT-Dual 在 GPU7",
   "【待 owner 决策】论文实验主线切换 + 08-30 ICLR 源路径"
@@ -146,15 +146,15 @@
    "goal": "G3",
    "task": "PB2 门控几何边距(v1f/v1fW)4 路训练 -> 终档验证",
    "status": "run",
-   "eta": "09-06 上午(30109 拥挤)",
-   "note": "目标:PB2 首个「得分且守约」臂;冒烟:门控把训练信号从 17% 步压到 4.7% 步"
+   "eta": "09-06 ~02:30(volc)",
+   "note": "已迁 volc,3 种子;30109 负载 190 不可用"
   },
   {
    "goal": "基础设施",
    "task": "volc-a100 环境复刻(jax 0.6.2 cuda12 + fork + fpi)-> 冒烟 -> 接入看板",
-   "status": "run",
-   "eta": "今日",
-   "note": "conda 镜像坏、火山 pypi 镜像陈旧,已改 pypi.org 直连"
+   "status": "done",
+   "eta": "-",
+   "note": "uv + Python 3.10.21;核心包版本对齐 30109(haiku 0.0.16/optax 0.2.6 为镜像最新);冒烟 130 步/s"
   },
   {
    "goal": "G1/G2",
@@ -166,9 +166,9 @@
   {
    "goal": "G1/G2/G3",
    "task": "PointPush2 第三任务波:typed 扫描(δ/门控/c)+ FDPI + SAC-Lag/Pen 同协议",
-   "status": "wait",
-   "eta": "volc 就绪后 ~2 天",
-   "note": "pillars(硬)/hazards(软);fork Push1 缺 Pillars 已修;SDAC/SRCPO 需 srcpo 仓库 Push2 配置"
+   "status": "run",
+   "eta": "试点 09-06 ~02:30",
+   "note": "试点 8 路先看回报尺度与泄漏,再决定全扫描"
   },
   {
    "goal": "G1",
@@ -214,6 +214,10 @@
   }
  ],
  "changelog": [
+  {
+   "time": "09-05 21:25",
+   "text": "volc-a100 环境就绪并投产 14 路(PB2 门控几何 x6、PP2 试点 x8);看板合并 volc run 快照;PP2 加入基准表"
+  },
   {
    "time": "09-05 19:14",
    "text": "新波发车:PB2 门控几何边距 4 路;volc-a100 接入(代码同步、venv 安装中、GPU 采集器部署);PointPush2 第三任务立项(fork Push2 修复)"
@@ -298,6 +302,15 @@
    "protocol": "同上",
    "baselines": "FDPI、SAC 族、SDAC、SRCPO",
    "status": "三族同协议趴地,不做主张"
+  },
+  {
+   "bench": "Safety-Gymnasium L2",
+   "task": "PointPush2 (PP2)",
+   "channels": "pillars(硬,碰撞)/ hazards(软)",
+   "budget": "软预算 25/集;2M 步",
+   "protocol": "同上;fork Push1 缺 Pillars 已修复(恢复上游)",
+   "baselines": "FDPI 默认(已发);SAC-Lag/Pen、SDAC/SRCPO 待排",
+   "status": "试点 8 路在 volc 训练中"
   },
   {
    "bench": "Safety-CHORES (SafeVLA)",
