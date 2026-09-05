@@ -1,184 +1,234 @@
 {
- "updated": "2026-09-05T19:18:30",
- "task": "T-1484 SafeOT-Dual（解得价格 + 偏移无关积分器）",
- "goals": [
-  {
-   "id": "G1",
-   "name": "统一多类 SafeRL / 旋钮曲线（SafeOT-Dual）",
-   "pct": 85,
-   "status": "run",
-   "summary": "理论：一步安全策略改进 = 占用流的熵近端投影，其对偶就是拉格朗日步（乘子解出而非自适应），ε 两端点 = 精确约束 LP / 比例惩罚，三大家族 = 同一松弛的「价格来源 × 步几何」。实验：TRPO 体上 clip 0→4 与 ε 0→10 两条单调曲线（PG1 3–5 种子、CarGoal1、PointButton1），PPO 体上 ε/clip/预算三个旋钮。",
-   "evidence": "PG1 clip 曲线：TRPO-Lag 24.2 @ 42.0，违约 2428 → clip 0.5 19.4 @ 37.0，违约 1951 → clip 1 14.9 @ 26.6，违约 1065 → clip 2 14.0 @ 26.7，违约 784；图 sotd_trpo_frontier.png；表 tab_trpo_knobs.tex",
-   "next": "PB1 三列图定稿；写作 §3/§5（另一会话负责正文）"
+  "updated": "2026-09-05T19:42:05+08:00",
+  "task": "T-1484 — 单因素修复与五目标证据复核",
+  "data_observed_at": {
+    "legacy_audit": "2026-09-05T19:21:47.615992+08:00",
+    "refs_table": "2026-09-05T19:18:08.745752+08:00",
+    "repair_queue": "2026-09-05T19:21:07.281607+08:00"
   },
-  {
-   "id": "G2",
-   "name": "两个端点（Penalty/Lagrangian 软端 vs CPO 硬端）",
-   "pct": 70,
-   "status": "run",
-   "summary": "硬端点：TRPO 体 + 解得价格在 2M 追平/超越 CPO（PG1 评测 16.1 @ 27.2 vs CPO 7.8 @ 20.1；CarGoal1 所有臂回报、成本同时优于 CPO），10M CarGoal1 回报最高 + 预算内 + 违约最低。软端点：匹配回报下成本更低（clip 2 gated 20.7 @ 30.6 支配 FOCOPS/CUP/PPO-Lag），但 TRPO-Lag 的回报仍更高（25.4 @ 41.6）——「全面超越 TRPO-Lag」不成立。",
-   "evidence": "CG1 2M：clip 1 19.7 @ 27.3（评测 18.7 @ 28.5，可行 1/3），违约 756 vs CPO 15.8 @ 32.9，违约 780；CG1 10M：clip 1 25.5 @ 23.6（评测 25.0 @ 25.8，可行 1/3），违约 1554 vs CPO 23.8 @ 26.9（评测 23.8 @ 25.3，可行 1/3），违约 2330 vs TRPO-Lag 24.2 @ 25.8（评测 22.2 @ 25.5，可行 1/3），违约 3382；PG1 10M：clip 1 16.0 @ 23.5（评测 17.5 @ 25.8，可行 1/3），违约 2026 vs CPO 18.8 @ 28.3（评测 19.2 @ 23.8，可行 3/3），违约 2442",
-   "next": "PG1 10M 回报仍低于 CPO 1.7 分：可试 clip 0.75 @ 10M；论文按「到达 CPO 工作点 + 成本上支配一阶 Lagrangian 家族」写"
-  },
-  {
-   "id": "G3",
-   "name": "异构多约束（硬花瓶/软危险区）SOTA",
-   "pct": 60,
-   "status": "run",
-   "summary": "同一严格协议（冻结末 ckpt，3×104 集）下 CG2：解得软价格 18.1 回报 / 4.8% 逐集硬泄漏 / 软 25.9，SDAC 7.9 / 42%，SRCPO 8.3 / 53%，未分型 FDPI（同 harness）12.7 / 10%。绑定软预算 10：解得价格 16.1 / 2.5% / 软 6.6（三种子全在预算内）vs 积分器 16.4 / 3.8% / 9.7（一种子越线）。PG2：无边距 typed 17.6 @ 14% 泄漏（SRCPO 5.0 @ 35%），阈值 0.8 把策略压死，0.9/0.95 中间点在跑；PB2 全场（含 SDAC/SRCPO/FDPI）无人得分。",
-   "evidence": "tab_typed_fdpi.tex；results/safeot_dual_fdpi/*/strict_eval_*.json；_sota_strict/*.json",
-   "next": "PG2 阈值 0.9/0.95、CG2 0.72/0.76 各 3 种子（本机 GPU7，09-06 上午出）→ 泄漏–回报曲线"
-  },
-  {
-   "id": "G4",
-   "name": "VLA 安全（SafeVLA 范式内换乘子来源）",
-   "pct": 30,
-   "status": "wait",
-   "summary": "SafeVLA 的 allenact 引擎影子拷贝：λ = 解得价格(EMA, clip 1) + SafeVLA 自己的对偶上升 β；状态特征 = critic transformer belief 的 64 维随机投影。ObjectNav 两臂（PPO-Lag vs 换源）8 进程各占 72 GB 在 30314 跑通：λ* 5–7、β 升到 2.x、128 步窗口成本 4.25 → 0.34；arm B >140 次更新后随 30314 失联中断。",
-   "evidence": "experiments/safeot_dual/vla/README.md；results_vla/armB_sotd_s0/sotd_lambda_worker0.jsonl（在 30314）",
-   "next": "等 30314 恢复：同步日志、续跑两臂到 ≥1M RL 步；否则只写机制与 smoke 曲线"
-  },
-  {
-   "id": "G5",
-   "name": "trade-off：高回报且低泄漏",
-   "pct": 75,
-   "status": "run",
-   "summary": "训练期：同代码比 PPO-Lag 累计违约低 2.2–4.8×；10M 下 PPO 体与 PPO-Lag 收敛到同一回报且违约最低。TRPO 体 10M：CarGoal1 回报最高 + 预算内 + 违约最低（1554 vs CPO 2330）。部署期零泄漏只有零回报策略做到；泄漏用边距旋钮扫成曲线如实报告。",
-   "evidence": "sotd_longrun_CarGoal1_10M.png / sotd_longrun_PointGoal1_10M.png；tab_10m.tex",
-   "next": "边距曲线（G3 同批）；论文用「训练期违约 + 部署 (R,C) + 逐集泄漏」三轴表述"
-  }
- ],
- "focus": [
-  "在跑：本机 GPU7 第二轮边距扫描（PG2 0.9/0.95、CG2 0.72/0.76 ×3）+ 15 个边距 run 的严格评测",
-  "阻塞：safeot-30314（main）09-05 13:00 起 SSH 拒绝连接（IP 可 ping，2222/30314 端口 RST）→ G4 两臂与 15 个 FDPI 严格评测挂起",
-  "写作：正文由另一会话按 RESULTS_FEED.md 更新；本会话产出表/图/附录（appendix_safeot_dual/）"
- ],
- "verdicts": [
-  {
-   "date": "09-05",
-   "topic": "10M 长程（TRPO 体）",
-   "verdict": "CarGoal1：clip 1 回报最高（25.5）、成本预算内（23.6）、违约最低（1554 vs CPO 2330、TRPO-Lag 3382）；PG1：17.5 @ 25.8 评测，略低于 CPO 19.2 @ 23.8，违约低 17%",
-   "evidence": "tab_10m.tex；longrun 图"
-  },
-  {
-   "date": "09-05",
-   "topic": "G1 双旋钮曲线",
-   "verdict": "PG1 clip 0→4：24.2/42.0 → 11.9/26.3，违约 2428 → 700 单调；ε 0→10（clip 1）：21.2/39.4 → 13.3/27.2；CG1 所有臂优于 CPO；PB1 全场低回报但成本 35.5 → 22",
-   "evidence": "tab_trpo_knobs.tex；trpo_frontier.png"
-  },
-  {
-   "date": "09-05",
-   "topic": "CG2 绑定软预算 10（严格）",
-   "verdict": "解得价格 16.1 / 泄漏 2.5% / 软 6.6（3/3 预算内）；积分器 16.4 / 3.8% / 9.7（1 种子越线）",
-   "evidence": "tab_typed_fdpi.tex"
-  },
-  {
-   "date": "09-04",
-   "topic": "SDAC/SRCPO 同协议重评",
-   "verdict": "CG2 SDAC 7.9 @ 42% 泄漏、SRCPO 8.3 @ 53%；期望成本「守约」掩盖了一半回合碰花瓶；ours 18.1 @ 4.8%",
-   "evidence": "_sota_strict/*.json"
-  },
-  {
-   "date": "09-04",
-   "topic": "确定性评测（参考方法同口径）",
-   "verdict": "PG1 2M：TRPO-SafeOT-Dual clip 1 16.1 @ 27.2（2/5 可行）为预算内回报最高臂；CPO 确定性策略 7.8 @ 20.1；PCPO 11.4 @ 41.5",
-   "evidence": "safepo_eval.py；refs_table.csv"
-  },
-  {
-   "date": "09-04",
-   "topic": "步几何决定价格能否兑现",
-   "verdict": "同一价格 PPO 体 R 4–8 @ 29–32；TRPO 体 R 13–15 @ 25–27——统一 = 价格来源 × 步几何",
-   "evidence": "doc §15.5"
-  },
-  {
-   "date": "09-04",
-   "topic": "wave-4 typed 严格评测",
-   "verdict": "CG2 lp 18.1 @ 4.8% vs integral 17.1 @ 4.7% vs fixed 15.9 @ 3.6%（软 16.3，无法瞄准预算）；PG2/PB2 typed 臂零回报",
-   "evidence": "tab_typed_fdpi.tex"
-  }
- ],
- "queue": [
-  {
-   "goal": "G3/G5",
-   "task": "边距第二轮：PG2 0.9/0.95、CG2 0.72/0.76 ×3（本机 GPU7）",
-   "status": "run",
-   "eta": "09-06 10:00",
-   "note": "补泄漏–回报曲线中间点"
-  },
-  {
-   "goal": "G3",
-   "task": "15 个边距 run 严格评测（本机）",
-   "status": "run",
-   "eta": "09-05 20:00",
-   "note": ""
-  },
-  {
-   "goal": "G4",
-   "task": "SafeVLA 两臂续跑（30314）",
-   "status": "wait",
-   "eta": "取决于 30314 恢复",
-   "note": "arm B 已 >140 更新；日志在 30314 磁盘"
-  },
-  {
-   "goal": "G3",
-   "task": "30314 上 15 个 FDPI run 的严格评测",
-   "status": "wait",
-   "eta": "取决于 30314 恢复",
-   "note": "ckpt 在 30314"
-  },
-  {
-   "goal": "G2",
-   "task": "PG1 10M clip 0.75（可选）",
-   "status": "idle",
-   "eta": "-",
-   "note": "若要在 PG1 10M 也追平 CPO 回报"
-  },
-  {
-   "goal": "写作",
-   "task": "main_safeot_dual.tex 正文压到 9 页 + 按 RESULTS_FEED 更新主张",
-   "status": "run",
-   "eta": "09-08",
-   "note": "另一会话负责正文；本会话供数字/图/附录"
-  }
- ],
- "changelog": [
-  {
-   "time": "09-05 19:18",
-   "text": "SafeOT-Dual 看板页上线：10M 长程、G1 双旋钮曲线、CG2 绑定预算、SDAC/SRCPO 同协议数字、G4 pilot 状态"
-  },
-  {
-   "time": "09-05 18:40",
-   "text": "10M 全收齐：CG1 TRPO clip 1 25.5 @ 23.6 违约 1554（CPO 2330）；PG1 16.0 @ 23.5 违约 2026（CPO 2442）"
-  },
-  {
-   "time": "09-05 13:00",
-   "text": "safeot-30314 失联；G4 两臂与 15 个严格评测挂起"
-  },
-  {
-   "time": "09-05 03:05",
-   "text": "CG2 绑定预算 10 严格评测：解得价格 16.1 / 2.5% / 6.6 vs 积分器 16.4 / 3.8% / 9.7"
-  },
-  {
-   "time": "09-05 02:00",
-   "text": "G1 曲线（TRPO 体）PG1 完整、CG1 全部臂优于 CPO"
-  },
-  {
-   "time": "09-04 23:20",
-   "text": "参考方法 30 集确定性评测：TRPO-SafeOT-Dual clip 1 为 PG1 预算内回报最高臂"
-  },
-  {
-   "time": "09-04 22:40",
-   "text": "SDAC/SRCPO 终 ckpt 同协议重评：CG2 42%/53% 逐集硬泄漏"
-  },
-  {
-   "time": "09-04 21:10",
-   "text": "块 T：TRPO 体 + 解得价格到达 CPO 工作点（13.3 @ 25.1 vs 13.3 @ 29.0）"
-  }
- ],
- "figures": [
-  "sotd_trpo_frontier.png",
-  "sotd_longrun_CarGoal1_10M.png",
-  "sotd_longrun_PointGoal1_10M.png",
-  "sotd_lambda_PointGoal1_2M.png"
- ]
+  "goals": [
+    {
+      "id": "G1",
+      "name": "统一多类 SafeRL 与参数曲线",
+      "status": "run",
+      "pct": 50,
+      "checklist": [
+        {
+          "item": "多引擎实现",
+          "passed": true
+        },
+        {
+          "item": "已完成参数扫描",
+          "passed": true
+        },
+        {
+          "item": "统一语义的端点等价验证",
+          "passed": false
+        },
+        {
+          "item": "修复后跨引擎复验",
+          "passed": false
+        }
+      ],
+      "summary": "验收清单 2/4 项（非成功概率）。PPO/TRPO、FDPI 和 SafeVLA 接口已有实现。曲线存在；OT eps、FDPI pf、边距、软预算分别改变不同机制，不能当作同一个参数。",
+      "evidence": "PG1 TRPO-Lag：训练 R/C=24.21/42.04；终档评测 R/C=25.42/41.56，预算内种子 0/3，评测种子 n=3；OT clip1：训练 R/C=14.94/26.64；终档评测 R/C=16.15/27.23，预算内种子 2/5，评测种子 n=5",
+      "next": "修复 FDPI 采样参数冲突后复验；端点等价、跨引擎和完整曲线分别验收。"
+    },
+    {
+      "id": "G2",
+      "name": "软硬端点比较",
+      "status": "run",
+      "pct": 50,
+      "checklist": [
+        {
+          "item": "软硬端点已运行",
+          "passed": true
+        },
+        {
+          "item": "基线参数扫描已完成",
+          "passed": true
+        },
+        {
+          "item": "逐种子预算验收全面通过",
+          "passed": false
+        },
+        {
+          "item": "新种子统计优势",
+          "passed": false
+        }
+      ],
+      "summary": "验收清单 2/4 项（非成功概率）。部分工作点更好；全面超越尚未成立。训练窗与部署评测严格区分，均值过线和逐种子过线分别报告。",
+      "evidence": "CG1 10M OT：训练 R/C=25.52/23.58；终档评测 R/C=25.01/25.79，预算内种子 1/3，评测种子 n=3；CPO：训练 R/C=23.82/26.91；终档评测 R/C=23.82/25.31，预算内种子 1/3，评测种子 n=3",
+      "next": "完成已启动的 10M/补种队列；同预算下比较回报、每种子可行性及统计区间。"
+    },
+    {
+      "id": "G3",
+      "name": "异构多约束与强基线",
+      "status": "run",
+      "pct": 50,
+      "checklist": [
+        {
+          "item": "多通道记录",
+          "passed": true
+        },
+        {
+          "item": "SDAC/SRCPO 对照已有产物",
+          "passed": true
+        },
+        {
+          "item": "修复后同协议比较",
+          "passed": false
+        },
+        {
+          "item": "多类不可逆损伤任务",
+          "passed": false
+        }
+      ],
+      "summary": "验收清单 2/4 项（非成功概率）。前修复版 FDPI-engine 固定/积分/LP 三组均受 beta 字段冲突影响，暂不支持“只改变价格便胜出”的因果结论。历史数据保留，待复验。",
+      "evidence": "独立 legacy typed-margin：v1e75c10: R=17.82，硬违规 0.53%（5/936），软成本 0.87，软预算内种子 3/3。这是另一实现，不计作 SafeOT-Dual 修复结果。",
+      "next": "先完成 beta 单项修复复验，再测接近门控；OopsieVerse 损伤任务为候选，尚未安装或跑出结果。"
+    },
+    {
+      "id": "G4",
+      "name": "SafeVLA 内的安全学习",
+      "status": "wait",
+      "pct": 25,
+      "checklist": [
+        {
+          "item": "SafeVLA 引擎接入",
+          "passed": true
+        },
+        {
+          "item": "完整匹配评测",
+          "passed": false
+        },
+        {
+          "item": "足够独立种子",
+          "passed": false
+        },
+        {
+          "item": "多通道异构优势",
+          "passed": false
+        }
+      ],
+      "summary": "验收清单 1/4 项（非成功概率）。当前是两臂、单种子、单聚合约束 pilot，不能宣称异构 VLA 优势。30314 失联是已有任务记录中的阻塞，本轮未宣布恢复。",
+      "evidence": "vla/README.md 与 T-1484 09-05 18:48 记录；没有完整匹配终档评测。",
+      "next": "恢复主机后先核验 PID/日志/checkpoint；核对 episode 与 rollout 预算单位，再完成配对评测和多通道扩展。"
+    },
+    {
+      "id": "G5",
+      "name": "高奖励与低硬违规同时成立",
+      "status": "run",
+      "pct": 50,
+      "checklist": [
+        {
+          "item": "完整折中数据",
+          "passed": true
+        },
+        {
+          "item": "逐集硬违规审计",
+          "passed": true
+        },
+        {
+          "item": "高奖励与目标泄漏上限同时满足",
+          "passed": false
+        },
+        {
+          "item": "新种子和分布外复验",
+          "passed": false
+        }
+      ],
+      "summary": "验收清单 2/4 项（非成功概率）。零观测违规不能证明未来零泄漏。既有最佳折中仍需收紧安全，同时保留回报；不把均值达标写成每个种子都达标。",
+      "evidence": "PG2 v1c: R=5.35，硬违规 0.00%（0/936），软成本 2.59，软预算内种子 3/3；PG2 v1e8: R=17.59，硬违规 1.07%（10/936），软成本 20.65，软预算内种子 3/3",
+      "next": "当前单因素 beta 修复；终止步损伤记账和接近门控分开做下一轮对照。"
+    }
+  ],
+  "focus": [
+    "已修复：FDPI 的 IS 衰减 beta 与软积分器分离；PB2 按任一硬违规计一次。",
+    "当前有限队列：pilot_before_integral_s1；完成 0/8；状态 running。",
+    "待验证：前修复版 FDPI-engine 各组的机制归因；后续门控与终止损伤建模分别对照。",
+    "五目标均未最终验收；保留失败、超预算及缺失结果。"
+  ],
+  "verdicts": [
+    {
+      "date": "09-05",
+      "topic": "重要性采样参数冲突",
+      "verdict": "软积分器覆盖 FDPI beta；已修复并通过实际父类回归检查，策略表现仍待新实验。",
+      "evidence": "sotd_repair_evidence.json / regression_checks.json"
+    },
+    {
+      "date": "09-05",
+      "topic": "完整历史产物审计",
+      "verdict": "112 个完整运行，34944 集；7 个 PB2 运行纠正重复计数；数据完整性错误 0。",
+      "evidence": "sotd_legacy_pooled.csv / sotd_repair_evidence.json"
+    },
+    {
+      "date": "09-05",
+      "topic": "基线调参扫描",
+      "verdict": "已核验 16 个完整种子运行；不重复训练已完成配置。",
+      "evidence": "sotd_legacy_pooled.csv"
+    },
+    {
+      "date": "09-05",
+      "topic": "终止步损伤",
+      "verdict": "合成输入终止成本 1，旧图统计为 0；尚未改算法，不能将其认定为导航泄漏根因。",
+      "evidence": "flow_pricer.py / doc/safeot_repair_20260905.md"
+    },
+    {
+      "date": "09-05",
+      "topic": "30314 / G4",
+      "verdict": "任务记录中 SSH 失联；两臂未完成匹配评测。",
+      "evidence": "T-1484 18:48 记录"
+    }
+  ],
+  "queue": [
+    {
+      "goal": "G3/G5",
+      "task": "配对 smoke + 修复后 fixed/integral/LP ×2 seeds ×2M",
+      "status": "run",
+      "eta": "按实际吞吐更新，不预报达标时间",
+      "note": "0/8 完成；一次一条 GPU 车道；错误即停；"
+    },
+    {
+      "goal": "G1/G2",
+      "task": "现有 wave-5 补种与 10M 队列",
+      "status": "run",
+      "eta": "沿用原采集器",
+      "note": "18:48 已启动记录；本轮未重发。"
+    },
+    {
+      "goal": "G4",
+      "task": "恢复 30314 后核验并完成两臂",
+      "status": "wait",
+      "eta": "取决于主机恢复",
+      "note": "禁止盲目重启旧命令。"
+    },
+    {
+      "goal": "G3/G5",
+      "task": "接近门控与终止事件模型",
+      "status": "idle",
+      "eta": "beta 复验之后",
+      "note": "尚未启动，分别单因素对照。"
+    }
+  ],
+  "changelog": [
+    {
+      "time": "09-05 19:42",
+      "text": "由真实表格和修复队列生成状态；移除训练达标代替部署达标、未验证全面超越等结论。"
+    },
+    {
+      "time": "09-05 19:21",
+      "text": "有限 beta 修复队列启动，代码和配置按哈希冻结。"
+    },
+    {
+      "time": "09-05 18:48",
+      "text": "wave-5 已启动；30314 仍在阻塞记录中。"
+    }
+  ],
+  "figures": [
+    "sotd_trpo_frontier.png",
+    "sotd_longrun_PointGoal1_10M.png",
+    "sotd_longrun_CarGoal1_10M.png",
+    "sotd_legacy_frontier.png"
+  ]
 }
