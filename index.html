@@ -5,99 +5,112 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>SafeOT 进度看板</title>
 <style>
-  :root { color-scheme: light; --blue:#2563eb; --green:#059669; --amber:#d97706; --red:#dc2626; --muted:#64748b; --line:#d7dbe0; }
+  :root { color-scheme: light; --blue:#2563eb; --green:#059669; --amber:#d97706; --red:#dc2626; --muted:#64748b; --line:#d7dbe0; --purple:#7c3aed; }
   * { box-sizing: border-box; }
-  body { margin:0; color:#1a1a2e; background:#fafbfc; font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif; line-height:1.55; }
-  .layout { display:flex; max-width:1680px; margin:0 auto; }
-  nav.sidebar { position:sticky; top:0; align-self:flex-start; width:220px; min-height:100vh; padding:16px 10px; border-right:1px solid var(--line); background:#f8fafc; font-size:12.5px; }
+  body { margin:0; color:#1a1a2e; background:#fafbfc; font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif; line-height:1.5; }
+  .layout { display:flex; max-width:1760px; margin:0 auto; }
+  nav.sidebar { position:sticky; top:0; align-self:flex-start; width:215px; min-height:100vh; padding:16px 10px; border-right:1px solid var(--line); background:#f8fafc; font-size:12.5px; }
   nav.sidebar a { display:block; padding:4px 8px; color:#334155; text-decoration:none; border-radius:4px; }
   nav.sidebar a:hover { background:#e2e8f0; }
   nav.sidebar .nav-title { font-weight:700; margin:8px 0 4px; color:#1e293b; }
-  main.content { flex:1; padding:24px 18px 40px; max-width:1460px; }
+  main.content { flex:1; padding:22px 18px 40px; max-width:1540px; }
   h1 { font-size:23px; border-bottom:3px solid var(--blue); padding-bottom:8px; margin-bottom:6px; }
-  h2 { margin-top:30px; padding:7px 10px; border-left:4px solid var(--blue); background:#eef2ff; font-size:17px; }
-  h3 { margin:18px 0 6px; font-size:14.5px; color:#334155; }
+  h2 { margin-top:28px; padding:7px 10px; border-left:4px solid var(--blue); background:#eef2ff; font-size:17px; }
+  h3 { margin:16px 0 6px; font-size:14px; color:#334155; }
   .meta,.small { color:var(--muted); font-size:12px; }
-  .banner { display:grid; grid-template-columns:repeat(5,1fr); gap:12px; margin:14px 0; }
-  @media (max-width:1100px) { .banner { grid-template-columns:repeat(2,1fr); } }
-  .card { padding:12px 14px; border:1px solid var(--line); border-radius:8px; background:#fff; }
+  .cards { display:grid; grid-template-columns:repeat(5,1fr); gap:10px; margin:12px 0; }
+  @media (max-width:1100px) { .cards { grid-template-columns:repeat(2,1fr); } }
+  .card { padding:10px 12px; border:1px solid var(--line); border-radius:8px; background:#fff; }
   .card .t { font-weight:700; font-size:13px; color:#1e293b; }
-  .card .pct { font-size:22px; font-weight:700; margin:2px 0; }
-  .bar { height:8px; background:#e5e7eb; border-radius:4px; overflow:hidden; margin:4px 0 6px; }
+  .card .pct { font-size:21px; font-weight:700; margin:2px 0; }
+  .bar { height:7px; background:#e5e7eb; border-radius:4px; overflow:hidden; margin:3px 0 5px; }
   .bar > i { display:block; height:100%; background:var(--blue); }
-  .pill { display:inline-block; padding:1px 8px; border-radius:10px; font-size:11px; font-weight:600; color:#fff; }
-  .pill.done { background:var(--green); } .pill.run { background:var(--blue); } .pill.wait { background:var(--amber); } .pill.neg { background:var(--red); } .pill.idle { background:var(--muted); }
+  .pill { display:inline-block; padding:1px 7px; border-radius:10px; font-size:11px; font-weight:600; color:#fff; white-space:nowrap; }
+  .pill.done { background:var(--green); } .pill.training,.pill.run { background:var(--blue); } .pill.verifying,.pill.wait,.pill.verified_partial { background:var(--amber); } .pill.negative,.pill.neg { background:var(--red); } .pill.planned,.pill.idle { background:var(--muted); }
   .table-wrap { overflow-x:auto; border:1px solid var(--line); background:#fff; margin-bottom:8px; border-radius:6px; }
-  table { width:100%; border-collapse:collapse; font-size:12.5px; }
-  th { padding:6px 8px; color:#fff; background:#1e293b; text-align:left; white-space:nowrap; }
-  td { padding:5px 8px; border-top:1px solid #eef0f3; vertical-align:top; }
+  table { width:100%; border-collapse:collapse; font-size:12.3px; }
+  th { padding:5px 7px; color:#fff; background:#1e293b; text-align:left; white-space:nowrap; position:sticky; top:0; }
+  td { padding:4px 7px; border-top:1px solid #eef0f3; vertical-align:top; }
   tr:hover td { background:#f8fafc; }
   td.num { text-align:right; font-variant-numeric:tabular-nums; white-space:nowrap; }
+  tr.grp td { background:#f1f5f9; font-weight:700; color:#1e293b; }
   .ok { color:var(--green); font-weight:600; } .bad { color:var(--red); font-weight:600; } .warn { color:var(--amber); font-weight:600; }
-  .gpu { display:inline-block; width:46px; text-align:center; padding:2px 0; border-radius:4px; font-size:11px; margin:1px; color:#fff; background:#9ca3af; }
-  .gpu.busy { background:var(--blue); } .gpu.other { background:#a78bfa; }
+  .mbar { display:inline-block; width:90px; height:9px; background:#e5e7eb; border-radius:3px; vertical-align:middle; overflow:hidden; margin-right:5px; }
+  .mbar > i { display:block; height:100%; background:#94a3b8; } .mbar.hot > i { background:var(--blue); } .mbar.util > i { background:var(--green); }
+  .tag { display:inline-block; padding:0 5px; border-radius:3px; font-size:11px; margin:1px 2px 1px 0; background:#e2e8f0; color:#334155; }
+  .tag.safeot { background:#dbeafe; color:#1e40af; font-weight:600; } .tag.other { background:#f3e8ff; color:#5b21b6; }
   figure { margin:10px 0; background:#fff; border:1px solid var(--line); border-radius:6px; padding:8px; }
   figure img { width:100%; max-width:1200px; display:block; }
   figcaption { font-size:12px; color:var(--muted); margin-top:6px; }
   ul.q { margin:6px 0; padding-left:20px; font-size:13px; } ul.q li { margin:3px 0; }
   code { background:#f1f5f9; padding:1px 4px; border-radius:3px; font-size:12px; }
   .stale { color:var(--red); }
+  .srvhead { display:flex; gap:14px; align-items:baseline; margin:12px 0 4px; }
+  .srvhead b { font-size:14px; }
 </style>
 </head>
 <body>
 <div class="layout">
 <nav class="sidebar">
   <div class="nav-title">大纲</div>
-  <a href="#sec0">0 五目标进度</a>
-  <a href="#secS">S 算力与在跑实验</a>
-  <a href="#sec1">1 前沿总表(严格协议)</a>
-  <a href="#sec2">2 判决记录</a>
-  <a href="#sec3">3 G4 VLA 终账</a>
-  <a href="#sec4">4 工作队列(agent 按此干活)</a>
-  <a href="#sec5">5 变更日志</a>
-  <a href="#sec6">6 维护契约</a>
+  <a href="#secS">S 服务器与算力(实时)</a>
+  <a href="#secM">1 实验矩阵(基准 x 方法 x 旋钮)</a>
+  <a href="#secD">2 基准数据集与协议</a>
+  <a href="#secF">3 前沿图与总表</a>
+  <a href="#sec0">4 五目标进度</a>
+  <a href="#secP">5 并行 agent(SafeOT-Dual)</a>
+  <a href="#secV">6 判决记录</a>
+  <a href="#secQ">7 工作队列</a>
+  <a href="#secC">8 变更日志</a>
+  <a href="#secX">9 维护契约</a>
   <div class="nav-title" style="margin-top:14px">数据源</div>
   <a href="https://github.com/asimfish/safeot-dashboard/tree/data" target="_blank">data 分支(JSON 快照)</a>
   <a href="https://github.com/asimfish/safeot-dashboard" target="_blank">仓库</a>
 </nav>
 <main class="content">
   <h1>SafeOT 进度看板</h1>
-  <div class="meta">内容快照 <span id="upd-status">-</span> · 服务器快照 <span id="upd-runs">-</span> · 页面每 60 秒自动刷新数据 · <span id="stale" class="stale"></span></div>
+  <div class="meta">内容快照 <span id="upd-status">-</span> · 服务器快照 <span id="upd-runs">-</span> · 每 60 秒自动刷新 · <span id="stale" class="stale"></span></div>
 
-  <h2 id="sec0">0 五目标进度</h2>
-  <div class="banner" id="goals"></div>
+  <h2 id="secS">S 服务器与算力(实时:每卡显存 / 利用率 / 正在跑的实验)</h2>
+  <div id="servers"></div>
+  <h3>在跑评估车道(30109)</h3>
+  <ul class="q" id="lanes"></ul>
+
+  <h2 id="secM">1 实验矩阵(基准 x 方法 x 旋钮;多 agent 对齐用)</h2>
+  <div class="meta" id="msum"></div>
+  <div class="table-wrap"><table id="matrix"><thead><tr><th>目标</th><th>方法</th><th>旋钮</th><th>计划种子</th><th>已训</th><th>已验证</th><th>集数</th><th>硬泄漏</th><th>回报</th><th>软/集</th><th>状态</th><th>负责</th><th>备注</th></tr></thead><tbody></tbody></table></div>
+
+  <h2 id="secD">2 基准数据集与协议</h2>
+  <div class="table-wrap"><table id="datasets"><thead><tr><th>基准</th><th>任务</th><th>成本通道(类型)</th><th>预算 / 步数</th><th>评估协议</th><th>基线</th><th>状态</th></tr></thead><tbody></tbody></table></div>
+
+  <h2 id="secF">3 前沿图与总表(终档、312 集/种子、逐集硬通道)</h2>
+  <figure><img id="fig" alt="frontier"><figcaption>回报 vs 逐集硬违规率。实心圆 = typed(预算内),空心 = 软成本超 25/集;红方 = FDPI,品红菱 = SAC-Lag,紫三角 = SAC-Pen,绿倒三角 = SDAC,青十字 = SRCPO;虚线 = 基线沿自身旋钮的扫描;蓝实线 = typed 预算内 Pareto 前沿。</figcaption></figure>
+  <div class="table-wrap"><table id="frontier"><thead><tr><th>任务</th><th>方法</th><th>旋钮</th><th>n</th><th>集数</th><th>硬泄漏</th><th>回报</th><th>软成本/集</th><th>预算内</th></tr></thead><tbody></tbody></table></div>
+
+  <h2 id="sec0">4 五目标进度</h2>
+  <div class="cards" id="goals"></div>
   <h3>今日焦点</h3>
   <ul class="q" id="focus"></ul>
 
-  <h2 id="secS">S 算力与在跑实验</h2>
-  <div class="table-wrap"><table id="gpu"><thead><tr><th>服务器</th><th>卡(蓝=我方任务,紫=他人)</th><th>在用</th><th>说明</th></tr></thead><tbody></tbody></table></div>
-  <h3>在跑 / 近 48h 完成的训练</h3>
-  <div class="table-wrap"><table id="runs"><thead><tr><th>run</th><th>任务</th><th>方法 / 旋钮</th><th>档数</th><th>最新 32 集扫描</th><th>104 集确认</th><th>终档验证(312 集)</th></tr></thead><tbody></tbody></table></div>
-  <h3>在跑评估车道</h3>
-  <ul class="q" id="lanes"></ul>
+  <h2 id="secP">5 并行 agent:SafeOT-Dual(只读镜像)</h2>
+  <div class="meta" id="pmeta"></div>
+  <div class="table-wrap"><table id="parallel"><thead><tr><th>run</th><th>最新步</th><th>训完</th><th>strict_eval 文件</th><th>最近更新</th></tr></thead><tbody></tbody></table></div>
 
-  <h2 id="sec1">1 前沿总表(终档、312 集/种子、逐集硬通道、与 FDPI 逐字同协议)</h2>
-  <figure><img id="fig" alt="frontier"><figcaption>回报 vs 逐集硬违规率。实心圆 = typed(预算内),空心 = 软成本超 25/集;红方 = FDPI,品红菱 = SAC-Lag,紫三角 = SAC-Pen;虚线 = 各基线沿自身旋钮的扫描;蓝实线 = typed 预算内 Pareto 前沿。</figcaption></figure>
-  <div class="table-wrap"><table id="frontier"><thead><tr><th>任务</th><th>方法</th><th>旋钮</th><th>n</th><th>集数</th><th>硬泄漏</th><th>回报</th><th>软成本/集</th><th>预算内</th></tr></thead><tbody></tbody></table></div>
-
-  <h2 id="sec2">2 判决记录</h2>
+  <h2 id="secV">6 判决记录</h2>
   <div class="table-wrap"><table id="verdicts"><thead><tr><th>日期</th><th>主题</th><th>判词</th><th>证据</th></tr></thead><tbody></tbody></table></div>
 
-  <h2 id="sec3">3 G4 VLA 终账(Safety-CHORES,n=4 配对)</h2>
-  <div class="table-wrap"><table id="vla"><thead><tr><th>任务</th><th>基线 SR / 成本</th><th>门控 SR / 成本</th><th>dSR</th><th>d成本</th><th>判词</th></tr></thead><tbody></tbody></table></div>
-
-  <h2 id="sec4">4 工作队列(agent 按此干活;状态由 agent 更新)</h2>
+  <h2 id="secQ">7 工作队列(agent 按此干活)</h2>
   <div class="table-wrap"><table id="queue"><thead><tr><th>#</th><th>目标</th><th>任务</th><th>状态</th><th>预计</th><th>备注</th></tr></thead><tbody></tbody></table></div>
 
-  <h2 id="sec5">5 变更日志</h2>
+  <h2 id="secC">8 变更日志</h2>
   <div class="table-wrap"><table id="changelog"><thead><tr><th>时间</th><th>变更</th></tr></thead><tbody></tbody></table></div>
 
-  <h2 id="sec6">6 维护契约</h2>
+  <h2 id="secX">9 维护契约</h2>
   <ul class="q">
-    <li>服务器快照(<code>runs.json</code>:GPU、在跑训练、扫描/确认/验证块)由 Mac 端 <code>update_dashboard.sh</code> 每 10 分钟 SSH 采集并推送到 <code>data</code> 分支;Mac 休眠期间快照停更,页面顶部会标红「快照过期」。</li>
-    <li>内容快照(<code>status.json</code>:五目标进度、焦点、判决、队列、变更日志)由 agent 在每个里程碑手工更新;所有数字必须能回溯到 <code>frontier_arms.csv</code> 或服务器日志。</li>
-    <li>前沿表/图(<code>frontier_pooled.json</code>、<code>fig_frontier_paper.png</code>)由 <code>auto_verify -> make_frontier_csv -> make_paper_fig</code> 流水线生成后推送。</li>
-    <li>协议口径:终档、零选点、每种子 3 独立块 x 104 集、逐集硬通道计数、软预算 25/集;认证选点仅作附录。</li>
+    <li>服务器快照(<code>runs.json</code>:两台服务器每卡显存/利用率/进程标签、全部 run 目录状态、评估车道、并行 agent 目录)由 Mac 端 <code>update_dashboard.sh</code> 每 10 分钟采集推送到 <code>data</code> 分支;Mac 休眠期间停更并标红。</li>
+    <li>实验矩阵 = <code>plan.json</code>(计划网格:基准 x 方法 x 旋钮 x 种子数,由 agent 维护)与服务器快照自动合并(<code>build_matrix.py</code>);新增实验先写进 plan.json 再发车。</li>
+    <li>内容快照(<code>status.json</code>:五目标、焦点、判决、队列、变更日志、数据集表)由 agent 在里程碑手工更新;所有数字回溯到 <code>frontier_arms.csv</code> 或服务器日志。</li>
+    <li>协议:终档、零选点、每种子 3 独立块 x 104 集、逐集硬通道计数、软预算 25/集;认证选点仅作附录。</li>
   </ul>
 </main>
 </div>
@@ -105,36 +118,63 @@
 const RAW = "https://raw.githubusercontent.com/asimfish/safeot-dashboard/data/";
 const $ = (s) => document.querySelector(s);
 const esc = (s) => String(s ?? "").replace(/[&<>]/g, (c) => ({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
-const pill = (st) => { const m = {done:"完成", run:"在跑", wait:"排队", neg:"负结果", idle:"空闲"}; return `<span class="pill ${st}">${m[st] || st}</span>`; };
+const PILL = {done:"完成", run:"在跑", training:"训练中", verifying:"验证中", verified_partial:"缺种子", wait:"排队", negative:"负结果", neg:"负结果", planned:"未开始", idle:"空闲"};
+const pill = (st) => `<span class="pill ${st}">${PILL[st] || st}</span>`;
 const fmtAge = (iso) => { if (!iso) return "-"; const m = Math.round((Date.now() - new Date(iso)) / 60000); return `${iso.replace("T"," ").slice(0,16)}(${m < 60 ? m + " 分钟前" : (m/60).toFixed(1) + " 小时前"})`; };
+const T = {pg2:"PointGoal2", cg2:"CarGoal2", pb2:"PointButton2"};
+const f2 = (x, d=2) => (x === null || x === undefined || isNaN(x)) ? "-" : Number(x).toFixed(d);
 async function getJSON(f) { const r = await fetch(RAW + f + "?v=" + Math.floor(Date.now()/60000), {cache:"no-store"}); if (!r.ok) throw new Error(f); return r.json(); }
+const rateCls = (r) => r === null ? "" : (r <= 1 ? "ok" : (r <= 5 ? "warn" : "bad"));
 
+function renderServers(r) {
+  $("#upd-runs").textContent = fmtAge(r.updated);
+  const ageMin = (Date.now() - new Date(r.updated)) / 60000;
+  $("#stale").textContent = ageMin > 40 ? `服务器快照已过期 ${(ageMin/60).toFixed(1)} 小时(Mac 端采集停摆或服务器不可达)` : "";
+  $("#servers").innerHTML = (r.servers || []).map(s => {
+    const busy = s.cards.filter(c => c.used_mb > 2000).length, mine = s.cards.filter(c => c.mine).length;
+    const rows = s.cards.map(c => {
+      const mem = Math.round(100 * c.used_mb / Math.max(1, c.total_mb));
+      const tags = (c.procs || []).map(p => `<span class="tag ${p.startsWith("safeot") ? "safeot" : "other"}">${esc(p)}</span>`).join("") || `<span class="small">空闲</span>`;
+      return `<tr><td class="num">g${c.idx}</td><td><span class="mbar ${c.mine ? "hot" : ""}"><i style="width:${mem}%"></i></span><span class="small">${Math.round(c.used_mb/1024)} / ${Math.round(c.total_mb/1024)} G</span></td><td><span class="mbar util"><i style="width:${Math.max(0,c.util)}%"></i></span><span class="small">${c.util < 0 ? "-" : c.util + "%"}</span></td><td>${tags}</td></tr>`;
+    }).join("");
+    return `<div class="srvhead"><b>${esc(s.name)}</b><span class="small">${esc(s.desc || "")}</span><span class="small">load ${esc(s.load || "-")} / ${s.ncpu || "-"} 核 · ${busy}/${s.cards.length} 卡在用 · SafeOT 占 ${mine} 卡${s.snap_time ? " · 快照 " + s.snap_time.slice(11,16) : ""}</span></div>
+      <div class="table-wrap"><table><thead><tr><th style="width:40px">卡</th><th style="width:190px">显存</th><th style="width:160px">利用率</th><th>正在跑(蓝 = SafeOT;紫 = 其它项目)</th></tr></thead><tbody>${rows}</tbody></table></div>`;
+  }).join("");
+  $("#lanes").innerHTML = (r.lanes && r.lanes.length) ? r.lanes.map(l => `<li><code>${esc(l)}</code></li>`).join("") : "<li class='small'>无在跑评估</li>";
+  const p = r.parallel || {runs: []};
+  const recent = p.runs.slice().sort((a,b) => b.mtime - a.mtime).slice(0, 25);
+  $("#pmeta").textContent = `工作区 ${p.workspace || "-"} · 进程 ${p.n_procs ?? "-"} · run 目录 ${p.runs.length}(显示最近 25 个)`;
+  $("#parallel tbody").innerHTML = recent.map(x => `<tr><td><code>${esc(x.name)}</code></td><td class="num">${x.latest_step ? (x.latest_step/1000).toFixed(0) + "k" : "-"}</td><td>${x.done ? "✓" : ""}</td><td class="num">${x.strict_evals}</td><td class="small">${new Date(x.mtime*1000).toISOString().slice(5,16).replace("T"," ")}</td></tr>`).join("") || "<tr><td colspan=5 class='small'>无</td></tr>";
+}
+function renderMatrix(m) {
+  const s = m.summary || {};
+  $("#msum").textContent = `共 ${s.total} 格 · 完成 ${s.done} · 训练中 ${s.training} · 未开始 ${s.planned} · 更新 ${fmtAge(m.updated)}`;
+  const order = ["pg2", "cg2", "pb2"]; let html = "";
+  for (const t of order) {
+    const rows = m.rows.filter(r => r.task === t);
+    if (!rows.length) continue;
+    html += `<tr class="grp"><td colspan="13">${T[t]} · ${rows.length} 格 · 完成 ${rows.filter(r=>r.status==="done").length}</td></tr>`;
+    html += rows.map(r => `<tr><td class="small">${esc(r.goal)}</td><td>${esc(r.method)}</td><td>${esc(r.knob)}</td><td class="num">${r.seeds_plan}</td><td class="num">${r.seeds_done}</td><td class="num">${r.seeds_verified}</td><td class="num">${r.eps || "-"}</td><td class="num ${rateCls(r.rate)}">${r.rate === null ? "-" : f2(r.rate) + "%"}</td><td class="num">${f2(r.ret)}</td><td class="num">${f2(r.soft,1)}</td><td>${pill(r.status)} <span class="small">${esc(r.detail)}</span></td><td class="small">${esc(r.owner)}</td><td class="small">${esc(r.note)}</td></tr>`).join("");
+  }
+  $("#matrix tbody").innerHTML = html;
+}
 function renderStatus(s) {
   $("#upd-status").textContent = fmtAge(s.updated);
   $("#goals").innerHTML = s.goals.map(g => `<div class="card"><div class="t">${esc(g.id)} ${esc(g.name)}</div><div class="pct">${g.pct}%</div><div class="bar"><i style="width:${g.pct}%"></i></div>${pill(g.status)} <span class="small">${esc(g.summary)}</span><div class="small" style="margin-top:4px">证据:${esc(g.evidence)}</div>${g.next ? `<div class="small">下一步:${esc(g.next)}</div>` : ""}</div>`).join("");
   $("#focus").innerHTML = s.focus.map(x => `<li>${esc(x)}</li>`).join("");
+  $("#datasets tbody").innerHTML = (s.datasets || []).map(d => `<tr><td>${esc(d.bench)}</td><td>${esc(d.task)}</td><td>${esc(d.channels)}</td><td>${esc(d.budget)}</td><td class="small">${esc(d.protocol)}</td><td class="small">${esc(d.baselines)}</td><td>${esc(d.status)}</td></tr>`).join("");
   $("#verdicts tbody").innerHTML = s.verdicts.map(v => `<tr><td style="white-space:nowrap">${esc(v.date)}</td><td>${esc(v.topic)}</td><td>${esc(v.verdict)}</td><td class="small">${esc(v.evidence)}</td></tr>`).join("");
-  $("#vla tbody").innerHTML = s.vla.map(v => `<tr><td>${esc(v.task)}</td><td class="num">${esc(v.base)}</td><td class="num">${esc(v.gated)}</td><td class="num">${esc(v.dsr)}</td><td class="num">${esc(v.dcost)}</td><td>${esc(v.verdict)}</td></tr>`).join("");
   $("#queue tbody").innerHTML = s.queue.map((q, i) => `<tr><td>${i+1}</td><td>${esc(q.goal)}</td><td>${esc(q.task)}</td><td>${pill(q.status)}</td><td>${esc(q.eta)}</td><td class="small">${esc(q.note)}</td></tr>`).join("");
   $("#changelog tbody").innerHTML = s.changelog.map(c => `<tr><td style="white-space:nowrap">${esc(c.time)}</td><td>${esc(c.text)}</td></tr>`).join("");
 }
-function renderRuns(r) {
-  $("#upd-runs").textContent = fmtAge(r.updated);
-  const ageMin = (Date.now() - new Date(r.updated)) / 60000;
-  $("#stale").textContent = ageMin > 40 ? `服务器快照已过期 ${(ageMin/60).toFixed(1)} 小时(Mac 端采集停摆或服务器不可达)` : "";
-  $("#gpu tbody").innerHTML = (r.gpu || []).map(srv => `<tr><td>${esc(srv.server)}</td><td>${srv.cards.map(c => `<span class="gpu ${c.mine ? "busy" : (c.used_mb > 2000 ? "other" : "")}" title="${c.used_mb} MiB">g${c.idx} ${Math.round(c.used_mb/1024)}G</span>`).join("")}</td><td class="num">${srv.cards.filter(c=>c.used_mb>2000).length}/${srv.cards.length}</td><td class="small">${esc(srv.note)}</td></tr>`).join("");
-  const rows = (r.runs || []).sort((a,b) => (Number(b.running) - Number(a.running)) || (Number(a.done) - Number(b.done)) || a.name.localeCompare(b.name));
-  $("#runs tbody").innerHTML = rows.length ? rows.map(x => `<tr><td><code>${esc(x.name)}</code>${x.running ? " " + pill("run") : ""}</td><td>${esc(x.task)}</td><td>${esc(x.variant)}</td><td class="num">${x.ckpts}/10${x.done ? " ✓" : ""}</td><td class="small">${esc(x.scan)}</td><td class="small">${esc(x.confirm)}</td><td class="small">${esc(x.blocks)}</td></tr>`).join("") : `<tr><td colspan="7" class="small">无在跑训练</td></tr>`;
-  $("#lanes").innerHTML = (r.lanes && r.lanes.length) ? r.lanes.map(l => `<li><code>${esc(l)}</code></li>`).join("") : "<li class='small'>无在跑评估</li>";
-}
 function renderFrontier(f) {
   $("#fig").src = RAW + "fig_frontier_paper.png?v=" + Math.floor(Date.now()/600000);
-  const T = {pg2:"PointGoal2", cg2:"CarGoal2", pb2:"PointButton2"};
-  $("#frontier tbody").innerHTML = f.rows.map(x => `<tr><td>${T[x.task] || x.task}</td><td>${esc(x.method)}</td><td>${esc(x.knob)}</td><td class="num">${x.n}</td><td class="num">${x.eps}</td><td class="num ${x.rate <= 1 ? "ok" : (x.rate <= 3 ? "warn" : "bad")}">${x.rate.toFixed(2)}%</td><td class="num">${x.ret.toFixed(2)}</td><td class="num">${x.soft.toFixed(1)}</td><td>${x.soft <= 25 ? "✓" : "✗"}</td></tr>`).join("");
+  $("#frontier tbody").innerHTML = f.rows.map(x => `<tr><td>${T[x.task] || x.task}</td><td>${esc(x.method)}</td><td>${esc(x.knob)}</td><td class="num">${x.n}</td><td class="num">${x.eps}</td><td class="num ${rateCls(x.rate)}">${x.rate.toFixed(2)}%</td><td class="num">${x.ret.toFixed(2)}</td><td class="num">${x.soft.toFixed(1)}</td><td>${x.soft <= 25 ? "✓" : "✗"}</td></tr>`).join("");
 }
 async function refresh() {
+  try { renderServers(await getJSON("runs.json")); } catch (e) { $("#upd-runs").textContent = "加载失败"; }
+  try { renderMatrix(await getJSON("matrix.json")); } catch (e) { console.warn(e); }
   try { renderStatus(await getJSON("status.json")); } catch (e) { $("#upd-status").textContent = "加载失败"; }
-  try { renderRuns(await getJSON("runs.json")); } catch (e) { $("#upd-runs").textContent = "加载失败"; }
   try { renderFrontier(await getJSON("frontier_pooled.json")); } catch (e) { console.warn(e); }
 }
 refresh(); setInterval(refresh, 60000);
