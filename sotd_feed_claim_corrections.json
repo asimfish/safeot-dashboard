@@ -1,0 +1,83 @@
+{
+  "observed": "2026-09-06T04:52:17+08:00",
+  "scope": "Correct descriptive dashboard claims; no experiment or benchmark definition changed.",
+  "source_before_sha256": "9ac54ffe9f532d28e4f09c4ca0f0d18b412ba2496e1bead7606cda80cf2b1c09",
+  "source_after_sha256": "b30249b5d686b1d8c64013c5e9c832aa780f251f6399676f8d571c25f14b0389",
+  "corrections": [
+    {
+      "time": "09-06 01:27",
+      "superseded_text": "30082 显卡空出：修复后 typed 补种 4–5（CG2/PG2 四臂 + CG2 绑定预算，20 个 run）已发车，主表将以 n=5 呈现；修复后早期读数：PG2 未分型 FDPI 5.4 @ 9%（修复前 2M 只有 1.4），IS 修复确实有效。",
+      "corrected_text": "30082 显卡空出：修复后 typed 补种 4–5（CG2/PG2 四臂 + CG2 绑定预算，20 个 run）已发车；目标是补足 n=5，验收按完整产物计数。当时 PG2 未分型 FDPI 早期训练读数为回报 5.4、逐集硬违规约 9%，修复前 2M 回报约 1.4。训练步数未匹配，不能据此断言 IS 修复带来性能收益；需同预算、同种子完整评测。"
+    },
+    {
+      "time": "09-05 18:40",
+      "superseded_text": "10M 全收齐：CarGoal1 TRPO-SafeOT-Dual clip 1 训练 25.5 @ 23.6（评测 25.0 @ 25.8），累计违约 1554（CPO 2330、TRPO-Lag 3382）——回报最高、预算内、违约最低；PG1 17.5 @ 25.8 评测，略低于 CPO 19.2 @ 23.8，违约低 17%。",
+      "corrected_text": "10M 已完成：CarGoal1 TRPO-SafeOT-Dual clip 1 训练 R/C=25.52/23.58；终档评测 R/C=25.01/25.79，预算 25，只有 1/3 种子在预算内。训练累计违约约 1554（CPO 2330、TRPO-Lag 3382）。这是较高奖励均值和较低训练累计违约的工作点，部署安全尚未通过。PG1 当时记录评测 17.5/25.8，CPO 19.2/23.8；训练累计违约低约 17%。"
+    },
+    {
+      "time": "09-05 02:00",
+      "superseded_text": "PG1 TRPO clip 曲线 0→4：24.2/42.0 → 11.9/26.3，违约 2428 → 700 单调；ε 0→10（clip 1）：21.2/39.4 → 13.3/27.2。CarGoal1 所有 TRPO-SafeOT-Dual 臂优于 CPO。",
+      "corrected_text": "当时训练窗口的 PG1 TRPO clip 曲线 0→4：24.2/42.0 → 11.9/26.3，累计违约 2428 → 700；ε 0→10（clip 1）：21.2/39.4 → 13.3/27.2。这些历史工作点展示了折中；CarGoal1 所有臂优于 CPO 的结论未通过同预算终档评测和统计验收。"
+    },
+    {
+      "time": "09-04 23:20",
+      "superseded_text": "参考方法 30 集确定性评测：PG1 2M 上 TRPO-SafeOT-Dual clip 1 是预算内回报最高臂（16.1 @ 27.2），CPO 确定性策略 7.8 @ 20.1，PCPO 11.4 @ 41.5，TRPO-Lag 25.4 @ 41.6（越线 66%）。",
+      "corrected_text": "PG1 2M 参考方法终档确定性评测：TRPO-SafeOT-Dual clip 1 R/C=16.15/27.23，预算 25，最新补种产物为 2/5 种子可行，不能称预算内回报最高臂。当时参考读数：CPO 7.8/20.1，PCPO 11.4/41.5，TRPO-Lag 25.4/41.6；训练与评测口径分别报告。"
+    }
+  ],
+  "verified_reference_rows": {
+    "CarGoal1_10M_SafeOT": {
+      "task": "SafetyCarGoal1-v0",
+      "algo": "trpo_sotd_eps1_cap1",
+      "budget": "25.0",
+      "steps": "10000000",
+      "n": "3",
+      "min_epochs": "500",
+      "train_R": "25.52338060861265",
+      "train_R_se": "0.9380666185064229",
+      "train_C": "23.58396666666667",
+      "train_C_se": "1.751878150569967",
+      "cumviol": "1553.959219131388",
+      "eval_R": "25.012035760756813",
+      "eval_R_se": "1.4117197058331452",
+      "eval_C": "25.78888888888889",
+      "eval_C_se": "0.8924235278646673",
+      "n_eval": "3",
+      "feasible_seeds": "1/3"
+    },
+    "PointGoal1_2M_SafeOT": {
+      "task": "SafetyPointGoal1-v0",
+      "algo": "trpo_sotd_eps1_cap1",
+      "budget": "25.0",
+      "steps": "2000000",
+      "n": "5",
+      "min_epochs": "100",
+      "train_R": "14.935173177996626",
+      "train_R_se": "1.6791671745168721",
+      "train_C": "26.63922",
+      "train_C_se": "1.4914099129347376",
+      "cumviol": "1064.9588767791022",
+      "eval_R": "16.146282061971817",
+      "eval_R_se": "1.4528433350915142",
+      "eval_C": "27.22666666666667",
+      "eval_C_se": "3.5362158053804102",
+      "n_eval": "5",
+      "feasible_seeds": "2/5"
+    }
+  },
+  "refs_table_sha256": "65906cc75f5b5521332dcee87ea87c5f8bac13d4ca1cb227a8449b7f1998465e",
+  "active_training_window": {
+    "run": "PG2_beta_repaired_fixed_s1",
+    "window_episodes": 50,
+    "last_logged_episode_step": 759998,
+    "reward_mean": -0.13691878539440083,
+    "observed_hard_episode_fraction": 0,
+    "soft_mean": 0.0,
+    "phase": "training_only_not_final_evaluation"
+  },
+  "first_mirrored_r2_training_done": "PG2_fdpi_fixed_r2_s2",
+  "r2_strict_evaluations_in_local_mirror": 0,
+  "G4_check": "2026-09-06 04:52 +08: safeot-30314 SSH connection refused",
+  "verdict": "No matched post-repair policy-performance gain, endpoint dominance or joint safety/reward acceptance established.",
+  "corrected_at": "2026-09-06T04:57:20+08:00"
+}
