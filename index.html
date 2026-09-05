@@ -97,6 +97,11 @@
   <h2 id="secP">5 并行 agent:SafeOT-Dual(只读镜像)</h2>
   <div class="meta" id="pmeta"></div>
   <div class="table-wrap"><table id="parallel"><thead><tr><th>run</th><th>最新步</th><th>训完</th><th>strict_eval 文件</th><th>最近更新</th></tr></thead><tbody></tbody></table></div>
+  <h3>SafeOT-Dual 主线进度（T-1484，自报口径；详情见 <a href="sotd.html">sotd.html</a>）</h3>
+  <div class="meta" id="sotd-meta"></div>
+  <div class="cards" id="sotd-goals"></div>
+  <h3>最近推进（SafeOT-Dual 会话手写，<code>sotd_progress_feed.json</code>）</h3>
+  <div class="table-wrap"><table id="sotd-feed"><thead><tr><th>时间</th><th>目标</th><th>内容</th></tr></thead><tbody></tbody></table></div>
 
   <h2 id="secV">6 判决记录</h2>
   <div class="table-wrap"><table id="verdicts"><thead><tr><th>日期</th><th>主题</th><th>判词</th><th>证据</th></tr></thead><tbody></tbody></table></div>
@@ -180,6 +185,19 @@ async function refresh() {
   try { renderFrontier(await getJSON("frontier_pooled.json")); } catch (e) { console.warn(e); }
 }
 refresh(); setInterval(refresh, 60000);
+async function refreshSotd() {
+  try {
+    const st = await getJSON("sotd_status.json");
+    document.querySelector("#sotd-meta").textContent = "状态更新：" + fmtAge(st.updated) + (st.task ? "（" + st.task + "）" : "");
+    document.querySelector("#sotd-goals").innerHTML = (st.goals || []).map(g => `<div class="card"><div class="t">${esc(g.id)} ${esc(g.name)}</div><div class="pct">${g.pct}%</div><div class="bar"><i style="width:${g.pct}%"></i></div>${pill(g.status)}<div class="small" style="margin-top:6px">${esc(g.summary)}</div></div>`).join("");
+  } catch (e) { document.querySelector("#sotd-meta").textContent = "sotd_status.json 加载失败"; }
+  try {
+    const f = await getJSON("sotd_progress_feed.json");
+    document.querySelector("#sotd-feed tbody").innerHTML = (f.entries || []).slice(0, 14).map(x => `<tr><td style="white-space:nowrap">${esc(x.time)}</td><td>${esc(x.goal || "")}</td><td>${esc(x.text)}</td></tr>`).join("");
+  } catch (e) { document.querySelector("#sotd-feed tbody").innerHTML = "<tr><td colspan=3 class='small'>sotd_progress_feed.json 加载失败</td></tr>"; }
+}
+refreshSotd(); setInterval(refreshSotd, 120000);
+
 </script>
 </body>
 </html>
