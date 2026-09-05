@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SafeOT-Dual 主线进展（T-1484）</title>
+<style>
+  :root { color-scheme: light; --blue:#2563eb; --green:#059669; --amber:#d97706; --red:#dc2626; --muted:#64748b; --line:#d7dbe0; }
+  * { box-sizing: border-box; }
+  body { margin:0; color:#1a1a2e; background:#fafbfc; font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif; line-height:1.55; }
+  .layout { display:flex; max-width:1680px; margin:0 auto; }
+  nav.sidebar { position:sticky; top:0; align-self:flex-start; width:220px; min-height:100vh; padding:16px 10px; border-right:1px solid var(--line); background:#f8fafc; font-size:12.5px; }
+  nav.sidebar a { display:block; padding:4px 8px; color:#334155; text-decoration:none; border-radius:4px; }
+  nav.sidebar a:hover { background:#e2e8f0; }
+  nav.sidebar .nav-title { font-weight:700; margin:8px 0 4px; color:#1e293b; }
+  main.content { flex:1; padding:24px 18px 40px; max-width:1460px; }
+  h1 { font-size:23px; border-bottom:3px solid var(--blue); padding-bottom:8px; margin-bottom:6px; }
+  h2 { margin-top:30px; padding:7px 10px; border-left:4px solid var(--blue); background:#eef2ff; font-size:17px; }
+  .meta,.small { color:var(--muted); font-size:12px; }
+  .banner { display:grid; grid-template-columns:repeat(5,1fr); gap:12px; margin:14px 0; }
+  @media (max-width:1100px) { .banner { grid-template-columns:repeat(2,1fr); } }
+  .card { border:1px solid var(--line); border-radius:8px; padding:10px 12px; background:#fff; font-size:12.5px; }
+  .card .t { font-weight:700; color:#1e293b; }
+  .card .pct { font-size:22px; font-weight:700; color:var(--blue); }
+  .bar { height:6px; background:#e2e8f0; border-radius:3px; margin:4px 0 6px; overflow:hidden; }
+  .bar i { display:block; height:100%; background:var(--blue); }
+  .pill { display:inline-block; padding:1px 7px; border-radius:10px; font-size:11px; color:#fff; background:var(--muted); }
+  .pill.done { background:var(--green); } .pill.run { background:var(--blue); } .pill.wait { background:var(--amber); } .pill.neg { background:var(--red); }
+  table { width:100%; border-collapse:collapse; font-size:12.5px; background:#fff; }
+  th, td { border:1px solid var(--line); padding:5px 7px; text-align:left; vertical-align:top; }
+  th { background:#f1f5f9; }
+  .figs { display:grid; grid-template-columns:repeat(2,1fr); gap:12px; }
+  .figs img { width:100%; border:1px solid var(--line); border-radius:6px; background:#fff; }
+  .note { border-left:4px solid var(--amber); background:#fffbeb; padding:8px 12px; font-size:12.5px; margin:10px 0; }
+</style>
+</head>
+<body>
+<div class="layout">
+<nav class="sidebar">
+  <div class="nav-title">SafeOT-Dual 主线</div>
+  <a href="#g">0 五目标进度（本主线口径）</a>
+  <a href="#focus">1 当前焦点 / 阻塞</a>
+  <a href="#figs">2 关键图</a>
+  <a href="#verdicts">3 判决记录</a>
+  <a href="#queue">4 队列</a>
+  <a href="#changelog">5 变更日志</a>
+  <div class="nav-title" style="margin-top:14px">其他</div>
+  <a href="index.html">← 返回总看板（typed 主线）</a>
+  <a href="https://raw.githubusercontent.com/asimfish/safeot-dashboard/data/sotd_status.json" target="_blank">sotd_status.json</a>
+</nav>
+<main class="content">
+<h1>SafeOT-Dual 主线进展 <span class="meta" id="task"></span></h1>
+<div class="meta">数据更新：<span id="upd"></span>。本页由 SafeTransport 仓库 <code>experiments/safeot_dual/dashboard_push.py</code> 生成（T-1484）；与总看板的 typed 主线并列，不互相覆盖。</div>
+<div class="note">口径：所有 on-policy 数字为 SafePO 协议（2×10⁴ 步/epoch，[64,64]，目标 KL 0.02），2M 或 10M 步，3–5 种子；「训练窗」= 末 10 epoch 均值，「评测」= 冻结末 ckpt 30 集确定性动作；typed 数字为冻结末 ckpt 3×104 集严格协议（逐集硬泄漏 + CP95）。</div>
+
+<h2 id="g">0 五目标进度</h2>
+<div class="banner" id="goals"></div>
+
+<h2 id="focus">1 当前焦点 / 阻塞</h2>
+<ul id="focus-list"></ul>
+
+<h2 id="figs">2 关键图</h2>
+<div class="figs" id="figs-grid"></div>
+
+<h2 id="verdicts">3 判决记录</h2>
+<table id="verdicts-t"><thead><tr><th>日期</th><th>主题</th><th>判决</th><th>证据</th></tr></thead><tbody></tbody></table>
+
+<h2 id="queue">4 队列</h2>
+<table id="queue-t"><thead><tr><th>#</th><th>目标</th><th>任务</th><th>状态</th><th>ETA</th><th>备注</th></tr></thead><tbody></tbody></table>
+
+<h2 id="changelog">5 变更日志</h2>
+<table id="changelog-t"><thead><tr><th>时间</th><th>内容</th></tr></thead><tbody></tbody></table>
+</main>
+</div>
+<script>
+const RAW = "https://raw.githubusercontent.com/asimfish/safeot-dashboard/data/";
+const $ = (s) => document.querySelector(s);
+const esc = (s) => String(s ?? "").replace(/[&<>]/g, (c) => ({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+const pill = (st) => { const m = {done:"完成", run:"在跑", wait:"阻塞/等待", neg:"负结果", idle:"可选"}; return `<span class="pill ${st}">${m[st] || st}</span>`; };
+const fmtAge = (iso) => { if (!iso) return "-"; const m = Math.round((Date.now() - new Date(iso)) / 60000); return `${iso.replace("T"," ").slice(0,16)}（${m < 60 ? m + " 分钟前" : (m/60).toFixed(1) + " 小时前"}）`; };
+async function refresh() {
+  let s;
+  try { const r = await fetch(RAW + "sotd_status.json?v=" + Math.floor(Date.now()/60000), {cache:"no-store"}); s = await r.json(); }
+  catch (e) { $("#upd").textContent = "加载失败"; return; }
+  $("#upd").textContent = fmtAge(s.updated); $("#task").textContent = s.task || "";
+  $("#goals").innerHTML = s.goals.map(g => `<div class="card"><div class="t">${esc(g.id)} ${esc(g.name)}</div><div class="pct">${g.pct}%</div><div class="bar"><i style="width:${g.pct}%"></i></div>${pill(g.status)}<div style="margin-top:6px">${esc(g.summary)}</div><div class="small" style="margin-top:6px"><b>证据：</b>${esc(g.evidence)}</div><div class="small"><b>下一步：</b>${esc(g.next)}</div></div>`).join("");
+  $("#focus-list").innerHTML = s.focus.map(x => `<li>${esc(x)}</li>`).join("");
+  $("#figs-grid").innerHTML = (s.figures || []).map(f => `<figure style="margin:0"><img src="${RAW + f}?v=${Math.floor(Date.now()/600000)}" alt="${esc(f)}"><figcaption class="small">${esc(f)}</figcaption></figure>`).join("");
+  $("#verdicts-t tbody").innerHTML = s.verdicts.map(v => `<tr><td style="white-space:nowrap">${esc(v.date)}</td><td>${esc(v.topic)}</td><td>${esc(v.verdict)}</td><td class="small">${esc(v.evidence)}</td></tr>`).join("");
+  $("#queue-t tbody").innerHTML = s.queue.map((q, i) => `<tr><td>${i+1}</td><td>${esc(q.goal)}</td><td>${esc(q.task)}</td><td>${pill(q.status)}</td><td>${esc(q.eta)}</td><td class="small">${esc(q.note)}</td></tr>`).join("");
+  $("#changelog-t tbody").innerHTML = s.changelog.map(c => `<tr><td style="white-space:nowrap">${esc(c.time)}</td><td>${esc(c.text)}</td></tr>`).join("");
+}
+refresh(); setInterval(refresh, 60000);
+</script>
+</body>
+</html>
