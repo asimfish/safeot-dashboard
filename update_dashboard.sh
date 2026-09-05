@@ -11,7 +11,11 @@ R3=volc-a100
 LOG=$TOOLS/update.log
 ts() { date "+%m-%d %H:%M:%S"; }
 cd "$DATA" || exit 1
-exec 9>"$DATA/.update.lock"; flock -n 9 || { echo "$(ts) another update running, skip" >> "$LOG"; exit 0; }
+LOCK="$DATA/.update.lock.d"
+if ! mkdir "$LOCK" 2>/dev/null; then
+  if [ -n "$(find "$LOCK" -maxdepth 0 -mmin +20 2>/dev/null)" ]; then rmdir "$LOCK" 2>/dev/null; mkdir "$LOCK" 2>/dev/null || exit 0; else echo "$(ts) another update running, skip" >> "$LOG"; exit 0; fi
+fi
+trap 'rmdir "$LOCK" 2>/dev/null' EXIT
 git pull -q --rebase origin data >/dev/null 2>&1 || git rebase --abort >/dev/null 2>&1
 if [ "${1:-}" != "--no-server" ]; then
   if timeout 120 ssh -o BatchMode=yes -o ConnectTimeout=20 $R1 "cd /home/dataset-local/liyufeng/goal34_prep/sota_h2h && python3 collect_dashboard.py" >/dev/null 2>&1; then
