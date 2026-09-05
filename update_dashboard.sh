@@ -33,6 +33,8 @@ if [ "${1:-}" != "--no-server" ]; then
   fi
   if timeout 120 ssh -o BatchMode=yes -o ConnectTimeout=20 $R3 "cd /home/dataset-local/liyufeng/goal34_prep/sota_h2h && python3 collect_dashboard.py" >/dev/null 2>&1; then
     timeout 60 scp -q $R3:/home/dataset-local/liyufeng/goal34_prep/logs/dash_runs.json volc_runs.json 2>/dev/null && echo "$(ts) volc runs ok" >> "$LOG"
+    timeout 90 ssh -o BatchMode=yes -o ConnectTimeout=20 $R3 "cd /home/dataset-local/liyufeng/goal34_prep/sota_h2h && python3 make_frontier_csv.py" >/dev/null 2>&1
+    timeout 60 scp -q $R3:/home/dataset-local/liyufeng/goal34_prep/logs/frontier_arms.csv volc_arms.csv 2>/dev/null
   fi
   if timeout 60 ssh -o BatchMode=yes -o ConnectTimeout=20 $R3 "python3 ~/research_storage/safeot/tools/collect_gpu.py" > volc_gpu.json.tmp 2>/dev/null && [ -s volc_gpu.json.tmp ]; then
     mv volc_gpu.json.tmp volc_gpu.json; echo "$(ts) volc snapshot ok" >> "$LOG"
@@ -70,6 +72,29 @@ if os.path.exists("volc_runs.json"):
     r["lanes"] = r.get("lanes", []) + ["volc: " + l for l in vr.get("lanes", [])]
 json.dump(r, open("runs.json", "w"), ensure_ascii=False, indent=1)
 PY
+  python3 - <<'PY2'
+import csv, os, json
+rows = {}
+for f in ("frontier_arms.csv", "volc_arms.csv"):
+    if not os.path.exists(f): continue
+    for r in csv.DictReader(open(f)):
+        if f == "volc_arms.csv" and r["method"] in ("FDPI", "SDAC", "SRCPO") and r["task"] != "pp2": continue  # 30109 已有
+        k = (r["task"], r["method"], r["margin"], r["seed"], r["mode"])
+        if k not in rows or int(r["ver_eps"]) > int(rows[k]["ver_eps"]): rows[k] = r
+if rows:
+    cols = list(next(iter(rows.values())).keys())
+    with open("frontier_arms.csv", "w") as fh:
+        w = csv.DictWriter(fh, fieldnames=cols); w.writeheader(); [w.writerow(r) for r in rows.values()]
+    # pooled json for the dashboard table
+    pool = {}
+    for r in rows.values():
+        if r["mode"] != "final" or int(r["ver_eps"]) == 0: continue
+        k = (r["task"], r["method"], r["margin"]); p = pool.setdefault(k, {"n": 0, "eps": 0, "hv": 0, "ret": [], "soft": []})
+        p["n"] += 1; p["eps"] += int(r["ver_eps"]); p["hv"] += int(r["ver_hv"]); p["ret"].append(float(r["ver_ret"])); p["soft"].append(float(r["ver_soft"]))
+    out = [{"task": t, "method": m, "knob": mg, "n": p["n"], "eps": p["eps"], "rate": 100.0 * p["hv"] / p["eps"], "ret": sum(p["ret"]) / p["n"], "soft": sum(p["soft"]) / p["n"]} for (t, m, mg), p in pool.items()]
+    out.sort(key=lambda x: (x["task"], -x["ret"]))
+    import time; json.dump({"updated": time.strftime("%Y-%m-%dT%H:%M:%S"), "rows": out}, open("frontier_pooled.json", "w"), ensure_ascii=False, indent=1)
+PY2
   python3 "$TOOLS/build_matrix.py" "$DATA" >/dev/null 2>&1 || echo "$(ts) build_matrix failed" >> "$LOG"
 fi
 [ -f "$SRC/fig_frontier_paper.png" ] && cp "$SRC/fig_frontier_paper.png" .
