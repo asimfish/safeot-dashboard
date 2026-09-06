@@ -1,0 +1,40 @@
+{
+  "observed": "2026-09-06T19:54:54+08:00",
+  "changes": [
+    {
+      "entry_time": "09-06 18:43",
+      "before": {
+        "time": "09-06 18:43",
+        "goal": "G3/G5",
+        "text": "修复后 typed 首批严格评测：CG2 解得价格 19.5 @ 3.3% 泄漏（3 种子）> 积分器 18.1 @ 4.5% > 常数 17.0 @ 5.9% > 未分型 FDPI 11.7 @ 9%（复现官方数字）≫ SDAC 7.9 @ 42%。边距成为泄漏–回报旋钮：CG2 0.76 → 10.9 @ 0.3%；PG2 0.85 → 11.4 @ 2.9%。priced-proximity（K=2）变体失败（接触反增）→ 负结果入附录。"
+      },
+      "after": {
+        "time": "09-06 18:43",
+        "goal": "G3/G5",
+        "text": "修复后 CG2 描述性终档均值：LP R=19.54、硬违规 3.31%、软成本 25.36/预算25，仅 1/3 种子软预算内（种子1,2,5）；积分器 R=18.14、硬违规 4.49%、软成本24.11，仅1/3预算内（种子1,2,3）；固定价格 R=17.05、硬违规5.88%、2/3软预算内。种子集合不同，不能当作配对三种子全面胜出。边距工作点仍体现折中。priced-proximity 训练有接触上升迹象，9项终档补评已启动，最终结论待完整产物。",
+        "corrected_at": "2026-09-06T19:54:54+08:00",
+        "correction_evidence": "sotd_r2_feed_corrections.json"
+      }
+    },
+    {
+      "entry_time": "09-06 17:41",
+      "before": {
+        "time": "09-06 17:41",
+        "goal": "G2/G5",
+        "text": "PG1 10M 收齐：TRPO-SafeOT-Dual clip 0.75 训练 19.0 @ 23.0（评测 19.5 @ 20.0），累计违约 2165 vs CPO 18.8 @ 28.3（评测 19.2 @ 23.8）、2442；TRPO-Lag 12.7 @ 19.6 / 4194。10M 下两个任务（PG1、CarGoal1）上解得价格的 TRPO 臂都做到「回报≥CPO、成本更低、训练违约更低」。"
+      },
+      "after": {
+        "time": "09-06 17:41",
+        "goal": "G2/G5",
+        "text": "PG1 10M 最新汇总：TRPO-SafeOT-Dual clip0.75 终档 R/C=20.27/24.92，2/3种子满足预算25；CPO为19.16/23.77，3/3满足。训练累计违约2165 vs CPO2442。奖励均值较高，评估成本也较高；尚未统计验收全面优势。CarGoal1 clip1终档25.01/25.79，CPO23.82/25.31，各1/3种子预算内，均值均超预算，不能宣称两个任务同时部署回报与安全胜出。",
+        "corrected_at": "2026-09-06T19:54:54+08:00",
+        "correction_evidence": "sotd_r2_feed_corrections.json"
+      }
+    }
+  ],
+  "sources": {
+    "r2_report_sha256": "01b7ae11f0fd6972e813829eee7551beacc3d1b0ba57b5c7b548b32dda8844f9",
+    "refs_table_sha256": "885343aa22edaa28f449894a5a73d0ab782ac6717b68410e9d25740a360f3744"
+  },
+  "rule": "Final deterministic evaluations, configured budgets, explicit training-seed coverage; no superiority test passed."
+}

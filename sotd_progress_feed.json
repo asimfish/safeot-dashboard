@@ -1,100 +1,110 @@
 {
- "owner": "T-1484 SafeOT-Dual session (cursor)",
- "entries": [
-  {
-   "time": "09-06 18:43",
-   "goal": "G3/G5",
-   "text": "修复后 typed 首批严格评测：CG2 解得价格 19.5 @ 3.3% 泄漏（3 种子）> 积分器 18.1 @ 4.5% > 常数 17.0 @ 5.9% > 未分型 FDPI 11.7 @ 9%（复现官方数字）≫ SDAC 7.9 @ 42%。边距成为泄漏–回报旋钮：CG2 0.76 → 10.9 @ 0.3%；PG2 0.85 → 11.4 @ 2.9%。priced-proximity（K=2）变体失败（接触反增）→ 负结果入附录。"
-  },
-  {
-   "time": "09-06 17:41",
-   "goal": "G2/G5",
-   "text": "PG1 10M 收齐：TRPO-SafeOT-Dual clip 0.75 训练 19.0 @ 23.0（评测 19.5 @ 20.0），累计违约 2165 vs CPO 18.8 @ 28.3（评测 19.2 @ 23.8）、2442；TRPO-Lag 12.7 @ 19.6 / 4194。10M 下两个任务（PG1、CarGoal1）上解得价格的 TRPO 臂都做到「回报≥CPO、成本更低、训练违约更低」。"
-  },
-  {
-   "time": "09-06 04:52",
-   "goal": "G2/G3/G4/G5",
-   "text": "监督核验：隔离修复对照 fixed seed1 从 44 万推进到 76 万/200 万步，两个短试跑完成；最近 50 个训练回合回报约 -0.14，观测硬违规和软成本为 0，低回报问题未解决。并行 _r2 本地镜像已有一条训练 DONE，严格评估产物待收齐。30314 SSH 仍拒绝连接。已更正四条旧进展中的过强结论；运行正常不等于研究验收通过。",
-   "evidence": "sotd_feed_claim_corrections.json"
-  },
-  {
-   "time": "09-06 01:27",
-   "goal": "G3",
-   "text": "30082 显卡空出：修复后 typed 补种 4–5（CG2/PG2 四臂 + CG2 绑定预算，20 个 run）已发车；目标是补足 n=5，验收按完整产物计数。当时 PG2 未分型 FDPI 早期训练读数为回报 5.4、逐集硬违规约 9%，修复前 2M 回报约 1.4。训练步数未匹配，不能据此断言 IS 修复带来性能收益；需同预算、同种子完整评测。",
-   "corrected_at": "2026-09-06T04:57:20+08:00",
-   "correction_evidence": "sotd_feed_claim_corrections.json"
-  },
-  {
-   "time": "09-05 22:50",
-   "goal": "G3",
-   "text": "事故 6：FDPI 包装器 self.beta 与 FDPI IS 衰减系数撞名（另一会话 19:55 发现修复）→ 全部 typed 旧结果降级为「修复前」；54 个修复后 _r2 run 已在 30163/30082/本机并行发车（约 09-06 中午出），表格优先修复后结果并标注 [pre-repair]。SDAC/SRCPO 重评、全部 on-policy/TRPO/10M 结果不受影响。"
-  },
-  {
-   "time": "09-05 22:45",
-   "goal": "G3/G5",
-   "text": "新 typed 变体 priced-proximity：雷达边距从可行性成本改为第二个被定价通道（K=2 联合定价：危险区预算 + 近物步数预算），硬接触仍为可行性约束；PG2/CG2 预算 20、PG2 预算 40 各 3 种子在跑。"
-  },
-  {
-   "time": "09-05 22:35",
-   "goal": "G1",
-   "text": "TRPO 双旋钮前沿图定稿：PointGoal1 / CarGoal1 / PointButton1，核心点 5 种子。CarGoal1 clip 1（n=5）19.8 @ 26.0，评测 17.6 @ 25.2（3/5 可行），累计违约 678 vs CPO 15.8 @ 32.9（780）。"
-  },
-  {
-   "time": "09-05 21:00",
-   "goal": "G4",
-   "text": "30163 无 NVIDIA Vulkan 库，AI2-THOR 起不来（两臂在首次更新前崩溃）；本机同样缺库且无 ≥72 GB 空闲卡。G4 两臂只能等 30314 恢复（其上曾跑 >8 h，arm B >140 次更新）。"
-  },
-  {
-   "time": "09-05 18:40",
-   "goal": "G2/G5",
-   "text": "10M 已完成：CarGoal1 TRPO-SafeOT-Dual clip 1 训练 R/C=25.52/23.58；终档评测 R/C=25.01/25.79，预算 25，只有 1/3 种子在预算内。训练累计违约约 1554（CPO 2330、TRPO-Lag 3382）。这是较高奖励均值和较低训练累计违约的工作点，部署安全尚未通过。PG1 当时记录评测 17.5/25.8，CPO 19.2/23.8；训练累计违约低约 17%。",
-   "corrected_at": "2026-09-06T04:57:20+08:00",
-   "correction_evidence": "sotd_feed_claim_corrections.json"
-  },
-  {
-   "time": "09-05 18:20",
-   "goal": "G3",
-   "text": "边距扫描（修复前）：PG2 无边距 typed 17.6 @ 14% 逐集泄漏（SRCPO 5.0 @ 35%），阈值 0.8 把策略压死 → 补 0.9/0.95 与 priced-proximity。"
-  },
-  {
-   "time": "09-05 13:00",
-   "goal": "基础设施",
-   "text": "safeot-30314（main）失联：IP 可 ping、2222/30314 端口拒绝连接；G4 两臂与 15 个 FDPI 严格评测挂起。"
-  },
-  {
-   "time": "09-05 03:05",
-   "goal": "G3",
-   "text": "CG2 绑定软预算 10（严格协议，修复前）：解得价格 16.1 / 2.5% / 软 6.6（3/3 预算内）vs 积分器 16.4 / 3.8% / 9.7（1 种子越线）。"
-  },
-  {
-   "time": "09-05 02:00",
-   "goal": "G1/G2",
-   "text": "当时训练窗口的 PG1 TRPO clip 曲线 0→4：24.2/42.0 → 11.9/26.3，累计违约 2428 → 700；ε 0→10（clip 1）：21.2/39.4 → 13.3/27.2。这些历史工作点展示了折中；CarGoal1 所有臂优于 CPO 的结论未通过同预算终档评测和统计验收。",
-   "corrected_at": "2026-09-06T04:57:20+08:00",
-   "correction_evidence": "sotd_feed_claim_corrections.json"
-  },
-  {
-   "time": "09-04 23:20",
-   "goal": "G2",
-   "text": "PG1 2M 参考方法终档确定性评测：TRPO-SafeOT-Dual clip 1 R/C=16.15/27.23，预算 25，最新补种产物为 2/5 种子可行，不能称预算内回报最高臂。当时参考读数：CPO 7.8/20.1，PCPO 11.4/41.5，TRPO-Lag 25.4/41.6；训练与评测口径分别报告。",
-   "corrected_at": "2026-09-06T04:57:20+08:00",
-   "correction_evidence": "sotd_feed_claim_corrections.json"
-  },
-  {
-   "time": "09-04 22:40",
-   "goal": "G3",
-   "text": "SDAC/SRCPO 终 ckpt 用同一严格协议重评：CG2 SDAC 7.9 @ 42% 逐集硬泄漏、SRCPO 8.3 @ 53%；PG2 SRCPO 5.0 @ 35%；PB2 全场无人得分。"
-  },
-  {
-   "time": "09-04 21:10",
-   "goal": "G1/G2",
-   "text": "块 T：TRPO 体 + 解得价格 2M 到达 CPO 工作点（13.3 @ 25.1 vs 13.3 @ 29.0）；步几何决定价格能否兑现（PPO 体同价格只有 R 4–8）。"
-  },
-  {
-   "time": "09-04 17:30",
-   "goal": "G5",
-   "text": "10M PG1（PPO 体）：与 PPO-Lag 收敛到同一回报 13.1，累计违约 1831（PPO-Lag 4431、CPO 2442）。"
-  }
- ],
- "updated": "2026-09-06T18:43:48"
+  "owner": "T-1484 SafeOT-Dual session (cursor)",
+  "entries": [
+    {
+      "time": "09-06 19:54",
+      "goal": "G1/G2/G3/G5",
+      "text": "补评与证据更新：已逐集复核 39 个修复版运行 / 12,168 集；新增逐种子回报—硬违规图、软预算可行性及风险上界。9个已训练 proximity 模型分两路串行补评，每模型312集；评估器四集一致性验证完全通过，失败的批量版验证单独保留。beta 隔离 fixed seed1 已完成2M+312集，R=0.25、硬违规0/312（单侧95%上限0.96%）、软成本0，低回报问题未解决；integral seed1继续训练。五项目标均未最终验收。",
+      "evidence": "sotd_r2_evaluations.json / sotd_r2_frontier.png / sotd_frozen_formal.json"
+    },
+    {
+      "time": "09-06 18:43",
+      "goal": "G3/G5",
+      "text": "修复后 CG2 描述性终档均值：LP R=19.54、硬违规 3.31%、软成本 25.36/预算25，仅 1/3 种子软预算内（种子1,2,5）；积分器 R=18.14、硬违规 4.49%、软成本24.11，仅1/3预算内（种子1,2,3）；固定价格 R=17.05、硬违规5.88%、2/3软预算内。种子集合不同，不能当作配对三种子全面胜出。边距工作点仍体现折中。priced-proximity 训练有接触上升迹象，9项终档补评已启动，最终结论待完整产物。",
+      "corrected_at": "2026-09-06T19:54:54+08:00",
+      "correction_evidence": "sotd_r2_feed_corrections.json"
+    },
+    {
+      "time": "09-06 17:41",
+      "goal": "G2/G5",
+      "text": "PG1 10M 最新汇总：TRPO-SafeOT-Dual clip0.75 终档 R/C=20.27/24.92，2/3种子满足预算25；CPO为19.16/23.77，3/3满足。训练累计违约2165 vs CPO2442。奖励均值较高，评估成本也较高；尚未统计验收全面优势。CarGoal1 clip1终档25.01/25.79，CPO23.82/25.31，各1/3种子预算内，均值均超预算，不能宣称两个任务同时部署回报与安全胜出。",
+      "corrected_at": "2026-09-06T19:54:54+08:00",
+      "correction_evidence": "sotd_r2_feed_corrections.json"
+    },
+    {
+      "time": "09-06 04:52",
+      "goal": "G2/G3/G4/G5",
+      "text": "监督核验：隔离修复对照 fixed seed1 从 44 万推进到 76 万/200 万步，两个短试跑完成；最近 50 个训练回合回报约 -0.14，观测硬违规和软成本为 0，低回报问题未解决。并行 _r2 本地镜像已有一条训练 DONE，严格评估产物待收齐。30314 SSH 仍拒绝连接。已更正四条旧进展中的过强结论；运行正常不等于研究验收通过。",
+      "evidence": "sotd_feed_claim_corrections.json"
+    },
+    {
+      "time": "09-06 01:27",
+      "goal": "G3",
+      "text": "30082 显卡空出：修复后 typed 补种 4–5（CG2/PG2 四臂 + CG2 绑定预算，20 个 run）已发车；目标是补足 n=5，验收按完整产物计数。当时 PG2 未分型 FDPI 早期训练读数为回报 5.4、逐集硬违规约 9%，修复前 2M 回报约 1.4。训练步数未匹配，不能据此断言 IS 修复带来性能收益；需同预算、同种子完整评测。",
+      "corrected_at": "2026-09-06T04:57:20+08:00",
+      "correction_evidence": "sotd_feed_claim_corrections.json"
+    },
+    {
+      "time": "09-05 22:50",
+      "goal": "G3",
+      "text": "事故 6：FDPI 包装器 self.beta 与 FDPI IS 衰减系数撞名（另一会话 19:55 发现修复）→ 全部 typed 旧结果降级为「修复前」；54 个修复后 _r2 run 已在 30163/30082/本机并行发车（约 09-06 中午出），表格优先修复后结果并标注 [pre-repair]。SDAC/SRCPO 重评、全部 on-policy/TRPO/10M 结果不受影响。"
+    },
+    {
+      "time": "09-05 22:45",
+      "goal": "G3/G5",
+      "text": "新 typed 变体 priced-proximity：雷达边距从可行性成本改为第二个被定价通道（K=2 联合定价：危险区预算 + 近物步数预算），硬接触仍为可行性约束；PG2/CG2 预算 20、PG2 预算 40 各 3 种子在跑。"
+    },
+    {
+      "time": "09-05 22:35",
+      "goal": "G1",
+      "text": "TRPO 双旋钮前沿图定稿：PointGoal1 / CarGoal1 / PointButton1，核心点 5 种子。CarGoal1 clip 1（n=5）19.8 @ 26.0，评测 17.6 @ 25.2（3/5 可行），累计违约 678 vs CPO 15.8 @ 32.9（780）。"
+    },
+    {
+      "time": "09-05 21:00",
+      "goal": "G4",
+      "text": "30163 无 NVIDIA Vulkan 库，AI2-THOR 起不来（两臂在首次更新前崩溃）；本机同样缺库且无 ≥72 GB 空闲卡。G4 两臂只能等 30314 恢复（其上曾跑 >8 h，arm B >140 次更新）。"
+    },
+    {
+      "time": "09-05 18:40",
+      "goal": "G2/G5",
+      "text": "10M 已完成：CarGoal1 TRPO-SafeOT-Dual clip 1 训练 R/C=25.52/23.58；终档评测 R/C=25.01/25.79，预算 25，只有 1/3 种子在预算内。训练累计违约约 1554（CPO 2330、TRPO-Lag 3382）。这是较高奖励均值和较低训练累计违约的工作点，部署安全尚未通过。PG1 当时记录评测 17.5/25.8，CPO 19.2/23.8；训练累计违约低约 17%。",
+      "corrected_at": "2026-09-06T04:57:20+08:00",
+      "correction_evidence": "sotd_feed_claim_corrections.json"
+    },
+    {
+      "time": "09-05 18:20",
+      "goal": "G3",
+      "text": "边距扫描（修复前）：PG2 无边距 typed 17.6 @ 14% 逐集泄漏（SRCPO 5.0 @ 35%），阈值 0.8 把策略压死 → 补 0.9/0.95 与 priced-proximity。"
+    },
+    {
+      "time": "09-05 13:00",
+      "goal": "基础设施",
+      "text": "safeot-30314（main）失联：IP 可 ping、2222/30314 端口拒绝连接；G4 两臂与 15 个 FDPI 严格评测挂起。"
+    },
+    {
+      "time": "09-05 03:05",
+      "goal": "G3",
+      "text": "CG2 绑定软预算 10（严格协议，修复前）：解得价格 16.1 / 2.5% / 软 6.6（3/3 预算内）vs 积分器 16.4 / 3.8% / 9.7（1 种子越线）。"
+    },
+    {
+      "time": "09-05 02:00",
+      "goal": "G1/G2",
+      "text": "当时训练窗口的 PG1 TRPO clip 曲线 0→4：24.2/42.0 → 11.9/26.3，累计违约 2428 → 700；ε 0→10（clip 1）：21.2/39.4 → 13.3/27.2。这些历史工作点展示了折中；CarGoal1 所有臂优于 CPO 的结论未通过同预算终档评测和统计验收。",
+      "corrected_at": "2026-09-06T04:57:20+08:00",
+      "correction_evidence": "sotd_feed_claim_corrections.json"
+    },
+    {
+      "time": "09-04 23:20",
+      "goal": "G2",
+      "text": "PG1 2M 参考方法终档确定性评测：TRPO-SafeOT-Dual clip 1 R/C=16.15/27.23，预算 25，最新补种产物为 2/5 种子可行，不能称预算内回报最高臂。当时参考读数：CPO 7.8/20.1，PCPO 11.4/41.5，TRPO-Lag 25.4/41.6；训练与评测口径分别报告。",
+      "corrected_at": "2026-09-06T04:57:20+08:00",
+      "correction_evidence": "sotd_feed_claim_corrections.json"
+    },
+    {
+      "time": "09-04 22:40",
+      "goal": "G3",
+      "text": "SDAC/SRCPO 终 ckpt 用同一严格协议重评：CG2 SDAC 7.9 @ 42% 逐集硬泄漏、SRCPO 8.3 @ 53%；PG2 SRCPO 5.0 @ 35%；PB2 全场无人得分。"
+    },
+    {
+      "time": "09-04 21:10",
+      "goal": "G1/G2",
+      "text": "块 T：TRPO 体 + 解得价格 2M 到达 CPO 工作点（13.3 @ 25.1 vs 13.3 @ 29.0）；步几何决定价格能否兑现（PPO 体同价格只有 R 4–8）。"
+    },
+    {
+      "time": "09-04 17:30",
+      "goal": "G5",
+      "text": "10M PG1（PPO 体）：与 PPO-Lag 收敛到同一回报 13.1，累计违约 1831（PPO-Lag 4431、CPO 2442）。"
+    }
+  ],
+  "updated": "2026-09-06T19:54:54+08:00"
 }

@@ -1,37 +1,84 @@
 {
-  "updated": "2026-09-06T08:18:49+08:00",
+  "updated": "2026-09-06T20:04:00+08:00",
   "task": "T-1484 — 单因素修复与五目标证据复核",
   "supervision": {
-    "observed": "2026-09-06T08:16:50+08:00",
-    "next_check": "2026-09-06T08:21:50+08:00",
+    "observed": "2026-09-06T20:01:50+08:00",
+    "next_check": "2026-09-06T20:06:50+08:00",
     "interval_seconds": 300,
-    "overall": "healthy",
+    "overall": "warning",
     "coverage": "冻结 beta 修复队列与共享采集/发布链路；远端其他队列仅由原采集器覆盖。",
-    "alerts": [],
+    "alerts": [
+      {
+        "code": "publication_stale",
+        "level": "warning",
+        "detail": "面板超过 75 分钟没有成功发布记录。"
+      }
+    ],
     "repair": {
       "status": "running",
-      "active": "PG2_beta_repaired_fixed_s1",
-      "completed": 2,
+      "active": "PG2_beta_repaired_integral_s1",
+      "completed": 3,
       "phase": "training",
-      "sample_steps": 1100000,
+      "sample_steps": 30000,
       "target_steps": 2000000,
-      "progress_age_seconds": 71,
+      "progress_age_seconds": 530,
       "code_hash_matches": true
     },
-    "summary": "后台监督：正常；PG2_beta_repaired_fixed_s1，采样 1,100,000/2,000,000 步。",
+    "summary": "后台监督：需检查；PG2_beta_repaired_integral_s1，采样 30,000/2,000,000 步。面板超过 75 分钟没有成功发布记录。",
     "harvest": {
-      "last_published": "2026-09-06T07:45:55.314697+08:00",
-      "log_updated": "2026-09-06T08:15:57+08:00",
-      "commit": "01b95b55db1fb38185e5c95361fcc669dc1731a0"
+      "last_published": "2026-09-06T08:18:53.699161+08:00",
+      "log_updated": "2026-09-06T19:37:05+08:00",
+      "commit": "5fc0f4d23a2da57e01fbf16a3ab65ba251d0bb06"
     }
+  },
+  "post_repair_evaluations": {
+    "observed": "2026-09-06T20:04:00+08:00",
+    "training_done": 61,
+    "complete_evaluations": 39,
+    "evaluation_episodes": 12168,
+    "integrity_errors": []
+  },
+  "local_evaluation_queue": {
+    "status": "running",
+    "total": 9,
+    "completed": 0,
+    "lanes": [
+      {
+        "lane": 0,
+        "status": "running",
+        "active": "PG2_fdpi_lp_prox20_r2_s1",
+        "updated": "2026-09-06T19:42:33+08:00",
+        "completed": 0
+      },
+      {
+        "lane": 1,
+        "status": "running",
+        "active": "PG2_fdpi_lp_prox20_r2_s2",
+        "updated": "2026-09-06T19:42:33+08:00",
+        "completed": 0
+      }
+    ],
+    "protocol": "Validated serial evaluator, 3 x104 final-checkpoint episodes; no retraining"
+  },
+  "g4_connection": {
+    "observed": "2026-09-06T19:56:38+08:00",
+    "host": "safeot-30314",
+    "status": "host_key_changed"
+  },
+  "isolated_formal_evaluations": {
+    "observed": "2026-09-06T20:04:00+08:00",
+    "complete_evaluations": 1,
+    "evaluation_episodes": 312,
+    "integrity_errors": []
   },
   "data_observed_at": {
     "legacy_audit": "2026-09-05T19:21:47.615992+08:00",
-    "refs_table": "2026-09-06T08:18:35.164682+08:00",
-    "repair_queue": "2026-09-05T20:47:29.718797+08:00",
+    "refs_table": "2026-09-06T19:36:38.749825+08:00",
+    "repair_queue": "2026-09-06T19:29:07.506261+08:00",
     "pilot_audit": "2026-09-05T21:25:56.853232+08:00",
     "terminal_component": "2026-09-05T21:46:22.695030+08:00",
-    "supervision": "2026-09-06T08:16:50+08:00"
+    "supervision": "2026-09-06T20:01:50+08:00",
+    "post_repair_evaluations": "2026-09-06T20:04:00+08:00"
   },
   "goals": [
     {
@@ -112,7 +159,7 @@
         }
       ],
       "summary": "验收清单 2/4 项（非成功概率）。前修复版 FDPI-engine 固定/积分/LP 三组均受 beta 字段冲突影响，暂不支持“只改变价格便胜出”的因果结论。历史数据保留，待复验。",
-      "evidence": "独立 legacy typed-margin：v1e75c10: R=17.82，硬违规 0.53%（5/936），软成本 0.87，软预算内种子 3/3。这是另一实现，不计作 SafeOT-Dual 修复结果。",
+      "evidence": "修复后终档评估已复核 39 个运行、12,168 集；原始回报/硬违规完整性错误 0。各臂缺失种子保留；软预算按配置重算，尚未建立全面超越。",
       "next": "完成 beta 单项复验；独立终止事件组件已校验，接入训练仍需边界信息和预算单位对齐。OopsieVerse 仍是待运行候选。"
     },
     {
@@ -138,9 +185,9 @@
           "passed": false
         }
       ],
-      "summary": "验收清单 1/4 项（非成功概率）。当前是两臂、单种子、单聚合约束 pilot，不能宣称异构 VLA 优势。30314 失联是已有任务记录中的阻塞，本轮未宣布恢复。",
+      "summary": "验收清单 1/4 项（非成功概率）。当前是两臂、单种子、单聚合约束 pilot，不能宣称异构 VLA 优势。30314 已响应 SSH，但主机密钥变化，身份校验未通过；等待服务商控制台核实指纹。",
       "evidence": "vla/README.md 与 T-1484 09-05 18:48 记录；没有完整匹配终档评测。",
-      "next": "恢复主机后先核验 PID/日志/checkpoint；核对 episode 与 rollout 预算单位，再完成配对评测和多通道扩展。"
+      "next": "核实主机身份后先核验 PID/日志/checkpoint；核对 episode 与 rollout 预算单位，再完成配对评测和多通道扩展。"
     },
     {
       "id": "G5",
@@ -172,14 +219,35 @@
   ],
   "focus": [
     "已修复：FDPI 的 IS 衰减 beta 与软积分器分离；PB2 按任一硬违规计一次。",
-    "后台监督：正常；PG2_beta_repaired_fixed_s1，采样 1,100,000/2,000,000 步。",
-    "当前有限队列：PG2_beta_repaired_fixed_s1；完成 2/8；状态 running。",
+    "后台监督：需检查；PG2_beta_repaired_integral_s1，采样 30,000/2,000,000 步。面板超过 75 分钟没有成功发布记录。",
+    "修复后终档评估已复核 39 个运行、12,168 集；原始回报/硬违规完整性错误 0。各臂缺失种子保留；软预算按配置重算，尚未建立全面超越。",
+    "9 项本地终档补评：0/9 完成，状态 running；串行一致性验证通过。",
+    "beta 隔离队列已复核 1/6 个正式终档评估；沿用顺序重置种子，和 r2 随机重置协议分开报告。 PG2_beta_repaired_fixed_s1：R=0.25，硬违规 0/312，单侧 95% 风险上限 0.96%，软成本 0.00。",
+    "当前有限队列：PG2_beta_repaired_integral_s1；完成 3/8；状态 running。",
     "两次 40k 试跑完成、每臂 16 集。双策略采样未启用，IS 权重恒为 1，模型 SHA 完全相同；R=-0.679、硬违规 1/16、软成本 31.69，未建立修复带来的性能提升。",
     "独立组件 9 项检查，ε/预算组合 25/25 通过。保留终止成本，拒绝不存在的安全等待动作；解析小问题，不计入 SafeRL/SOTA 结果。",
     "待验证：前修复版 FDPI-engine 各组的机制归因；后续门控与终止损伤建模分别对照。",
     "五目标均未最终验收；保留失败、超预算及缺失结果。"
   ],
   "verdicts": [
+    {
+      "date": "09-06",
+      "topic": "修复版逐种子终档证据",
+      "verdict": "修复后终档评估已复核 39 个运行、12,168 集；原始回报/硬违规完整性错误 0。各臂缺失种子保留；软预算按配置重算，尚未建立全面超越。",
+      "evidence": "sotd_r2_evaluations.json / sotd_r2_runs.csv"
+    },
+    {
+      "date": "09-06",
+      "topic": "beta 隔离正式复验",
+      "verdict": "beta 隔离队列已复核 1/6 个正式终档评估；沿用顺序重置种子，和 r2 随机重置协议分开报告。 PG2_beta_repaired_fixed_s1：R=0.25，硬违规 0/312，单侧 95% 风险上限 0.96%，软成本 0.00。",
+      "evidence": "sotd_frozen_formal.json"
+    },
+    {
+      "date": "09-06",
+      "topic": "评估器一致性",
+      "verdict": "批量版 4 集验证出现回报/成本差异，已隔离；保留原串行动作路径的修正版回报、成本、长度完全一致。软预算超标率按各配置计算。",
+      "evidence": "sotd_serial_validation.json"
+    },
     {
       "date": "09-05",
       "topic": "重要性采样参数冲突",
@@ -226,10 +294,17 @@
   "queue": [
     {
       "goal": "G3/G5",
+      "task": "9 个已训练 proximity 模型终档补评",
+      "status": "run",
+      "eta": "两条有限队列；每模型 312 集",
+      "note": "0/9 完成；缺失/失败显式保留，错误即停。"
+    },
+    {
+      "goal": "G3/G5",
       "task": "配对 smoke + 修复后 fixed/integral/LP ×2 seeds ×2M",
       "status": "run",
       "eta": "按实际吞吐更新，不预报达标时间",
-      "note": "2/8 完成；一次一条 GPU 车道；错误即停；"
+      "note": "3/8 完成；一次一条 GPU 车道；错误即停；"
     },
     {
       "goal": "G1/G2",
@@ -240,10 +315,10 @@
     },
     {
       "goal": "G4",
-      "task": "恢复 30314 后核验并完成两臂",
+      "task": "核实 30314 身份后续接两臂",
       "status": "wait",
-      "eta": "取决于主机恢复",
-      "note": "禁止盲目重启旧命令。"
+      "eta": "取决于可信指纹核实",
+      "note": "30314 已响应 SSH，但主机密钥变化，身份校验未通过；等待服务商控制台核实指纹。"
     },
     {
       "goal": "G3/G4/G5",
@@ -262,7 +337,7 @@
   ],
   "changelog": [
     {
-      "time": "09-06 08:18",
+      "time": "09-06 20:04",
       "text": "由真实表格和修复队列生成状态；移除训练达标代替部署达标、未验证全面超越等结论。"
     },
     {
@@ -275,6 +350,7 @@
     }
   ],
   "figures": [
+    "sotd_r2_frontier.png",
     "sotd_trpo_frontier.png",
     "sotd_longrun_PointGoal1_10M.png",
     "sotd_longrun_CarGoal1_10M.png",
