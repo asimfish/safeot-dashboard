@@ -1,13 +1,13 @@
 {
- "updated": "2026-09-06T17:20:54",
+ "updated": "2026-09-06T18:35:09",
  "goals": [
   {
    "id": "G1",
    "name": "统一多类 SafeRL / 旋钮曲线",
-   "pct": 95,
+   "pct": 97,
    "status": "done",
-   "summary": "typed 全曲线 22 点(PG2 10 / CG2 12):非门控 δ 单调换回报为安全;门控 .8 峭点;价格 c 单调压软成本;两端点为参数特例",
-   "evidence": "frontier_arms.csv 44 合并臂;fig_frontier_paper;计划文档 09-05 18:30 节",
+   "summary": "typed 前沿在 PG2/CG2/PP2 三任务成型(共 30 点);非门控 δ 单调、门控 .8 甜点、价格 c 压软成本",
+   "evidence": "frontier_arms.csv 167 臂;fig_frontier_paper 三面板",
    "next": "写作:ε ↔ (δ, 门控, c) 映射段(sec_frontier.tex 已含)"
   },
   {
@@ -15,8 +15,8 @@
    "name": "两端点全面超越",
    "pct": 100,
    "status": "done",
-   "summary": "硬端点 FDPI(pf 三点)、软端点 SAC-Pen(c 三点)/ SAC-Lag(lim 三点)全部沿自身旋钮扫描,曲线整体位于 typed 前沿右下方",
-   "evidence": "PG2 typed .8g 17.59@1.07% vs FDPI 9.76@3.53%;CG2 typed .75g/c.10 17.82@0.53% vs FDPI 12.31@6.62%;CG2 无基线配置 <2% 泄漏",
+   "summary": "三任务上 typed 各有臂双轴支配 FDPI(PP2:.8g 7.64@0.12% vs FDPI 6.70@0.64%);PG2/PP2 各有 0/936 零臂;软端点 SAC-Lag/Pen 在 PG2/CG2 收官、PP2 在跑",
+   "evidence": "PG2 typed .8g 17.59@1.07% vs FDPI 9.76@3.53%;CG2 typed .75g/c.10 17.82@0.53% vs FDPI 12.31@6.62%;CG2 无基线配置 <2% 泄漏;PP2 见计划文档 09-06 18:40 节",
    "next": ""
   },
   {
@@ -42,18 +42,23 @@
    "name": "trade-off:高回报且不漏",
    "pct": 95,
    "status": "done",
-   "summary": "PG2 typed d=.8 0/936 零违规;.8g 回报 +80% / 泄漏 -70%;CG2 .7g 0.32%@15.83、.75g/c.10 0.53%@17.82(软 0.9)",
+   "summary": "PG2 typed d=.8 0/936 零违规;.8g 回报 +80% / 泄漏 -70%;CG2 .7g 0.32%@15.83、.75g/c.10 0.53%@17.82(软 0.9);PP2 δ=.8 0/936 @ 4.05、.8g 0.12% @ 7.64",
    "evidence": "frontier_pooled;HARVEST §20-22",
    "next": "PG2 上 c=.10 是软硬互换(2.40%),如实入表"
   }
  ],
  "focus": [
-  "PP2 试点四臂到齐:门控 .8 两轴压过 FDPI;第二波 18 路(第三种子 + δ/门控/价格扫描 + SAC-Lag/Pen)volc 在跑 ~16:00",
-  "PP2 第二波 18 路已在 volc 发车(第三种子 + δ=.9 / 门控 .75/.7 / 价格 c.10 + SAC-Lag x3 + SAC-Pen c5/c20),~9h",
-  "PB2 门控几何边距 6 路负结果(-0.05/-0.11 @ 1.2-1.4%):PB2 三族 + 两种边距机制全部趴地,定论不变",
+  "PP2 typed 扫描收官:Pareto δ=.8(0/936)→ .8g(0.12%, 7.64)→ δ=.9(0.64%, 9.71);FDPI 6.70@0.64% 在内侧;三任务前沿成型",
+  "PP2 基线 SAC-Lag ×3 / SAC-Pen c5、c20 ×2 在 volc 跑(~21:30);之后 volc 排扫描点第三种子",
   "【待 owner 决策】论文实验主线切换 + 08-30 ICLR 源路径"
  ],
  "verdicts": [
+  {
+   "date": "09-06",
+   "topic": "PointPush2 typed 扫描",
+   "verdict": "δ=.8 0/936@4.05、.8g 0.12%@7.64、δ=.9 0.64%@9.71;FDPI 0.64%@6.70 被同泄漏 +45% 回报 / 同回报 −81% 泄漏双向支配;三任务机制同构",
+   "evidence": "frontier_arms(pp2);fig_frontier_paper 三面板"
+  },
   {
    "date": "09-06",
    "topic": "PointPush2 试点(四臂)",
@@ -221,6 +226,10 @@
  ],
  "changelog": [
   {
+   "time": "09-06 18:35",
+   "text": "PP2 typed 11 臂终档验证收齐,前沿图扩为三面板(52 合并臂);PP2 基线 7 路重发(首发因参数位置错误未起跑)"
+  },
+  {
    "time": "09-06 17:20",
    "text": "PP2 试点四臂 + PB2 门控几何六臂终档验证收齐;PB2 记负结果"
   },
@@ -324,7 +333,7 @@
    "budget": "软预算 25/集;2M 步",
    "protocol": "同上;fork Push1 缺 Pillars 已修复(恢复上游)",
    "baselines": "FDPI 默认(已发);SAC-Lag/Pen、SDAC/SRCPO 待排",
-   "status": "试点完成(4 臂);第二波 18 路训练中"
+   "status": "typed 8 臂 + FDPI 完成;SAC-Lag/Pen 训练中"
   },
   {
    "bench": "Safety-CHORES (SafeVLA)",
