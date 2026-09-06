@@ -1,5 +1,5 @@
 {
- "updated": "2026-09-06T18:36:54",
+ "updated": "2026-09-06T21:38:14",
  "goals": [
   {
    "id": "G1",
@@ -49,7 +49,7 @@
  ],
  "focus": [
   "PP2 typed 扫描收官:Pareto δ=.8(0/936)→ .8g(0.12%, 7.64)→ δ=.9(0.64%, 9.71);FDPI 6.70@0.64% 在内侧;三任务前沿成型",
-  "PP2 基线 SAC-Lag ×3 / SAC-Pen c5、c20 ×2 在 volc 跑(~21:30);之后 volc 排扫描点第三种子",
+  "volc GPU 时间片是瓶颈(两卡被 DP/ACT 占 100%,JAX 更新排队;CPU-JAX 不可用):已 SIGSTOP 16 路第三种子,让 PP2 基线 7 路(SAC-Lag x3 / SAC-Pen c5,c20)先跑完(~2h),再 SIGCONT",
   "【待 owner 决策】论文实验主线切换 + 08-30 ICLR 源路径"
  ],
  "verdicts": [
@@ -172,7 +172,7 @@
    "task": "扫描点补第三种子(δ=.9/.7/.85g 等 n=2 的点、FDPI pf、SAC-Lag lim)~14 路",
    "status": "run",
    "eta": "09-07 ~04:00",
-   "note": "16 路第三种子已在 volc 发车(typed 8 + FDPI pf 4 + SAC-Lag lim 4)"
+   "note": "16 路第三种子已在 volc 发车(typed 8 + FDPI pf 4 + SAC-Lag lim 4);21:40 起暂停(SIGSTOP)让 PP2 基线先行"
   },
   {
    "goal": "G1/G2/G3",
@@ -225,6 +225,10 @@
   }
  ],
  "changelog": [
+  {
+   "time": "09-06 21:38",
+   "text": "volc 调度:冻结 16 路第三种子(GPU 时间片瓶颈,总吞吐 ~0.26 档/分钟不随并发增加),PP2 基线优先"
+  },
   {
    "time": "09-06 18:36",
    "text": "volc 追加 16 路第三种子(PG2/CG2 扫描点 + FDPI pf + SAC-Lag lim);volc 共 23 路在训"
