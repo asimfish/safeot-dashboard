@@ -1,9 +1,9 @@
 {
-  "observed": "2026-09-07T02:36:54+08:00",
+  "observed": "2026-09-07T02:39:21+08:00",
   "mirrored_runs": 79,
   "training_done": 79,
-  "complete_evaluations": 71,
-  "evaluation_episodes": 22152,
+  "complete_evaluations": 73,
+  "evaluation_episodes": 22776,
   "rows": [
     {
       "run": "CG2_fdpi_fixed_r2_s1",
@@ -191,6 +191,30 @@
       "eval_file": "CG2_fdpi_integral_b10_r2_s3/strict_eval_params_1990002.json",
       "eval_sha256": "e81ff70d98cfc456b36a266d62010af3dd647d744b3cadaef082f0dc80952956",
       "config_sha256": "efe3f2667128be932afe44c00d05b37230dcf2a05f9b3ddb74ff5c3e6bf132b5",
+      "comparison_config_sha256": "0c6061cff852b0412ae9977c04f291e637481b2da2a11a8a11c6ef38c0a28f4a",
+      "train_steps": 2000000,
+      "margin": 0.8,
+      "mode": "integral",
+      "prox_budget": 0.0
+    },
+    {
+      "run": "CG2_fdpi_integral_b10_r2_s5",
+      "arm": "CG2_fdpi_integral_b10_r2",
+      "seed": 5,
+      "env": "SafetyCarGoal2-v0",
+      "episodes": 312,
+      "reward": 16.65742216470748,
+      "hard_events": 8,
+      "hard_rate": 0.02564102564102564,
+      "hard_cp95": 0.04578834372534741,
+      "soft_cost": 10.054487179487179,
+      "soft_budget": 10.0,
+      "soft_mean_feasible": false,
+      "soft_episode_exceedance": 0.3685897435897436,
+      "checkpoint_binding": "filename_only_checkpoint_not_in_mirror",
+      "eval_file": "CG2_fdpi_integral_b10_r2_s5/strict_eval_params_1990002.json",
+      "eval_sha256": "336aa31cbe0436c542917876ce8372beff4a1da45428074af96a82786d186d5e",
+      "config_sha256": "66d30457cd1620dac3c90c4a0cc032cb8a758723be91b4715e0cfcbe092e587b",
       "comparison_config_sha256": "0c6061cff852b0412ae9977c04f291e637481b2da2a11a8a11c6ef38c0a28f4a",
       "train_steps": 2000000,
       "margin": 0.8,
@@ -532,6 +556,30 @@
       "margin": 0.76,
       "mode": "lp",
       "prox_budget": 0.0
+    },
+    {
+      "run": "CG2_fdpi_lp_prox20_r2_s1",
+      "arm": "CG2_fdpi_lp_prox20_r2",
+      "seed": 1,
+      "env": "SafetyCarGoal2-v0",
+      "episodes": 312,
+      "reward": 11.276021154894247,
+      "hard_events": 7,
+      "hard_rate": 0.022435897435897436,
+      "hard_cp95": 0.04172682166890226,
+      "soft_cost": 19.78525641025641,
+      "soft_budget": 25.0,
+      "soft_mean_feasible": true,
+      "soft_episode_exceedance": 0.1987179487179487,
+      "checkpoint_binding": "checkpoint_sha256_verified",
+      "eval_file": "CG2_fdpi_lp_prox20_r2_s1/strict_eval_params_1990002.json",
+      "eval_sha256": "bcbb0fd8eb5bd704a8a8b16328f1f4c5152f6a1fe650d5503968220824f8463a",
+      "config_sha256": "b3a7e6dcab775f7742de86186ff1f2efc4d0600ef5256511ca3756b2ee673fb3",
+      "comparison_config_sha256": "3acee5cf30535df7796675910043f42fadf50a834bf8e17119fd2e5fd018fc59",
+      "train_steps": 2000000,
+      "margin": 0.8,
+      "mode": "lp",
+      "prox_budget": 20.0
     },
     {
       "run": "CG2_fdpi_lp_r2_s1",
@@ -1732,13 +1780,14 @@
       "seeds": [
         1,
         2,
-        3
+        3,
+        5
       ],
-      "n_train_seeds": 3,
-      "episodes": 936,
-      "reward_mean": 15.382732253386578,
-      "hard_rate_mean": 0.04594017094017094,
-      "soft_cost_mean": 9.614316239316238,
+      "n_train_seeds": 4,
+      "episodes": 1248,
+      "reward_mean": 15.701404731216803,
+      "hard_rate_mean": 0.040865384615384616,
+      "soft_cost_mean": 9.724358974358974,
       "soft_feasible_seeds": 2
     },
     {
@@ -1797,6 +1846,18 @@
       "reward_mean": 10.896834441155423,
       "hard_rate_mean": 0.003205128205128205,
       "soft_cost_mean": 21.03846153846154,
+      "soft_feasible_seeds": 1
+    },
+    {
+      "arm": "CG2_fdpi_lp_prox20_r2",
+      "seeds": [
+        1
+      ],
+      "n_train_seeds": 1,
+      "episodes": 312,
+      "reward_mean": 11.276021154894247,
+      "hard_rate_mean": 0.022435897435897436,
+      "soft_cost_mean": 19.78525641025641,
       "soft_feasible_seeds": 1
     },
     {
@@ -2063,9 +2124,15 @@
           "reward": -0.7042711463814904,
           "hard_rate": 0.0032051282051282007,
           "soft_cost": 0.9967948717948705
+        },
+        {
+          "seed": 5,
+          "reward": -2.769543959267846,
+          "hard_rate": 0.0,
+          "soft_cost": -1.5865384615384617
         }
       ],
-      "n_train_seeds": 3,
+      "n_train_seeds": 4,
       "interpretation": "Descriptive matched seeds; no significance or superiority claim"
     },
     {
@@ -2183,6 +2250,20 @@
       "channel": "cost_hazards",
       "stored_rate": 0.1346153846153846,
       "configured_rate": 0.3525641025641026,
+      "configured_budget": 10.0
+    },
+    {
+      "run": "CG2_fdpi_integral_b10_r2_s5",
+      "channel": "cost_vases_contact",
+      "stored_rate": 0.003205128205128205,
+      "configured_rate": 0.02564102564102564,
+      "configured_budget": 0.0
+    },
+    {
+      "run": "CG2_fdpi_integral_b10_r2_s5",
+      "channel": "cost_hazards",
+      "stored_rate": 0.1346153846153846,
+      "configured_rate": 0.3685897435897436,
       "configured_budget": 10.0
     },
     {
