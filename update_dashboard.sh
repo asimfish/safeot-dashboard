@@ -78,7 +78,7 @@ rows = {}
 for f in ("frontier_arms.csv", "volc_arms.csv"):
     if not os.path.exists(f): continue
     for r in csv.DictReader(open(f)):
-        if f == "volc_arms.csv" and r["method"] in ("FDPI", "SDAC", "SRCPO") and r["task"] != "pp2": continue  # 30109 已有
+        if f == "volc_arms.csv" and r["method"] in ("SDAC", "SRCPO"): continue  # SDAC/SRCPO 只在 30109
         k = (r["task"], r["method"], r["margin"], r["seed"], r["mode"])
         if k not in rows or int(r["ver_eps"]) > int(rows[k]["ver_eps"]): rows[k] = r
 if rows:
