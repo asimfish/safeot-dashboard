@@ -1,31 +1,30 @@
 {
- "updated": "2026-09-08T06:34:56",
+ "updated": "2026-09-08T06:45:34",
  "servers": [
   {
    "name": "tianyiyun-30109",
    "desc": "8x A100-80G, 128 核; SafeRL 训练/评估主力(共享账号,多项目并行)",
    "host": "ide-650ef93f23324f04881bde87cf05d6c1-0f2fcc",
-   "load": "49.38",
+   "load": "143.54",
    "ncpu": 128,
    "cards": [
     {
      "idx": 0,
-     "used_mb": 16172,
+     "used_mb": 11603,
      "total_mb": 81920,
-     "util": 26,
+     "util": 40,
      "mine": true,
      "procs": [
       "dppo: run.py --config-name=ft_ppo_diffusion_mlp_armC_",
       "safeot: fdpi_safeot_dual.py --env SafetyPointGoal2-v0 --seed 4",
-      "safeot: fdpi_safeot_dual.py --env SafetyPointGoal2-v0 --seed 5",
-      "wam: function_distance_calib.py"
+      "safeot: fdpi_safeot_dual.py --env SafetyPointGoal2-v0 --seed 5"
      ]
     },
     {
      "idx": 1,
      "used_mb": 46203,
      "total_mb": 81920,
-     "util": 54,
+     "util": 96,
      "mine": true,
      "procs": [
       "safeot: fdpi_safeot_dual.py --env SafetyPointGoal2-v0 --seed 5",
@@ -37,20 +36,19 @@
     },
     {
      "idx": 2,
-     "used_mb": 34159,
+     "used_mb": 14559,
      "total_mb": 81920,
-     "util": 18,
+     "util": 10,
      "mine": false,
      "procs": [
-      "safeduo: python --seed 46 --env-yaml",
-      "asbs: e0_paired_fork_runtime.py --config-name sim_libero.yaml"
+      "safeduo: python --seed 46 --env-yaml"
      ]
     },
     {
      "idx": 3,
      "used_mb": 16312,
      "total_mb": 81920,
-     "util": 80,
+     "util": 98,
      "mine": true,
      "procs": [
       "dppo: run.py --config-name=ft_ppo_diffusion_mlp",
@@ -63,7 +61,7 @@
      "idx": 4,
      "used_mb": 60988,
      "total_mb": 81920,
-     "util": 100,
+     "util": 65,
      "mine": false,
      "procs": [
       "other: VLLM::Worker_TP1"
@@ -73,7 +71,7 @@
      "idx": 5,
      "used_mb": 66360,
      "total_mb": 81920,
-     "util": 5,
+     "util": 88,
      "mine": true,
      "procs": [
       "safeot: fdpi_safeot_dual.py --env SafetyPointGoal2-v0 --seed 5",
@@ -86,7 +84,7 @@
      "idx": 6,
      "used_mb": 63585,
      "total_mb": 81920,
-     "util": 65,
+     "util": 98,
      "mine": false,
      "procs": [
       "other: VLLM::Worker_TP0",
@@ -97,7 +95,7 @@
      "idx": 7,
      "used_mb": 66952,
      "total_mb": 81920,
-     "util": 51,
+     "util": 96,
      "mine": true,
      "procs": [
       "safeot: fdpi_safeot_dual.py --env SafetyPointGoal2-v0 --seed 1 --env",
@@ -111,14 +109,14 @@
   },
   {
    "host": "di-20260831162150-5ll6n",
-   "load": "69.72",
+   "load": "21.96",
    "ncpu": 26,
    "cards": [
     {
      "idx": 0,
      "used_mb": 41417,
      "total_mb": 81920,
-     "util": 60,
+     "util": 74,
      "mine": false,
      "procs": [
       "other: ?"
@@ -126,9 +124,9 @@
     },
     {
      "idx": 1,
-     "used_mb": 27621,
+     "used_mb": 37325,
      "total_mb": 81920,
-     "util": 54,
+     "util": 69,
      "mine": false,
      "procs": [
       "other: ?"
@@ -137,11 +135,11 @@
    ],
    "name": "volc-a100",
    "desc": "2x A100-80G, 128 核, 3PB vepfs; SafeRL 第二算力(DP/ACT 训练共用 GPU); 环境部署中",
-   "snap_time": "2026-09-08T06:35:07"
+   "snap_time": "2026-09-08T06:45:57"
   },
   {
    "host": "dsw-1008180-7cb5796fcd-xt4lh",
-   "load": "0.00",
+   "load": "0.02",
    "ncpu": 184,
    "cards": [
     {
@@ -275,7 +273,7 @@
    ],
    "name": "aliyun-ppu",
    "desc": "16x PPU-ZW810E 96G, 184 核; VLA(Safety-CHORES)评测; 共享(act_train 等他人任务)",
-   "snap_time": "2026-09-08T06:35:02"
+   "snap_time": "2026-09-08T06:45:48"
   }
  ],
  "runs": [
@@ -3028,7 +3026,7 @@
    "variant": "fdpi",
    "task": "cp2",
    "seed": "s2",
-   "ckpts": 1,
+   "ckpts": 2,
    "done": false,
    "running": true,
    "blocks": 0,
@@ -3036,7 +3034,7 @@
    "hv": 0,
    "ret": null,
    "soft": null,
-   "mtime": 1788810207.882255,
+   "mtime": 1788821046.4652946,
    "scan_n": 1,
    "scan_last": "ck100k 4.2/3",
    "confirm_n": 0,
@@ -3777,8 +3775,8 @@
    "ret": null,
    "soft": null,
    "mtime": 1788815669.9984438,
-   "scan_n": 1,
-   "scan_last": "ck100k 4.6/0",
+   "scan_n": 2,
+   "scan_last": "ck200k 4.7/1",
    "confirm_n": 1,
    "confirm_clean": 0,
    "server": "volc"
@@ -4037,8 +4035,8 @@
    "ret": null,
    "soft": null,
    "mtime": 1788816067.3771312,
-   "scan_n": 1,
-   "scan_last": "ck100k 5.1/0",
+   "scan_n": 2,
+   "scan_last": "ck200k 7.5/3",
    "confirm_n": 1,
    "confirm_clean": 1,
    "server": "volc"
@@ -4386,7 +4384,7 @@
  ],
  "lanes": [
   "volc: d2v2_v1c_cp2_s2/confirm_200000_100ep.json",
-  "volc: d2v2_v1c_cp2_s3/eval_all_ckpts_30ep.json"
+  "volc: d2v2_v1e8_cp2_s2/eval_all_ckpts_30ep.json"
  ],
  "parallel": {
   "workspace": "/home/dataset-local/liyufeng/SafeTransport/results/safeot_dual_fdpi",
@@ -5880,7 +5878,7 @@
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788820310.6039064
+    "mtime": 1788820910.6293218
    },
    {
     "name": "terminal_event_20260905",
