@@ -2,6 +2,11 @@
   "owner": "T-1484 SafeOT-Dual session (cursor)",
   "entries": [
     {
+      "time": "09-08 02:11",
+      "goal": "G2/G1/G3/算力",
+      "text": "按 owner 澄清把 G2 的验收改为「两端点各自接近」：软端点 = 某个旋钮点回报 ≥0.9×TRPO-Lag 且成本不高于 TRPO-Lag+2；硬端点 = 回报 ≥CPO 且成本 ≤CPO。现状：PG1 两端均达（软 clip 0.1，硬 clip 0.75–2）；PB1 两端均达（软 clip 0.5）；CG1 硬端达、软端 clip 0.1 差 0.3 回报 → 已发 clip 0.05（三任务 ×3 种子）。自动迭代改为硬端点达标后不再搜中段变体。五台机器全部满载：阿里云新装 SafePO 栈（受另一项目 /dev/shm 1.2 TB 限制，40 路并行）跑 125 个作业——clip 0.05、速度套件 Ant/HalfCheetah/Hopper/Walker2d × {SOTD clip 0.1/0.25/1/2, TRPO-Lag, CPO, PPO-Lag, FOCOPS}、CG1/PB1 种子 3-4；mainskill 加 22 个 10M 种子 3-4（PG1/CG1 头条臂与参考，凑齐 n=5）并接管全部 42 个 typed 边距日程 FDPI run（本机 0.07M 步/h → 30314 0.3M 步/h，G3 判决从 ~27 h 提前到 ~7 h；新增 PG2 0.82/0.83、CG2 0.77/0.78 的对冲网格）；5090 排入速度套件 10M（36 个）；volc 只保留 CG1/PB1 曲线补点。本机只剩 beta 隔离 run。"
+    },
+    {
       "time": "09-08 00:13",
       "goal": "算力/G1/G2",
       "text": "volc-a100 接入：公网 115.190.90.101:2760 从 30109/30314/阿里云均不通（TCP 被过滤），只有 5090 机能连 → 以 5090 为跳板（ProxyJump）接入。容器名义 128 核，实际 k8s 配额约 26 核，且与 owner 的 chembench Isaac Sim 作业（6 进程约 7 核、两张 A100 均 100% 占用）共享，根盘只剩 5.6 GB，全部放到 vePFS（/personal_fast_storage/liyufeng/safeot_w2）。SafePO 栈 40 s 装好（火山镜像），CarGoal1 / AntVelocity 冒烟通过。已发车 wave-6 队列 107 个 TRPO 作业（16 路并行，每作业约 1.6 min/epoch）：① CG1/PB1 的 ε 扫描（0、10）与 clip 扫描（0.25/0.75/1.5/4，PB1 加 0.1）×3 种子（39 个），使 G1 的「一个旋钮一条前沿」从单任务变三任务；② SafePO 速度套件 Ant/HalfCheetah/Hopper/Walker2d × {TRPO-SafeOT-Dual, TRPO-Lag, CPO, PPO-Lag} × 3 种子（48 个），为 G2 补运动类任务的广度；③ CG1/PB1 已有臂补种子 3-4（20 个）。收割与自动迭代脚本均已纳入该机。预计 ~14 h 排空。"
