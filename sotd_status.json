@@ -1,9 +1,9 @@
 {
-  "updated": "2026-09-07T16:41:53+08:00",
+  "updated": "2026-09-07T17:15:15+08:00",
   "task": "T-1484 — 单因素修复与五目标证据复核",
   "supervision": {
-    "observed": "2026-09-07T16:41:50+08:00",
-    "next_check": "2026-09-07T16:46:50+08:00",
+    "observed": "2026-09-07T17:11:50+08:00",
+    "next_check": "2026-09-07T17:16:50+08:00",
     "interval_seconds": 300,
     "overall": "warning",
     "coverage": "冻结 beta 修复队列与共享采集/发布链路；远端其他队列仅由原采集器覆盖。",
@@ -11,44 +11,44 @@
       {
         "code": "system_disk_low",
         "level": "warning",
-        "detail": "system 剩余空间 3.33 GiB。"
+        "detail": "system 剩余空间 3.32 GiB。"
       }
     ],
     "repair": {
       "status": "running",
       "active": "PG2_beta_repaired_integral_s1",
       "completed": 3,
-      "phase": "training",
-      "sample_steps": 1950000,
+      "phase": "evaluating",
       "target_steps": 2000000,
-      "progress_age_seconds": 113,
+      "progress_age_seconds": 323,
+      "evaluation_blocks_written": 0,
       "code_hash_matches": true
     },
-    "summary": "后台监督：需检查；PG2_beta_repaired_integral_s1，采样 1,950,000/2,000,000 步。system 剩余空间 3.33 GiB。",
+    "summary": "后台监督：需检查；PG2_beta_repaired_integral_s1。system 剩余空间 3.32 GiB。",
     "harvest": {
-      "last_published": "2026-09-07T16:40:28.625787+08:00",
-      "log_updated": "2026-09-07T16:40:30+08:00",
-      "commit": "6560338e92d49b2b5a39094ebb98f3beffb2bb61"
+      "last_published": "2026-09-07T16:42:20.339647+08:00",
+      "log_updated": "2026-09-07T17:10:32+08:00",
+      "commit": "54acbaafab5b32d097700011560ba5bd853f8144"
     }
   },
   "post_repair_evaluations": {
-    "observed": "2026-09-07T16:41:53+08:00",
+    "observed": "2026-09-07T17:15:15+08:00",
     "training_done": 79,
-    "complete_evaluations": 78,
-    "evaluation_episodes": 24336,
+    "complete_evaluations": 79,
+    "evaluation_episodes": 24648,
     "integrity_errors": []
   },
   "local_evaluation_queue": {
-    "status": "running",
+    "status": "complete",
     "total": 9,
-    "completed": 8,
+    "completed": 9,
     "lanes": [
       {
         "lane": 0,
-        "status": "running",
-        "active": "CG2_fdpi_lp_prox20_r2_s3",
-        "updated": "2026-09-07T16:01:18+08:00",
-        "completed": 4
+        "status": "complete",
+        "active": null,
+        "updated": "2026-09-07T16:54:26+08:00",
+        "completed": 5
       },
       {
         "lane": 1,
@@ -76,19 +76,19 @@
     "independent_seeds_per_arm": 1
   },
   "isolated_formal_evaluations": {
-    "observed": "2026-09-07T16:41:53+08:00",
+    "observed": "2026-09-07T17:15:15+08:00",
     "complete_evaluations": 1,
     "evaluation_episodes": 312,
     "integrity_errors": []
   },
   "data_observed_at": {
     "legacy_audit": "2026-09-05T19:21:47.615992+08:00",
-    "refs_table": "2026-09-07T16:39:51.772701+08:00",
+    "refs_table": "2026-09-07T17:14:59.607654+08:00",
     "repair_queue": "2026-09-06T19:29:07.506261+08:00",
     "pilot_audit": "2026-09-05T21:25:56.853232+08:00",
     "terminal_component": "2026-09-05T21:46:22.695030+08:00",
-    "supervision": "2026-09-07T16:41:50+08:00",
-    "post_repair_evaluations": "2026-09-07T16:41:53+08:00"
+    "supervision": "2026-09-07T17:11:50+08:00",
+    "post_repair_evaluations": "2026-09-07T17:15:15+08:00"
   },
   "goals": [
     {
@@ -169,7 +169,7 @@
         }
       ],
       "summary": "验收清单 2/4 项（非成功概率）。前修复版 FDPI-engine 固定/积分/LP 三组均受 beta 字段冲突影响，暂不支持“只改变价格便胜出”的因果结论。历史数据保留，待复验。",
-      "evidence": "修复后终档评估已复核 78 个运行、24,336 集；原始回报/硬违规完整性错误 0。各臂缺失种子保留；软预算按配置重算，尚未建立全面超越。",
+      "evidence": "修复后终档评估已复核 79 个运行、24,648 集；原始回报/硬违规完整性错误 0。各臂缺失种子保留；软预算按配置重算，尚未建立全面超越。",
       "next": "完成 beta 单项复验；独立终止事件组件已校验，接入训练仍需边界信息和预算单位对齐。OopsieVerse 仍是待运行候选。"
     },
     {
@@ -229,9 +229,9 @@
   ],
   "focus": [
     "已修复：FDPI 的 IS 衰减 beta 与软积分器分离；PB2 按任一硬违规计一次。",
-    "后台监督：需检查；PG2_beta_repaired_integral_s1，采样 1,950,000/2,000,000 步。system 剩余空间 3.33 GiB。",
-    "修复后终档评估已复核 78 个运行、24,336 集；原始回报/硬违规完整性错误 0。各臂缺失种子保留；软预算按配置重算，尚未建立全面超越。",
-    "9 项本地终档补评：8/9 完成，状态 running；串行一致性验证通过。",
+    "后台监督：需检查；PG2_beta_repaired_integral_s1。system 剩余空间 3.32 GiB。",
+    "修复后终档评估已复核 79 个运行、24,648 集；原始回报/硬违规完整性错误 0。各臂缺失种子保留；软预算按配置重算，尚未建立全面超越。",
+    "9 项本地终档补评：9/9 完成，状态 complete；串行一致性验证通过。",
     "beta 隔离队列已复核 1/6 个正式终档评估；沿用顺序重置种子，和 r2 随机重置协议分开报告。 PG2_beta_repaired_fixed_s1：R=0.25，硬违规 0/312，单侧 95% 风险上限 0.96%，软成本 0.00。",
     "当前有限队列：PG2_beta_repaired_integral_s1；完成 3/8；状态 running。",
     "两次 40k 试跑完成、每臂 16 集。双策略采样未启用，IS 权重恒为 1，模型 SHA 完全相同；R=-0.679、硬违规 1/16、软成本 31.69，未建立修复带来的性能提升。",
@@ -243,7 +243,7 @@
     {
       "date": "09-06",
       "topic": "修复版逐种子终档证据",
-      "verdict": "修复后终档评估已复核 78 个运行、24,336 集；原始回报/硬违规完整性错误 0。各臂缺失种子保留；软预算按配置重算，尚未建立全面超越。",
+      "verdict": "修复后终档评估已复核 79 个运行、24,648 集；原始回报/硬违规完整性错误 0。各臂缺失种子保留；软预算按配置重算，尚未建立全面超越。",
       "evidence": "sotd_r2_evaluations.json / sotd_r2_runs.csv"
     },
     {
@@ -305,9 +305,9 @@
     {
       "goal": "G3/G5",
       "task": "9 个已训练 proximity 模型终档补评",
-      "status": "run",
+      "status": "done",
       "eta": "两条有限队列；每模型 312 集",
-      "note": "8/9 完成；缺失/失败显式保留，错误即停。"
+      "note": "9/9 完成；缺失/失败显式保留，错误即停。"
     },
     {
       "goal": "G3/G5",
@@ -347,7 +347,7 @@
   ],
   "changelog": [
     {
-      "time": "09-07 16:41",
+      "time": "09-07 17:15",
       "text": "由真实表格和修复队列生成状态；移除训练达标代替部署达标、未验证全面超越等结论。"
     },
     {
