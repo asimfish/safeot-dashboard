@@ -1,18 +1,18 @@
 {
- "updated": "2026-09-07T14:56:53",
+ "updated": "2026-09-07T15:07:12",
  "servers": [
   {
    "name": "tianyiyun-30109",
    "desc": "8x A100-80G, 128 核; SafeRL 训练/评估主力(共享账号,多项目并行)",
    "host": "ide-650ef93f23324f04881bde87cf05d6c1-0f2fcc",
-   "load": "114.17",
+   "load": "121.00",
    "ncpu": 128,
    "cards": [
     {
      "idx": 0,
      "used_mb": 2605,
      "total_mb": 81920,
-     "util": 25,
+     "util": 12,
      "mine": false,
      "procs": [
       "dppo: run.py --config-name=ft_ppo_diffusion_mlp_armC_"
@@ -20,13 +20,14 @@
     },
     {
      "idx": 1,
-     "used_mb": 16991,
+     "used_mb": 26048,
      "total_mb": 81920,
      "util": 93,
      "mine": false,
      "procs": [
       "other: curveseq_m1.py",
-      "other: curveseq_m1_b.py"
+      "other: curveseq_m1_b.py",
+      "other: curveseq_m1_c.py"
      ]
     },
     {
@@ -41,7 +42,7 @@
      "idx": 3,
      "used_mb": 2609,
      "total_mb": 81920,
-     "util": 6,
+     "util": 1,
      "mine": false,
      "procs": [
       "dppo: run.py --config-name=ft_ppo_diffusion_mlp"
@@ -51,7 +52,7 @@
      "idx": 4,
      "used_mb": 60988,
      "total_mb": 81920,
-     "util": 0,
+     "util": 83,
      "mine": false,
      "procs": [
       "other: VLLM::Worker_TP1"
@@ -61,7 +62,7 @@
      "idx": 5,
      "used_mb": 2603,
      "total_mb": 81920,
-     "util": 27,
+     "util": 29,
      "mine": false,
      "procs": [
       "dppo: run.py --config-name=ft_ppo_diffusion_mlp_ds_F6"
@@ -69,19 +70,20 @@
     },
     {
      "idx": 6,
-     "used_mb": 60992,
+     "used_mb": 63585,
      "total_mb": 81920,
-     "util": 0,
+     "util": 97,
      "mine": false,
      "procs": [
-      "other: VLLM::Worker_TP0"
+      "other: VLLM::Worker_TP0",
+      "dppo: run.py --config-name=ft_ppo_diffusion_mlp_ds_F7"
      ]
     },
     {
      "idx": 7,
      "used_mb": 583,
      "total_mb": 81920,
-     "util": 10,
+     "util": 0,
      "mine": true,
      "procs": [
       "safeot: fdpi_safeot_dual.py --env SafetyPointGoal2-v0 --seed 1 --env"
@@ -91,12 +93,12 @@
   },
   {
    "host": "di-20260831162150-5ll6n",
-   "load": "11.11",
+   "load": "21.91",
    "ncpu": 26,
    "cards": [
     {
      "idx": 0,
-     "used_mb": 30741,
+     "used_mb": 32423,
      "total_mb": 81920,
      "util": 99,
      "mine": false,
@@ -106,7 +108,7 @@
     },
     {
      "idx": 1,
-     "used_mb": 30674,
+     "used_mb": 32418,
      "total_mb": 81920,
      "util": 99,
      "mine": false,
@@ -117,11 +119,11 @@
    ],
    "name": "volc-a100",
    "desc": "2x A100-80G, 128 核, 3PB vepfs; SafeRL 第二算力(DP/ACT 训练共用 GPU); 环境部署中",
-   "snap_time": "2026-09-07T14:56:59"
+   "snap_time": "2026-09-07T15:07:24"
   },
   {
    "host": "dsw-1008180-7cb5796fcd-xt4lh",
-   "load": "0.03",
+   "load": "0.00",
    "ncpu": 184,
    "cards": [
     {
@@ -255,7 +257,7 @@
    ],
    "name": "aliyun-ppu",
    "desc": "16x PPU-ZW810E 96G, 184 核; VLA(Safety-CHORES)评测; 共享(act_train 等他人任务)",
-   "snap_time": "2026-09-07T14:56:57"
+   "snap_time": "2026-09-07T15:07:23"
   }
  ],
  "runs": [
@@ -3864,7 +3866,14 @@
    "server": "volc"
   }
  ],
- "lanes": [],
+ "lanes": [
+  "volc: d2v2_fdpi002_cg2_s3/proto3_ck995001_seed5000.json",
+  "volc: d2v2_fdpi002_pg2_s3/proto3_ck995001_seed5000.json",
+  "volc: d2v2_fdpi05_cg2_s3/proto3_ck995001_seed5000.json",
+  "volc: d2v2_fdpi05_pg2_s3/proto3_ck995001_seed5000.json",
+  "volc: d2v2_lag002_cg2_s3/proto3_ck995002_seed5000.json",
+  "volc: d2v2_lag002_pg2_s3/proto3_ck995002_seed5000.json"
+ ],
  "parallel": {
   "workspace": "/home/dataset-local/liyufeng/SafeTransport/results/safeot_dual_fdpi",
   "runs": [
@@ -4979,7 +4988,7 @@
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788764210.4534636
+    "mtime": 1788764810.4811246
    },
    {
     "name": "terminal_event_20260905",
