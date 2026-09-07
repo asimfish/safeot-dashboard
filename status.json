@@ -1,5 +1,5 @@
 {
- "updated": "2026-09-08T00:36:53",
+ "updated": "2026-09-08T00:42:47",
  "goals": [
   {
    "id": "G1",
@@ -48,9 +48,9 @@
   }
  ],
  "focus": [
-  "三任务前沿定稿:55 合并臂、除 SAC-Pen c=1 外全 n=3;PP2 FDPI 7.08@0.43% 被 typed δ=.9(同泄漏 +20%)与 .8g(−74% 泄漏 +7%)双向支配",
-  "两台服务器均无 SafeOT 训练在跑;实验侧五目标收官(G1 100 / G2 100 / G3 95 / G4 100 / G5 95)",
-  "【待 owner 决策】论文实验主线切换 + 08-30 ICLR 源路径;可选:SDAC/SRCPO 上 PP2、PB2 攻坚"
+  "CarPush2 18 路在 volc 跑(~09-08 15:00):补齐 Level-2 Point/Car x Goal/Push 完整子集",
+  "三任务(PG2/CG2/PP2)前沿定稿,图表已同步论文目录",
+  "【待 owner 决策】论文实验主线切换 + 08-30 ICLR 源路径"
  ],
  "verdicts": [
   {
@@ -166,6 +166,13 @@
  ],
  "queue": [
   {
+   "goal": "G1/G2",
+   "task": "CarPush2 六臂 x 3 种子训练 -> 终档验证 -> 四面板前沿图",
+   "status": "run",
+   "eta": "09-08 ~15:00",
+   "note": "把 Level-2 Point/Car x Goal/Push 凑成 4/4 完整子集"
+  },
+  {
    "goal": "G3",
    "task": "PB2 门控几何边距(v1f/v1fW)4 路训练 -> 终档验证",
    "status": "negative",
@@ -237,6 +244,10 @@
   }
  ],
  "changelog": [
+  {
+   "time": "09-08 00:42",
+   "text": "CarPush2 立项发车 18 路(volc);脚本/看板加 cp2 映射"
+  },
   {
    "time": "09-08 00:36",
    "text": "看板改版:实验矩阵按套件/任务折叠(默认收起);基准表改为套件→任务族→任务的层级口径并标注覆盖率(Level-2 导航 4/6、Safety-CHORES 3/3)"
@@ -348,7 +359,7 @@
      "name": "Level-2 安全导航 · Point/Car x Goal/Button/Push(6 任务)",
      "total": 6,
      "covered": 4,
-     "note": "含异构通道(硬:vases/pillars/buttons+gremlins 接触;软:hazards)的完整子集;缺 CarButton2、CarPush2",
+     "note": "含异构通道的完整子集;CarPush2 18 路在跑(补齐后 Point/Car x Goal/Push = 4/4);缺 CarButton2",
      "tasks": [
       {
        "id": "PG2",
@@ -399,11 +410,12 @@
       {
        "id": "CP2",
        "name": "SafetyCarPush2-v0",
-       "channels": "硬 pillars / 软 hazards",
-       "budget": "-",
-       "baselines": "-",
-       "covered": false,
-       "status": "未做(可作为 PP2 的 Car 版补全,约 1 天算力)"
+       "channels": "硬 pillars(碰撞)/ 软 hazards",
+       "budget": "软 25/集;2M 步",
+       "baselines": "FDPI、SAC-Lag、SAC-Pen c5",
+       "covered": true,
+       "status": "训练中:typed none/δ=.8/.8g + FDPI + SAC-Lag + SAC-Pen c5 x 3 种子(volc,~15h)",
+       "status_kind": "training"
       }
      ]
     },
