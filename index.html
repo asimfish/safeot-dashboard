@@ -45,6 +45,16 @@
   ul.q { margin:6px 0; padding-left:20px; font-size:13px; } ul.q li { margin:3px 0; }
   code { background:#f1f5f9; padding:1px 4px; border-radius:3px; font-size:12px; }
   .stale { color:var(--red); }
+  details.grp { border:1px solid var(--line); border-radius:6px; background:#fff; margin:8px 0; }
+  details.grp > summary { cursor:pointer; padding:8px 12px; font-weight:700; color:#1e293b; list-style:none; display:flex; gap:12px; align-items:center; }
+  details.grp > summary::before { content:"▸"; color:var(--muted); font-size:12px; }
+  details.grp[open] > summary::before { content:"▾"; }
+  details.grp > summary .sum { font-weight:400; color:var(--muted); font-size:12px; }
+  details.grp > .body { padding:0 10px 10px; }
+  details.suite { border:2px solid #c7d2fe; margin:12px 0; }
+  details.suite > summary { background:#eef2ff; font-size:15px; }
+  .cov { display:inline-block; min-width:52px; text-align:center; padding:1px 6px; border-radius:4px; font-size:11px; font-weight:600; background:#e2e8f0; }
+  .cov.full { background:#d1fae5; color:#065f46; } .cov.part { background:#fef3c7; color:#92400e; } .cov.none { background:#f1f5f9; color:#64748b; }
   .srvhead { display:flex; gap:14px; align-items:baseline; margin:12px 0 4px; }
   .srvhead b { font-size:14px; }
 </style>
@@ -80,10 +90,12 @@
 
   <h2 id="secM">1 实验矩阵(基准 x 方法 x 旋钮;多 agent 对齐用)</h2>
   <div class="meta" id="msum"></div>
-  <div class="table-wrap"><table id="matrix"><thead><tr><th>目标</th><th>方法</th><th>旋钮</th><th>计划种子</th><th>已训</th><th>已验证</th><th>集数</th><th>硬泄漏</th><th>回报</th><th>软/集</th><th>状态</th><th>负责</th><th>备注</th></tr></thead><tbody></tbody></table></div>
+  <div class="small" style="margin:4px 0 8px">默认折叠;点标题展开。每格 = (任务 x 方法 x 旋钮),列出计划/已训/已验证种子数与 312 集/种子终档结果。</div>
+  <div id="matrix"></div>
 
-  <h2 id="secD">2 基准数据集与协议</h2>
-  <div class="table-wrap"><table id="datasets"><thead><tr><th>基准</th><th>任务</th><th>成本通道(类型)</th><th>预算 / 步数</th><th>评估协议</th><th>基线</th><th>状态</th></tr></thead><tbody></tbody></table></div>
+  <h2 id="secD">2 基准套件与覆盖(哪些是完整基准、哪些只是单任务)</h2>
+  <div class="small" style="margin:6px 0 8px">口径:<b>基准套件</b> = 官方发布的整套环境;<b>任务族</b> = 套件内按机器人/任务类型/难度划分的子集;<b>覆盖率</b> = 我们在严格协议(终档、312 集/种子、逐集硬通道)下完成的任务数 / 该任务族任务数。只声称已覆盖的部分;未覆盖的任务不外推。</div>
+  <div id="datasets"></div>
 
   <h2 id="secF">3 前沿图与总表(终档、312 集/种子、逐集硬通道)</h2>
   <figure><img id="fig" alt="frontier"><figcaption>回报 vs 逐集硬违规率。实心圆 = typed(预算内),空心 = 软成本超 25/集;红方 = FDPI,品红菱 = SAC-Lag,紫三角 = SAC-Pen,绿倒三角 = SDAC,青十字 = SRCPO;虚线 = 基线沿自身旋钮的扫描;蓝实线 = typed 预算内 Pareto 前沿。</figcaption></figure>
@@ -156,20 +168,36 @@ function renderServers(r) {
 function renderMatrix(m) {
   const s = m.summary || {};
   $("#msum").textContent = `共 ${s.total} 格 · 完成 ${s.done} · 训练中 ${s.training} · 未开始 ${s.planned} · 更新 ${fmtAge(m.updated)}`;
-  const order = ["pg2", "cg2", "pb2"]; let html = "";
-  for (const t of order) {
-    const rows = m.rows.filter(r => r.task === t);
-    if (!rows.length) continue;
-    html += `<tr class="grp"><td colspan="13">${T[t]} · ${rows.length} 格 · 完成 ${rows.filter(r=>r.status==="done").length}</td></tr>`;
-    html += rows.map(r => `<tr><td class="small">${esc(r.goal)}</td><td>${esc(r.method)}</td><td>${esc(r.knob)}</td><td class="num">${r.seeds_plan}</td><td class="num">${r.seeds_done}</td><td class="num">${r.seeds_verified}</td><td class="num">${r.eps || "-"}</td><td class="num ${rateCls(r.rate)}">${r.rate === null ? "-" : f2(r.rate) + "%"}</td><td class="num">${f2(r.ret)}</td><td class="num">${f2(r.soft,1)}</td><td>${pill(r.status)} <span class="small">${esc(r.detail)}</span></td><td class="small">${esc(r.owner)}</td><td class="small">${esc(r.note)}</td></tr>`).join("");
+  const SUITES = [["Safety-Gymnasium · Level-2 导航", ["pg2", "cg2", "pp2", "pb2"]]];
+  const TN = {pg2:"PointGoal2", cg2:"CarGoal2", pp2:"PointPush2", pb2:"PointButton2"};
+  const thead = `<thead><tr><th>目标</th><th>方法</th><th>旋钮</th><th>计划种子</th><th>已训</th><th>已验证</th><th>集数</th><th>硬泄漏</th><th>回报</th><th>软/集</th><th>状态</th><th>负责</th><th>备注</th></tr></thead>`;
+  let html = "";
+  for (const [suite, tasks] of SUITES) {
+    let inner = "", sTot = 0, sDone = 0;
+    for (const t of tasks) {
+      const rows = m.rows.filter(r => r.task === t).sort((a, b) => (a.rate ?? 99) - (b.rate ?? 99));
+      if (!rows.length) continue;
+      const done = rows.filter(r => r.status === "done").length, zero = rows.filter(r => r.rate === 0 && r.status === "done").length, run = rows.filter(r => r.status === "training" || r.status === "verifying").length;
+      sTot += rows.length; sDone += done;
+      const body = rows.map(r => `<tr><td class="small">${esc(r.goal)}</td><td>${esc(r.method)}</td><td>${esc(r.knob)}</td><td class="num">${r.seeds_plan}</td><td class="num">${r.seeds_done}</td><td class="num">${r.seeds_verified}</td><td class="num">${r.eps || "-"}</td><td class="num ${rateCls(r.rate)}">${r.rate === null ? "-" : f2(r.rate) + "%"}</td><td class="num">${f2(r.ret)}</td><td class="num">${f2(r.soft,1)}</td><td>${pill(r.status)} <span class="small">${esc(r.detail)}</span></td><td class="small">${esc(r.owner)}</td><td class="small">${esc(r.note)}</td></tr>`).join("");
+      inner += `<details class="grp"><summary>${TN[t] || t} <span class="sum">${rows.length} 格 · 完成 ${done} · 在跑 ${run} · 零违规臂 ${zero}${t === "pb2" ? " · 三族趴地(不做主张)" : ""}</span></summary><div class="body"><div class="table-wrap"><table>${thead}<tbody>${body}</tbody></table></div></div></details>`;
+    }
+    html += `<details class="suite" open><summary>${suite} <span class="sum">${sTot} 格 · 完成 ${sDone}</span></summary><div class="body">${inner}</div></details>`;
   }
-  $("#matrix tbody").innerHTML = html;
+  $("#matrix").innerHTML = html;
 }
 function renderStatus(s) {
   $("#upd-status").textContent = fmtAge(s.updated);
   $("#goals").innerHTML = s.goals.map(g => `<div class="card"><div class="t">${esc(g.id)} ${esc(g.name)}</div><div class="pct">${g.pct}%</div><div class="bar"><i style="width:${g.pct}%"></i></div>${pill(g.status)} <span class="small">${esc(g.summary)}</span><div class="small" style="margin-top:4px">证据:${esc(g.evidence)}</div>${g.next ? `<div class="small">下一步:${esc(g.next)}</div>` : ""}</div>`).join("");
   $("#focus").innerHTML = s.focus.map(x => `<li>${esc(x)}</li>`).join("");
-  $("#datasets tbody").innerHTML = (s.datasets || []).map(d => `<tr><td>${esc(d.bench)}</td><td>${esc(d.task)}</td><td>${esc(d.channels)}</td><td>${esc(d.budget)}</td><td class="small">${esc(d.protocol)}</td><td class="small">${esc(d.baselines)}</td><td>${esc(d.status)}</td></tr>`).join("");
+  $("#datasets").innerHTML = (s.suites || []).map(su => {
+    const fams = su.families.map(f => {
+      const covCls = f.covered === f.total ? "full" : (f.covered > 0 ? "part" : "none");
+      const rows = f.tasks.map(t => `<tr><td><b>${esc(t.id)}</b> <span class="small">${esc(t.name)}</span></td><td class="small">${esc(t.channels)}</td><td class="small">${esc(t.budget)}</td><td class="small">${esc(t.baselines)}</td><td>${t.covered ? pill(t.status_kind || "done") : pill("planned")} <span class="small">${esc(t.status)}</span></td></tr>`).join("");
+      return `<details class="grp"><summary>${esc(f.name)} <span class="cov ${covCls}">${f.covered}/${f.total}</span><span class="sum">${esc(f.note)}</span></summary><div class="body"><div class="table-wrap"><table><thead><tr><th>任务</th><th>成本通道(硬/软类型)</th><th>预算 / 训练步数</th><th>基线</th><th>状态</th></tr></thead><tbody>${rows}</tbody></table></div></div></details>`;
+    }).join("");
+    return `<details class="suite" open><summary>${esc(su.name)} <span class="sum">${esc(su.desc)}</span></summary><div class="body"><div class="small" style="margin:6px 0">${esc(su.protocol)}</div>${fams}</div></details>`;
+  }).join("");
   $("#verdicts tbody").innerHTML = s.verdicts.map(v => `<tr><td style="white-space:nowrap">${esc(v.date)}</td><td>${esc(v.topic)}</td><td>${esc(v.verdict)}</td><td class="small">${esc(v.evidence)}</td></tr>`).join("");
   $("#queue tbody").innerHTML = s.queue.map((q, i) => `<tr><td>${i+1}</td><td>${esc(q.goal)}</td><td>${esc(q.task)}</td><td>${pill(q.status)}</td><td>${esc(q.eta)}</td><td class="small">${esc(q.note)}</td></tr>`).join("");
   $("#changelog tbody").innerHTML = s.changelog.map(c => `<tr><td style="white-space:nowrap">${esc(c.time)}</td><td>${esc(c.text)}</td></tr>`).join("");
