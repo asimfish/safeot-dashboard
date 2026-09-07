@@ -1,9 +1,9 @@
 {
-  "updated": "2026-09-07T15:30:50+08:00",
+  "updated": "2026-09-07T16:04:38+08:00",
   "task": "T-1484 — 单因素修复与五目标证据复核",
   "supervision": {
-    "observed": "2026-09-07T15:26:50+08:00",
-    "next_check": "2026-09-07T15:31:50+08:00",
+    "observed": "2026-09-07T16:01:50+08:00",
+    "next_check": "2026-09-07T16:06:50+08:00",
     "interval_seconds": 300,
     "overall": "warning",
     "coverage": "冻结 beta 修复队列与共享采集/发布链路；远端其他队列仅由原采集器覆盖。",
@@ -11,7 +11,7 @@
       {
         "code": "system_disk_low",
         "level": "warning",
-        "detail": "system 剩余空间 3.44 GiB。"
+        "detail": "system 剩余空间 3.34 GiB。"
       }
     ],
     "repair": {
@@ -19,37 +19,36 @@
       "active": "PG2_beta_repaired_integral_s1",
       "completed": 3,
       "phase": "training",
-      "sample_steps": 1780000,
+      "sample_steps": 1850000,
       "target_steps": 2000000,
-      "progress_age_seconds": 49,
+      "progress_age_seconds": 195,
       "code_hash_matches": true
     },
-    "summary": "后台监督：需检查；PG2_beta_repaired_integral_s1，采样 1,780,000/2,000,000 步。system 剩余空间 3.44 GiB。",
+    "summary": "后台监督：需检查；PG2_beta_repaired_integral_s1，采样 1,850,000/2,000,000 步。system 剩余空间 3.34 GiB。",
     "harvest": {
-      "last_published": "2026-09-07T15:19:29.242645+08:00",
-      "log_updated": "2026-09-07T15:25:18+08:00",
-      "commit": "a178579c545dd919c80947c84f7f30ba7e2c0c47"
+      "last_published": "2026-09-07T15:31:28.330457+08:00",
+      "log_updated": "2026-09-07T16:00:36+08:00",
+      "commit": "bcb5b936035a5e813da46b02d4e9965b9be9f773"
     }
   },
   "post_repair_evaluations": {
-    "observed": "2026-09-07T15:30:50+08:00",
+    "observed": "2026-09-07T16:04:38+08:00",
     "training_done": 79,
     "complete_evaluations": 78,
     "evaluation_episodes": 24336,
     "integrity_errors": []
   },
   "local_evaluation_queue": {
-    "status": "blocked",
+    "status": "running",
     "total": 9,
-    "completed": 7,
+    "completed": 8,
     "lanes": [
       {
         "lane": 0,
-        "status": "blocked",
-        "active": "CG2_fdpi_lp_prox20_r2_s1",
-        "updated": "2026-09-07T04:02:02+08:00",
-        "error": "[Errno 17] File exists: '/home/dataset-local/liyufeng/SafeTransport/results/safeot_dual_fdpi/r2_analysis_20260906/local_evaluations/CG2_fdpi_lp_prox20_r2_s1/evaluation.json' -> '/home/dataset-local/liyufeng/SafeTransport/results/safeot_dual_fdpi/CG2_fdpi_lp_prox20_r2_s1/strict_eval_params_1990002.json'",
-        "completed": 3
+        "status": "running",
+        "active": "CG2_fdpi_lp_prox20_r2_s3",
+        "updated": "2026-09-07T16:01:18+08:00",
+        "completed": 4
       },
       {
         "lane": 1,
@@ -62,12 +61,22 @@
     "protocol": "Validated serial evaluator, 3 x104 final-checkpoint episodes; no retraining"
   },
   "g4_connection": {
-    "observed": "2026-09-06T19:56:38+08:00",
+    "observed": "2026-09-07T16:02:21+08:00",
     "host": "safeot-30314",
-    "status": "host_key_changed"
+    "status": "connected",
+    "training_steps": {
+      "armA_ppolag_s0": 594944,
+      "armB_sotd_s0": 548864
+    },
+    "training_log_times_utc": {
+      "armA_ppolag_s0": "2026-09-07T08:00:07+00:00",
+      "armB_sotd_s0": "2026-09-07T08:00:29+00:00"
+    },
+    "target_rl_steps": 2000000,
+    "independent_seeds_per_arm": 1
   },
   "isolated_formal_evaluations": {
-    "observed": "2026-09-07T15:30:50+08:00",
+    "observed": "2026-09-07T16:04:38+08:00",
     "complete_evaluations": 1,
     "evaluation_episodes": 312,
     "integrity_errors": []
@@ -78,8 +87,8 @@
     "repair_queue": "2026-09-06T19:29:07.506261+08:00",
     "pilot_audit": "2026-09-05T21:25:56.853232+08:00",
     "terminal_component": "2026-09-05T21:46:22.695030+08:00",
-    "supervision": "2026-09-07T15:26:50+08:00",
-    "post_repair_evaluations": "2026-09-07T15:30:50+08:00"
+    "supervision": "2026-09-07T16:01:50+08:00",
+    "post_repair_evaluations": "2026-09-07T16:04:38+08:00"
   },
   "goals": [
     {
@@ -166,7 +175,7 @@
     {
       "id": "G4",
       "name": "SafeVLA 内的安全学习",
-      "status": "wait",
+      "status": "run",
       "pct": 25,
       "checklist": [
         {
@@ -186,9 +195,9 @@
           "passed": false
         }
       ],
-      "summary": "验收清单 1/4 项（非成功概率）。当前是两臂、单种子、单聚合约束 pilot，不能宣称异构 VLA 优势。30314 已响应 SSH，但主机密钥变化，身份校验未通过；等待服务商控制台核实指纹。",
-      "evidence": "vla/README.md 与 T-1484 09-05 18:48 记录；没有完整匹配终档评测。",
-      "next": "核实主机身份后先核验 PID/日志/checkpoint；核对 episode 与 rollout 预算单位，再完成配对评测和多通道扩展。"
+      "summary": "验收清单 1/4 项（非成功概率）。当前是两臂、单种子、单聚合约束 pilot，不能宣称异构 VLA 优势。30314 正常 SSH 身份校验通过，两臂训练已续接。",
+      "evidence": "观测于 2026-09-07T16:02:21+08:00；两臂记录训练步数 594,944/548,864，各 1 个种子，目标 2M；没有完整匹配终档评测。",
+      "next": "沿现有队列训练；核对 episode 与 rollout 预算单位，再完成配对终档评测和多通道扩展。"
     },
     {
       "id": "G5",
@@ -220,9 +229,9 @@
   ],
   "focus": [
     "已修复：FDPI 的 IS 衰减 beta 与软积分器分离；PB2 按任一硬违规计一次。",
-    "后台监督：需检查；PG2_beta_repaired_integral_s1，采样 1,780,000/2,000,000 步。system 剩余空间 3.44 GiB。",
+    "后台监督：需检查；PG2_beta_repaired_integral_s1，采样 1,850,000/2,000,000 步。system 剩余空间 3.34 GiB。",
     "修复后终档评估已复核 78 个运行、24,336 集；原始回报/硬违规完整性错误 0。各臂缺失种子保留；软预算按配置重算，尚未建立全面超越。",
-    "9 项本地终档补评：7/9 完成，状态 blocked；串行一致性验证通过。",
+    "9 项本地终档补评：8/9 完成，状态 running；串行一致性验证通过。",
     "beta 隔离队列已复核 1/6 个正式终档评估；沿用顺序重置种子，和 r2 随机重置协议分开报告。 PG2_beta_repaired_fixed_s1：R=0.25，硬违规 0/312，单侧 95% 风险上限 0.96%，软成本 0.00。",
     "当前有限队列：PG2_beta_repaired_integral_s1；完成 3/8；状态 running。",
     "两次 40k 试跑完成、每臂 16 集。双策略采样未启用，IS 权重恒为 1，模型 SHA 完全相同；R=-0.679、硬违规 1/16、软成本 31.69，未建立修复带来的性能提升。",
@@ -296,9 +305,9 @@
     {
       "goal": "G3/G5",
       "task": "9 个已训练 proximity 模型终档补评",
-      "status": "wait",
+      "status": "run",
       "eta": "两条有限队列；每模型 312 集",
-      "note": "7/9 完成；缺失/失败显式保留，错误即停。"
+      "note": "8/9 完成；缺失/失败显式保留，错误即停。"
     },
     {
       "goal": "G3/G5",
@@ -316,10 +325,10 @@
     },
     {
       "goal": "G4",
-      "task": "核实 30314 身份后续接两臂",
-      "status": "wait",
-      "eta": "取决于可信指纹核实",
-      "note": "30314 已响应 SSH，但主机密钥变化，身份校验未通过；等待服务商控制台核实指纹。"
+      "task": "SafeVLA 两臂单种子训练",
+      "status": "run",
+      "eta": "目标 2M；以实际日志为准",
+      "note": "30314 正常 SSH 身份校验通过，两臂训练已续接。 观测于 2026-09-07T16:02:21+08:00；两臂记录训练步数 594,944/548,864，各 1 个种子，目标 2M；没有完整匹配终档评测。"
     },
     {
       "goal": "G3/G4/G5",
@@ -338,7 +347,7 @@
   ],
   "changelog": [
     {
-      "time": "09-07 15:30",
+      "time": "09-07 16:04",
       "text": "由真实表格和修复队列生成状态；移除训练达标代替部署达标、未验证全面超越等结论。"
     },
     {

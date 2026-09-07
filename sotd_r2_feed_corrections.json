@@ -36,5 +36,43 @@
     "r2_report_sha256": "01b7ae11f0fd6972e813829eee7551beacc3d1b0ba57b5c7b548b32dda8844f9",
     "refs_table_sha256": "885343aa22edaa28f449894a5a73d0ab782ac6717b68410e9d25740a360f3744"
   },
-  "rule": "Final deterministic evaluations, configured budgets, explicit training-seed coverage; no superiority test passed."
+  "rule": "Final deterministic evaluations, configured budgets, explicit training-seed coverage; no superiority test passed.",
+  "subsequent_corrections": [
+    {
+      "observed": "2026-09-07T16:03:29+08:00",
+      "changes": [
+        {
+          "entry_time": "09-07 15:18",
+          "before": {
+            "time": "09-07 15:18",
+            "goal": "G4",
+            "text": "SafeVLA ObjectNav 两臂各跑到 ~0.5M 步（单种子）：400–550k 区间 PPO-Lag 成本 0.36 / 成功率 0.62，解得价格换源 成本 0.83 / 成功率 0.83——都在限值 2.31 内，换源臂成功率高 0.2；乘子从第一次更新即非零（1.8 vs 0.57）。看门狗已让两臂稳定 >8.5 h，目标 2M 步（~30 h）。图 vla_curves.png。"
+          },
+          "after": {
+            "time": "09-07 15:18",
+            "goal": "G4",
+            "text": "SafeVLA ObjectNav 单种子两臂训练中：此前400–550k训练日志区间 PPO-Lag记录成本0.36/成功率0.62，解得价格臂0.83/0.83。两臂覆盖步数和完成任务数不同，属于训练窗口描述；episode成本与128步rollout约束阈值2.31的单位仍需对齐，不能据此宣布预算验收或最终优势。最新原始日志已推进至约595k/549k步，目标2M。",
+            "corrected_at": "2026-09-07T16:03:29+08:00",
+            "correction_evidence": "sotd_r2_feed_corrections.json"
+          }
+        },
+        {
+          "entry_time": "09-07 02:49",
+          "before": {
+            "time": "09-07 02:49",
+            "goal": "G3/G5",
+            "text": "修复后 typed 终表（严格协议）：CG2 解得价格 19.0±0.8 @ 3.7% 泄漏（n=5）> 积分器 17.8 @ 4.9% > 常数 16.9 @ 5.3% > 未分型 FDPI 12.3 @ 7.9% ≫ SDAC 7.9 @ 42% / SRCPO 8.3 @ 53%。PG2 边距旋钮 0.8/0.85/0.9/无 = 0.6@0.2% / 12.7@2.2% / 17.4@4.3% / 18.9@7.1%，对照 SRCPO 5.0@35%。G3 在两个 level-2 任务上成立；新图 typed_frontier.png。"
+          },
+          "after": {
+            "time": "09-07 02:49",
+            "goal": "G3/G5",
+            "text": "修复版终档评估持续收齐：CG2 同组5种子 LP 回报19.05、硬违规3.72%、软成本24.18/25（2/5种子软预算内）；积分器17.83、4.94%、23.72/25（3/5预算内）。LP奖励均值较高、硬违规均值较低，但逐种子软可行性更少，不能宣布异构安全全面胜出或SOTA。PG2边距扫描已出现明确的奖励—硬违规折中；PB2奖励仍低。",
+            "corrected_at": "2026-09-07T16:03:29+08:00",
+            "correction_evidence": "sotd_r2_feed_corrections.json"
+          }
+        }
+      ],
+      "report_sha256": "5dc0991ed4996778a36827ff669ea258a9250fb720c49bf485fb259ce2e8b720"
+    }
+  ]
 }
