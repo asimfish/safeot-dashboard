@@ -1,18 +1,18 @@
 {
- "updated": "2026-09-08T07:40:15",
+ "updated": "2026-09-08T07:51:17",
  "servers": [
   {
    "name": "tianyiyun-30109",
    "desc": "8x A100-80G, 128 核; SafeRL 训练/评估主力(共享账号,多项目并行)",
    "host": "ide-650ef93f23324f04881bde87cf05d6c1-0f2fcc",
-   "load": "199.33",
+   "load": "137.14",
    "ncpu": 128,
    "cards": [
     {
      "idx": 0,
      "used_mb": 31202,
      "total_mb": 81920,
-     "util": 30,
+     "util": 5,
      "mine": true,
      "procs": [
       "dppo: run.py --config-name=ft_ppo_diffusion_mlp_armC_",
@@ -25,7 +25,7 @@
      "idx": 1,
      "used_mb": 26604,
      "total_mb": 81920,
-     "util": 59,
+     "util": 31,
      "mine": true,
      "procs": [
       "safeot: fdpi_safeot_dual.py --env SafetyPointGoal2-v0 --seed 5",
@@ -39,7 +39,7 @@
      "idx": 2,
      "used_mb": 34159,
      "total_mb": 81920,
-     "util": 24,
+     "util": 22,
      "mine": false,
      "procs": [
       "safeduo: python --seed 46 --env-yaml",
@@ -50,7 +50,7 @@
      "idx": 3,
      "used_mb": 31212,
      "total_mb": 81920,
-     "util": 12,
+     "util": 14,
      "mine": true,
      "procs": [
       "dppo: run.py --config-name=ft_ppo_diffusion_mlp",
@@ -63,7 +63,7 @@
      "idx": 4,
      "used_mb": 60988,
      "total_mb": 81920,
-     "util": 99,
+     "util": 79,
      "mine": false,
      "procs": [
       "other: VLLM::Worker_TP1"
@@ -84,20 +84,20 @@
     },
     {
      "idx": 6,
-     "used_mb": 63585,
+     "used_mb": 61545,
      "total_mb": 81920,
-     "util": 62,
+     "util": 58,
      "mine": false,
      "procs": [
       "other: VLLM::Worker_TP0",
-      "dppo: run.py --config-name=ft_ppo_diffusion_mlp_ds_F7"
+      "dppo: rollout_record.py --seed 1000"
      ]
     },
     {
      "idx": 7,
      "used_mb": 66952,
      "total_mb": 81920,
-     "util": 46,
+     "util": 66,
      "mine": true,
      "procs": [
       "safeot: fdpi_safeot_dual.py --env SafetyPointGoal2-v0 --seed 1 --env",
@@ -111,14 +111,14 @@
   },
   {
    "host": "di-20260831162150-5ll6n",
-   "load": "52.00",
+   "load": "37.61",
    "ncpu": 26,
    "cards": [
     {
      "idx": 0,
      "used_mb": 41573,
      "total_mb": 81920,
-     "util": 41,
+     "util": 43,
      "mine": false,
      "procs": [
       "other: ?"
@@ -126,9 +126,9 @@
     },
     {
      "idx": 1,
-     "used_mb": 37757,
+     "used_mb": 38035,
      "total_mb": 81920,
-     "util": 60,
+     "util": 50,
      "mine": false,
      "procs": [
       "other: ?"
@@ -137,11 +137,11 @@
    ],
    "name": "volc-a100",
    "desc": "2x A100-80G, 128 核, 3PB vepfs; SafeRL 第二算力(DP/ACT 训练共用 GPU); 环境部署中",
-   "snap_time": "2026-09-08T07:40:32"
+   "snap_time": "2026-09-08T07:51:58"
   },
   {
    "host": "dsw-1008180-7cb5796fcd-xt4lh",
-   "load": "0.06",
+   "load": "0.00",
    "ncpu": 184,
    "cards": [
     {
@@ -275,7 +275,7 @@
    ],
    "name": "aliyun-ppu",
    "desc": "16x PPU-ZW810E 96G, 184 核; VLA(Safety-CHORES)评测; 共享(act_train 等他人任务)",
-   "snap_time": "2026-09-08T07:40:26"
+   "snap_time": "2026-09-08T07:51:47"
   }
  ],
  "runs": [
@@ -4772,10 +4772,10 @@
    },
    {
     "name": "CG2_fdpi_lp_m0.76_r2_s4",
-    "latest_step": 300000,
+    "latest_step": 400000,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788818849.6204133
+    "mtime": 1788824551.1275716
    },
    {
     "name": "CG2_fdpi_lp_m0.76_r2_s5",
@@ -4789,126 +4789,126 @@
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788820086.6537824
+    "mtime": 1788823098.0351195
    },
    {
     "name": "CG2_fdpi_lp_m0.76sched_r2_s2",
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788821732.0697706
+    "mtime": 1788824524.8473952
    },
    {
     "name": "CG2_fdpi_lp_m0.76sched_r2_s3",
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788819596.4465206
+    "mtime": 1788822533.120737
    },
    {
     "name": "CG2_fdpi_lp_m0.77sched_r2_s1",
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788820606.7832055
+    "mtime": 1788822963.081288
    },
    {
     "name": "CG2_fdpi_lp_m0.77sched_r2_s2",
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788820312.3846822
+    "mtime": 1788822641.5669813
    },
    {
     "name": "CG2_fdpi_lp_m0.77sched_r2_s3",
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788821166.826895
+    "mtime": 1788823647.579459
    },
    {
     "name": "CG2_fdpi_lp_m0.78sched_r2_s1",
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788821160.740756
+    "mtime": 1788823648.6744833
    },
    {
     "name": "CG2_fdpi_lp_m0.78sched_r2_s2",
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788820466.0700433
+    "mtime": 1788822838.842107
    },
    {
     "name": "CG2_fdpi_lp_m0.78sched_r2_s3",
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788820212.1525922
+    "mtime": 1788822554.7572193
    },
    {
     "name": "CG2_fdpi_lp_m0.8sched1500k_r2_s1",
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788819669.9585264
+    "mtime": 1788822597.1291583
    },
    {
     "name": "CG2_fdpi_lp_m0.8sched1500k_r2_s2",
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788819446.8750968
+    "mtime": 1788822399.7035787
    },
    {
     "name": "CG2_fdpi_lp_m0.8sched1500k_r2_s3",
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788819629.5413935
+    "mtime": 1788822548.6990852
    },
    {
     "name": "CG2_fdpi_lp_m0.8sched500k_r2_s1",
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788819682.253805
+    "mtime": 1788822628.9817517
    },
    {
     "name": "CG2_fdpi_lp_m0.8sched500k_r2_s2",
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788814683.7268875
+    "mtime": 1788824861.1706545
    },
    {
     "name": "CG2_fdpi_lp_m0.8sched500k_r2_s3",
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788819852.106495
+    "mtime": 1788822818.8866775
    },
    {
     "name": "CG2_fdpi_lp_m0.8sched_r2_s1",
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788814508.2715752
+    "mtime": 1788824396.0241604
    },
    {
     "name": "CG2_fdpi_lp_m0.8sched_r2_s2",
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788822054.4470897
+    "mtime": 1788824907.523638
    },
    {
     "name": "CG2_fdpi_lp_m0.8sched_r2_s3",
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788822034.005622
+    "mtime": 1788824874.5109375
    },
    {
     "name": "CG2_fdpi_lp_prox20_r2_s1",
@@ -4933,10 +4933,10 @@
    },
    {
     "name": "CG2_fdpi_lp_prox20_r2_s4",
-    "latest_step": 300000,
+    "latest_step": 400000,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788819154.5131867
+    "mtime": 1788824889.7033443
    },
    {
     "name": "CG2_fdpi_lp_prox20_r2_s5",
@@ -5181,42 +5181,42 @@
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788820963.8523128
+    "mtime": 1788824217.262216
    },
    {
     "name": "PB2_fdpi_lp_m0.85sched1000k_r2_s2",
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788821256.247983
+    "mtime": 1788823975.5578527
    },
    {
     "name": "PB2_fdpi_lp_m0.85sched1000k_r2_s3",
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788821230.6413472
+    "mtime": 1788823948.4282455
    },
    {
     "name": "PB2_fdpi_lp_m0.8sched1000k_r2_s1",
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788821944.7495909
+    "mtime": 1788824759.6194654
    },
    {
     "name": "PB2_fdpi_lp_m0.8sched1000k_r2_s2",
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788821467.016905
+    "mtime": 1788824229.6204894
    },
    {
     "name": "PB2_fdpi_lp_m0.8sched1000k_r2_s3",
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788813578.3934526
+    "mtime": 1788822479.8994968
    },
    {
     "name": "PB2_fdpi_lp_m0_s1",
@@ -5447,42 +5447,42 @@
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788822136.8561857
+    "mtime": 1788824768.5746632
    },
    {
     "name": "PG2_fdpi_lp_m0.82sched_r2_s2",
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788821719.2714808
+    "mtime": 1788824282.835666
    },
    {
     "name": "PG2_fdpi_lp_m0.82sched_r2_s3",
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788819973.4471822
+    "mtime": 1788824614.2155173
    },
    {
     "name": "PG2_fdpi_lp_m0.83sched_r2_s1",
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788821561.7609134
+    "mtime": 1788823758.5329604
    },
    {
     "name": "PG2_fdpi_lp_m0.83sched_r2_s2",
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788820374.9771256
+    "mtime": 1788822738.157051
    },
    {
     "name": "PG2_fdpi_lp_m0.83sched_r2_s3",
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788820426.703218
+    "mtime": 1788822811.3205147
    },
    {
     "name": "PG2_fdpi_lp_m0.85_r2_s1",
@@ -5514,73 +5514,73 @@
    },
    {
     "name": "PG2_fdpi_lp_m0.85_r2_s5",
-    "latest_step": 300000,
+    "latest_step": 400000,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788818735.255865
+    "mtime": 1788824459.6519234
    },
    {
     "name": "PG2_fdpi_lp_m0.85sched1500k_r2_s1",
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788819863.9517338
+    "mtime": 1788824898.5104468
    },
    {
     "name": "PG2_fdpi_lp_m0.85sched1500k_r2_s2",
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788820105.4502048
+    "mtime": 1788822533.2207394
    },
    {
     "name": "PG2_fdpi_lp_m0.85sched1500k_r2_s3",
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788821043.5410697
+    "mtime": 1788824172.172219
    },
    {
     "name": "PG2_fdpi_lp_m0.85sched500k_r2_s1",
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788822075.8555796
+    "mtime": 1788824533.6835916
    },
    {
     "name": "PG2_fdpi_lp_m0.85sched500k_r2_s2",
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788819647.7190228
+    "mtime": 1788822483.9215906
    },
    {
     "name": "PG2_fdpi_lp_m0.85sched500k_r2_s3",
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788821492.022479
+    "mtime": 1788824724.179082
    },
    {
     "name": "PG2_fdpi_lp_m0.85sched_r2_s1",
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788820760.8067267
+    "mtime": 1788823409.0291283
    },
    {
     "name": "PG2_fdpi_lp_m0.85sched_r2_s2",
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788819941.5794597
+    "mtime": 1788824919.3578892
    },
    {
     "name": "PG2_fdpi_lp_m0.85sched_r2_s3",
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788820583.1306705
+    "mtime": 1788823677.5691254
    },
    {
     "name": "PG2_fdpi_lp_m0.8sched_r2_s1",
@@ -5594,14 +5594,14 @@
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788820159.7024226
+    "mtime": 1788822603.0152779
    },
    {
     "name": "PG2_fdpi_lp_m0.8sched_r2_s3",
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788820390.1374645
+    "mtime": 1788824239.060698
    },
    {
     "name": "PG2_fdpi_lp_m0.95_r2_s1",
@@ -5874,14 +5874,14 @@
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788824213.9299588
+    "mtime": 1788824963.6932263
    },
    {
     "name": "repair_20260905",
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788824222.4139283
+    "mtime": 1788824972.0012176
    },
    {
     "name": "terminal_event_20260905",
