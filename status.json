@@ -1,5 +1,5 @@
 {
- "updated": "2026-09-08T00:32:00",
+ "updated": "2026-09-08T00:36:53",
  "goals": [
   {
    "id": "G1",
@@ -238,6 +238,10 @@
  ],
  "changelog": [
   {
+   "time": "09-08 00:36",
+   "text": "看板改版:实验矩阵按套件/任务折叠(默认收起);基准表改为套件→任务族→任务的层级口径并标注覆盖率(Level-2 导航 4/6、Safety-CHORES 3/3)"
+  },
+  {
    "time": "09-08 00:32",
    "text": "PP2 第三种子 7 臂验证收齐;三任务前沿定稿(55 合并臂全 n=3);G1 100%、G3 95%"
   },
@@ -334,51 +338,132 @@
    "text": "PG2/CG2/PB2 三任务 312 集严格协议终判;FDPI 零违规口径坍塌"
   }
  ],
- "datasets": [
+ "suites": [
   {
-   "bench": "Safety-Gymnasium L2",
-   "task": "PointGoal2 (PG2)",
-   "channels": "vases_contact(硬,不可逆)/ hazards(软,可恢复)",
-   "budget": "软预算 25/集;2M 步",
-   "protocol": "终档、零选点、3 块 x 104 集 = 312 集/种子、逐集硬通道计数、Wilson 95% CI",
-   "baselines": "FDPI(pf .02/.1/.5)、SAC-Lag(lim .02/.1/.5)、SAC-Pen(c 1/5/20)、SDAC、SRCPO",
-   "status": "完成(typed 10 点 + 基线 11 臂)"
+   "name": "Safety-Gymnasium(Farama,官方基准套件)",
+   "desc": "套件含:安全导航(Point/Car/Racecar/Doggo/Ant x Goal/Button/Push/Circle x Level 0/1/2)、安全速度控制(6 个 MuJoCo 机器人)、视觉/多智能体变体。我们的严格协议只覆盖下列任务族;其它任务族未做,不外推。",
+   "protocol": "严格协议:终档、零选点、每种子 3 独立块 x 104 集 = 312 集、逐集硬通道计数(任一硬通道接触即计违规集)、软通道按均值与 25/集预算报告、Wilson 95% CI;2M 环境步、同一 SAC 骨干(2x256, lr 1e-4)。Level-0 无约束、Level-1 单软约束(hazards),均不含「不可逆硬通道」,不在本研究范围。",
+   "families": [
+    {
+     "name": "Level-2 安全导航 · Point/Car x Goal/Button/Push(6 任务)",
+     "total": 6,
+     "covered": 4,
+     "note": "含异构通道(硬:vases/pillars/buttons+gremlins 接触;软:hazards)的完整子集;缺 CarButton2、CarPush2",
+     "tasks": [
+      {
+       "id": "PG2",
+       "name": "SafetyPointGoal2-v0",
+       "channels": "硬 vases_contact / 软 hazards",
+       "budget": "软 25/集;2M 步",
+       "baselines": "FDPI(pf .02/.1/.5)、SAC-Lag(lim .02/.1/.5)、SAC-Pen(c 1/5/20)、SDAC、SRCPO",
+       "covered": true,
+       "status": "完成:typed 10 点 + 基线 11 臂,全 n=3(SAC-Pen c=1 n=1)"
+      },
+      {
+       "id": "CG2",
+       "name": "SafetyCarGoal2-v0",
+       "channels": "硬 vases_contact / 软 hazards",
+       "budget": "软 25/集;2M 步",
+       "baselines": "同 PG2",
+       "covered": true,
+       "status": "完成:typed 12 点 + 基线 11 臂,全 n=3"
+      },
+      {
+       "id": "PP2",
+       "name": "SafetyPointPush2-v0",
+       "channels": "硬 pillars(碰撞)/ 软 hazards",
+       "budget": "软 25/集;2M 步",
+       "baselines": "FDPI、SAC-Lag、SAC-Pen c5/c20(SDAC/SRCPO 未做)",
+       "covered": true,
+       "status": "完成:typed 8 点 + 基线 4 臂,全 n=3;注:fork 缺 Pillars 已按上游修复"
+      },
+      {
+       "id": "PB2",
+       "name": "SafetyPointButton2-v0",
+       "channels": "硬 buttons + gremlins(双硬)/ 软 hazards",
+       "budget": "软 25/集;2M 步",
+       "baselines": "FDPI、SAC 族、SDAC、SRCPO",
+       "covered": true,
+       "status_kind": "negative",
+       "status": "完成但三族 + 四种边距机制全部趴地(回报 <=2,泄漏 1-15%),不做主张"
+      },
+      {
+       "id": "CB2",
+       "name": "SafetyCarButton2-v0",
+       "channels": "硬 buttons + gremlins / 软 hazards",
+       "budget": "-",
+       "baselines": "-",
+       "covered": false,
+       "status": "未做(Button 任务全体趴地,优先级低)"
+      },
+      {
+       "id": "CP2",
+       "name": "SafetyCarPush2-v0",
+       "channels": "硬 pillars / 软 hazards",
+       "budget": "-",
+       "baselines": "-",
+       "covered": false,
+       "status": "未做(可作为 PP2 的 Car 版补全,约 1 天算力)"
+      }
+     ]
+    },
+    {
+     "name": "Level-2 安全导航 · 其它机器人(Racecar/Doggo/Ant)与 Circle 任务",
+     "total": 12,
+     "covered": 0,
+     "note": "未在严格协议下运行",
+     "tasks": []
+    },
+    {
+     "name": "安全速度控制(HalfCheetah/Hopper/Swimmer/Walker2d/Ant/Humanoid)",
+     "total": 6,
+     "covered": 0,
+     "note": "单一聚合成本、无不可逆硬通道;ICLR 稿早期实验用 OmniSafe 协议做过,不在本严格协议内",
+     "tasks": []
+    }
+   ]
   },
   {
-   "bench": "Safety-Gymnasium L2",
-   "task": "CarGoal2 (CG2)",
-   "channels": "vases_contact(硬)/ hazards(软)",
-   "budget": "软预算 25/集;2M 步",
-   "protocol": "同上",
-   "baselines": "同上",
-   "status": "完成(typed 12 点 + 基线 11 臂)"
-  },
-  {
-   "bench": "Safety-Gymnasium L2",
-   "task": "PointButton2 (PB2)",
-   "channels": "buttons + gremlins(双硬)/ hazards(软)",
-   "budget": "软预算 25/集;2M 步",
-   "protocol": "同上",
-   "baselines": "FDPI、SAC 族、SDAC、SRCPO",
-   "status": "三族同协议趴地,不做主张"
-  },
-  {
-   "bench": "Safety-Gymnasium L2",
-   "task": "PointPush2 (PP2)",
-   "channels": "pillars(硬,碰撞)/ hazards(软)",
-   "budget": "软预算 25/集;2M 步",
-   "protocol": "同上;fork Push1 缺 Pillars 已修复(恢复上游)",
-   "baselines": "FDPI 默认(已发);SAC-Lag/Pen、SDAC/SRCPO 待排",
-   "status": "六族 11 臂全 n=3 完成"
-  },
-  {
-   "bench": "Safety-CHORES (SafeVLA)",
-   "task": "ObjNav / Fetch / Pickup",
-   "channels": "blind / danger / corner / fragile / critical(多类型成本)",
-   "budget": "SafeVLA 官方 minival;n=4 种子配对",
-   "protocol": "同权重同集配对评测(200/172/171 集 x 4 种子),SR 与总成本,bootstrap CI",
-   "baselines": "SPOC、FLaRe、FLaRe-RS、ISA(SafeVLA)",
-   "status": "完成 n=4:零任务代价叠加层"
+   "name": "Safety-CHORES(SafeVLA,VLA 安全基准)",
+   "desc": "AI2-THOR 家居场景,3 个任务类型(ObjectNav / PickUp / Fetch),5 类成本(blind / danger / corner / fragile / critical);我们覆盖全部 3 个任务 = 完整基准(minival 子集)。",
+   "protocol": "同权重同集配对评测:基线 ISA(SafeVLA)vs ISA + typed 运行时门控;n=4 种子 x 200/171/172 集,SR 与总成本,配对 bootstrap CI",
+   "families": [
+    {
+     "name": "三任务(minival)",
+     "total": 3,
+     "covered": 3,
+     "note": "完整基准",
+     "tasks": [
+      {
+       "id": "ObjNav",
+       "name": "ObjectNavType",
+       "channels": "5 类成本(fragile/critical 不可逆型)",
+       "budget": "n=4 x 200 集",
+       "baselines": "SPOC、FLaRe、FLaRe-RS、ISA",
+       "covered": true,
+       "status": "完成:SR 无损(0.848 vs 0.848)、成本 1.26→0.98(CI 跨零)、灾难封顶"
+      },
+      {
+       "id": "Fetch",
+       "name": "FetchType",
+       "channels": "同上",
+       "budget": "n=4 x 172 集",
+       "baselines": "同上",
+       "covered": true,
+       "status": "完成:SR +2.3pp、成本 −7%,方向一致不显著"
+      },
+      {
+       "id": "Pickup",
+       "name": "PickupType",
+       "channels": "同上",
+       "budget": "n=4 x 171 集",
+       "baselines": "同上",
+       "covered": true,
+       "status": "完成:中性(成本地板 0.47)"
+      }
+     ]
+    }
+   ]
   }
  ]
 }
