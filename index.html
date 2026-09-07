@@ -140,7 +140,7 @@ const esc = (s) => String(s ?? "").replace(/[&<>]/g, (c) => ({"&":"&amp;","<":"&
 const PILL = {done:"完成", run:"在跑", training:"训练中", verifying:"验证中", verified_partial:"缺种子", wait:"排队", negative:"负结果", neg:"负结果", planned:"未开始", idle:"空闲"};
 const pill = (st) => `<span class="pill ${st}">${PILL[st] || st}</span>`;
 const fmtAge = (iso) => { if (!iso) return "-"; const m = Math.round((Date.now() - new Date(iso)) / 60000); return `${iso.replace("T"," ").slice(0,16)}(${m < 60 ? m + " 分钟前" : (m/60).toFixed(1) + " 小时前"})`; };
-const T = {pg2:"PointGoal2", cg2:"CarGoal2", pb2:"PointButton2"};
+const T = {pg2:"PointGoal2", cg2:"CarGoal2", pp2:"PointPush2", cp2:"CarPush2", pb2:"PointButton2"};
 const f2 = (x, d=2) => (x === null || x === undefined || isNaN(x)) ? "-" : Number(x).toFixed(d);
 async function getJSON(f) { const r = await fetch(RAW + f + "?v=" + Math.floor(Date.now()/60000), {cache:"no-store"}); if (!r.ok) throw new Error(f); return r.json(); }
 const rateCls = (r) => r === null ? "" : (r <= 1 ? "ok" : (r <= 5 ? "warn" : "bad"));
@@ -168,8 +168,8 @@ function renderServers(r) {
 function renderMatrix(m) {
   const s = m.summary || {};
   $("#msum").textContent = `共 ${s.total} 格 · 完成 ${s.done} · 训练中 ${s.training} · 未开始 ${s.planned} · 更新 ${fmtAge(m.updated)}`;
-  const SUITES = [["Safety-Gymnasium · Level-2 导航", ["pg2", "cg2", "pp2", "pb2"]]];
-  const TN = {pg2:"PointGoal2", cg2:"CarGoal2", pp2:"PointPush2", pb2:"PointButton2"};
+  const SUITES = [["Safety-Gymnasium · Level-2 导航", ["pg2", "cg2", "pp2", "cp2", "pb2"]]];
+  const TN = {pg2:"PointGoal2", cg2:"CarGoal2", pp2:"PointPush2", cp2:"CarPush2", pb2:"PointButton2"};
   const thead = `<thead><tr><th>目标</th><th>方法</th><th>旋钮</th><th>计划种子</th><th>已训</th><th>已验证</th><th>集数</th><th>硬泄漏</th><th>回报</th><th>软/集</th><th>状态</th><th>负责</th><th>备注</th></tr></thead>`;
   let html = "";
   for (const [suite, tasks] of SUITES) {
