@@ -2,6 +2,11 @@
   "owner": "T-1484 SafeOT-Dual session (cursor)",
   "entries": [
     {
+      "time": "09-08 00:13",
+      "goal": "算力/G1/G2",
+      "text": "volc-a100 接入：公网 115.190.90.101:2760 从 30109/30314/阿里云均不通（TCP 被过滤），只有 5090 机能连 → 以 5090 为跳板（ProxyJump）接入。容器名义 128 核，实际 k8s 配额约 26 核，且与 owner 的 chembench Isaac Sim 作业（6 进程约 7 核、两张 A100 均 100% 占用）共享，根盘只剩 5.6 GB，全部放到 vePFS（/personal_fast_storage/liyufeng/safeot_w2）。SafePO 栈 40 s 装好（火山镜像），CarGoal1 / AntVelocity 冒烟通过。已发车 wave-6 队列 107 个 TRPO 作业（16 路并行，每作业约 1.6 min/epoch）：① CG1/PB1 的 ε 扫描（0、10）与 clip 扫描（0.25/0.75/1.5/4，PB1 加 0.1）×3 种子（39 个），使 G1 的「一个旋钮一条前沿」从单任务变三任务；② SafePO 速度套件 Ant/HalfCheetah/Hopper/Walker2d × {TRPO-SafeOT-Dual, TRPO-Lag, CPO, PPO-Lag} × 3 种子（48 个），为 G2 补运动类任务的广度；③ CG1/PB1 已有臂补种子 3-4（20 个）。收割与自动迭代脚本均已纳入该机。预计 ~14 h 排空。"
+    },
+    {
       "time": "09-07 22:45",
       "goal": "算力",
       "text": "按 owner 要求只用 30109 / mainskill(30314) / aliyun / volc / 5090：已从 30082、30163 拉回全部结果并清空我方进程（30082 上 156 个），脚本中移除这两台。被中断的工作已迁移：30 个 TRPO 作业 → 30314，24 个改进变体 2M → 5090，18 个边距日程 FDPI → 本机 GPU 0/3/5。30163 上的改进变体已跑满 100 epoch（结果保留）；30082 上的 10M 部分进度重跑。"
