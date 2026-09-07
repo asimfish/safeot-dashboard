@@ -1,49 +1,52 @@
 {
- "updated": "2026-09-07T19:49:46",
+ "updated": "2026-09-07T20:00:00",
  "servers": [
   {
    "name": "tianyiyun-30109",
    "desc": "8x A100-80G, 128 核; SafeRL 训练/评估主力(共享账号,多项目并行)",
    "host": "ide-650ef93f23324f04881bde87cf05d6c1-0f2fcc",
-   "load": "143.48",
+   "load": "167.39",
    "ncpu": 128,
    "cards": [
     {
      "idx": 0,
-     "used_mb": 2597,
+     "used_mb": 20606,
      "total_mb": 81920,
-     "util": 0,
-     "mine": false,
+     "util": 19,
+     "mine": true,
      "procs": [
-      "dppo: run.py --config-name=ft_ppo_diffusion_mlp_armC_"
+      "dppo: run.py --config-name=ft_ppo_diffusion_mlp_armC_",
+      "safeot: fdpi_safeot_dual.py --env SafetyPointGoal2-v0 --seed 1 1 1",
+      "safeot: fdpi_safeot_dual.py --env SafetyCarGoal2-v0 --seed 1 1 1"
      ]
     },
     {
      "idx": 1,
-     "used_mb": 17423,
+     "used_mb": 35680,
      "total_mb": 81920,
-     "util": 51,
+     "util": 82,
      "mine": false,
      "procs": [
-      "other: curveseq_m2.py"
+      "other: curveseq_m2.py",
+      "asbs: e0_paired_fork_runtime.py --config-name sim_libero.yaml"
      ]
     },
     {
      "idx": 2,
-     "used_mb": 20157,
+     "used_mb": 18815,
      "total_mb": 81920,
-     "util": 35,
+     "util": 1,
      "mine": false,
      "procs": [
       "asbs: e0_paired_fork_runtime.py --config-name sim_libero.yaml",
-      "dppo: rollout_record.py --seed 1000"
+      "dppo: rollout_record.py --seed 2000"
      ]
     },
     {
      "idx": 3,
-     "used_mb": 41806,
+     "used_mb": 22209,
      "total_mb": 81920,
-     "util": 41,
+     "util": 2,
      "mine": false,
      "procs": [
       "asbs: e0_paired_fork_runtime.py --config-name sim_libero.yaml",
@@ -54,7 +57,7 @@
      "idx": 4,
      "used_mb": 60988,
      "total_mb": 81920,
-     "util": 20,
+     "util": 16,
      "mine": false,
      "procs": [
       "other: VLLM::Worker_TP1"
@@ -62,19 +65,21 @@
     },
     {
      "idx": 5,
-     "used_mb": 19603,
+     "used_mb": 37612,
      "total_mb": 81920,
-     "util": 0,
-     "mine": false,
+     "util": 13,
+     "mine": true,
      "procs": [
-      "asbs: e0_paired_fork_runtime.py --config-name sim_libero.yaml"
+      "asbs: e0_paired_fork_runtime.py --config-name sim_libero.yaml",
+      "safeot: fdpi_safeot_dual.py --env SafetyPointGoal2-v0 --seed 2",
+      "safeot: fdpi_safeot_dual.py --env SafetyCarGoal2-v0 --seed 2"
      ]
     },
     {
      "idx": 6,
      "used_mb": 63585,
      "total_mb": 81920,
-     "util": 81,
+     "util": 92,
      "mine": false,
      "procs": [
       "other: VLLM::Worker_TP0",
@@ -83,20 +88,22 @@
     },
     {
      "idx": 7,
-     "used_mb": 20183,
+     "used_mb": 38189,
      "total_mb": 81920,
-     "util": 4,
+     "util": 19,
      "mine": true,
      "procs": [
       "safeot: fdpi_safeot_dual.py --env SafetyPointGoal2-v0 --seed 1 --env",
-      "asbs: e0_paired_fork_runtime.py --config-name sim_libero.yaml"
+      "asbs: e0_paired_fork_runtime.py --config-name sim_libero.yaml",
+      "safeot: fdpi_safeot_dual.py --env SafetyPointGoal2-v0 --seed 3",
+      "safeot: fdpi_safeot_dual.py --env SafetyCarGoal2-v0 --seed 3"
      ]
     }
    ]
   },
   {
    "host": "di-20260831162150-5ll6n",
-   "load": "21.93",
+   "load": "22.05",
    "ncpu": 26,
    "cards": [
     {
@@ -111,7 +118,7 @@
     },
     {
      "idx": 1,
-     "used_mb": 34247,
+     "used_mb": 33072,
      "total_mb": 81920,
      "util": 100,
      "mine": false,
@@ -122,177 +129,163 @@
    ],
    "name": "volc-a100",
    "desc": "2x A100-80G, 128 核, 3PB vepfs; SafeRL 第二算力(DP/ACT 训练共用 GPU); 环境部署中",
-   "snap_time": "2026-09-07T19:49:52"
+   "snap_time": "2026-09-07T20:00:05"
   },
   {
    "host": "dsw-1008180-7cb5796fcd-xt4lh",
-   "load": "49.99",
+   "load": "19.48",
    "ncpu": 184,
    "cards": [
     {
      "idx": 0,
-     "used_mb": 2281,
+     "used_mb": 1,
      "total_mb": 98304,
      "util": 0,
      "mine": false,
-     "procs": [
-      "other: act_train_ppu.py --seed 3961"
-     ]
+     "procs": []
     },
     {
      "idx": 1,
-     "used_mb": 2273,
+     "used_mb": 1,
      "total_mb": 98304,
      "util": 0,
      "mine": false,
-     "procs": [
-      "other: act_train_ppu.py --seed 3962"
-     ]
+     "procs": []
     },
     {
      "idx": 2,
-     "used_mb": 2273,
-     "total_mb": 98304,
-     "util": 64,
-     "mine": false,
-     "procs": [
-      "other: act_train_ppu.py --seed 3963"
-     ]
-    },
-    {
-     "idx": 3,
-     "used_mb": 2295,
-     "total_mb": 98304,
-     "util": 100,
-     "mine": false,
-     "procs": [
-      "other: act_train_ppu.py --seed 3961"
-     ]
-    },
-    {
-     "idx": 4,
-     "used_mb": 2295,
-     "total_mb": 98304,
-     "util": 10,
-     "mine": false,
-     "procs": [
-      "other: act_train_ppu.py --seed 3962"
-     ]
-    },
-    {
-     "idx": 5,
-     "used_mb": 2295,
-     "total_mb": 98304,
-     "util": 86,
-     "mine": false,
-     "procs": [
-      "other: act_train_ppu.py --seed 3963"
-     ]
-    },
-    {
-     "idx": 6,
-     "used_mb": 2265,
-     "total_mb": 98304,
-     "util": 100,
-     "mine": false,
-     "procs": [
-      "other: act_train_ppu.py --seed 3961"
-     ]
-    },
-    {
-     "idx": 7,
-     "used_mb": 2265,
-     "total_mb": 98304,
-     "util": 76,
-     "mine": false,
-     "procs": [
-      "other: act_train_ppu.py --seed 3962"
-     ]
-    },
-    {
-     "idx": 8,
-     "used_mb": 2265,
-     "total_mb": 98304,
-     "util": 92,
-     "mine": false,
-     "procs": [
-      "other: act_train_ppu.py --seed 3963"
-     ]
-    },
-    {
-     "idx": 9,
-     "used_mb": 2265,
+     "used_mb": 1,
      "total_mb": 98304,
      "util": 0,
      "mine": false,
-     "procs": [
-      "other: act_train_ppu.py --seed 3961"
-     ]
+     "procs": []
     },
     {
-     "idx": 10,
-     "used_mb": 2265,
+     "idx": 3,
+     "used_mb": 1,
      "total_mb": 98304,
-     "util": 30,
+     "util": 0,
      "mine": false,
-     "procs": [
-      "other: act_train_ppu.py --seed 3962"
-     ]
+     "procs": []
     },
     {
-     "idx": 11,
-     "used_mb": 2257,
-     "total_mb": 98304,
-     "util": 4,
-     "mine": false,
-     "procs": [
-      "other: act_train_ppu.py --seed 3963"
-     ]
-    },
-    {
-     "idx": 12,
-     "used_mb": 2265,
-     "total_mb": 98304,
-     "util": 74,
-     "mine": false,
-     "procs": [
-      "other: act_train_ppu.py --seed 3961"
-     ]
-    },
-    {
-     "idx": 13,
-     "used_mb": 2257,
+     "idx": 4,
+     "used_mb": 2129,
      "total_mb": 98304,
      "util": 66,
      "mine": false,
      "procs": [
-      "other: act_train_ppu.py --seed 3962"
+      "other: act_train_ppu.py --seed 3554"
      ]
+    },
+    {
+     "idx": 5,
+     "used_mb": 2129,
+     "total_mb": 98304,
+     "util": 38,
+     "mine": false,
+     "procs": [
+      "other: act_train_ppu.py --seed 3555"
+     ]
+    },
+    {
+     "idx": 6,
+     "used_mb": 2129,
+     "total_mb": 98304,
+     "util": 76,
+     "mine": false,
+     "procs": [
+      "other: act_train_ppu.py --seed 3554"
+     ]
+    },
+    {
+     "idx": 7,
+     "used_mb": 2129,
+     "total_mb": 98304,
+     "util": 76,
+     "mine": false,
+     "procs": [
+      "other: act_train_ppu.py --seed 3555"
+     ]
+    },
+    {
+     "idx": 8,
+     "used_mb": 2129,
+     "total_mb": 98304,
+     "util": 100,
+     "mine": false,
+     "procs": [
+      "other: act_train_ppu.py --seed 3554"
+     ]
+    },
+    {
+     "idx": 9,
+     "used_mb": 2129,
+     "total_mb": 98304,
+     "util": 16,
+     "mine": false,
+     "procs": [
+      "other: act_train_ppu.py --seed 3555"
+     ]
+    },
+    {
+     "idx": 10,
+     "used_mb": 2129,
+     "total_mb": 98304,
+     "util": 100,
+     "mine": false,
+     "procs": [
+      "other: act_train_ppu.py --seed 3554"
+     ]
+    },
+    {
+     "idx": 11,
+     "used_mb": 2129,
+     "total_mb": 98304,
+     "util": 96,
+     "mine": false,
+     "procs": [
+      "other: act_train_ppu.py --seed 3555"
+     ]
+    },
+    {
+     "idx": 12,
+     "used_mb": 2129,
+     "total_mb": 98304,
+     "util": 100,
+     "mine": false,
+     "procs": [
+      "other: act_train_ppu.py --seed 3554"
+     ]
+    },
+    {
+     "idx": 13,
+     "used_mb": 1,
+     "total_mb": 98304,
+     "util": 0,
+     "mine": false,
+     "procs": []
     },
     {
      "idx": 14,
-     "used_mb": 2257,
+     "used_mb": 1,
      "total_mb": 98304,
-     "util": 30,
+     "util": 0,
      "mine": false,
-     "procs": [
-      "other: act_train_ppu.py --seed 3961"
-     ]
+     "procs": []
     },
     {
      "idx": 15,
-     "used_mb": 2257,
+     "used_mb": 1,
      "total_mb": 98304,
-     "util": 10,
+     "util": 0,
      "mine": false,
-     "procs": [
-      "other: act_train_ppu.py --seed 3962"
-     ]
+     "procs": []
     }
    ],
    "name": "aliyun-ppu",
    "desc": "16x PPU-ZW810E 96G, 184 核; VLA(Safety-CHORES)评测; 共享(act_train 等他人任务)",
-   "snap_time": "2026-09-07T19:49:50"
+   "snap_time": "2026-09-07T20:00:04"
   }
  ],
  "runs": [
@@ -3656,8 +3649,8 @@
    "mtime": 1788781353.1554356,
    "scan_n": 6,
    "scan_last": "ck600k 4.7/0",
-   "confirm_n": 3,
-   "confirm_clean": 3,
+   "confirm_n": 4,
+   "confirm_clean": 4,
    "server": "volc"
   },
   {
@@ -3716,8 +3709,8 @@
    "mtime": 1788781367.6727047,
    "scan_n": 6,
    "scan_last": "ck600k 5.5/0",
-   "confirm_n": 3,
-   "confirm_clean": 2,
+   "confirm_n": 4,
+   "confirm_clean": 3,
    "server": "volc"
   },
   {
@@ -3896,8 +3889,8 @@
    "mtime": 1788781111.1731493,
    "scan_n": 6,
    "scan_last": "ck600k 3.6/0",
-   "confirm_n": 3,
-   "confirm_clean": 1,
+   "confirm_n": 4,
+   "confirm_clean": 2,
    "server": "volc"
   },
   {
@@ -4042,9 +4035,7 @@
   }
  ],
  "lanes": [
-  "volc: d2v2_v1e75_pp2_s3/confirm_600000_100ep.json",
-  "volc: d2v2_v1e7_pp2_s3/confirm_600000_100ep.json",
-  "volc: d2v2_v1e8c10_pp2_s3/confirm_600000_100ep.json"
+  "volc: d2v2_pen20_pp2_s3/eval_all_ckpts_30ep.json"
  ],
  "parallel": {
   "workspace": "/home/dataset-local/liyufeng/SafeTransport/results/safeot_dual_fdpi",
@@ -4412,6 +4403,48 @@
     "done": true,
     "strict_evals": 1,
     "mtime": 1788722534.3860943
+   },
+   {
+    "name": "CG2_fdpi_lp_m0.76sched_r2_s1",
+    "latest_step": 0,
+    "done": false,
+    "strict_evals": 0,
+    "mtime": 1788782174.15759
+   },
+   {
+    "name": "CG2_fdpi_lp_m0.76sched_r2_s2",
+    "latest_step": 0,
+    "done": false,
+    "strict_evals": 0,
+    "mtime": 1788782174.2305899
+   },
+   {
+    "name": "CG2_fdpi_lp_m0.76sched_r2_s3",
+    "latest_step": 0,
+    "done": false,
+    "strict_evals": 0,
+    "mtime": 1788782174.8175888
+   },
+   {
+    "name": "CG2_fdpi_lp_m0.8sched_r2_s1",
+    "latest_step": 0,
+    "done": false,
+    "strict_evals": 0,
+    "mtime": 1788782174.5945892
+   },
+   {
+    "name": "CG2_fdpi_lp_m0.8sched_r2_s2",
+    "latest_step": 0,
+    "done": false,
+    "strict_evals": 0,
+    "mtime": 1788782174.2825897
+   },
+   {
+    "name": "CG2_fdpi_lp_m0.8sched_r2_s3",
+    "latest_step": 0,
+    "done": false,
+    "strict_evals": 0,
+    "mtime": 1788782174.2295897
    },
    {
     "name": "CG2_fdpi_lp_prox20_r2_s1",
@@ -4911,6 +4944,48 @@
     "mtime": 1788713090.2851572
    },
    {
+    "name": "PG2_fdpi_lp_m0.85sched_r2_s1",
+    "latest_step": 0,
+    "done": false,
+    "strict_evals": 0,
+    "mtime": 1788782169.6206071
+   },
+   {
+    "name": "PG2_fdpi_lp_m0.85sched_r2_s2",
+    "latest_step": 0,
+    "done": false,
+    "strict_evals": 0,
+    "mtime": 1788782171.0156019
+   },
+   {
+    "name": "PG2_fdpi_lp_m0.85sched_r2_s3",
+    "latest_step": 0,
+    "done": false,
+    "strict_evals": 0,
+    "mtime": 1788782170.0696054
+   },
+   {
+    "name": "PG2_fdpi_lp_m0.8sched_r2_s1",
+    "latest_step": 0,
+    "done": false,
+    "strict_evals": 0,
+    "mtime": 1788782171.0216017
+   },
+   {
+    "name": "PG2_fdpi_lp_m0.8sched_r2_s2",
+    "latest_step": 0,
+    "done": false,
+    "strict_evals": 0,
+    "mtime": 1788782170.3096044
+   },
+   {
+    "name": "PG2_fdpi_lp_m0.8sched_r2_s3",
+    "latest_step": 0,
+    "done": false,
+    "strict_evals": 0,
+    "mtime": 1788782171.1786013
+   },
+   {
     "name": "PG2_fdpi_lp_m0.95_r2_s1",
     "latest_step": 0,
     "done": true,
@@ -5153,14 +5228,14 @@
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788780188.7095103
+    "mtime": 1788782322.5241318
    },
    {
     "name": "repair_20260905",
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788781610.475484
+    "mtime": 1788782330.7880952
    },
    {
     "name": "terminal_event_20260905",
@@ -5170,6 +5245,6 @@
     "mtime": 1788616474.922712
    }
   ],
-  "n_procs": 5
+  "n_procs": 77
  }
 }
