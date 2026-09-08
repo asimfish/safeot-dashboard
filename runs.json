@@ -1,18 +1,18 @@
 {
- "updated": "2026-09-08T11:47:26",
+ "updated": "2026-09-08T11:57:59",
  "servers": [
   {
    "name": "tianyiyun-30109",
    "desc": "8x A100-80G, 128 核; SafeRL 训练/评估主力(共享账号,多项目并行)",
    "host": "ide-650ef93f23324f04881bde87cf05d6c1-0f2fcc",
-   "load": "144.01",
+   "load": "112.61",
    "ncpu": 128,
    "cards": [
     {
      "idx": 0,
      "used_mb": 31202,
      "total_mb": 81920,
-     "util": 52,
+     "util": 56,
      "mine": true,
      "procs": [
       "dppo: run.py --config-name=ft_ppo_diffusion_mlp_armC_",
@@ -25,7 +25,7 @@
      "idx": 1,
      "used_mb": 26604,
      "total_mb": 81920,
-     "util": 89,
+     "util": 71,
      "mine": true,
      "procs": [
       "safeot: fdpi_safeot_dual.py --env SafetyPointGoal2-v0 --seed 5",
@@ -39,7 +39,7 @@
      "idx": 2,
      "used_mb": 14559,
      "total_mb": 81920,
-     "util": 24,
+     "util": 26,
      "mine": false,
      "procs": [
       "safeduo: python --seed 46 --env-yaml"
@@ -49,7 +49,7 @@
      "idx": 3,
      "used_mb": 31212,
      "total_mb": 81920,
-     "util": 45,
+     "util": 47,
      "mine": true,
      "procs": [
       "dppo: run.py --config-name=ft_ppo_diffusion_mlp",
@@ -62,7 +62,7 @@
      "idx": 4,
      "used_mb": 60988,
      "total_mb": 81920,
-     "util": 54,
+     "util": 86,
      "mine": false,
      "procs": [
       "other: VLLM::Worker_TP1"
@@ -72,7 +72,7 @@
      "idx": 5,
      "used_mb": 66360,
      "total_mb": 81920,
-     "util": 98,
+     "util": 81,
      "mine": true,
      "procs": [
       "safeot: fdpi_safeot_dual.py --env SafetyPointGoal2-v0 --seed 5",
@@ -85,7 +85,7 @@
      "idx": 6,
      "used_mb": 60992,
      "total_mb": 81920,
-     "util": 76,
+     "util": 16,
      "mine": false,
      "procs": [
       "other: VLLM::Worker_TP0"
@@ -109,14 +109,14 @@
   },
   {
    "host": "di-20260831162150-5ll6n",
-   "load": "9.21",
+   "load": "5.81",
    "ncpu": 26,
    "cards": [
     {
      "idx": 0,
      "used_mb": 41443,
      "total_mb": 81920,
-     "util": 66,
+     "util": 56,
      "mine": false,
      "procs": [
       "other: ?"
@@ -124,9 +124,9 @@
     },
     {
      "idx": 1,
-     "used_mb": 37399,
+     "used_mb": 37261,
      "total_mb": 81920,
-     "util": 64,
+     "util": 54,
      "mine": false,
      "procs": [
       "other: ?"
@@ -135,11 +135,11 @@
    ],
    "name": "volc-a100",
    "desc": "2x A100-80G, 128 核, 3PB vepfs; SafeRL 第二算力(DP/ACT 训练共用 GPU); 环境部署中",
-   "snap_time": "2026-09-08T11:47:33"
+   "snap_time": "2026-09-08T11:58:10"
   },
   {
    "host": "dsw-1008180-7cb5796fcd-xt4lh",
-   "load": "0.15",
+   "load": "0.00",
    "ncpu": 184,
    "cards": [
     {
@@ -273,7 +273,7 @@
    ],
    "name": "aliyun-ppu",
    "desc": "16x PPU-ZW810E 96G, 184 核; VLA(Safety-CHORES)评测; 共享(act_train 等他人任务)",
-   "snap_time": "2026-09-08T11:47:30"
+   "snap_time": "2026-09-08T11:58:05"
   }
  ],
  "runs": [
@@ -3026,7 +3026,7 @@
    "variant": "fdpi",
    "task": "cp2",
    "seed": "s2",
-   "ckpts": 3,
+   "ckpts": 4,
    "done": false,
    "running": true,
    "blocks": 0,
@@ -3034,7 +3034,7 @@
    "hv": 0,
    "ret": null,
    "soft": null,
-   "mtime": 1788830431.7927096,
+   "mtime": 1788839828.2739196,
    "scan_n": 1,
    "scan_last": "ck100k 4.2/3",
    "confirm_n": 0,
@@ -3755,8 +3755,8 @@
    "ret": null,
    "soft": null,
    "mtime": 1788837577.8914294,
-   "scan_n": 3,
-   "scan_last": "ck300k 7.9/1",
+   "scan_n": 5,
+   "scan_last": "ck500k 12.1/1",
    "confirm_n": 1,
    "confirm_clean": 1,
    "server": "volc"
@@ -4384,7 +4384,7 @@
  ],
  "lanes": [
   "volc: d2v2_v1c_cp2_s1/confirm_500000_100ep.json",
-  "volc: d2v2_v1c_cp2_s2/eval_all_ckpts_30ep.json"
+  "volc: d2v2_v1c_cp2_s3/eval_all_ckpts_30ep.json"
  ],
  "parallel": {
   "workspace": "/home/dataset-local/liyufeng/SafeTransport/results/safeot_dual_fdpi",
@@ -4786,28 +4786,28 @@
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788835503.1554332
+    "mtime": 1788838355.4746165
    },
    {
     "name": "CG2_fdpi_lp_m0.76sched_r2_s2",
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788835925.6180797
+    "mtime": 1788838665.232585
    },
    {
     "name": "CG2_fdpi_lp_m0.76sched_r2_s3",
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788834573.7862873
+    "mtime": 1788837493.0311148
    },
    {
     "name": "CG2_fdpi_lp_m0.77sched_r2_s1",
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788835270.6212666
+    "mtime": 1788837616.2048652
    },
    {
     "name": "CG2_fdpi_lp_m0.77sched_r2_s2",
@@ -4821,21 +4821,21 @@
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788836382.166133
+    "mtime": 1788838786.4293315
    },
    {
     "name": "CG2_fdpi_lp_m0.78sched_r2_s1",
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788836426.7091062
+    "mtime": 1788838848.939761
    },
    {
     "name": "CG2_fdpi_lp_m0.78sched_r2_s2",
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788835069.8647492
+    "mtime": 1788837408.3811953
    },
    {
     "name": "CG2_fdpi_lp_m0.78sched_r2_s3",
@@ -4849,28 +4849,28 @@
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788834721.6205053
+    "mtime": 1788837644.2184825
    },
    {
     "name": "CG2_fdpi_lp_m0.8sched1500k_r2_s2",
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788834355.8074965
+    "mtime": 1788837275.8792346
    },
    {
     "name": "CG2_fdpi_lp_m0.8sched1500k_r2_s3",
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788834619.257251
+    "mtime": 1788837542.132216
    },
    {
     "name": "CG2_fdpi_lp_m0.8sched500k_r2_s1",
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788834740.7029417
+    "mtime": 1788837668.2100112
    },
    {
     "name": "CG2_fdpi_lp_m0.8sched500k_r2_s2",
@@ -4884,7 +4884,7 @@
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788835051.4573483
+    "mtime": 1788837979.7540796
    },
    {
     "name": "CG2_fdpi_lp_m0.8sched_r2_s1",
@@ -5178,35 +5178,35 @@
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788834202.9275897
+    "mtime": 1788837349.830894
    },
    {
     "name": "PB2_fdpi_lp_m0.85sched1000k_r2_s2",
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788835154.651692
+    "mtime": 1788837832.982797
    },
    {
     "name": "PB2_fdpi_lp_m0.85sched1000k_r2_s3",
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788835078.850957
+    "mtime": 1788837757.05104
    },
    {
     "name": "PB2_fdpi_lp_m0.8sched1000k_r2_s1",
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788836358.3346217
+    "mtime": 1788839108.7676387
    },
    {
     "name": "PB2_fdpi_lp_m0.8sched1000k_r2_s2",
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788835532.5230954
+    "mtime": 1788838224.057674
    },
    {
     "name": "PB2_fdpi_lp_m0.8sched1000k_r2_s3",
@@ -5444,42 +5444,42 @@
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788835487.8361242
+    "mtime": 1788838048.5346913
    },
    {
     "name": "PG2_fdpi_lp_m0.82sched_r2_s2",
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788834779.6589034
+    "mtime": 1788837337.925627
    },
    {
     "name": "PG2_fdpi_lp_m0.82sched_r2_s3",
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788836394.5074027
+    "mtime": 1788838619.848558
    },
    {
     "name": "PG2_fdpi_lp_m0.83sched_r2_s1",
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788835137.9703145
+    "mtime": 1788837320.548237
    },
    {
     "name": "PG2_fdpi_lp_m0.83sched_r2_s2",
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788834878.41539
+    "mtime": 1788837251.9266965
    },
    {
     "name": "PG2_fdpi_lp_m0.83sched_r2_s3",
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788835043.4211755
+    "mtime": 1788837423.1795292
    },
    {
     "name": "PG2_fdpi_lp_m0.85_r2_s1",
@@ -5521,21 +5521,21 @@
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788835119.3648877
+    "mtime": 1788837567.9127908
    },
    {
     "name": "PG2_fdpi_lp_m0.85sched1500k_r2_s2",
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788835716.842241
+    "mtime": 1788838038.7744603
    },
    {
     "name": "PG2_fdpi_lp_m0.85sched1500k_r2_s3",
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788834233.029283
+    "mtime": 1788837446.6540637
    },
    {
     "name": "PG2_fdpi_lp_m0.85sched500k_r2_s1",
@@ -5549,14 +5549,14 @@
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788834744.12902
+    "mtime": 1788837445.752043
    },
    {
     "name": "PG2_fdpi_lp_m0.85sched500k_r2_s3",
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788835036.5550277
+    "mtime": 1788838295.3512683
    },
    {
     "name": "PG2_fdpi_lp_m0.85sched_r2_s1",
@@ -5570,7 +5570,7 @@
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788835297.4208767
+    "mtime": 1788837706.7048812
    },
    {
     "name": "PG2_fdpi_lp_m0.85sched_r2_s3",
@@ -5584,14 +5584,14 @@
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788831892.7427485
+    "mtime": 1788838597.5890567
    },
    {
     "name": "PG2_fdpi_lp_m0.8sched_r2_s2",
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788835865.9776032
+    "mtime": 1788838156.7731502
    },
    {
     "name": "PG2_fdpi_lp_m0.8sched_r2_s3",
@@ -5871,14 +5871,14 @@
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788839213.5293343
+    "mtime": 1788839278.3300781
    },
    {
     "name": "repair_20260905",
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788839221.182304
+    "mtime": 1788839810.5789678
    },
    {
     "name": "terminal_event_20260905",
