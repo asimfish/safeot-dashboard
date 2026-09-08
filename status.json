@@ -1,5 +1,5 @@
 {
- "updated": "2026-09-08T22:01:07",
+ "updated": "2026-09-08T23:27:40",
  "goals": [
   {
    "id": "G1",
@@ -48,9 +48,9 @@
   }
  ],
  "focus": [
-  "【全覆盖计划启动】A 期 72 路已发车:CarButton2 + PointGoal1(30109)、PointButton1 + CarButton1(volc);CarGoal1/PointPush1/CarPush1 排队;B 期 Circle x4 + 速度 x6 需修代码",
-  "已完成 5 任务(PG2/CG2/PP2/CP2/PB2)保持不变;新任务同协议 + 标准指标 J_c/CSR@25",
-  "【待 owner 决策】论文实验主线切换 + 08-30 ICLR 源路径"
+  "全覆盖 A 期:volc 54 路(PB1/CB1/CB2)+ 阿里云 54 路(PG1/CG1/PP1,CPU-JAX 绑核)在跑;CP1 排队;30109 因进程数触顶与 GPU 被占本波弃用",
+  "阿里云 CPU-JAX 速度 ≈ 空闲 GPU,184 核可并行 ~54 路,是当前最大算力;首发未绑核导致 load 875 已修正(taskset 3 核/路)",
+  "B 期待办:修 fork Circle 类、速度任务标量成本包装器;【待 owner 决策】论文主线切换"
  ],
  "verdicts": [
   {
@@ -278,6 +278,10 @@
  ],
  "changelog": [
   {
+   "time": "09-08 23:27",
+   "text": "30109 弃用(进程触顶/GPU 被占);阿里云 CPU-JAX 环境上线并绑核发 54 路;volc 54 路;矩阵 112 格"
+  },
+  {
    "time": "09-08 22:01",
    "text": "全覆盖计划启动:A 期 72 路发车(CB2/PG1@30109,PB1/CB1@volc);流水线加任务感知硬通道与 J_c/CSR@25"
   },
@@ -450,7 +454,7 @@
        "budget": "软 25/集;2M 步",
        "baselines": "FDPI、SAC-Lag、SAC-Pen c5",
        "covered": true,
-       "status": "训练中(30109):typed 3 臂 + FDPI + SAC-Lag + SAC-Pen c5 x 3 种子",
+       "status": "训练中(volc):typed 3 臂 + FDPI + SAC-Lag + SAC-Pen c5 x 3 种子",
        "status_kind": "training"
       },
       {
@@ -479,7 +483,7 @@
        "baselines": "FDPI、SAC-Lag、SAC-Pen c5",
        "covered": true,
        "status_kind": "training",
-       "status": "训练中(30109)"
+       "status": "训练中(阿里云 CPU-JAX,绑核)"
       },
       {
        "id": "CG1",
@@ -488,8 +492,8 @@
        "budget": "预算 25/集;2M 步",
        "baselines": "同上",
        "covered": true,
-       "status_kind": "planned",
-       "status": "排队"
+       "status_kind": "training",
+       "status": "训练中(阿里云 CPU-JAX,绑核)"
       },
       {
        "id": "PB1",
@@ -518,8 +522,8 @@
        "budget": "预算 25/集;2M 步",
        "baselines": "同上",
        "covered": true,
-       "status_kind": "planned",
-       "status": "排队"
+       "status_kind": "training",
+       "status": "训练中(阿里云 CPU-JAX,绑核)"
       },
       {
        "id": "CP1",
@@ -529,7 +533,7 @@
        "baselines": "同上",
        "covered": true,
        "status_kind": "planned",
-       "status": "排队"
+       "status": "排队(阿里云下一槽)"
       }
      ]
     },
@@ -598,5 +602,6 @@
     }
    ]
   }
- ]
+ ],
+ "servers_note": "aliyun-ppu:PPU 卡不能跑 JAX;用其 184 核 CPU 跑 CPU-JAX(每路 taskset 3 核)"
 }
