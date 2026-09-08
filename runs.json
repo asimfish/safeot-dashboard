@@ -1,18 +1,18 @@
 {
- "updated": "2026-09-08T07:51:17",
+ "updated": "2026-09-08T08:02:19",
  "servers": [
   {
    "name": "tianyiyun-30109",
    "desc": "8x A100-80G, 128 核; SafeRL 训练/评估主力(共享账号,多项目并行)",
    "host": "ide-650ef93f23324f04881bde87cf05d6c1-0f2fcc",
-   "load": "137.14",
+   "load": "179.59",
    "ncpu": 128,
    "cards": [
     {
      "idx": 0,
      "used_mb": 31202,
      "total_mb": 81920,
-     "util": 5,
+     "util": 27,
      "mine": true,
      "procs": [
       "dppo: run.py --config-name=ft_ppo_diffusion_mlp_armC_",
@@ -25,7 +25,7 @@
      "idx": 1,
      "used_mb": 26604,
      "total_mb": 81920,
-     "util": 31,
+     "util": 52,
      "mine": true,
      "procs": [
       "safeot: fdpi_safeot_dual.py --env SafetyPointGoal2-v0 --seed 5",
@@ -39,7 +39,7 @@
      "idx": 2,
      "used_mb": 34159,
      "total_mb": 81920,
-     "util": 22,
+     "util": 15,
      "mine": false,
      "procs": [
       "safeduo: python --seed 46 --env-yaml",
@@ -50,7 +50,7 @@
      "idx": 3,
      "used_mb": 31212,
      "total_mb": 81920,
-     "util": 14,
+     "util": 62,
      "mine": true,
      "procs": [
       "dppo: run.py --config-name=ft_ppo_diffusion_mlp",
@@ -63,7 +63,7 @@
      "idx": 4,
      "used_mb": 60988,
      "total_mb": 81920,
-     "util": 79,
+     "util": 88,
      "mine": false,
      "procs": [
       "other: VLLM::Worker_TP1"
@@ -73,7 +73,7 @@
      "idx": 5,
      "used_mb": 66360,
      "total_mb": 81920,
-     "util": 65,
+     "util": 92,
      "mine": true,
      "procs": [
       "safeot: fdpi_safeot_dual.py --env SafetyPointGoal2-v0 --seed 5",
@@ -86,7 +86,7 @@
      "idx": 6,
      "used_mb": 61545,
      "total_mb": 81920,
-     "util": 58,
+     "util": 82,
      "mine": false,
      "procs": [
       "other: VLLM::Worker_TP0",
@@ -97,7 +97,7 @@
      "idx": 7,
      "used_mb": 66952,
      "total_mb": 81920,
-     "util": 66,
+     "util": 85,
      "mine": true,
      "procs": [
       "safeot: fdpi_safeot_dual.py --env SafetyPointGoal2-v0 --seed 1 --env",
@@ -111,14 +111,14 @@
   },
   {
    "host": "di-20260831162150-5ll6n",
-   "load": "37.61",
+   "load": "9.88",
    "ncpu": 26,
    "cards": [
     {
      "idx": 0,
      "used_mb": 41573,
      "total_mb": 81920,
-     "util": 43,
+     "util": 55,
      "mine": false,
      "procs": [
       "other: ?"
@@ -126,9 +126,9 @@
     },
     {
      "idx": 1,
-     "used_mb": 38035,
+     "used_mb": 38025,
      "total_mb": 81920,
-     "util": 50,
+     "util": 52,
      "mine": false,
      "procs": [
       "other: ?"
@@ -137,7 +137,7 @@
    ],
    "name": "volc-a100",
    "desc": "2x A100-80G, 128 核, 3PB vepfs; SafeRL 第二算力(DP/ACT 训练共用 GPU); 环境部署中",
-   "snap_time": "2026-09-08T07:51:58"
+   "snap_time": "2026-09-08T08:02:33"
   },
   {
    "host": "dsw-1008180-7cb5796fcd-xt4lh",
@@ -275,7 +275,7 @@
    ],
    "name": "aliyun-ppu",
    "desc": "16x PPU-ZW810E 96G, 184 核; VLA(Safety-CHORES)评测; 共享(act_train 等他人任务)",
-   "snap_time": "2026-09-08T07:51:47"
+   "snap_time": "2026-09-08T08:02:28"
   }
  ],
  "runs": [
@@ -3239,7 +3239,7 @@
    "mtime": 1788821644.082665,
    "scan_n": 3,
    "scan_last": "ck300k 3.7/0",
-   "confirm_n": 0,
+   "confirm_n": 1,
    "confirm_clean": 0,
    "server": "volc"
   },
@@ -3397,8 +3397,8 @@
    "ret": null,
    "soft": null,
    "mtime": 1788822678.370541,
-   "scan_n": 2,
-   "scan_last": "ck200k 1.4/1",
+   "scan_n": 4,
+   "scan_last": "ck400k 6.7/1",
    "confirm_n": 0,
    "confirm_clean": 0,
    "server": "volc"
@@ -4385,9 +4385,9 @@
   }
  ],
  "lanes": [
-  "volc: d2v2_lag_cp2_s2/confirm_300000_100ep.json",
   "volc: d2v2_lag_cp2_s3/confirm_300000_100ep.json",
-  "volc: d2v2_pen5_cp2_s1/eval_all_ckpts_30ep.json"
+  "volc: d2v2_pen5_cp2_s1/confirm_300000_100ep.json",
+  "volc: d2v2_pen5_cp2_s2/eval_all_ckpts_30ep.json"
  ],
  "parallel": {
   "workspace": "/home/dataset-local/liyufeng/SafeTransport/results/safeot_dual_fdpi",
@@ -4940,10 +4940,10 @@
    },
    {
     "name": "CG2_fdpi_lp_prox20_r2_s5",
-    "latest_step": 300000,
+    "latest_step": 400000,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788819389.1482875
+    "mtime": 1788825081.324777
    },
    {
     "name": "CG2_fdpi_lp_r2_s1",
@@ -5881,7 +5881,7 @@
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788824972.0012176
+    "mtime": 1788825710.5823312
    },
    {
     "name": "terminal_event_20260905",
