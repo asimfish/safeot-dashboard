@@ -95,15 +95,23 @@ if rows:
     pool = {}
     for r in rows.values():
         if r["mode"] != "final" or int(r["ver_eps"]) == 0: continue
-        k = (r["task"], r["method"], r["margin"]); p = pool.setdefault(k, {"n": 0, "eps": 0, "hv": 0, "ret": [], "soft": []})
+        k = (r["task"], r["method"], r["margin"]); p = pool.setdefault(k, {"n": 0, "eps": 0, "hv": 0, "ret": [], "soft": [], "jc": [], "csr": []})
         p["n"] += 1; p["eps"] += int(r["ver_eps"]); p["hv"] += int(r["ver_hv"]); p["ret"].append(float(r["ver_ret"])); p["soft"].append(float(r["ver_soft"]))
-    out = [{"task": t, "method": m, "knob": mg, "n": p["n"], "eps": p["eps"], "rate": 100.0 * p["hv"] / p["eps"], "ret": sum(p["ret"]) / p["n"], "soft": sum(p["soft"]) / p["n"]} for (t, m, mg), p in pool.items()]
+        p["jc"].append(float(r.get("jc") or 0.0)); p["csr"].append(float(r.get("csr25") or 0.0))
+    out = [{"task": t, "method": m, "knob": mg, "n": p["n"], "eps": p["eps"], "rate": 100.0 * p["hv"] / p["eps"], "ret": sum(p["ret"]) / p["n"], "soft": sum(p["soft"]) / p["n"],
+            "jc": sum(p["jc"]) / p["n"], "csr": sum(p["csr"]) / p["n"]} for (t, m, mg), p in pool.items()]
     out.sort(key=lambda x: (x["task"], -x["ret"]))
     import time; json.dump({"updated": time.strftime("%Y-%m-%dT%H:%M:%S"), "rows": out}, open("frontier_pooled.json", "w"), ensure_ascii=False, indent=1)
 PY2
   python3 "$TOOLS/build_matrix.py" "$DATA" >/dev/null 2>&1 || echo "$(ts) build_matrix failed" >> "$LOG"
 fi
-[ -f "$SRC/fig_frontier_paper.png" ] && cp "$SRC/fig_frontier_paper.png" .
+# per-suite frontier figures + LaTeX tables straight from the merged CSV (paper/l2/l1/circle/velocity)
+if [ -s frontier_arms.csv ] && [ -x "$TOOLS/.venv-plot/bin/python" ]; then
+  mkdir -p figs
+  "$TOOLS/.venv-plot/bin/python" "$TOOLS/make_paper_fig.py" frontier_arms.csv --suite all --outdir figs >/dev/null 2>&1 \
+    && cp figs/fig_frontier_paper.png fig_frontier_paper.png && echo "$(ts) figures ok" >> "$LOG" \
+    || echo "$(ts) make_paper_fig failed" >> "$LOG"
+fi
 python3 -c "import json;[json.load(open(f)) for f in ('status.json','runs.json','matrix.json','plan.json')]" 2>/dev/null || { echo "$(ts) invalid json, abort" >> "$LOG"; exit 1; }
 git add -A >/dev/null 2>&1
 if git diff --cached --quiet; then echo "$(ts) no change" >> "$LOG"; exit 0; fi
