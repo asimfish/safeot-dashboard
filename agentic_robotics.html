@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agentic Robotics 进度 · GPT-6 Astra 直控机器人</title>
+<style>
+  :root { color-scheme: light; --blue:#2563eb; --green:#059669; --amber:#d97706; --red:#dc2626; --muted:#64748b; --line:#d7dbe0; --purple:#7c3aed; }
+  * { box-sizing: border-box; }
+  body { margin:0; color:#1a1a2e; background:#fafbfc; font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif; line-height:1.5; }
+  .layout { display:flex; max-width:1760px; margin:0 auto; }
+  nav.sidebar { position:sticky; top:0; align-self:flex-start; width:215px; min-height:100vh; padding:16px 10px; border-right:1px solid var(--line); background:#f8fafc; font-size:12.5px; }
+  nav.sidebar a { display:block; padding:4px 8px; color:#334155; text-decoration:none; border-radius:4px; }
+  nav.sidebar a:hover { background:#e2e8f0; }
+  nav.sidebar .nav-title { font-weight:700; margin:8px 0 4px; color:#1e293b; }
+  main.content { flex:1; padding:22px 18px 40px; max-width:1540px; }
+  h1 { font-size:23px; border-bottom:3px solid var(--purple); padding-bottom:8px; margin-bottom:6px; }
+  h2 { margin-top:28px; padding:7px 10px; border-left:4px solid var(--purple); background:#f5f3ff; font-size:17px; }
+  h3 { margin:16px 0 6px; font-size:14px; color:#334155; }
+  .meta,.small { color:var(--muted); font-size:12px; }
+  .cards { display:grid; grid-template-columns:repeat(5,1fr); gap:10px; margin:12px 0; }
+  @media (max-width:1100px) { .cards { grid-template-columns:repeat(2,1fr); } }
+  .card { padding:10px 12px; border:1px solid var(--line); border-radius:8px; background:#fff; }
+  .card .t { font-weight:700; font-size:13px; color:#1e293b; }
+  .card .pct { font-size:21px; font-weight:700; margin:2px 0; }
+  .pill { display:inline-block; padding:1px 7px; border-radius:10px; font-size:11px; font-weight:600; color:#fff; white-space:nowrap; }
+  .pill.done { background:var(--green); } .pill.run { background:var(--blue); } .pill.wait,.pill.partial { background:var(--amber); } .pill.negative { background:var(--red); } .pill.planned { background:var(--muted); } .pill.agent { background:var(--purple); }
+  .table-wrap { overflow-x:auto; border:1px solid var(--line); background:#fff; margin-bottom:8px; border-radius:6px; }
+  table { width:100%; border-collapse:collapse; font-size:12.3px; }
+  th { padding:5px 7px; color:#fff; background:#1e293b; text-align:left; white-space:nowrap; position:sticky; top:0; }
+  td { padding:4px 7px; border-top:1px solid #eef0f3; vertical-align:top; }
+  tr:hover td { background:#f8fafc; }
+  td.num { text-align:right; font-variant-numeric:tabular-nums; white-space:nowrap; }
+  .ok { color:var(--green); font-weight:600; } .bad { color:var(--red); font-weight:600; } .warn { color:var(--amber); font-weight:600; }
+  ul.q { margin:6px 0; padding-left:20px; font-size:13px; } ul.q li { margin:3px 0; }
+  code { background:#f1f5f9; padding:1px 4px; border-radius:3px; font-size:12px; }
+  details.grp { border:1px solid var(--line); border-radius:6px; background:#fff; margin:8px 0; }
+  details.grp > summary { cursor:pointer; padding:8px 12px; font-weight:700; color:#1e293b; list-style:none; display:flex; gap:12px; align-items:center; flex-wrap:wrap; }
+  details.grp > summary::before { content:"▸"; color:var(--muted); font-size:12px; }
+  details.grp[open] > summary::before { content:"▾"; }
+  details.grp > summary .sum { font-weight:400; color:var(--muted); font-size:12px; }
+  details.grp > .body { padding:0 10px 10px; }
+  details.exp { border:2px solid #ddd6fe; margin:12px 0; }
+  details.exp > summary { background:#f5f3ff; font-size:15px; }
+  .figs { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin:10px 0; }
+  @media (max-width:1100px) { .figs { grid-template-columns:repeat(2,1fr); } }
+  .figs figure, .vids figure { margin:0; background:#fff; border:1px solid var(--line); border-radius:6px; padding:6px; }
+  .figs img { width:100%; display:block; border-radius:4px; }
+  .vids { display:grid; grid-template-columns:repeat(2,1fr); gap:10px; margin:10px 0; }
+  .vids video { width:100%; display:block; border-radius:4px; background:#000; }
+  figcaption { font-size:12px; color:var(--muted); margin-top:6px; }
+  .flow { font-family:ui-monospace,Menlo,monospace; font-size:12px; background:#fff; border:1px solid var(--line); border-radius:6px; padding:10px 12px; white-space:pre; overflow-x:auto; }
+  .callout { border-left:4px solid var(--red); background:#fef2f2; padding:8px 12px; margin:10px 0; font-size:13px; }
+  .callout.info { border-color:var(--blue); background:#eff6ff; }
+</style>
+</head>
+<body>
+<div class="layout">
+<nav class="sidebar">
+  <div class="nav-title">大纲</div>
+  <a href="#sec0">0 概览</a>
+  <a href="#sec1">1 路线与对照</a>
+  <a href="#sec2">2 E1 PsiBot 抓 100ml 烧杯</a>
+  <a href="#sec2e">&nbsp;&nbsp;证据图与视频</a>
+  <a href="#sec2f">&nbsp;&nbsp;装置缺陷修复</a>
+  <a href="#sec2v">&nbsp;&nbsp;判决与下一步</a>
+  <a href="#sec3">3 E0 SafeDuo 四臂 pilot</a>
+  <a href="#sec4">4 时间线</a>
+  <a href="#sec5">5 证据索引</a>
+  <a href="#sec6">6 维护契约</a>
+  <div class="nav-title" style="margin-top:14px">返回</div>
+  <a href="index.html">← SafeOT 进度看板</a>
+  <a href="sotd.html">SafeOT-Dual 主线</a>
+  <div class="nav-title" style="margin-top:14px">相关看板</div>
+  <a href="https://asimfish.github.io/psibot-dashboard/" target="_blank">PsiBot 数据集面板</a>
+  <a href="https://asimfish.github.io/psibot-dashboard/data_gallery.html" target="_blank">数据检查子面板</a>
+</nav>
+<main class="content">
+  <h1>Agentic Robotics 进度 <span class="pill agent">GPT-6 Astra 直控机器人</span></h1>
+  <div class="meta">RoboCurve 路线（大模型直接看相机 + 本体状态，输出末端 waypoint 工具调用，IK + 控制器执行）在我们自己的仿真任务上的验证记录。内容更新 2026-09-08 16:20 · 数字全部回溯到各试验目录的 <code>REPORT_SUMMARY.json</code> / <code>evaluation.json</code> · 静态页，由负责该线的 agent 在里程碑手工更新。</div>
+
+  <h2 id="sec0">0 概览</h2>
+  <div class="cards">
+    <div class="card"><div class="t">试验</div><div class="pct">2</div><span class="pill done">E1 完成</span> <span class="small">PsiBot 单臂灵巧手（本线）+ SafeDuo 四臂 pilot（并行会话，只读镜像）</span></div>
+    <div class="card"><div class="t">E1 有效成功率</div><div class="pct bad">0 / 5</div><span class="pill negative">负结果</span> <span class="small">标定正确条件下 5 个 seed 均未达"抬升 ≥5cm 并稳定保持 1s"</span></div>
+    <div class="card"><div class="t">E1 单次推理等待</div><div class="pct">153 s</div><span class="small">gpt-6-astra · xhigh · 3 张 640×480 RGB；最长单次 440 s；推理期间物理暂停</span></div>
+    <div class="card"><div class="t">E1 token / 集</div><div class="pct">3.9 万</div><span class="small">平均 5.2 次决策/集；全程 52 次请求共 36.6 万 token（另 2 次无 usage）</span></div>
+    <div class="card"><div class="t">装置缺陷（Codex 自查修复）</div><div class="pct">4</div><span class="small">时钟多子步 / RGB 过期 / 接触回调无数据 / 相机焦距错误；受影响样本全部封存不计</span></div>
+  </div>
+  <div class="callout"><b>当前判决（2026-09-08）：</b>识别 ✓、接近 ✓（IK 跟踪 1–2 mm）、<b>抓取构型建立 ✗</b>。手到杯沿附近后建立不起对向夹持：两集把杯子碰倒后模型仍自报完成，一集手掌压进杯体触发穿透硬中止。<b>不建议现在把该直控流程推广到 FR3 / UR5e 正式采集调整；保留已验证的 cuRobo 采集主线。</b> 更合适的用法是把 gpt-6-astra 放在采集调整的"系统 2"层（判断配方失败原因、选抓取参数、做视觉复核），而不是逐步输出腕位姿。</div>
+  <div class="callout info"><b>工程代理本身的表现是本次最强的部分：</b>Codex CLI（gpt-6-astra，xhigh）在 3 小时 43 分钟内从零搭出 PsiBot 直控装置（相机预检、Jacobian DLS 伺服、strict function schema、GPU 接触监测、独立评估器、9 项单测、逐请求溯源），并在正式请求前后自己抓出 4 个会让结果失真的装置缺陷。这支持"用 Codex + gpt-6-astra 做采集工程代理"，不支持"用 Astra 当抓取策略"。</div>
+
+  <h2 id="sec1">1 路线与对照</h2>
+  <div class="flow">RGB(head/chest/third) + 任务语言 + 本体状态(关节/限位/腕位姿/上轮执行误差/剩余预算)
+        │
+        ▼
+GPT-6 Astra (xhigh)  ──►  唯一函数 execute_motion：1–2 个动作，每动作 = 绝对世界坐标腕位姿 + 全部手指关节目标 + 时长
+        │                     （逐 waypoint 位移 ≤0.15 m、转角 ≤0.6 rad、手指在硬件限位内；非法整块拒绝）
+        ▼
+通用 IK 伺服(实时 Jacobian DLS + 插值 + slew 限制)  ──►  Isaac Lab 电机目标  ──►  新观察反馈
+        │
+        ▼
+独立评估器(只读物体真值，绝不回流模型)：抬升 ≥50 mm、末 1 s 速度 ≤50 mm/s、倾斜 ≤15°、无几何穿透硬中止</div>
+  <div class="table-wrap"><table>
+    <thead><tr><th></th><th>经典 VLA（π0.5 / GR00T）</th><th>RoboCurve 路线（本页试验）</th><th>我们的采集主线（cuRobo 脚本配方）</th></tr></thead>
+    <tbody>
+      <tr><td>输入</td><td>图像 + 语言 + robot state</td><td>图像 + 语言 + robot state</td><td>物体真值位姿 + 任务配方参数</td></tr>
+      <tr><td>高层理解</td><td>VLA 内部</td><td>GPT-6 Astra</td><td>人写的阶段脚本（接近/预抓/闭合/抬起）</td></tr>
+      <tr><td>动作输出</td><td>学习出的 action chunk</td><td>EEF waypoint 工具调用</td><td>cuRobo 规划到抓取位姿</td></tr>
+      <tr><td>轨迹细节 / 高频控制</td><td>learned action head</td><td>IK + 底层控制器</td><td>cuRobo 轨迹 + 底层控制器</td></tr>
+      <tr><td>需要机器人数据训练</td><td>需要</td><td>不需要</td><td>不需要</td></tr>
+      <tr><td>在我们任务上的现状</td><td class="small">DP / ACT 在正式数据集上训练评测（见 PsiBot 面板）</td><td class="bad">E1 0/5（抓取构型不成立）</td><td class="ok">grasp/glass_beaker_100ml 100/100 通过全部数据门</td></tr>
+    </tbody>
+  </table></div>
+  <div class="small">参考：罗清雨《RoboCurve：GPT-6 Astra 直接控制机器人》（2026-09-07，知乎）。文中 block→bowl 19/20、精插 10%；本页试验是流程适配，不是原 benchmark 复现，不与其数字直接比较。</div>
+
+  <h2 id="sec2">2 E1 · PsiBot 单臂灵巧手抓取 100 ml 玻璃烧杯（2026-09-08 04:37–08:22）</h2>
+  <div class="meta">执行者：Codex CLI <code>gpt-6-astra</code> xhigh，作为工程代理直接运行在 bjxy（双 RTX 5090 共享机，tmux <code>codex_astra_psibot</code>）；策略模型同为 <code>gpt-6-astra</code> xhigh，经既有 Codex 身份 + 回环代理调用。工作目录 <code>bjxy:/home/liyufeng/astra_psibot_grasp/</code>（本地盘），NAS 上的 chembench 与 SafeDuo 源码只读；Isaac 进程经 <code>bwrap</code> 沙箱只能写自己目录。任务文本：<i>Grasp and stably lift the 100 ml glass beaker.</i></div>
+
+  <details class="grp" open><summary>2.1 装置与冻结协议 <span class="sum">只读复用 PSI_DC_Grasp_CFG 场景；不实例化 MP task / cuRobo / 抓取点 / 参考轨迹 / 技能库 / 学习 action head</span></summary><div class="body">
+    <ul class="q">
+      <li><b>机器人</b>：PsiBot 右臂 7 轴 + 右手全部 11 关节；其余关节保持初始目标。原生驱动/碰撞/物体参数不改；按正式启动器关闭粒子流体；烧杯 XY 随机化 ±3 cm。</li>
+      <li><b>观察</b>：head / chest / third 三路 640×480 RGB；K/T 从渲染器实际投影矩阵导出（head fx=fy=615.873 px，chest/third 555.556 px），重投影核验像素差 &lt;1e-6。</li>
+      <li><b>模型输入</b>：任务、三路 RGB 与标定、关节位置/速度/限位、腕位姿、上轮执行误差、剩余请求数、模型自己的简短记忆。<b>不给</b>物体真值、抓取点、参考轨迹、技能原语。</li>
+      <li><b>伺服</b>：实时 Jacobian DLS（阻尼 0.02、旋转权重 0.2、增益 4），位置线性 + 四元数最短路插值，最后 30% 时间跟踪终点；臂目标 slew ≤0.72 rad/s、手指 ≤1.2 rad/s；每 1/120 s 一个物理步、渲染独立。</li>
+      <li><b>安全</b>：GPU <code>get_contact_data</code> 监测 53 个传感刚体 × 56 个碰撞过滤路径，分离距离 &lt;−2 mm 锁存硬中止（受控 20 mm 重叠探针首 tick 报 −19.99991 mm）。</li>
+      <li><b>预算</b>：全程 ≤60 次策略请求；有效批次每集 ≤6 次（简报允许 12，前置适配消耗 26 次后按剩余预算收紧）；每请求 1–2 动作、每动作 0.25–2 s；总墙钟 ≤4 h，新请求硬截止 08:07:32。</li>
+    </ul>
+  </div></details>
+
+  <details class="grp" open><summary>2.2 前置门（0 次模型调用） <span class="sum">Phase 0 相机预检 · Phase 1 伺服自检 · 均通过</span></summary><div class="body">
+    <div class="table-wrap"><table>
+      <thead><tr><th>门</th><th>指标</th><th>结果</th></tr></thead>
+      <tbody>
+        <tr><td>Phase 0 相机</td><td>初始烧杯在 3/3 视角可见且未被机器人遮挡；PNG / 关节名 / 状态 / 限位 / 腕位姿 / K/T 全部保存</td><td class="ok">通过</td></tr>
+        <tr><td>Phase 1 右腕 +1 cm</td><td>位置误差 2.329 mm · 朝向误差 0.005793 rad（门限 4 mm / 0.035 rad）</td><td class="ok">通过</td></tr>
+        <tr><td>Phase 1 再 +5 cm 并绕世界 Z 转 0.1 rad</td><td>位置误差 2.497 mm · 朝向误差 0.007769 rad</td><td class="ok">通过</td></tr>
+        <tr><td>Phase 1 手指合拢 / 张开探针</td><td>11/11 关节移动，最大 0.9523 / 0.7686 rad；腕位姿保持</td><td class="ok">通过</td></tr>
+        <tr><td>时钟 / 渲染一致性</td><td>960 个物理 tick = 8.000000417 s；3 路视频各 121 帧 15 fps，逐帧核对 53 个 link + 杯体的渲染/物理位姿</td><td class="ok">通过</td></tr>
+      </tbody>
+    </table></div>
+    <div class="small">增益 1 的初始自检误差 9.56 mm 未过门，改增益 4 后才进入模型试验；原生电机增益未修改。局部自检不保证抓取区域所有位姿可达或能在 2 s 内跟踪到位。</div>
+  </div></details>
+
+  <details class="grp" open><summary>2.3 有效批次结果 <span class="sum">seed 8110–8114 · 每集 ≤6 次请求 · 0/5 成功</span></summary><div class="body">
+    <div class="table-wrap"><table>
+      <thead><tr><th>seed</th><th>决策数</th><th>停止原因</th><th>成功</th><th>最大质心抬升</th><th>末态倾斜</th><th>推理总等待</th><th>token（输入 + 输出）</th></tr></thead>
+      <tbody>
+        <tr><td>8110</td><td class="num">6</td><td>模型置 <code>task_done</code>，独立判分未过（杯体侧倒）</td><td class="bad">否</td><td class="num">5.4 mm</td><td class="num">88.8°</td><td class="num">904 s</td><td class="num">23,846 + 22,565 = 46,411</td></tr>
+        <tr><td>8111</td><td class="num">5</td><td>手掌基座与杯体穿透 2.34 mm，硬中止</td><td class="bad">否</td><td class="num">0.0 mm</td><td class="num">5.0°</td><td class="num">579 s</td><td class="num">19,895 + 14,550 = 34,445</td></tr>
+        <tr><td>8112</td><td class="num">6</td><td>末次请求分块传输中断（基础设施，非模型）</td><td class="warn">否 · 通信影响</td><td class="num">3.1 mm</td><td class="num">22.8°</td><td class="num">760 s</td><td class="num">19,862 + 16,304 = 36,166（另 1 次未知）</td></tr>
+        <tr><td>8113</td><td class="num">6</td><td>杯体侧倒后恢复失败，置 <code>task_done</code> 判分未过</td><td class="bad">否</td><td class="num">11.4 mm</td><td class="num">88.8°</td><td class="num">1,383 s</td><td class="num">23,658 + 32,093 = 55,751</td></tr>
+        <tr><td>8114</td><td class="num">3</td><td>3.5 h 全局截止，只用了 3/6 次</td><td class="warn">未达标 · 时间截断</td><td class="num">0.0 mm</td><td class="num">0.5°</td><td class="num">343 s</td><td class="num">11,781 + 8,521 = 20,302</td></tr>
+      </tbody>
+    </table></div>
+    <div class="small">平均 5.2 次决策/集 · 平均单次请求等待 152.68 s（客户端端到端，非纯服务端计算） · 平均 38,615 token/集。成功判据：杯质心相对初始抬升 ≥50 mm，且末尾完整 1 s 窗口内速度 ≤50 mm/s、倾斜 ≤15°，无几何硬中止；模型自报完成不计成功。8112 受通信中断、8114 受时间截断影响，这组不能当作"五集足额、无基础设施影响"的纯模型对照。</div>
+    <h3>失败阶段与可核验依据</h3>
+    <div class="table-wrap"><table>
+      <thead><tr><th>seed</th><th>主要阶段</th><th>依据</th></tr></thead>
+      <tbody>
+        <tr><td>8110</td><td>接近 / 腕姿调整与抓取建立失败</td><td class="small">杯体识别与位置描述与图像一致；多轮请求花在推断"手指相对腕部坐标轴"上。第 3 请求因 3.05 rad 比浮点上限高 4.77e-8 rad 被整块拒绝（接口边界，非危险动作）。第 5/6 请求位置跟踪误差 51 / 108 mm；末态杯体倾斜 88.8°（侧倒），最大只升 5.44 mm。</td></tr>
+        <tr><td>8111</td><td>接近 / 抓取构型：掌部撞杯体</td><td class="small">第 5 请求第二段执行到 1.12 / 2 s 时 <code>hand2_link_base</code> 与 <code>Bottle/base</code> 分离距离 −2.34 mm，立即硬中止；杯体尚未抬起。</td></tr>
+        <tr><td>8112</td><td>接近 / 腕姿跟踪不足 + 通信中断</td><td class="small">第 4 请求目标执行位置误差 122 / 43 mm、姿态误差 0.583 / 0.228 rad；第 6 请求 81 s 后 ChunkedEncodingError，无最终函数参数。</td></tr>
+        <tr><td>8113</td><td>抓取未建立，杯体侧倒后恢复失败</td><td class="small">首请求把 <code>hand2_joint_link_1_3</code> 目标写成 1.56 rad（上限 0.04），整块拒绝；随后杯体侧倒，模型识别侧倒并调整，但位置误差 29.7 mm / 朝向 0.292 rad；最大抬升 11.4 mm；最长单请求 440 s。</td></tr>
+        <tr><td>8114</td><td>接近阶段被全局时间截断</td><td class="small">仅 3/6 请求，手臂仍在接近，最后一段位置误差 19.6 mm。</td></tr>
+      </tbody>
+    </table></div>
+  </div></details>
+
+  <h3 id="sec2e">2.4 证据图与视频（有效批次原始观察，未经挑选）</h3>
+  <div class="figs">
+    <figure><img src="agentic/e1_s8110_d00_chest.png" alt="seed 8110 决策 0 胸部相机"><figcaption><b>seed 8110 · 决策 0 · chest</b>：起始状态，烧杯直立，手在画面外。模型描述"烧杯中心约在世界 (−1.13, −5.09, 0.98)"，与真值 (−1.154, −5.084, 0.977) 相差约 2.5 cm。</figcaption></figure>
+    <figure><img src="agentic/e1_s8111_d04_chest.png" alt="seed 8111 决策 4 胸部相机"><figcaption><b>seed 8111 · 决策 4 · chest</b>：手掌朝向杯体横向扫入、五指张开——下一段动作中掌基座压进杯体 2.34 mm，触发穿透硬中止。</figcaption></figure>
+    <figure><img src="agentic/e1_s8110_d05_chest.png" alt="seed 8110 决策 5 胸部相机"><figcaption><b>seed 8110 · 决策 5 · chest</b>：杯子已侧倒，手指蜷成拳悬在上方。模型此时置 <code>task_done=true</code>，描述却写"稳定直立抓取与抬升尚未确认"。</figcaption></figure>
+    <figure><img src="agentic/e1_s8113_d05_chest.png" alt="seed 8113 决策 5 胸部相机"><figcaption><b>seed 8113 · 决策 5 · chest</b>：杯子侧倒，手指压在杯身上；模型自报完成，独立评估抬升 11.4 mm、倾斜 88.8°。</figcaption></figure>
+  </div>
+  <div class="vids">
+    <figure><video controls muted preload="metadata" src="agentic/e1_s8110_chest.mp4"></video><figcaption><b>seed 8110 · chest 全程</b>（15 fps，1× 仿真时间；省略了每次约 150 s 的推理等待，不是实时闭环录像）</figcaption></figure>
+    <figure><video controls muted preload="metadata" src="agentic/e1_s8110_third.mp4"></video><figcaption><b>seed 8110 · third 全程</b>：可见右臂接近、手在杯沿附近反复调整腕姿、最终把杯子碰倒。</figcaption></figure>
+  </div>
+  <div class="figs" style="grid-template-columns:repeat(2,1fr)">
+    <figure><img src="agentic/e1_s8110_d00_third.png" alt="seed 8110 决策 0 第三视角"><figcaption><b>seed 8110 · 决策 0 · third</b>：起始位姿，双臂抬起。</figcaption></figure>
+    <figure><img src="agentic/e1_s8110_d05_third.png" alt="seed 8110 决策 5 第三视角"><figcaption><b>seed 8110 · 决策 5 · third</b>：终态，右手悬在侧倒的烧杯上方。</figcaption></figure>
+  </div>
+
+  <details class="grp" open id="sec2f"><summary>2.5 装置缺陷修复记录 <span class="sum">Codex 自查 · 受影响样本全部封存，成本单列，不用于成功率</span></summary><div class="body">
+    <div class="table-wrap"><table>
+      <thead><tr><th>#</th><th>缺陷</th><th>若未发现的后果</th><th>判定依据</th><th>修复</th><th>封存样本（请求 / token）</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>带渲染的 <code>step()</code> 推进多个物理子步：标称 4 s 动作实跑 7.5 仿真秒</td><td>动作时长与轨迹记录全部失真</td><td>SDK 物理时钟与命令时长比对</td><td>每次 <code>step(render=False)</code> 只进一个 1/120 s 物理步，渲染独立</td><td>seed 8101：2 / 12,824</td></tr>
+        <tr><td>2</td><td>场景关闭了 Fabric 变换输出，渲染 RGB 是过期 USD 位姿（烧杯悬空、机器人与关节状态不一致）</td><td>喂给模型的图像是假的</td><td>渲染位姿 vs 物理位姿逐 link 比对（最大偏差 0.81 m / 2.93 rad）</td><td>开启 Fabric 变换输出；用 Fabric hierarchy 读渲染位姿；每帧一致性检查</td><td>seed 8102：4 / 24,495</td></tr>
+        <tr><td>3</td><td>原生接触回调返回 0 事件（手把杯子碰倒都不报）</td><td>穿透硬中止形同虚设</td><td>受控 20 mm 重叠探针：回调 0，GPU 接触张量 −19.99991 mm</td><td>改用 GPU <code>get_contact_data</code>，53 体 × 56 路径覆盖核验</td><td>seed 8103：6 / 38,661（+1 次未知）</td></tr>
+        <tr><td>4</td><td>传给模型的 chest / third 焦距 316.14 / 421.53 px，渲染器实际 555.56 px</td><td>模型空间估计偏差数厘米，失败无法归因</td><td>公开 K/T 与渲染投影矩阵对同一点重投影比对</td><td>K/T 直接从渲染器 CameraParams 导出，重投影差 &lt;1e-6 px</td><td>seed 8104、8105：14 / 97,243</td></tr>
+      </tbody>
+    </table></div>
+    <div class="small">封存条件下已经发生的物理失败判分仍保留（8104：9 次决策自报完成、抬升 5.2 mm；8105：接近正常、终点误差 1.6 mm），不改称成功；后续全部用未用 seed，不重放旧回答。另一次中途调整：8112 的传输错误最初被误分为"不可重试"导致整批关闭，只修正了网络分类与安全续跑，前三集结果不变，续跑 8113 / 8114，源版本分别哈希保留。</div>
+  </div></details>
+
+  <details class="grp"><summary>2.6 成本与预算 <span class="sum">52/60 次策略请求 · 36.6 万 token · 3.71 h 墙钟</span></summary><div class="body">
+    <div class="table-wrap"><table>
+      <thead><tr><th>项目</th><th>数值</th><th>说明</th></tr></thead>
+      <tbody>
+        <tr><td>策略请求</td><td class="num">52 / 60</td><td class="small">含全部前置无效尝试、拒绝、取消、传输错误；不含工程代理自身会话用量</td></tr>
+        <tr><td>已知 token</td><td class="num">196,301 输入 + 169,997 输出 = 366,298</td><td class="small">另 2 次请求无 usage，精确总量不可确定，不按 0 计</td></tr>
+        <tr><td>有效批次</td><td class="num">26 次请求 · 193,075 token</td><td class="small">5 集，平均 38,615 token/集，5.2 次决策/集</td></tr>
+        <tr><td>单次推理等待</td><td class="num">均值 152.68 s · 最长 439.99 s</td><td class="small">客户端端到端；推理期间仿真暂停</td></tr>
+        <tr><td>墙钟</td><td class="num">3.713 h（04:37:32 → 08:20:19）</td><td class="small">含环境适配、前置失败、正式请求、执行、核验与报告；最后一次请求 08:05:30 早于 08:07:32 截止</td></tr>
+        <tr><td>GPU</td><td class="num">1 张 RTX 5090（共享）</td><td class="small">启动前按最大空闲选卡且 ≥10,752 MiB，nice 10；未杀任何非本任务进程</td></tr>
+      </tbody>
+    </table></div>
+  </div></details>
+
+  <details class="grp" open id="sec2v"><summary>2.7 判决、不能证明的事、下一步</summary><div class="body">
+    <h3>本试验不能证明</h3>
+    <ul class="q">
+      <li>稳定总体成功率（仅 5 个 seed）；完整 12 请求预算下的效果（有效上限 6）；FR3 / UR5e 或其他物体的外推能力。</li>
+      <li>真实机器人上的安全与吞吐（推理时仿真暂停）；接触归属、力闭合或接触力安全（未建立归属/力证据）；全网格穿透不存在（监测器基于求解器接触几何，2 mm 容差；GPU 模式忽略 CCD）。</li>
+      <li>与 cuRobo 主线的配对吞吐/延迟优劣（未在同机同 seed 复跑基线；两者先验与执行结构不同）。</li>
+    </ul>
+    <h3>判决</h3>
+    <ul class="q">
+      <li><span class="pill negative">负结果</span> 不建议将该直控流程推广到 FR3 / UR5e 正式采集调整；<b>保留已验证的 cuRobo 采集主线</b>（该行 100/100）。</li>
+      <li><span class="pill done">正结果</span> Codex + gpt-6-astra 作为<b>采集工程代理</b>可用：自主搭装置、自查缺陷、写验证与报告，全程不越权（只写自己目录、不杀他人进程）。</li>
+    </ul>
+    <h3>下一步（按优先级）</h3>
+    <ul class="q">
+      <li>修数值接口边界（3.05 vs 3.0499999523 rad 一类的字面拒绝）与任务区域腕姿可达性 / 2 s 执行时长验收，减少把请求预算耗在接口摩擦上。</li>
+      <li>给模型明确的<b>工具坐标语义</b>（手指沿腕局部哪个轴伸展、掌心法向），验证是否减少多轮在线猜测——这是本次多集反复出现的浪费点。</li>
+      <li>用 FR3 低自由度夹爪 + 同一物体做预先固定预算的小规模对照，记录全部失败；只有达到既有数据门后才考虑扩大采集。</li>
+      <li>更实际的落地：把 gpt-6-astra 放到采集调整的系统 2 层（配方失败归因、抓取参数选择、视觉复核），底层继续用 cuRobo / 学习策略。</li>
+    </ul>
+  </div></details>
+
+  <h2 id="sec3">3 E0 · SafeDuo 四臂 pilot（并行会话，只读镜像）</h2>
+  <div class="meta">同一路线在 SafeDuo 项目（四臂 + 四只 12 关节灵巧手，三台固定互补相机 960×640）上的更早适配，由另一会话于 2026-09-08 02:22 起在 bjxy 执行，代码 <code>bjxy:/home/liyufeng/safeduo/spike/astra_vla_pilot/</code>。E1 的接口与安全思路直接沿用于此。数字来自其各目录 <code>evaluation.json</code>，<b>每任务仅 1 集，不构成成功率</b>。</div>
+  <div class="table-wrap"><table>
+    <thead><tr><th>任务</th><th>最新有效尝试</th><th>停止原因</th><th>主要物体结果</th><th>判定</th></tr></thead>
+    <tbody>
+      <tr><td>rod_pick（双臂各取一根杆）</td><td>robocurve_v05</td><td>几何安全中止</td><td class="small">rod_l / rod_r 抬升 0，目标位置误差 0.16 m（未移动）</td><td class="bad">未完成</td></tr>
+      <tr><td>rack_colift（双手共抬试管架）</td><td>robocurve_v05</td><td>决策预算耗尽（12 次）</td><td class="small">架子抬升 6.4 cm，但目标位置误差 5.7 cm（判据 ≤3 cm）；末态直立</td><td class="warn">几何未达标</td></tr>
+      <tr><td>beaker_relay（烧杯交接）</td><td>robocurve_v07</td><td>决策预算耗尽</td><td class="small">烧杯抬升 0.4 cm</td><td class="bad">未完成</td></tr>
+    </tbody>
+  </table></div>
+  <div class="small">v01–v04 与 v05/v06 部分尝试为装置/网络问题（代理、整数四元数 dtype、slew 限速实现、传输中断），已在其 <code>PROTOCOL.md</code> 中单列，不计模型失败。与 E1 的共同现象：接近阶段跟踪可用，需要精细对向接触的阶段（抓、共抬对齐、交接）不成立。</div>
+
+  <h2 id="sec4">4 时间线（2026-09-08，北京时间）</h2>
+  <div class="table-wrap"><table>
+    <thead><tr><th>时间</th><th>事件</th></tr></thead>
+    <tbody>
+      <tr><td>02:22</td><td>E0：SafeDuo 会话开始搭 astra_vla_pilot（相机预检 → 伺服自检 → 三任务各一集）。</td></tr>
+      <tr><td>02:20 → 04:30</td><td>owner 指令（先进入数据集总负责会话队列，后由本会话接手）：用本地 Codex CLI（gpt-6-astra，xhigh）负责采集调整，先测 PsiBot grasp/glass_beaker_100ml 看效果。</td></tr>
+      <tr><td>04:37</td><td>E1 启动：Codex 在 bjxy tmux <code>codex_astra_psibot</code> 开工，GPU 准入 ≥10.5 GB、bwrap 沙箱。</td></tr>
+      <tr><td>04:47</td><td>Phase 0 通过（三相机可见，7 臂关节 + 11 手关节导出）。</td></tr>
+      <tr><td>05:00</td><td>Phase 1 通过（增益 1→4 后腕误差 2.3 mm）；05:01 第一次 Astra 请求。</td></tr>
+      <tr><td>05:10 / 05:21</td><td>发现并修复缺陷 1（时钟多子步）、缺陷 2（RGB 过期）；seed 8101 / 8102 封存。</td></tr>
+      <tr><td>05:36</td><td>最终 Phase 0/1 通过（逐帧渲染/物理一致性）；有效批次开始。</td></tr>
+      <tr><td>06:07</td><td>seed 8103 杯子被碰倒但接触回调 0 事件 → 缺陷 3；改用 GPU 接触张量并做受控碰撞探针。</td></tr>
+      <tr><td>06:41–06:50</td><td>seed 8104 失败（自报完成、抬 5.2 mm）；投影核验发现缺陷 4（焦距错误）→ 批次 campaign05_calibrated。</td></tr>
+      <tr><td>07:08–08:05</td><td>seed 8110–8114 正式运行；8112 末次传输中断后续跑 8113/8114；08:05:30 最后一次请求。</td></tr>
+      <tr><td>08:20 / 08:22</td><td>REPORT.md、REPORT_SUMMARY.json、VERIFICATION.md 写出；26 次请求审计、15 段视频、9 项单测通过；Codex 退出 rc=0，无 Isaac 残留。</td></tr>
+      <tr><td>16:20</td><td>本页上线（safeot-dashboard <code>agentic_robotics.html</code>）；结论同步到 safelab_dataset_ops <code>RALPH_LOG.md</code>。</td></tr>
+    </tbody>
+  </table></div>
+
+  <h2 id="sec5">5 证据索引</h2>
+  <ul class="q">
+    <li><b>E1 主报告</b>：<code>bjxy:/home/liyufeng/astra_psibot_grasp/REPORT.md</code>（中文，含每集依据）、<code>REPORT_SUMMARY.json</code>（结构化）、<code>VERIFICATION.md</code>、<code>REQUEST_LEDGER.json</code>（全程 52 次请求）、<code>PROGRESS.md</code>（时间线）、<code>EXPERIMENT_PLAN.md</code>（协议修订）。Git 最终提交 <code>cdc98fe</code>。</li>
+    <li><b>E1 有效批次原始产物</b>：<code>artifacts/phase2_campaign05_calibrated/</code>（8110–8112）、<code>artifacts/phase2_campaign05_transport_resume/</code>（8113–8114）；每次决策含三张 PNG、公开状态、prompt、schema、原始函数参数、usage/latency、执行反馈；每集含三路 15 fps 视频、逐 tick 真值轨迹、<code>evaluation.json</code>。</li>
+    <li><b>E1 前置门</b>：<code>PHASE0_GATE.json</code>、<code>PHASE1_GATE.json</code>、<code>CAMERA_CALIBRATION_GATE.json</code>、<code>CONTACT_MONITOR_GATE.json</code>；封存尝试在 <code>artifacts/phase2_campaign01…04*/</code>。</li>
+    <li><b>离线复核</b>（无 GPU / 无模型）：<code>python audit.py artifacts/phase2_campaign05_calibrated --report artifacts/final_audit.json</code>；单测 <code>python -m unittest test_contract -v</code>。</li>
+    <li><b>E0</b>：<code>bjxy:/home/liyufeng/safeduo/spike/astra_vla_pilot/{README,PROTOCOL,PREFLIGHT}.md</code>，产物 <code>safeduo/artifacts/astra_vla_pilot/robocurve_v0*/</code>。</li>
+    <li><b>本页素材</b>：<code>agentic/</code>（seed 8110 chest/third 视频与首末帧、8111 决策 4、8113 决策 5 原图，未裁剪）。</li>
+  </ul>
+
+  <h2 id="sec6">6 维护契约</h2>
+  <ul class="q">
+    <li>本页为静态页，不走 <code>data</code> 分支自动更新；每个试验一个 <code>&lt;h2&gt;</code> 区块（E0/E1/…），新增试验按 2.1–2.7 的结构追加：协议 → 前置门 → 结果表 → 失败依据 → 证据 → 装置修复 → 成本 → 判决。</li>
+    <li>所有数字必须能回溯到试验目录里的 <code>REPORT_SUMMARY.json</code> / <code>evaluation.json</code> / 请求账本；封存的装置无效样本单列成本，不进成功率；模型自报完成不计成功。</li>
+    <li>视频/图片直接随仓库托管在 <code>agentic/</code>，单个试验控制在 10 MB 内；更多原图留在 bjxy 原目录。</li>
+    <li>与其他看板的关系：数据集采集进度看 <a href="https://asimfish.github.io/psibot-dashboard/" target="_blank">PsiBot 面板</a>；本页只记录"大模型作为策略 / 作为工程代理"的验证结论与证据。</li>
+  </ul>
+</main>
+</div>
+</body>
+</html>
