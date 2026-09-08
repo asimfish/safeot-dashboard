@@ -1,18 +1,18 @@
 {
- "updated": "2026-09-08T10:20:45",
+ "updated": "2026-09-08T10:32:15",
  "servers": [
   {
    "name": "tianyiyun-30109",
    "desc": "8x A100-80G, 128 核; SafeRL 训练/评估主力(共享账号,多项目并行)",
    "host": "ide-650ef93f23324f04881bde87cf05d6c1-0f2fcc",
-   "load": "81.32",
+   "load": "182.84",
    "ncpu": 128,
    "cards": [
     {
      "idx": 0,
      "used_mb": 31202,
      "total_mb": 81920,
-     "util": 18,
+     "util": 7,
      "mine": true,
      "procs": [
       "dppo: run.py --config-name=ft_ppo_diffusion_mlp_armC_",
@@ -25,7 +25,7 @@
      "idx": 1,
      "used_mb": 26604,
      "total_mb": 81920,
-     "util": 60,
+     "util": 52,
      "mine": true,
      "procs": [
       "safeot: fdpi_safeot_dual.py --env SafetyPointGoal2-v0 --seed 5",
@@ -39,7 +39,7 @@
      "idx": 2,
      "used_mb": 34159,
      "total_mb": 81920,
-     "util": 45,
+     "util": 18,
      "mine": false,
      "procs": [
       "safeduo: python --seed 46 --env-yaml",
@@ -50,7 +50,7 @@
      "idx": 3,
      "used_mb": 31212,
      "total_mb": 81920,
-     "util": 13,
+     "util": 35,
      "mine": true,
      "procs": [
       "dppo: run.py --config-name=ft_ppo_diffusion_mlp",
@@ -63,7 +63,7 @@
      "idx": 4,
      "used_mb": 60988,
      "total_mb": 81920,
-     "util": 66,
+     "util": 100,
      "mine": false,
      "procs": [
       "other: VLLM::Worker_TP1"
@@ -71,9 +71,9 @@
     },
     {
      "idx": 5,
-     "used_mb": 50238,
+     "used_mb": 66360,
      "total_mb": 81920,
-     "util": 100,
+     "util": 78,
      "mine": true,
      "procs": [
       "safeot: fdpi_safeot_dual.py --env SafetyPointGoal2-v0 --seed 5",
@@ -86,7 +86,7 @@
      "idx": 6,
      "used_mb": 60992,
      "total_mb": 81920,
-     "util": 69,
+     "util": 52,
      "mine": false,
      "procs": [
       "other: VLLM::Worker_TP0"
@@ -94,30 +94,30 @@
     },
     {
      "idx": 7,
-     "used_mb": 66952,
+     "used_mb": 62596,
      "total_mb": 81920,
-     "util": 14,
+     "util": 79,
      "mine": true,
      "procs": [
       "safeot: fdpi_safeot_dual.py --env SafetyPointGoal2-v0 --seed 1 --env",
       "safeot: fdpi_safeot_dual.py --env SafetyCarGoal2-v0 --seed 5",
       "safeot: fdpi_safeot_dual.py --env SafetyCarGoal2-v0 --seed 4",
-      "asbs: e0_paired_fork_runtime.py --config-name sim_libero.yaml",
-      "other: train.py --config-name train_diffusion_transforme"
+      "other: train.py --config-name train_diffusion_transforme",
+      "asbs: e0_paired_fork_runtime.py --config-name sim_libero.yaml"
      ]
     }
    ]
   },
   {
    "host": "di-20260831162150-5ll6n",
-   "load": "51.62",
+   "load": "8.34",
    "ncpu": 26,
    "cards": [
     {
      "idx": 0,
      "used_mb": 41573,
      "total_mb": 81920,
-     "util": 90,
+     "util": 58,
      "mine": false,
      "procs": [
       "other: ?"
@@ -125,9 +125,9 @@
     },
     {
      "idx": 1,
-     "used_mb": 37463,
+     "used_mb": 36872,
      "total_mb": 81920,
-     "util": 48,
+     "util": 62,
      "mine": false,
      "procs": [
       "other: ?"
@@ -136,11 +136,11 @@
    ],
    "name": "volc-a100",
    "desc": "2x A100-80G, 128 核, 3PB vepfs; SafeRL 第二算力(DP/ACT 训练共用 GPU); 环境部署中",
-   "snap_time": "2026-09-08T10:21:44"
+   "snap_time": "2026-09-08T10:32:27"
   },
   {
    "host": "dsw-1008180-7cb5796fcd-xt4lh",
-   "load": "0.01",
+   "load": "0.00",
    "ncpu": 184,
    "cards": [
     {
@@ -274,7 +274,7 @@
    ],
    "name": "aliyun-ppu",
    "desc": "16x PPU-ZW810E 96G, 184 核; VLA(Safety-CHORES)评测; 共享(act_train 等他人任务)",
-   "snap_time": "2026-09-08T10:21:27"
+   "snap_time": "2026-09-08T10:32:23"
   }
  ],
  "runs": [
@@ -3207,7 +3207,7 @@
    "variant": "lag",
    "task": "cp2",
    "seed": "s1",
-   "ckpts": 4,
+   "ckpts": 5,
    "done": false,
    "running": true,
    "blocks": 0,
@@ -3215,10 +3215,10 @@
    "hv": 0,
    "ret": null,
    "soft": null,
-   "mtime": 1788828168.3903408,
+   "mtime": 1788834397.181819,
    "scan_n": 4,
    "scan_last": "ck400k 8.3/0",
-   "confirm_n": 0,
+   "confirm_n": 1,
    "confirm_clean": 0,
    "server": "volc"
   },
@@ -3247,7 +3247,7 @@
    "variant": "lag",
    "task": "cp2",
    "seed": "s3",
-   "ckpts": 4,
+   "ckpts": 5,
    "done": false,
    "running": true,
    "blocks": 0,
@@ -3255,9 +3255,9 @@
    "hv": 0,
    "ret": null,
    "soft": null,
-   "mtime": 1788827947.9003034,
-   "scan_n": 3,
-   "scan_last": "ck300k 8.7/0",
+   "mtime": 1788834146.3820314,
+   "scan_n": 4,
+   "scan_last": "ck400k 12.6/4",
    "confirm_n": 2,
    "confirm_clean": 0,
    "server": "volc"
@@ -4384,8 +4384,7 @@
   }
  ],
  "lanes": [
-  "volc: d2v2_lag_cp2_s1/confirm_400000_100ep.json",
-  "volc: d2v2_lag_cp2_s3/eval_all_ckpts_30ep.json"
+  "volc: d2v2_pen5_cp2_s1/eval_all_ckpts_30ep.json"
  ],
  "parallel": {
   "workspace": "/home/dataset-local/liyufeng/SafeTransport/results/safeot_dual_fdpi",
@@ -4742,10 +4741,10 @@
    },
    {
     "name": "CG2_fdpi_lp_m0.72_r2_s5",
-    "latest_step": 400000,
+    "latest_step": 500000,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788829090.3106453
+    "mtime": 1788834400.6179001
    },
    {
     "name": "CG2_fdpi_lp_m0.76_r2_s1",
@@ -4777,10 +4776,10 @@
    },
    {
     "name": "CG2_fdpi_lp_m0.76_r2_s5",
-    "latest_step": 500000,
+    "latest_step": 600000,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788829815.0347886
+    "mtime": 1788834099.6089995
    },
    {
     "name": "CG2_fdpi_lp_m0.76sched_r2_s1",
@@ -5743,17 +5742,17 @@
    },
    {
     "name": "PG2_fdpi_lp_prox40_r2_s4",
-    "latest_step": 400000,
+    "latest_step": 500000,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788829383.891478
+    "mtime": 1788834464.68466
    },
    {
     "name": "PG2_fdpi_lp_prox40_r2_s5",
-    "latest_step": 400000,
+    "latest_step": 500000,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788829458.6291914
+    "mtime": 1788834545.8613522
    },
    {
     "name": "PG2_fdpi_lp_r2_s1",
@@ -5879,7 +5878,7 @@
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788833810.6250226
+    "mtime": 1788834710.6037157
    },
    {
     "name": "terminal_event_20260905",
