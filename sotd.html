@@ -39,6 +39,7 @@
 <nav class="sidebar">
   <div class="nav-title">SafeOT-Dual 主线</div>
   <a href="#g">0 五目标进度（本主线口径）</a>
+  <a href="#gap">0b 差距与解决办法</a>
   <a href="#focus">1 当前焦点 / 阻塞</a>
   <a href="#figs">2 关键图</a>
   <a href="#verdicts">3 判决记录</a>
@@ -55,6 +56,9 @@
 
 <h2 id="g">0 五目标进度</h2>
 <div class="banner" id="goals"></div>
+
+<h2 id="gap">0b 差距与解决办法（<code>sotd_gap_plan.json</code>，由收割表每 30 分钟自动生成）</h2>
+<table id="gap-t"><thead><tr><th>目标</th><th>验收清单</th><th>差距</th><th>原因</th><th>解决办法（在跑）</th><th>预计</th><th>证据</th></tr></thead><tbody></tbody></table>
 
 <h2 id="focus">1 当前焦点 / 阻塞</h2>
 <ul id="focus-list"></ul>
@@ -85,6 +89,7 @@ async function refresh() {
   $("#upd").textContent = fmtAge(s.updated); $("#task").textContent = s.task || "";
   $("#goals").innerHTML = s.goals.map(g => `<div class="card"><div class="t">${esc(g.id)} ${esc(g.name)}</div><div class="pct">${g.pct}%</div><div class="bar"><i style="width:${g.pct}%"></i></div>${pill(g.status)}<div style="margin-top:6px">${esc(g.summary)}</div><div class="small" style="margin-top:6px"><b>证据：</b>${esc(g.evidence)}</div><div class="small"><b>下一步：</b>${esc(g.next)}</div></div>`).join("");
   $("#focus-list").innerHTML = s.focus.map(x => `<li>${esc(x)}</li>`).join("");
+  $("#gap-t tbody").innerHTML = (s.gap_plan || []).map(g => `<tr><td style="white-space:nowrap"><b>${esc(g.goal)}</b><div class="small">${esc(g.name)}</div></td><td class="small">${(g.checks || []).map(c => (c.passed ? "✓ " : "✗ ") + esc(c.item)).join("<br>")}</td><td>${esc(g.gap)}</td><td class="small">${esc(g.cause)}</td><td>${esc(g.remedy)}</td><td style="white-space:nowrap">${esc(g.eta)}</td><td class="small">${esc(g.evidence)}</td></tr>`).join("");
   $("#figs-grid").innerHTML = (s.figures || []).map(f => `<figure style="margin:0"><img src="${RAW + f}?v=${Math.floor(Date.now()/600000)}" alt="${esc(f)}"><figcaption class="small">${esc(f)}</figcaption></figure>`).join("");
   $("#verdicts-t tbody").innerHTML = s.verdicts.map(v => `<tr><td style="white-space:nowrap">${esc(v.date)}</td><td>${esc(v.topic)}</td><td>${esc(v.verdict)}</td><td class="small">${esc(v.evidence)}</td></tr>`).join("");
   $("#queue-t tbody").innerHTML = s.queue.map((q, i) => `<tr><td>${i+1}</td><td>${esc(q.goal)}</td><td>${esc(q.task)}</td><td>${pill(q.status)}</td><td>${esc(q.eta)}</td><td class="small">${esc(q.note)}</td></tr>`).join("");
