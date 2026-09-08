@@ -1,5 +1,5 @@
 {
- "updated": "2026-09-08T21:10:55",
+ "updated": "2026-09-08T22:01:07",
  "goals": [
   {
    "id": "G1",
@@ -48,9 +48,9 @@
   }
  ],
  "focus": [
-  "CarPush2 收官:typed 全面支配(门控 .8 15.20@1.82% vs FDPI 14.40@4.17%;δ=.8 13.31@0.32%);Level-2 Point/Car x Goal/Push 4/4 完整覆盖",
-  "头条表 tab_headline.tex(含 Fisher/Welch p 值)已入 sec_frontier.tex;四面板图 61 合并臂已同步论文目录",
-  "两台服务器无 SafeOT 训练;【待 owner 决策】论文实验主线切换 + 08-30 ICLR 源路径"
+  "【全覆盖计划启动】A 期 72 路已发车:CarButton2 + PointGoal1(30109)、PointButton1 + CarButton1(volc);CarGoal1/PointPush1/CarPush1 排队;B 期 Circle x4 + 速度 x6 需修代码",
+  "已完成 5 任务(PG2/CG2/PP2/CP2/PB2)保持不变;新任务同协议 + 标准指标 J_c/CSR@25",
+  "【待 owner 决策】论文实验主线切换 + 08-30 ICLR 源路径"
  ],
  "verdicts": [
   {
@@ -178,6 +178,27 @@
  ],
  "queue": [
   {
+   "goal": "G2 全覆盖",
+   "task": "A 期:CB2 + Level-1 六任务(126 路)训练→验证",
+   "status": "run",
+   "eta": "~2-3 天(受 30109 CPU / volc GPU 限速)",
+   "note": "第一批 72 路已发;第二批 54 路待容量"
+  },
+  {
+   "goal": "G2 全覆盖",
+   "task": "B 期:修 fork Circle 类 + 速度任务包装器(几何/速度边距)→ 10 任务 180 路",
+   "status": "wait",
+   "eta": "A 期后 ~3 天",
+   "note": "Circle:成本=越界;速度:标量 cost"
+  },
+  {
+   "goal": "G2 全覆盖",
+   "task": "C 期(可选):Racecar/Doggo/Ant 导航 24 任务",
+   "status": "idle",
+   "eta": "-",
+   "note": "重机器人需更长训练,视 A/B 期结果决定"
+  },
+  {
    "goal": "G1/G2",
    "task": "CarPush2 六臂 x 3 种子训练 -> 终档验证 -> 四面板前沿图",
    "status": "done",
@@ -256,6 +277,10 @@
   }
  ],
  "changelog": [
+  {
+   "time": "09-08 22:01",
+   "text": "全覆盖计划启动:A 期 72 路发车(CB2/PG1@30109,PB1/CB1@volc);流水线加任务感知硬通道与 J_c/CSR@25"
+  },
   {
    "time": "09-08 21:10",
    "text": "生成主文头条表 + 统计检验(Fisher 精确 / Welch t);PP2 对 FDPI 仅方向性,如实标注"
@@ -372,14 +397,14 @@
  "suites": [
   {
    "name": "Safety-Gymnasium(Farama,官方基准套件)",
-   "desc": "套件含:安全导航(Point/Car/Racecar/Doggo/Ant x Goal/Button/Push/Circle x Level 0/1/2)、安全速度控制(6 个 MuJoCo 机器人)、视觉/多智能体变体。我们的严格协议只覆盖下列任务族;其它任务族未做,不外推。",
+   "desc": "套件含:安全导航(Point/Car/Racecar/Doggo/Ant x Goal/Button/Push/Circle x Level 0/1/2)、安全速度控制(6 个 MuJoCo 机器人)、视觉/多智能体变体。目标:Point/Car 全部 16 个 Level-1/2 导航任务 + 6 个速度任务全覆盖(Level-0 无约束不测);Racecar/Doggo/Ant 为可选 C 期。",
    "protocol": "严格协议:终档、零选点、每种子 3 独立块 x 104 集 = 312 集、逐集硬通道计数(任一硬通道接触即计违规集)、软通道按均值与 25/集预算报告、Wilson 95% CI;2M 环境步、同一 SAC 骨干(2x256, lr 1e-4)。Level-0 无约束、Level-1 单软约束(hazards),均不含「不可逆硬通道」,不在本研究范围。",
    "families": [
     {
      "name": "Level-2 安全导航 · Point/Car x Goal/Button/Push(6 任务)",
      "total": 6,
      "covered": 5,
-     "note": "Point/Car x Goal/Push 完整 4/4 + PB2(趴地)= 5/6;缺 CarButton2",
+     "note": "Goal/Push 4/4 完成;PB2 趴地;CarButton2 18 路在跑(30109)",
      "tasks": [
       {
        "id": "PG2",
@@ -422,10 +447,11 @@
        "id": "CB2",
        "name": "SafetyCarButton2-v0",
        "channels": "硬 buttons + gremlins / 软 hazards",
-       "budget": "-",
-       "baselines": "-",
-       "covered": false,
-       "status": "未做(Button 任务全体趴地,优先级低)"
+       "budget": "软 25/集;2M 步",
+       "baselines": "FDPI、SAC-Lag、SAC-Pen c5",
+       "covered": true,
+       "status": "训练中(30109):typed 3 臂 + FDPI + SAC-Lag + SAC-Pen c5 x 3 种子",
+       "status_kind": "training"
       },
       {
        "id": "CP2",
@@ -440,6 +466,81 @@
      ]
     },
     {
+     "name": "Level-1 安全导航 · Point/Car x Goal/Button/Push(6 任务)",
+     "total": 6,
+     "covered": 6,
+     "note": "Goal1/Push1 仅 hazards 单通道(作硬通道;同时报 J_c 与 CSR@25 标准指标);Button1 三通道。A 期:PB1/CB1 在 volc、PG1 在 30109 跑,CG1/PP1/CP1 排队",
+     "tasks": [
+      {
+       "id": "PG1",
+       "name": "SafetyPointGoal1-v0",
+       "channels": "单通道 hazards(8 个)",
+       "budget": "预算 25/集;2M 步",
+       "baselines": "FDPI、SAC-Lag、SAC-Pen c5",
+       "covered": true,
+       "status_kind": "training",
+       "status": "训练中(30109)"
+      },
+      {
+       "id": "CG1",
+       "name": "SafetyCarGoal1-v0",
+       "channels": "单通道 hazards",
+       "budget": "预算 25/集;2M 步",
+       "baselines": "同上",
+       "covered": true,
+       "status_kind": "planned",
+       "status": "排队"
+      },
+      {
+       "id": "PB1",
+       "name": "SafetyPointButton1-v0",
+       "channels": "硬 buttons+gremlins / 软 hazards",
+       "budget": "软 25/集;2M 步",
+       "baselines": "同上",
+       "covered": true,
+       "status_kind": "training",
+       "status": "训练中(volc)"
+      },
+      {
+       "id": "CB1",
+       "name": "SafetyCarButton1-v0",
+       "channels": "硬 buttons+gremlins / 软 hazards",
+       "budget": "软 25/集;2M 步",
+       "baselines": "同上",
+       "covered": true,
+       "status_kind": "training",
+       "status": "训练中(volc)"
+      },
+      {
+       "id": "PP1",
+       "name": "SafetyPointPush1-v0",
+       "channels": "单通道 hazards",
+       "budget": "预算 25/集;2M 步",
+       "baselines": "同上",
+       "covered": true,
+       "status_kind": "planned",
+       "status": "排队"
+      },
+      {
+       "id": "CP1",
+       "name": "SafetyCarPush1-v0",
+       "channels": "单通道 hazards",
+       "budget": "预算 25/集;2M 步",
+       "baselines": "同上",
+       "covered": true,
+       "status_kind": "planned",
+       "status": "排队"
+      }
+     ]
+    },
+    {
+     "name": "Level-1/2 · Circle 任务(Point/Car x Circle1/2,4 任务)",
+     "total": 4,
+     "covered": 0,
+     "note": "B 期:fork 的 Circle 类损坏(缺 size 属性)待修;成本=越界,边距用几何距离(到边界)实现",
+     "tasks": []
+    },
+    {
      "name": "Level-2 安全导航 · 其它机器人(Racecar/Doggo/Ant)与 Circle 任务",
      "total": 12,
      "covered": 0,
@@ -450,7 +551,7 @@
      "name": "安全速度控制(HalfCheetah/Hopper/Swimmer/Walker2d/Ant/Humanoid)",
      "total": 6,
      "covered": 0,
-     "note": "单一聚合成本、无不可逆硬通道;ICLR 稿早期实验用 OmniSafe 协议做过,不在本严格协议内",
+     "note": "B 期:单通道速度成本,不在 info 里而是标量 cost;边距用速度阈值实现;FDPI 代码支持",
      "tasks": []
     }
    ]
