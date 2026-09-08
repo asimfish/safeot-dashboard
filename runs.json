@@ -1,23 +1,24 @@
 {
- "updated": "2026-09-08T20:16:26",
+ "updated": "2026-09-08T20:26:46",
  "servers": [
   {
    "name": "tianyiyun-30109",
    "desc": "8x A100-80G, 128 核; SafeRL 训练/评估主力(共享账号,多项目并行)",
    "host": "ide-650ef93f23324f04881bde87cf05d6c1-0f2fcc",
-   "load": "111.03",
+   "load": "118.22",
    "ncpu": 128,
    "cards": [
     {
      "idx": 0,
-     "used_mb": 43241,
+     "used_mb": 62840,
      "total_mb": 81920,
-     "util": 100,
+     "util": 59,
      "mine": true,
      "procs": [
       "safeot-vla: gpu_keeper.py",
       "other: train.py --config-name train_diffusion_transforme",
-      "safeot: fdpi_safeot_dual.py --env SafetyCarGoal2-v0 --seed 1 1 1"
+      "safeot: fdpi_safeot_dual.py --env SafetyCarGoal2-v0 --seed 1 1 1",
+      "asbs: e0_paired_fork_runtime.py --config-name sim_libero.yaml"
      ]
     },
     {
@@ -38,7 +39,7 @@
      "idx": 2,
      "used_mb": 72906,
      "total_mb": 81920,
-     "util": 100,
+     "util": 95,
      "mine": true,
      "procs": [
       "safeduo: python --seed 46 --env-yaml",
@@ -49,23 +50,23 @@
     },
     {
      "idx": 3,
-     "used_mb": 56835,
+     "used_mb": 70591,
      "total_mb": 81920,
-     "util": 100,
+     "util": 87,
      "mine": true,
      "procs": [
       "safeot: fdpi_safeot_dual.py --env SafetyCarGoal2-v0 --seed 4",
-      "safeot: fdpi_safeot_dual.py --env SafetyCarGoal2-v0 --seed 5",
       "safeot-vla: gpu_keeper.py",
       "other: train.py --config-name train_diffusion_transforme",
-      "safeot: fdpi_safeot_dual.py --env SafetyCarGoal2-v0 --seed 2"
+      "safeot: fdpi_safeot_dual.py --env SafetyCarGoal2-v0 --seed 2",
+      "safeot: fdpi_strict_eval.py --env SafetyPointGoal2-v0"
      ]
     },
     {
      "idx": 4,
      "used_mb": 61960,
      "total_mb": 81920,
-     "util": 64,
+     "util": 100,
      "mine": true,
      "procs": [
       "other: VLLM::Worker_TP1",
@@ -76,7 +77,7 @@
      "idx": 5,
      "used_mb": 67372,
      "total_mb": 81920,
-     "util": 99,
+     "util": 100,
      "mine": true,
      "procs": [
       "safeot: fdpi_safeot_dual.py --env SafetyPointGoal2-v0 --seed 5",
@@ -90,7 +91,7 @@
      "idx": 6,
      "used_mb": 61963,
      "total_mb": 81920,
-     "util": 100,
+     "util": 94,
      "mine": true,
      "procs": [
       "other: VLLM::Worker_TP0",
@@ -115,14 +116,14 @@
   },
   {
    "host": "di-20260831162150-5ll6n",
-   "load": "16.27",
+   "load": "18.45",
    "ncpu": 26,
    "cards": [
     {
      "idx": 0,
-     "used_mb": 26691,
+     "used_mb": 22423,
      "total_mb": 81920,
-     "util": 100,
+     "util": 99,
      "mine": false,
      "procs": [
       "other: ?"
@@ -130,9 +131,9 @@
     },
     {
      "idx": 1,
-     "used_mb": 21565,
+     "used_mb": 21629,
      "total_mb": 81920,
-     "util": 99,
+     "util": 97,
      "mine": false,
      "procs": [
       "other: ?"
@@ -141,16 +142,16 @@
    ],
    "name": "volc-a100",
    "desc": "2x A100-80G, 128 核, 3PB vepfs; SafeRL 第二算力(DP/ACT 训练共用 GPU); 环境部署中",
-   "snap_time": "2026-09-08T20:16:31"
+   "snap_time": "2026-09-08T20:26:52"
   },
   {
    "host": "dsw-1008180-7cb5796fcd-xt4lh",
-   "load": "49.00",
+   "load": "49.44",
    "ncpu": 184,
    "cards": [
     {
      "idx": 0,
-     "used_mb": 39979,
+     "used_mb": 39987,
      "total_mb": 98304,
      "util": 100,
      "mine": false,
@@ -161,7 +162,7 @@
     },
     {
      "idx": 1,
-     "used_mb": 39969,
+     "used_mb": 39977,
      "total_mb": 98304,
      "util": 100,
      "mine": false,
@@ -172,7 +173,7 @@
     },
     {
      "idx": 2,
-     "used_mb": 39975,
+     "used_mb": 39983,
      "total_mb": 98304,
      "util": 100,
      "mine": false,
@@ -205,7 +206,7 @@
      "idx": 5,
      "used_mb": 37733,
      "total_mb": 98304,
-     "util": 100,
+     "util": 98,
      "mine": false,
      "procs": [
       "other: train_ppu.py --config-name train_diffusion_transforme"
@@ -275,7 +276,7 @@
      "idx": 12,
      "used_mb": 37733,
      "total_mb": 98304,
-     "util": 88,
+     "util": 100,
      "mine": false,
      "procs": [
       "other: train_ppu.py --config-name train_diffusion_transforme"
@@ -314,7 +315,7 @@
    ],
    "name": "aliyun-ppu",
    "desc": "16x PPU-ZW810E 96G, 184 核; VLA(Safety-CHORES)评测; 共享(act_train 等他人任务)",
-   "snap_time": "2026-09-08T20:16:30"
+   "snap_time": "2026-09-08T20:26:51"
   }
  ],
  "runs": [
@@ -4814,17 +4815,17 @@
    },
    {
     "name": "CG2_fdpi_lp_m0.76_r2_s5",
-    "latest_step": 1900000,
-    "done": false,
+    "latest_step": 1990002,
+    "done": true,
     "strict_evals": 0,
-    "mtime": 1788866923.0019696
+    "mtime": 1788869939.172979
    },
    {
     "name": "CG2_fdpi_lp_m0.76sched_pf0.05_r2_s1",
-    "latest_step": 0,
+    "latest_step": 100000,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788866767.9234653
+    "mtime": 1788870042.7826061
    },
    {
     "name": "CG2_fdpi_lp_m0.76sched_r2_s1",
@@ -5916,7 +5917,7 @@
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788869646.7938864
+    "mtime": 1788870110.59335
    },
    {
     "name": "terminal_event_20260905",
@@ -5926,6 +5927,6 @@
     "mtime": 1788616474.922712
    }
   ],
-  "n_procs": 93
+  "n_procs": 87
  }
 }
