@@ -77,7 +77,7 @@
 </nav>
 <main class="content">
   <h1>Agentic Robotics 进度 <span class="pill agent">GPT-6 Astra 直控机器人</span></h1>
-  <div class="meta">RoboCurve 路线（大模型直接看相机 + 本体状态，输出末端 waypoint 工具调用，IK + 控制器执行）在我们自己的仿真任务上的验证记录。内容更新 2026-09-08 16:20 · 数字全部回溯到各试验目录的 <code>REPORT_SUMMARY.json</code> / <code>evaluation.json</code> · 静态页，由负责该线的 agent 在里程碑手工更新。</div>
+  <div class="meta">RoboCurve 路线（大模型直接看相机 + 本体状态，输出末端 waypoint 工具调用，IK + 控制器执行）在我们自己的仿真任务上的验证记录。内容更新 2026-09-08 16:50（补入原文离线版装置核对与 E2 设计） · 数字全部回溯到各试验目录的 <code>REPORT_SUMMARY.json</code> / <code>evaluation.json</code> · 静态页，由负责该线的 agent 在里程碑手工更新。</div>
 
   <h2 id="sec0">0 概览</h2>
   <div class="cards">
@@ -112,7 +112,22 @@ GPT-6 Astra (xhigh)  ──►  唯一函数 execute_motion：1–2 个动作，
       <tr><td>在我们任务上的现状</td><td class="small">DP / ACT 在正式数据集上训练评测（见 PsiBot 面板）</td><td class="bad">E1 0/5（抓取构型不成立）</td><td class="ok">grasp/glass_beaker_100ml 100/100 通过全部数据门</td></tr>
     </tbody>
   </table></div>
-  <div class="small">参考：罗清雨《RoboCurve：GPT-6 Astra 直接控制机器人》（2026-09-07，知乎）。文中 block→bowl 19/20、精插 10%；本页试验是流程适配，不是原 benchmark 复现，不与其数字直接比较。</div>
+  <div class="small">参考：罗清雨《RoboCurve：GPT-6 Astra 直接控制机器人》（2026-09-07，知乎；owner 提供的离线版 SHA256 <code>90682bc1…b675e32</code>，含正文、示意图、海报与 14 s demo 视频，已完整核对）。文中 block→bowl 19/20、精插 10%；本页试验是流程适配，不是原 benchmark 复现，不与其数字直接比较。原文图片版权归作者，本页只转述不转载。</div>
+
+  <h3>原文 demo 装置（离线版示意图/海报/视频核对）与 E1 的差异——这些差异足以解释成功率差距</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>维度</th><th>RoboCurve demo（原文）</th><th>E1（本页）</th><th>影响</th></tr></thead>
+    <tbody>
+      <tr><td>机器人 / 末端</td><td>YAM 机械臂 + <b>平行夹爪</b>（1 自由度开合）</td><td>PsiBot 7 轴臂 + <b>11 关节灵巧手</b>，模型每步要给 11 个手指目标</td><td class="small">E1 多轮请求消耗在推断"手指沿腕局部哪个轴伸展"和手型上；原文模型只需决定夹爪开/合</td></tr>
+      <tr><td>物体 → 目标</td><td>高对比度粉色字母<b>积木</b> → 大口<b>碗</b>（容错大）</td><td><b>透明 100 ml 玻璃烧杯</b>（薄壁、细高、易倒）→ 抬起并稳定保持</td><td class="small">E1 两集在接近时把杯子碰倒；模型对杯心位置估计偏差约 2.5 cm，对积木进碗足够、对薄壁杯抓合不够</td></tr>
+      <tr><td>相机</td><td><b>顶视相机 + 左右腕相机</b>（腕相机直接给出夹爪与物体的相对对齐）</td><td>三台<b>固定</b>相机（head / chest / third），无腕相机</td><td class="small">手–物相对位姿只能从外部视角三角化，是 E1 抓取构型失败的直接原因之一</td></tr>
+      <tr><td>动作接口</td><td><code>move_to(...)</code> 末端 waypoint 工具调用 + 夹爪开合；IK / 轨迹插值 / 控制器执行</td><td><code>execute_motion</code>：绝对腕位姿 + 11 手指关节目标（位移 ≤0.15 m、转角 ≤0.6 rad 校验）</td><td class="small">接口形态一致（waypoint → IK），差别在手部自由度与是否有开合原语</td></tr>
+      <tr><td>闭环节奏</td><td>Observe → Reason → Move → Replan；一次成功实际 1:40，视频 20.7× 加速并去掉思考停顿</td><td>每次决策等待均值 153 s（xhigh），6 次决策 ≈ 15 min 推理；仿真在推理时暂停</td><td class="small">原文也有明显思考停顿；E1 的 xhigh 推理更长，同样墙钟内决策次数更少</td></tr>
+      <tr><td>token / 成本</td><td>约 2.1k token/run；海报 API 成本轴 $1–4/run</td><td>约 3.9 万 token/集（输出侧含 xhigh 推理）；经 Codex 身份调用未单独计费</td><td class="small">原文更像低/中推理档位；E1 未做推理档位对照</td></tr>
+      <tr><td>样本量 / 口径</td><td>每任务 20 次运行；Fable 5.1 在视频里最终也成功（2:57）</td><td>5 个 seed，各 ≤6 次请求；1 集通信中断、1 集时间截断</td><td class="small">E1 不足以估计成功率，只能给失败模式</td></tr>
+      <tr><td>真机 / 仿真</td><td>真实机器人、真实相机</td><td>Isaac Sim 渲染，透明玻璃材质</td><td class="small">合成透明体的视觉线索比实拍积木少</td></tr>
+    </tbody>
+  </table></div>
 
   <h2 id="sec2">2 E1 · PsiBot 单臂灵巧手抓取 100 ml 玻璃烧杯（2026-09-08 04:37–08:22）</h2>
   <div class="meta">执行者：Codex CLI <code>gpt-6-astra</code> xhigh，作为工程代理直接运行在 bjxy（双 RTX 5090 共享机，tmux <code>codex_astra_psibot</code>）；策略模型同为 <code>gpt-6-astra</code> xhigh，经既有 Codex 身份 + 回环代理调用。工作目录 <code>bjxy:/home/liyufeng/astra_psibot_grasp/</code>（本地盘），NAS 上的 chembench 与 SafeDuo 源码只读；Isaac 进程经 <code>bwrap</code> 沙箱只能写自己目录。任务文本：<i>Grasp and stably lift the 100 ml glass beaker.</i></div>
@@ -222,12 +237,14 @@ GPT-6 Astra (xhigh)  ──►  唯一函数 execute_motion：1–2 个动作，
       <li><span class="pill negative">负结果</span> 不建议将该直控流程推广到 FR3 / UR5e 正式采集调整；<b>保留已验证的 cuRobo 采集主线</b>（该行 100/100）。</li>
       <li><span class="pill done">正结果</span> Codex + gpt-6-astra 作为<b>采集工程代理</b>可用：自主搭装置、自查缺陷、写验证与报告，全程不越权（只写自己目录、不杀他人进程）。</li>
     </ul>
-    <h3>下一步（按优先级）</h3>
+    <h3>下一步（按优先级；E2 设计按"先对齐原文装置条件"原则）</h3>
     <ul class="q">
-      <li>修数值接口边界（3.05 vs 3.0499999523 rad 一类的字面拒绝）与任务区域腕姿可达性 / 2 s 执行时长验收，减少把请求预算耗在接口摩擦上。</li>
-      <li>给模型明确的<b>工具坐标语义</b>（手指沿腕局部哪个轴伸展、掌心法向），验证是否减少多轮在线猜测——这是本次多集反复出现的浪费点。</li>
-      <li>用 FR3 低自由度夹爪 + 同一物体做预先固定预算的小规模对照，记录全部失败；只有达到既有数据门后才考虑扩大采集。</li>
-      <li>更实际的落地：把 gpt-6-astra 放到采集调整的系统 2 层（配方失败归因、抓取参数选择、视觉复核），底层继续用 cuRobo / 学习策略。</li>
+      <li><b>对齐原文的感知条件</b>：给 PsiBot 加一台仿真<b>腕相机</b>（原文靠腕相机拿手–物相对对齐），并在公开状态里给出明确的<b>工具坐标语义</b>（手指沿腕局部哪个轴伸展、掌心法向）——这是 E1 多集反复浪费请求的地方。</li>
+      <li><b>对齐原文的动作接口</b>：把 11 个手指目标换成 1 自由度的开合原语（<code>hand: open | close_fraction</code>，等价于原文的夹爪），只保留 waypoint 决策；这不是抓取点先验，只是把末端自由度降到与原文同级。同时修数值边界误拒（3.05 vs 3.0499999523 rad）与腕姿可达性 / 2 s 执行时长验收。</li>
+      <li><b>对齐原文的物体难度</b>：先用不透明高对比度物体（如 brown_reagent_bottle）和"放进大口容器"任务复现 block→bowl 量级的结果，再回到透明烧杯；每任务 20 次运行，与原文口径一致。</li>
+      <li><b>推理档位对照</b>：原文约 2.1k token/run 更像低/中档；在同一预算下比较 medium 与 xhigh 的成功率与墙钟，而不是默认 xhigh。</li>
+      <li>FR3 低自由度夹爪 + 同一物体做预先固定预算的小规模对照（它天然满足前两条），记录全部失败；只有达到既有数据门后才考虑扩大采集。</li>
+      <li>更实际的落地：把 gpt-6-astra 放到采集调整的系统 2 层（配方失败归因、抓取参数选择、视觉复核），底层继续用 cuRobo / 学习策略——这也是原文示意图第 3 栏"System 2 + System 1"的方向。</li>
     </ul>
   </div></details>
 
@@ -259,6 +276,7 @@ GPT-6 Astra (xhigh)  ──►  唯一函数 execute_motion：1–2 个动作，
       <tr><td>07:08–08:05</td><td>seed 8110–8114 正式运行；8112 末次传输中断后续跑 8113/8114；08:05:30 最后一次请求。</td></tr>
       <tr><td>08:20 / 08:22</td><td>REPORT.md、REPORT_SUMMARY.json、VERIFICATION.md 写出；26 次请求审计、15 段视频、9 项单测通过；Codex 退出 rc=0，无 Isaac 残留。</td></tr>
       <tr><td>16:20</td><td>本页上线（safeot-dashboard <code>agentic_robotics.html</code>）；结论同步到 safelab_dataset_ops <code>RALPH_LOG.md</code>。</td></tr>
+      <tr><td>16:50</td><td>owner 提供原文离线版（含示意图/海报/视频）；核对出腕相机、平行夹爪、积木→碗、$1–4/run 等装置差异，写入第 1 节对照表并据此细化 E2 设计。</td></tr>
     </tbody>
   </table></div>
 
