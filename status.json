@@ -48,8 +48,8 @@
   }
  ],
  "focus": [
-  "并发整形中:阿里云 72 路活跃(PG1/CG1/PP1/CP1,~100 分钟/档),volc 36 路活跃(PB1/CB1);36+54 路暂停待恢复;排队 6 任务 108 路。用 ckpt_rate 时间序列找总吞吐最高的并发数。",
-  "全覆盖 22 任务:15 任务 198 路在训(volc 90:PB1/CB1/CB2/Hopper/HalfCheetah;阿里云 108:PG1/CG1/PP1/CP1/PC1/CC1),7 任务排队(PC2/CC2/Swimmer/Walker2d/Ant/Humanoid + 已完成 5)",
+  "三机自动排队上线:阿里云 slot_keeper(恢复/再平衡/补发 CPU 队列)+ volc gpu_keeper(活跃 ≤18 时补发 GPU 队列)+ 两机 verify_loop(每 15 分钟对到终档的 run 跑 3×104 集);人工只需看 keeper.log / verify_loop.out",
+  "全覆盖 22 任务:已完成 5;在训 8 任务 126 路(阿里云 PG1/CG1/PP1/CP1 72 + volc PB1/CB1 36 + CB2-CPU 18);暂停 2 任务 36 路(PC1/CC1);排队 8 任务 144 路(PC2/CC2/SWV/WAV → 阿里云;HOV/HCV/ANV/HUV → volc)",
   "B 期代码已就位:Circle 几何修复 + v1g 状态边距(边界距离/速度阈值,支持门控);评估支持标量成本",
   "【待 owner 决策】论文主线切换"
  ],
@@ -182,15 +182,15 @@
    "goal": "G2 全覆盖",
    "task": "A 期:CB2 + Level-1 六任务(126 路)训练→验证",
    "status": "run",
-   "eta": "~2-3 天(受 30109 CPU / volc GPU 限速)",
-   "note": "A 期 126 路全部在跑(volc 54 + 阿里云 72)"
+   "eta": "~3 天(三机自动排队,落地即验证)",
+   "note": "阿里云 72 路活跃(PG1/CG1/PP1/CP1),slot_keeper 按空闲核自动恢复暂停的 PC1/CC1 并再平衡核绑定;volc GPU 36 路(PB1/CB1)15.6 档/时封顶;CB2 18 路改在 volc CPU 核 46-99 跑;首个终档(pen5_pg1_s3)已进入验证"
   },
   {
    "goal": "G2 全覆盖",
    "task": "B 期:修 fork Circle 类 + 速度任务包装器(几何/速度边距)→ 10 任务 180 路",
    "status": "run",
    "eta": "A 期后 ~3 天",
-   "note": "Circle 修复 + v1g 完成;首批 4 任务 72 路在跑,6 任务排队"
+   "note": "Circle 修复 + v1g 完成;PC1/CC1 36 路暂停待 keeper 恢复;阿里云 CPU 队列 PC2→CC2→Swimmer→Walker2d;volc GPU 队列 Hopper→HalfCheetah→Ant→Humanoid(gpu_keeper 在活跃 ≤18 路时补发)"
   },
   {
    "goal": "G2 全覆盖",
@@ -278,6 +278,10 @@
   }
  ],
  "changelog": [
+  {
+   "date": "2026-09-09 05:10",
+   "text": "volc:90 路 GPU 并发时吞吐反降(4 小时仅 16 路首档),砍到 36 路后总吞吐回到 15.6 档/时封顶;杀掉 54 路零档暂停 run 释放 26 GB 显存,CB2 改为 CPU-JAX 18 路(核 46-99);Hopper/HalfCheetah/Ant/Humanoid 入 GPU 队列。阿里云:slot_keeper 上线(每 10 分钟按核占用恢复暂停 run、再平衡绑定、空闲 ≥54 核时补发 CPU 队列);首个终档 pen5_pg1_s3 进入 3×104 集验证。两机 verify_loop 自动验证。"
+  },
   {
    "date": "2026-09-09 01:45",
    "text": "09-09 01:45 并发整形:阿里云 SIGSTOP PC1/CC1 36 路(核段与 PG1/CG1 重叠,load 392→270);volc SIGSTOP CB2/HopperVel/HalfCheetahVel 54 路(90 路时 GPU 上下文切换抖动,吞吐反降 3–4 倍;保留 PB1/CB1 36 路,GPU 利用 68/44→88/72%)。暂停的 run 在服务器卡片里仍显示为在跑但档数不增,属计划内,A 期落地后 SIGCONT。看板 §3 改为四套件自动图 + J_c/CSR@25 列。"
