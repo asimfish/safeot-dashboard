@@ -26,6 +26,10 @@ if [ "${1:-}" != "--no-server" ]; then
   else
     echo "$(ts) 30109 unreachable, keeping old runs.json" >> "$LOG"
   fi
+  if timeout 120 ssh -o BatchMode=yes -o ConnectTimeout=20 $R2 "cd /home/dataset-local/liyufeng/goal34_prep/sota_h2h && python3 collect_dashboard.py && python3 make_frontier_csv.py" >/dev/null 2>&1; then
+    timeout 60 scp -q $R2:/home/dataset-local/liyufeng/goal34_prep/logs/dash_runs.json ali_runs.json 2>/dev/null && echo "$(ts) aliyun runs ok" >> "$LOG"
+    timeout 60 scp -q $R2:/home/dataset-local/liyufeng/goal34_prep/logs/frontier_arms.csv ali_arms.csv 2>/dev/null
+  fi
   if timeout 60 ssh -o BatchMode=yes -o ConnectTimeout=20 $R2 "python3 /mnt/data/safeot_vla_m1/collect_gpu.py" > aliyun_gpu.json.tmp 2>/dev/null && [ -s aliyun_gpu.json.tmp ]; then
     mv aliyun_gpu.json.tmp aliyun_gpu.json; echo "$(ts) aliyun snapshot ok" >> "$LOG"
   else
@@ -59,26 +63,28 @@ r["servers"] = srv
 # merge volc runs (tag server; dedupe by name, prefer more ckpts)
 for x in r.get("runs", []):
     x.setdefault("server", "30109")
-if os.path.exists("volc_runs.json"):
-    vr = json.load(open("volc_runs.json"))
-    have = {x["name"]: x for x in r["runs"]}
+have = {x["name"]: x for x in r["runs"]}
+for fn, tag in (("volc_runs.json", "volc"), ("ali_runs.json", "aliyun")):
+    if not os.path.exists(fn):
+        continue
+    vr = json.load(open(fn))
     for x in vr.get("runs", []):
         if x["variant"] in ("sdac", "srcpo"):
             continue
-        x["server"] = "volc"
+        x["server"] = tag
         if x["name"] not in have or x["ckpts"] > have[x["name"]]["ckpts"]:
             have[x["name"]] = x
-    r["runs"] = list(have.values())
-    r["lanes"] = r.get("lanes", []) + ["volc: " + l for l in vr.get("lanes", [])]
+    r["lanes"] = r.get("lanes", []) + [tag + ": " + l for l in vr.get("lanes", [])]
+r["runs"] = list(have.values())
 json.dump(r, open("runs.json", "w"), ensure_ascii=False, indent=1)
 PY
   python3 - <<'PY2'
 import csv, os, json
 rows = {}
-for f in ("frontier_arms.csv", "volc_arms.csv"):
+for f in ("frontier_arms.csv", "volc_arms.csv", "ali_arms.csv"):
     if not os.path.exists(f): continue
     for r in csv.DictReader(open(f)):
-        if f == "volc_arms.csv" and r["method"] in ("SDAC", "SRCPO"): continue  # SDAC/SRCPO 只在 30109
+        if f != "frontier_arms.csv" and r["method"] in ("SDAC", "SRCPO"): continue  # SDAC/SRCPO 只在 30109
         k = (r["task"], r["method"], r["margin"], r["seed"], r["mode"])
         if k not in rows or int(r["ver_eps"]) > int(rows[k]["ver_eps"]): rows[k] = r
 if rows:
