@@ -1,6 +1,5 @@
 {
   "updated": "2026-09-08T16:01:18+08:00",
-  "task": "T-1484/T-1490 — 五目标差距与解决办法（数据驱动，每 30 分钟刷新）",
   "gap_plan": [
     {
       "goal": "G1",
@@ -158,95 +157,128 @@
       ]
     }
   ],
-  "supervision": {
-    "observed": "2026-09-08T15:56:50+08:00",
-    "next_check": "2026-09-08T16:01:50+08:00",
-    "interval_seconds": 300,
-    "overall": "warning",
-    "coverage": "冻结 beta 修复队列与共享采集/发布链路；远端其他队列仅由原采集器覆盖。",
-    "alerts": [
-      {
-        "code": "system_disk_low",
-        "level": "warning",
-        "detail": "system 剩余空间 2.36 GiB。"
-      }
-    ],
-    "repair": {
-      "status": "running",
-      "active": "PG2_beta_repaired_lp_s1",
-      "completed": 4,
-      "phase": "evaluating",
-      "target_steps": 2000000,
-      "progress_age_seconds": 286,
-      "evaluation_blocks_written": 0,
-      "code_hash_matches": true
+  "queue": [
+    {
+      "goal": "G1/G2",
+      "task": "CG1/PB1 ε 与 clip 曲线补点（volc）",
+      "status": "run",
+      "n": 39,
+      "done": 35,
+      "running": 4,
+      "pending": 0,
+      "eta": "约 1 h",
+      "note": "35/39 完成，4 在跑，0 排队"
     },
-    "summary": "后台监督：需检查；PG2_beta_repaired_lp_s1。system 剩余空间 2.36 GiB。",
-    "harvest": {
-      "last_published": "2026-09-08T15:32:08.513524+08:00",
-      "log_updated": "2026-09-08T15:32:11+08:00",
-      "commit": "a352334738e892f67d516a9b358e456b69d95a60"
+    {
+      "goal": "G1/G2",
+      "task": "clip 0.05 软端点 + 速度套件两端点 + 种子 3-4（aliyun）",
+      "status": "done",
+      "n": 125,
+      "done": 125,
+      "running": 0,
+      "pending": 0,
+      "eta": "完成",
+      "note": "125/125 完成，0 在跑，0 排队"
+    },
+    {
+      "goal": "G2/G5",
+      "task": "10M 种子 3-4（PG1/CG1 头条臂与参考）（mainskill）",
+      "status": "run",
+      "n": 22,
+      "done": 10,
+      "running": 12,
+      "pending": 0,
+      "eta": "约 1 h",
+      "note": "10/22 完成，12 在跑，0 排队"
+    },
+    {
+      "goal": "G2",
+      "task": "速度套件 10M（5090）",
+      "status": "done",
+      "n": 36,
+      "done": 36,
+      "running": 0,
+      "pending": 0,
+      "eta": "完成",
+      "note": "36/36 完成，0 在跑，0 排队"
+    },
+    {
+      "goal": "G2",
+      "task": "PointButton1 10M（5090）",
+      "status": "done",
+      "n": 12,
+      "done": 12,
+      "running": 0,
+      "pending": 0,
+      "eta": "完成",
+      "note": "12/12 完成，0 在跑，0 排队"
+    },
+    {
+      "goal": "G3",
+      "task": "typed 边距日程对冲网格（mainskill）",
+      "status": "run",
+      "n": 12,
+      "done": 7,
+      "running": 5,
+      "pending": 0,
+      "eta": "约 1 h",
+      "note": "7/12 完成，5 在跑，0 排队"
+    },
+    {
+      "goal": "G3",
+      "task": "typed 边距日程（自 30109 迁入）（mainskill）",
+      "status": "run",
+      "n": 30,
+      "done": 0,
+      "running": 30,
+      "pending": 0,
+      "eta": "约 3 h",
+      "note": "0/30 完成，30 在跑，0 排队"
+    },
+    {
+      "goal": "G3",
+      "task": "typed 前沿行种子 4-5（30109）",
+      "status": "run",
+      "n": 8,
+      "done": 0,
+      "running": 8,
+      "pending": 0,
+      "eta": "约 4 h",
+      "note": "0/8 完成，8 在跑，0 排队"
+    },
+    {
+      "goal": "G3/G5",
+      "task": "typed 接近预算点种子 4-5（30109）",
+      "status": "run",
+      "n": 4,
+      "done": 0,
+      "running": 4,
+      "pending": 0,
+      "eta": "约 5 h",
+      "note": "0/4 完成，4 在跑，0 排队"
+    },
+    {
+      "goal": "G4",
+      "task": "SafeVLA 两臂 × 2 种子训练（mainskill，看门狗保活）",
+      "status": "run",
+      "eta": "seed 0 2M 约 09-09；两种子 1M 约 09-12",
+      "note": "阿里云四条线已停（1.5 万步/h，不可能在截止前到 2M）；30109 无 NVIDIA Vulkan 不能渲染。建议口径：1M 步 × 2 种子案例研究 + 配对终档评测。"
+    },
+    {
+      "goal": "G3/G5",
+      "task": "9 个已训练 proximity 模型终档补评",
+      "status": "done",
+      "eta": "每模型 312 集",
+      "note": "9/9 完成；缺失/失败显式保留。"
+    },
+    {
+      "goal": "G3/G4/G5",
+      "task": "终止事件独立组件检查",
+      "status": "done",
+      "eta": "以产物为准",
+      "note": "独立组件 9 项检查，ε/预算组合 25/25 通过。保留终止成本，拒绝不存在的安全等待动作；解析小问题，不计入 SafeRL/SOTA 结果。"
     }
-  },
-  "post_repair_evaluations": {
-    "observed": "2026-09-08T16:01:18+08:00",
-    "training_done": 86,
-    "complete_evaluations": 81,
-    "evaluation_episodes": 25272,
-    "integrity_errors": []
-  },
-  "local_evaluation_queue": {
-    "status": "complete",
-    "total": 9,
-    "completed": 9,
-    "lanes": [
-      {
-        "lane": 0,
-        "status": "complete",
-        "active": null,
-        "updated": "2026-09-07T16:54:26+08:00",
-        "completed": 5
-      },
-      {
-        "lane": 1,
-        "status": "complete",
-        "active": null,
-        "updated": "2026-09-07T02:59:09+08:00",
-        "completed": 4
-      }
-    ],
-    "protocol": "Validated serial evaluator, 3 x104 final-checkpoint episodes; no retraining"
-  },
-  "g4_connection": {
-    "observed": "2026-09-07T16:02:21+08:00",
-    "host": "safeot-30314",
-    "status": "connected",
-    "training_steps": {
-      "armA_ppolag_s0": 594944,
-      "armB_sotd_s0": 548864
-    },
-    "training_log_times_utc": {
-      "armA_ppolag_s0": "2026-09-07T08:00:07+00:00",
-      "armB_sotd_s0": "2026-09-07T08:00:29+00:00"
-    },
-    "target_rl_steps": 2000000,
-    "independent_seeds_per_arm": 1
-  },
-  "isolated_formal_evaluations": {
-    "observed": "2026-09-08T16:01:18+08:00",
-    "complete_evaluations": 2,
-    "evaluation_episodes": 624,
-    "integrity_errors": []
-  },
-  "data_observed_at": {
-    "legacy_audit": "2026-09-05T19:21:47.615992+08:00",
-    "refs_table": "2026-09-08T16:00:27.009021+08:00",
-    "repair_queue": "2026-09-07T17:50:03.445609+08:00",
-    "pilot_audit": "2026-09-05T21:25:56.853232+08:00",
-    "terminal_component": "2026-09-05T21:46:22.695030+08:00",
-    "supervision": "2026-09-08T15:56:50+08:00",
-    "post_repair_evaluations": "2026-09-08T16:01:18+08:00"
-  },
+  ],
   "goals": [
     {
       "id": "G1",
@@ -403,249 +435,5 @@
       "evidence": "PG1 10M cumviol ours 2107 vs CPO 2452; CG1 10M cumviol ours 1429 vs CPO 2305",
       "next": "10M 表补到 n=5（mainskill）；速度套件 10M（5090）；typed 日程 run 争取同时满足回报与泄漏目标。论文以「同回报下累计违约最低 + 可调旋钮」为 G5 主张。"
     }
-  ],
-  "focus": [
-    "2026-09-08 16:01：五台机器全部在跑（30109 / mainskill / aliyun / volc / 5090），队列见下表；看板每 30 分钟由收割循环自动刷新。",
-    "G1 差距：PG1 上 clip（0→4）与 ε（0→10）两条曲线已完整；三导航任务曲线完整，速度套件曲线在建。 → 解决：volc 补 CG1/PB1 的 ε∈{0,10}、clip∈{0.25,0.75,1.5,4}（各 3 种子）；阿里云跑速度套件 clip∈{0.1,0.25,1,2}。收割后自动出三任务 + 速度套件的旋钮前沿图。（导航三任务 09-09 早；速度套件 09-08 晚。）",
-    "G2 差距：三导航任务两端点均达；速度套件与 10M 的 n=5 在补。原「回报≥0.9×TRPO-Lag 且成本≤B+2」标准在可达前沿之外（2M 下任何方法回报≥22 时成本≥37），已按 owner 09-08 改为两端点各自接近。 → 解决：阿里云跑 clip 0.05（PG1/CG1/PB1 ×3 种子）补软端点；速度套件 {clip 0.1/0.25/1/2} vs {TRPO-Lag, CPO, PPO-Lag, FOCOPS}；mainskill 跑 10M 种子 3-4 使头条表 n=5；5090 跑速度套件 10M 与 PB1 10M。自动迭代已停止搜中段变体。（clip 0.05 与速度套件 2M：09-08 晚；10M 补种：09-09/10。）",
-    "G3 差距：相对文献基线已大幅领先；差的是自定目标：PG2 最好点 12.7 @ 2.2% 硬泄漏（目标 ≤2%），CG2 零泄漏侧最好点 10.9 @ 0.4%（目标回报 ≥12）。 → 解决：边距日程（0.95 起、前 0.5–1.5M 步线性收紧到目标阈值）：42 个 run 在 mainskill GPU 0/3/5/7（含 PG2 0.82/0.83、CG2 0.77/0.78 对冲网格），已完成 7；本机 GPU 补 PG2 m0.85/0.9、CG2 m0.76/0.72、prox40/prox20 的种子 4-5（n=5）。DONE 后自动严格评测（312 集/种子）。（日程 run 判决 09-08 晚—09-09 早；种子 4-5 09-09 早。）",
-    "G4 差距：只有 1 个种子过 1M 步；第 2 个种子 30 万步量级；阿里云四条线 1.5 万步/小时、本机无 NVIDIA Vulkan 无法渲染，都到不了 2M。 → 解决：30314 两臂两种子继续（看门狗保活）；建议把 G4 口径定为 1M 步 × 2 种子的案例研究并配对终档评测，阿里云线作为补充；本机放弃 VLA、改跑 typed 5 种子。（seed 0 2M 约 09-09；两种子 1M 约 09-12。）",
-    "G5 差距：训练期零泄漏没有任何 on-policy 方法能做到；我们能给的是：到达预算的累计违约最低、旋钮可预测、typed 上存在零硬泄漏工作点。 → 解决：10M 表补到 n=5（mainskill）；速度套件 10M（5090）；typed 日程 run 争取同时满足回报与泄漏目标。论文以「同回报下累计违约最低 + 可调旋钮」为 G5 主张。（10M 补种 09-09/10；typed 日程 09-09。）",
-    "历史修复证据（09-05/06）：修复后终档评估已复核 81 个运行、25,272 集；原始回报/硬违规完整性错误 0。各臂缺失种子保留；软预算按配置重算，尚未建立全面超越。",
-    "beta 隔离队列已复核 2/6 个正式终档评估；沿用顺序重置种子，和 r2 随机重置协议分开报告。 PG2_beta_repaired_integral_s1：R=-0.15，硬违规 0/312，单侧 95% 风险上限 0.96%，软成本 0.00。",
-    "独立组件 9 项检查，ε/预算组合 25/25 通过。保留终止成本，拒绝不存在的安全等待动作；解析小问题，不计入 SafeRL/SOTA 结果。",
-    "五目标以上述验收清单为准；保留失败、超预算及缺失结果。"
-  ],
-  "verdicts": [
-    {
-      "date": "09-08",
-      "topic": "G2 验收口径",
-      "verdict": "按 owner 要求改为「两端点各自接近」：软端点 = 某旋钮点回报 ≥0.9×TRPO-Lag−se 且成本 ≤TRPO-Lag+2（或在预算内全面优于它）；硬端点 = 回报 ≥CPO 且成本 ≤max(B, CPO)。原「回报≥0.9×TRPO-Lag 且成本≤B+2」在 2M 的可达前沿之外（回报≥22 的点成本都≥37）。",
-      "evidence": "results/safeot_dual_safepo/_iterate/status.md"
-    },
-    {
-      "date": "09-08",
-      "topic": "两端点判决",
-      "verdict": "G2: PG1 两端点（软≈TRPO-Lag，硬≥CPO）/CG1 两端点（软≈TRPO-Lag，硬≥CPO）/PB1 两端点（软≈TRPO-Lag，硬≥CPO）/速度套件 ≥2 任务两端点/10M：PG1 与 CG1 回报 ≥CPO 且成本 ≤CPO",
-      "evidence": "sotd_gap_plan.json"
-    },
-    {
-      "date": "09-08",
-      "topic": "算力",
-      "verdict": "volc-a100 经 5090 跳板接入（实际 26 核配额）；阿里云装 SafePO 栈后 2M 导航任务 1.7 h/作业、速度任务 1 h/作业，125 作业 2.3 h 排空；30109 无 NVIDIA Vulkan，VLA 不能在本机渲染；typed 日程 run 迁 30314 GPU（0.07→0.15–0.3M 步/h）。",
-      "evidence": ".agent/tasks/T-1490.md"
-    },
-    {
-      "date": "09-06",
-      "topic": "修复版逐种子终档证据",
-      "verdict": "修复后终档评估已复核 81 个运行、25,272 集；原始回报/硬违规完整性错误 0。各臂缺失种子保留；软预算按配置重算，尚未建立全面超越。",
-      "evidence": "sotd_r2_evaluations.json / sotd_r2_runs.csv"
-    },
-    {
-      "date": "09-06",
-      "topic": "beta 隔离正式复验",
-      "verdict": "beta 隔离队列已复核 2/6 个正式终档评估；沿用顺序重置种子，和 r2 随机重置协议分开报告。 PG2_beta_repaired_integral_s1：R=-0.15，硬违规 0/312，单侧 95% 风险上限 0.96%，软成本 0.00。",
-      "evidence": "sotd_frozen_formal.json"
-    },
-    {
-      "date": "09-06",
-      "topic": "评估器一致性",
-      "verdict": "批量版 4 集验证出现回报/成本差异，已隔离；保留原串行动作路径的修正版回报、成本、长度完全一致。软预算超标率按各配置计算。",
-      "evidence": "sotd_serial_validation.json"
-    },
-    {
-      "date": "09-05",
-      "topic": "重要性采样参数冲突",
-      "verdict": "软积分器覆盖 FDPI beta；已修复并通过实际父类回归检查，策略表现仍待新实验。",
-      "evidence": "sotd_repair_evidence.json / regression_checks.json"
-    },
-    {
-      "date": "09-05",
-      "topic": "配对试跑审计",
-      "verdict": "两次 40k 试跑完成、每臂 16 集。双策略采样未启用，IS 权重恒为 1，模型 SHA 完全相同；R=-0.679、硬违规 1/16、软成本 31.69，未建立修复带来的性能提升。",
-      "evidence": "sotd_pilot_audit.json"
-    },
-    {
-      "date": "09-05",
-      "topic": "完整历史产物审计",
-      "verdict": "112 个完整运行，34944 集；7 个 PB2 运行纠正重复计数；数据完整性错误 0。",
-      "evidence": "sotd_legacy_pooled.csv / sotd_repair_evidence.json"
-    },
-    {
-      "date": "09-05",
-      "topic": "基线调参扫描",
-      "verdict": "已核验 16 个完整种子运行；不重复训练已完成配置。",
-      "evidence": "sotd_legacy_pooled.csv"
-    },
-    {
-      "date": "09-05",
-      "topic": "终止步损伤与严格支持",
-      "verdict": "独立组件 9 项检查，ε/预算组合 25/25 通过。保留终止成本，拒绝不存在的安全等待动作；解析小问题，不计入 SafeRL/SOTA 结果。",
-      "evidence": "sotd_terminal_component.json"
-    },
-    {
-      "date": "09-05",
-      "topic": "小 ε 数值失败",
-      "verdict": "首轮组件检查 20/25；ε=.001 的 5 个失衡结果已拦截并保留。新组件用联合对偶和 Newton 精修复验，原训练求解器未替换。",
-      "evidence": "sotd_terminal_component.json / previous_attempt"
-    },
-    {
-      "date": "09-05",
-      "topic": "30314 / G4",
-      "verdict": "任务记录中 SSH 失联；两臂未完成匹配评测。",
-      "evidence": "T-1484 18:48 记录"
-    }
-  ],
-  "queue": [
-    {
-      "goal": "G1/G2",
-      "task": "CG1/PB1 ε 与 clip 曲线补点（volc）",
-      "status": "run",
-      "n": 39,
-      "done": 35,
-      "running": 4,
-      "pending": 0,
-      "eta": "约 1 h",
-      "note": "35/39 完成，4 在跑，0 排队"
-    },
-    {
-      "goal": "G1/G2",
-      "task": "clip 0.05 软端点 + 速度套件两端点 + 种子 3-4（aliyun）",
-      "status": "done",
-      "n": 125,
-      "done": 125,
-      "running": 0,
-      "pending": 0,
-      "eta": "完成",
-      "note": "125/125 完成，0 在跑，0 排队"
-    },
-    {
-      "goal": "G2/G5",
-      "task": "10M 种子 3-4（PG1/CG1 头条臂与参考）（mainskill）",
-      "status": "run",
-      "n": 22,
-      "done": 10,
-      "running": 12,
-      "pending": 0,
-      "eta": "约 1 h",
-      "note": "10/22 完成，12 在跑，0 排队"
-    },
-    {
-      "goal": "G2",
-      "task": "速度套件 10M（5090）",
-      "status": "done",
-      "n": 36,
-      "done": 36,
-      "running": 0,
-      "pending": 0,
-      "eta": "完成",
-      "note": "36/36 完成，0 在跑，0 排队"
-    },
-    {
-      "goal": "G2",
-      "task": "PointButton1 10M（5090）",
-      "status": "done",
-      "n": 12,
-      "done": 12,
-      "running": 0,
-      "pending": 0,
-      "eta": "完成",
-      "note": "12/12 完成，0 在跑，0 排队"
-    },
-    {
-      "goal": "G3",
-      "task": "typed 边距日程对冲网格（mainskill）",
-      "status": "run",
-      "n": 12,
-      "done": 7,
-      "running": 5,
-      "pending": 0,
-      "eta": "约 1 h",
-      "note": "7/12 完成，5 在跑，0 排队"
-    },
-    {
-      "goal": "G3",
-      "task": "typed 边距日程（自 30109 迁入）（mainskill）",
-      "status": "run",
-      "n": 30,
-      "done": 0,
-      "running": 30,
-      "pending": 0,
-      "eta": "约 3 h",
-      "note": "0/30 完成，30 在跑，0 排队"
-    },
-    {
-      "goal": "G3",
-      "task": "typed 前沿行种子 4-5（30109）",
-      "status": "run",
-      "n": 8,
-      "done": 0,
-      "running": 8,
-      "pending": 0,
-      "eta": "约 4 h",
-      "note": "0/8 完成，8 在跑，0 排队"
-    },
-    {
-      "goal": "G3/G5",
-      "task": "typed 接近预算点种子 4-5（30109）",
-      "status": "run",
-      "n": 4,
-      "done": 0,
-      "running": 4,
-      "pending": 0,
-      "eta": "约 5 h",
-      "note": "0/4 完成，4 在跑，0 排队"
-    },
-    {
-      "goal": "G4",
-      "task": "SafeVLA 两臂 × 2 种子训练（mainskill，看门狗保活）",
-      "status": "run",
-      "eta": "seed 0 2M 约 09-09；两种子 1M 约 09-12",
-      "note": "阿里云四条线已停（1.5 万步/h，不可能在截止前到 2M）；30109 无 NVIDIA Vulkan 不能渲染。建议口径：1M 步 × 2 种子案例研究 + 配对终档评测。"
-    },
-    {
-      "goal": "G3/G5",
-      "task": "9 个已训练 proximity 模型终档补评",
-      "status": "done",
-      "eta": "每模型 312 集",
-      "note": "9/9 完成；缺失/失败显式保留。"
-    },
-    {
-      "goal": "G3/G4/G5",
-      "task": "终止事件独立组件检查",
-      "status": "done",
-      "eta": "以产物为准",
-      "note": "独立组件 9 项检查，ε/预算组合 25/25 通过。保留终止成本，拒绝不存在的安全等待动作；解析小问题，不计入 SafeRL/SOTA 结果。"
-    }
-  ],
-  "changelog": [
-    {
-      "time": "09-08 16:01",
-      "text": "五目标卡片、焦点、队列改为由 sotd_gap_plan.py 从收割表实时生成（差距 / 原因 / 解决办法 / 预计）；新增 sotd_gap_plan.json 与 sotd_gap_plan.md。"
-    },
-    {
-      "time": "09-08 02:00",
-      "text": "G2 验收改为两端点各自接近；阿里云 SafePO 栈上线；typed 日程 run 迁至 30314 GPU；30109 GPU 跑 typed 种子 4-5。"
-    },
-    {
-      "time": "09-07 23:50",
-      "text": "volc-a100 经 5090 跳板接入；wave-6 曲线补点开跑。"
-    },
-    {
-      "time": "09-05 19:21",
-      "text": "有限 beta 修复队列启动，代码和配置按哈希冻结。"
-    },
-    {
-      "time": "09-05 18:48",
-      "text": "wave-5 已启动；30314 仍在阻塞记录中。"
-    }
-  ],
-  "figures": [
-    "sotd_r2_frontier.png",
-    "sotd_trpo_frontier.png",
-    "sotd_longrun_PointGoal1_10M.png",
-    "sotd_longrun_CarGoal1_10M.png",
-    "sotd_legacy_frontier.png",
-    "sotd_terminal_component_frontier.png"
   ]
 }
