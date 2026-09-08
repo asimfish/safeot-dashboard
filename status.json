@@ -1,5 +1,5 @@
 {
- "updated": "2026-09-08T23:27:40",
+ "updated": "2026-09-08T23:54:04",
  "goals": [
   {
    "id": "G1",
@@ -48,9 +48,9 @@
   }
  ],
  "focus": [
-  "全覆盖 A 期:volc 54 路(PB1/CB1/CB2)+ 阿里云 54 路(PG1/CG1/PP1,CPU-JAX 绑核)在跑;CP1 排队;30109 因进程数触顶与 GPU 被占本波弃用",
-  "阿里云 CPU-JAX 速度 ≈ 空闲 GPU,184 核可并行 ~54 路,是当前最大算力;首发未绑核导致 load 875 已修正(taskset 3 核/路)",
-  "B 期待办:修 fork Circle 类、速度任务标量成本包装器;【待 owner 决策】论文主线切换"
+  "全覆盖 22 任务:15 任务 198 路在训(volc 90:PB1/CB1/CB2/Hopper/HalfCheetah;阿里云 108:PG1/CG1/PP1/CP1/PC1/CC1),7 任务排队(PC2/CC2/Swimmer/Walker2d/Ant/Humanoid + 已完成 5)",
+  "B 期代码已就位:Circle 几何修复 + v1g 状态边距(边界距离/速度阈值,支持门控);评估支持标量成本",
+  "【待 owner 决策】论文主线切换"
  ],
  "verdicts": [
   {
@@ -182,14 +182,14 @@
    "task": "A 期:CB2 + Level-1 六任务(126 路)训练→验证",
    "status": "run",
    "eta": "~2-3 天(受 30109 CPU / volc GPU 限速)",
-   "note": "第一批 72 路已发;第二批 54 路待容量"
+   "note": "A 期 126 路全部在跑(volc 54 + 阿里云 72)"
   },
   {
    "goal": "G2 全覆盖",
    "task": "B 期:修 fork Circle 类 + 速度任务包装器(几何/速度边距)→ 10 任务 180 路",
-   "status": "wait",
+   "status": "run",
    "eta": "A 期后 ~3 天",
-   "note": "Circle:成本=越界;速度:标量 cost"
+   "note": "Circle 修复 + v1g 完成;首批 4 任务 72 路在跑,6 任务排队"
   },
   {
    "goal": "G2 全覆盖",
@@ -277,6 +277,10 @@
   }
  ],
  "changelog": [
+  {
+   "time": "09-08 23:54",
+   "text": "B 期发车:Circle 修复、v1g 状态边距脚本;PC1/CC1@阿里云、Hopper/HalfCheetah@volc;CP1 发车;矢阵 172 格"
+  },
   {
    "time": "09-08 23:27",
    "text": "30109 弃用(进程触顶/GPU 被占);阿里云 CPU-JAX 环境上线并绑核发 54 路;volc 54 路;矩阵 112 格"
@@ -532,17 +536,58 @@
        "budget": "预算 25/集;2M 步",
        "baselines": "同上",
        "covered": true,
-       "status_kind": "planned",
-       "status": "排队(阿里云下一槽)"
+       "status_kind": "training",
+       "status": "训练中(阿里云)"
       }
      ]
     },
     {
      "name": "Level-1/2 · Circle 任务(Point/Car x Circle1/2,4 任务)",
      "total": 4,
-     "covered": 0,
-     "note": "B 期:fork 的 Circle 类损坏(缺 size 属性)待修;成本=越界,边距用几何距离(到边界)实现",
-     "tasks": []
+     "covered": 4,
+     "note": "fork Circle 类已修(补 size 字段);成本=越界(|x|,|y| > 1.125);边距=到边界距离,门控=距离在缩小时才罚。PC1/CC1 在阿里云跑,PC2/CC2 排队",
+     "tasks": [
+      {
+       "id": "pc1",
+       "name": "SafetyPointCircle1-v0",
+       "channels": "单通道 cost_out_of_boundary",
+       "budget": "预算 25/集;2M 步",
+       "baselines": "FDPI、SAC-Lag、SAC-Pen c5",
+       "covered": true,
+       "status_kind": "training",
+       "status": "训练中(阿里云)"
+      },
+      {
+       "id": "pc2",
+       "name": "SafetyPointCircle2-v0",
+       "channels": "单通道 cost_out_of_boundary",
+       "budget": "预算 25/集;2M 步",
+       "baselines": "FDPI、SAC-Lag、SAC-Pen c5",
+       "covered": true,
+       "status_kind": "planned",
+       "status": "排队"
+      },
+      {
+       "id": "cc1",
+       "name": "SafetyCarCircle1-v0",
+       "channels": "单通道 cost_out_of_boundary",
+       "budget": "预算 25/集;2M 步",
+       "baselines": "FDPI、SAC-Lag、SAC-Pen c5",
+       "covered": true,
+       "status_kind": "training",
+       "status": "训练中(阿里云)"
+      },
+      {
+       "id": "cc2",
+       "name": "SafetyCarCircle2-v0",
+       "channels": "单通道 cost_out_of_boundary",
+       "budget": "预算 25/集;2M 步",
+       "baselines": "FDPI、SAC-Lag、SAC-Pen c5",
+       "covered": true,
+       "status_kind": "planned",
+       "status": "排队"
+      }
+     ]
     },
     {
      "name": "Level-2 安全导航 · 其它机器人(Racecar/Doggo/Ant)与 Circle 任务",
@@ -554,9 +599,70 @@
     {
      "name": "安全速度控制(HalfCheetah/Hopper/Swimmer/Walker2d/Ant/Humanoid)",
      "total": 6,
-     "covered": 0,
-     "note": "B 期:单通道速度成本,不在 info 里而是标量 cost;边距用速度阈值实现;FDPI 代码支持",
-     "tasks": []
+     "covered": 6,
+     "note": "成本=速度超阈值(标量);边距=速度到阈值的距离,门控=速度在上升时才罚。Hopper/HalfCheetah 在 volc 跑,其余 4 个排队",
+     "tasks": [
+      {
+       "id": "hcv",
+       "name": "SafetyHalfCheetahVelocity-v1",
+       "channels": "单通道 速度阈值",
+       "budget": "预算 25/集;2M 步",
+       "baselines": "FDPI、SAC-Lag、SAC-Pen c5",
+       "covered": true,
+       "status_kind": "training",
+       "status": "训练中(volc)"
+      },
+      {
+       "id": "hov",
+       "name": "SafetyHopperVelocity-v1",
+       "channels": "单通道 速度阈值",
+       "budget": "预算 25/集;2M 步",
+       "baselines": "FDPI、SAC-Lag、SAC-Pen c5",
+       "covered": true,
+       "status_kind": "training",
+       "status": "训练中(volc)"
+      },
+      {
+       "id": "swv",
+       "name": "SafetySwimmerVelocity-v1",
+       "channels": "单通道 速度阈值",
+       "budget": "预算 25/集;2M 步",
+       "baselines": "FDPI、SAC-Lag、SAC-Pen c5",
+       "covered": true,
+       "status_kind": "planned",
+       "status": "排队"
+      },
+      {
+       "id": "wav",
+       "name": "SafetyWalker2dVelocity-v1",
+       "channels": "单通道 速度阈值",
+       "budget": "预算 25/集;2M 步",
+       "baselines": "FDPI、SAC-Lag、SAC-Pen c5",
+       "covered": true,
+       "status_kind": "planned",
+       "status": "排队"
+      },
+      {
+       "id": "anv",
+       "name": "SafetyAntVelocity-v1",
+       "channels": "单通道 速度阈值",
+       "budget": "预算 25/集;2M 步",
+       "baselines": "FDPI、SAC-Lag、SAC-Pen c5",
+       "covered": true,
+       "status_kind": "planned",
+       "status": "排队"
+      },
+      {
+       "id": "huv",
+       "name": "SafetyHumanoidVelocity-v1",
+       "channels": "单通道 速度阈值",
+       "budget": "预算 25/集;2M 步",
+       "baselines": "FDPI、SAC-Lag、SAC-Pen c5",
+       "covered": true,
+       "status_kind": "planned",
+       "status": "排队"
+      }
+     ]
     }
    ]
   },
