@@ -1,5 +1,5 @@
 {
- "updated": "2026-09-09T21:27:53",
+ "updated": "2026-09-10T00:28:40",
  "goals": [
   {
    "id": "G1",
@@ -48,13 +48,19 @@
   }
  ],
  "focus": [
-  "阿里云:PG1/CG1 全 n=3 定稿;PP1/CP1 边距臂 13 路在验证车道(今晚齐);活跃 59(PC1/CC1 收尾 + PC2/CC2 各 3 档/路);SWV/WAV 36 路 SIGSTOP 待空槽;cpu_queue:Ant → L1 .75g×4 任务。",
+  "阿里云:L1 Goal/Push 4/4 定稿;PC1/CC1 18/18 终档 → 22 臂验证中(车道是瓶颈,~4 h);PC2/CC2 快臂终档陆续入表;SWV/WAV 恢复中;cpu_queue:Ant → L1 .75g×4。",
   "volc:GPU 只跑 PB1/CB1 36 路(单路 ~5.5 h/档,36 路同步发车 → 出档成批,~28 h 齐终档);Hopper 暂停待自动恢复;CPU 侧 CB2 + HalfCheetah(首档已出)。",
   "30109:GPU 仍被他人占满,但 CPU 半空 → Humanoid 18 路绑核 64-99 发车;verify_loop(CPU 车道 100-111)已起。22 任务全部已发车或在自动队列(仅 Ant 待阿里云空槽)。",
   "L1 初读(官方 CSR@25 几乎人人=1,主张必须用逐集 any-cost + J_r):CG1 typed .8g 0/936 @20.39 vs FDPI 2.24%@33.83;PG1/PP1 边距臂验证未齐;CP1 typed none 18.65 高于 Lag/Pen。结论未闭合,等齐 n=3。",
   "【待 owner】论文主线切换 + 08-30 ICLR tex 源路径"
  ],
  "verdicts": [
+  {
+   "date": "09-10",
+   "topic": "Level-1 Goal/Push 四任务定稿(PG1/CG1/PP1/CP1,24 臂全 n=3、936 集)",
+   "verdict": "官方 CSR@25 全部 ≥0.995 → 预算口径无法排序。逐集 any-cost:typed .8g 四任务唯一零臂(PG1 1/936)且保留 47–65% FDPI 回报(PG1 18.50 / CG1 20.39 / PP1 12.35 / CP1 12.66);SAC-Lag 两任务塌陷换零(1.25/0.90)、两任务漏 1.4–1.5%;SAC-Pen 全漏 0.5–1.4% 且回报 ≤30%;CP1 typed .8g 严格支配 SAC-Lag。typed δ=0 四任务复现 FDPI 端点(单通道同算法)→ 增益来自旋钮。无门控 δ=.8 回报塌 3.7–9.4、门控恢复 12.4–20.4",
+   "evidence": "HARVEST §29;figs/tab_frontier_l1.tex;paper/tables/tab_frontier_l1.tex;FRONTIER_WRITEUP_EN.md L1 节"
+  },
   {
    "date": "09-09",
    "topic": "Level-1 PointGoal1/CarGoal1 定稿(n=3,936 集/臂)",
@@ -205,6 +211,10 @@
   }
  ],
  "changelog": [
+  {
+   "date": "2026-09-10 00:40",
+   "text": "L1 Goal/Push 四任务定稿(HARVEST §29、tab_frontier_l1.tex、写作稿 L1 节、论文目录图表)。PC1/CC1 训练全部到终档。30109 Humanoid 出档速度确认:8358P 上速度任务快臂 27 分/档。"
+  },
   {
    "date": "2026-09-09 21:30",
    "text": "Humanoid 从 volc gpu_queue 挪到 30109 CPU 立即发车(GPU 满、CPU 半空);30109 起 CPU 验证循环(此前 pgrep 自匹配误报'已运行',实际未起);三机 make_frontier_csv 跳过未注册变体(v0 探针)。volc 出档成批现象解释:36 路同步发车,单路 ~5.5 h/档。"
@@ -429,7 +439,7 @@
      "name": "Level-1 安全导航 · Point/Car x Goal/Button/Push(6 任务)",
      "total": 6,
      "covered": 6,
-     "note": "Goal1/Push1 仅 hazards 单通道(逐集 any-cost + 官方 J_c/CSR@25 双口径);Button1 为三通道。PG1/CG1/PP1/CP1 终档已齐、验证进行中;PB1/CB1 仍在 volc 训练。",
+     "note": "Goal1/Push1 单通道 hazards(逐集 any-cost + 官方 J_c/CSR@25 双口径);Button1 三通道。Goal/Push 4/4 定稿(HARVEST §29);Button1 ×2 在 volc GPU 训练。.75g 中间档 ×4 排队。",
      "tasks": [
       {
        "id": "PG1",
@@ -478,8 +488,8 @@
        "budget": "预算 25/集;2M 步",
        "baselines": "同上",
        "covered": true,
-       "status_kind": "verifying",
-       "status": "终档齐,verify_loop 补 3x104 块(阿里云);已入 60 条 L1 臂"
+       "status_kind": "done",
+       "status": "完成:6 臂全 n=3(936 集);typed .8g 0/936,SAC-Lag 塌陷(PP1)/漏 1.5%(CP1)"
       },
       {
        "id": "CP1",
@@ -488,8 +498,8 @@
        "budget": "预算 25/集;2M 步",
        "baselines": "同上",
        "covered": true,
-       "status_kind": "verifying",
-       "status": "终档齐,verify_loop 补 3x104 块(阿里云);已入 60 条 L1 臂"
+       "status_kind": "done",
+       "status": "完成:6 臂全 n=3(936 集);typed .8g 0/936,SAC-Lag 塌陷(PP1)/漏 1.5%(CP1)"
       }
      ]
     },
@@ -506,8 +516,8 @@
        "budget": "预算 25/集;2M 步",
        "baselines": "FDPI、SAC-Lag、SAC-Pen c5",
        "covered": true,
-       "status_kind": "training",
-       "status": "训练中(阿里云),各 3/18 终档(pen5)"
+       "status_kind": "verifying",
+       "status": "18/18 终档;22 臂在阿里云验证车道(~16 分/臂,2 车道)"
       },
       {
        "id": "pc2",
@@ -517,7 +527,7 @@
        "baselines": "FDPI、SAC-Lag、SAC-Pen c5",
        "covered": true,
        "status_kind": "training",
-       "status": "已发车(阿里云 18 路/任务,16:12 UTC+8)"
+       "status": "快臂已出终档(PC2 5/18、CC2 6/18),typed 臂 ~7 档"
       },
       {
        "id": "cc1",
@@ -526,8 +536,8 @@
        "budget": "预算 25/集;2M 步",
        "baselines": "FDPI、SAC-Lag、SAC-Pen c5",
        "covered": true,
-       "status_kind": "training",
-       "status": "训练中(阿里云),各 3/18 终档(pen5)"
+       "status_kind": "verifying",
+       "status": "18/18 终档;22 臂在阿里云验证车道(~16 分/臂,2 车道)"
       },
       {
        "id": "cc2",
@@ -537,7 +547,7 @@
        "baselines": "FDPI、SAC-Lag、SAC-Pen c5",
        "covered": true,
        "status_kind": "training",
-       "status": "已发车(阿里云 18 路/任务,16:12 UTC+8)"
+       "status": "快臂已出终档(PC2 5/18、CC2 6/18),typed 臂 ~7 档"
       }
      ]
     },
@@ -562,7 +572,7 @@
        "baselines": "FDPI、SAC-Lag、SAC-Pen c5",
        "covered": true,
        "status_kind": "training",
-       "status": "训练中(volc CPU 核 0-35,19:05 发车)"
+       "status": "训练中(volc CPU,首档已出 4 路)"
       },
       {
        "id": "hov",
@@ -581,8 +591,8 @@
        "budget": "预算 25/集;2M 步",
        "baselines": "FDPI、SAC-Lag、SAC-Pen c5",
        "covered": true,
-       "status_kind": "paused",
-       "status": "已创建目录但 SIGSTOP(keeper 抢跑超发),待空槽 CONT"
+       "status_kind": "training",
+       "status": "阿里云 keeper 已恢复大部分(SWV 55 档、WAV 15 档),5 路仍暂停"
       },
       {
        "id": "wav",
@@ -591,8 +601,8 @@
        "budget": "预算 25/集;2M 步",
        "baselines": "FDPI、SAC-Lag、SAC-Pen c5",
        "covered": true,
-       "status_kind": "paused",
-       "status": "已创建目录但 SIGSTOP(keeper 抢跑超发),待空槽 CONT"
+       "status_kind": "training",
+       "status": "阿里云 keeper 已恢复大部分(SWV 55 档、WAV 15 档),5 路仍暂停"
       },
       {
        "id": "anv",
@@ -612,7 +622,7 @@
        "baselines": "FDPI、SAC-Lag、SAC-Pen c5",
        "covered": true,
        "status_kind": "training",
-       "status": "训练中(30109 CPU 核 64-99,每路 2 核,21:25 发车)"
+       "status": "训练中(30109 CPU,快臂 27 分/档、typed 1.6 h/档 —— 8358P 比 volc CPU 快 4-5x)"
       }
      ]
     }
