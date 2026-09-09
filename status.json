@@ -1,5 +1,5 @@
 {
- "updated": "2026-09-10T00:28:40",
+ "updated": "2026-09-10T00:32:36",
  "goals": [
   {
    "id": "G1",
@@ -50,7 +50,7 @@
  "focus": [
   "阿里云:L1 Goal/Push 4/4 定稿;PC1/CC1 18/18 终档 → 22 臂验证中(车道是瓶颈,~4 h);PC2/CC2 快臂终档陆续入表;SWV/WAV 恢复中;cpu_queue:Ant → L1 .75g×4。",
   "volc:GPU 只跑 PB1/CB1 36 路(单路 ~5.5 h/档,36 路同步发车 → 出档成批,~28 h 齐终档);Hopper 暂停待自动恢复;CPU 侧 CB2 + HalfCheetah(首档已出)。",
-  "30109:GPU 仍被他人占满,但 CPU 半空 → Humanoid 18 路绑核 64-99 发车;verify_loop(CPU 车道 100-111)已起。22 任务全部已发车或在自动队列(仅 Ant 待阿里云空槽)。",
+  "30109:Humanoid(核 64-99)+ Ant(核 0-17,1 核起步)36 路 CPU-JAX;load 127/128;repin_anv 守护在 Humanoid 快臂结束后给 Ant 加核;verify_loop CPU 车道 100-111。**22/22 任务全部在跑或已定稿**。",
   "L1 初读(官方 CSR@25 几乎人人=1,主张必须用逐集 any-cost + J_r):CG1 typed .8g 0/936 @20.39 vs FDPI 2.24%@33.83;PG1/PP1 边距臂验证未齐;CP1 typed none 18.65 高于 Lag/Pen。结论未闭合,等齐 n=3。",
   "【待 owner】论文主线切换 + 08-30 ICLR tex 源路径"
  ],
@@ -192,25 +192,35 @@
  ],
  "queue": [
   {
-   "task": "阿里云 verify 补齐 L1 边距臂 n=3 + 刷新 L1 图/表",
-   "eta": "今晚",
+   "task": "阿里云验证车道消化 PC1/CC1 22 臂 + PC2/CC2 快臂",
+   "eta": "~4 h",
    "owner": "verify_loop",
-   "note": "缺 v1c/v1e8 若干 seed 的 proto3"
+   "note": "2 车道 ~16 分/臂"
   },
   {
-   "task": "volc PB1/CB1 出终档",
-   "eta": "~24h",
-   "owner": "gpu",
-   "note": "~4 档/路,需 10 档"
+   "task": "volc PB1/CB1 齐终档 → resume_when 自动 CONT Hopper",
+   "eta": "~24 h",
+   "owner": "resume_when",
+   "note": "36 路同步出档成批"
   },
   {
-   "task": "CONT SWV/WAV 或发 ANV/HUV",
-   "eta": "PC1/CC1 结束后",
+   "task": "阿里云 SWV/WAV/PC2/CC2 结束后 keeper 发 L1 .75g×4(12 路)",
+   "eta": "~15 h",
    "owner": "slot_keeper",
-   "note": "MAXACT=76"
+   "note": "cpu_queue 4 行"
+  },
+  {
+   "task": "Humanoid/Ant 终档 → 30109 CPU 验证",
+   "eta": "快臂 4.5 h / typed 16-30 h",
+   "owner": "verify_loop@30109",
+   "note": ""
   }
  ],
  "changelog": [
+  {
+   "date": "2026-09-10 00:55",
+   "text": "Ant 从阿里云队列挪到 30109 CPU 立即发车(1 核/路,repin_anv 守护待 Humanoid 快臂结束后升 2 核)。至此 22 任务无一在排队等待。阿里云 cpu_queue 只剩 L1 .75g 补档臂。"
+  },
   {
    "date": "2026-09-10 00:40",
    "text": "L1 Goal/Push 四任务定稿(HARVEST §29、tab_frontier_l1.tex、写作稿 L1 节、论文目录图表)。PC1/CC1 训练全部到终档。30109 Humanoid 出档速度确认:8358P 上速度任务快臂 27 分/档。"
@@ -611,8 +621,8 @@
        "budget": "预算 25/集;2M 步",
        "baselines": "FDPI、SAC-Lag、SAC-Pen c5",
        "covered": true,
-       "status_kind": "planned",
-       "status": "阿里云 cpu_queue 首位(SWV/WAV 恢复后自动发)"
+       "status_kind": "training",
+       "status": "训练中(30109 CPU 核 0-17 每路 1 核,00:50 发车;Humanoid 快臂结束后 repin_anv 守护自动升 2 核)"
       },
       {
        "id": "huv",
