@@ -1,0 +1,121 @@
+{
+  "protocol_sha256": "d3c6b6e6b3658080d06bde325ce7e3e7dbc78c6a60af0956f802f5852a0f52c5",
+  "source_report_sha256": "ea9254ad3c1297bd182b542dc1e1a8460b6b947b5dd1a3c946e04671112f3cc8",
+  "primary_joint_gate": true,
+  "summaries": [
+    {
+      "setting": "native",
+      "training_seeds": [
+        1,
+        2,
+        3
+      ],
+      "n": 1872,
+      "reward_mean": 10.638244508088874,
+      "reward_seed_sd": 1.2641615298474589,
+      "hard_k": 31,
+      "worst_seed_simultaneous_cp95": 0.034664911717933546,
+      "soft_mean": 16.76709401709402,
+      "soft_feasible_seeds": 3
+    },
+    {
+      "setting": "random",
+      "training_seeds": [
+        1,
+        2,
+        3
+      ],
+      "n": 1872,
+      "reward_mean": 11.287854423783545,
+      "reward_seed_sd": 1.7604362936018845,
+      "hard_k": 55,
+      "worst_seed_simultaneous_cp95": 0.060253948248747996,
+      "soft_mean": 17.73824786324786,
+      "soft_feasible_seeds": 3
+    },
+    {
+      "setting": "safeot_filter",
+      "training_seeds": [
+        1,
+        2,
+        3
+      ],
+      "n": 1872,
+      "reward_mean": 10.489819223835985,
+      "reward_seed_sd": 1.3196275535559756,
+      "hard_k": 13,
+      "worst_seed_simultaneous_cp95": 0.01962165805801333,
+      "soft_mean": 15.675213675213675,
+      "soft_feasible_seeds": 3
+    }
+  ],
+  "contrasts": [
+    {
+      "control": "native",
+      "outcome": "reward",
+      "mean": -0.1484252842528906,
+      "nominal95_low": -0.5709904202747066,
+      "nominal95_high": 0.2616333901000226,
+      "familywise95_low": -0.7026797813664729,
+      "familywise95_high": 0.42710380163476136
+    },
+    {
+      "control": "native",
+      "outcome": "hard_event_rate",
+      "mean": -0.009615384615384612,
+      "nominal95_low": -0.01655982905982906,
+      "nominal95_high": -0.0026709401709401714,
+      "familywise95_low": -0.018696581196581203,
+      "familywise95_high": -0.000534188034188034
+    },
+    {
+      "control": "native",
+      "outcome": "soft_cost",
+      "mean": -1.0918803418803424,
+      "nominal95_low": -2.535790598290597,
+      "nominal95_high": 0.3402777777777778,
+      "familywise95_low": -3.0752203525641026,
+      "familywise95_high": 0.7695913461538466
+    },
+    {
+      "control": "random",
+      "outcome": "reward",
+      "mean": -0.7980351999475603,
+      "nominal95_low": -1.228489064957031,
+      "nominal95_high": -0.37816131554602916,
+      "familywise95_low": -1.3933885118294442,
+      "familywise95_high": -0.24330822511614977
+    },
+    {
+      "control": "random",
+      "outcome": "hard_event_rate",
+      "mean": -0.022435897435897446,
+      "nominal95_low": -0.030448717948717948,
+      "nominal95_high": -0.01442307692307692,
+      "familywise95_low": -0.033653846153846145,
+      "familywise95_high": -0.011752136752136747
+    },
+    {
+      "control": "random",
+      "outcome": "soft_cost",
+      "mean": -2.0630341880341874,
+      "nominal95_low": -3.324252136752134,
+      "nominal95_high": -0.8477564102564108,
+      "familywise95_low": -3.777624198717947,
+      "familywise95_high": -0.44391025641025667
+    }
+  ],
+  "bootstrap": {
+    "repetitions": 10000,
+    "rng_seed": 20260909,
+    "n_reset_ids": 624,
+    "method": "Paired reset-ID percentile bootstrap; approximate intervals. Bonferroni over the six fixed control/outcome contrasts."
+  },
+  "scope": "New reset distribution for three fixed, previously selected policies. No claim about new training seeds or SOTA.",
+  "primary_gate_units": "Empirical average reward and each-policy soft mean; simultaneous exact hard-risk bounds across the three fixed primary policies. Not a confidence guarantee for all three metric types.",
+  "limitations": [
+    "Bootstrap intervals are approximate, especially for rare hard events; primary hard-risk decision uses exact binomial bounds.",
+    "Every bootstrap reset ID keeps all policy/control/outcome pairs together.",
+    "All six secondary contrasts are reported, including unfavorable outcomes; no change to the original primary gate."
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "id": "T1484-CG2-fallback-support-screen-20260909",
+  "frozen_at": "2026-09-09T18:52:19.224008+08:00",
+  "purpose": "Mechanism screen: can priced Q retain reward/soft-budget information when the hard-score feasible set is empty?",
+  "hypothesis": "Current argmin-g fallback discards the reward-minus-priced-soft-cost critic. A small score-support slack may improve empirical return and soft costs; hard risk may regress and must be reported.",
+  "env": "SafetyCarGoal2-v0",
+  "runs": [
+    {
+      "run": "CG2_fdpi_lp_m0.78sched_r2_s1",
+      "seed": 1,
+      "checkpoint": "params_1990002.pkl",
+      "checkpoint_sha256": "f4439eabaa53c3344d06cf07641186ab5ba30fea761423bf6f4511807518fe26",
+      "config_sha256": "fd14b0d033955b1680f90fd42d0e093de7f19a6e30fd19ac68b44c346246d1ec",
+      "reference_file": "results/safeot_dual_fdpi/CG2_fdpi_lp_m0.78sched_r2_s1/strict_eval_filterK16_pf0.02_b5000_params_1990002.json",
+      "reference_sha256": "b4288794b0601aa4408d160bad9caa2126546d6d1107d01ab4c81479621b312b"
+    },
+    {
+      "run": "CG2_fdpi_lp_m0.78sched_r2_s2",
+      "seed": 2,
+      "checkpoint": "params_1990002.pkl",
+      "checkpoint_sha256": "51d6fb2a64d347f6efb821111cee43a24dc721e555dbcd7d6661951b271184f0",
+      "config_sha256": "9b35fd6fc1ae7d3a9023060224f4e680447b5340ae0a46a33846a4262f7a0840",
+      "reference_file": "results/safeot_dual_fdpi/CG2_fdpi_lp_m0.78sched_r2_s2/strict_eval_filterK16_pf0.02_b5000_params_1990002.json",
+      "reference_sha256": "8a3f84b2571202c18fbf421da73dccf1082bfae7176a2ea6a367f8b8820b582e"
+    }
+  ],
+  "blocks": [
+    5000,
+    9000
+  ],
+  "episodes_per_block": 104,
+  "fallback_slacks": [
+    0.0,
+    0.001,
+    0.005
+  ],
+  "k": 16,
+  "pf": 0.02,
+  "std": 1,
+  "fixed_total_episodes": 1248,
+  "max_workers": 3,
+  "source_sha256": {
+    "fdpi_strict_eval_support.py": "01508adb9f476f3d00119c2d778bb34b163d1b93a0d000f8ef708ff99f6443e5",
+    "support_selection.py": "c62799f74f57107f84277059d68fd5f03283533893279ef2c07c67e61a7bb6ad"
+  },
+  "validation_gate": "Four seed1 block5000 episodes at slack0 must reproduce existing canonical raw reward/cost/length before nonzero-slack screening. Full slack0 output also compared on both blocks/seeds.",
+  "stopping_rule": "Run fixed2seeds x3settings x208episodes, preserve every result; no extra blocks or post hoc seed replacement. Any equivalence/integrity failure invalidates mechanistic comparison.",
+  "promotion_rule": "Screen only: report both seed directions of return and soft mean with hard counts; consider fresh held-out evaluation only after a setting meets R>=12 and soft mean<=25 on both seeds with no increase in observed hard counts vs matched slack0.",
+  "limitations": [
+    "Exploratory reused reset blocks, no SOTA or confidence-qualified hard-risk claim.",
+    "Slack is a learned-score tolerance, not an event-probability guarantee.",
+    "Q already contains learned soft-cost pricing; no independent soft-cost critic is introduced.",
+    "Frozen PG2 confirmatory protocol is separate and unchanged."
+  ]
+}
