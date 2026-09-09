@@ -1,0 +1,136 @@
+{
+  "status": "running",
+  "started": "2026-09-10T05:16:05.547350+08:00",
+  "updated": "2026-09-10T05:19:58.543100+08:00",
+  "total": 12,
+  "completed": 0,
+  "failed": 0,
+  "protocol_sha256": "10f575603d27aa7ede3addbcddefc44a3ad2bfbb28fc297e7c426bf7ea603359",
+  "observed": "2026-09-10T05:24:08.224751+08:00",
+  "jobs": {
+    "smoke_fixed": {
+      "margin_mode": "approach",
+      "soft_mode": "fixed",
+      "seed": 101,
+      "status": "complete",
+      "gpu": 0,
+      "started": "2026-09-10T05:16:05.549395+08:00",
+      "finished": "2026-09-10T05:19:58.505828+08:00",
+      "sample_steps": 20000,
+      "evaluation_episodes": 2
+    },
+    "smoke_lp": {
+      "margin_mode": "approach",
+      "soft_mode": "lp",
+      "seed": 101,
+      "status": "complete",
+      "gpu": 3,
+      "started": "2026-09-10T05:16:05.549565+08:00",
+      "finished": "2026-09-10T05:19:54.374110+08:00",
+      "sample_steps": 20000,
+      "evaluation_episodes": 2
+    },
+    "distance_fixed_s1": {
+      "margin_mode": "distance",
+      "soft_mode": "fixed",
+      "seed": 1,
+      "status": "training",
+      "gpu": 0,
+      "started": "2026-09-10T05:19:58.507845+08:00",
+      "sample_steps": 20000
+    },
+    "distance_lp_s1": {
+      "margin_mode": "distance",
+      "soft_mode": "lp",
+      "seed": 1,
+      "status": "training",
+      "gpu": 3,
+      "started": "2026-09-10T05:19:58.508332+08:00",
+      "sample_steps": 20000
+    },
+    "approach_fixed_s1": {
+      "margin_mode": "approach",
+      "soft_mode": "fixed",
+      "seed": 1,
+      "status": "training",
+      "gpu": 0,
+      "started": "2026-09-10T05:19:58.508784+08:00",
+      "sample_steps": 20000
+    },
+    "approach_lp_s1": {
+      "margin_mode": "approach",
+      "soft_mode": "lp",
+      "seed": 1,
+      "status": "training",
+      "gpu": 3,
+      "started": "2026-09-10T05:19:58.511456+08:00",
+      "sample_steps": 20000
+    }
+  },
+  "queue_identity_alive": true,
+  "operational_gate": "passed",
+  "formal_running": 4,
+  "formal_pending": 8,
+  "host": "30109",
+  "max_parallel": 4,
+  "protocol": {
+    "task": "SafetyCarGoal2-v0",
+    "hypothesis": "Approach-gated margin preserves progress around nearby hazards while LP pricing controls soft cost; compare within a single repaired FDPI trainer.",
+    "factors": {
+      "margin_mode": [
+        "distance",
+        "approach"
+      ],
+      "soft_mode": [
+        "fixed",
+        "lp"
+      ]
+    },
+    "seeds": [
+      1,
+      2,
+      3
+    ],
+    "steps": 2000000,
+    "common_flags": {
+      "--env_num": 2,
+      "--update_per_iteration": 2,
+      "--margin_thr": 0.75,
+      "--gate-eps": 0.005,
+      "--soft-coef": 0.1,
+      "--soft-budget": 25,
+      "--epsilon": 0.1,
+      "--eps": 1,
+      "--ff-cap": 1,
+      "--act-filter-k": 0
+    },
+    "evaluation_blocks": [
+      701000,
+      705000,
+      709000
+    ],
+    "episodes_per_block": 104,
+    "expected_final_episodes": 3744,
+    "max_attempts": 1,
+    "primary_comparisons": [
+      "approach_lp minus distance_lp",
+      "approach_fixed minus distance_fixed",
+      "approach_lp minus approach_fixed"
+    ],
+    "analysis": "Report all12 final policies with paired block/reset comparisons and between-training-seed uncertainty; per-seed empirical soft budgets and hard-event confidence bounds. No posthoc seed or checkpoint selection.",
+    "limits": [
+      "Mechanism development cohort, not automatic SOTA/zero-leak acceptance.",
+      "312 episodes per frozen policy cannot certify a0.5%risk threshold at95%even with zero events.",
+      "Price mode and gate are the only factorial changes; no training/deployment action filter.",
+      "Operational20k runs are excluded from scientific results; failed attempts retained; no retries.",
+      "Typed original rewards are shaped before replay; this cohort uses the repaired Dual replay consistently in allarms."
+    ],
+    "code_sha256": {
+      "fdpi_safeot_dual.py": "cec02c6874cd2b9f5cc5801569d40202debd48d82d3f28e1b6823c5d5bbd9c5b",
+      "flow_pricer.py": "858a66faff5b78cedde6e08dbd2a6d028f9bf928fbd380b6fe3ebb5b30c20d6b",
+      "flow_dual_solver.py": "33dcd740970dc3db15dec93f5965921ff9153d14a44f6cff110252e057b9af4f",
+      "fdpi_strict_eval.py": "461cafdf64a200278f165b3f30ae604af76dc7199798c4f547068eaccef2a35f",
+      "run_approach_bridge.py": "dccbc95762330dbdb398ee80491f084f6f42c83930688f0c99eb5900600a6433"
+    }
+  }
+}
