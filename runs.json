@@ -1,11 +1,11 @@
 {
- "updated": "2026-09-10T04:13:40",
+ "updated": "2026-09-10T04:24:10",
  "servers": [
   {
    "name": "tianyiyun-30109",
    "desc": "8x A100-80G, 128 核; SafeRL 训练/评估主力(共享账号,多项目并行)",
    "host": "ide-650ef93f23324f04881bde87cf05d6c1-0f2fcc",
-   "load": "66.06",
+   "load": "66.28",
    "ncpu": 128,
    "cards": [
     {
@@ -20,7 +20,7 @@
      "idx": 1,
      "used_mb": 14268,
      "total_mb": 81920,
-     "util": 84,
+     "util": 83,
      "mine": false,
      "procs": [
       "other: curveseq_m1.py"
@@ -30,7 +30,7 @@
      "idx": 2,
      "used_mb": 23669,
      "total_mb": 81920,
-     "util": 86,
+     "util": 99,
      "mine": false,
      "procs": [
       "safeduo: python --seed 46 --env-yaml"
@@ -74,26 +74,26 @@
     },
     {
      "idx": 7,
-     "used_mb": 586,
+     "used_mb": 574,
      "total_mb": 81920,
-     "util": 0,
+     "util": 15,
      "mine": true,
      "procs": [
-      "safeot: fdpi_eval_vec.py --env SafetyPointGoal2-v0 --seed0"
+      "safeot: fdpi_safeot_dual.py --env SafetyPointGoal2-v0 --seed 2 --env"
      ]
     }
    ]
   },
   {
    "host": "di-20260831162150-5ll6n",
-   "load": "6.18",
+   "load": "99.22",
    "ncpu": 26,
    "cards": [
     {
      "idx": 0,
-     "used_mb": 26544,
+     "used_mb": 26545,
      "total_mb": 81920,
-     "util": 25,
+     "util": 27,
      "mine": false,
      "procs": [
       "other: ?"
@@ -101,9 +101,9 @@
     },
     {
      "idx": 1,
-     "used_mb": 23177,
+     "used_mb": 23590,
      "total_mb": 81920,
-     "util": 17,
+     "util": 18,
      "mine": false,
      "procs": [
       "other: ?"
@@ -112,11 +112,11 @@
    ],
    "name": "volc-a100",
    "desc": "2x A100-80G, 128 核, 3PB vepfs; SafeRL 第二算力(DP/ACT 训练共用 GPU); 环境部署中",
-   "snap_time": "2026-09-10T04:13:55"
+   "snap_time": "2026-09-10T04:24:26"
   },
   {
    "host": "dsw-1008180-7cb5796fcd-xt4lh",
-   "load": "36.50",
+   "load": "37.00",
    "ncpu": 184,
    "cards": [
     {
@@ -250,7 +250,7 @@
    ],
    "name": "aliyun-ppu",
    "desc": "16x PPU-ZW810E 96G, 184 核; VLA(Safety-CHORES)评测; 共享(act_train 等他人任务)",
-   "snap_time": "2026-09-10T04:13:48"
+   "snap_time": "2026-09-10T04:24:18"
   }
  ],
  "runs": [
@@ -419,7 +419,7 @@
    "variant": "fdpi",
    "task": "anv",
    "seed": "s1",
-   "ckpts": 1,
+   "ckpts": 2,
    "done": false,
    "running": true,
    "blocks": 0,
@@ -427,7 +427,7 @@
    "hv": 0,
    "ret": null,
    "soft": null,
-   "mtime": 1788980018.927786,
+   "mtime": 1788985315.1315255,
    "scan_n": 1,
    "scan_last": "ck100k 41.6/0",
    "confirm_n": 1,
@@ -708,10 +708,10 @@
    "ret": null,
    "soft": null,
    "mtime": 1788984569.8332524,
-   "scan_n": 2,
-   "scan_last": "ck200k 699.8/0",
-   "confirm_n": 1,
-   "confirm_clean": 1,
+   "scan_n": 3,
+   "scan_last": "ck300k 950.1/0",
+   "confirm_n": 2,
+   "confirm_clean": 2,
    "server": "30109"
   },
   {
@@ -748,10 +748,10 @@
    "ret": null,
    "soft": null,
    "mtime": 1788984514.557456,
-   "scan_n": 2,
-   "scan_last": "ck200k -1304.2/0",
-   "confirm_n": 0,
-   "confirm_clean": 0,
+   "scan_n": 3,
+   "scan_last": "ck300k 918.1/0",
+   "confirm_n": 1,
+   "confirm_clean": 1,
    "server": "30109"
   },
   {
@@ -828,8 +828,8 @@
    "ret": null,
    "soft": null,
    "mtime": 1788984516.5754488,
-   "scan_n": 6,
-   "scan_last": "ck600k 5544.7/0",
+   "scan_n": 7,
+   "scan_last": "ck700k 5069.0/0",
    "confirm_n": 5,
    "confirm_clean": 5,
    "server": "30109"
@@ -1099,7 +1099,7 @@
    "variant": "pen5",
    "task": "anv",
    "seed": "s1",
-   "ckpts": 4,
+   "ckpts": 5,
    "done": false,
    "running": true,
    "blocks": 0,
@@ -1107,7 +1107,7 @@
    "hv": 0,
    "ret": null,
    "soft": null,
-   "mtime": 1788982759.35068,
+   "mtime": 1788985198.6349518,
    "scan_n": 4,
    "scan_last": "ck400k 865.3/0",
    "confirm_n": 3,
@@ -1139,7 +1139,7 @@
    "variant": "pen5",
    "task": "anv",
    "seed": "s3",
-   "ckpts": 4,
+   "ckpts": 5,
    "done": false,
    "running": true,
    "blocks": 0,
@@ -1147,7 +1147,7 @@
    "hv": 0,
    "ret": null,
    "soft": null,
-   "mtime": 1788982783.9725876,
+   "mtime": 1788985369.3263273,
    "scan_n": 4,
    "scan_last": "ck400k 919.7/0",
    "confirm_n": 3,
@@ -3039,7 +3039,7 @@
    "variant": "v1gg",
    "task": "anv",
    "seed": "s1",
-   "ckpts": 1,
+   "ckpts": 2,
    "done": false,
    "running": true,
    "blocks": 0,
@@ -3047,7 +3047,7 @@
    "hv": 0,
    "ret": null,
    "soft": null,
-   "mtime": 1788979964.4829922,
+   "mtime": 1788985297.0635917,
    "scan_n": 1,
    "scan_last": "ck100k 292.2/0",
    "confirm_n": 1,
@@ -7342,11 +7342,11 @@
    "ckpts": 10,
    "done": true,
    "running": false,
-   "blocks": 0,
-   "eps": 0,
+   "blocks": 3,
+   "eps": 312,
    "hv": 0,
-   "ret": null,
-   "soft": null,
+   "ret": 3001.7925376797743,
+   "soft": 0.0,
    "mtime": 1788984352.3493428,
    "scan_n": 1,
    "scan_last": "ck500k 2754.7/0",
@@ -7808,8 +7808,8 @@
    "ret": 0.1650337833320405,
    "soft": 0.0,
    "mtime": 1788917768.014652,
-   "scan_n": 4,
-   "scan_last": "ck400k -0.0/0",
+   "scan_n": 10,
+   "scan_last": "ck995k 0.1/0",
    "confirm_n": 0,
    "confirm_clean": 0,
    "server": "aliyun"
@@ -7828,8 +7828,8 @@
    "ret": 0.3512553665215758,
    "soft": 0.0,
    "mtime": 1788917819.735072,
-   "scan_n": 5,
-   "scan_last": "ck500k -0.1/0",
+   "scan_n": 10,
+   "scan_last": "ck995k 0.3/0",
    "confirm_n": 2,
    "confirm_clean": 2,
    "server": "aliyun"
@@ -9391,7 +9391,7 @@
    "variant": "v1e75",
    "task": "cp1",
    "seed": "s1",
-   "ckpts": 3,
+   "ckpts": 4,
    "done": false,
    "running": true,
    "blocks": 0,
@@ -9399,7 +9399,7 @@
    "hv": 0,
    "ret": null,
    "soft": null,
-   "mtime": 1788983046.4342303,
+   "mtime": 1788985147.7114375,
    "confirm_n": 0,
    "confirm_clean": 0,
    "server": "aliyun"
@@ -9409,7 +9409,7 @@
    "variant": "v1e75",
    "task": "cp1",
    "seed": "s2",
-   "ckpts": 3,
+   "ckpts": 4,
    "done": false,
    "running": true,
    "blocks": 0,
@@ -9417,7 +9417,7 @@
    "hv": 0,
    "ret": null,
    "soft": null,
-   "mtime": 1788983114.1423395,
+   "mtime": 1788985218.2651017,
    "confirm_n": 0,
    "confirm_clean": 0,
    "server": "aliyun"
@@ -9427,7 +9427,7 @@
    "variant": "v1e75",
    "task": "cp1",
    "seed": "s3",
-   "ckpts": 3,
+   "ckpts": 4,
    "done": false,
    "running": true,
    "blocks": 0,
@@ -9435,7 +9435,7 @@
    "hv": 0,
    "ret": null,
    "soft": null,
-   "mtime": 1788983122.499938,
+   "mtime": 1788985228.6237926,
    "confirm_n": 0,
    "confirm_clean": 0,
    "server": "aliyun"
@@ -9445,7 +9445,7 @@
    "variant": "v1e75",
    "task": "pg1",
    "seed": "s1",
-   "ckpts": 4,
+   "ckpts": 5,
    "done": false,
    "running": true,
    "blocks": 0,
@@ -9453,7 +9453,7 @@
    "hv": 0,
    "ret": null,
    "soft": null,
-   "mtime": 1788983395.0879679,
+   "mtime": 1788985362.157203,
    "confirm_n": 0,
    "confirm_clean": 0,
    "server": "aliyun"
@@ -9481,7 +9481,7 @@
    "variant": "v1e75",
    "task": "pg1",
    "seed": "s3",
-   "ckpts": 4,
+   "ckpts": 5,
    "done": false,
    "running": true,
    "blocks": 0,
@@ -9489,7 +9489,7 @@
    "hv": 0,
    "ret": null,
    "soft": null,
-   "mtime": 1788983435.398997,
+   "mtime": 1788985407.5857892,
    "confirm_n": 0,
    "confirm_clean": 0,
    "server": "aliyun"
@@ -10093,7 +10093,7 @@
    "variant": "v1g",
    "task": "wav",
    "seed": "s2",
-   "ckpts": 8,
+   "ckpts": 9,
    "done": false,
    "running": true,
    "blocks": 0,
@@ -10101,7 +10101,7 @@
    "hv": 0,
    "ret": null,
    "soft": null,
-   "mtime": 1788983940.9129596,
+   "mtime": 1788985393.7675734,
    "confirm_n": 0,
    "confirm_clean": 0,
    "server": "aliyun"
@@ -10210,10 +10210,10 @@
    "ckpts": 10,
    "done": true,
    "running": false,
-   "blocks": 2,
-   "eps": 208,
+   "blocks": 3,
+   "eps": 312,
    "hv": 0,
-   "ret": 12.899362249320536,
+   "ret": 12.904432324767518,
    "soft": 0.0,
    "mtime": 1788976776.4118028,
    "confirm_n": 0,
@@ -10360,11 +10360,11 @@
    "ckpts": 10,
    "done": true,
    "running": false,
-   "blocks": 0,
-   "eps": 0,
+   "blocks": 3,
+   "eps": 312,
    "hv": 0,
-   "ret": null,
-   "soft": null,
+   "ret": 3.087214050134008,
+   "soft": 0.0,
    "mtime": 1788979107.411637,
    "confirm_n": 0,
    "confirm_clean": 0,
@@ -10396,11 +10396,11 @@
    "ckpts": 10,
    "done": true,
    "running": false,
-   "blocks": 0,
-   "eps": 0,
+   "blocks": 3,
+   "eps": 312,
    "hv": 0,
-   "ret": null,
-   "soft": null,
+   "ret": 6.700694650285484,
+   "soft": 0.0,
    "mtime": 1788980200.443664,
    "confirm_n": 0,
    "confirm_clean": 0,
@@ -10432,11 +10432,11 @@
    "ckpts": 10,
    "done": true,
    "running": false,
-   "blocks": 0,
-   "eps": 0,
+   "blocks": 3,
+   "eps": 312,
    "hv": 0,
-   "ret": null,
-   "soft": null,
+   "ret": 2516.146918384194,
+   "soft": 0.0,
    "mtime": 1788983355.7210507,
    "confirm_n": 0,
    "confirm_clean": 0,
@@ -10450,11 +10450,11 @@
    "ckpts": 10,
    "done": true,
    "running": false,
-   "blocks": 0,
-   "eps": 0,
+   "blocks": 3,
+   "eps": 312,
    "hv": 0,
-   "ret": null,
-   "soft": null,
+   "ret": 2556.367067046274,
+   "soft": 0.0,
    "mtime": 1788984753.1609719,
    "confirm_n": 0,
    "confirm_clean": 0,
@@ -10465,8 +10465,9 @@
   "volc: d2v2_lag_pb1_s3/eval_all_ckpts_30ep.json",
   "volc: d2v2_pen5_pb1_s2/proto3_ck995002_seed9000.json",
   "volc: d2v2_pen5_pb1_s3/proto3_ck995002_seed9000.json",
-  "aliyun: d2v2_lag_pp1_s1/eval_all_ckpts_30ep.json",
-  "aliyun: d2v2_v1gg_cc2_s2/proto3_ck995002_seed13000.json"
+  "aliyun: d2v2_lag_pp1_s2/confirm_800000_100ep.json",
+  "aliyun: d2v2_lag_pp1_s2/confirm_900000_100ep.json",
+  "aliyun: d2v2_lag_pp1_s3/eval_all_ckpts_30ep.json"
  ],
  "parallel": {
   "workspace": "/home/dataset-local/liyufeng/SafeTransport/results/safeot_dual_fdpi",
@@ -10896,7 +10897,7 @@
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788961753.676203
+    "mtime": 1788984517.083212
    },
    {
     "name": "CG2_fdpi_lp_m0.77sched_r2_s1",
@@ -10924,7 +10925,7 @@
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788961218.080488
+    "mtime": 1788984842.480249
    },
    {
     "name": "CG2_fdpi_lp_m0.78sched_af16_pf0.02_r2_s1",
@@ -12058,28 +12059,28 @@
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788984145.4796612
+    "mtime": 1788985335.4424512
    },
    {
     "name": "fleet_20260910",
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788984794.3654294
+    "mtime": 1788985396.3432286
    },
    {
     "name": "r2_analysis_20260906",
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788984138.7836835
+    "mtime": 1788985328.7504756
    },
    {
     "name": "repair_20260905",
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1788984710.7177346
+    "mtime": 1788985347.515407
    },
    {
     "name": "review_20260909_evening",
@@ -12110,6 +12111,6 @@
     "mtime": 1788616474.922712
    }
   ],
-  "n_procs": 0
+  "n_procs": 5
  }
 }
