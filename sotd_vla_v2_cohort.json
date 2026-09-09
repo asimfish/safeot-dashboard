@@ -1,43 +1,43 @@
 {
-  "observed": "2026-09-09T14:01:41.118251+00:00",
-  "status": "blocked",
+  "observed": "2026-09-09T18:01:35.512186+00:00",
+  "status": "full",
   "connection": "connected",
   "gpus": [
     {
       "index": 0,
-      "free_mib": 81093,
-      "used_mib": 59,
-      "utilization_percent": 0
+      "free_mib": 6589,
+      "used_mib": 74564,
+      "utilization_percent": 51
     },
     {
       "index": 1,
-      "free_mib": 78388,
-      "used_mib": 2765,
+      "free_mib": 79230,
+      "used_mib": 1923,
       "utilization_percent": 0
     },
     {
       "index": 2,
-      "free_mib": 79424,
-      "used_mib": 1729,
-      "utilization_percent": 0
+      "free_mib": 54748,
+      "used_mib": 26405,
+      "utilization_percent": 27
     },
     {
       "index": 3,
-      "free_mib": 81145,
-      "used_mib": 7,
-      "utilization_percent": 0
+      "free_mib": 19720,
+      "used_mib": 61432,
+      "utilization_percent": 58
     },
     {
       "index": 4,
-      "free_mib": 76644,
-      "used_mib": 4509,
-      "utilization_percent": 1
+      "free_mib": 43527,
+      "used_mib": 37626,
+      "utilization_percent": 3
     },
     {
       "index": 5,
-      "free_mib": 76647,
-      "used_mib": 4506,
-      "utilization_percent": 24
+      "free_mib": 74123,
+      "used_mib": 7030,
+      "utilization_percent": 17
     }
   ],
   "gates": {
@@ -56,10 +56,6 @@
     "resume/B": {
       "passed": true,
       "sha256": "699c0911605b33ebf296ad138bb42cee4dc9e18a0f69b48145d094ad731308e5"
-    },
-    "pilot/C": {
-      "passed": true,
-      "sha256": "fe2e0d4845ca0ce4eab905fb1a9785e14ccab894ac164ec2dcee3c7369564b65"
     }
   },
   "limits": [
@@ -68,10 +64,20 @@
     "One aggregate training cost; heterogeneous VLA evidence remains open."
   ],
   "full_planned_runs": 6,
-  "full_launched_runs": 0,
+  "full_launched_runs": 4,
+  "full_eligible_runs": 4,
+  "promotion": {
+    "arms": [
+      "A",
+      "B"
+    ],
+    "horizon_changed_in_pilot": false,
+    "priced_updates_checked": 10,
+    "reason": "defer C: episode horizon equalled rollout on every pilot update; A/B remain eligible"
+  },
   "next_check_seconds": 180,
-  "fresh_observation": false,
-  "supervisor_alive": false,
+  "fresh_observation": true,
+  "supervisor_alive": true,
   "jobs": {
     "pilot/A": {
       "state": "complete",
@@ -106,14 +112,52 @@
       "steps": 10240,
       "gpu": 3,
       "seed": 101,
-      "last_log": "2026-09-09T13:27:43.136980+00:00"
+      "last_log": "2026-09-09T13:27:43.136980+00:00",
+      "required_for_full": false
     },
     "resume/C": {
       "state": "failed",
       "steps": 0,
       "gpu": 3,
       "seed": 101,
-      "last_log": "2026-09-09T14:01:28.595768+00:00"
+      "last_log": "2026-09-09T14:01:28.595768+00:00",
+      "required_for_full": false
+    },
+    "full/A/s1": {
+      "state": "starting",
+      "steps": 0,
+      "gpu": 0,
+      "seed": 1,
+      "last_log": "2026-09-09T17:58:03.754743+00:00"
+    },
+    "full/B/s1": {
+      "state": "starting",
+      "steps": 0,
+      "gpu": 1,
+      "seed": 1,
+      "last_log": "2026-09-09T17:58:34.178408+00:00"
+    },
+    "full/C/s1": {
+      "state": "deferred_inactive_mechanism",
+      "steps": 0
+    },
+    "full/A/s2": {
+      "state": "starting",
+      "steps": 0,
+      "gpu": 3,
+      "seed": 2,
+      "last_log": "2026-09-09T17:58:16.584019+00:00"
+    },
+    "full/B/s2": {
+      "state": "starting",
+      "steps": 0,
+      "gpu": 4,
+      "seed": 2,
+      "last_log": "2026-09-09T18:01:27.601269+00:00"
+    },
+    "full/C/s2": {
+      "state": "deferred_inactive_mechanism",
+      "steps": 0
     }
   }
 }
