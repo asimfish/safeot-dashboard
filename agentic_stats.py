@@ -21,7 +21,7 @@ for exp,robot,task,d,subs in EXPS:
             epdir=os.path.dirname(ev); e=load(ev) or {}
             name=os.path.basename(epdir); seed=name.split('seed_')[1].split('_')[0] if 'seed_' in name else name
             effort=e.get('effort') or ('xhigh' if exp=='E1' else name.split('_')[-1])
-            acts=[]; durs=[]; lat=[]; ntool=0
+            acts=[]; durs=[]; lat=[]; ntool=0; req_usage=[]
             decs=sorted(glob.glob(f'{epdir}/decision_*'))
             for dd in decs:
                 c=load(f'{dd}/model/candidate.json')
@@ -34,12 +34,15 @@ for exp,robot,task,d,subs in EXPS:
                     acts.append(len(c['actions'])); durs+= [a.get('duration_s') for a in c['actions'] if isinstance(a,dict) and a.get('duration_s') is not None]
                 pm=load(f'{dd}/model/provenance.json') or load(f'{dd}/model/response_metadata.json') or {}
                 if pm.get('elapsed_s') is not None: lat.append(pm['elapsed_s'])
+                u=pm.get('usage') or {}
+                if u.get('input_tokens') is not None:
+                    req_usage.append((u.get('input_tokens'),u.get('output_tokens'),((u.get('output_tokens_details') or {}).get('reasoning_tokens')),pm.get('elapsed_s')))
             def num(v): return len(v) if isinstance(v,list) else v
             eps.append(dict(seed=seed,effort=effort,success=e.get('success'),stop=e.get('stop_reason'),
                 decisions=num(e.get('decisions')),requests=num(e.get('requests')),max_lift_mm=round((e.get('max_lift_m') or 0)*1000,1),
                 lifted50=e.get('lifted_at_least_50mm') if e.get('lifted_at_least_50mm') is not None else ((e.get('max_lift_m') or 0)>=0.05),sim_s=num(e.get('simulation_time_s')),action_s=num(e.get('action_time_s')),infer_s=num(e.get('total_inference_s')),
                 n_actions=sum(acts) if acts else None,n_dec_dirs=len(decs),dur_mean=mean(durs),dur_list=durs,lat_mean=mean(lat),
-                in_tok=e.get('input_tokens'),out_tok=e.get('output_tokens'),ev_keys=sorted(e.keys()) if not eps else None))
+                in_tok=e.get('input_tokens'),out_tok=e.get('output_tokens'),req_usage=req_usage,ev_keys=sorted(e.keys()) if not eps else None))
     # schema/state/cameras sample from last decision with files
     for ep in reversed(eps):
         pass
@@ -88,12 +91,19 @@ for exp,robot,task,d,subs in EXPS:
             decisions_per_wall_min=round(60*sum(x['decisions'] or 0 for x in g)/(tot_inf+tot_act),3) if (tot_inf+tot_act) else None,
             wall_per_episode_s=round((tot_inf+tot_act)/max(1,len(g)),1),
             mean_in_tok=m('in_tok'),mean_out_tok=m('out_tok'),
-            episodes=[{k:v for k,v in x.items() if k not in ('dur_list','ev_keys')} for x in g],
-            invalid=[{k:v for k,v in x.items() if k not in ('dur_list','ev_keys')} for x in ginv]))
+            req_stats=(lambda R: dict(n=len(R),in_mean=mean([r[0] for r in R]),in_med=(st.median([r[0] for r in R]) if R else None),out_mean=mean([r[1] for r in R]),out_med=(st.median([r[1] for r in R]) if R else None),
+                reason_mean=mean([r[2] for r in R if r[2] is not None]),reason_share=(round(sum(r[2] for r in R if r[2] is not None)/max(1,sum(r[1] for r in R if r[2] is not None)),3) if R else None),
+                lat_med=(st.median([r[3] for r in R if r[3] is not None]) if R else None),lat_min=(min(r[3] for r in R if r[3] is not None) if R else None),lat_max=(max(r[3] for r in R if r[3] is not None) if R else None)))([r for x in g for r in x['req_usage']]),
+            ep_tok=(lambda T: dict(mean=mean(T),min=min(T) if T else None,max=max(T) if T else None))([ (x['in_tok'] or 0)+(x['out_tok'] or 0) for x in g if x['in_tok'] is not None]),
+            episodes=[{k:v for k,v in x.items() if k not in ('dur_list','ev_keys','req_usage')} for x in g],
+            invalid=[{k:v for k,v in x.items() if k not in ('dur_list','ev_keys','req_usage')} for x in ginv]))
     if eps and eps[0].get('ev_keys'): out.setdefault('ev_keys',{})[key]=eps[0]['ev_keys']
 json.dump(out,open('/tmp/astra_stats.json','w'),ensure_ascii=False,indent=1)
 for g in out['groups']:
     print(f"{g['exp']:3}{g['robot']:7}{g['task']:16}{g['effort']:7} N={g['N']:2} ok={g['success']:2} lift50={g['lifted50']:2} dec={g['mean_decisions']} act={g['mean_actions']} a/d={g['actions_per_decision']} dur={g['mean_action_dur_s']} sim={g['mean_sim_s']} act_s={g['mean_action_s']} inf={g['mean_infer_s']} lat={g['mean_latency_s']} wp/simmin={g['waypoints_per_sim_min']} dec/wallmin={g['decisions_per_wall_min']} wall/ep={g['wall_per_episode_s']} tok={g['mean_in_tok']}/{g['mean_out_tok']}")
+for g in out['groups']:
+    r=g['req_stats']; t=g['ep_tok']
+    print(f"TOK {g['exp']} {g['robot']} {g['task']} {g['effort']}: req n={r['n']} in {r['in_mean']}/{r['in_med']} out {r['out_mean']}/{r['out_med']} reason {r['reason_mean']} share {r['reason_share']} lat med {r['lat_med']} [{r['lat_min']},{r['lat_max']}] | ep tok mean {t['mean']} [{t['min']},{t['max']}]")
 print('CAMERAS',json.dumps(out['cameras'],ensure_ascii=False))
 print('STATE_KEYS',json.dumps(out['state_keys'],ensure_ascii=False))
 print('EV_KEYS',json.dumps(out.get('ev_keys'),ensure_ascii=False))
