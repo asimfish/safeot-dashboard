@@ -65,8 +65,10 @@ def wilson(k, n, z=1.96):
     return max(0.0, c - h), min(1.0, c + h)
 
 
-def load_pool(src):
-    rows = [r for r in csv.DictReader(open(src)) if r["mode"] == "final" and int(r["ver_eps"]) > 0]
+def load_pool(src, min_eps=312):
+    # min_eps=312 keeps only seeds whose 3 x 104-episode blocks are all verified; partially
+    # verified seeds would otherwise enter the pooled table with inflated confidence intervals.
+    rows = [r for r in csv.DictReader(open(src)) if r["mode"] == "final" and int(r["ver_eps"]) >= min_eps]
     pool = defaultdict(lambda: {"eps": 0, "hv": 0, "rets": [], "soft": [], "jc": [], "csr": []})
     for r in rows:
         p = pool[(r["task"], r["method"], r["margin"])]
@@ -196,7 +198,8 @@ if __name__ == "__main__":
     ap.add_argument("src", nargs="?", default="frontier_arms.csv")
     ap.add_argument("--suite", default="paper", choices=list(SUITES) + ["all"])
     ap.add_argument("--outdir", default=".")
+    ap.add_argument("--min-eps", type=int, default=312, help="minimum verified episodes per seed (312 = complete)")
     a = ap.parse_args()
-    pool = load_pool(a.src)
+    pool = load_pool(a.src, a.min_eps)
     for s in (list(SUITES) if a.suite == "all" else [a.suite]):
         make_suite(s, pool, a.outdir)
