@@ -1,0 +1,52 @@
+{
+  "purpose": "Diagnose hard-filter fallback, brake selection, soft occupancy and return loss on recorded transitions.",
+  "status": "frozen_before_launch",
+  "env": "SafetyCarGoal2-v0",
+  "seeds": [
+    1,
+    2,
+    3
+  ],
+  "blocks": [
+    5000,
+    9000,
+    13000
+  ],
+  "episodes_per_block": 16,
+  "trace_episodes_per_block": 2,
+  "modes": [
+    "native",
+    "critic",
+    "brake015"
+  ],
+  "filter_k": 16,
+  "filter_pf": 0.02,
+  "filter_std": 1.0,
+  "brake_g": 0.15,
+  "fixed_total_episodes": 432,
+  "jobs": 27,
+  "max_parallel": 8,
+  "wall_seconds_per_job": 2700,
+  "max_attempts": 1,
+  "checkpoint": "1990002",
+  "input_sha256": {
+    "CG2_fdpi_lp_m0.78sched_r2_s1": {
+      "config.json": "fd14b0d033955b1680f90fd42d0e093de7f19a6e30fd19ac68b44c346246d1ec",
+      "params_1990002.pkl": "f4439eabaa53c3344d06cf07641186ab5ba30fea761423bf6f4511807518fe26"
+    },
+    "CG2_fdpi_lp_m0.78sched_r2_s2": {
+      "config.json": "9b35fd6fc1ae7d3a9023060224f4e680447b5340ae0a46a33846a4262f7a0840",
+      "params_1990002.pkl": "51d6fb2a64d347f6efb821111cee43a24dc721e555dbcd7d6661951b271184f0"
+    },
+    "CG2_fdpi_lp_m0.78sched_r2_s3": {
+      "config.json": "a755591382a00e8877b29b5a24a2434c89fadfab9c339e77f391d7f5386c38dc",
+      "params_1990002.pkl": "3ef20b8322ff209f4fad8647771c32031fb48f8aee4d845ac798a4818bd4befc"
+    }
+  },
+  "code_sha256": {
+    "baseline_evaluator.py": "d1abb3a1babb78a137d20fc82396b66c16fe3887d896d5b162b0996b222148cd",
+    "traced_evaluator.py": "a8e26900d47ac12d70f0784a3bc33b4473adf85fa4059b6e06ccb951b156341e"
+  },
+  "validation": "Three modes x two episodes: original and traced evaluators must have identical raw episode summaries and filter statistics before dispatch.",
+  "interpretation": "Exploratory mechanism diagnosis on first16 episodes of previously used reset blocks. No new held-out evidence, no seed expansion, no risk certification or SOTA promotion. Trace observations compare resulting trajectories, not causal counterfactuals."
+}
