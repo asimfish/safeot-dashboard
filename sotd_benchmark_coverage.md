@@ -1,6 +1,6 @@
 # 完整基准覆盖核对
 
-更新时间：2026-09-10T17:08:54.978012+08:00
+更新时间：2026-09-10T17:56:57.908425+08:00
 
 当前主线：Safety-Gymnasium；SafeVLA所用Safety-CHORES。完整覆盖是五目标的必要条件，不能代替奖励/安全优势检验。
 
@@ -30,6 +30,7 @@ Safety-CHORES：200 ObjectNav +171 Pickup +172 Fetch =543场景/策略，三类�
 - separate fresh cohorts: visual, multi-agent and Isaac adapters; never alter existing frozen jobs
 
 验收约束：
+- Source correction: the earlier afc6a34 snapshot simplifies task definitions. This v2 inventory pins the verified official main ae966e5. The old inventory and failed operational attempt remain archived; no formal full-suite training used them.
 - 197 counts documented task/robot/difficulty configurations, not training runs. Vision observations and velocityv0/v1 remain separate tracks.
 - 14 additional registry configurations: Run0 x5robots and MultiGoal x3levels xCar/Doggo/Racecar. The latter9 conflict with the two documented multi-agent robots and block whole-suite closure.
 - 402 Safety-Gymnasium tracks and543 Safety-CHORES scenarios are different units; no combined percentage.
@@ -40,4 +41,4 @@ Safety-CHORES：200 ObjectNav +171 Pickup +172 Fetch =543场景/策略，三类�
 
 完整任务见 sotd_benchmark_tasks.csv；逐任务/方法/种子缺口见 sotd_benchmark_backlog.csv；所有未适配、失败、缺种子和协议不一致项保留，禁止缩小分母。现有冻结队列继续，补齐协议后按完整系列派发。
 
-[Safety-Gymnasium官方目录](https://github.com/PKU-Alignment/safety-gymnasium/tree/afc6a34acc3f81aa26c5cc8d66ed0e31c26a48ba)；[SafeVLA官方评测清单](https://github.com/PKU-Alignment/SafeVLA/tree/2aa82559d272b5f888e53433e258914057f15bed/benchmark)
+[Safety-Gymnasium官方目录](https://github.com/PKU-Alignment/safety-gymnasium/tree/ae966e511b9927f06b39c727ca5c650136a4e696)；[SafeVLA官方评测清单](https://github.com/PKU-Alignment/SafeVLA/tree/2aa82559d272b5f888e53433e258914057f15bed/benchmark)
