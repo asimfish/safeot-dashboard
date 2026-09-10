@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-10T23:20:49.926640+08:00",
+  "updated": "2026-09-10T23:29:51.727177+08:00",
   "changes": [
     {
       "at": "2026-09-10T14:57:14.829442+00:00",
@@ -13,8 +13,8 @@
       "cohort": "full_vision_vector_20260910",
       "current_host": {
         "status": "running",
-        "observed": "2026-09-10T15:17:38.704432+00:00",
-        "process_observed": "2026-09-10T15:20:05.908269+00:00",
+        "observed": "2026-09-10T15:29:10.663641+00:00",
+        "process_observed": "2026-09-10T15:29:20.178301+00:00",
         "fresh_observation": true,
         "controller_alive": true,
         "tasks": 80,
@@ -84,13 +84,13 @@
       "cohort": "full_native_ppo_20260910",
       "current_host": {
         "status": "running",
-        "observed": "2026-09-10T15:17:56.582473+00:00",
-        "process_observed": "2026-09-10T15:19:48.760306+00:00",
+        "observed": "2026-09-10T15:31:45.431883+00:00",
+        "process_observed": "2026-09-10T15:31:55.269799+00:00",
         "fresh_observation": true,
         "controller_alive": true,
         "tasks": 38,
         "jobs": 912,
-        "completed": 23,
+        "completed": 26,
         "running": 32,
         "live_running": 32,
         "probes_passed": 38,
@@ -153,7 +153,86 @@
   "scientific_goal_acceptance": "open",
   "actual_speedup": "unmeasured; added concurrency is not a measured throughput ratio",
   "formal_live_total": 248,
-  "completed_cells": 145,
+  "completed_cells": 153,
+  "wall_budget_amendment": {
+    "observed": "2026-09-10T23:27:04.411539+08:00",
+    "reason": "Observed slow native FormulaOne physics exceeds generic wall-clock watchdog despite steady progress.",
+    "old_train_wall_seconds": 86400,
+    "old_eval_wall_seconds": 7200,
+    "new_train_wall_seconds": 345600,
+    "new_eval_wall_seconds": 86400,
+    "scope": "All105 Safe Vision vector tracks, all8 methods, all3 seeds, all3 hosts; applies to live and untouched pending cells. Failed attempts remain failed.",
+    "training_steps_unchanged": 2000000,
+    "final_episodes_unchanged": 312,
+    "slow_observed_jobs": [
+      {
+        "job": "SafetyAntFormulaOne1-v0__safeot_eps0.1__s1",
+        "task": "SafetyAntFormulaOne1-v0",
+        "host": "30314",
+        "observed_steps": 140000,
+        "projected_training_hours": 57.28,
+        "rate_steps_per_second": 9.699
+      },
+      {
+        "job": "SafetyAntFormulaOne2-v0__safeot_eps0.1__s1",
+        "task": "SafetyAntFormulaOne2-v0",
+        "host": "30314",
+        "observed_steps": 140000,
+        "projected_training_hours": 57.24,
+        "rate_steps_per_second": 9.705
+      },
+      {
+        "job": "SafetyCarFormulaOne2-v0__safeot_eps0.1__s1",
+        "task": "SafetyCarFormulaOne2-v0",
+        "host": "aliyun",
+        "observed_steps": 180000,
+        "projected_training_hours": 47.36,
+        "rate_steps_per_second": 11.731
+      }
+    ],
+    "projection_is_guarantee": false,
+    "scientific_protocol_modified": false,
+    "failed_attempts_restarted": 0,
+    "status": "deployed",
+    "commits": [
+      {
+        "at": "2026-09-10T23:28:41.994639+08:00",
+        "preserved_workers": 6,
+        "original_lanes": 6,
+        "target_lanes": 6,
+        "killed_training_processes": 0,
+        "prior_policy_attempts_restarted": 0,
+        "protocol_sha256": "b6eef0edcc546ab70feed741a45dc5691e19195e870d0aea99db413dca59c4d9",
+        "train_wall_seconds": 345600,
+        "eval_wall_seconds": 86400,
+        "host": "30109"
+      },
+      {
+        "at": "2026-09-10T15:28:55.719214+00:00",
+        "preserved_workers": 4,
+        "original_lanes": 4,
+        "target_lanes": 4,
+        "killed_training_processes": 0,
+        "prior_policy_attempts_restarted": 0,
+        "protocol_sha256": "b6eef0edcc546ab70feed741a45dc5691e19195e870d0aea99db413dca59c4d9",
+        "train_wall_seconds": 345600,
+        "eval_wall_seconds": 86400,
+        "host": "30314"
+      },
+      {
+        "at": "2026-09-10T15:29:10.578297+00:00",
+        "preserved_workers": 128,
+        "original_lanes": 128,
+        "target_lanes": 128,
+        "killed_training_processes": 0,
+        "prior_policy_attempts_restarted": 0,
+        "protocol_sha256": "b6eef0edcc546ab70feed741a45dc5691e19195e870d0aea99db413dca59c4d9",
+        "train_wall_seconds": 345600,
+        "eval_wall_seconds": 86400,
+        "host": "aliyun"
+      }
+    ]
+  },
   "retained_failure_diagnosis": {
     "observed": "2026-09-10T23:17:33.807293+08:00",
     "job": "SafetyCarFormulaOne1-v0__safeot_eps0.1__s1",
