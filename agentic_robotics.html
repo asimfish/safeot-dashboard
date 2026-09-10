@@ -1,228 +1,26 @@
 <!doctype html>
-<html lang="zh-CN">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Agentic Robotics 进度 · GPT-6 Astra 直控机器人</title>
-<style>
-  :root { color-scheme: light; --blue:#2563eb; --green:#059669; --amber:#d97706; --red:#dc2626; --muted:#64748b; --line:#d7dbe0; --purple:#7c3aed; }
-  * { box-sizing: border-box; }
-  body { margin:0; color:#1a1a2e; background:#fafbfc; font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif; line-height:1.5; }
-  .layout { display:flex; max-width:1760px; margin:0 auto; }
-  nav.sidebar { position:sticky; top:0; align-self:flex-start; width:215px; min-height:100vh; padding:16px 10px; border-right:1px solid var(--line); background:#f8fafc; font-size:12.5px; }
-  nav.sidebar a { display:block; padding:4px 8px; color:#334155; text-decoration:none; border-radius:4px; }
-  nav.sidebar a:hover { background:#e2e8f0; }
-  nav.sidebar .nav-title { font-weight:700; margin:8px 0 4px; color:#1e293b; }
-  main.content { flex:1; padding:22px 18px 40px; max-width:1540px; }
-  h1 { font-size:23px; border-bottom:3px solid var(--purple); padding-bottom:8px; margin-bottom:6px; }
-  h2 { margin-top:28px; padding:7px 10px; border-left:4px solid var(--purple); background:#f5f3ff; font-size:17px; }
-  h3 { margin:16px 0 6px; font-size:14px; color:#334155; }
-  .meta,.small { color:var(--muted); font-size:12px; }
-  .cards { display:grid; grid-template-columns:repeat(5,1fr); gap:10px; margin:12px 0; }
-  @media (max-width:1100px) { .cards { grid-template-columns:repeat(2,1fr); } }
-  .card { padding:10px 12px; border:1px solid var(--line); border-radius:8px; background:#fff; }
-  .card .t { font-weight:700; font-size:13px; color:#1e293b; }
-  .card .pct { font-size:21px; font-weight:700; margin:2px 0; }
-  .pill { display:inline-block; padding:1px 7px; border-radius:10px; font-size:11px; font-weight:600; color:#fff; white-space:nowrap; }
-  .pill.done { background:var(--green); } .pill.run { background:var(--blue); } .pill.wait,.pill.partial { background:var(--amber); } .pill.negative { background:var(--red); } .pill.planned { background:var(--muted); } .pill.agent { background:var(--purple); }
-  .table-wrap { overflow-x:auto; border:1px solid var(--line); background:#fff; margin-bottom:8px; border-radius:6px; }
-  table { width:100%; border-collapse:collapse; font-size:12.3px; }
-  th { padding:5px 7px; color:#fff; background:#1e293b; text-align:left; white-space:nowrap; position:sticky; top:0; }
-  td { padding:4px 7px; border-top:1px solid #eef0f3; vertical-align:top; }
-  tr:hover td { background:#f8fafc; }
-  td.num { text-align:right; font-variant-numeric:tabular-nums; white-space:nowrap; }
-  .ok { color:var(--green); font-weight:600; } .bad { color:var(--red); font-weight:600; } .warn { color:var(--amber); font-weight:600; }
-  ul.q { margin:6px 0; padding-left:20px; font-size:13px; } ul.q li { margin:3px 0; }
-  code { background:#f1f5f9; padding:1px 4px; border-radius:3px; font-size:12px; }
-  details.grp { border:1px solid var(--line); border-radius:6px; background:#fff; margin:8px 0; }
-  details.grp > summary { cursor:pointer; padding:8px 12px; font-weight:700; color:#1e293b; list-style:none; display:flex; gap:12px; align-items:center; flex-wrap:wrap; }
-  details.grp > summary::before { content:"▸"; color:var(--muted); font-size:12px; }
-  details.grp[open] > summary::before { content:"▾"; }
-  details.grp > summary .sum { font-weight:400; color:var(--muted); font-size:12px; }
-  details.grp > .body { padding:0 10px 10px; }
-  details.exp { border:2px solid #ddd6fe; margin:12px 0; }
-  details.exp > summary { background:#f5f3ff; font-size:15px; }
-  .figs { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin:10px 0; }
-  @media (max-width:1100px) { .figs { grid-template-columns:repeat(2,1fr); } }
-  .figs figure, .vids figure { margin:0; background:#fff; border:1px solid var(--line); border-radius:6px; padding:6px; }
-  .figs img { width:100%; display:block; border-radius:4px; }
-  .vids { display:grid; grid-template-columns:repeat(2,1fr); gap:10px; margin:10px 0; }
-  .vids video { width:100%; display:block; border-radius:4px; background:#000; }
-  figcaption { font-size:12px; color:var(--muted); margin-top:6px; }
-  .flow { font-family:ui-monospace,Menlo,monospace; font-size:12px; background:#fff; border:1px solid var(--line); border-radius:6px; padding:10px 12px; white-space:pre; overflow-x:auto; }
-  .callout { border-left:4px solid var(--red); background:#fef2f2; padding:8px 12px; margin:10px 0; font-size:13px; }
-  .callout.info { border-color:var(--blue); background:#eff6ff; }
-  h4 { margin:14px 0 4px; font-size:13px; color:#475569; }
-  .hero { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin:12px 0; }
-  @media (max-width:1100px) { .hero { grid-template-columns:repeat(2,1fr); } }
-  table.kv td:first-child { white-space:nowrap; font-weight:600; color:#334155; width:150px; }
-  .lead { font-size:13.5px; }
-  .vids4 { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin:6px 0 4px; }
-  @media (max-width:1100px) { .vids4 { grid-template-columns:repeat(2,1fr); } }
-  .vids4 figure { margin:0; background:#fff; border:1px solid var(--line); border-radius:6px; padding:5px; }
-  .vids4 video { width:100%; display:block; border-radius:4px; background:#000; }
-  .vidrow { border:1px solid var(--line); border-radius:8px; background:#fff; padding:8px 10px; margin:10px 0; }
-  .vidrow .vt { font-weight:700; font-size:13px; color:#1e293b; }
-  .callout.sum { border-color:var(--purple); background:#f5f3ff; font-size:13.5px; }
-</style>
-</head>
-<body>
-<div class="layout">
-<nav class="sidebar">
-  <div class="nav-title">大纲</div>
-  <a href="#top">总结</a>
-  <a href="#latest-e3">最新效果 · E3 已完成</a>
-  <a href="#sec0">0 一页结论</a>
-  <a href="#iface">1 接口规格：输入 / 输出 / 执行</a>
-  <a href="#results">2 结果</a>
-  <a href="#cadence">&nbsp;&nbsp;2.1 频率与时间</a>
-  <a href="#tokens">&nbsp;&nbsp;2.2 token</a>
-  <a href="#failures">&nbsp;&nbsp;2.3 失败模式</a>
-  <a href="#videos">3 操作 RGB 视频（四视角）</a>
-  <a href="#verdict">4 判决与下一步</a>
-  <a href="#details">5 各轮详情（E3 / E2 / E1 / E0）</a>
-  <a href="#appx">6 附录</a>
-  <div class="nav-title" style="margin-top:14px">返回</div>
-  <a href="index.html">← SafeOT 进度看板</a>
-  <a href="sotd.html">SafeOT-Dual 主线</a>
-  <div class="nav-title" style="margin-top:14px">相关看板</div>
-  <a href="https://asimfish.github.io/psibot-dashboard/" target="_blank">PsiBot 数据集面板</a>
-  <a href="https://asimfish.github.io/psibot-dashboard/data_gallery.html" target="_blank">数据检查子面板</a>
-</nav>
-<main class="content">
-  <h1 id="top">Agentic Robotics 进度 <span class="pill agent">GPT-6 Astra 直控机器人</span></h1>
-  <div class="meta">RoboCurve 路线在我们 Isaac Sim 任务上的验证记录。更新 2026-09-10 · E3 终态核验 · 数字由 <code>agentic_stats.py</code> 从 85 个报告统计集的 <code>evaluation.json</code> 与逐请求 <code>provenance.json</code> 统计（<code>agentic/astra_stats.json</code>），与各试验 <code>REPORT_SUMMARY.json</code> 交叉一致 · 静态页，里程碑手工更新。</div>
-  <div class="callout sum"><b>总结。</b>我们把 GPT-6 Astra 当作机器人策略直接跑在自己的仿真任务上：每轮把 4 路 640×480 RGB、本体状态 JSON 和一句任务给模型，模型一次函数调用返回 1–2 个末端 waypoint（绝对世界位姿 + 夹爪开度/6 维手指目标 + 时长），装置只用一个通用 IK 伺服执行，不给物体位姿、抓取点或任何规划器。三轮 85 个报告统计集（FR3 平行夹爪 60 集、PsiBot 灵巧手 25 集）得到：<b>平行夹爪 + xhigh 能完成"看图抓起并放到可见圆垫上"9/10</b>，medium 抓取 60%、放置 30%；<b>灵巧手从 0/5 → 0/10 → 3/10</b>，E3 得到 3 个稳定抬升成功样本；E2 xhigh 按同口径重评已有 1/5 成功，尚不能归因于手型语义。主要失败集中在接近阶段（手压向瓶体触发穿透中止，85 集里 25 集），不在抓或放。节奏上 Astra 不是高频策略：每决策 1.7–1.9 个 waypoint、各 ≈1.9 s，仿真里 ≈0.5 Hz；推理期间机器人静止等待，单次推理 medium 15–19 s、xhigh 40–88 s，一集 84–99% 的墙钟在等模型；每次请求输入 ≈4.2–5.9k token（4 图 ≈1.45k）、输出 medium ≈0.35k / xhigh 1–2.2k（其中推理 token 占 74–90%），一条轨迹 1.9–5.9 万 token。判决：维持 cuRobo 采集主线不变；直控路线在夹爪 + xhigh 上可作试验性补充，下一步先解决接近安全；Codex + Astra 作工程代理可靠。</div>
-  <section aria-labelledby="latest-e3">
-  <h2 id="latest-e3">最新效果 · E3 已完成 <span class="pill done">2026-09-10 核验</span></h2>
-  <p class="lead">实验于 9 月 9 日完成，本次核对最终报告与逐集统计。<b>最强结果是 FR3 视觉放置 xhigh 9/10；PsiBot 稳定抬升 3/10。</b>下表保留各路原始统计口径。</p>
-  <div class="table-wrap"><table>
-    <thead><tr><th>机器人 / 任务</th><th>档位</th><th>成功率</th><th>分母与网络影响</th><th>请求数</th></tr></thead>
-    <tbody>
-      <tr><td>FR3 · 抓起并稳定保持</td><td>medium</td><td class="ok">12/20 · 60%</td><td>全部 20 个指定尝试；含 2 个网络中断失败集</td><td class="num">91</td></tr>
-      <tr><td>FR3 · 放到可见圆垫并释放</td><td>medium</td><td class="warn">6/20 · 30%</td><td>全部 20 个指定尝试；含 1 个网络中断失败集</td><td class="num">83</td></tr>
-      <tr><td>FR3 · 放到可见圆垫并释放</td><td>xhigh</td><td class="ok">9/10 · 90%</td><td>全部 10 个指定尝试；无网络中断集</td><td class="num">57</td></tr>
-      <tr><td>PsiBot · 对向抓握并稳定抬升</td><td>xhigh</td><td class="warn">3/10 · 30%</td><td>补跑后的 10 个有效集；4 个基础设施无效场景另列</td><td>有效集 73；全程 81</td></tr>
-    </tbody>
-  </table></div>
-  <div class="callout info"><b>配对比较：</b>FR3 放置 seed 9301–9310：medium <b>3/10</b>，xhigh <b>9/10</b>；medium 中含 1 个网络中断集。不能用全量 medium 6/20 直接替代这个配对子集。</div>
-  <ul class="q">
-    <li><b>PsiBot 成功样本：</b>9212、9214、9215；有效 seed 为 9201–9204、9211–9216。9205–9208 按基础设施无效保留（9208 零请求），9209/9210 未运行。原始记录保留，未重放旧回答。</li>
-    <li><b>与 E2 的关系：</b>E2 按 E3 保持门重评，FR3 medium 3/5 → 4/5、xhigh 3/5 → 5/5；PsiBot xhigh 0/5 → 1/5。官方原评分不变。PsiBot 本轮 3/10 对同口径 1/5，尚不足以确认整体成功率稳健提升；语义、材质、措辞和 seed 同时改变。</li>
-    <li><b>成本：</b>两路合计 <b>312 次请求</b>、<b>1,670,331 已知 tokens</b>；另 12 次请求 usage 未知，精确总量不可确定。FR3 与 PsiBot 全程请求分别为 231、81。</li>
-    <li><b>验收：</b>两路最终报告均完成、无在途请求；原实验验收分别记录 17 / 28 项测试通过。本次重新核对 10 份报告哈希和逐集汇总，未重新运行实验。实验协议验收通过不等于每集任务成功。</li>
-    <li><b>下一步：</b>优先解决接近碰撞、灵巧手夹持建立与腕相机视野；以新协议和预算做复验，维持 cuRobo 采集主线。</li>
-  </ul>
-  <p class="small"><a href="#videos">查看成功 / 失败四视角视频</a> · <a href="#detail-e3">展开 E3 全部试验详情</a> · <a href="agentic/e3_verified_20260910.json">下载本次核验数据与源文件 SHA-256</a></p>
-  </section>
-  <h2 id="sec0">0 一页结论</h2>
-  <div class="hero">
-    <div class="card"><div class="t">Astra 输出的是什么</div><div class="pct">末端 waypoint</div><span class="small">1–2 个绝对世界位姿 + 夹爪开度 / 6 维手指目标 + 时长，每轮一次函数调用；IK 伺服 120 Hz 执行。无物体位姿、抓取点、规划器、action head。</span></div>
-    <div class="card"><div class="t">最好的结果</div><div class="pct ok">FR3 放置 xhigh 9/10</div><span class="small">看图把瓶放到随机位置的绿色圆垫上并释放（坐标不给模型）；同 seed medium 3/10</span></div>
-    <div class="card"><div class="t">灵巧手</div><div class="pct warn">PsiBot xhigh 3/10</div><span class="small">E1 0/5 → E2 0/10（同口径 1/10）→ E3 3/10；失败集中在接近时把瓶推倒</span></div>
-    <div class="card"><div class="t">节奏与成本</div><div class="pct">≈0.5 Hz（仿真）</div><span class="small">墙钟每 17–88 s 一次决策，等待期间机器人静止；每次推理 4.2–5.9k 入 / 0.35–2.2k 出 token，每条轨迹 1.9–5.9 万</span></div>
-  </div>
-  <ul class="q lead">
-    <li><b>按任务与末端分别看结果</b>：E3 FR3 抓取 medium 12/20、放置 xhigh 9/10；PsiBot 抓取 xhigh 3/10。任务、档位及输入条件不同，这些数字不能单独证明末端形态的因果效应。</li>
-    <li><b>瓶颈在接近</b>：85 集里 25 集被 −2 mm 穿透监测硬中止（E3 FR3 medium 17 集），PsiBot 另有 7 集推倒；FR3 一旦抬起 ≥50 mm 且不掉网，放置 15/15。</li>
-    <li><b>推理档位</b>：E2 抓取两档官方判分均 3/5（同口径重评 medium 4/5、xhigh 5/5；未证明等效），多步放置 medium 3/10 对 xhigh 9/10；medium 快 2.2–2.8×、输出 token 少 3×。后续实验优先考虑：抓取 medium 作成本基线，放置与灵巧手评估 xhigh；均需复验。</li>
-    <li><b>对采集主线</b>：维持 cuRobo 脚本配方；直控路线不导出数据。Codex CLI（gpt-6-astra）作工程代理——从零搭装置、自查修 4 个装置缺陷、重启/断网后 resume——是最可靠的收益。</li>
-  </ul>
-  <h2 id="iface">1 接口规格：输入 / 输出 / 执行 / 评估</h2>
-  <div class="flow">观测 ─► [4× RGB 640×480] + [state JSON] + [task] ─► GPT-6 Astra ─► execute_motion(actions[1–2]) ─► 校验 ─► IK 伺服 @120 Hz（≈3.6 s 仿真）─► 新观测
-                                                                  ↑ 推理期间物理暂停，机器人静止等待（medium 15–19 s / xhigh 40–88 s）</div>
-  <div class="table-wrap"><table class="kv">
-    <thead><tr><th>项</th><th>规格</th><th>说明</th></tr></thead>
-    <tbody>
-      <tr><td>图像输入</td><td>head / chest / third（固定）+ wrist（腕 link）；640×480 RGB，<code>detail=high</code>，每张 ≈361 token</td><td class="small">E1 无腕相机。K、T_world_from_camera（OpenCV）随状态给出，逐轮与 renderer 核验</td></tr>
-      <tr><td>状态输入</td><td>手部 link 世界位姿；7 臂关节 q / q̇ / 限位；FR3：夹爪开度 0–80 mm；PsiBot：6 驱动关节 + mimic 耦合 + 手型语义（伸展轴、掌心法向、拇指对掌方向、开合间隙）；上轮执行反馈（位姿误差、限速/限位触发、拒绝原因）；自写 memory（≤1600 字符）；剩余请求数</td><td class="small">文本部分 ≈2.5k token（FR3）/ 4.1k（PsiBot E3）。<b>不给</b>：物体位姿、抓取点、目标坐标、深度、接触力</td></tr>
-      <tr><td>语言输入</td><td>一句任务 + 固定合同（单位、约束、评估口径、"自报完成不算成功"）</td><td class="small">E3 PsiBot 措辞要求拇指对四指夹持瓶身并保持直立</td></tr>
-      <tr><td>输出</td><td>唯一工具 <code>execute_motion</code>，strict schema，每轮恰一次：<code>actions[1–2]</code>，每项 <code>position_world_m[3]</code> + <code>quaternion_world_wxyz[4]</code> + <code>gripper_width_m</code>（或 <code>hand_joint_position_rad[6]</code>，E1 为 [11]）+ <code>duration_s</code> 0.25–2.0；另 <code>task_done</code>、<code>visual_observation</code>、<code>memory_for_next_observation</code></td><td class="small">实测 1.7–1.9 waypoint/次，时长几乎用满 2 s；输出 token medium ≈0.35k、xhigh 1–2.2k（推理 token 占 74–90%）</td></tr>
-      <tr><td>校验</td><td>相邻 waypoint 位移 ≤0.15 m、最短旋转 ≤0.6 rad、手指在限位内；违反则整块拒绝、扣预算、物理不推进</td><td class="small">拒绝罕见（E2 1 次、E3 FR3 2 次、E3 PsiBot 3 次），均未推进物理</td></tr>
-      <tr><td>执行</td><td>实时 Jacobian DLS IK（增益 4），位置线性 + 四元数最短路径插值，后 30% 时长锁定终点；关节 slew ≤0.72 rad/s、手指原生限速；物理 dt 1/120 s，渲染 15 fps</td><td class="small">Phase 1 跟踪误差 FR3 0.1 mm / 2.4e-4 rad，PsiBot 1.7–2.5 mm / 0.006 rad。无规划器、无避障</td></tr>
-      <tr><td>安全</td><td>GPU 接触张量监测机器人 link 对非机器人物体穿透，−2 mm 硬中止；每轮 20 mm 探针验证</td><td class="small">本线最主要失败来源</td></tr>
-      <tr><td>评估</td><td>独立评估器只读真值、不回流：抬升 ≥50 mm；末 1 s 质心差分速度（1/30 s 窗）≤50 mm/s；倾斜 ≤15°；无硬中止。放置另加：已释放、质心水平距目标中心 ≤4 cm</td><td class="small">E1/E2 曾用 PhysX 原生速度，E3 定稿差分口径并重评 E2（原判分保留）</td></tr>
-    </tbody>
-  </table></div>
-  <h2 id="results">2 结果（三轮 85 个报告统计集）</h2>
-  <div class="small">严格成功 = 评估器全部判据通过（模型自报完成不计）。推理/次 = 单次 API 请求墙钟；仿真执行/集 = 所有 waypoint 执行时长之和；墙钟/集 = 推理 + 执行，不含重置、渲染与评估。E3 FR3 三集 TLS 中断按报告计失败，E3 PsiBot 四个场景按基础设施无效单列（9208 为零请求初始化），不进入有效 N=10；各分母不是统一的“无网络故障有效集”。</div>
-<div class="table-wrap"><table>
-<thead><tr><th>轮次</th><th>机器人 / 末端</th><th>任务</th><th>物体</th><th>相机</th><th>档位</th><th>N</th><th>严格成功</th><th>曾抬 ≥50 mm</th><th>决策/集</th><th>推理/次</th><th>推理/集</th><th>仿真执行/集</th><th>墙钟/集</th><th>备注</th></tr></thead><tbody>
-<tr><td><b>E1</b></td><td class="small">PsiBot 7 轴 + 11 关节灵巧手</td><td class="small">抓起并稳定保持</td><td class="small">透明 100 ml 烧杯</td><td class="small">3 固定</td><td>xhigh</td><td class="num">5</td><td class="bad">0/5<span class="small">（0%）</span></td><td class="num">0/5</td><td class="num">5.20</td><td class="num">152.7 s</td><td class="num">794 s</td><td class="num">16.9 s</td><td class="num">804 s</td><td class="small"></td></tr>
-<tr><td><b>E2</b></td><td class="small">FR3 7 轴 + 平行夹爪</td><td class="small">抓起并稳定保持</td><td class="small">棕色试剂瓶（含 OmniGlass）</td><td class="small">3 固定 + 腕</td><td>medium</td><td class="num">5</td><td class="ok">3/5<span class="small">（60%）</span></td><td class="num">4/5</td><td class="num">6</td><td class="num">15.0 s</td><td class="num">90 s</td><td class="num">20.2 s</td><td class="num">101 s</td><td class="small">E3 口径重评 4/5</td></tr>
-<tr><td><b>E2</b></td><td class="small">FR3 + 平行夹爪</td><td class="small">抓起并稳定保持</td><td class="small">同上</td><td class="small">3 固定 + 腕</td><td>xhigh</td><td class="num">5</td><td class="ok">3/5<span class="small">（60%）</span></td><td class="num">5/5</td><td class="num">5.60</td><td class="num">41.9 s</td><td class="num">234 s</td><td class="num">18.6 s</td><td class="num">244 s</td><td class="small">E3 口径重评 5/5</td></tr>
-<tr><td><b>E2</b></td><td class="small">PsiBot + 6 维灵巧手</td><td class="small">抓起并稳定保持</td><td class="small">同上</td><td class="small">3 固定 + 腕</td><td>medium</td><td class="num">5</td><td class="bad">0/5<span class="small">（0%）</span></td><td class="num">0/5</td><td class="num">6.20</td><td class="num">17.5 s</td><td class="num">108 s</td><td class="num">20.7 s</td><td class="num">120 s</td><td class="small"></td></tr>
-<tr><td><b>E2</b></td><td class="small">PsiBot + 6 维灵巧手</td><td class="small">抓起并稳定保持</td><td class="small">同上</td><td class="small">3 固定 + 腕</td><td>xhigh</td><td class="num">5</td><td class="bad">0/5<span class="small">（0%）</span></td><td class="num">3/5</td><td class="num">7.20</td><td class="num">82.7 s</td><td class="num">595 s</td><td class="num">24.8 s</td><td class="num">609 s</td><td class="small">E3 口径重评 1/5</td></tr>
-<tr><td><b>E3</b></td><td class="small">FR3 + 平行夹爪</td><td class="small">抓起并稳定保持</td><td class="small">棕色试剂瓶，渲染层不透明</td><td class="small">3 固定 + 腕</td><td>medium</td><td class="num">20</td><td class="ok">12/20<span class="small">（60%）</span></td><td class="num">12/20</td><td class="num">4.55</td><td class="num">16.9 s</td><td class="num">77 s</td><td class="num">14.9 s</td><td class="num">85 s</td><td class="small">含 2 集 TLS 中断计失败</td></tr>
-<tr><td><b>E3</b></td><td class="small">FR3 + 平行夹爪</td><td class="small">抓起 → 放到可见圆垫上 → 释放</td><td class="small">同上</td><td class="small">3 固定 + 腕</td><td>medium</td><td class="num">20</td><td class="warn">6/20<span class="small">（30%）</span></td><td class="num">7/20</td><td class="num">4.15</td><td class="num">19.0 s</td><td class="num">79 s</td><td class="num">11.9 s</td><td class="num">86 s</td><td class="small">含 1 集 TLS 中断计失败</td></tr>
-<tr><td><b>E3</b></td><td class="small">FR3 + 平行夹爪</td><td class="small">同上（与 medium 同 seed）</td><td class="small">同上</td><td class="small">3 固定 + 腕</td><td>xhigh</td><td class="num">10</td><td class="ok">9/10<span class="small">（90%）</span></td><td class="num">9/10</td><td class="num">5.70</td><td class="num">40.5 s</td><td class="num">231 s</td><td class="num">20.7 s</td><td class="num">242 s</td><td class="small"></td></tr>
-<tr><td><b>E3</b></td><td class="small">PsiBot + 6 维灵巧手 + 手型语义</td><td class="small">对向抓握、保持直立、抬起</td><td class="small">同上</td><td class="small">3 固定 + 腕</td><td>xhigh</td><td class="num">10</td><td class="warn">3/10<span class="small">（30%）</span></td><td class="num">4/10</td><td class="num">7.30</td><td class="num">85.7 s</td><td class="num">626 s</td><td class="num">25.8 s</td><td class="num">639 s</td><td class="small">另 4 个基础设施无效场景单列（含 1 个零请求场景）</td></tr>
-</tbody></table></div>
-
-  <h3 id="cadence">2.1 频率与时间</h3>
-  <div class="callout info"><b>"0.5 Hz 的时候，没有返回就是在等待吗？"——是。</b>装置在发出请求后暂停物理，机器人保持当前关节目标静止，直到模型返回并通过校验，才执行这 1–2 个 waypoint（≈3.3–3.8 s 仿真），然后再拍图、再暂停。因此 0.5 Hz 只是仿真时间内的 waypoint 密度；按墙钟，medium 每 17–19 s 才动一次、xhigh 每 42–88 s，一集 84–99% 的时间机器人在等模型。真机上物理不能暂停，等待期间机器人只能保持姿态；要提高有效频率只能把推理和执行流水线化（边执行上一批 waypoint 边请求下一批），本线三轮都没有做。</div>
-<div class="table-wrap"><table>
-<thead><tr><th>条件</th><th>waypoint / 决策</th><th>waypoint 时长</th><th>每决策覆盖仿真时间</th><th>waypoint 频率（仿真）</th><th>决策频率（墙钟）</th><th>推理占墙钟</th><th>仿真时长/集</th></tr></thead><tbody>
-<tr><td>E1 · PsiBot · 抓取 · xhigh</td><td class="num">1.88</td><td class="num">1.99 s</td><td class="num">3.7 s</td><td class="num">0.58 Hz</td><td class="num">每 155 s 一次（0.39/min）</td><td class="num">98%</td><td class="num">17.8 s</td></tr>
-<tr><td>E2 · FR3 · 抓取 · medium</td><td class="num">1.80</td><td class="num">1.91 s</td><td class="num">3.4 s</td><td class="num">0.54 Hz</td><td class="num">每 17 s 一次（3.57/min）</td><td class="num">82%</td><td class="num">21.0 s</td></tr>
-<tr><td>E2 · FR3 · 抓取 · xhigh</td><td class="num">1.68</td><td class="num">1.97 s</td><td class="num">3.3 s</td><td class="num">0.51 Hz</td><td class="num">每 44 s 一次（1.38/min）</td><td class="num">93%</td><td class="num">19.6 s</td></tr>
-<tr><td>E2 · PsiBot · 抓取 · medium</td><td class="num">1.84</td><td class="num">1.97 s</td><td class="num">3.6 s</td><td class="num">0.55 Hz</td><td class="num">每 19 s 一次（3.10/min）</td><td class="num">84%</td><td class="num">21.4 s</td></tr>
-<tr><td>E2 · PsiBot · 抓取 · xhigh</td><td class="num">1.86</td><td class="num">1.91 s</td><td class="num">3.6 s</td><td class="num">0.54 Hz</td><td class="num">每 85 s 一次（0.71/min）</td><td class="num">96%</td><td class="num">25.4 s</td></tr>
-<tr><td>E3 · FR3 · 抓取 · medium</td><td class="num">1.73</td><td class="num">1.92 s</td><td class="num">3.3 s</td><td class="num">0.53 Hz</td><td class="num">每 19 s 一次（3.22/min）</td><td class="num">84%</td><td class="num">15.6 s</td></tr>
-<tr><td>E3 · FR3 · 放置 · medium</td><td class="num">1.88</td><td class="num">1.68 s</td><td class="num">3.2 s</td><td class="num">0.65 Hz</td><td class="num">每 21 s 一次（2.88/min）</td><td class="num">87%</td><td class="num">12.4 s</td></tr>
-<tr><td>E3 · FR3 · 放置 · xhigh</td><td class="num">1.91</td><td class="num">1.92 s</td><td class="num">3.7 s</td><td class="num">0.53 Hz</td><td class="num">每 42 s 一次（1.42/min）</td><td class="num">92%</td><td class="num">21.7 s</td></tr>
-<tr><td>E3 · PsiBot · 抓取 · xhigh</td><td class="num">1.89</td><td class="num">1.96 s</td><td class="num">3.7 s</td><td class="num">0.54 Hz</td><td class="num">每 88 s 一次（0.69/min）</td><td class="num">96%</td><td class="num">26.8 s</td></tr>
-</tbody></table></div>
-
-  <h3 id="tokens">2.2 token：每次推理 / 每条轨迹</h3>
-  <div class="small">来自逐请求 <code>provenance.json</code> 的 API usage；TLS 失败的请求无 usage（FR3 6 次、PsiBot 6 次），"token / 集"只计已知 usage，因此含 TLS 失败的集偏低（E3 FR3 抓取一集为 0）。输入构成（FR3 E3 一次请求 4,299）：文本 2,485 + 4 图 1,445 + 工具 schema 301 + 指令 42。</div>
-<div class="table-wrap"><table>
-<thead><tr><th>条件</th><th>有 usage 的请求</th><th>输入 token / 次<br><span class="small">均值 · 中位</span></th><th>输出 token / 次<br><span class="small">均值 · 中位</span></th><th>其中推理 token<br><span class="small">均值 · 占输出</span></th><th>推理延迟 / 次<br><span class="small">中位 [最小, 最大]</span></th><th>token / 集<br><span class="small">均值 [最小, 最大]</span></th><th>token / 集 入 · 出</th></tr></thead><tbody>
-<tr><td>E1 · PsiBot · 抓取 · xhigh</td><td class="num">25</td><td class="num">3,962 · 4,025</td><td class="num">3,761 · 2,810</td><td class="num">3,374 · 90%</td><td class="num">112.3 s [77, 440]</td><td class="num">38,615 [20,302, 55,751]</td><td class="num">19,808 · 18,807</td></tr>
-<tr><td>E2 · FR3 · 抓取 · medium</td><td class="num">30</td><td class="num">4,170 · 4,218</td><td class="num">314 · 286</td><td class="num">109 · 35%</td><td class="num">13.0 s [9, 30]</td><td class="num">26,905 [22,393, 31,273]</td><td class="num">25,020 · 1,885</td></tr>
-<tr><td>E2 · FR3 · 抓取 · xhigh</td><td class="num">28</td><td class="num">4,182 · 4,230</td><td class="num">1,060 · 1,000</td><td class="num">813 · 77%</td><td class="num">40.7 s [15, 82]</td><td class="num">29,356 [26,309, 31,632]</td><td class="num">23,420 · 5,936</td></tr>
-<tr><td>E2 · PsiBot · 抓取 · medium</td><td class="num">31</td><td class="num">4,711 · 4,765</td><td class="num">399 · 374</td><td class="num">139 · 35%</td><td class="num">15.7 s [11, 31]</td><td class="num">31,682 [10,382, 41,452]</td><td class="num">29,209 · 2,473</td></tr>
-<tr><td>E2 · PsiBot · 抓取 · xhigh</td><td class="num">36</td><td class="num">4,765 · 4,802</td><td class="num">2,165 · 1,956</td><td class="num">1,855 · 86%</td><td class="num">74.8 s [48, 155]</td><td class="num">49,896 [27,965, 57,165]</td><td class="num">34,310 · 15,586</td></tr>
-<tr><td>E3 · FR3 · 抓取 · medium</td><td class="num">87</td><td class="num">4,173 · 4,229</td><td class="num">361 · 337</td><td class="num">149 · 41%</td><td class="num">15.9 s [9, 36]</td><td class="num">19,722 [0, 35,211]</td><td class="num">18,152 · 1,570</td></tr>
-<tr><td>E3 · FR3 · 放置 · medium</td><td class="num">81</td><td class="num">4,213 · 4,275</td><td class="num">389 · 325</td><td class="num">171 · 44%</td><td class="num">16.7 s [9, 44]</td><td class="num">18,636 [9,017, 46,598]</td><td class="num">17,061 · 1,575</td></tr>
-<tr><td>E3 · FR3 · 放置 · xhigh</td><td class="num">57</td><td class="num">4,253 · 4,298</td><td class="num">995 · 997</td><td class="num">737 · 74%</td><td class="num">40.0 s [14, 95]</td><td class="num">29,910 [11,373, 37,076]</td><td class="num">24,241 · 5,669</td></tr>
-<tr><td>E3 · PsiBot · 抓取 · xhigh</td><td class="num">73</td><td class="num">5,891 · 5,935</td><td class="num">2,180 · 1,886</td><td class="num">1,862 · 85%</td><td class="num">77.6 s [28, 228]</td><td class="num">58,925 [44,946, 70,363]</td><td class="num">43,008 · 15,917</td></tr>
-</tbody></table></div>
-  <ul class="q">
-    <li>输入端稳定在 ≈4.2k（FR3）；PsiBot E3 因手型语义文本涨到 5.9k。图像只占约 1/3。</li>
-    <li>输出端由档位决定：medium ≈0.3–0.4k/次（推理 token 35–44%），xhigh 夹爪 ≈1.0k（74–77%），xhigh 灵巧手 ≈2.2k（85%），E1 xhigh 11 维手 3.8k（90%）——手部维度越高、xhigh 想得越久，延迟同步拉长（中位 13–16 s → 40 s → 75–112 s）。</li>
-    <li>一条轨迹：medium 夹爪 1.9–2.7 万，xhigh 夹爪 2.9–3.0 万，xhigh 灵巧手 5.0–5.9 万（E3 最大 7.0 万）。与 RoboCurve 原文 ≈2.1k/run 相差一个量级以上，原文更像低档位 + 更少决策。</li>
-  </ul>
-
-  <h3 id="failures">2.3 失败模式（按阶段，逐集复核）</h3>
-  <div class="table-wrap"><table>
-    <thead><tr><th>条件</th><th>N</th><th>成功</th><th>接近碰撞硬中止</th><th>抓取未建立 / 推倒</th><th>抬起后掉落</th><th>抬起但保持门未过</th><th>抬起不足 50 mm</th><th>网络 / 截止</th></tr></thead>
-    <tbody>
-      <tr><td>E1 PsiBot 11 维手 xhigh</td><td class="num">5</td><td class="num bad">0</td><td class="num">1</td><td class="num">2</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">2</td></tr>
-      <tr><td>E2 FR3 夹爪 medium + xhigh</td><td class="num">10</td><td class="num ok">6</td><td class="num">1</td><td class="num">0</td><td class="num">0</td><td class="num">3<span class="small">（E3 口径均成功）</span></td><td class="num">0</td><td class="num">0</td></tr>
-      <tr><td>E2 PsiBot 6 维手 medium + xhigh</td><td class="num">10</td><td class="num bad">0</td><td class="num">4</td><td class="num">3</td><td class="num">0</td><td class="num">3<span class="small">（1 集 E3 口径成功）</span></td><td class="num">0</td><td class="num">0</td></tr>
-      <tr><td>E3 FR3 抓取 medium</td><td class="num">20</td><td class="num ok">12</td><td class="num warn">6</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">2</td></tr>
-      <tr><td>E3 FR3 放置 medium</td><td class="num">20</td><td class="num warn">6</td><td class="num warn">11</td><td class="num">2</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">1</td></tr>
-      <tr><td>E3 FR3 放置 xhigh</td><td class="num">10</td><td class="num ok">9</td><td class="num">1</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">0</td></tr>
-      <tr><td>E3 PsiBot 6 维手 + 语义 xhigh</td><td class="num">10</td><td class="num warn">3</td><td class="num">1</td><td class="num warn">4</td><td class="num">1</td><td class="num">0</td><td class="num">1</td><td class="num">0<span class="small">（另 4 集作废）</span></td></tr>
-    </tbody>
-  </table></div>
-  <h2 id="videos">3 操作 RGB 视频（四路视角，模型看到的原始画面）</h2>
-  <div class="small">每行一集，四路 = head / chest / third（固定）+ wrist（腕相机），即每轮喂给模型的 4 张图对应的视频流；15 fps，1× 仿真时间，<b>不含推理等待</b>（真实墙钟见 2.1）；已压缩到 480 px。原始 640×480 视频与逐决策 PNG 在 bjxy 各试验目录。</div>
-<div class="vidrow"><div class="vt">E3 · FR3 放置 · seed 9301 · xhigh · <span class="ok">成功</span></div><div class="small">6 次决策 · 仿真 23.6 s · 推理 225 s · 抬升 105.7 mm → 放到圆垫中心 4.9 mm 处并释放</div><div class="vids4"><figure><video controls muted preload="auto" src="agentic/e3_fr3_s9301_xhigh_head.mp4"></video><figcaption>head_camera</figcaption></figure><figure><video controls muted preload="auto" src="agentic/e3_fr3_s9301_xhigh_chest.mp4"></video><figcaption>chest_camera</figcaption></figure><figure><video controls muted preload="auto" src="agentic/e3_fr3_s9301_xhigh_third.mp4"></video><figcaption>third_camera</figcaption></figure><figure><video controls muted preload="auto" src="agentic/e3_fr3_s9301_xhigh_wrist.mp4"></video><figcaption>wrist_camera</figcaption></figure></div></div>
-<div class="vidrow"><div class="vt">E3 · FR3 抓取 · seed 9201 · medium · <span class="ok">成功</span></div><div class="small">6 次决策 · 仿真 20.1 s · 推理 103 s · 抬升 81.4 mm 稳定保持</div><div class="vids4"><figure><video controls muted preload="auto" src="agentic/e3_fr3_s9201_medium_head.mp4"></video><figcaption>head_camera</figcaption></figure><figure><video controls muted preload="auto" src="agentic/e3_fr3_s9201_medium_chest.mp4"></video><figcaption>chest_camera</figcaption></figure><figure><video controls muted preload="auto" src="agentic/e3_fr3_s9201_medium_third.mp4"></video><figcaption>third_camera</figcaption></figure><figure><video controls muted preload="auto" src="agentic/e3_fr3_s9201_medium_wrist.mp4"></video><figcaption>wrist_camera</figcaption></figure></div></div>
-<div class="vidrow"><div class="vt">E3 · FR3 放置 · seed 9305 · medium · <span class="bad">接近碰撞硬中止</span></div><div class="small">2 次决策 · 仿真 4.3 s · 推理 47 s · 第 2 步下压时手掌–瓶体穿透 −2 mm 中止（该 seed 两档均在此中止）</div><div class="vids4"><figure><video controls muted preload="auto" src="agentic/e3_fr3_s9305_medium_head.mp4"></video><figcaption>head_camera</figcaption></figure><figure><video controls muted preload="auto" src="agentic/e3_fr3_s9305_medium_chest.mp4"></video><figcaption>chest_camera</figcaption></figure><figure><video controls muted preload="auto" src="agentic/e3_fr3_s9305_medium_third.mp4"></video><figcaption>third_camera</figcaption></figure><figure><video controls muted preload="auto" src="agentic/e3_fr3_s9305_medium_wrist.mp4"></video><figcaption>wrist_camera</figcaption></figure></div></div>
-<div class="vidrow"><div class="vt">E3 · PsiBot 抓取 · seed 9212 · xhigh · <span class="ok">成功</span></div><div class="small">7 次决策 · 仿真 27.1 s · 推理 379 s · 拇指–四指对向夹持，抬升 74.7 mm、倾斜 10.8°</div><div class="vids4"><figure><video controls muted preload="auto" src="agentic/e3_psibot_s9212_xhigh_head.mp4"></video><figcaption>head_camera</figcaption></figure><figure><video controls muted preload="auto" src="agentic/e3_psibot_s9212_xhigh_chest.mp4"></video><figcaption>chest_camera</figcaption></figure><figure><video controls muted preload="auto" src="agentic/e3_psibot_s9212_xhigh_third.mp4"></video><figcaption>third_camera</figcaption></figure><figure><video controls muted preload="auto" src="agentic/e3_psibot_s9212_xhigh_wrist.mp4"></video><figcaption>wrist_camera</figcaption></figure></div></div>
-<div class="vidrow"><div class="vt">E3 · PsiBot 抓取 · seed 9211 · xhigh · <span class="bad">推倒</span></div><div class="small">8 次决策 · 仿真 32.6 s · 推理 796 s · 接近时把瓶推倒（90°），此后在瓶上方反复调整</div><div class="vids4"><figure><video controls muted preload="auto" src="agentic/e3_psibot_s9211_xhigh_head.mp4"></video><figcaption>head_camera</figcaption></figure><figure><video controls muted preload="auto" src="agentic/e3_psibot_s9211_xhigh_chest.mp4"></video><figcaption>chest_camera</figcaption></figure><figure><video controls muted preload="auto" src="agentic/e3_psibot_s9211_xhigh_third.mp4"></video><figcaption>third_camera</figcaption></figure><figure><video controls muted preload="auto" src="agentic/e3_psibot_s9211_xhigh_wrist.mp4"></video><figcaption>wrist_camera</figcaption></figure></div></div>
-  <h2 id="verdict">4 判决与下一步</h2>
-  <ul class="q lead">
-    <li><span class="pill partial">条件正结果</span> <b>FR3 平行夹爪</b>：xhigh 放置 9/10——"看 4 路 RGB 对准可见目标并放下"在夹爪上成立；medium 60% / 30%，差在接近安全裕度。下一步：接近阶段两段式悬停–下降原语或给模型夹爪–瓶最近距离（不给抓取点），xhigh N=20 放置复验；不导出 LeRobot 数据。</li>
-    <li><span class="pill partial">有限进展</span> <b>PsiBot 灵巧手</b>：3/10，有对向夹持动作证据；未证明手型语义的独立收益；接触在瓶肩、未证明力闭合。下一步：推倒当接近问题处理，或按"System 2 Astra + System 1 低层抓取策略"分工。</li>
-    <li><b>档位规则</b>：单步抓取 medium；放置/多步与灵巧手 xhigh。</li>
-    <li><b>采集主线</b>：维持 cuRobo 脚本配方。Codex CLI + gpt-6-astra 作工程代理可靠；"Astra 当策略"仍是试验性补充。</li>
-    <li><b>不能证明</b>：稳定成功率（每条件 ≤20 集）；腕相机独立收益（无消融）；力闭合；真机可迁移性（仿真、推理时暂停）；档位差异显著性。</li>
-  </ul>
-  <h2 id="details">5 各轮详情（默认折叠；每轮：变更 → 前置门 → 逐集结果 → 证据 → 发现 → 判决）</h2>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>机器人直控实验 · SafeLab</title><meta name="description" content="GPT-6 Astra 机器人直控实验：E3成功率、视频证据与token费用估算。"><link rel="stylesheet" href="agentic/dashboard.css"></head>
+<body><a class="skip-link" href="#main">跳到正文</a>
+<header class="site-header"><div class="header-inner"><a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true">S</span> SafeLab <span class="brand-divider">/</span> 实验看板</a><nav aria-label="主导航"><a href="#latest-e3">效果</a><a href="#videos">视频</a><a href="#costs">费用</a><a href="#archive">档案</a></nav></div></header>
+<main id="main" class="page">
+<section class="intro" id="top"><div class="eyebrow">AGENTIC ROBOTICS <span class="status"><i></i>E3 已完成</span></div><h1>机器人直控实验</h1><p class="intro-copy">GPT-6 Astra 看图规划动作，机器人执行。<br class="desktop-break">这一轮，我们看它能否抓稳瓶子，并放到指定位置。</p><div class="intro-foot"><span>仿真验证 · FR3 / PsiBot</span><span>结果核验于 2026.09.10</span></div></section>
+<div class="key-metrics" aria-label="本轮重点"><div><span class="metric-label">FR3 放置 · xhigh</span><strong>90<span>%</span></strong><p>9/10 成功 · 本轮最强结果</p></div><div><span class="metric-label">PsiBot 稳定抬升 · xhigh</span><strong>30<span>%</span></strong><p>3/10 成功 · 仍需提高可靠性</p></div><div><span class="metric-label">E3 已知用量 · API 等值估算</span><strong>$27.87</strong><p>167.03 万 token · 312 次请求</p></div></div>
+<section class="section" id="latest-e3"><span id="sec0"></span><div class="section-heading"><div><span class="section-index">01 / RESULTS</span><h2>当前效果</h2></div><span class="section-note">E3 · 2026.09.08—09.09</span></div><p class="section-lead">夹爪放置表现最好；灵巧手已能稳定抬起，但还没有足够可靠。</p>
+<div class="table-shell"><table class="result-table"><caption class="sr-only">E3各条件成功率、延迟与每集估算费用</caption><thead><tr><th>机器人 / 任务</th><th>档位</th><th>成功</th><th>平均推理等待</th><th>估算费用 / 集</th><th>统计说明</th></tr></thead><tbody><tr><td data-label="任务"><strong>FR3</strong><span class="sub">抓取并稳定保持</span></td><td data-label="推理档位"><span class="effort">medium</span></td><td data-label="成功"><div class="result-number">12/20 <span>60%</span></div><div class="bar" aria-hidden="true"><i style="width:60.0%"></i></div></td><td data-label="平均推理等待">16.9 秒 / 次</td><td data-label="估算费用 / 集"><strong>$0.26</strong><span class="sub">API 标准价等值</span></td><td data-label="统计说明"><span class="note">含 2 集网络失败</span></td></tr><tr><td data-label="任务"><strong>FR3</strong><span class="sub">放到圆垫并释放</span></td><td data-label="推理档位"><span class="effort">medium</span></td><td data-label="成功"><div class="result-number">6/20 <span>30%</span></div><div class="bar" aria-hidden="true"><i style="width:30.0%"></i></div></td><td data-label="平均推理等待">19.0 秒 / 次</td><td data-label="估算费用 / 集"><strong>$0.25</strong><span class="sub">API 标准价等值</span></td><td data-label="统计说明"><span class="note">含 1 集网络失败</span></td></tr><tr><td data-label="任务"><strong>FR3</strong><span class="sub">放到圆垫并释放</span></td><td data-label="推理档位"><span class="effort">xhigh</span></td><td data-label="成功"><div class="result-number">9/10 <span>90%</span></div><div class="bar" aria-hidden="true"><i style="width:90.0%"></i></div></td><td data-label="平均推理等待">40.5 秒 / 次</td><td data-label="估算费用 / 集"><strong>$0.52</strong><span class="sub">API 标准价等值</span></td><td data-label="统计说明"><span class="note">无网络中断</span></td></tr><tr><td data-label="任务"><strong>PsiBot</strong><span class="sub">抓取并稳定保持</span></td><td data-label="推理档位"><span class="effort">xhigh</span></td><td data-label="成功"><div class="result-number">3/10 <span>30%</span></div><div class="bar" aria-hidden="true"><i style="width:30.0%"></i></div></td><td data-label="平均推理等待">85.7 秒 / 次</td><td data-label="估算费用 / 集"><strong>$1.23</strong><span class="sub">API 标准价等值</span></td><td data-label="统计说明"><span class="note">补跑后有效 N=10</span></td></tr></tbody></table></div>
+<p class="table-caption">费用按当前 API 标准价换算已知用量，非实际账单；每集均摊包含失败集。FR3 分母保留网络失败，PsiBot 分母为补跑后的有效集。</p>
+<div class="takeaways"><div><h3>同种子比较，更值得看</h3><p>FR3 放置配对子集：<b>medium 3/10 → xhigh 9/10</b>。medium 中有 1 集网络中断；样本量较小，仍需复验。</p></div><div><h3>主要卡在接近与夹持</h3><p>FR3 的 50 集中，18 集触发接近碰撞中止。PsiBot 的 10 个有效集中，4 集未建立抓取或达标抬升。</p></div></div>
+<details class="method-note"><summary>统计边界：为什么不能把两轮成功率直接比较？</summary><div><p>E2 改用 E3 的保持门重评：FR3 medium 3/5 → 4/5、xhigh 3/5 → 5/5；PsiBot xhigh 0/5 → 1/5。原始评分保留。本轮 PsiBot 3/10 对同口径 1/5，尚不足以证明稳健提升；材质、措辞、语义和种子同时改变。</p><p>PsiBot 有效种子为 9201–9204、9211–9216；9205–9208 保留为基础设施无效场景（9208 零请求），9209/9210 未运行。成功种子：9212、9214、9215。</p></div></details>
+</section>
+<section class="section" id="videos"><div class="section-heading"><div><span class="section-index">02 / EVIDENCE</span><h2>先看机器人怎么做</h2></div><span class="section-note">成功与失败样本都保留</span></div><p class="section-lead">默认展示第三视角，展开可看头部、胸部和腕部相机。视频是仿真时间，不包含模型推理等待。</p><div class="video-grid"><article class="video-card"><div class="video-heading"><h3>FR3 · 放置</h3><span class="badge good">成功</span></div><video controls muted playsinline preload="none" poster="agentic/e3_fr3_s9301_xhigh_poster.jpg" aria-label="FR3 · 放置 seed 9301第三视角" src="agentic/e3_fr3_s9301_xhigh_third.mp4"></video><p class="video-meta">seed 9301 <span>·</span> xhigh</p><p>6 次决策 · 抬升 105.7 mm，释放后距目标 4.9 mm</p><details class="camera-details"><summary>查看其余 3 个相机视角</summary><div class="camera-grid"><figure><video controls muted playsinline preload="none" aria-label="FR3 · 放置 seed 9301 head视角" src="agentic/e3_fr3_s9301_xhigh_head.mp4"></video><figcaption>头部视角</figcaption></figure><figure><video controls muted playsinline preload="none" aria-label="FR3 · 放置 seed 9301 chest视角" src="agentic/e3_fr3_s9301_xhigh_chest.mp4"></video><figcaption>胸部视角</figcaption></figure><figure><video controls muted playsinline preload="none" aria-label="FR3 · 放置 seed 9301 wrist视角" src="agentic/e3_fr3_s9301_xhigh_wrist.mp4"></video><figcaption>腕部视角</figcaption></figure></div></details></article><article class="video-card"><div class="video-heading"><h3>PsiBot · 抓取</h3><span class="badge good">成功</span></div><video controls muted playsinline preload="none" poster="agentic/e3_psibot_s9212_xhigh_poster.jpg" aria-label="PsiBot · 抓取 seed 9212第三视角" src="agentic/e3_psibot_s9212_xhigh_third.mp4"></video><p class="video-meta">seed 9212 <span>·</span> xhigh</p><p>7 次决策 · 抬升 74.7 mm，倾斜 10.8°</p><details class="camera-details"><summary>查看其余 3 个相机视角</summary><div class="camera-grid"><figure><video controls muted playsinline preload="none" aria-label="PsiBot · 抓取 seed 9212 head视角" src="agentic/e3_psibot_s9212_xhigh_head.mp4"></video><figcaption>头部视角</figcaption></figure><figure><video controls muted playsinline preload="none" aria-label="PsiBot · 抓取 seed 9212 chest视角" src="agentic/e3_psibot_s9212_xhigh_chest.mp4"></video><figcaption>胸部视角</figcaption></figure><figure><video controls muted playsinline preload="none" aria-label="PsiBot · 抓取 seed 9212 wrist视角" src="agentic/e3_psibot_s9212_xhigh_wrist.mp4"></video><figcaption>腕部视角</figcaption></figure></div></details></article></div><details class="more-videos"><summary>再看 3 个样本：抓取成功、接近失败、推倒</summary><div class="video-grid"><article class="video-card"><div class="video-heading"><h3>FR3 · 抓取</h3><span class="badge good">成功</span></div><video controls muted playsinline preload="none" poster="agentic/e3_fr3_s9201_medium_poster.jpg" aria-label="FR3 · 抓取 seed 9201第三视角" src="agentic/e3_fr3_s9201_medium_third.mp4"></video><p class="video-meta">seed 9201 <span>·</span> medium</p><p>6 次决策 · 抬升 81.4 mm 并稳定保持</p><details class="camera-details"><summary>查看其余 3 个相机视角</summary><div class="camera-grid"><figure><video controls muted playsinline preload="none" aria-label="FR3 · 抓取 seed 9201 head视角" src="agentic/e3_fr3_s9201_medium_head.mp4"></video><figcaption>头部视角</figcaption></figure><figure><video controls muted playsinline preload="none" aria-label="FR3 · 抓取 seed 9201 chest视角" src="agentic/e3_fr3_s9201_medium_chest.mp4"></video><figcaption>胸部视角</figcaption></figure><figure><video controls muted playsinline preload="none" aria-label="FR3 · 抓取 seed 9201 wrist视角" src="agentic/e3_fr3_s9201_medium_wrist.mp4"></video><figcaption>腕部视角</figcaption></figure></div></details></article><article class="video-card"><div class="video-heading"><h3>FR3 · 放置</h3><span class="badge warning">接近失败</span></div><video controls muted playsinline preload="none" poster="agentic/e3_fr3_s9305_medium_poster.jpg" aria-label="FR3 · 放置 seed 9305第三视角" src="agentic/e3_fr3_s9305_medium_third.mp4"></video><p class="video-meta">seed 9305 <span>·</span> medium</p><p>2 次决策 · 接近时触发穿透硬中止</p><details class="camera-details"><summary>查看其余 3 个相机视角</summary><div class="camera-grid"><figure><video controls muted playsinline preload="none" aria-label="FR3 · 放置 seed 9305 head视角" src="agentic/e3_fr3_s9305_medium_head.mp4"></video><figcaption>头部视角</figcaption></figure><figure><video controls muted playsinline preload="none" aria-label="FR3 · 放置 seed 9305 chest视角" src="agentic/e3_fr3_s9305_medium_chest.mp4"></video><figcaption>胸部视角</figcaption></figure><figure><video controls muted playsinline preload="none" aria-label="FR3 · 放置 seed 9305 wrist视角" src="agentic/e3_fr3_s9305_medium_wrist.mp4"></video><figcaption>腕部视角</figcaption></figure></div></details></article><article class="video-card"><div class="video-heading"><h3>PsiBot · 抓取</h3><span class="badge warning">推倒</span></div><video controls muted playsinline preload="none" poster="agentic/e3_psibot_s9211_xhigh_poster.jpg" aria-label="PsiBot · 抓取 seed 9211第三视角" src="agentic/e3_psibot_s9211_xhigh_third.mp4"></video><p class="video-meta">seed 9211 <span>·</span> xhigh</p><p>8 次决策 · 瓶体倾倒至约 90°</p><details class="camera-details"><summary>查看其余 3 个相机视角</summary><div class="camera-grid"><figure><video controls muted playsinline preload="none" aria-label="PsiBot · 抓取 seed 9211 head视角" src="agentic/e3_psibot_s9211_xhigh_head.mp4"></video><figcaption>头部视角</figcaption></figure><figure><video controls muted playsinline preload="none" aria-label="PsiBot · 抓取 seed 9211 chest视角" src="agentic/e3_psibot_s9211_xhigh_chest.mp4"></video><figcaption>胸部视角</figcaption></figure><figure><video controls muted playsinline preload="none" aria-label="PsiBot · 抓取 seed 9211 wrist视角" src="agentic/e3_psibot_s9211_xhigh_wrist.mp4"></video><figcaption>腕部视角</figcaption></figure></div></details></article></div></details></section>
+<section class="section" id="costs"><div class="section-heading"><div><span class="section-index">03 / TOKENS & COST</span><h2>这些 token，大约多少钱？</h2></div><label class="scope-control">查看轮次<select id="cost-scope"><option value="E3">E3 · 本轮全程</option><option value="E2">E2 · 上一轮</option><option value="E1">E1 · 初始试验</option><option value="all">E1—E3 · 全部</option></select></label></div>
+<div class="cost-overview"><div class="cost-amount"><span id="cost-label">E3 · 已知用量的 API 等值估算</span><strong id="cost-total">$27.87</strong><span class="cost-currency">USD · 非实际账单</span></div><dl class="cost-facts"><div><dt>输入 token</dt><dd id="cost-input">1,388,178</dd></div><div><dt>输出 token</dt><dd id="cost-output">282,153</dd></div><div><dt>其中缓存输入</dt><dd id="cost-cached">13,696</dd></div><div><dt>缺少用量的请求</dt><dd id="cost-unknown">12 次</dd></div></dl></div>
+<p class="cost-basis" id="cost-basis">按 API Standard：输入 $10 / 百万、缓存输入 $1 / 百万、输出 $50 / 百万 token。来源：<a href="https://developers.openai.com/api/docs/models/gpt-6-astra" target="_blank" rel="noopener">OpenAI 官方价格</a>，核对于 2026-09-10。</p>
+<div class="table-shell"><table class="cost-table"><caption class="sr-only">各条件token用量与美元等值估算</caption><thead><tr><th>条件</th><th>输入 token</th><th>输出 token</th><th>估算 USD</th><th>估算 / 集</th></tr></thead><tbody id="cost-rows"><tr><td data-label="条件"><strong>FR3 · 抓取并稳定保持</strong><span class="sub">medium · 20 集</span></td><td data-label="输入 token">363,048<span class="sub">含缓存 2,176</span></td><td data-label="输出 token">31,401</td><td data-label="估算 USD"><strong>$5.18</strong></td><td data-label="估算 / 集">$0.26</td></tr><tr><td data-label="条件"><strong>FR3 · 放到圆垫并释放</strong><span class="sub">medium · 20 集</span></td><td data-label="输入 token">341,217<span class="sub">含缓存 9,216</span></td><td data-label="输出 token">31,508</td><td data-label="估算 USD"><strong>$4.90</strong></td><td data-label="估算 / 集">$0.25</td></tr><tr><td data-label="条件"><strong>FR3 · 放到圆垫并释放</strong><span class="sub">xhigh · 10 集</span></td><td data-label="输入 token">242,410<span class="sub">含缓存 2,304</span></td><td data-label="输出 token">56,693</td><td data-label="估算 USD"><strong>$5.24</strong></td><td data-label="估算 / 集">$0.52</td></tr><tr><td data-label="条件"><strong>PsiBot · 抓取并稳定保持</strong><span class="sub">xhigh · 10 集</span></td><td data-label="输入 token">430,077</td><td data-label="输出 token">159,170</td><td data-label="估算 USD"><strong>$12.26</strong></td><td data-label="估算 / 集">$1.23</td></tr><tr><td data-label="条件"><strong>PsiBot · 基础设施无效场景</strong><span class="sub">xhigh · 4 场景</span></td><td data-label="输入 token">11,426</td><td data-label="输出 token">3,381</td><td data-label="估算 USD"><strong>$0.28</strong></td><td data-label="估算 / 集">—</td></tr></tbody></table></div>
+<p class="table-caption">E3 全程包含 PsiBot 无效场景的 8 次请求。E3 缺失 usage 的 12 次请求没有按 0 计费，未纳入可计算金额；同样不包含工程代理、GPU、订阅或服务商附加费用。合计按未四舍五入的金额计算；实际扣款须以账单为准。</p>
+<details class="price-settings"><summary>按你的单价重算</summary><div class="price-form"><p>单位为美元 / 百万 token。更改后只更新本节估算；效果表保留官方标准价基线。</p><div class="rate-grid"><label>普通输入<input id="price-input" type="number" min="0" max="1000000" step="0.01" value="10" inputmode="decimal"></label><label>缓存输入<input id="price-cached" type="number" min="0" max="1000000" step="0.01" value="1" inputmode="decimal"></label><label>缓存写入<input id="price-write" type="number" min="0" max="1000000" step="0.01" value="12.5" inputmode="decimal"></label><label>输出<input id="price-output" type="number" min="0" max="1000000" step="0.01" value="50" inputmode="decimal"></label></div><div class="form-footer"><button type="button" id="price-reset">恢复官方标准价</button><span id="price-state" role="status" aria-live="polite">当前：官方标准价</span></div><p class="formula">估算 = 普通输入 × 输入单价 + 缓存输入 × 缓存价 + 缓存写入 × 写入价 + 输出 × 输出单价，再除以 1,000,000。</p></div></details>
+<details class="method-note"><summary>计费口径与可复核数据</summary><div><p>从 E1—E3 的逐请求 provenance 读取用量，输入已包含图像，输出已包含推理 token，均不重复加价。E3 的 300 条已知用量记录与最终报告逐项一致；缓存写入为 0。单请求输入最多 5,993 token，未触发超过 272K 的长上下文价格。</p><p>这里估算的是按标准 API 单价执行同等用量的金额。实际服务档位、订阅或平台折扣未从账单核验；Batch / Flex、Fast 或其他计费方式不能直接套用本金额。</p><p><a href="agentic/token_costs_20260910.json" download>下载分组用量与价格口径</a> · <a href="agentic/e3_verified_20260910.json" download>下载 E3 核验记录</a></p></div></details>
+<noscript><p class="notice">JavaScript 未启用；上方显示 E3 官方标准价估算。筛选轮次和自定义价格需要启用 JavaScript。</p></noscript></section>
+<section class="section" id="archive"><div class="section-heading"><div><span class="section-index">04 / LAB NOTEBOOK</span><h2>实验档案</h2></div><span class="section-note">需要时再展开</span></div><p class="section-lead">完整数字、判据、逐集记录和技术细节保留在这里。</p><details class="archive-block"><summary><span>按轮次查看实验记录<small>E3 / E2 / E1 / E0 · 逐集结果与原始证据</small></span><span class="expand-icon" aria-hidden="true">＋</span></summary><div class="archive-body">  <h2 id="details">各轮详情（默认折叠；每轮：变更 → 前置门 → 逐集结果 → 证据 → 发现 → 判决）</h2>
   <details class="grp exp" id="detail-e3"><summary>E3 · 口径定稿 + 真不透明 + FR3 N=20 抓取/放置 + PsiBot 手型语义（09-08 23:13 → 09-09 04:49） <span class="sum">FR3 抓取 medium 12/20 · 放置 medium 6/20 · xhigh 9/10 · PsiBot xhigh 3/10</span></summary><div class="body">
 <span id="sec2c"></span>
   <div class="meta">owner 在 E2 后定的三件事：<b>先定保持门的速度口径</b>（PhysX 原生速度 vs 位置差分差异巨大，E2 未改判）并透明重评 E2；<b>真正不透明</b>（E2 资产含 OmniGlass，允许仅渲染层 overlay）；<b>FR3 上 N=20 + 放置任务</b>（block→bowl 等价，夹爪默认 medium、另 10 集 xhigh 配对），<b>PsiBot 保持 xhigh，公开 6 维手型语义并要求对向抓握</b>。两个独立 Codex 代理（gpt-6-astra xhigh）从 E2 代码 clone 出 <code>bjxy:/home/liyufeng/astra_fr3_grasp_e3/</code> 与 <code>astra_psibot_grasp_e3/</code>，各自 ≤7 h（05:43 停发新请求、06:13 报告截止），FR3 ≤420 次请求、PsiBot ≤150 次。<b>基础设施事件</b>：00:51–00:56 代理上游 TLS 抖动（<code>SSLError: unexpected eof</code>），两路各有请求失败——FR3 3 集（抓取 9219/9220、放置 9310-medium）保留为原始失败判分不重跑；PsiBot 9205–9208 四集判为 infrastructure-invalid（不计模型失败），代理按协议自判 BLOCKED 停发，owner 01:14 实测代理恢复后 01:15 <code>codex exec resume</code> 续跑并以新 seed 9211–9216 补足有效 N=10。</div>
@@ -314,16 +112,16 @@
 
   <h4 id="sec2ce">2C.4 证据图与视频（原始观察，未经挑选）</h4>
   <div class="figs">
-    <figure><img src="agentic/e3_fr3_s9301_xhigh_d05_third.png" alt="FR3 seed 9301 xhigh 决策 5 third 相机"><figcaption><b>FR3 · 放置 9301 xhigh · 决策 5 · third</b>：瓶直立在绿色圆垫中央，夹爪已张开到 79 mm 准备撤离；模型此步自报完成，独立评估抬升 105.7 mm、保持门通过。目标坐标未给模型，纯靠视觉对准。</figcaption></figure>
-    <figure><img src="agentic/e3_fr3_s9301_xhigh_d05_wrist.png" alt="FR3 seed 9301 xhigh 决策 5 腕相机"><figcaption><b>FR3 · 放置 9301 xhigh · 决策 5 · 腕相机</b>：同一时刻腕视角，两指之间是瓶口。</figcaption></figure>
-    <figure><img src="agentic/e3_fr3_s9305_medium_d01_third.png" alt="FR3 seed 9305 medium 决策 1 third 相机"><figcaption><b>FR3 · 放置 9305 medium · 决策 1 · third</b>：瓶靠近机器人基座、圆垫在桌中央——这是本轮 medium 典型失败初态，下一步接近时手掌/指压向瓶体触发 −2 mm 硬中止（9305 两档都在此中止）。</figcaption></figure>
-    <figure><img src="agentic/e3_psibot_s9212_xhigh_d06_chest.png" alt="PsiBot seed 9212 xhigh 决策 6 胸部相机"><figcaption><b>PsiBot · 9212 xhigh · 决策 6 · chest</b>：拇指压瓶盖上方、四指托瓶身对向夹持，瓶离桌 74.7 mm、倾斜 10.8°、末秒差分速度 0.149 mm/s → <b>PsiBot 灵巧手三轮试验里第一个严格成功样本</b>。接触位置在瓶肩/上部，不是环抱中段。</figcaption></figure>
-    <figure><img src="agentic/e3_psibot_s9211_xhigh_d07_chest.png" alt="PsiBot seed 9211 xhigh 决策 7 胸部相机"><figcaption><b>PsiBot · 9211 xhigh · 决策 7 · chest</b>：瓶已被推倒（90.1°），手仍在上方调整——4 个"抓取未建立"失败都是这一模式，与 E1/E2 medium 的碰倒同源。</figcaption></figure>
-    <figure><img src="agentic/e3_psibot_tilt_comparison.png" alt="PsiBot E2 vs E3 末窗倾斜分布"><figcaption><b>PsiBot · E2 xhigh vs E3 xhigh 末窗最大倾斜分布</b>（代理生成的经验累积分布，<code>artifacts/analysis/tilt_comparison.png</code>；红虚线 = 15° 门）：左图全部有效集——E3 曲线在 ~12° 处到 0.5 后平台到 90° 才再上升，即一半的集抬起且直、另一半推倒；右图仅"曾抬升 ≥50 mm"的集——E3 4 集中 3 集在 15° 门以内（E2 3 集中 1 集）。</figcaption></figure>
+    <figure><img loading="lazy" src="agentic/e3_fr3_s9301_xhigh_d05_third.png" alt="FR3 seed 9301 xhigh 决策 5 third 相机"><figcaption><b>FR3 · 放置 9301 xhigh · 决策 5 · third</b>：瓶直立在绿色圆垫中央，夹爪已张开到 79 mm 准备撤离；模型此步自报完成，独立评估抬升 105.7 mm、保持门通过。目标坐标未给模型，纯靠视觉对准。</figcaption></figure>
+    <figure><img loading="lazy" src="agentic/e3_fr3_s9301_xhigh_d05_wrist.png" alt="FR3 seed 9301 xhigh 决策 5 腕相机"><figcaption><b>FR3 · 放置 9301 xhigh · 决策 5 · 腕相机</b>：同一时刻腕视角，两指之间是瓶口。</figcaption></figure>
+    <figure><img loading="lazy" src="agentic/e3_fr3_s9305_medium_d01_third.png" alt="FR3 seed 9305 medium 决策 1 third 相机"><figcaption><b>FR3 · 放置 9305 medium · 决策 1 · third</b>：瓶靠近机器人基座、圆垫在桌中央——这是本轮 medium 典型失败初态，下一步接近时手掌/指压向瓶体触发 −2 mm 硬中止（9305 两档都在此中止）。</figcaption></figure>
+    <figure><img loading="lazy" src="agentic/e3_psibot_s9212_xhigh_d06_chest.png" alt="PsiBot seed 9212 xhigh 决策 6 胸部相机"><figcaption><b>PsiBot · 9212 xhigh · 决策 6 · chest</b>：拇指压瓶盖上方、四指托瓶身对向夹持，瓶离桌 74.7 mm、倾斜 10.8°、末秒差分速度 0.149 mm/s → <b>PsiBot 灵巧手三轮试验里第一个严格成功样本</b>。接触位置在瓶肩/上部，不是环抱中段。</figcaption></figure>
+    <figure><img loading="lazy" src="agentic/e3_psibot_s9211_xhigh_d07_chest.png" alt="PsiBot seed 9211 xhigh 决策 7 胸部相机"><figcaption><b>PsiBot · 9211 xhigh · 决策 7 · chest</b>：瓶已被推倒（90.1°），手仍在上方调整——4 个"抓取未建立"失败都是这一模式，与 E1/E2 medium 的碰倒同源。</figcaption></figure>
+    <figure><img loading="lazy" src="agentic/e3_psibot_tilt_comparison.png" alt="PsiBot E2 vs E3 末窗倾斜分布"><figcaption><b>PsiBot · E2 xhigh vs E3 xhigh 末窗最大倾斜分布</b>（代理生成的经验累积分布，<code>artifacts/analysis/tilt_comparison.png</code>；红虚线 = 15° 门）：左图全部有效集——E3 曲线在 ~12° 处到 0.5 后平台到 90° 才再上升，即一半的集抬起且直、另一半推倒；右图仅"曾抬升 ≥50 mm"的集——E3 4 集中 3 集在 15° 门以内（E2 3 集中 1 集）。</figcaption></figure>
   </div>
   <div class="vids">
-    <figure><video controls muted preload="metadata" src="agentic/e3_fr3_s9301_xhigh_third.mp4"></video><figcaption><b>FR3 · 放置 9301 xhigh · third 全程</b>（15 fps，1× 仿真时间，省略每次约 40 s 的推理等待；已压缩到 480 px）：接近 → 夹瓶颈 → 抬起 → 搬到圆垫上方 → 下放 → 张开撤离。</figcaption></figure>
-    <figure><video controls muted preload="metadata" src="agentic/e3_psibot_s9212_xhigh_third.mp4"></video><figcaption><b>PsiBot · 9212 xhigh · third 全程</b>（省略每次约 86 s 的推理等待）：手型先张开对准，再拇指–四指合拢从瓶肩提起并保持。</figcaption></figure>
+    <figure><video controls muted preload="none" src="agentic/e3_fr3_s9301_xhigh_third.mp4"></video><figcaption><b>FR3 · 放置 9301 xhigh · third 全程</b>（15 fps，1× 仿真时间，省略每次约 40 s 的推理等待；已压缩到 480 px）：接近 → 夹瓶颈 → 抬起 → 搬到圆垫上方 → 下放 → 张开撤离。</figcaption></figure>
+    <figure><video controls muted preload="none" src="agentic/e3_psibot_s9212_xhigh_third.mp4"></video><figcaption><b>PsiBot · 9212 xhigh · third 全程</b>（省略每次约 86 s 的推理等待）：手型先张开对准，再拇指–四指合拢从瓶肩提起并保持。</figcaption></figure>
   </div>
 
   <details class="grp"><summary>2C.5 关键发现</summary><div class="body">
@@ -408,14 +206,14 @@
 
   <h4>2B.3 证据图与视频（原始观察，未经挑选）</h4>
   <div class="figs">
-    <figure><img src="agentic/e2_fr3_s9101_medium_d03_wrist.png" alt="FR3 seed 9101 medium 决策 3 腕相机"><figcaption><b>FR3 · 9101 medium · 决策 3 · 腕相机</b>：两指之间是瓶口，模型在此步引用"wrist view"指出瓶颈偏向世界 +Y，随后做了约 12 mm 的 +Y 修正——腕相机唯一一条可核验的使用证据。</figcaption></figure>
-    <figure><img src="agentic/e2_fr3_s9101_medium_d06_chest.png" alt="FR3 seed 9101 medium 决策 6 胸部相机"><figcaption><b>FR3 · 9101 medium · 决策 6 · chest</b>：夹爪夹住瓶颈，瓶体离桌（阴影可见），独立评估抬升 107.6 mm、稳定保持 → <b>整个 Astra 直控测试的首个成功样本</b>。</figcaption></figure>
-    <figure><img src="agentic/e2_psibot_s9101_xhigh_d07_chest.png" alt="PsiBot seed 9101 xhigh 决策 7 胸部相机"><figcaption><b>PsiBot · 9101 xhigh · 决策 7 · chest</b>：灵巧手从瓶盖/瓶颈处单侧握住并提起（89.7 mm），但瓶体倾斜 26.5°，保持门未过。这是 PsiBot 两轮试验里第一次真正抬起物体。</figcaption></figure>
-    <figure><img src="agentic/e2_psibot_s9101_xhigh_d07_wrist.png" alt="PsiBot seed 9101 xhigh 决策 7 腕相机"><figcaption><b>PsiBot · 9101 xhigh · 决策 7 · 腕相机</b>：同一时刻的腕视角。PsiBot 路 67 次请求中只有 1 次（9105-xhigh 第 8 步）明确引用腕视角。</figcaption></figure>
+    <figure><img loading="lazy" src="agentic/e2_fr3_s9101_medium_d03_wrist.png" alt="FR3 seed 9101 medium 决策 3 腕相机"><figcaption><b>FR3 · 9101 medium · 决策 3 · 腕相机</b>：两指之间是瓶口，模型在此步引用"wrist view"指出瓶颈偏向世界 +Y，随后做了约 12 mm 的 +Y 修正——腕相机唯一一条可核验的使用证据。</figcaption></figure>
+    <figure><img loading="lazy" src="agentic/e2_fr3_s9101_medium_d06_chest.png" alt="FR3 seed 9101 medium 决策 6 胸部相机"><figcaption><b>FR3 · 9101 medium · 决策 6 · chest</b>：夹爪夹住瓶颈，瓶体离桌（阴影可见），独立评估抬升 107.6 mm、稳定保持 → <b>整个 Astra 直控测试的首个成功样本</b>。</figcaption></figure>
+    <figure><img loading="lazy" src="agentic/e2_psibot_s9101_xhigh_d07_chest.png" alt="PsiBot seed 9101 xhigh 决策 7 胸部相机"><figcaption><b>PsiBot · 9101 xhigh · 决策 7 · chest</b>：灵巧手从瓶盖/瓶颈处单侧握住并提起（89.7 mm），但瓶体倾斜 26.5°，保持门未过。这是 PsiBot 两轮试验里第一次真正抬起物体。</figcaption></figure>
+    <figure><img loading="lazy" src="agentic/e2_psibot_s9101_xhigh_d07_wrist.png" alt="PsiBot seed 9101 xhigh 决策 7 腕相机"><figcaption><b>PsiBot · 9101 xhigh · 决策 7 · 腕相机</b>：同一时刻的腕视角。PsiBot 路 67 次请求中只有 1 次（9105-xhigh 第 8 步）明确引用腕视角。</figcaption></figure>
   </div>
   <div class="vids">
-    <figure><video controls muted preload="metadata" src="agentic/e2_fr3_s9101_medium_third.mp4"></video><figcaption><b>FR3 · 9101 medium · third 全程</b>（15 fps，1× 仿真时间，省略每次约 15 s 的推理等待）：接近 → 腕视角修正 → 夹瓶颈 → 抬起保持。</figcaption></figure>
-    <figure><video controls muted preload="metadata" src="agentic/e2_psibot_s9101_xhigh_third.mp4"></video><figcaption><b>PsiBot · 9101 xhigh · third 全程</b>（省略每次约 80 s 的推理等待）：手在瓶上方反复调整手型，最终从瓶颈处提起但倾斜。</figcaption></figure>
+    <figure><video controls muted preload="none" src="agentic/e2_fr3_s9101_medium_third.mp4"></video><figcaption><b>FR3 · 9101 medium · third 全程</b>（15 fps，1× 仿真时间，省略每次约 15 s 的推理等待）：接近 → 腕视角修正 → 夹瓶颈 → 抬起保持。</figcaption></figure>
+    <figure><video controls muted preload="none" src="agentic/e2_psibot_s9101_xhigh_third.mp4"></video><figcaption><b>PsiBot · 9101 xhigh · third 全程</b>（省略每次约 80 s 的推理等待）：手在瓶上方反复调整手型，最终从瓶颈处提起但倾斜。</figcaption></figure>
   </div>
 
   <details class="grp"><summary>2B.4 关键发现</summary><div class="body">
@@ -496,18 +294,18 @@
 
   <h4 id="sec2e">2.4 证据图与视频（有效批次原始观察，未经挑选）</h4>
   <div class="figs">
-    <figure><img src="agentic/e1_s8110_d00_chest.png" alt="seed 8110 决策 0 胸部相机"><figcaption><b>seed 8110 · 决策 0 · chest</b>：起始状态，烧杯直立，手在画面外。模型描述"烧杯中心约在世界 (−1.13, −5.09, 0.98)"，与真值 (−1.154, −5.084, 0.977) 相差约 2.5 cm。</figcaption></figure>
-    <figure><img src="agentic/e1_s8111_d04_chest.png" alt="seed 8111 决策 4 胸部相机"><figcaption><b>seed 8111 · 决策 4 · chest</b>：手掌朝向杯体横向扫入、五指张开——下一段动作中掌基座压进杯体 2.34 mm，触发穿透硬中止。</figcaption></figure>
-    <figure><img src="agentic/e1_s8110_d05_chest.png" alt="seed 8110 决策 5 胸部相机"><figcaption><b>seed 8110 · 决策 5 · chest</b>：杯子已侧倒，手指蜷成拳悬在上方。模型此时置 <code>task_done=true</code>，描述却写"稳定直立抓取与抬升尚未确认"。</figcaption></figure>
-    <figure><img src="agentic/e1_s8113_d05_chest.png" alt="seed 8113 决策 5 胸部相机"><figcaption><b>seed 8113 · 决策 5 · chest</b>：杯子侧倒，手指压在杯身上；模型自报完成，独立评估抬升 11.4 mm、倾斜 88.8°。</figcaption></figure>
+    <figure><img loading="lazy" src="agentic/e1_s8110_d00_chest.png" alt="seed 8110 决策 0 胸部相机"><figcaption><b>seed 8110 · 决策 0 · chest</b>：起始状态，烧杯直立，手在画面外。模型描述"烧杯中心约在世界 (−1.13, −5.09, 0.98)"，与真值 (−1.154, −5.084, 0.977) 相差约 2.5 cm。</figcaption></figure>
+    <figure><img loading="lazy" src="agentic/e1_s8111_d04_chest.png" alt="seed 8111 决策 4 胸部相机"><figcaption><b>seed 8111 · 决策 4 · chest</b>：手掌朝向杯体横向扫入、五指张开——下一段动作中掌基座压进杯体 2.34 mm，触发穿透硬中止。</figcaption></figure>
+    <figure><img loading="lazy" src="agentic/e1_s8110_d05_chest.png" alt="seed 8110 决策 5 胸部相机"><figcaption><b>seed 8110 · 决策 5 · chest</b>：杯子已侧倒，手指蜷成拳悬在上方。模型此时置 <code>task_done=true</code>，描述却写"稳定直立抓取与抬升尚未确认"。</figcaption></figure>
+    <figure><img loading="lazy" src="agentic/e1_s8113_d05_chest.png" alt="seed 8113 决策 5 胸部相机"><figcaption><b>seed 8113 · 决策 5 · chest</b>：杯子侧倒，手指压在杯身上；模型自报完成，独立评估抬升 11.4 mm、倾斜 88.8°。</figcaption></figure>
   </div>
   <div class="vids">
-    <figure><video controls muted preload="metadata" src="agentic/e1_s8110_chest.mp4"></video><figcaption><b>seed 8110 · chest 全程</b>（15 fps，1× 仿真时间；省略了每次约 150 s 的推理等待，不是实时闭环录像）</figcaption></figure>
-    <figure><video controls muted preload="metadata" src="agentic/e1_s8110_third.mp4"></video><figcaption><b>seed 8110 · third 全程</b>：可见右臂接近、手在杯沿附近反复调整腕姿、最终把杯子碰倒。</figcaption></figure>
+    <figure><video controls muted preload="none" src="agentic/e1_s8110_chest.mp4"></video><figcaption><b>seed 8110 · chest 全程</b>（15 fps，1× 仿真时间；省略了每次约 150 s 的推理等待，不是实时闭环录像）</figcaption></figure>
+    <figure><video controls muted preload="none" src="agentic/e1_s8110_third.mp4"></video><figcaption><b>seed 8110 · third 全程</b>：可见右臂接近、手在杯沿附近反复调整腕姿、最终把杯子碰倒。</figcaption></figure>
   </div>
   <div class="figs" style="grid-template-columns:repeat(2,1fr)">
-    <figure><img src="agentic/e1_s8110_d00_third.png" alt="seed 8110 决策 0 第三视角"><figcaption><b>seed 8110 · 决策 0 · third</b>：起始位姿，双臂抬起。</figcaption></figure>
-    <figure><img src="agentic/e1_s8110_d05_third.png" alt="seed 8110 决策 5 第三视角"><figcaption><b>seed 8110 · 决策 5 · third</b>：终态，右手悬在侧倒的烧杯上方。</figcaption></figure>
+    <figure><img loading="lazy" src="agentic/e1_s8110_d00_third.png" alt="seed 8110 决策 0 第三视角"><figcaption><b>seed 8110 · 决策 0 · third</b>：起始位姿，双臂抬起。</figcaption></figure>
+    <figure><img loading="lazy" src="agentic/e1_s8110_d05_third.png" alt="seed 8110 决策 5 第三视角"><figcaption><b>seed 8110 · 决策 5 · third</b>：终态，右手悬在侧倒的烧杯上方。</figcaption></figure>
   </div>
 
   <details class="grp" open id="sec2f"><summary>2.5 装置缺陷修复记录 <span class="sum">Codex 自查 · 受影响样本全部封存，成本单列，不用于成功率</span></summary><div class="body">
@@ -577,7 +375,89 @@
 
 
   </div></details>
-  <h2 id="appx">6 附录</h2>
+</div></details>
+<details class="archive-block"><summary><span>接口、计分与运行节奏<small>输入输出、保持门、时钟与等待时间</small></span><span class="expand-icon" aria-hidden="true">＋</span></summary><div class="archive-body">  <h2 id="iface">接口规格：输入 / 输出 / 执行 / 评估</h2>
+  <div class="flow">观测 ─► [4× RGB 640×480] + [state JSON] + [task] ─► GPT-6 Astra ─► execute_motion(actions[1–2]) ─► 校验 ─► IK 伺服 @120 Hz（≈3.6 s 仿真）─► 新观测
+                                                                  ↑ 推理期间物理暂停，机器人静止等待（medium 15–19 s / xhigh 40–88 s）</div>
+  <div class="table-wrap"><table class="kv">
+    <thead><tr><th>项</th><th>规格</th><th>说明</th></tr></thead>
+    <tbody>
+      <tr><td>图像输入</td><td>head / chest / third（固定）+ wrist（腕 link）；640×480 RGB，<code>detail=high</code>，每张 ≈361 token</td><td class="small">E1 无腕相机。K、T_world_from_camera（OpenCV）随状态给出，逐轮与 renderer 核验</td></tr>
+      <tr><td>状态输入</td><td>手部 link 世界位姿；7 臂关节 q / q̇ / 限位；FR3：夹爪开度 0–80 mm；PsiBot：6 驱动关节 + mimic 耦合 + 手型语义（伸展轴、掌心法向、拇指对掌方向、开合间隙）；上轮执行反馈（位姿误差、限速/限位触发、拒绝原因）；自写 memory（≤1600 字符）；剩余请求数</td><td class="small">文本部分 ≈2.5k token（FR3）/ 4.1k（PsiBot E3）。<b>不给</b>：物体位姿、抓取点、目标坐标、深度、接触力</td></tr>
+      <tr><td>语言输入</td><td>一句任务 + 固定合同（单位、约束、评估口径、"自报完成不算成功"）</td><td class="small">E3 PsiBot 措辞要求拇指对四指夹持瓶身并保持直立</td></tr>
+      <tr><td>输出</td><td>唯一工具 <code>execute_motion</code>，strict schema，每轮恰一次：<code>actions[1–2]</code>，每项 <code>position_world_m[3]</code> + <code>quaternion_world_wxyz[4]</code> + <code>gripper_width_m</code>（或 <code>hand_joint_position_rad[6]</code>，E1 为 [11]）+ <code>duration_s</code> 0.25–2.0；另 <code>task_done</code>、<code>visual_observation</code>、<code>memory_for_next_observation</code></td><td class="small">实测 1.7–1.9 waypoint/次，时长几乎用满 2 s；输出 token medium ≈0.35k、xhigh 1–2.2k（推理 token 占 74–90%）</td></tr>
+      <tr><td>校验</td><td>相邻 waypoint 位移 ≤0.15 m、最短旋转 ≤0.6 rad、手指在限位内；违反则整块拒绝、扣预算、物理不推进</td><td class="small">拒绝罕见（E2 1 次、E3 FR3 2 次、E3 PsiBot 3 次），均未推进物理</td></tr>
+      <tr><td>执行</td><td>实时 Jacobian DLS IK（增益 4），位置线性 + 四元数最短路径插值，后 30% 时长锁定终点；关节 slew ≤0.72 rad/s、手指原生限速；物理 dt 1/120 s，渲染 15 fps</td><td class="small">Phase 1 跟踪误差 FR3 0.1 mm / 2.4e-4 rad，PsiBot 1.7–2.5 mm / 0.006 rad。无规划器、无避障</td></tr>
+      <tr><td>安全</td><td>GPU 接触张量监测机器人 link 对非机器人物体穿透，−2 mm 硬中止；每轮 20 mm 探针验证</td><td class="small">本线最主要失败来源</td></tr>
+      <tr><td>评估</td><td>独立评估器只读真值、不回流：抬升 ≥50 mm；末 1 s 质心差分速度（1/30 s 窗）≤50 mm/s；倾斜 ≤15°；无硬中止。放置另加：已释放、质心水平距目标中心 ≤4 cm</td><td class="small">E1/E2 曾用 PhysX 原生速度，E3 定稿差分口径并重评 E2（原判分保留）</td></tr>
+    </tbody>
+  </table></div>
+  <h3 id="cadence">频率与时间</h3>
+  <div class="callout info"><b>"0.5 Hz 的时候，没有返回就是在等待吗？"——是。</b>装置在发出请求后暂停物理，机器人保持当前关节目标静止，直到模型返回并通过校验，才执行这 1–2 个 waypoint（≈3.3–3.8 s 仿真），然后再拍图、再暂停。因此 0.5 Hz 只是仿真时间内的 waypoint 密度；按墙钟，medium 每 17–19 s 才动一次、xhigh 每 42–88 s，一集 84–99% 的时间机器人在等模型。真机上物理不能暂停，等待期间机器人只能保持姿态；要提高有效频率只能把推理和执行流水线化（边执行上一批 waypoint 边请求下一批），本线三轮都没有做。</div>
+<div class="table-wrap"><table>
+<thead><tr><th>条件</th><th>waypoint / 决策</th><th>waypoint 时长</th><th>每决策覆盖仿真时间</th><th>waypoint 频率（仿真）</th><th>决策频率（墙钟）</th><th>推理占墙钟</th><th>仿真时长/集</th></tr></thead><tbody>
+<tr><td>E1 · PsiBot · 抓取 · xhigh</td><td class="num">1.88</td><td class="num">1.99 s</td><td class="num">3.7 s</td><td class="num">0.58 Hz</td><td class="num">每 155 s 一次（0.39/min）</td><td class="num">98%</td><td class="num">17.8 s</td></tr>
+<tr><td>E2 · FR3 · 抓取 · medium</td><td class="num">1.80</td><td class="num">1.91 s</td><td class="num">3.4 s</td><td class="num">0.54 Hz</td><td class="num">每 17 s 一次（3.57/min）</td><td class="num">82%</td><td class="num">21.0 s</td></tr>
+<tr><td>E2 · FR3 · 抓取 · xhigh</td><td class="num">1.68</td><td class="num">1.97 s</td><td class="num">3.3 s</td><td class="num">0.51 Hz</td><td class="num">每 44 s 一次（1.38/min）</td><td class="num">93%</td><td class="num">19.6 s</td></tr>
+<tr><td>E2 · PsiBot · 抓取 · medium</td><td class="num">1.84</td><td class="num">1.97 s</td><td class="num">3.6 s</td><td class="num">0.55 Hz</td><td class="num">每 19 s 一次（3.10/min）</td><td class="num">84%</td><td class="num">21.4 s</td></tr>
+<tr><td>E2 · PsiBot · 抓取 · xhigh</td><td class="num">1.86</td><td class="num">1.91 s</td><td class="num">3.6 s</td><td class="num">0.54 Hz</td><td class="num">每 85 s 一次（0.71/min）</td><td class="num">96%</td><td class="num">25.4 s</td></tr>
+<tr><td>E3 · FR3 · 抓取 · medium</td><td class="num">1.73</td><td class="num">1.92 s</td><td class="num">3.3 s</td><td class="num">0.53 Hz</td><td class="num">每 19 s 一次（3.22/min）</td><td class="num">84%</td><td class="num">15.6 s</td></tr>
+<tr><td>E3 · FR3 · 放置 · medium</td><td class="num">1.88</td><td class="num">1.68 s</td><td class="num">3.2 s</td><td class="num">0.65 Hz</td><td class="num">每 21 s 一次（2.88/min）</td><td class="num">87%</td><td class="num">12.4 s</td></tr>
+<tr><td>E3 · FR3 · 放置 · xhigh</td><td class="num">1.91</td><td class="num">1.92 s</td><td class="num">3.7 s</td><td class="num">0.53 Hz</td><td class="num">每 42 s 一次（1.42/min）</td><td class="num">92%</td><td class="num">21.7 s</td></tr>
+<tr><td>E3 · PsiBot · 抓取 · xhigh</td><td class="num">1.89</td><td class="num">1.96 s</td><td class="num">3.7 s</td><td class="num">0.54 Hz</td><td class="num">每 88 s 一次（0.69/min）</td><td class="num">96%</td><td class="num">26.8 s</td></tr>
+</tbody></table></div>
+
+</div></details>
+<details class="archive-block"><summary><span>历史结果与 token 明细<small>85 个报告统计集 · 包含失败与中断</small></span><span class="expand-icon" aria-hidden="true">＋</span></summary><div class="archive-body">  <h2 id="results">结果（三轮 85 个报告统计集）</h2>
+  <div class="small">严格成功 = 评估器全部判据通过（模型自报完成不计）。推理/次 = 单次 API 请求墙钟；仿真执行/集 = 所有 waypoint 执行时长之和；墙钟/集 = 推理 + 执行，不含重置、渲染与评估。E3 FR3 三集 TLS 中断按报告计失败，E3 PsiBot 四个场景按基础设施无效单列（9208 为零请求初始化），不进入有效 N=10；各分母不是统一的“无网络故障有效集”。</div>
+<div class="table-wrap"><table>
+<thead><tr><th>轮次</th><th>机器人 / 末端</th><th>任务</th><th>物体</th><th>相机</th><th>档位</th><th>N</th><th>严格成功</th><th>曾抬 ≥50 mm</th><th>决策/集</th><th>推理/次</th><th>推理/集</th><th>仿真执行/集</th><th>墙钟/集</th><th>备注</th></tr></thead><tbody>
+<tr><td><b>E1</b></td><td class="small">PsiBot 7 轴 + 11 关节灵巧手</td><td class="small">抓起并稳定保持</td><td class="small">透明 100 ml 烧杯</td><td class="small">3 固定</td><td>xhigh</td><td class="num">5</td><td class="bad">0/5<span class="small">（0%）</span></td><td class="num">0/5</td><td class="num">5.20</td><td class="num">152.7 s</td><td class="num">794 s</td><td class="num">16.9 s</td><td class="num">804 s</td><td class="small"></td></tr>
+<tr><td><b>E2</b></td><td class="small">FR3 7 轴 + 平行夹爪</td><td class="small">抓起并稳定保持</td><td class="small">棕色试剂瓶（含 OmniGlass）</td><td class="small">3 固定 + 腕</td><td>medium</td><td class="num">5</td><td class="ok">3/5<span class="small">（60%）</span></td><td class="num">4/5</td><td class="num">6</td><td class="num">15.0 s</td><td class="num">90 s</td><td class="num">20.2 s</td><td class="num">101 s</td><td class="small">E3 口径重评 4/5</td></tr>
+<tr><td><b>E2</b></td><td class="small">FR3 + 平行夹爪</td><td class="small">抓起并稳定保持</td><td class="small">同上</td><td class="small">3 固定 + 腕</td><td>xhigh</td><td class="num">5</td><td class="ok">3/5<span class="small">（60%）</span></td><td class="num">5/5</td><td class="num">5.60</td><td class="num">41.9 s</td><td class="num">234 s</td><td class="num">18.6 s</td><td class="num">244 s</td><td class="small">E3 口径重评 5/5</td></tr>
+<tr><td><b>E2</b></td><td class="small">PsiBot + 6 维灵巧手</td><td class="small">抓起并稳定保持</td><td class="small">同上</td><td class="small">3 固定 + 腕</td><td>medium</td><td class="num">5</td><td class="bad">0/5<span class="small">（0%）</span></td><td class="num">0/5</td><td class="num">6.20</td><td class="num">17.5 s</td><td class="num">108 s</td><td class="num">20.7 s</td><td class="num">120 s</td><td class="small"></td></tr>
+<tr><td><b>E2</b></td><td class="small">PsiBot + 6 维灵巧手</td><td class="small">抓起并稳定保持</td><td class="small">同上</td><td class="small">3 固定 + 腕</td><td>xhigh</td><td class="num">5</td><td class="bad">0/5<span class="small">（0%）</span></td><td class="num">3/5</td><td class="num">7.20</td><td class="num">82.7 s</td><td class="num">595 s</td><td class="num">24.8 s</td><td class="num">609 s</td><td class="small">E3 口径重评 1/5</td></tr>
+<tr><td><b>E3</b></td><td class="small">FR3 + 平行夹爪</td><td class="small">抓起并稳定保持</td><td class="small">棕色试剂瓶，渲染层不透明</td><td class="small">3 固定 + 腕</td><td>medium</td><td class="num">20</td><td class="ok">12/20<span class="small">（60%）</span></td><td class="num">12/20</td><td class="num">4.55</td><td class="num">16.9 s</td><td class="num">77 s</td><td class="num">14.9 s</td><td class="num">85 s</td><td class="small">含 2 集 TLS 中断计失败</td></tr>
+<tr><td><b>E3</b></td><td class="small">FR3 + 平行夹爪</td><td class="small">抓起 → 放到可见圆垫上 → 释放</td><td class="small">同上</td><td class="small">3 固定 + 腕</td><td>medium</td><td class="num">20</td><td class="warn">6/20<span class="small">（30%）</span></td><td class="num">7/20</td><td class="num">4.15</td><td class="num">19.0 s</td><td class="num">79 s</td><td class="num">11.9 s</td><td class="num">86 s</td><td class="small">含 1 集 TLS 中断计失败</td></tr>
+<tr><td><b>E3</b></td><td class="small">FR3 + 平行夹爪</td><td class="small">同上（与 medium 同 seed）</td><td class="small">同上</td><td class="small">3 固定 + 腕</td><td>xhigh</td><td class="num">10</td><td class="ok">9/10<span class="small">（90%）</span></td><td class="num">9/10</td><td class="num">5.70</td><td class="num">40.5 s</td><td class="num">231 s</td><td class="num">20.7 s</td><td class="num">242 s</td><td class="small"></td></tr>
+<tr><td><b>E3</b></td><td class="small">PsiBot + 6 维灵巧手 + 手型语义</td><td class="small">对向抓握、保持直立、抬起</td><td class="small">同上</td><td class="small">3 固定 + 腕</td><td>xhigh</td><td class="num">10</td><td class="warn">3/10<span class="small">（30%）</span></td><td class="num">4/10</td><td class="num">7.30</td><td class="num">85.7 s</td><td class="num">626 s</td><td class="num">25.8 s</td><td class="num">639 s</td><td class="small">另 4 个基础设施无效场景单列（含 1 个零请求场景）</td></tr>
+</tbody></table></div>
+
+  <h3 id="tokens">token：每次推理 / 每条轨迹</h3>
+  <div class="small">来自逐请求 <code>provenance.json</code> 的 API usage；TLS 失败的请求无 usage（FR3 6 次、PsiBot 6 次），"token / 集"只计已知 usage，因此含 TLS 失败的集偏低（E3 FR3 抓取一集为 0）。输入构成（FR3 E3 一次请求 4,299）：文本 2,485 + 4 图 1,445 + 工具 schema 301 + 指令 42。</div>
+<div class="table-wrap"><table>
+<thead><tr><th>条件</th><th>有 usage 的请求</th><th>输入 token / 次<br><span class="small">均值 · 中位</span></th><th>输出 token / 次<br><span class="small">均值 · 中位</span></th><th>其中推理 token<br><span class="small">均值 · 占输出</span></th><th>推理延迟 / 次<br><span class="small">中位 [最小, 最大]</span></th><th>token / 集<br><span class="small">均值 [最小, 最大]</span></th><th>token / 集 入 · 出</th></tr></thead><tbody>
+<tr><td>E1 · PsiBot · 抓取 · xhigh</td><td class="num">25</td><td class="num">3,962 · 4,025</td><td class="num">3,761 · 2,810</td><td class="num">3,374 · 90%</td><td class="num">112.3 s [77, 440]</td><td class="num">38,615 [20,302, 55,751]</td><td class="num">19,808 · 18,807</td></tr>
+<tr><td>E2 · FR3 · 抓取 · medium</td><td class="num">30</td><td class="num">4,170 · 4,218</td><td class="num">314 · 286</td><td class="num">109 · 35%</td><td class="num">13.0 s [9, 30]</td><td class="num">26,905 [22,393, 31,273]</td><td class="num">25,020 · 1,885</td></tr>
+<tr><td>E2 · FR3 · 抓取 · xhigh</td><td class="num">28</td><td class="num">4,182 · 4,230</td><td class="num">1,060 · 1,000</td><td class="num">813 · 77%</td><td class="num">40.7 s [15, 82]</td><td class="num">29,356 [26,309, 31,632]</td><td class="num">23,420 · 5,936</td></tr>
+<tr><td>E2 · PsiBot · 抓取 · medium</td><td class="num">31</td><td class="num">4,711 · 4,765</td><td class="num">399 · 374</td><td class="num">139 · 35%</td><td class="num">15.7 s [11, 31]</td><td class="num">31,682 [10,382, 41,452]</td><td class="num">29,209 · 2,473</td></tr>
+<tr><td>E2 · PsiBot · 抓取 · xhigh</td><td class="num">36</td><td class="num">4,765 · 4,802</td><td class="num">2,165 · 1,956</td><td class="num">1,855 · 86%</td><td class="num">74.8 s [48, 155]</td><td class="num">49,896 [27,965, 57,165]</td><td class="num">34,310 · 15,586</td></tr>
+<tr><td>E3 · FR3 · 抓取 · medium</td><td class="num">87</td><td class="num">4,173 · 4,229</td><td class="num">361 · 337</td><td class="num">149 · 41%</td><td class="num">15.9 s [9, 36]</td><td class="num">19,722 [0, 35,211]</td><td class="num">18,152 · 1,570</td></tr>
+<tr><td>E3 · FR3 · 放置 · medium</td><td class="num">81</td><td class="num">4,213 · 4,275</td><td class="num">389 · 325</td><td class="num">171 · 44%</td><td class="num">16.7 s [9, 44]</td><td class="num">18,636 [9,017, 46,598]</td><td class="num">17,061 · 1,575</td></tr>
+<tr><td>E3 · FR3 · 放置 · xhigh</td><td class="num">57</td><td class="num">4,253 · 4,298</td><td class="num">995 · 997</td><td class="num">737 · 74%</td><td class="num">40.0 s [14, 95]</td><td class="num">29,910 [11,373, 37,076]</td><td class="num">24,241 · 5,669</td></tr>
+<tr><td>E3 · PsiBot · 抓取 · xhigh</td><td class="num">73</td><td class="num">5,891 · 5,935</td><td class="num">2,180 · 1,886</td><td class="num">1,862 · 85%</td><td class="num">77.6 s [28, 228]</td><td class="num">58,925 [44,946, 70,363]</td><td class="num">43,008 · 15,917</td></tr>
+</tbody></table></div>
+  <ul class="q">
+    <li>输入端稳定在 ≈4.2k（FR3）；PsiBot E3 因手型语义文本涨到 5.9k。图像只占约 1/3。</li>
+    <li>输出端由档位决定：medium ≈0.3–0.4k/次（推理 token 35–44%），xhigh 夹爪 ≈1.0k（74–77%），xhigh 灵巧手 ≈2.2k（85%），E1 xhigh 11 维手 3.8k（90%）——手部维度越高、xhigh 想得越久，延迟同步拉长（中位 13–16 s → 40 s → 75–112 s）。</li>
+    <li>一条轨迹：medium 夹爪 1.9–2.7 万，xhigh 夹爪 2.9–3.0 万，xhigh 灵巧手 5.0–5.9 万（E3 最大 7.0 万）。与 RoboCurve 原文 ≈2.1k/run 相差一个量级以上，原文更像低档位 + 更少决策。</li>
+  </ul>
+
+  <h3 id="failures">失败模式（按阶段，逐集复核）</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>条件</th><th>N</th><th>成功</th><th>接近碰撞硬中止</th><th>抓取未建立 / 推倒</th><th>抬起后掉落</th><th>抬起但保持门未过</th><th>抬起不足 50 mm</th><th>网络 / 截止</th></tr></thead>
+    <tbody>
+      <tr><td>E1 PsiBot 11 维手 xhigh</td><td class="num">5</td><td class="num bad">0</td><td class="num">1</td><td class="num">2</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">2</td></tr>
+      <tr><td>E2 FR3 夹爪 medium + xhigh</td><td class="num">10</td><td class="num ok">6</td><td class="num">1</td><td class="num">0</td><td class="num">0</td><td class="num">3<span class="small">（E3 口径均成功）</span></td><td class="num">0</td><td class="num">0</td></tr>
+      <tr><td>E2 PsiBot 6 维手 medium + xhigh</td><td class="num">10</td><td class="num bad">0</td><td class="num">4</td><td class="num">3</td><td class="num">0</td><td class="num">3<span class="small">（1 集 E3 口径成功）</span></td><td class="num">0</td><td class="num">0</td></tr>
+      <tr><td>E3 FR3 抓取 medium</td><td class="num">20</td><td class="num ok">12</td><td class="num warn">6</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">2</td></tr>
+      <tr><td>E3 FR3 放置 medium</td><td class="num">20</td><td class="num warn">6</td><td class="num warn">11</td><td class="num">2</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">1</td></tr>
+      <tr><td>E3 FR3 放置 xhigh</td><td class="num">10</td><td class="num ok">9</td><td class="num">1</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">0</td></tr>
+      <tr><td>E3 PsiBot 6 维手 + 语义 xhigh</td><td class="num">10</td><td class="num warn">3</td><td class="num">1</td><td class="num warn">4</td><td class="num">1</td><td class="num">0</td><td class="num">1</td><td class="num">0<span class="small">（另 4 集作废）</span></td></tr>
+    </tbody>
+  </table></div>
+</div></details>
+<details class="archive-block"><summary><span>日志与数据文件<small>关键事件、报告路径与素材索引</small></span><span class="expand-icon" aria-hidden="true">＋</span></summary><div class="archive-body">  <h2 id="appx">附录</h2>
   <details class="grp exp" id="appx-robocurve"><summary>6.1 与 RoboCurve 原文及经典 VLA 的对照 <span class="sum">路线对比 · 原文 demo 装置与 E1 的差异</span></summary><div class="body">
   <div class="table-wrap"><table>
     <thead><tr><th></th><th>经典 VLA（π0.5 / GR00T）</th><th>RoboCurve 路线（本页试验）</th><th>我们的采集主线（cuRobo 脚本配方）</th></tr></thead>
@@ -673,7 +553,8 @@
   </ul>
 
   </div></details>
-</main>
-</div>
-</body>
-</html>
+</div></details>
+</section>
+<section class="next-step" id="verdict"><span class="section-index">NEXT</span><h2>下一步：先把接近和夹持做稳</h2><p>FR3 优先复验 xhigh 放置；PsiBot 优先解决瓶身定位、夹持建立和腕相机视野。维持 cuRobo 采集主线，这条直控路线仍是试验性补充。</p></section>
+<footer><a href="index.html">← SafeOT 总面板</a><span>结果与费用核对：2026-09-10</span><a href="agentic/e3_verified_20260910.json">数据来源</a></footer></main>
+<script id="cost-data" type="application/json">{"model": "gpt-6-astra", "currency": "USD", "price_checked_on": "2026-09-10", "price_source": "https://developers.openai.com/api/docs/models/gpt-6-astra", "price_per_million": {"input": 10, "cached": 1, "cache_write": 12.5, "output": 50}, "basis": "API Standard equivalent, not actual billing; known usage only; cached input separately priced; reasoning included in output", "max_request_input_tokens": 5993, "groups": [{"experiment": "E1", "robot": "PsiBot", "task": "grasp_beaker100", "effort": "xhigh", "valid_cohort": true, "episodes": 5, "successes": 0, "input": 99042, "cached": 0, "cache_write": 0, "output": 94033, "known_requests": 25, "unknown_usage_requests": 1, "standard_usd": 5.69207}, {"experiment": "E2", "robot": "FR3", "task": "grasp_bottle", "effort": "medium", "valid_cohort": true, "episodes": 5, "successes": 3, "input": 125099, "cached": 0, "cache_write": 0, "output": 9427, "known_requests": 30, "unknown_usage_requests": 0, "standard_usd": 1.72234}, {"experiment": "E2", "robot": "FR3", "task": "grasp_bottle", "effort": "xhigh", "valid_cohort": true, "episodes": 5, "successes": 3, "input": 117098, "cached": 0, "cache_write": 0, "output": 29680, "known_requests": 28, "unknown_usage_requests": 0, "standard_usd": 2.65498}, {"experiment": "E2", "robot": "PsiBot", "task": "grasp_bottle", "effort": "medium", "valid_cohort": true, "episodes": 5, "successes": 0, "input": 146047, "cached": 0, "cache_write": 0, "output": 12363, "known_requests": 31, "unknown_usage_requests": 0, "standard_usd": 2.07862}, {"experiment": "E2", "robot": "PsiBot", "task": "grasp_bottle", "effort": "xhigh", "valid_cohort": true, "episodes": 5, "successes": 0, "input": 171549, "cached": 2816, "cache_write": 0, "output": 77930, "known_requests": 36, "unknown_usage_requests": 0, "standard_usd": 5.586646}, {"experiment": "E3", "robot": "FR3", "task": "grasp_bottle", "effort": "medium", "valid_cohort": true, "episodes": 20, "successes": 12, "input": 363048, "cached": 2176, "cache_write": 0, "output": 31401, "known_requests": 87, "unknown_usage_requests": 4, "standard_usd": 5.180946}, {"experiment": "E3", "robot": "FR3", "task": "place_bottle", "effort": "medium", "valid_cohort": true, "episodes": 20, "successes": 6, "input": 341217, "cached": 9216, "cache_write": 0, "output": 31508, "known_requests": 81, "unknown_usage_requests": 2, "standard_usd": 4.904626}, {"experiment": "E3", "robot": "FR3", "task": "place_bottle", "effort": "xhigh", "valid_cohort": true, "episodes": 10, "successes": 9, "input": 242410, "cached": 2304, "cache_write": 0, "output": 56693, "known_requests": 57, "unknown_usage_requests": 0, "standard_usd": 5.238014}, {"experiment": "E3", "robot": "PsiBot", "task": "grasp_bottle", "effort": "xhigh", "valid_cohort": true, "episodes": 10, "successes": 3, "input": 430077, "cached": 0, "cache_write": 0, "output": 159170, "known_requests": 73, "unknown_usage_requests": 0, "standard_usd": 12.25927}, {"experiment": "E3", "robot": "PsiBot", "task": "grasp_bottle", "effort": "xhigh", "valid_cohort": false, "episodes": 4, "successes": 0, "input": 11426, "cached": 0, "cache_write": 0, "output": 3381, "known_requests": 2, "unknown_usage_requests": 6, "standard_usd": 0.28331}], "source_usage_sha256": "0f404d6436a2247eb05d77f648875514495606a7384058cc74752c34f72d0e70"}</script><script src="agentic/dashboard.js" defer></script></body></html>
