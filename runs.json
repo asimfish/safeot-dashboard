@@ -1,18 +1,18 @@
 {
- "updated": "2026-09-11T02:00:09",
+ "updated": "2026-09-11T02:10:43",
  "servers": [
   {
    "name": "tianyiyun-30109",
    "desc": "8x A100-80G, 128 核; SafeRL 训练/评估主力(共享账号,多项目并行)",
    "host": "ide-650ef93f23324f04881bde87cf05d6c1-0f2fcc",
-   "load": "78.33",
+   "load": "69.05",
    "ncpu": 128,
    "cards": [
     {
      "idx": 0,
      "used_mb": 1143,
      "total_mb": 81920,
-     "util": 28,
+     "util": 27,
      "mine": true,
      "procs": [
       "safeot: fdpi_safeot_dual.py --env SafetyCarGoal2-v0 --seed 3 --env_n"
@@ -22,7 +22,7 @@
      "idx": 1,
      "used_mb": 1145,
      "total_mb": 81920,
-     "util": 24,
+     "util": 3,
      "mine": true,
      "procs": [
       "safeot: fdpi_safeot_dual.py --env SafetyCarGoal2-v0 --seed 1 --env_n"
@@ -32,7 +32,7 @@
      "idx": 2,
      "used_mb": 14875,
      "total_mb": 81920,
-     "util": 34,
+     "util": 38,
      "mine": false,
      "procs": [
       "safeduo: python --seed 46 --env-yaml",
@@ -43,7 +43,7 @@
      "idx": 3,
      "used_mb": 1145,
      "total_mb": 81920,
-     "util": 22,
+     "util": 37,
      "mine": true,
      "procs": [
       "safeot: fdpi_safeot_dual.py --env SafetyCarGoal2-v0 --seed 3 --env_n"
@@ -61,13 +61,13 @@
     },
     {
      "idx": 5,
-     "used_mb": 20177,
+     "used_mb": 20051,
      "total_mb": 81920,
-     "util": 17,
+     "util": 0,
      "mine": true,
      "procs": [
-      "safeot: fdpi_safeot_dual.py --env SafetyCarGoal2-v0 --seed 1 --env_n",
-      "asbs: e0_paired_fork_runtime.py --config-name sim_libero.yaml"
+      "asbs: e0_paired_fork_runtime.py --config-name sim_libero.yaml",
+      "safeot: fdpi_strict_eval.py --env SafetyCarGoal2-v0"
      ]
     },
     {
@@ -92,14 +92,14 @@
   },
   {
    "host": "di-20260831162150-5ll6n",
-   "load": "16.10",
+   "load": "6.76",
    "ncpu": 26,
    "cards": [
     {
      "idx": 0,
-     "used_mb": 16480,
+     "used_mb": 16358,
      "total_mb": 81920,
-     "util": 3,
+     "util": 1,
      "mine": false,
      "procs": [
       "other: ?"
@@ -107,9 +107,9 @@
     },
     {
      "idx": 1,
-     "used_mb": 19639,
+     "used_mb": 19631,
      "total_mb": 81920,
-     "util": 15,
+     "util": 24,
      "mine": false,
      "procs": [
       "other: ?"
@@ -118,11 +118,11 @@
    ],
    "name": "volc-a100",
    "desc": "2x A100-80G, 128 核, 3PB vepfs; SafeRL 第二算力(DP/ACT 训练共用 GPU); 环境部署中",
-   "snap_time": "2026-09-11T02:00:24"
+   "snap_time": "2026-09-11T02:10:58"
   },
   {
    "host": "dsw-1008180-7cb5796fcd-xt4lh",
-   "load": "158.39",
+   "load": "158.55",
    "ncpu": 184,
    "cards": [
     {
@@ -260,7 +260,7 @@
    ],
    "name": "aliyun-ppu",
    "desc": "16x PPU-ZW810E 96G, 184 核; VLA(Safety-CHORES)评测; 共享(act_train 等他人任务)",
-   "snap_time": "2026-09-11T02:00:21"
+   "snap_time": "2026-09-11T02:10:54"
   }
  ],
  "runs": [
@@ -3923,7 +3923,7 @@
    "variant": "fdpi",
    "task": "hcv",
    "seed": "s3",
-   "ckpts": 5,
+   "ckpts": 6,
    "done": false,
    "running": true,
    "blocks": 0,
@@ -3931,7 +3931,7 @@
    "hv": 0,
    "ret": null,
    "soft": null,
-   "mtime": 1789051057.2747602,
+   "mtime": 1789063269.063209,
    "confirm_n": 0,
    "confirm_clean": 0,
    "server": "volc"
@@ -4295,7 +4295,7 @@
    "variant": "lag",
    "task": "cb2",
    "seed": "s3",
-   "ckpts": 7,
+   "ckpts": 8,
    "done": false,
    "running": true,
    "blocks": 0,
@@ -4303,7 +4303,7 @@
    "hv": 0,
    "ret": null,
    "soft": null,
-   "mtime": 1789052075.8799949,
+   "mtime": 1789063840.4824054,
    "scan_n": 2,
    "scan_last": "ck200k -0.7/2",
    "confirm_n": 0,
@@ -4506,10 +4506,10 @@
    "ckpts": 10,
    "done": true,
    "running": false,
-   "blocks": 2,
-   "eps": 208,
-   "hv": 0,
-   "ret": -0.25378435770885355,
+   "blocks": 3,
+   "eps": 312,
+   "hv": 2,
+   "ret": -0.24809632671606272,
    "soft": 0.0,
    "mtime": 1789004801.4815872,
    "scan_n": 7,
@@ -4526,10 +4526,10 @@
    "ckpts": 10,
    "done": true,
    "running": false,
-   "blocks": 2,
-   "eps": 208,
+   "blocks": 3,
+   "eps": 312,
    "hv": 4,
-   "ret": -0.11704607775765696,
+   "ret": -0.09678946564514805,
    "soft": 0.0,
    "mtime": 1789005712.263944,
    "scan_n": 8,
@@ -4842,11 +4842,11 @@
    "ckpts": 10,
    "done": true,
    "running": false,
-   "blocks": 0,
-   "eps": 0,
+   "blocks": 1,
+   "eps": 104,
    "hv": 0,
-   "ret": null,
-   "soft": null,
+   "ret": 2440.07946712074,
+   "soft": 0.0,
    "mtime": 1789029499.4811947,
    "confirm_n": 0,
    "confirm_clean": 0,
@@ -10630,9 +10630,9 @@
   }
  ],
  "lanes": [
-  "volc: d2v2_lag_pb1_s2/proto3_ck995002_seed13000.json",
-  "volc: d2v2_lag_pb1_s3/proto3_ck995002_seed13000.json",
-  "volc: d2v2_pen5_cb2_s2/eval_all_ckpts_30ep.json"
+  "volc: d2v2_pen5_cb2_s1/proto3_ck995002_seed5000.json",
+  "volc: d2v2_pen5_cb2_s2/eval_all_ckpts_30ep.json",
+  "volc: d2v2_pen5_hcv_s1/proto3_ck995002_seed9000.json"
  ],
  "parallel": {
   "workspace": "/home/dataset-local/liyufeng/SafeTransport/results/safeot_dual_fdpi",
@@ -12224,7 +12224,7 @@
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1789063202.2289705
+    "mtime": 1789063799.5185454
    },
    {
     "name": "benchmark_coverage_20260910",
@@ -12259,7 +12259,7 @@
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1789063199.957979
+    "mtime": 1789063797.510552
    },
    {
     "name": "cg2_diagnostic_20260910",
@@ -12273,21 +12273,21 @@
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1789063204.8119607
+    "mtime": 1789063801.7105384
    },
    {
     "name": "confirm_20260909_pg2",
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1789061383.6295662
+    "mtime": 1789063549.7314532
    },
    {
     "name": "fleet_20260910",
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1789063204.8159606
+    "mtime": 1789063801.7135384
    },
    {
     "name": "manuscript_audit_20260911",
@@ -12308,7 +12308,7 @@
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1789063203.9869637
+    "mtime": 1789063800.9865408
    },
    {
     "name": "priority_expansion_20260910",
@@ -12322,28 +12322,28 @@
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1789063045.8627365
+    "mtime": 1789063769.7816556
    },
    {
     "name": "r2_analysis_20260906",
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1789061375.7555952
+    "mtime": 1789063542.9994817
    },
    {
     "name": "repair_20260905",
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1789063010.7668178
+    "mtime": 1789063610.772219
    },
    {
     "name": "resource_expansion_20260910",
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1789063147.9003396
+    "mtime": 1789063694.8989518
    },
    {
     "name": "review_20260909_evening",
@@ -12374,6 +12374,6 @@
     "mtime": 1788616474.922712
    }
   ],
-  "n_procs": 35
+  "n_procs": 31
  }
 }
