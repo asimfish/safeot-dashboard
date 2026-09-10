@@ -389,7 +389,7 @@
     "interpretation": "Complete CG2 development cohort; all3 seeds per cell. Error bars are training-seed SD. No monotonic epsilon effect, SOTA or safety acceptance claimed."
   },
   "repair": {
-    "observed": "2026-09-10T20:33:32.140274+00:00",
+    "observed": "2026-09-10T20:45:10.698117+00:00",
     "total": 12,
     "protocol_sha256": "b1f1c06bd9b0108fe9c7942be5adb15844ef88017bd4bca5b1c06ef99a72ef80",
     "controller_alive": true,
@@ -420,11 +420,116 @@
       ],
       "criterion": "At least2/3 frozen seeds and the across-seed mean have positive deterministic-minus-stochastic native cost on24 paired resets. No seed excluded."
     },
-    "operational_gate": null,
+    "operational_gate": {
+      "status": "passed",
+      "observed": "2026-09-10T20:37:00.118723+00:00",
+      "jobs": [
+        {
+          "id": "smoke_control_h0p1",
+          "margin_mode": "approach",
+          "soft_mode": "lp",
+          "budget_estimator": "primal",
+          "epsilon": 0.1,
+          "eps": 1,
+          "seed": 101,
+          "trainer": "fdpi_deployment_feedback.py",
+          "deployment_feedback": "control",
+          "status": "complete",
+          "started": "2026-09-10T20:28:10.041726+00:00",
+          "gpu": 1,
+          "cores": "120-122",
+          "pid": 648069,
+          "probe_episodes": 16,
+          "probe_steps": 16000,
+          "checkpoint": "params_10002.pkl",
+          "checkpoint_sha256": "0d64917f811992c03b9cdddb2d0ef6195bbf50744c6409718592606f642cead5",
+          "config_sha256": "6b4640827956c9278e94cfdd9437253d24e2058f355c4fa27872caf67d3c6da2",
+          "finished": "2026-09-10T20:34:45.811428+00:00",
+          "final_eval_sha256": "2b714d9472864b2329a762735007cfdbefd56c6ad6daff6fa5e4b2a2a93f26d4"
+        },
+        {
+          "id": "smoke_paired_bias_h0p1",
+          "margin_mode": "approach",
+          "soft_mode": "lp",
+          "budget_estimator": "primal",
+          "epsilon": 0.1,
+          "eps": 1,
+          "seed": 101,
+          "trainer": "fdpi_deployment_feedback.py",
+          "deployment_feedback": "paired-bias",
+          "status": "complete",
+          "started": "2026-09-10T20:28:10.041565+00:00",
+          "gpu": 1,
+          "cores": "123-125",
+          "pid": 648084,
+          "probe_episodes": 16,
+          "probe_steps": 16000,
+          "checkpoint": "params_10002.pkl",
+          "checkpoint_sha256": "3a56607df66c35fdc66d97dab4d702ebd24a2e535ef54c65905fcd7797fdc1ba",
+          "config_sha256": "f5caa56ce6ad67534008cd01f4625ede8f90fffbe77168aa1cb04cc9effd7174",
+          "finished": "2026-09-10T20:34:51.420201+00:00",
+          "final_eval_sha256": "091cfd521dd359795b10d3bd74792b62853382b7c352f4c18706e4dc5bea6798"
+        },
+        {
+          "id": "smoke_control_h0p02",
+          "margin_mode": "approach",
+          "soft_mode": "lp",
+          "budget_estimator": "primal",
+          "epsilon": 0.02,
+          "eps": 1,
+          "seed": 101,
+          "trainer": "fdpi_deployment_feedback.py",
+          "deployment_feedback": "control",
+          "status": "complete",
+          "started": "2026-09-10T20:28:10.042483+00:00",
+          "gpu": 1,
+          "cores": "126-128",
+          "pid": 650393,
+          "probe_episodes": 16,
+          "probe_steps": 16000,
+          "checkpoint": "params_10002.pkl",
+          "checkpoint_sha256": "f4a6c9dc2723cccd831d47870ac66bb21b34f3215d1ba34fc8732f086173a87e",
+          "config_sha256": "572d43414ac9af0d24a5769e9108a1f802911d312cacb70c7128e530d89909e8",
+          "finished": "2026-09-10T20:35:17.027095+00:00",
+          "final_eval_sha256": "633bbc38ea33eb0483c41a4fda9b744d077a9aad404d20f929a398237e54717c"
+        },
+        {
+          "id": "smoke_paired_bias_h0p02",
+          "margin_mode": "approach",
+          "soft_mode": "lp",
+          "budget_estimator": "primal",
+          "epsilon": 0.02,
+          "eps": 1,
+          "seed": 101,
+          "trainer": "fdpi_deployment_feedback.py",
+          "deployment_feedback": "paired-bias",
+          "status": "complete",
+          "started": "2026-09-10T20:28:10.042982+00:00",
+          "gpu": 1,
+          "cores": "129-131",
+          "pid": 656276,
+          "probe_episodes": 16,
+          "probe_steps": 16000,
+          "checkpoint": "params_10002.pkl",
+          "checkpoint_sha256": "70a6ad12c30c64423d8382a4acd3ceda57a155031ffeddeca2a188dcde61461a",
+          "config_sha256": "1cbdbc568afcad29ca71b371627aaec3c24719232cb910c9982ab48bc9d8e940",
+          "finished": "2026-09-10T20:37:00.117879+00:00",
+          "final_eval_sha256": "2d4b5c7bd9da0e0a278106b0eefb293691310ec8351b93bd32a286379618a2ee"
+        }
+      ],
+      "default_feedback_parity": {
+        "status": "passed",
+        "kind": "direct controller integration tests plus15 targeted regressions",
+        "trajectory_parity": false
+      },
+      "old_controls_reused": false,
+      "trajectory_parity": "not_claimed",
+      "matched_probe_budget": true
+    },
     "completed": 0,
     "failed": 0,
-    "running": 0,
-    "pending": 12,
+    "running": 6,
+    "pending": 6,
     "jobs": {
       "smoke_paired_bias_h0p1": {
         "id": "smoke_paired_bias_h0p1",
@@ -436,10 +541,35 @@
         "seed": 101,
         "trainer": "fdpi_deployment_feedback.py",
         "deployment_feedback": "paired-bias",
-        "status": "training",
+        "status": "complete",
         "started": "2026-09-10T20:28:10.041565+00:00",
         "gpu": 1,
-        "sample_steps": 20000
+        "probe_episodes": 16,
+        "probe_steps": 16000,
+        "checkpoint": "params_10002.pkl",
+        "checkpoint_sha256": "3a56607df66c35fdc66d97dab4d702ebd24a2e535ef54c65905fcd7797fdc1ba",
+        "config_sha256": "f5caa56ce6ad67534008cd01f4625ede8f90fffbe77168aa1cb04cc9effd7174",
+        "finished": "2026-09-10T20:34:51.420201+00:00",
+        "final_eval_sha256": "091cfd521dd359795b10d3bd74792b62853382b7c352f4c18706e4dc5bea6798",
+        "sample_steps": 20000,
+        "final_evaluation": {
+          "reward_mean": -0.7133833587847531,
+          "channel_means": {
+            "cost_vases_contact": 0.0,
+            "cost_hazards": 678.0
+          },
+          "hard_any_leak_rate": 0.0,
+          "hard_any_leak_cp95": 0.776393202250021,
+          "n_episodes": 2,
+          "provenance": {
+            "checkpoint_sha256": "3a56607df66c35fdc66d97dab4d702ebd24a2e535ef54c65905fcd7797fdc1ba",
+            "config_sha256": "f5caa56ce6ad67534008cd01f4625ede8f90fffbe77168aa1cb04cc9effd7174",
+            "evaluator_sha256": "461cafdf64a200278f165b3f30ae604af76dc7199798c4f547068eaccef2a35f",
+            "parallel_envs": 1,
+            "seed_protocol": "numpy.default_rng(block).integers(0,2**31-1), serial episode order",
+            "action_policy": "deterministic_unmodified"
+          }
+        }
       },
       "smoke_control_h0p1": {
         "id": "smoke_control_h0p1",
@@ -451,10 +581,35 @@
         "seed": 101,
         "trainer": "fdpi_deployment_feedback.py",
         "deployment_feedback": "control",
-        "status": "training",
+        "status": "complete",
         "started": "2026-09-10T20:28:10.041726+00:00",
         "gpu": 1,
-        "sample_steps": 20000
+        "probe_episodes": 16,
+        "probe_steps": 16000,
+        "checkpoint": "params_10002.pkl",
+        "checkpoint_sha256": "0d64917f811992c03b9cdddb2d0ef6195bbf50744c6409718592606f642cead5",
+        "config_sha256": "6b4640827956c9278e94cfdd9437253d24e2058f355c4fa27872caf67d3c6da2",
+        "finished": "2026-09-10T20:34:45.811428+00:00",
+        "final_eval_sha256": "2b714d9472864b2329a762735007cfdbefd56c6ad6daff6fa5e4b2a2a93f26d4",
+        "sample_steps": 20000,
+        "final_evaluation": {
+          "reward_mean": -0.36177442233414514,
+          "channel_means": {
+            "cost_vases_contact": 0.0,
+            "cost_hazards": 217.5
+          },
+          "hard_any_leak_rate": 0.0,
+          "hard_any_leak_cp95": 0.776393202250021,
+          "n_episodes": 2,
+          "provenance": {
+            "checkpoint_sha256": "0d64917f811992c03b9cdddb2d0ef6195bbf50744c6409718592606f642cead5",
+            "config_sha256": "6b4640827956c9278e94cfdd9437253d24e2058f355c4fa27872caf67d3c6da2",
+            "evaluator_sha256": "461cafdf64a200278f165b3f30ae604af76dc7199798c4f547068eaccef2a35f",
+            "parallel_envs": 1,
+            "seed_protocol": "numpy.default_rng(block).integers(0,2**31-1), serial episode order",
+            "action_policy": "deterministic_unmodified"
+          }
+        }
       },
       "smoke_control_h0p02": {
         "id": "smoke_control_h0p02",
@@ -466,10 +621,35 @@
         "seed": 101,
         "trainer": "fdpi_deployment_feedback.py",
         "deployment_feedback": "control",
-        "status": "training",
+        "status": "complete",
         "started": "2026-09-10T20:28:10.042483+00:00",
         "gpu": 1,
-        "sample_steps": 20000
+        "probe_episodes": 16,
+        "probe_steps": 16000,
+        "checkpoint": "params_10002.pkl",
+        "checkpoint_sha256": "f4a6c9dc2723cccd831d47870ac66bb21b34f3215d1ba34fc8732f086173a87e",
+        "config_sha256": "572d43414ac9af0d24a5769e9108a1f802911d312cacb70c7128e530d89909e8",
+        "finished": "2026-09-10T20:35:17.027095+00:00",
+        "final_eval_sha256": "633bbc38ea33eb0483c41a4fda9b744d077a9aad404d20f929a398237e54717c",
+        "sample_steps": 20000,
+        "final_evaluation": {
+          "reward_mean": -0.6955352694723173,
+          "channel_means": {
+            "cost_vases_contact": 0.0,
+            "cost_hazards": 98.5
+          },
+          "hard_any_leak_rate": 0.0,
+          "hard_any_leak_cp95": 0.776393202250021,
+          "n_episodes": 2,
+          "provenance": {
+            "checkpoint_sha256": "f4a6c9dc2723cccd831d47870ac66bb21b34f3215d1ba34fc8732f086173a87e",
+            "config_sha256": "572d43414ac9af0d24a5769e9108a1f802911d312cacb70c7128e530d89909e8",
+            "evaluator_sha256": "461cafdf64a200278f165b3f30ae604af76dc7199798c4f547068eaccef2a35f",
+            "parallel_envs": 1,
+            "seed_protocol": "numpy.default_rng(block).integers(0,2**31-1), serial episode order",
+            "action_policy": "deterministic_unmodified"
+          }
+        }
       },
       "smoke_paired_bias_h0p02": {
         "id": "smoke_paired_bias_h0p02",
@@ -481,8 +661,123 @@
         "seed": 101,
         "trainer": "fdpi_deployment_feedback.py",
         "deployment_feedback": "paired-bias",
-        "status": "training",
+        "status": "complete",
         "started": "2026-09-10T20:28:10.042982+00:00",
+        "gpu": 1,
+        "probe_episodes": 16,
+        "probe_steps": 16000,
+        "checkpoint": "params_10002.pkl",
+        "checkpoint_sha256": "70a6ad12c30c64423d8382a4acd3ceda57a155031ffeddeca2a188dcde61461a",
+        "config_sha256": "1cbdbc568afcad29ca71b371627aaec3c24719232cb910c9982ab48bc9d8e940",
+        "finished": "2026-09-10T20:37:00.117879+00:00",
+        "final_eval_sha256": "2d4b5c7bd9da0e0a278106b0eefb293691310ec8351b93bd32a286379618a2ee",
+        "sample_steps": 20000,
+        "final_evaluation": {
+          "reward_mean": -1.5670227701786201,
+          "channel_means": {
+            "cost_vases_contact": 40.0,
+            "cost_hazards": 118.0
+          },
+          "hard_any_leak_rate": 0.5,
+          "hard_any_leak_cp95": 0.9746794344808963,
+          "n_episodes": 2,
+          "provenance": {
+            "checkpoint_sha256": "70a6ad12c30c64423d8382a4acd3ceda57a155031ffeddeca2a188dcde61461a",
+            "config_sha256": "1cbdbc568afcad29ca71b371627aaec3c24719232cb910c9982ab48bc9d8e940",
+            "evaluator_sha256": "461cafdf64a200278f165b3f30ae604af76dc7199798c4f547068eaccef2a35f",
+            "parallel_envs": 1,
+            "seed_protocol": "numpy.default_rng(block).integers(0,2**31-1), serial episode order",
+            "action_policy": "deterministic_unmodified"
+          }
+        }
+      },
+      "control_h0p1_s11": {
+        "id": "control_h0p1_s11",
+        "margin_mode": "approach",
+        "soft_mode": "lp",
+        "budget_estimator": "primal",
+        "epsilon": 0.1,
+        "eps": 1,
+        "seed": 11,
+        "trainer": "fdpi_deployment_feedback.py",
+        "deployment_feedback": "control",
+        "status": "training",
+        "started": "2026-09-10T20:37:00.119616+00:00",
+        "gpu": 1,
+        "sample_steps": 20000
+      },
+      "paired_bias_h0p1_s11": {
+        "id": "paired_bias_h0p1_s11",
+        "margin_mode": "approach",
+        "soft_mode": "lp",
+        "budget_estimator": "primal",
+        "epsilon": 0.1,
+        "eps": 1,
+        "seed": 11,
+        "trainer": "fdpi_deployment_feedback.py",
+        "deployment_feedback": "paired-bias",
+        "status": "training",
+        "started": "2026-09-10T20:37:05.124768+00:00",
+        "gpu": 1,
+        "sample_steps": 20000
+      },
+      "control_h0p02_s11": {
+        "id": "control_h0p02_s11",
+        "margin_mode": "approach",
+        "soft_mode": "lp",
+        "budget_estimator": "primal",
+        "epsilon": 0.02,
+        "eps": 1,
+        "seed": 11,
+        "trainer": "fdpi_deployment_feedback.py",
+        "deployment_feedback": "control",
+        "status": "training",
+        "started": "2026-09-10T20:37:10.129280+00:00",
+        "gpu": 1,
+        "sample_steps": 20000
+      },
+      "paired_bias_h0p02_s11": {
+        "id": "paired_bias_h0p02_s11",
+        "margin_mode": "approach",
+        "soft_mode": "lp",
+        "budget_estimator": "primal",
+        "epsilon": 0.02,
+        "eps": 1,
+        "seed": 11,
+        "trainer": "fdpi_deployment_feedback.py",
+        "deployment_feedback": "paired-bias",
+        "status": "training",
+        "started": "2026-09-10T20:37:15.134253+00:00",
+        "gpu": 1,
+        "sample_steps": 20000
+      },
+      "control_h0p1_s12": {
+        "id": "control_h0p1_s12",
+        "margin_mode": "approach",
+        "soft_mode": "lp",
+        "budget_estimator": "primal",
+        "epsilon": 0.1,
+        "eps": 1,
+        "seed": 12,
+        "trainer": "fdpi_deployment_feedback.py",
+        "deployment_feedback": "control",
+        "status": "training",
+        "started": "2026-09-10T20:37:20.140272+00:00",
+        "gpu": 1,
+        "sample_steps": 20000
+      },
+      "paired_bias_h0p1_s12": {
+        "id": "paired_bias_h0p1_s12",
+        "margin_mode": "approach",
+        "soft_mode": "lp",
+        "budget_estimator": "primal",
+        "epsilon": 0.1,
+        "eps": 1,
+        "seed": 12,
+        "trainer": "fdpi_deployment_feedback.py",
+        "deployment_feedback": "paired-bias",
+        "status": "training",
+        "started": "2026-09-10T20:37:25.137562+00:00",
         "gpu": 1,
         "sample_steps": 20000
       }
@@ -1824,7 +2119,7 @@
         "interpretation": "Development diagnostic, same checkpoint/reset seeds; no training or final-test reuse."
       }
     },
-    "status": "operational_gate",
+    "status": "running",
     "new_method_performance_accepted": false,
     "whole_benchmark_complete": false
   },
