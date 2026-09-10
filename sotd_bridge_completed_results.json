@@ -1,5 +1,5 @@
 {
-  "observed": "2026-09-11T05:06:47.550882+08:00",
+  "observed": "2026-09-11T05:42:02.847424+08:00",
   "rows": [
     {
       "cohort": "approach_bridge_20260910",
@@ -200,6 +200,31 @@
       "hard_005_gate": false,
       "checkpoint_sha256": "1e4ccd6a399a0ce50a976f5895d3620463620b335a8bc95edfd5c0c7bac724ff",
       "final_eval_sha256": "2854b10b1864258c1cf850f42dad14c9a68c6f82bc6f3d61480a81e29f246526"
+    },
+    {
+      "cohort": "approach_bridge_20260910",
+      "job": "distance_fixed_s3",
+      "task": "SafetyCarGoal2-v0",
+      "seed": 3,
+      "margin_mode": "distance",
+      "soft_mode": "fixed",
+      "lp_epsilon": 1.0,
+      "hard_epsilon": 0.1,
+      "budget_estimator": "mixture",
+      "sample_steps": 2000000,
+      "episodes": 312,
+      "reward": 5.265626455433143,
+      "reward_episode_se": 0.34335010057045656,
+      "soft_cost": 1.0865384615384615,
+      "soft_episode_se": 0.49909910864311885,
+      "soft_budget": 25.0,
+      "empirical_soft_feasible": true,
+      "hard_events": 0,
+      "hard_rate": 0.0,
+      "hard_cp95_upper": 0.009555756807037344,
+      "hard_005_gate": false,
+      "checkpoint_sha256": "c0b4da1002b2d6d20e32ff2e87059639819cdfc962140d7b264e907edf60229d",
+      "final_eval_sha256": "c08ddfc6141910239e0a8795e6e431bdbc0516651271356b725102ac1178b685"
     },
     {
       "cohort": "pg2_bridge_20260910",
@@ -1303,6 +1328,31 @@
     },
     {
       "cohort": "budget_feedback_v2_20260910",
+      "job": "mixture_h0p02_s1",
+      "task": "SafetyCarGoal2-v0",
+      "seed": 1,
+      "margin_mode": "approach",
+      "soft_mode": "lp",
+      "lp_epsilon": 1.0,
+      "hard_epsilon": 0.02,
+      "budget_estimator": "mixture",
+      "sample_steps": 2000000,
+      "episodes": 312,
+      "reward": 9.314608181315121,
+      "reward_episode_se": 0.48958566537085624,
+      "soft_cost": 30.727564102564102,
+      "soft_episode_se": 4.025251939412394,
+      "soft_budget": 25.0,
+      "empirical_soft_feasible": false,
+      "hard_events": 1,
+      "hard_rate": 0.003205128205128205,
+      "hard_cp95_upper": 0.015113773151500549,
+      "hard_005_gate": false,
+      "checkpoint_sha256": "3811cbd50deb8a23a28cc181910766235ec61c2a873183d0b9207e475744f1e3",
+      "final_eval_sha256": "45bbb0ad291cea6551927878b03fb64c39b4e7cc5ef0f5d9694b50ce894663af"
+    },
+    {
+      "cohort": "budget_feedback_v2_20260910",
       "job": "primal_h0p02_s1",
       "task": "SafetyCarGoal2-v0",
       "seed": 1,
@@ -1537,12 +1587,13 @@
       "budget_estimator": "mixture",
       "completed_seeds": [
         1,
-        2
+        2,
+        3
       ],
-      "complete_three_seeds": false,
-      "reward_seed_mean": null,
-      "reward_seed_se": null,
-      "soft_feasible_seeds": 2,
+      "complete_three_seeds": true,
+      "reward_seed_mean": 5.653279493942287,
+      "reward_seed_se": 0.19793801449475365,
+      "soft_feasible_seeds": 3,
       "certified_hard_gate_seeds": 0
     },
     {
@@ -1890,6 +1941,24 @@
       "soft_mode": "lp",
       "lp_epsilon": 1.0,
       "hard_epsilon": 0.02,
+      "budget_estimator": "mixture",
+      "completed_seeds": [
+        1,
+        2,
+        3
+      ],
+      "complete_three_seeds": true,
+      "reward_seed_mean": 8.912659080316812,
+      "reward_seed_se": 1.798735821787651,
+      "soft_feasible_seeds": 2,
+      "certified_hard_gate_seeds": 0
+    },
+    {
+      "cohort": "budget_feedback_v2_20260910",
+      "margin_mode": "approach",
+      "soft_mode": "lp",
+      "lp_epsilon": 1.0,
+      "hard_epsilon": 0.02,
       "budget_estimator": "primal",
       "completed_seeds": [
         1,
@@ -1900,23 +1969,6 @@
       "reward_seed_mean": 9.992379644956001,
       "reward_seed_se": 1.8104189669713036,
       "soft_feasible_seeds": 3,
-      "certified_hard_gate_seeds": 0
-    },
-    {
-      "cohort": "budget_feedback_v2_20260910",
-      "margin_mode": "approach",
-      "soft_mode": "lp",
-      "lp_epsilon": 1.0,
-      "hard_epsilon": 0.02,
-      "budget_estimator": "mixture",
-      "completed_seeds": [
-        2,
-        3
-      ],
-      "complete_three_seeds": false,
-      "reward_seed_mean": null,
-      "reward_seed_se": null,
-      "soft_feasible_seeds": 2,
       "certified_hard_gate_seeds": 0
     }
   ],
@@ -9008,6 +9060,892 @@
           "beta": 0.027800000000000002
         }
       ]
+    },
+    "distance_fixed_s3": {
+      "bins": [
+        {
+          "step": 50000,
+          "episodes": 50,
+          "reward": -1.673456421638879,
+          "soft_cost": 21.1,
+          "hard_rate": 0.36
+        },
+        {
+          "step": 100000,
+          "episodes": 50,
+          "reward": -0.02413454639236158,
+          "soft_cost": 0.0,
+          "hard_rate": 0.06
+        },
+        {
+          "step": 150000,
+          "episodes": 50,
+          "reward": 0.39901988863456095,
+          "soft_cost": 7.48,
+          "hard_rate": 0.06
+        },
+        {
+          "step": 200000,
+          "episodes": 50,
+          "reward": 1.1569038666883518,
+          "soft_cost": 2.68,
+          "hard_rate": 0.04
+        },
+        {
+          "step": 250000,
+          "episodes": 50,
+          "reward": 2.2427610398000044,
+          "soft_cost": 0.94,
+          "hard_rate": 0.02
+        },
+        {
+          "step": 300000,
+          "episodes": 50,
+          "reward": 2.538722363828556,
+          "soft_cost": 1.98,
+          "hard_rate": 0.0
+        },
+        {
+          "step": 350000,
+          "episodes": 50,
+          "reward": 2.394995354245989,
+          "soft_cost": 0.28,
+          "hard_rate": 0.02
+        },
+        {
+          "step": 400000,
+          "episodes": 50,
+          "reward": 3.3919220970067996,
+          "soft_cost": 1.84,
+          "hard_rate": 0.0
+        },
+        {
+          "step": 450000,
+          "episodes": 50,
+          "reward": 2.8660536016873612,
+          "soft_cost": 0.8,
+          "hard_rate": 0.02
+        },
+        {
+          "step": 500000,
+          "episodes": 50,
+          "reward": 3.690360169688315,
+          "soft_cost": 2.96,
+          "hard_rate": 0.04
+        },
+        {
+          "step": 550000,
+          "episodes": 50,
+          "reward": 2.8323366998811474,
+          "soft_cost": 1.28,
+          "hard_rate": 0.0
+        },
+        {
+          "step": 600000,
+          "episodes": 50,
+          "reward": 3.7141064401863546,
+          "soft_cost": 0.08,
+          "hard_rate": 0.04
+        },
+        {
+          "step": 650000,
+          "episodes": 50,
+          "reward": 3.4717422120363053,
+          "soft_cost": 0.52,
+          "hard_rate": 0.02
+        },
+        {
+          "step": 700000,
+          "episodes": 50,
+          "reward": 4.755146143357122,
+          "soft_cost": 0.6,
+          "hard_rate": 0.06
+        },
+        {
+          "step": 750000,
+          "episodes": 50,
+          "reward": 3.7121813260884142,
+          "soft_cost": 0.04,
+          "hard_rate": 0.06
+        },
+        {
+          "step": 800000,
+          "episodes": 50,
+          "reward": 3.3805860819892404,
+          "soft_cost": 0.22,
+          "hard_rate": 0.02
+        },
+        {
+          "step": 850000,
+          "episodes": 50,
+          "reward": 3.6645693058487177,
+          "soft_cost": 0.6,
+          "hard_rate": 0.02
+        },
+        {
+          "step": 900000,
+          "episodes": 50,
+          "reward": 3.8393282576262995,
+          "soft_cost": 0.0,
+          "hard_rate": 0.02
+        },
+        {
+          "step": 950000,
+          "episodes": 50,
+          "reward": 5.491678649613342,
+          "soft_cost": 0.64,
+          "hard_rate": 0.04
+        },
+        {
+          "step": 1000000,
+          "episodes": 50,
+          "reward": 4.603981691592274,
+          "soft_cost": 1.06,
+          "hard_rate": 0.0
+        },
+        {
+          "step": 1050000,
+          "episodes": 50,
+          "reward": 3.068011051532441,
+          "soft_cost": 1.34,
+          "hard_rate": 0.04
+        },
+        {
+          "step": 1100000,
+          "episodes": 50,
+          "reward": 4.326856307811161,
+          "soft_cost": 0.0,
+          "hard_rate": 0.04
+        },
+        {
+          "step": 1150000,
+          "episodes": 50,
+          "reward": 4.03394947818332,
+          "soft_cost": 1.64,
+          "hard_rate": 0.0
+        },
+        {
+          "step": 1200000,
+          "episodes": 50,
+          "reward": 3.6692263638032374,
+          "soft_cost": 1.14,
+          "hard_rate": 0.04
+        },
+        {
+          "step": 1250000,
+          "episodes": 50,
+          "reward": 4.349086063044018,
+          "soft_cost": 0.22,
+          "hard_rate": 0.0
+        },
+        {
+          "step": 1300000,
+          "episodes": 50,
+          "reward": 4.9633797315003445,
+          "soft_cost": 0.26,
+          "hard_rate": 0.0
+        },
+        {
+          "step": 1350000,
+          "episodes": 50,
+          "reward": 4.682756167221138,
+          "soft_cost": 0.0,
+          "hard_rate": 0.0
+        },
+        {
+          "step": 1400000,
+          "episodes": 50,
+          "reward": 3.964487121368293,
+          "soft_cost": 0.0,
+          "hard_rate": 0.0
+        },
+        {
+          "step": 1450000,
+          "episodes": 50,
+          "reward": 4.533451860768119,
+          "soft_cost": 0.86,
+          "hard_rate": 0.02
+        },
+        {
+          "step": 1500000,
+          "episodes": 50,
+          "reward": 4.098920866742984,
+          "soft_cost": 0.94,
+          "hard_rate": 0.0
+        },
+        {
+          "step": 1550000,
+          "episodes": 50,
+          "reward": 6.341124934788314,
+          "soft_cost": 0.8,
+          "hard_rate": 0.0
+        },
+        {
+          "step": 1600000,
+          "episodes": 50,
+          "reward": 4.762403059734905,
+          "soft_cost": 0.06,
+          "hard_rate": 0.0
+        },
+        {
+          "step": 1650000,
+          "episodes": 50,
+          "reward": 4.217519613927829,
+          "soft_cost": 0.32,
+          "hard_rate": 0.0
+        },
+        {
+          "step": 1700000,
+          "episodes": 50,
+          "reward": 5.261981019108783,
+          "soft_cost": 0.02,
+          "hard_rate": 0.0
+        },
+        {
+          "step": 1750000,
+          "episodes": 50,
+          "reward": 4.891436052000676,
+          "soft_cost": 0.0,
+          "hard_rate": 0.0
+        },
+        {
+          "step": 1800000,
+          "episodes": 50,
+          "reward": 4.514470468565525,
+          "soft_cost": 0.6,
+          "hard_rate": 0.0
+        },
+        {
+          "step": 1850000,
+          "episodes": 50,
+          "reward": 5.478586870247276,
+          "soft_cost": 0.22,
+          "hard_rate": 0.0
+        },
+        {
+          "step": 1900000,
+          "episodes": 50,
+          "reward": 5.343335038938023,
+          "soft_cost": 0.38,
+          "hard_rate": 0.0
+        },
+        {
+          "step": 1950000,
+          "episodes": 50,
+          "reward": 5.709315481861193,
+          "soft_cost": 1.04,
+          "hard_rate": 0.0
+        },
+        {
+          "step": 2000000,
+          "episodes": 50,
+          "reward": 6.129181505536211,
+          "soft_cost": 0.44,
+          "hard_rate": 0.0
+        }
+      ],
+      "prices": [
+        {
+          "step": 20000,
+          "lambda_soft": 0.1,
+          "J_soft": 35.4,
+          "beta": 0.0
+        },
+        {
+          "step": 40000,
+          "lambda_soft": 0.1,
+          "J_soft": 26.375,
+          "beta": 0.0
+        },
+        {
+          "step": 60000,
+          "lambda_soft": 0.1,
+          "J_soft": 13.5,
+          "beta": 0.0
+        },
+        {
+          "step": 80000,
+          "lambda_soft": 0.1,
+          "J_soft": 0.9,
+          "beta": 0.0
+        },
+        {
+          "step": 100000,
+          "lambda_soft": 0.1,
+          "J_soft": 0.0,
+          "beta": 0.0
+        },
+        {
+          "step": 120000,
+          "lambda_soft": 0.1,
+          "J_soft": 0.08,
+          "beta": 0.0
+        },
+        {
+          "step": 140000,
+          "lambda_soft": 0.1,
+          "J_soft": 3.04,
+          "beta": 0.0
+        },
+        {
+          "step": 160000,
+          "lambda_soft": 0.1,
+          "J_soft": 7.4,
+          "beta": 0.0
+        },
+        {
+          "step": 180000,
+          "lambda_soft": 0.1,
+          "J_soft": 5.86,
+          "beta": 0.0
+        },
+        {
+          "step": 200000,
+          "lambda_soft": 0.1,
+          "J_soft": 2.68,
+          "beta": 0.0
+        },
+        {
+          "step": 220000,
+          "lambda_soft": 0.1,
+          "J_soft": 3.1,
+          "beta": 0.0
+        },
+        {
+          "step": 240000,
+          "lambda_soft": 0.1,
+          "J_soft": 2.34,
+          "beta": 0.0
+        },
+        {
+          "step": 260000,
+          "lambda_soft": 0.1,
+          "J_soft": 0.52,
+          "beta": 0.0
+        },
+        {
+          "step": 280000,
+          "lambda_soft": 0.1,
+          "J_soft": 1.56,
+          "beta": 0.0
+        },
+        {
+          "step": 300000,
+          "lambda_soft": 0.1,
+          "J_soft": 1.98,
+          "beta": 0.0
+        },
+        {
+          "step": 320000,
+          "lambda_soft": 0.1,
+          "J_soft": 1.84,
+          "beta": 0.0
+        },
+        {
+          "step": 340000,
+          "lambda_soft": 0.1,
+          "J_soft": 0.72,
+          "beta": 0.0
+        },
+        {
+          "step": 360000,
+          "lambda_soft": 0.1,
+          "J_soft": 0.1,
+          "beta": 0.0
+        },
+        {
+          "step": 380000,
+          "lambda_soft": 0.1,
+          "J_soft": 0.1,
+          "beta": 0.0
+        },
+        {
+          "step": 400000,
+          "lambda_soft": 0.1,
+          "J_soft": 1.84,
+          "beta": 0.0
+        },
+        {
+          "step": 420000,
+          "lambda_soft": 0.1,
+          "J_soft": 1.86,
+          "beta": 0.0
+        },
+        {
+          "step": 440000,
+          "lambda_soft": 0.1,
+          "J_soft": 1.66,
+          "beta": 0.0
+        },
+        {
+          "step": 460000,
+          "lambda_soft": 0.1,
+          "J_soft": 0.8,
+          "beta": 0.0
+        },
+        {
+          "step": 480000,
+          "lambda_soft": 0.1,
+          "J_soft": 3.02,
+          "beta": 0.0
+        },
+        {
+          "step": 500000,
+          "lambda_soft": 0.1,
+          "J_soft": 2.96,
+          "beta": 0.0
+        },
+        {
+          "step": 520000,
+          "lambda_soft": 0.1,
+          "J_soft": 3.62,
+          "beta": 0.0
+        },
+        {
+          "step": 540000,
+          "lambda_soft": 0.1,
+          "J_soft": 1.12,
+          "beta": 0.0
+        },
+        {
+          "step": 560000,
+          "lambda_soft": 0.1,
+          "J_soft": 0.68,
+          "beta": 0.0
+        },
+        {
+          "step": 580000,
+          "lambda_soft": 0.1,
+          "J_soft": 0.2,
+          "beta": 0.0
+        },
+        {
+          "step": 600000,
+          "lambda_soft": 0.1,
+          "J_soft": 0.08,
+          "beta": 0.0
+        },
+        {
+          "step": 620000,
+          "lambda_soft": 0.1,
+          "J_soft": 0.6,
+          "beta": 0.0
+        },
+        {
+          "step": 640000,
+          "lambda_soft": 0.1,
+          "J_soft": 0.6,
+          "beta": 0.0
+        },
+        {
+          "step": 660000,
+          "lambda_soft": 0.1,
+          "J_soft": 0.52,
+          "beta": 0.0
+        },
+        {
+          "step": 680000,
+          "lambda_soft": 0.1,
+          "J_soft": 0.6,
+          "beta": 0.0
+        },
+        {
+          "step": 700000,
+          "lambda_soft": 0.1,
+          "J_soft": 0.6,
+          "beta": 0.0
+        },
+        {
+          "step": 720000,
+          "lambda_soft": 0.1,
+          "J_soft": 0.52,
+          "beta": 0.0
+        },
+        {
+          "step": 740000,
+          "lambda_soft": 0.1,
+          "J_soft": 0.04,
+          "beta": 0.0
+        },
+        {
+          "step": 760000,
+          "lambda_soft": 0.1,
+          "J_soft": 0.26,
+          "beta": 0.0
+        },
+        {
+          "step": 780000,
+          "lambda_soft": 0.1,
+          "J_soft": 0.22,
+          "beta": 0.0
+        },
+        {
+          "step": 800000,
+          "lambda_soft": 0.1,
+          "J_soft": 0.22,
+          "beta": 0.0
+        },
+        {
+          "step": 820000,
+          "lambda_soft": 0.1,
+          "J_soft": 0.48,
+          "beta": 0.0
+        },
+        {
+          "step": 840000,
+          "lambda_soft": 0.1,
+          "J_soft": 0.6,
+          "beta": 0.0
+        },
+        {
+          "step": 860000,
+          "lambda_soft": 0.1,
+          "J_soft": 0.6,
+          "beta": 0.0
+        },
+        {
+          "step": 880000,
+          "lambda_soft": 0.1,
+          "J_soft": 0.0,
+          "beta": 0.0
+        },
+        {
+          "step": 900000,
+          "lambda_soft": 0.1,
+          "J_soft": 0.0,
+          "beta": 0.0
+        },
+        {
+          "step": 920000,
+          "lambda_soft": 0.1,
+          "J_soft": 0.0,
+          "beta": 0.0
+        },
+        {
+          "step": 940000,
+          "lambda_soft": 0.1,
+          "J_soft": 0.42,
+          "beta": 0.0
+        },
+        {
+          "step": 960000,
+          "lambda_soft": 0.1,
+          "J_soft": 0.76,
+          "beta": 0.0
+        },
+        {
+          "step": 980000,
+          "lambda_soft": 0.1,
+          "J_soft": 1.12,
+          "beta": 0.0
+        },
+        {
+          "step": 1000000,
+          "lambda_soft": 0.1,
+          "J_soft": 1.06,
+          "beta": 0.0
+        },
+        {
+          "step": 1020000,
+          "lambda_soft": 0.1,
+          "J_soft": 1.18,
+          "beta": 0.0
+        },
+        {
+          "step": 1040000,
+          "lambda_soft": 0.1,
+          "J_soft": 1.5,
+          "beta": 0.0
+        },
+        {
+          "step": 1060000,
+          "lambda_soft": 0.1,
+          "J_soft": 1.1,
+          "beta": 0.0
+        },
+        {
+          "step": 1080000,
+          "lambda_soft": 0.1,
+          "J_soft": 0.0,
+          "beta": 0.0
+        },
+        {
+          "step": 1100000,
+          "lambda_soft": 0.1,
+          "J_soft": 0.0,
+          "beta": 0.0
+        },
+        {
+          "step": 1120000,
+          "lambda_soft": 0.1,
+          "J_soft": 0.28,
+          "beta": 0.0
+        },
+        {
+          "step": 1140000,
+          "lambda_soft": 0.1,
+          "J_soft": 1.64,
+          "beta": 0.0
+        },
+        {
+          "step": 1160000,
+          "lambda_soft": 0.1,
+          "J_soft": 1.36,
+          "beta": 0.0
+        },
+        {
+          "step": 1180000,
+          "lambda_soft": 0.1,
+          "J_soft": 0.7,
+          "beta": 0.0
+        },
+        {
+          "step": 1200000,
+          "lambda_soft": 0.1,
+          "J_soft": 1.14,
+          "beta": 0.0
+        },
+        {
+          "step": 1220000,
+          "lambda_soft": 0.1,
+          "J_soft": 1.36,
+          "beta": 0.0
+        },
+        {
+          "step": 1240000,
+          "lambda_soft": 0.1,
+          "J_soft": 0.66,
+          "beta": 0.0
+        },
+        {
+          "step": 1260000,
+          "lambda_soft": 0.1,
+          "J_soft": 0.0,
+          "beta": 0.0
+        },
+        {
+          "step": 1280000,
+          "lambda_soft": 0.1,
+          "J_soft": 0.0,
+          "beta": 0.0
+        },
+        {
+          "step": 1300000,
+          "lambda_soft": 0.1,
+          "J_soft": 0.26,
+          "beta": 0.0
+        },
+        {
+          "step": 1320000,
+          "lambda_soft": 0.1,
+          "J_soft": 0.26,
+          "beta": 0.0
+        },
+        {
+          "step": 1340000,
+          "lambda_soft": 0.1,
+          "J_soft": 0.26,
+          "beta": 0.0
+        },
+        {
+          "step": 1360000,
+          "lambda_soft": 0.1,
+          "J_soft": 0.0,
+          "beta": 0.0
+        },
+        {
+          "step": 1380000,
+          "lambda_soft": 0.1,
+          "J_soft": 0.0,
+          "beta": 0.0
+        },
+        {
+          "step": 1400000,
+          "lambda_soft": 0.1,
+          "J_soft": 0.0,
+          "beta": 0.0
+        },
+        {
+          "step": 1420000,
+          "lambda_soft": 0.1,
+          "J_soft": 0.12,
+          "beta": 0.0
+        },
+        {
+          "step": 1440000,
+          "lambda_soft": 0.1,
+          "J_soft": 0.78,
+          "beta": 0.0
+        },
+        {
+          "step": 1460000,
+          "lambda_soft": 0.1,
+          "J_soft": 0.86,
+          "beta": 0.0
+        },
+        {
+          "step": 1480000,
+          "lambda_soft": 0.1,
+          "J_soft": 1.02,
+          "beta": 0.0
+        },
+        {
+          "step": 1500000,
+          "lambda_soft": 0.1,
+          "J_soft": 0.94,
+          "beta": 0.0
+        },
+        {
+          "step": 1520000,
+          "lambda_soft": 0.1,
+          "J_soft": 1.46,
+          "beta": 0.0
+        },
+        {
+          "step": 1540000,
+          "lambda_soft": 0.1,
+          "J_soft": 0.8,
+          "beta": 0.0
+        },
+        {
+          "step": 1560000,
+          "lambda_soft": 0.1,
+          "J_soft": 0.3,
+          "beta": 0.0
+        },
+        {
+          "step": 1580000,
+          "lambda_soft": 0.1,
+          "J_soft": 0.34,
+          "beta": 0.0
+        },
+        {
+          "step": 1600000,
+          "lambda_soft": 0.1,
+          "J_soft": 0.06,
+          "beta": 0.0
+        },
+        {
+          "step": 1620000,
+          "lambda_soft": 0.1,
+          "J_soft": 0.0,
+          "beta": 0.0
+        },
+        {
+          "step": 1640000,
+          "lambda_soft": 0.1,
+          "J_soft": 0.32,
+          "beta": 0.0
+        },
+        {
+          "step": 1660000,
+          "lambda_soft": 0.1,
+          "J_soft": 0.32,
+          "beta": 0.0
+        },
+        {
+          "step": 1680000,
+          "lambda_soft": 0.1,
+          "J_soft": 0.32,
+          "beta": 0.0
+        },
+        {
+          "step": 1700000,
+          "lambda_soft": 0.1,
+          "J_soft": 0.02,
+          "beta": 0.0
+        },
+        {
+          "step": 1720000,
+          "lambda_soft": 0.1,
+          "J_soft": 0.02,
+          "beta": 0.0
+        },
+        {
+          "step": 1740000,
+          "lambda_soft": 0.1,
+          "J_soft": 0.02,
+          "beta": 0.0
+        },
+        {
+          "step": 1760000,
+          "lambda_soft": 0.1,
+          "J_soft": 0.0,
+          "beta": 0.0
+        },
+        {
+          "step": 1780000,
+          "lambda_soft": 0.1,
+          "J_soft": 0.08,
+          "beta": 0.0
+        },
+        {
+          "step": 1800000,
+          "lambda_soft": 0.1,
+          "J_soft": 0.6,
+          "beta": 0.0
+        },
+        {
+          "step": 1820000,
+          "lambda_soft": 0.1,
+          "J_soft": 0.52,
+          "beta": 0.0
+        },
+        {
+          "step": 1840000,
+          "lambda_soft": 0.1,
+          "J_soft": 0.74,
+          "beta": 0.0
+        },
+        {
+          "step": 1860000,
+          "lambda_soft": 0.1,
+          "J_soft": 0.6,
+          "beta": 0.0
+        },
+        {
+          "step": 1880000,
+          "lambda_soft": 0.1,
+          "J_soft": 0.6,
+          "beta": 0.0
+        },
+        {
+          "step": 1900000,
+          "lambda_soft": 0.1,
+          "J_soft": 0.38,
+          "beta": 0.0
+        },
+        {
+          "step": 1920000,
+          "lambda_soft": 0.1,
+          "J_soft": 0.0,
+          "beta": 0.0
+        },
+        {
+          "step": 1940000,
+          "lambda_soft": 0.1,
+          "J_soft": 0.0,
+          "beta": 0.0
+        },
+        {
+          "step": 1960000,
+          "lambda_soft": 0.1,
+          "J_soft": 1.04,
+          "beta": 0.0
+        },
+        {
+          "step": 1980000,
+          "lambda_soft": 0.1,
+          "J_soft": 1.18,
+          "beta": 0.0
+        },
+        {
+          "step": 2000000,
+          "lambda_soft": 0.1,
+          "J_soft": 0.44,
+          "beta": 0.0
+        }
+      ]
     }
   },
   "population_audit": [
@@ -13290,6 +14228,541 @@
           "primal": 26.68
         }
       ]
+    },
+    {
+      "job": "distance_fixed_s3",
+      "verified_windows": 100,
+      "primary_above_mixture_below": 0,
+      "mixture_above_primary_below": 1,
+      "last_windows": [
+        {
+          "step": 1920000,
+          "mixture": 0.0,
+          "primal": 0.0
+        },
+        {
+          "step": 1940000,
+          "mixture": 0.0,
+          "primal": 0.0
+        },
+        {
+          "step": 1960000,
+          "mixture": 1.04,
+          "primal": 2.08
+        },
+        {
+          "step": 1980000,
+          "mixture": 1.18,
+          "primal": 2.08
+        },
+        {
+          "step": 2000000,
+          "mixture": 0.44,
+          "primal": 0.2
+        }
+      ],
+      "rows": [
+        {
+          "step": 20000,
+          "mixture": 35.4,
+          "primal": 33.5
+        },
+        {
+          "step": 40000,
+          "mixture": 26.375,
+          "primal": 19.0
+        },
+        {
+          "step": 60000,
+          "mixture": 13.5,
+          "primal": 11.28
+        },
+        {
+          "step": 80000,
+          "mixture": 0.9,
+          "primal": 1.8
+        },
+        {
+          "step": 100000,
+          "mixture": 0.0,
+          "primal": 0.0
+        },
+        {
+          "step": 120000,
+          "mixture": 0.08,
+          "primal": 0.0
+        },
+        {
+          "step": 140000,
+          "mixture": 3.04,
+          "primal": 3.08
+        },
+        {
+          "step": 160000,
+          "mixture": 7.4,
+          "primal": 11.96
+        },
+        {
+          "step": 180000,
+          "mixture": 5.86,
+          "primal": 8.88
+        },
+        {
+          "step": 200000,
+          "mixture": 2.68,
+          "primal": 1.84
+        },
+        {
+          "step": 220000,
+          "mixture": 3.1,
+          "primal": 2.68
+        },
+        {
+          "step": 240000,
+          "mixture": 2.34,
+          "primal": 1.16
+        },
+        {
+          "step": 260000,
+          "mixture": 0.52,
+          "primal": 0.32
+        },
+        {
+          "step": 280000,
+          "mixture": 1.56,
+          "primal": 0.0
+        },
+        {
+          "step": 300000,
+          "mixture": 1.98,
+          "primal": 0.52
+        },
+        {
+          "step": 320000,
+          "mixture": 1.84,
+          "primal": 0.52
+        },
+        {
+          "step": 340000,
+          "mixture": 0.72,
+          "primal": 0.0
+        },
+        {
+          "step": 360000,
+          "mixture": 0.1,
+          "primal": 0.2
+        },
+        {
+          "step": 380000,
+          "mixture": 0.1,
+          "primal": 0.2
+        },
+        {
+          "step": 400000,
+          "mixture": 1.84,
+          "primal": 2.96
+        },
+        {
+          "step": 420000,
+          "mixture": 1.86,
+          "primal": 3.0
+        },
+        {
+          "step": 440000,
+          "mixture": 1.66,
+          "primal": 2.48
+        },
+        {
+          "step": 460000,
+          "mixture": 0.8,
+          "primal": 0.24
+        },
+        {
+          "step": 480000,
+          "mixture": 3.02,
+          "primal": 0.36
+        },
+        {
+          "step": 500000,
+          "mixture": 2.96,
+          "primal": 1.16
+        },
+        {
+          "step": 520000,
+          "mixture": 3.62,
+          "primal": 1.28
+        },
+        {
+          "step": 540000,
+          "mixture": 1.12,
+          "primal": 0.96
+        },
+        {
+          "step": 560000,
+          "mixture": 0.68,
+          "primal": 0.96
+        },
+        {
+          "step": 580000,
+          "mixture": 0.2,
+          "primal": 0.0
+        },
+        {
+          "step": 600000,
+          "mixture": 0.08,
+          "primal": 0.16
+        },
+        {
+          "step": 620000,
+          "mixture": 0.6,
+          "primal": 0.16
+        },
+        {
+          "step": 640000,
+          "mixture": 0.6,
+          "primal": 0.16
+        },
+        {
+          "step": 660000,
+          "mixture": 0.52,
+          "primal": 0.0
+        },
+        {
+          "step": 680000,
+          "mixture": 0.6,
+          "primal": 1.2
+        },
+        {
+          "step": 700000,
+          "mixture": 0.6,
+          "primal": 1.2
+        },
+        {
+          "step": 720000,
+          "mixture": 0.52,
+          "primal": 1.04
+        },
+        {
+          "step": 740000,
+          "mixture": 0.04,
+          "primal": 0.0
+        },
+        {
+          "step": 760000,
+          "mixture": 0.26,
+          "primal": 0.0
+        },
+        {
+          "step": 780000,
+          "mixture": 0.22,
+          "primal": 0.0
+        },
+        {
+          "step": 800000,
+          "mixture": 0.22,
+          "primal": 0.0
+        },
+        {
+          "step": 820000,
+          "mixture": 0.48,
+          "primal": 0.96
+        },
+        {
+          "step": 840000,
+          "mixture": 0.6,
+          "primal": 0.96
+        },
+        {
+          "step": 860000,
+          "mixture": 0.6,
+          "primal": 0.96
+        },
+        {
+          "step": 880000,
+          "mixture": 0.0,
+          "primal": 0.0
+        },
+        {
+          "step": 900000,
+          "mixture": 0.0,
+          "primal": 0.0
+        },
+        {
+          "step": 920000,
+          "mixture": 0.0,
+          "primal": 0.0
+        },
+        {
+          "step": 940000,
+          "mixture": 0.42,
+          "primal": 0.0
+        },
+        {
+          "step": 960000,
+          "mixture": 0.76,
+          "primal": 0.68
+        },
+        {
+          "step": 980000,
+          "mixture": 1.12,
+          "primal": 1.92
+        },
+        {
+          "step": 1000000,
+          "mixture": 1.06,
+          "primal": 1.72
+        },
+        {
+          "step": 1020000,
+          "mixture": 1.18,
+          "primal": 1.96
+        },
+        {
+          "step": 1040000,
+          "mixture": 1.5,
+          "primal": 2.92
+        },
+        {
+          "step": 1060000,
+          "mixture": 1.1,
+          "primal": 2.2
+        },
+        {
+          "step": 1080000,
+          "mixture": 0.0,
+          "primal": 0.0
+        },
+        {
+          "step": 1100000,
+          "mixture": 0.0,
+          "primal": 0.0
+        },
+        {
+          "step": 1120000,
+          "mixture": 0.28,
+          "primal": 0.0
+        },
+        {
+          "step": 1140000,
+          "mixture": 1.64,
+          "primal": 0.0
+        },
+        {
+          "step": 1160000,
+          "mixture": 1.36,
+          "primal": 0.0
+        },
+        {
+          "step": 1180000,
+          "mixture": 0.7,
+          "primal": 0.0
+        },
+        {
+          "step": 1200000,
+          "mixture": 1.14,
+          "primal": 0.88
+        },
+        {
+          "step": 1220000,
+          "mixture": 1.36,
+          "primal": 0.88
+        },
+        {
+          "step": 1240000,
+          "mixture": 0.66,
+          "primal": 0.88
+        },
+        {
+          "step": 1260000,
+          "mixture": 0.0,
+          "primal": 0.0
+        },
+        {
+          "step": 1280000,
+          "mixture": 0.0,
+          "primal": 0.0
+        },
+        {
+          "step": 1300000,
+          "mixture": 0.26,
+          "primal": 0.0
+        },
+        {
+          "step": 1320000,
+          "mixture": 0.26,
+          "primal": 0.0
+        },
+        {
+          "step": 1340000,
+          "mixture": 0.26,
+          "primal": 0.0
+        },
+        {
+          "step": 1360000,
+          "mixture": 0.0,
+          "primal": 0.0
+        },
+        {
+          "step": 1380000,
+          "mixture": 0.0,
+          "primal": 0.0
+        },
+        {
+          "step": 1400000,
+          "mixture": 0.0,
+          "primal": 0.0
+        },
+        {
+          "step": 1420000,
+          "mixture": 0.12,
+          "primal": 0.24
+        },
+        {
+          "step": 1440000,
+          "mixture": 0.78,
+          "primal": 0.24
+        },
+        {
+          "step": 1460000,
+          "mixture": 0.86,
+          "primal": 0.24
+        },
+        {
+          "step": 1480000,
+          "mixture": 1.02,
+          "primal": 0.92
+        },
+        {
+          "step": 1500000,
+          "mixture": 0.94,
+          "primal": 0.92
+        },
+        {
+          "step": 1520000,
+          "mixture": 1.46,
+          "primal": 1.96
+        },
+        {
+          "step": 1540000,
+          "mixture": 0.8,
+          "primal": 1.04
+        },
+        {
+          "step": 1560000,
+          "mixture": 0.3,
+          "primal": 0.04
+        },
+        {
+          "step": 1580000,
+          "mixture": 0.34,
+          "primal": 0.04
+        },
+        {
+          "step": 1600000,
+          "mixture": 0.06,
+          "primal": 0.04
+        },
+        {
+          "step": 1620000,
+          "mixture": 0.0,
+          "primal": 0.0
+        },
+        {
+          "step": 1640000,
+          "mixture": 0.32,
+          "primal": 0.64
+        },
+        {
+          "step": 1660000,
+          "mixture": 0.32,
+          "primal": 0.64
+        },
+        {
+          "step": 1680000,
+          "mixture": 0.32,
+          "primal": 0.64
+        },
+        {
+          "step": 1700000,
+          "mixture": 0.02,
+          "primal": 0.0
+        },
+        {
+          "step": 1720000,
+          "mixture": 0.02,
+          "primal": 0.0
+        },
+        {
+          "step": 1740000,
+          "mixture": 0.02,
+          "primal": 0.0
+        },
+        {
+          "step": 1760000,
+          "mixture": 0.0,
+          "primal": 0.0
+        },
+        {
+          "step": 1780000,
+          "mixture": 0.08,
+          "primal": 0.16
+        },
+        {
+          "step": 1800000,
+          "mixture": 0.6,
+          "primal": 1.2
+        },
+        {
+          "step": 1820000,
+          "mixture": 0.52,
+          "primal": 1.04
+        },
+        {
+          "step": 1840000,
+          "mixture": 0.74,
+          "primal": 1.04
+        },
+        {
+          "step": 1860000,
+          "mixture": 0.6,
+          "primal": 0.0
+        },
+        {
+          "step": 1880000,
+          "mixture": 0.6,
+          "primal": 0.0
+        },
+        {
+          "step": 1900000,
+          "mixture": 0.38,
+          "primal": 0.0
+        },
+        {
+          "step": 1920000,
+          "mixture": 0.0,
+          "primal": 0.0
+        },
+        {
+          "step": 1940000,
+          "mixture": 0.0,
+          "primal": 0.0
+        },
+        {
+          "step": 1960000,
+          "mixture": 1.04,
+          "primal": 2.08
+        },
+        {
+          "step": 1980000,
+          "mixture": 1.18,
+          "primal": 2.08
+        },
+        {
+          "step": 2000000,
+          "mixture": 0.44,
+          "primal": 0.2
+        }
+      ]
     }
   ],
   "sources_sha256": {
@@ -13334,6 +14807,11 @@
     "approach_bridge_20260910/runs/approach_lp_s2/final_eval.json": "2854b10b1864258c1cf850f42dad14c9a68c6f82bc6f3d61480a81e29f246526",
     "approach_bridge_20260910/runs/approach_lp_s2/episodes.jsonl": "e89761791c736e014f75b813cb247e2778d684cf1d971e188fec938a70a5d8ab",
     "approach_bridge_20260910/runs/approach_lp_s2/price_log.jsonl": "f31e500db1bcf765d386178dd24d465b6ed09d2545d10826b1f0e87bc1fbb9e6",
+    "approach_bridge_20260910/runs/distance_fixed_s3/config.json": "3488d81aacaf2ca706d076b1f166330e3395a7dacd755d10cf63b78301a9f267",
+    "approach_bridge_20260910/runs/distance_fixed_s3/execution.json": "d14757fc0faf76f01e3a92f255c379240d19577845f7fd3dedb2b2dd6b8b22a8",
+    "approach_bridge_20260910/runs/distance_fixed_s3/final_eval.json": "c08ddfc6141910239e0a8795e6e431bdbc0516651271356b725102ac1178b685",
+    "approach_bridge_20260910/runs/distance_fixed_s3/episodes.jsonl": "9447edc877b59b61919bbe88a6fe5b47e607f4a144f9c04e0f08f1644cee4fc5",
+    "approach_bridge_20260910/runs/distance_fixed_s3/price_log.jsonl": "5f045a72e62a28d0b155d856169aec0b290fded0a3ef64cbaa1ecd2433751677",
     "pg2_bridge_20260910/protocol.json": "bd73daf512bfd14456543e32c3d6168aee44f8ea352e56c47868bb8d30b0b1f3",
     "pg2_bridge_20260910/runs/distance_fixed_e1_s1/config.json": "b61b631de54807a77ad4df4f3a0e731c842285adb4f1b8fde0c0118f7f598415",
     "pg2_bridge_20260910/runs/distance_fixed_e1_s1/execution.json": "19b4e8b3822a35077deae58abe687a336b99f9947a117ecdac3069c7500be50e",
@@ -13470,6 +14948,9 @@
     "budget_feedback_v2_20260910/runs/primal_h0p1_s1/config.json": "898110a961da88c87631c839d93143dafe8b7a4faffa7b5689fea0a4470ba764",
     "budget_feedback_v2_20260910/runs/primal_h0p1_s1/execution.json": "488d959e5b1ca34620a6800c799817f6af8f7f8c5ddc5c5054ea4c02d1745aad",
     "budget_feedback_v2_20260910/runs/primal_h0p1_s1/final_eval.json": "1166b1cf581d4a6c3452baa86245595bb772f2e57b8050833922c8eeb25023cc",
+    "budget_feedback_v2_20260910/runs/mixture_h0p02_s1/config.json": "93f84074fbac6370c8efaa6710a0076dde7dd06920fe38f0ec9a57efd6acb431",
+    "budget_feedback_v2_20260910/runs/mixture_h0p02_s1/execution.json": "48e54c652ebe177301bb5d3bfefd0815ec0984dc3738a471272fc00f305e8335",
+    "budget_feedback_v2_20260910/runs/mixture_h0p02_s1/final_eval.json": "45bbb0ad291cea6551927878b03fb64c39b4e7cc5ef0f5d9694b50ce894663af",
     "budget_feedback_v2_20260910/runs/primal_h0p02_s1/config.json": "5f389fcdd29fe41cfdf81212b8cbb529b21f901b9088fbd28b4ef6599cecbefe",
     "budget_feedback_v2_20260910/runs/primal_h0p02_s1/execution.json": "5d05295418e79fb84aeacd3c1780d027ad13d5ec49a3f366eced29a782e2987d",
     "budget_feedback_v2_20260910/runs/primal_h0p02_s1/final_eval.json": "5634069877650db209424f0fa0d09ce575e3ff8aa32f4d75d8c932ef21963367",
