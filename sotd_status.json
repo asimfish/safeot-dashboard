@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-11T00:30:04+08:00",
+  "updated": "2026-09-11T00:53:25+08:00",
   "task": "T-1484/T-1490 — 五目标差距与解决办法（数据驱动，每 30 分钟刷新）",
   "gap_plan": [
     {
@@ -199,8 +199,8 @@
     }
   ],
   "supervision": {
-    "observed": "2026-09-11T00:26:50+08:00",
-    "next_check": "2026-09-11T00:31:50+08:00",
+    "observed": "2026-09-11T00:51:50+08:00",
+    "next_check": "2026-09-11T00:56:50+08:00",
     "interval_seconds": 300,
     "overall": "warning",
     "coverage": "冻结 beta 修复队列与共享采集/发布链路；远端其他队列仅由原采集器覆盖。",
@@ -208,7 +208,7 @@
       {
         "code": "system_disk_low",
         "level": "warning",
-        "detail": "system 剩余空间 1.84 GiB。"
+        "detail": "system 剩余空间 1.89 GiB。"
       }
     ],
     "repair": {
@@ -216,15 +216,15 @@
       "active": null,
       "completed": 8
     },
-    "summary": "后台监督：需检查；None。system 剩余空间 1.84 GiB。",
+    "summary": "后台监督：需检查；None。system 剩余空间 1.89 GiB。",
     "harvest": {
-      "last_published": "2026-09-11T00:17:24.747053+08:00",
-      "log_updated": "2026-09-11T00:17:27+08:00",
-      "commit": "fdba48a9f6ebb31aeb87cfa6dea0e53f600b0ab1"
+      "last_published": "2026-09-11T00:33:48.578692+08:00",
+      "log_updated": "2026-09-11T00:51:50+08:00",
+      "commit": "8b3b6cdfb04ba0181c3f54b99d2a507f811fccd1"
     }
   },
   "post_repair_evaluations": {
-    "observed": "2026-09-11T00:29:57+08:00",
+    "observed": "2026-09-11T00:53:18+08:00",
     "training_done": 141,
     "complete_evaluations": 141,
     "evaluation_episodes": 43992,
@@ -253,7 +253,7 @@
     "protocol": "Validated serial evaluator, 3 x104 final-checkpoint episodes; no retraining"
   },
   "g4_connection": {
-    "observed": "2026-09-10T16:16:37+00:00",
+    "observed": "2026-09-10T16:53:15+00:00",
     "host": "30314",
     "status": "connected",
     "training_steps": {
@@ -269,24 +269,24 @@
     "metric_scope": "training only; last 10 log windows of completed-episode averages",
     "final_evaluation_complete": false,
     "latest_connection_check": {
-      "observed_unix": 1789056998.1645029,
+      "observed_unix": 1789059196.8392682,
       "status": "connected"
     }
   },
   "isolated_formal_evaluations": {
-    "observed": "2026-09-11T00:29:57+08:00",
+    "observed": "2026-09-11T00:53:18+08:00",
     "complete_evaluations": 6,
     "evaluation_episodes": 1872,
     "integrity_errors": []
   },
   "data_observed_at": {
     "legacy_audit": "2026-09-05T19:21:47.615992+08:00",
-    "refs_table": "2026-09-11T00:15:27.610402+08:00",
+    "refs_table": "2026-09-11T00:52:08.003997+08:00",
     "repair_queue": "2026-09-10T11:37:54.984063+08:00",
     "pilot_audit": "2026-09-05T21:25:56.853232+08:00",
     "terminal_component": "2026-09-05T21:46:22.695030+08:00",
-    "supervision": "2026-09-11T00:26:50+08:00",
-    "post_repair_evaluations": "2026-09-11T00:29:57+08:00"
+    "supervision": "2026-09-11T00:51:50+08:00",
+    "post_repair_evaluations": "2026-09-11T00:53:18+08:00"
   },
   "goals": [
     {
@@ -489,24 +489,24 @@
     "资源扩展：30109与mainskill各增加24个PPO训练槽；volc仅调整4个现有SafeOT训练的CPU亲和性，未重启训练。容器约26核，其他队列及18个Hopper依赖等待保留；效果按真实步数与CPU窗口评估，尚未宣布加速倍数。",
     "论文审计：F01为旧capacity-flow稿，不能以目标流证书代替部署安全。当前CG2 Dual默认LP软预算仅2/5种子达标，预算10为3/5；五目标仍未验收。",
     "已逐回合复算PG2全部24个开发策略/7488回合，发布完整非单调epsilon曲线。distance eps0.1回报8.846、硬接触0.321%、软预算3/3达标；仅为待独立确认候选，不是SOTA或零风险证据。",
-    "加速现有队列：核实正式运行248路，已完成180个训练+终档评测单元。aliyun目标32→128路，mainskill PPO目标24→32路；原活跃训练进程保留，仅替换队列调度器。未宣称等比例实际提速。",
+    "加速现有队列：核实正式运行248路，已完成191个训练+终档评测单元。aliyun目标32→128路，mainskill PPO目标24→32路；原活跃训练进程保留，仅替换队列调度器。未宣称等比例实际提速。",
     "失败保留：SafetyCarFormulaOne1-v0 / safeot_eps0.1 / seed1，最后记录160000步，MuJoCo物理求解器异常；未计入完成、未自动重跑。",
     "Safe Vision全部105向量轨道统一延长运行时限：训练96小时、终档评测24小时。已观测慢任务按当前速度约需47–57小时；仍为2M训练步和312评测回合，失败尝试不重跑。",
-    "全基准尚未全跑：Safety-Gymnasium 182/402轨道已冻结排队，151个不同任务当前有训练/评测进程，220轨道尚未冻结；CHORES的Pickup171/Fetch172场景适配仍待完成。",
-    "新增Safe Vision完整105向量轨道2520单元：已完成21，核实运行138，失败2，阻塞0。像素输入策略仍未完成；整个基准验收保持开放。",
-    "新增完整PPO骨干队列1848次：已完成55，核实运行56，失败0，阻塞0。与TRPO/CPO的1848次共同检验多算法适用性；所有77轨道和3种子均保留，完整基准验收仍开放。",
-    "完整向量系列已实际启动：77任务×8设置×3种子=1848次；正在训练/评测54，完整终档104，失败0，阻塞0。三档SafeOT ε、三档固定惩罚、TRPO-Lag和CPO；逐任务比较，尚无优势结论。",
+    "全基准尚未全跑：Safety-Gymnasium 182/402轨道已冻结排队，152个不同任务当前有训练/评测进程，220轨道尚未冻结；CHORES的Pickup171/Fetch172场景适配仍待完成。",
+    "新增Safe Vision完整105向量轨道2520单元：已完成26，核实运行138，失败2，阻塞0。像素输入策略仍未完成；整个基准验收保持开放。",
+    "新增完整PPO骨干队列1848次：已完成57，核实运行56，失败0，阻塞0。与TRPO/CPO的1848次共同检验多算法适用性；所有77轨道和3种子均保留，完整基准验收仍开放。",
+    "完整向量系列已实际启动：77任务×8设置×3种子=1848次；正在训练/评测54，完整终档108，失败0，阻塞0。三档SafeOT ε、三档固定惩罚、TRPO-Lag和CPO；逐任务比较，尚无优势结论。",
     "环境来源更正：旧afc6a34提交改动了Button/Push/Circle，未用于这批正式结果。新批次固定官方主分支ae966e5，1302个包文件逐一核对Git对象；旧失败记录保留。导航60、速度12、Run5全部派发；其余325个SG轨道及Safety-CHORES完整计划继续保留。",
     "完整基准验收尚未通过：Safety-Gymnasium官方表格197个任务配置，导航仅60个；注册代码额外14个配置及观察/版本分别保留，共402个轨道，含9个待解决的MultiGoal配置差异。现有汇总涉及20个轨道，需逐协议审计；不等于完成比例。",
     "Safety-CHORES必须覆盖ObjectNav200、Pickup171、Fetch172，共543场景/策略。当前Dual旧ObjectNav评测396/400有效、196/200成对；完整任务清单和缺口已公开。失败、缺种子和未适配项保留在分母，既有部分任务结果作为开发证据；五目标仍未验收。",
     "CG2接近门控+LP首个种子：奖励21.01，软成本29.27/25，硬违规3/312；奖励提升但安全联合目标未通过。",
-    "新门控/ε队列已审计43个完整2M策略，公开全部最终奖励、软成本、硬违规及训练曲线；单策略误差条为回合标准误，三个训练种子齐备后才作组间结论。",
+    "新门控/ε队列已审计45个完整2M策略，公开全部最终奖励、软成本、硬违规及训练曲线；单策略误差条为回合标准误，三个训练种子齐备后才作组间结论。",
     "两条研究线已对齐：D2v2多基准与SafeOT-Dual分别记账；历史完成卡不能代替当前五目标验收。统一核验版本、种子、训练预算、评测协议和每种约束；五目标仍待验收。",
     "CPO独立补实验SafetyPointButton1-v0已齐3种子/90集：奖励3.664、平均成本45.200；0/3种子经验平均成本≤25。比较候选前仍需匹配评测协议。",
     "CPO独立补实验SafetyCarGoal1-v0已齐3种子/90集：奖励12.525、平均成本25.256；1/3种子经验平均成本≤25。比较候选前仍需匹配评测协议。",
     "G2缺失CPO终档证据已安排独立重建：CG1/PB1各3种子，固定2M步；每个终档使用保存的归一化状态评测。",
     "冻结400评测保留4个任务失败（A_103, A_112, B_170, A_172）。首轮GPU1后端诊断complete：覆盖A103/A112与两个已完成对照；不替换冻结400集。",
-    "全局资源监测 2026-09-11T00:29:59+08:00：30109：配额96核、活动训练组54、暂停0、部分暂停0、活动评测组8；30314：配额96核、活动训练组47、暂停0、部分暂停0、活动评测组2；5090：配额48核、活动训练组12、暂停0、部分暂停0、活动评测组0；volc：配额26核、活动训练组37、暂停18、部分暂停0、活动评测组3；aliyun：配额184核、活动训练组146、暂停0、部分暂停0、活动评测组6。暂停与僵尸不计入活动；活动仍须用训练日志验证产出。每分钟采样，五分钟窗口判断余量。",
+    "全局资源监测 2026-09-11T00:52:59+08:00：30109：配额96核、活动训练组50、暂停0、部分暂停0、活动评测组10；30314：配额96核、活动训练组46、暂停0、部分暂停0、活动评测组3；5090：配额48核、活动训练组10、暂停0、部分暂停0、活动评测组2；volc：配额26核、活动训练组37、暂停18、部分暂停0、活动评测组3；aliyun：配额184核、活动训练组142、暂停0、部分暂停0、活动评测组10。暂停与僵尸不计入活动；活动仍须用训练日志验证产出。每分钟采样，五分钟窗口判断余量。",
     "资源告警：volc: 18 paused / 0 partly stopped training groups；vla_fixed400: 4 preserved failures",
     "V2 三臂试验当前阶段 full，活跃进程 4；先接续SafeVLA/SafeOT对照；第三臂需同时通过真实训练/恢复和预算旋钮生效检查。",
     "VLA基线seed1在199680步因Unity场景重置超时退出，尚无检查点；失败日志保留。采用NVIDIA-only后端做一次同种子重新训练，旧步数不累加；其余三个训练继续。",
@@ -519,7 +519,7 @@
     "原 VLA 评测在 359/400 回合因模拟器超时结束；新进程复现检查动作不一致，因此另跑两臂执行条件一致的完整400回合，不混合旧数据。",
     "VLA 配对终档评测已收取 396/400 回合；两臂均通过全部模型权重严格加载，原始逐动作数据持续核验。",
     "CG2 刹车候选完整审计：0/5 配置通过联合门槛；逐种子软预算、硬违规和相对原策略的奖励变化同时公开，低平均违规不能替代联合通过。",
-    "2026-09-11 00:30：按独立种子、完整训练预算和终档评测分别验收。五台允许服务器的产物进度见下表；进程状态以实际监督记录为准。看板约每 30 分钟刷新。",
+    "2026-09-11 00:53：按独立种子、完整训练预算和终档评测分别验收。五台允许服务器的产物进度见下表；进程状态以实际监督记录为准。看板约每 30 分钟刷新。",
     "G1 差距：三导航任务曲线已覆盖；速度任务点位与终档覆盖见逐项检查。现有点位数量不等于多引擎统一性全部验收。 → 解决：保留已完成曲线，复核匹配种子终档前沿与独立种子不确定性；补充多引擎统一性证据，只对确实缺失且无重复的点位安排算力。（曲线覆盖按当前产物更新；剩余分析与跨引擎验收待完成。）",
     "G2 差距：三导航任务训练筛选两端点已达；终档复核单列；独立种子计数已去重；训练完成度与终档覆盖分开验收。按 owner 09-08 要求，两端点各自接近。 → 解决：先补齐 CPO 参考的终档评测，尤其 CG1/PB1；对已有完整旋钮点按终档回报和成本复核。缺口若是性能不足，再做配置筛选；若是产物缺失，先找回允许服务器上的原检查点，避免重复训练。（训练队列完成数见下表；参考终档补齐和安全验收时间以产物为准。）",
     "G3 差距：已有候选改善，SOTA 完整复核仍待完成。PG2 筛选点 15.5 @ 1.6% 观测硬违规率；CG2 低违规侧筛选点 8.6 @ 0.3%。观测均值达标不等于逐种子风险上界达标。 → 解决：（a）边距日程（0.95 起、前 0.5–1.5M 步线性收紧到目标阈值）：56 个 run，已完成 50；（b）执行时可行性筛选：从策略分布采 K=16 个候选动作，在 g≤pf 的集合内选最高 q；集合为空时选最低 g（同权重、不重训、随机采样对照组用于排除随机性）；已有增补种子与评测继续按产物收集；后加块保留为探索性数据，不能承诺加块后达标。PG2 m0.83 日程候选已冻结新评测块，与无筛选/随机动作配对复验；未分型 FDPI 的同筛选对照仍需完整收齐。（PG2 冻结复验已完成；CG2 按逐训练种子的奖励、硬风险上界与软预算共同验收，探索队列进度不等于通过。）",
@@ -633,11 +633,11 @@
       "goal": "G1/G2/G5",
       "task": "全部170单智能体像素轨道：渲染与观测适配检查",
       "n": 170,
-      "done": 146,
+      "done": 170,
       "failed": 0,
-      "pending": 23,
-      "running": 1,
-      "status": "run",
+      "pending": 0,
+      "running": 0,
+      "status": "done",
       "eta": "mainskill GPU2，单个低优先级检查进程；每任务2次reset和最多16次step",
       "note": "这是全清单适配检查，不是正式像素策略训练或完整基准验收。官方观测包含RGB和传感器/lidar；所有检查失败保留。"
     },
@@ -646,11 +646,11 @@
       "task": "Safe Vision七系列：全部105向量轨道×8配置×3种子",
       "status": "run",
       "n": 2520,
-      "done": 21,
+      "done": 26,
       "running": 138,
       "failed": 2,
       "blocked": 0,
-      "pending": 2359,
+      "pending": 2354,
       "eta": "30109/mainskill保留6/4槽；aliyun接管后目标128槽；旧训练进程和冻结协议保持",
       "note": "完整105向量轨道，包含Building/Fading/Race/FormulaOne全部机器人和难度；像素输入策略、多智能体、Isaac、CHORES仍待补齐。失败不减少分母。"
     },
@@ -659,9 +659,9 @@
       "task": "完整77向量轨道：PPO骨干SafeOT/惩罚/PPO-Lag/PID-Lag对照",
       "status": "run",
       "n": 1848,
-      "done": 55,
+      "done": 57,
       "running": 56,
-      "pending": 1737,
+      "pending": 1735,
       "failed": 0,
       "blocked": 0,
       "eta": "30109保留24槽；mainskill接管后目标32槽，旧训练进程保留；每策略2M步和312终档回合",
@@ -672,13 +672,13 @@
       "task": "完整 Navigation / Velocity / Run 向量系列：77任务 × 8设置 × 3种子",
       "status": "run",
       "n": 1848,
-      "done": 104,
+      "done": 108,
       "running": 54,
-      "pending": 1690,
+      "pending": 1686,
       "failed": 0,
       "blocked": 0,
       "eta": "每策略2M训练步及312终档回合；各机器固定队列逐项接续",
-      "note": "30109/5090/阿里云分别624/624/600个任务单元；已观测训练步数267,380,000。观测2026-09-11T00:28:46.993093+08:00；失败保留，整基准验收仍未通过。"
+      "note": "30109/5090/阿里云分别624/624/600个任务单元；已观测训练步数279,100,000。观测2026-09-11T00:53:20.336847+08:00；失败保留，整基准验收仍未通过。"
     },
     {
       "goal": "G1–G5",
@@ -705,8 +705,8 @@
       "task": "主策略成本反馈 × 硬约束容差（12个新实验）",
       "status": "run",
       "n": 12,
-      "done": 2,
-      "running": 10,
+      "done": 4,
+      "running": 8,
       "pending": 0,
       "host": "30109",
       "eta": "2M步/策略；3×104最终评测",
@@ -979,7 +979,7 @@
   ],
   "changelog": [
     {
-      "time": "09-11 00:30",
+      "time": "09-11 00:53",
       "text": "五目标卡片、焦点、队列改为由 sotd_gap_plan.py 从收割表实时生成（差距 / 原因 / 解决办法 / 预计）；新增 sotd_gap_plan.json 与 sotd_gap_plan.md。"
     },
     {
@@ -1016,8 +1016,8 @@
     "sotd_pg2_bridge_epsilon.png"
   ],
   "fleet": {
-    "observed": "2026-09-11T00:29:59+08:00",
-    "observed_unix": 1789057799.0307086,
+    "observed": "2026-09-11T00:52:59+08:00",
+    "observed_unix": 1789059179.236154,
     "next_check_seconds": 60,
     "window_seconds": 300,
     "hosts": {
@@ -1025,28 +1025,28 @@
         "status": "connected",
         "effective_cores": 96.0,
         "load": [
-          86.51025390625,
-          90.8115234375,
-          93.53173828125
+          81.89892578125,
+          83.6669921875,
+          86.5400390625
         ],
-        "mem_available_gib": 352.83417892456055,
+        "mem_available_gib": 339.32983779907227,
         "disks_free_gib": {
-          "root": 1.878,
+          "root": 1.89,
           "shm": 5.118,
-          "workspace": 122.468
+          "workspace": 122.394
         },
         "process_counts": {
           "unity": 0,
           "keeper": 0,
           "watcher": 11,
-          "train": 54,
-          "train_total": 54,
+          "train": 50,
+          "train_total": 50,
           "train_paused": 0,
           "train_partial_paused": 0,
           "train_defunct": 0,
           "train_unknown": 0,
-          "eval": 8,
-          "eval_total": 8,
+          "eval": 10,
+          "eval_total": 10,
           "eval_paused": 0,
           "eval_partial_paused": 0,
           "eval_defunct": 0,
@@ -1056,11 +1056,11 @@
           {
             "index": 0,
             "name": "NVIDIA A100-SXM4-80GB",
-            "util": 28.0,
+            "util": 18.0,
             "used_mib": 1143.0,
             "total_mib": 81920.0,
-            "mean_util": 74.5,
-            "max_util": 100.0,
+            "mean_util": 23.5,
+            "max_util": 33.0,
             "allowed": true,
             "candidate_for_preflight": false,
             "note": "Allocation still requires process/session, dependency and live-memory checks."
@@ -1068,11 +1068,11 @@
           {
             "index": 1,
             "name": "NVIDIA A100-SXM4-80GB",
-            "util": 19.0,
+            "util": 25.0,
             "used_mib": 2032.0,
             "total_mib": 81920.0,
-            "mean_util": 29.67,
-            "max_util": 41.0,
+            "mean_util": 23.67,
+            "max_util": 30.0,
             "allowed": true,
             "candidate_for_preflight": false,
             "note": "Allocation still requires process/session, dependency and live-memory checks."
@@ -1080,11 +1080,11 @@
           {
             "index": 2,
             "name": "NVIDIA A100-SXM4-80GB",
-            "util": 9.0,
+            "util": 31.0,
             "used_mib": 14873.0,
             "total_mib": 81920.0,
-            "mean_util": 15.83,
-            "max_util": 24.0,
+            "mean_util": 24.0,
+            "max_util": 35.0,
             "allowed": true,
             "candidate_for_preflight": false,
             "note": "Allocation still requires process/session, dependency and live-memory checks."
@@ -1092,11 +1092,11 @@
           {
             "index": 3,
             "name": "NVIDIA A100-SXM4-80GB",
-            "util": 27.0,
+            "util": 12.0,
             "used_mib": 1145.0,
             "total_mib": 81920.0,
-            "mean_util": 73.33,
-            "max_util": 100.0,
+            "mean_util": 25.33,
+            "max_util": 31.0,
             "allowed": true,
             "candidate_for_preflight": false,
             "note": "Allocation still requires process/session, dependency and live-memory checks."
@@ -1116,11 +1116,11 @@
           {
             "index": 5,
             "name": "NVIDIA A100-SXM4-80GB",
-            "util": 52.0,
-            "used_mib": 3173.0,
+            "util": 34.0,
+            "used_mib": 21760.0,
             "total_mib": 81920.0,
-            "mean_util": 90.5,
-            "max_util": 100.0,
+            "mean_util": 42.0,
+            "max_util": 53.0,
             "allowed": true,
             "candidate_for_preflight": false,
             "note": "Allocation still requires process/session, dependency and live-memory checks."
@@ -1143,19 +1143,19 @@
             "util": 0.0,
             "used_mib": 1971.0,
             "total_mib": 81920.0,
-            "mean_util": 62.17,
-            "max_util": 100.0,
+            "mean_util": 0.0,
+            "max_util": 0.0,
             "allowed": true,
             "candidate_for_preflight": false,
             "note": "Allocation still requires process/session, dependency and live-memory checks."
           }
         ],
         "samples": 6,
-        "span_seconds": 299,
+        "span_seconds": 300,
         "window_ready": true,
         "training_by_line": {
           "safeot_dual": {
-            "active": 54,
+            "active": 50,
             "paused": 0,
             "partial_paused": 0,
             "defunct": 0,
@@ -1168,28 +1168,28 @@
         "status": "connected",
         "effective_cores": 96.0,
         "load": [
-          88.759765625,
-          88.2705078125,
-          88.12744140625
+          86.5859375,
+          85.72021484375,
+          86.6123046875
         ],
-        "mem_available_gib": 392.1670684814453,
+        "mem_available_gib": 394.1070213317871,
         "disks_free_gib": {
-          "root": 49.415,
+          "root": 49.414,
           "shm": 477.482,
-          "workspace": 142.55
+          "workspace": 142.523
         },
         "process_counts": {
           "unity": 35,
           "keeper": 0,
           "watcher": 1,
-          "train": 47,
-          "train_total": 47,
+          "train": 46,
+          "train_total": 46,
           "train_paused": 0,
           "train_partial_paused": 0,
           "train_defunct": 0,
           "train_unknown": 0,
-          "eval": 2,
-          "eval_total": 2,
+          "eval": 3,
+          "eval_total": 3,
           "eval_paused": 0,
           "eval_partial_paused": 0,
           "eval_defunct": 0,
@@ -1199,11 +1199,11 @@
           {
             "index": 0,
             "name": "NVIDIA A100-SXM4-80GB",
-            "util": 50.0,
-            "used_mib": 73440.0,
+            "util": 30.0,
+            "used_mib": 73854.0,
             "total_mib": 81920.0,
-            "mean_util": 17.17,
-            "max_util": 50.0,
+            "mean_util": 25.5,
+            "max_util": 44.0,
             "allowed": true,
             "candidate_for_preflight": false,
             "note": "Allocation still requires process/session, dependency and live-memory checks."
@@ -1211,11 +1211,11 @@
           {
             "index": 1,
             "name": "NVIDIA A100-SXM4-80GB",
-            "util": 86.0,
+            "util": 91.0,
             "used_mib": 8335.0,
             "total_mib": 81920.0,
-            "mean_util": 84.83,
-            "max_util": 87.0,
+            "mean_util": 82.33,
+            "max_util": 91.0,
             "allowed": true,
             "candidate_for_preflight": false,
             "note": "Allocation still requires process/session, dependency and live-memory checks."
@@ -1223,11 +1223,11 @@
           {
             "index": 2,
             "name": "NVIDIA A100-SXM4-80GB",
-            "util": 39.0,
-            "used_mib": 31423.0,
+            "util": 0.0,
+            "used_mib": 30419.0,
             "total_mib": 81920.0,
-            "mean_util": 13.83,
-            "max_util": 39.0,
+            "mean_util": 1.0,
+            "max_util": 6.0,
             "allowed": true,
             "candidate_for_preflight": false,
             "note": "Allocation still requires process/session, dependency and live-memory checks."
@@ -1235,11 +1235,11 @@
           {
             "index": 3,
             "name": "NVIDIA A100-SXM4-80GB",
-            "util": 20.0,
-            "used_mib": 74558.0,
+            "util": 0.0,
+            "used_mib": 74987.0,
             "total_mib": 81920.0,
-            "mean_util": 12.83,
-            "max_util": 22.0,
+            "mean_util": 36.83,
+            "max_util": 98.0,
             "allowed": true,
             "candidate_for_preflight": false,
             "note": "Allocation still requires process/session, dependency and live-memory checks."
@@ -1247,11 +1247,11 @@
           {
             "index": 4,
             "name": "NVIDIA A100-SXM4-80GB",
-            "util": 5.0,
+            "util": 0.0,
             "used_mib": 41944.0,
             "total_mib": 81920.0,
-            "mean_util": 38.5,
-            "max_util": 100.0,
+            "mean_util": 13.33,
+            "max_util": 33.0,
             "allowed": true,
             "candidate_for_preflight": false,
             "note": "Allocation still requires process/session, dependency and live-memory checks."
@@ -1259,11 +1259,11 @@
           {
             "index": 5,
             "name": "NVIDIA A100-SXM4-80GB",
-            "util": 32.0,
-            "used_mib": 68097.0,
+            "util": 92.0,
+            "used_mib": 68342.0,
             "total_mib": 81920.0,
-            "mean_util": 23.17,
-            "max_util": 45.0,
+            "mean_util": 32.67,
+            "max_util": 92.0,
             "allowed": true,
             "candidate_for_preflight": false,
             "note": "Allocation still requires process/session, dependency and live-memory checks."
@@ -1294,7 +1294,7 @@
           }
         ],
         "samples": 6,
-        "span_seconds": 300,
+        "span_seconds": 302,
         "window_ready": true,
         "training_by_line": {
           "vla": {
@@ -1306,7 +1306,7 @@
             "paused_runs": []
           },
           "safeot_dual": {
-            "active": 43,
+            "active": 42,
             "paused": 0,
             "partial_paused": 0,
             "defunct": 0,
@@ -1319,28 +1319,28 @@
         "status": "connected",
         "effective_cores": 48,
         "load": [
-          20.17529296875,
-          19.82275390625,
-          22.5966796875
+          18.658203125,
+          19.54345703125,
+          20.46826171875
         ],
-        "mem_available_gib": 170.0333595275879,
+        "mem_available_gib": 172.4678726196289,
         "disks_free_gib": {
-          "root": 196.089,
-          "shm": 125.419,
-          "workspace": 333.781
+          "root": 195.948,
+          "shm": 125.417,
+          "workspace": 331.364
         },
         "process_counts": {
           "unity": 0,
           "keeper": 0,
-          "watcher": 1,
-          "train": 12,
-          "train_total": 12,
+          "watcher": 0,
+          "train": 10,
+          "train_total": 10,
           "train_paused": 0,
           "train_partial_paused": 0,
           "train_defunct": 0,
           "train_unknown": 0,
-          "eval": 0,
-          "eval_total": 0,
+          "eval": 2,
+          "eval_total": 2,
           "eval_paused": 0,
           "eval_partial_paused": 0,
           "eval_defunct": 0,
@@ -1350,11 +1350,11 @@
           {
             "index": 0,
             "name": "NVIDIA GeForce RTX 5090",
-            "util": 49.0,
-            "used_mib": 7066.0,
+            "util": 55.0,
+            "used_mib": 7065.0,
             "total_mib": 32607.0,
-            "mean_util": 47.17,
-            "max_util": 50.0,
+            "mean_util": 49.83,
+            "max_util": 58.0,
             "allowed": true,
             "candidate_for_preflight": false,
             "note": "Allocation still requires process/session, dependency and live-memory checks."
@@ -1362,11 +1362,11 @@
           {
             "index": 1,
             "name": "NVIDIA GeForce RTX 5090",
-            "util": 1.0,
-            "used_mib": 5657.0,
+            "util": 97.0,
+            "used_mib": 21008.0,
             "total_mib": 32607.0,
-            "mean_util": 5.83,
-            "max_util": 30.0,
+            "mean_util": 94.5,
+            "max_util": 99.0,
             "allowed": true,
             "candidate_for_preflight": false,
             "note": "Allocation still requires process/session, dependency and live-memory checks."
@@ -1377,7 +1377,7 @@
         "window_ready": true,
         "training_by_line": {
           "safeot_dual": {
-            "active": 12,
+            "active": 10,
             "paused": 0,
             "partial_paused": 0,
             "defunct": 0,
@@ -1390,15 +1390,15 @@
         "status": "connected",
         "effective_cores": 26,
         "load": [
-          8.83642578125,
-          31.287109375,
-          35.1826171875
+          34.9052734375,
+          44.0966796875,
+          38.9521484375
         ],
-        "mem_available_gib": 281.99199295043945,
+        "mem_available_gib": 280.5415573120117,
         "disks_free_gib": {
-          "root": 5.318,
-          "shm": 324.438,
-          "workspace": 729959.23
+          "root": 5.317,
+          "shm": 324.437,
+          "workspace": 729548.742
         },
         "process_counts": {
           "unity": 0,
@@ -1422,10 +1422,10 @@
             "index": 0,
             "name": "NVIDIA A100-SXM4-80GB",
             "util": 3.0,
-            "used_mib": 15921.0,
+            "used_mib": 16228.0,
             "total_mib": 81920.0,
-            "mean_util": 4.0,
-            "max_util": 5.0,
+            "mean_util": 3.33,
+            "max_util": 4.0,
             "allowed": true,
             "candidate_for_preflight": false,
             "note": "Allocation still requires process/session, dependency and live-memory checks."
@@ -1433,18 +1433,18 @@
           {
             "index": 1,
             "name": "NVIDIA A100-SXM4-80GB",
-            "util": 13.0,
-            "used_mib": 20084.0,
+            "util": 23.0,
+            "used_mib": 19639.0,
             "total_mib": 81920.0,
-            "mean_util": 20.17,
-            "max_util": 25.0,
+            "mean_util": 19.83,
+            "max_util": 23.0,
             "allowed": true,
             "candidate_for_preflight": false,
             "note": "Allocation still requires process/session, dependency and live-memory checks."
           }
         ],
         "samples": 6,
-        "span_seconds": 300,
+        "span_seconds": 301,
         "window_ready": true,
         "training_by_line": {
           "safeot_dual": {
@@ -1542,28 +1542,28 @@
         "status": "connected",
         "effective_cores": 184,
         "load": [
-          161.046875,
-          162.9462890625,
-          162.48876953125
+          162.34765625,
+          162.9228515625,
+          162.923828125
         ],
-        "mem_available_gib": 465.8819694519043,
+        "mem_available_gib": 469.064640045166,
         "disks_free_gib": {
-          "root": 4988.651,
-          "shm": 676.869,
-          "workspace": 7309.254
+          "root": 4988.65,
+          "shm": 677.043,
+          "workspace": 7309.051
         },
         "process_counts": {
           "unity": 2,
           "keeper": 0,
           "watcher": 0,
-          "train": 146,
-          "train_total": 146,
+          "train": 142,
+          "train_total": 142,
           "train_paused": 0,
           "train_partial_paused": 0,
           "train_defunct": 0,
           "train_unknown": 0,
-          "eval": 6,
-          "eval_total": 6,
+          "eval": 10,
+          "eval_total": 10,
           "eval_paused": 0,
           "eval_partial_paused": 0,
           "eval_defunct": 0,
@@ -1600,7 +1600,7 @@
             "util": 100.0,
             "used_mib": 37765.0,
             "total_mib": 98304.0,
-            "mean_util": 100.0,
+            "mean_util": 83.33,
             "max_util": 100.0,
             "allowed": true,
             "candidate_for_preflight": false,
@@ -1612,7 +1612,7 @@
             "util": 100.0,
             "used_mib": 37845.0,
             "total_mib": 98304.0,
-            "mean_util": 100.0,
+            "mean_util": 88.67,
             "max_util": 100.0,
             "allowed": true,
             "candidate_for_preflight": false,
@@ -1764,11 +1764,11 @@
           }
         ],
         "samples": 6,
-        "span_seconds": 302,
+        "span_seconds": 300,
         "window_ready": true,
         "training_by_line": {
           "safeot_dual": {
-            "active": 146,
+            "active": 142,
             "paused": 0,
             "partial_paused": 0,
             "defunct": 0,
@@ -1822,28 +1822,28 @@
     },
     "progress": {
       "vla_training": {
-        "observed": "2026-09-10T16:26:48.267129+00:00",
+        "observed": "2026-09-10T16:48:43.330114+00:00",
         "status": "full",
-        "observation_age_seconds": 15,
+        "observation_age_seconds": 131,
         "terminal_evidence": false,
         "runs": {
           "full/A/s1": {
-            "steps": 1219584,
+            "steps": 1240064,
             "state": "training",
             "live": true
           },
           "full/B/s1": {
-            "steps": 710656,
+            "steps": 734208,
             "state": "training",
             "live": true
           },
           "full/A/s2": {
-            "steps": 1122304,
+            "steps": 1137664,
             "state": "training",
             "live": true
           },
           "full/B/s2": {
-            "steps": 1400832,
+            "steps": 1423360,
             "state": "training",
             "live": true
           }
@@ -1854,7 +1854,7 @@
         "status": "blocked",
         "completed_episodes": 396,
         "completed_pairs": 196,
-        "observation_age_seconds": 67303,
+        "observation_age_seconds": 68683,
         "terminal_evidence": true,
         "failed_jobs": [
           "A_103",
@@ -1864,21 +1864,21 @@
         ]
       },
       "repair_queue": {
-        "observed": "2026-09-11T00:26:50+08:00",
+        "observed": "2026-09-11T00:51:50+08:00",
         "overall": "warning",
-        "observation_age_seconds": 188,
+        "observation_age_seconds": 68,
         "terminal_evidence": false
       }
     },
     "budget_feedback": {
       "status": "running",
       "started": "2026-09-10T15:35:51.447622+08:00",
-      "updated": "2026-09-11T00:29:17.244193+08:00",
+      "updated": "2026-09-11T00:48:58.782358+08:00",
       "total": 12,
-      "completed": 2,
+      "completed": 4,
       "failed": 0,
       "protocol_sha256": "6fef896c16565741b588579a449510a0c549325b4fe07e8532d0780c8f6acd1f",
-      "observed": "2026-09-11T00:29:59.034516+08:00",
+      "observed": "2026-09-11T00:52:59.239806+08:00",
       "host": "30109",
       "backend": "JAX GPU",
       "max_parallel": 12,
@@ -1939,7 +1939,7 @@
           "seed": 1,
           "status": "training",
           "started": "2026-09-10T15:40:01.673700+08:00",
-          "sample_steps": 1690000,
+          "sample_steps": 1750000,
           "epsilon": 0.1,
           "budget_estimator": "mixture"
         },
@@ -1950,7 +1950,7 @@
           "seed": 1,
           "status": "training",
           "started": "2026-09-10T15:40:06.678206+08:00",
-          "sample_steps": 1710000,
+          "sample_steps": 1780000,
           "epsilon": 0.1,
           "budget_estimator": "primal"
         },
@@ -1961,7 +1961,7 @@
           "seed": 1,
           "status": "training",
           "started": "2026-09-10T15:40:11.684237+08:00",
-          "sample_steps": 1410000,
+          "sample_steps": 1460000,
           "epsilon": 0.02,
           "budget_estimator": "mixture"
         },
@@ -1972,7 +1972,7 @@
           "seed": 1,
           "status": "training",
           "started": "2026-09-10T15:40:16.689341+08:00",
-          "sample_steps": 1880000,
+          "sample_steps": 1960000,
           "epsilon": 0.02,
           "budget_estimator": "primal"
         },
@@ -1992,9 +1992,12 @@
           "soft_mode": "lp",
           "eps": 1,
           "seed": 2,
-          "status": "evaluating",
+          "status": "complete",
           "started": "2026-09-10T15:40:26.690384+08:00",
+          "finished": "2026-09-11T00:47:40.659510+08:00",
           "sample_steps": 2000000,
+          "evaluation_episodes": 312,
+          "final_eval_sha256": "c2507d5bff5da8c737a571bc933bef224f00d69da89c63ccf06ba06cbac94a81",
           "epsilon": 0.1,
           "budget_estimator": "primal"
         },
@@ -2017,9 +2020,12 @@
           "soft_mode": "lp",
           "eps": 1,
           "seed": 2,
-          "status": "evaluating",
+          "status": "complete",
           "started": "2026-09-10T15:40:36.718224+08:00",
+          "finished": "2026-09-11T00:43:37.528211+08:00",
           "sample_steps": 2000000,
+          "evaluation_episodes": 312,
+          "final_eval_sha256": "9fbc1dfe542ea3b14c79517e37d2da5b055e4cda601b99c1b158ab3b6f06fbe4",
           "epsilon": 0.02,
           "budget_estimator": "primal"
         },
@@ -2042,9 +2048,9 @@
           "soft_mode": "lp",
           "eps": 1,
           "seed": 3,
-          "status": "training",
+          "status": "evaluating",
           "started": "2026-09-10T15:40:46.728280+08:00",
-          "sample_steps": 1920000,
+          "sample_steps": 2000000,
           "epsilon": 0.1,
           "budget_estimator": "primal"
         },
@@ -2066,14 +2072,14 @@
           "seed": 3,
           "status": "training",
           "started": "2026-09-10T15:40:56.719011+08:00",
-          "sample_steps": 1860000,
+          "sample_steps": 1940000,
           "epsilon": 0.02,
           "budget_estimator": "primal"
         }
       },
       "queue_identity_alive": true,
       "operational_gate": "passed",
-      "formal_running": 10,
+      "formal_running": 8,
       "formal_pending": 0,
       "protocol": {
         "task": "SafetyCarGoal2-v0",
@@ -2232,7 +2238,7 @@
       }
     },
     "vla_failure_diagnosis": {
-      "observed": "2026-09-11T00:29:59.042438+08:00",
+      "observed": "2026-09-11T00:52:59.246645+08:00",
       "failed_jobs": 4,
       "rows": [
         {
@@ -2492,7 +2498,7 @@
       "completed": 8,
       "failed": 0,
       "protocol_sha256": "10f575603d27aa7ede3addbcddefc44a3ad2bfbb28fc297e7c426bf7ea603359",
-      "observed": "2026-09-11T00:30:02.452363+08:00",
+      "observed": "2026-09-11T00:53:01.743948+08:00",
       "jobs": {
         "smoke_fixed": {
           "margin_mode": "approach",
@@ -2611,7 +2617,7 @@
           "status": "training",
           "gpu": 3,
           "started": "2026-09-10T19:45:53.382535+08:00",
-          "sample_steps": 930000
+          "sample_steps": 1010000
         },
         "distance_fixed_s3": {
           "margin_mode": "distance",
@@ -2620,7 +2626,7 @@
           "status": "training",
           "gpu": 0,
           "started": "2026-09-10T20:01:19.884169+08:00",
-          "sample_steps": 890000
+          "sample_steps": 980000
         },
         "approach_fixed_s3": {
           "margin_mode": "approach",
@@ -2629,7 +2635,7 @@
           "status": "training",
           "gpu": 0,
           "started": "2026-09-10T20:03:32.993978+08:00",
-          "sample_steps": 870000
+          "sample_steps": 960000
         },
         "distance_lp_s3": {
           "margin_mode": "distance",
@@ -2638,7 +2644,7 @@
           "status": "training",
           "gpu": 3,
           "started": "2026-09-10T21:54:52.048741+08:00",
-          "sample_steps": 410000
+          "sample_steps": 490000
         }
       },
       "queue_identity_alive": true,
@@ -2716,7 +2722,7 @@
       "completed": 24,
       "failed": 0,
       "protocol_sha256": "bd73daf512bfd14456543e32c3d6168aee44f8ea352e56c47868bb8d30b0b1f3",
-      "observed": "2026-09-10T16:30:03.209794+00:00",
+      "observed": "2026-09-10T16:53:02.517284+00:00",
       "host": "aliyun",
       "backend": "jax_cpu",
       "max_parallel": 24,
@@ -3181,7 +3187,7 @@
       "completed": 9,
       "failed": 0,
       "protocol_sha256": "6b42a9e95a87645b0adb652046ed5a7fe5107e95ae7f39506b3e447bb805bfed",
-      "observed": "2026-09-10T16:30:04.313935+00:00",
+      "observed": "2026-09-10T16:53:03.623155+00:00",
       "host": "30314",
       "backend": "jax_cuda",
       "max_parallel": 9,
@@ -3374,7 +3380,7 @@
           "seed": 2,
           "status": "training",
           "started": "2026-09-10T07:42:46.455783+00:00",
-          "sample_steps": 1640000
+          "sample_steps": 1710000
         },
         "approach_lp_e0p1_s3": {
           "margin_mode": "approach",
@@ -3383,7 +3389,7 @@
           "seed": 3,
           "status": "training",
           "started": "2026-09-10T07:44:20.687917+00:00",
-          "sample_steps": 1630000
+          "sample_steps": 1700000
         },
         "distance_lp_e0p1_s3": {
           "margin_mode": "distance",
@@ -3392,7 +3398,7 @@
           "seed": 3,
           "status": "training",
           "started": "2026-09-10T07:44:55.504501+00:00",
-          "sample_steps": 1630000
+          "sample_steps": 1700000
         },
         "distance_lp_e1_s3": {
           "margin_mode": "distance",
@@ -3401,7 +3407,7 @@
           "seed": 3,
           "status": "training",
           "started": "2026-09-10T07:45:12.136182+00:00",
-          "sample_steps": 1630000
+          "sample_steps": 1700000
         },
         "approach_lp_e1_s3": {
           "margin_mode": "approach",
@@ -3410,7 +3416,7 @@
           "seed": 3,
           "status": "training",
           "started": "2026-09-10T07:45:19.249633+00:00",
-          "sample_steps": 1630000
+          "sample_steps": 1690000
         },
         "distance_lp_e3_s3": {
           "margin_mode": "distance",
@@ -3419,7 +3425,7 @@
           "seed": 3,
           "status": "training",
           "started": "2026-09-10T07:45:41.042650+00:00",
-          "sample_steps": 1620000
+          "sample_steps": 1690000
         },
         "approach_lp_e1_s2": {
           "margin_mode": "approach",
@@ -3428,7 +3434,7 @@
           "seed": 2,
           "status": "training",
           "started": "2026-09-10T07:47:21.596322+00:00",
-          "sample_steps": 1880000
+          "sample_steps": 1960000
         },
         "approach_lp_e0p1_s2": {
           "margin_mode": "approach",
@@ -3437,7 +3443,7 @@
           "seed": 2,
           "status": "training",
           "started": "2026-09-10T07:49:37.570185+00:00",
-          "sample_steps": 1840000
+          "sample_steps": 1900000
         },
         "approach_lp_e3_s3": {
           "margin_mode": "approach",
@@ -3446,7 +3452,7 @@
           "seed": 3,
           "status": "training",
           "started": "2026-09-10T07:52:18.107339+00:00",
-          "sample_steps": 1900000
+          "sample_steps": 1980000
         }
       },
       "queue_identity_alive": true,
@@ -4198,25 +4204,25 @@
     "backlog": "sotd_benchmark_backlog.csv"
   },
   "full_native_queue": {
-    "updated": "2026-09-11T00:28:46.993093+08:00",
+    "updated": "2026-09-11T00:53:20.336847+08:00",
     "task_count": 77,
     "total": 1848,
-    "completed": 104,
+    "completed": 108,
     "running": 54,
     "live_running": 54,
     "failed": 0,
     "blocked": 0,
-    "pending": 1690,
+    "pending": 1686,
     "hosts": {
       "30109": {
         "status": "running",
-        "observed": "2026-09-11T00:21:20.475484+08:00",
-        "process_observed": "2026-09-11T00:28:46.669611+08:00",
+        "observed": "2026-09-11T00:50:06.855561+08:00",
+        "process_observed": "2026-09-11T00:53:19.816263+08:00",
         "fresh_observation": true,
         "controller_alive": true,
         "tasks": 26,
         "jobs": 624,
-        "completed": 19,
+        "completed": 22,
         "running": 18,
         "live_running": 18,
         "probes_passed": 26,
@@ -4269,8 +4275,8 @@
       },
       "5090": {
         "status": "running",
-        "observed": "2026-09-11T00:23:30.243085+08:00",
-        "process_observed": "2026-09-11T00:28:45.867753+08:00",
+        "observed": "2026-09-11T00:45:30.809146+08:00",
+        "process_observed": "2026-09-11T00:53:18.711016+08:00",
         "fresh_observation": true,
         "controller_alive": true,
         "tasks": 26,
@@ -4328,13 +4334,13 @@
       },
       "aliyun": {
         "status": "running",
-        "observed": "2026-09-10T16:21:46.276160+00:00",
-        "process_observed": "2026-09-10T16:28:46.607080+00:00",
+        "observed": "2026-09-10T16:31:18.590012+00:00",
+        "process_observed": "2026-09-10T16:53:19.729620+00:00",
         "fresh_observation": true,
         "controller_alive": true,
         "tasks": 25,
         "jobs": 600,
-        "completed": 50,
+        "completed": 51,
         "running": 24,
         "live_running": 24,
         "probes_passed": 25,
@@ -4396,24 +4402,24 @@
     "whole_benchmark_complete": false
   },
   "full_native_ppo": {
-    "updated": "2026-09-11T00:29:27.997706+08:00",
+    "updated": "2026-09-11T00:50:39.489102+08:00",
     "total": 1848,
-    "completed": 55,
+    "completed": 57,
     "running": 56,
     "live_running": 56,
     "failed": 0,
     "blocked": 0,
-    "pending": 1737,
+    "pending": 1735,
     "hosts": {
       "30109": {
         "status": "running",
-        "observed": "2026-09-11T00:28:02.174487+08:00",
-        "process_observed": "2026-09-11T00:29:27.740649+08:00",
+        "observed": "2026-09-11T00:47:07.579946+08:00",
+        "process_observed": "2026-09-11T00:50:39.300775+08:00",
         "fresh_observation": true,
         "controller_alive": true,
         "tasks": 39,
         "jobs": 936,
-        "completed": 25,
+        "completed": 26,
         "running": 24,
         "live_running": 24,
         "probes_passed": 39,
@@ -4466,13 +4472,13 @@
       },
       "30314": {
         "status": "running",
-        "observed": "2026-09-10T16:25:32.007573+00:00",
-        "process_observed": "2026-09-10T16:29:27.679105+00:00",
+        "observed": "2026-09-10T16:42:16.848427+00:00",
+        "process_observed": "2026-09-10T16:50:39.250420+00:00",
         "fresh_observation": true,
         "controller_alive": true,
         "tasks": 38,
         "jobs": 912,
-        "completed": 30,
+        "completed": 31,
         "running": 32,
         "live_running": 32,
         "probes_passed": 38,
@@ -4525,22 +4531,22 @@
       }
     },
     "protocol_sha256": "b01f061faf650c89d3d9d97215a62bde603c0a8cbc8780000b630a9b75430dea",
-    "observed_training_steps": 170220000
+    "observed_training_steps": 180180000
   },
   "full_vision_vector": {
-    "updated": "2026-09-11T00:28:46.067955+08:00",
+    "updated": "2026-09-11T00:53:21.445694+08:00",
     "total": 2520,
-    "completed": 21,
+    "completed": 26,
     "running": 138,
     "live_running": 138,
     "failed": 2,
     "blocked": 0,
-    "pending": 2359,
+    "pending": 2354,
     "hosts": {
       "30109": {
         "status": "running",
         "observed": "2026-09-10T23:28:42.103716+08:00",
-        "process_observed": "2026-09-11T00:28:45.866615+08:00",
+        "process_observed": "2026-09-11T00:53:21.165912+08:00",
         "fresh_observation": true,
         "controller_alive": true,
         "tasks": 15,
@@ -4599,7 +4605,7 @@
       "30314": {
         "status": "running",
         "observed": "2026-09-10T15:44:40.698603+00:00",
-        "process_observed": "2026-09-10T16:28:42.813833+00:00",
+        "process_observed": "2026-09-10T16:53:18.193476+00:00",
         "fresh_observation": true,
         "controller_alive": true,
         "tasks": 10,
@@ -4657,13 +4663,13 @@
       },
       "aliyun": {
         "status": "running",
-        "observed": "2026-09-10T16:27:13.692656+00:00",
-        "process_observed": "2026-09-10T16:28:45.795557+00:00",
+        "observed": "2026-09-10T16:53:15.009078+00:00",
+        "process_observed": "2026-09-10T16:53:21.081902+00:00",
         "fresh_observation": true,
         "controller_alive": true,
         "tasks": 80,
         "jobs": 1920,
-        "completed": 20,
+        "completed": 25,
         "running": 128,
         "live_running": 128,
         "probes_passed": 80,
@@ -4721,7 +4727,7 @@
     "safety_gymnasium": {
       "required_tracks": 402,
       "frozen_tracks": 182,
-      "active_tasks_now": 151,
+      "active_tasks_now": 152,
       "complete_frozen_matrix_tasks": 0,
       "unfrozen_tracks": 220,
       "groups": [
@@ -4783,7 +4789,7 @@
           "group": "Safe Velocity",
           "required": 12,
           "frozen": 12,
-          "active_now": 1,
+          "active_now": 2,
           "complete_frozen_matrix": 0,
           "with_failed_or_blocked_cells": 0,
           "unfrozen": 0
@@ -5031,20 +5037,20 @@
       "note": "Existing ObjectNav development evaluation is separate from whole-suite matched-seed acceptance."
     },
     "cohort_cells": 6216,
-    "completed_cells": 180,
+    "completed_cells": 191,
     "live_workers": 248,
     "whole_benchmark_complete": false,
     "scientific_goal_acceptance": "open",
     "counting_note": "Frozen means a protocol and queue exist, not that every task is training now. Completion here covers frozen cells only; SOTA and full benchmark acceptance remain separate.",
-    "updated": "2026-09-11T00:30:04+08:00",
+    "updated": "2026-09-11T00:53:25+08:00",
     "cohort_observations": {
-      "T1484-full-native-vector-20260910-v2": "2026-09-11T00:28:46.993093+08:00",
-      "T1484-full-native-ppo-20260910": "2026-09-11T00:29:27.997706+08:00",
-      "T1484-full-vision-vector-20260910": "2026-09-11T00:28:46.067955+08:00"
+      "T1484-full-native-vector-20260910-v2": "2026-09-11T00:53:20.336847+08:00",
+      "T1484-full-native-ppo-20260910": "2026-09-11T00:50:39.489102+08:00",
+      "T1484-full-vision-vector-20260910": "2026-09-11T00:53:21.445694+08:00"
     }
   },
   "queue_acceleration": {
-    "updated": "2026-09-11T00:30:05.623505+08:00",
+    "updated": "2026-09-11T00:51:10.529054+08:00",
     "changes": [
       {
         "at": "2026-09-10T14:57:14.829442+00:00",
@@ -5058,13 +5064,13 @@
         "cohort": "full_vision_vector_20260910",
         "current_host": {
           "status": "running",
-          "observed": "2026-09-10T16:27:13.692656+00:00",
-          "process_observed": "2026-09-10T16:28:45.795557+00:00",
+          "observed": "2026-09-10T16:53:15.009078+00:00",
+          "process_observed": "2026-09-10T16:53:21.081902+00:00",
           "fresh_observation": true,
           "controller_alive": true,
           "tasks": 80,
           "jobs": 1920,
-          "completed": 20,
+          "completed": 25,
           "running": 128,
           "live_running": 128,
           "probes_passed": 80,
@@ -5129,13 +5135,13 @@
         "cohort": "full_native_ppo_20260910",
         "current_host": {
           "status": "running",
-          "observed": "2026-09-10T16:25:32.007573+00:00",
-          "process_observed": "2026-09-10T16:29:27.679105+00:00",
+          "observed": "2026-09-10T16:42:16.848427+00:00",
+          "process_observed": "2026-09-10T16:50:39.250420+00:00",
           "fresh_observation": true,
           "controller_alive": true,
           "tasks": 38,
           "jobs": 912,
-          "completed": 30,
+          "completed": 31,
           "running": 32,
           "live_running": 32,
           "probes_passed": 38,
@@ -5198,7 +5204,7 @@
     "scientific_goal_acceptance": "open",
     "actual_speedup": "unmeasured; added concurrency is not a measured throughput ratio",
     "formal_live_total": 248,
-    "completed_cells": 180,
+    "completed_cells": 191,
     "wall_budget_amendment": {
       "observed": "2026-09-10T23:27:04.411539+08:00",
       "reason": "Observed slow native FormulaOne physics exceeds generic wall-clock watchdog despite steady progress.",
@@ -5303,7 +5309,7 @@
   },
   "pixel_preflight": {
     "started": "2026-09-10T15:05:06.794074+00:00",
-    "status": "running",
+    "status": "complete",
     "total": 170,
     "rows": {
       "SafetyAntBuildingButton0Vision-v0": {
@@ -26682,110 +26688,1742 @@
       },
       "SafetyRacecarButton1Vision-v0": {
         "task": "SafetyRacecarButton1Vision-v0",
-        "status": "running"
+        "status": "passed",
+        "observed": "2026-09-10T16:30:03.186217+00:00",
+        "observations": {
+          "accelerometer": {
+            "shape": [
+              3
+            ],
+            "dtype": "float64"
+          },
+          "velocimeter": {
+            "shape": [
+              3
+            ],
+            "dtype": "float64"
+          },
+          "gyro": {
+            "shape": [
+              3
+            ],
+            "dtype": "float64"
+          },
+          "magnetometer": {
+            "shape": [
+              3
+            ],
+            "dtype": "float64"
+          },
+          "buttons_lidar": {
+            "shape": [
+              16
+            ],
+            "dtype": "float64"
+          },
+          "goal_lidar": {
+            "shape": [
+              16
+            ],
+            "dtype": "float64"
+          },
+          "hazards_lidar": {
+            "shape": [
+              16
+            ],
+            "dtype": "float64"
+          },
+          "gremlins_lidar": {
+            "shape": [
+              16
+            ],
+            "dtype": "float64"
+          },
+          "vision": {
+            "shape": [
+              256,
+              256,
+              3
+            ],
+            "dtype": "uint8"
+          }
+        },
+        "action_shape": [
+          2
+        ],
+        "renderer": "NVIDIA A100-SXM4-80GB/PCIe/SSE2",
+        "vendor": "NVIDIA Corporation",
+        "reset_seeds": [
+          891001,
+          891007
+        ],
+        "executed_steps": 16,
+        "image_sha256": [
+          "4c9c5a9d5cdb0ce617d4f4fd30862d055004f1e0663bfbe1120c36c748fec45a",
+          "4b87ef19e3f4792ead7060514e9b056d66ad39d6a1858eec75e7d42b4585ee0e"
+        ],
+        "native_cost_interface": true,
+        "elapsed_seconds": 22.274046352991718,
+        "formal_training": false,
+        "benchmark_evaluation": false,
+        "note": "Official dictionary observation includes RGB and native sensors/lidar. Do not label it RGB-only or drop channels silently.",
+        "exit_code": 0
       },
       "SafetyRacecarButton2Vision-v0": {
         "task": "SafetyRacecarButton2Vision-v0",
-        "status": "pending"
+        "status": "passed",
+        "observed": "2026-09-10T16:30:35.667249+00:00",
+        "observations": {
+          "accelerometer": {
+            "shape": [
+              3
+            ],
+            "dtype": "float64"
+          },
+          "velocimeter": {
+            "shape": [
+              3
+            ],
+            "dtype": "float64"
+          },
+          "gyro": {
+            "shape": [
+              3
+            ],
+            "dtype": "float64"
+          },
+          "magnetometer": {
+            "shape": [
+              3
+            ],
+            "dtype": "float64"
+          },
+          "buttons_lidar": {
+            "shape": [
+              16
+            ],
+            "dtype": "float64"
+          },
+          "goal_lidar": {
+            "shape": [
+              16
+            ],
+            "dtype": "float64"
+          },
+          "hazards_lidar": {
+            "shape": [
+              16
+            ],
+            "dtype": "float64"
+          },
+          "gremlins_lidar": {
+            "shape": [
+              16
+            ],
+            "dtype": "float64"
+          },
+          "vision": {
+            "shape": [
+              256,
+              256,
+              3
+            ],
+            "dtype": "uint8"
+          }
+        },
+        "action_shape": [
+          2
+        ],
+        "renderer": "NVIDIA A100-SXM4-80GB/PCIe/SSE2",
+        "vendor": "NVIDIA Corporation",
+        "reset_seeds": [
+          891001,
+          891007
+        ],
+        "executed_steps": 16,
+        "image_sha256": [
+          "f23467c641f1ec843fc11feb944a0a5fd101d25c1f303857f088cf009086b311",
+          "5d58ec1cf315c9666162354bbcf2e7b07f5d166a3ece35f7cce85470e704173f"
+        ],
+        "native_cost_interface": true,
+        "elapsed_seconds": 22.637499258999014,
+        "formal_training": false,
+        "benchmark_evaluation": false,
+        "note": "Official dictionary observation includes RGB and native sensors/lidar. Do not label it RGB-only or drop channels silently.",
+        "exit_code": 0
       },
       "SafetyRacecarCircle0Vision-v0": {
         "task": "SafetyRacecarCircle0Vision-v0",
-        "status": "pending"
+        "status": "passed",
+        "observed": "2026-09-10T16:31:22.968303+00:00",
+        "observations": {
+          "accelerometer": {
+            "shape": [
+              3
+            ],
+            "dtype": "float64"
+          },
+          "velocimeter": {
+            "shape": [
+              3
+            ],
+            "dtype": "float64"
+          },
+          "gyro": {
+            "shape": [
+              3
+            ],
+            "dtype": "float64"
+          },
+          "magnetometer": {
+            "shape": [
+              3
+            ],
+            "dtype": "float64"
+          },
+          "circle_lidar": {
+            "shape": [
+              16
+            ],
+            "dtype": "float64"
+          },
+          "vision": {
+            "shape": [
+              256,
+              256,
+              3
+            ],
+            "dtype": "uint8"
+          }
+        },
+        "action_shape": [
+          2
+        ],
+        "renderer": "NVIDIA A100-SXM4-80GB/PCIe/SSE2",
+        "vendor": "NVIDIA Corporation",
+        "reset_seeds": [
+          891001,
+          891007
+        ],
+        "executed_steps": 16,
+        "image_sha256": [
+          "502dfa47edced1277241596c5698c09860b3c41ab87c27a3735f079a71a4b4cc",
+          "e1f96ca428b45eef7b725c1cfffde2d077cf61b7079afaba729071d077364448"
+        ],
+        "native_cost_interface": true,
+        "elapsed_seconds": 36.985162036988186,
+        "formal_training": false,
+        "benchmark_evaluation": false,
+        "note": "Official dictionary observation includes RGB and native sensors/lidar. Do not label it RGB-only or drop channels silently.",
+        "exit_code": 0
       },
       "SafetyRacecarCircle1Vision-v0": {
         "task": "SafetyRacecarCircle1Vision-v0",
-        "status": "pending"
+        "status": "passed",
+        "observed": "2026-09-10T16:31:48.988936+00:00",
+        "observations": {
+          "accelerometer": {
+            "shape": [
+              3
+            ],
+            "dtype": "float64"
+          },
+          "velocimeter": {
+            "shape": [
+              3
+            ],
+            "dtype": "float64"
+          },
+          "gyro": {
+            "shape": [
+              3
+            ],
+            "dtype": "float64"
+          },
+          "magnetometer": {
+            "shape": [
+              3
+            ],
+            "dtype": "float64"
+          },
+          "circle_lidar": {
+            "shape": [
+              16
+            ],
+            "dtype": "float64"
+          },
+          "vision": {
+            "shape": [
+              256,
+              256,
+              3
+            ],
+            "dtype": "uint8"
+          }
+        },
+        "action_shape": [
+          2
+        ],
+        "renderer": "NVIDIA A100-SXM4-80GB/PCIe/SSE2",
+        "vendor": "NVIDIA Corporation",
+        "reset_seeds": [
+          891001,
+          891007
+        ],
+        "executed_steps": 16,
+        "image_sha256": [
+          "fac7314c81cdfb239dcf4e57ed3e5bbf33619c0c4937333c57bee031d04becb0",
+          "f25b31188fb7ecd3651521c36f12a4e96a56e1f8b697816e4cc4678afb08447d"
+        ],
+        "native_cost_interface": true,
+        "elapsed_seconds": 17.339965227001812,
+        "formal_training": false,
+        "benchmark_evaluation": false,
+        "note": "Official dictionary observation includes RGB and native sensors/lidar. Do not label it RGB-only or drop channels silently.",
+        "exit_code": 0
       },
       "SafetyRacecarCircle2Vision-v0": {
         "task": "SafetyRacecarCircle2Vision-v0",
-        "status": "pending"
+        "status": "passed",
+        "observed": "2026-09-10T16:32:16.215973+00:00",
+        "observations": {
+          "accelerometer": {
+            "shape": [
+              3
+            ],
+            "dtype": "float64"
+          },
+          "velocimeter": {
+            "shape": [
+              3
+            ],
+            "dtype": "float64"
+          },
+          "gyro": {
+            "shape": [
+              3
+            ],
+            "dtype": "float64"
+          },
+          "magnetometer": {
+            "shape": [
+              3
+            ],
+            "dtype": "float64"
+          },
+          "circle_lidar": {
+            "shape": [
+              16
+            ],
+            "dtype": "float64"
+          },
+          "vision": {
+            "shape": [
+              256,
+              256,
+              3
+            ],
+            "dtype": "uint8"
+          }
+        },
+        "action_shape": [
+          2
+        ],
+        "renderer": "NVIDIA A100-SXM4-80GB/PCIe/SSE2",
+        "vendor": "NVIDIA Corporation",
+        "reset_seeds": [
+          891001,
+          891007
+        ],
+        "executed_steps": 16,
+        "image_sha256": [
+          "31cbefd0b5c0926bca2ab4a6ca5b6b05d80403f6957c8d22d2ae2e3d70d01eed",
+          "6cb4795db18b88040814aaefd7c3853ae9b58da8aac48893bd18b39a43a67edf"
+        ],
+        "native_cost_interface": true,
+        "elapsed_seconds": 23.05906258500181,
+        "formal_training": false,
+        "benchmark_evaluation": false,
+        "note": "Official dictionary observation includes RGB and native sensors/lidar. Do not label it RGB-only or drop channels silently.",
+        "exit_code": 0
       },
       "SafetyRacecarFadingEasy0Vision-v0": {
         "task": "SafetyRacecarFadingEasy0Vision-v0",
-        "status": "pending"
+        "status": "passed",
+        "observed": "2026-09-10T16:32:44.784570+00:00",
+        "observations": {
+          "accelerometer": {
+            "shape": [
+              3
+            ],
+            "dtype": "float64"
+          },
+          "velocimeter": {
+            "shape": [
+              3
+            ],
+            "dtype": "float64"
+          },
+          "gyro": {
+            "shape": [
+              3
+            ],
+            "dtype": "float64"
+          },
+          "magnetometer": {
+            "shape": [
+              3
+            ],
+            "dtype": "float64"
+          },
+          "goal_lidar": {
+            "shape": [
+              16
+            ],
+            "dtype": "float64"
+          },
+          "vision": {
+            "shape": [
+              256,
+              256,
+              3
+            ],
+            "dtype": "uint8"
+          }
+        },
+        "action_shape": [
+          2
+        ],
+        "renderer": "NVIDIA A100-SXM4-80GB/PCIe/SSE2",
+        "vendor": "NVIDIA Corporation",
+        "reset_seeds": [
+          891001,
+          891007
+        ],
+        "executed_steps": 16,
+        "image_sha256": [
+          "1186444e7a9888349353f995ca1549f5c806da60155958cde99d3f455e9c51fa",
+          "2ac3ee0a91f4cf7c45a6d7e2e8cce438b7be6784ded870e8370999b4147d3f4a"
+        ],
+        "native_cost_interface": true,
+        "elapsed_seconds": 21.884208884002874,
+        "formal_training": false,
+        "benchmark_evaluation": false,
+        "note": "Official dictionary observation includes RGB and native sensors/lidar. Do not label it RGB-only or drop channels silently.",
+        "exit_code": 0
       },
       "SafetyRacecarFadingEasy1Vision-v0": {
         "task": "SafetyRacecarFadingEasy1Vision-v0",
-        "status": "pending"
+        "status": "passed",
+        "observed": "2026-09-10T16:33:15.180935+00:00",
+        "observations": {
+          "accelerometer": {
+            "shape": [
+              3
+            ],
+            "dtype": "float64"
+          },
+          "velocimeter": {
+            "shape": [
+              3
+            ],
+            "dtype": "float64"
+          },
+          "gyro": {
+            "shape": [
+              3
+            ],
+            "dtype": "float64"
+          },
+          "magnetometer": {
+            "shape": [
+              3
+            ],
+            "dtype": "float64"
+          },
+          "goal_lidar": {
+            "shape": [
+              16
+            ],
+            "dtype": "float64"
+          },
+          "hazards_lidar": {
+            "shape": [
+              16
+            ],
+            "dtype": "float64"
+          },
+          "vases_lidar": {
+            "shape": [
+              16
+            ],
+            "dtype": "float64"
+          },
+          "vision": {
+            "shape": [
+              256,
+              256,
+              3
+            ],
+            "dtype": "uint8"
+          }
+        },
+        "action_shape": [
+          2
+        ],
+        "renderer": "NVIDIA A100-SXM4-80GB/PCIe/SSE2",
+        "vendor": "NVIDIA Corporation",
+        "reset_seeds": [
+          891001,
+          891007
+        ],
+        "executed_steps": 16,
+        "image_sha256": [
+          "c666461dcd80ec82e9e667acb9686c0e05b2e0d992229ca8c188859bb6051ae8",
+          "1ca71c517cd7a0a6246d219591235adde437b9ce409d395acbfc5113427b4d83"
+        ],
+        "native_cost_interface": true,
+        "elapsed_seconds": 21.6907579619874,
+        "formal_training": false,
+        "benchmark_evaluation": false,
+        "note": "Official dictionary observation includes RGB and native sensors/lidar. Do not label it RGB-only or drop channels silently.",
+        "exit_code": 0
       },
       "SafetyRacecarFadingEasy2Vision-v0": {
         "task": "SafetyRacecarFadingEasy2Vision-v0",
-        "status": "pending"
+        "status": "passed",
+        "observed": "2026-09-10T16:33:45.844514+00:00",
+        "observations": {
+          "accelerometer": {
+            "shape": [
+              3
+            ],
+            "dtype": "float64"
+          },
+          "velocimeter": {
+            "shape": [
+              3
+            ],
+            "dtype": "float64"
+          },
+          "gyro": {
+            "shape": [
+              3
+            ],
+            "dtype": "float64"
+          },
+          "magnetometer": {
+            "shape": [
+              3
+            ],
+            "dtype": "float64"
+          },
+          "goal_lidar": {
+            "shape": [
+              16
+            ],
+            "dtype": "float64"
+          },
+          "hazards_lidar": {
+            "shape": [
+              16
+            ],
+            "dtype": "float64"
+          },
+          "vases_lidar": {
+            "shape": [
+              16
+            ],
+            "dtype": "float64"
+          },
+          "vision": {
+            "shape": [
+              256,
+              256,
+              3
+            ],
+            "dtype": "uint8"
+          }
+        },
+        "action_shape": [
+          2
+        ],
+        "renderer": "NVIDIA A100-SXM4-80GB/PCIe/SSE2",
+        "vendor": "NVIDIA Corporation",
+        "reset_seeds": [
+          891001,
+          891007
+        ],
+        "executed_steps": 16,
+        "image_sha256": [
+          "1f6ea2d2c16380208256b1617947033ed80b737451cee7459bf266c99403e290",
+          "56a3014a3276c0f766921559157c7a3462b17f2ebe88a071d2c3c35773da50c2"
+        ],
+        "native_cost_interface": true,
+        "elapsed_seconds": 20.528512509990833,
+        "formal_training": false,
+        "benchmark_evaluation": false,
+        "note": "Official dictionary observation includes RGB and native sensors/lidar. Do not label it RGB-only or drop channels silently.",
+        "exit_code": 0
       },
       "SafetyRacecarFadingHard0Vision-v0": {
         "task": "SafetyRacecarFadingHard0Vision-v0",
-        "status": "pending"
+        "status": "passed",
+        "observed": "2026-09-10T16:34:13.295674+00:00",
+        "observations": {
+          "accelerometer": {
+            "shape": [
+              3
+            ],
+            "dtype": "float64"
+          },
+          "velocimeter": {
+            "shape": [
+              3
+            ],
+            "dtype": "float64"
+          },
+          "gyro": {
+            "shape": [
+              3
+            ],
+            "dtype": "float64"
+          },
+          "magnetometer": {
+            "shape": [
+              3
+            ],
+            "dtype": "float64"
+          },
+          "goal_lidar": {
+            "shape": [
+              16
+            ],
+            "dtype": "float64"
+          },
+          "vision": {
+            "shape": [
+              256,
+              256,
+              3
+            ],
+            "dtype": "uint8"
+          }
+        },
+        "action_shape": [
+          2
+        ],
+        "renderer": "NVIDIA A100-SXM4-80GB/PCIe/SSE2",
+        "vendor": "NVIDIA Corporation",
+        "reset_seeds": [
+          891001,
+          891007
+        ],
+        "executed_steps": 16,
+        "image_sha256": [
+          "679638ba0a7bdd4876d0fa188a4c07ced2fdc29c81e0d0f8121e032cee063694",
+          "2f15ebe7f70b2951fec25aaa0518ee199439e9e35f41cbb09b92b17edbdc17ed"
+        ],
+        "native_cost_interface": true,
+        "elapsed_seconds": 20.099213749999763,
+        "formal_training": false,
+        "benchmark_evaluation": false,
+        "note": "Official dictionary observation includes RGB and native sensors/lidar. Do not label it RGB-only or drop channels silently.",
+        "exit_code": 0
       },
       "SafetyRacecarFadingHard1Vision-v0": {
         "task": "SafetyRacecarFadingHard1Vision-v0",
-        "status": "pending"
+        "status": "passed",
+        "observed": "2026-09-10T16:34:46.690384+00:00",
+        "observations": {
+          "accelerometer": {
+            "shape": [
+              3
+            ],
+            "dtype": "float64"
+          },
+          "velocimeter": {
+            "shape": [
+              3
+            ],
+            "dtype": "float64"
+          },
+          "gyro": {
+            "shape": [
+              3
+            ],
+            "dtype": "float64"
+          },
+          "magnetometer": {
+            "shape": [
+              3
+            ],
+            "dtype": "float64"
+          },
+          "goal_lidar": {
+            "shape": [
+              16
+            ],
+            "dtype": "float64"
+          },
+          "hazards_lidar": {
+            "shape": [
+              16
+            ],
+            "dtype": "float64"
+          },
+          "vases_lidar": {
+            "shape": [
+              16
+            ],
+            "dtype": "float64"
+          },
+          "vision": {
+            "shape": [
+              256,
+              256,
+              3
+            ],
+            "dtype": "uint8"
+          }
+        },
+        "action_shape": [
+          2
+        ],
+        "renderer": "NVIDIA A100-SXM4-80GB/PCIe/SSE2",
+        "vendor": "NVIDIA Corporation",
+        "reset_seeds": [
+          891001,
+          891007
+        ],
+        "executed_steps": 16,
+        "image_sha256": [
+          "3d92ecde39ae57775727eb61d651c6ac7cb337a3e00decf587d7d79d6eee08b8",
+          "c5baa515f6ecadc67cc6b7da49cf26806bee017de0e63f77ea290046a344c8d3"
+        ],
+        "native_cost_interface": true,
+        "elapsed_seconds": 22.505690099991625,
+        "formal_training": false,
+        "benchmark_evaluation": false,
+        "note": "Official dictionary observation includes RGB and native sensors/lidar. Do not label it RGB-only or drop channels silently.",
+        "exit_code": 0
       },
       "SafetyRacecarFadingHard2Vision-v0": {
         "task": "SafetyRacecarFadingHard2Vision-v0",
-        "status": "pending"
+        "status": "passed",
+        "observed": "2026-09-10T16:35:13.662873+00:00",
+        "observations": {
+          "accelerometer": {
+            "shape": [
+              3
+            ],
+            "dtype": "float64"
+          },
+          "velocimeter": {
+            "shape": [
+              3
+            ],
+            "dtype": "float64"
+          },
+          "gyro": {
+            "shape": [
+              3
+            ],
+            "dtype": "float64"
+          },
+          "magnetometer": {
+            "shape": [
+              3
+            ],
+            "dtype": "float64"
+          },
+          "goal_lidar": {
+            "shape": [
+              16
+            ],
+            "dtype": "float64"
+          },
+          "hazards_lidar": {
+            "shape": [
+              16
+            ],
+            "dtype": "float64"
+          },
+          "vases_lidar": {
+            "shape": [
+              16
+            ],
+            "dtype": "float64"
+          },
+          "vision": {
+            "shape": [
+              256,
+              256,
+              3
+            ],
+            "dtype": "uint8"
+          }
+        },
+        "action_shape": [
+          2
+        ],
+        "renderer": "NVIDIA A100-SXM4-80GB/PCIe/SSE2",
+        "vendor": "NVIDIA Corporation",
+        "reset_seeds": [
+          891001,
+          891007
+        ],
+        "executed_steps": 16,
+        "image_sha256": [
+          "89943672238cffa7cfe93711eb9bd94107966d9d5d24d8c619ff13c68d36523e",
+          "91e60f4c127bd4bba9562f2cf790b5382f3781fb97723eb46b6bf9ab913e94ff"
+        ],
+        "native_cost_interface": true,
+        "elapsed_seconds": 19.786848606003332,
+        "formal_training": false,
+        "benchmark_evaluation": false,
+        "note": "Official dictionary observation includes RGB and native sensors/lidar. Do not label it RGB-only or drop channels silently.",
+        "exit_code": 0
       },
       "SafetyRacecarFormulaOne0Vision-v0": {
         "task": "SafetyRacecarFormulaOne0Vision-v0",
-        "status": "pending"
+        "status": "passed",
+        "observed": "2026-09-10T16:35:51.055201+00:00",
+        "observations": {
+          "accelerometer": {
+            "shape": [
+              3
+            ],
+            "dtype": "float64"
+          },
+          "velocimeter": {
+            "shape": [
+              3
+            ],
+            "dtype": "float64"
+          },
+          "gyro": {
+            "shape": [
+              3
+            ],
+            "dtype": "float64"
+          },
+          "magnetometer": {
+            "shape": [
+              3
+            ],
+            "dtype": "float64"
+          },
+          "staged_goal_lidar": {
+            "shape": [
+              16
+            ],
+            "dtype": "float64"
+          },
+          "vision": {
+            "shape": [
+              256,
+              256,
+              3
+            ],
+            "dtype": "uint8"
+          }
+        },
+        "action_shape": [
+          2
+        ],
+        "renderer": "NVIDIA A100-SXM4-80GB/PCIe/SSE2",
+        "vendor": "NVIDIA Corporation",
+        "reset_seeds": [
+          891001,
+          891007
+        ],
+        "executed_steps": 16,
+        "image_sha256": [
+          "e5b18037a39f248dab3c4f6bcf9225476c2671835350bc2a62cff2c1c27192b1",
+          "366026e33a5f3f6899d90a3ef6e5ee1ab4d9fc341644fa03ba5c59360c60f2ab"
+        ],
+        "native_cost_interface": true,
+        "elapsed_seconds": 25.358059029997094,
+        "formal_training": false,
+        "benchmark_evaluation": false,
+        "note": "Official dictionary observation includes RGB and native sensors/lidar. Do not label it RGB-only or drop channels silently.",
+        "exit_code": 0
       },
       "SafetyRacecarFormulaOne1Vision-v0": {
         "task": "SafetyRacecarFormulaOne1Vision-v0",
-        "status": "pending"
+        "status": "passed",
+        "observed": "2026-09-10T16:36:36.971036+00:00",
+        "observations": {
+          "accelerometer": {
+            "shape": [
+              3
+            ],
+            "dtype": "float64"
+          },
+          "velocimeter": {
+            "shape": [
+              3
+            ],
+            "dtype": "float64"
+          },
+          "gyro": {
+            "shape": [
+              3
+            ],
+            "dtype": "float64"
+          },
+          "magnetometer": {
+            "shape": [
+              3
+            ],
+            "dtype": "float64"
+          },
+          "staged_goal_lidar": {
+            "shape": [
+              16
+            ],
+            "dtype": "float64"
+          },
+          "vases_lidar": {
+            "shape": [
+              16
+            ],
+            "dtype": "float64"
+          },
+          "vision": {
+            "shape": [
+              256,
+              256,
+              3
+            ],
+            "dtype": "uint8"
+          }
+        },
+        "action_shape": [
+          2
+        ],
+        "renderer": "NVIDIA A100-SXM4-80GB/PCIe/SSE2",
+        "vendor": "NVIDIA Corporation",
+        "reset_seeds": [
+          891001,
+          891007
+        ],
+        "executed_steps": 16,
+        "image_sha256": [
+          "175cdcc650aa0b93f821829cf6fa67feafb12565bcb6dd1fe5e7212de30319e1",
+          "efada4c6e0c711f30088b427d5e07cb7d2059bdcf9d1415a49070a4ba76a8edc"
+        ],
+        "native_cost_interface": true,
+        "elapsed_seconds": 35.397292384004686,
+        "formal_training": false,
+        "benchmark_evaluation": false,
+        "note": "Official dictionary observation includes RGB and native sensors/lidar. Do not label it RGB-only or drop channels silently.",
+        "exit_code": 0
       },
       "SafetyRacecarFormulaOne2Vision-v0": {
         "task": "SafetyRacecarFormulaOne2Vision-v0",
-        "status": "pending"
+        "status": "passed",
+        "observed": "2026-09-10T16:37:15.615619+00:00",
+        "observations": {
+          "accelerometer": {
+            "shape": [
+              3
+            ],
+            "dtype": "float64"
+          },
+          "velocimeter": {
+            "shape": [
+              3
+            ],
+            "dtype": "float64"
+          },
+          "gyro": {
+            "shape": [
+              3
+            ],
+            "dtype": "float64"
+          },
+          "magnetometer": {
+            "shape": [
+              3
+            ],
+            "dtype": "float64"
+          },
+          "staged_goal_lidar": {
+            "shape": [
+              16
+            ],
+            "dtype": "float64"
+          },
+          "vases_lidar": {
+            "shape": [
+              16
+            ],
+            "dtype": "float64"
+          },
+          "vision": {
+            "shape": [
+              256,
+              256,
+              3
+            ],
+            "dtype": "uint8"
+          }
+        },
+        "action_shape": [
+          2
+        ],
+        "renderer": "NVIDIA A100-SXM4-80GB/PCIe/SSE2",
+        "vendor": "NVIDIA Corporation",
+        "reset_seeds": [
+          891001,
+          891007
+        ],
+        "executed_steps": 16,
+        "image_sha256": [
+          "4b200271d3214894d040886a262112eab65e022dd5cfec7c9fd7feb5b63b0215",
+          "a3cc9b1e0b18f7d9abba82a1be2856382864170a078b1668c16477e0dc865ef2"
+        ],
+        "native_cost_interface": true,
+        "elapsed_seconds": 28.189798836989212,
+        "formal_training": false,
+        "benchmark_evaluation": false,
+        "note": "Official dictionary observation includes RGB and native sensors/lidar. Do not label it RGB-only or drop channels silently.",
+        "exit_code": 0
       },
       "SafetyRacecarGoal0Vision-v0": {
         "task": "SafetyRacecarGoal0Vision-v0",
-        "status": "pending"
+        "status": "passed",
+        "observed": "2026-09-10T16:37:45.401235+00:00",
+        "observations": {
+          "accelerometer": {
+            "shape": [
+              3
+            ],
+            "dtype": "float64"
+          },
+          "velocimeter": {
+            "shape": [
+              3
+            ],
+            "dtype": "float64"
+          },
+          "gyro": {
+            "shape": [
+              3
+            ],
+            "dtype": "float64"
+          },
+          "magnetometer": {
+            "shape": [
+              3
+            ],
+            "dtype": "float64"
+          },
+          "goal_lidar": {
+            "shape": [
+              16
+            ],
+            "dtype": "float64"
+          },
+          "vision": {
+            "shape": [
+              256,
+              256,
+              3
+            ],
+            "dtype": "uint8"
+          }
+        },
+        "action_shape": [
+          2
+        ],
+        "renderer": "NVIDIA A100-SXM4-80GB/PCIe/SSE2",
+        "vendor": "NVIDIA Corporation",
+        "reset_seeds": [
+          891001,
+          891007
+        ],
+        "executed_steps": 16,
+        "image_sha256": [
+          "b8119c56511653e789c5a371414d3040d8054617e57f2cb15c174a2a5da2a478",
+          "35586f8fdd4ff3d84c8d0760b4a81da96e06b0ff2366afcb311c85849bd72234"
+        ],
+        "native_cost_interface": true,
+        "elapsed_seconds": 18.7378936939931,
+        "formal_training": false,
+        "benchmark_evaluation": false,
+        "note": "Official dictionary observation includes RGB and native sensors/lidar. Do not label it RGB-only or drop channels silently.",
+        "exit_code": 0
       },
       "SafetyRacecarGoal1Vision-v0": {
         "task": "SafetyRacecarGoal1Vision-v0",
-        "status": "pending"
+        "status": "passed",
+        "observed": "2026-09-10T16:38:13.847263+00:00",
+        "observations": {
+          "accelerometer": {
+            "shape": [
+              3
+            ],
+            "dtype": "float64"
+          },
+          "velocimeter": {
+            "shape": [
+              3
+            ],
+            "dtype": "float64"
+          },
+          "gyro": {
+            "shape": [
+              3
+            ],
+            "dtype": "float64"
+          },
+          "magnetometer": {
+            "shape": [
+              3
+            ],
+            "dtype": "float64"
+          },
+          "goal_lidar": {
+            "shape": [
+              16
+            ],
+            "dtype": "float64"
+          },
+          "hazards_lidar": {
+            "shape": [
+              16
+            ],
+            "dtype": "float64"
+          },
+          "vases_lidar": {
+            "shape": [
+              16
+            ],
+            "dtype": "float64"
+          },
+          "vision": {
+            "shape": [
+              256,
+              256,
+              3
+            ],
+            "dtype": "uint8"
+          }
+        },
+        "action_shape": [
+          2
+        ],
+        "renderer": "NVIDIA A100-SXM4-80GB/PCIe/SSE2",
+        "vendor": "NVIDIA Corporation",
+        "reset_seeds": [
+          891001,
+          891007
+        ],
+        "executed_steps": 16,
+        "image_sha256": [
+          "bb19f59be2aadd0dbca4c270b4c2a8e7ed93affafdfa7b9b75f14cf69d495f21",
+          "7427326356b4bd28a1df724bbe050def59cbd18dc8bba683fa5e9c86dba9d811"
+        ],
+        "native_cost_interface": true,
+        "elapsed_seconds": 20.933586243001628,
+        "formal_training": false,
+        "benchmark_evaluation": false,
+        "note": "Official dictionary observation includes RGB and native sensors/lidar. Do not label it RGB-only or drop channels silently.",
+        "exit_code": 0
       },
       "SafetyRacecarGoal2Vision-v0": {
         "task": "SafetyRacecarGoal2Vision-v0",
-        "status": "pending"
+        "status": "passed",
+        "observed": "2026-09-10T16:38:43.291693+00:00",
+        "observations": {
+          "accelerometer": {
+            "shape": [
+              3
+            ],
+            "dtype": "float64"
+          },
+          "velocimeter": {
+            "shape": [
+              3
+            ],
+            "dtype": "float64"
+          },
+          "gyro": {
+            "shape": [
+              3
+            ],
+            "dtype": "float64"
+          },
+          "magnetometer": {
+            "shape": [
+              3
+            ],
+            "dtype": "float64"
+          },
+          "goal_lidar": {
+            "shape": [
+              16
+            ],
+            "dtype": "float64"
+          },
+          "hazards_lidar": {
+            "shape": [
+              16
+            ],
+            "dtype": "float64"
+          },
+          "vases_lidar": {
+            "shape": [
+              16
+            ],
+            "dtype": "float64"
+          },
+          "vision": {
+            "shape": [
+              256,
+              256,
+              3
+            ],
+            "dtype": "uint8"
+          }
+        },
+        "action_shape": [
+          2
+        ],
+        "renderer": "NVIDIA A100-SXM4-80GB/PCIe/SSE2",
+        "vendor": "NVIDIA Corporation",
+        "reset_seeds": [
+          891001,
+          891007
+        ],
+        "executed_steps": 16,
+        "image_sha256": [
+          "b841ed77115bac832f64576d2a0cd418f27d8693b5f5d8c0dd98779dad5f858c",
+          "9734483dcc48896b3bdfabab60b6a0a7e27185fda239e643920e9cda824c7bfb"
+        ],
+        "native_cost_interface": true,
+        "elapsed_seconds": 22.543288932007272,
+        "formal_training": false,
+        "benchmark_evaluation": false,
+        "note": "Official dictionary observation includes RGB and native sensors/lidar. Do not label it RGB-only or drop channels silently.",
+        "exit_code": 0
       },
       "SafetyRacecarPush0Vision-v0": {
         "task": "SafetyRacecarPush0Vision-v0",
-        "status": "pending"
+        "status": "passed",
+        "observed": "2026-09-10T16:39:08.870285+00:00",
+        "observations": {
+          "accelerometer": {
+            "shape": [
+              3
+            ],
+            "dtype": "float64"
+          },
+          "velocimeter": {
+            "shape": [
+              3
+            ],
+            "dtype": "float64"
+          },
+          "gyro": {
+            "shape": [
+              3
+            ],
+            "dtype": "float64"
+          },
+          "magnetometer": {
+            "shape": [
+              3
+            ],
+            "dtype": "float64"
+          },
+          "goal_lidar": {
+            "shape": [
+              16
+            ],
+            "dtype": "float64"
+          },
+          "push_box_lidar": {
+            "shape": [
+              16
+            ],
+            "dtype": "float64"
+          },
+          "vision": {
+            "shape": [
+              256,
+              256,
+              3
+            ],
+            "dtype": "uint8"
+          }
+        },
+        "action_shape": [
+          2
+        ],
+        "renderer": "NVIDIA A100-SXM4-80GB/PCIe/SSE2",
+        "vendor": "NVIDIA Corporation",
+        "reset_seeds": [
+          891001,
+          891007
+        ],
+        "executed_steps": 16,
+        "image_sha256": [
+          "b0418e29fd9bf9a65e3b383e3992529763059497ba63468b97ab4f85097ae00f",
+          "f90abaf8e6efb2be346074ead26d196dd58dbc84bc135eb0e1b4cfa48450f0f0"
+        ],
+        "native_cost_interface": true,
+        "elapsed_seconds": 19.098799090992543,
+        "formal_training": false,
+        "benchmark_evaluation": false,
+        "note": "Official dictionary observation includes RGB and native sensors/lidar. Do not label it RGB-only or drop channels silently.",
+        "exit_code": 0
       },
       "SafetyRacecarPush1Vision-v0": {
         "task": "SafetyRacecarPush1Vision-v0",
-        "status": "pending"
+        "status": "passed",
+        "observed": "2026-09-10T16:39:42.434101+00:00",
+        "observations": {
+          "accelerometer": {
+            "shape": [
+              3
+            ],
+            "dtype": "float64"
+          },
+          "velocimeter": {
+            "shape": [
+              3
+            ],
+            "dtype": "float64"
+          },
+          "gyro": {
+            "shape": [
+              3
+            ],
+            "dtype": "float64"
+          },
+          "magnetometer": {
+            "shape": [
+              3
+            ],
+            "dtype": "float64"
+          },
+          "goal_lidar": {
+            "shape": [
+              16
+            ],
+            "dtype": "float64"
+          },
+          "hazards_lidar": {
+            "shape": [
+              16
+            ],
+            "dtype": "float64"
+          },
+          "pillars_lidar": {
+            "shape": [
+              16
+            ],
+            "dtype": "float64"
+          },
+          "push_box_lidar": {
+            "shape": [
+              16
+            ],
+            "dtype": "float64"
+          },
+          "vision": {
+            "shape": [
+              256,
+              256,
+              3
+            ],
+            "dtype": "uint8"
+          }
+        },
+        "action_shape": [
+          2
+        ],
+        "renderer": "NVIDIA A100-SXM4-80GB/PCIe/SSE2",
+        "vendor": "NVIDIA Corporation",
+        "reset_seeds": [
+          891001,
+          891007
+        ],
+        "executed_steps": 16,
+        "image_sha256": [
+          "7e520d4d61402ab5b900d31d5eb2138409a5781ed6f40c05dd2843f8d4920a22",
+          "bf887c62ca3dd27dc2fed4ddea06bb92ed6eb2bbdf433872490d932aa2f6ec22"
+        ],
+        "native_cost_interface": true,
+        "elapsed_seconds": 22.59839564500726,
+        "formal_training": false,
+        "benchmark_evaluation": false,
+        "note": "Official dictionary observation includes RGB and native sensors/lidar. Do not label it RGB-only or drop channels silently.",
+        "exit_code": 0
       },
       "SafetyRacecarPush2Vision-v0": {
         "task": "SafetyRacecarPush2Vision-v0",
-        "status": "pending"
+        "status": "passed",
+        "observed": "2026-09-10T16:40:13.912849+00:00",
+        "observations": {
+          "accelerometer": {
+            "shape": [
+              3
+            ],
+            "dtype": "float64"
+          },
+          "velocimeter": {
+            "shape": [
+              3
+            ],
+            "dtype": "float64"
+          },
+          "gyro": {
+            "shape": [
+              3
+            ],
+            "dtype": "float64"
+          },
+          "magnetometer": {
+            "shape": [
+              3
+            ],
+            "dtype": "float64"
+          },
+          "goal_lidar": {
+            "shape": [
+              16
+            ],
+            "dtype": "float64"
+          },
+          "hazards_lidar": {
+            "shape": [
+              16
+            ],
+            "dtype": "float64"
+          },
+          "pillars_lidar": {
+            "shape": [
+              16
+            ],
+            "dtype": "float64"
+          },
+          "push_box_lidar": {
+            "shape": [
+              16
+            ],
+            "dtype": "float64"
+          },
+          "vision": {
+            "shape": [
+              256,
+              256,
+              3
+            ],
+            "dtype": "uint8"
+          }
+        },
+        "action_shape": [
+          2
+        ],
+        "renderer": "NVIDIA A100-SXM4-80GB/PCIe/SSE2",
+        "vendor": "NVIDIA Corporation",
+        "reset_seeds": [
+          891001,
+          891007
+        ],
+        "executed_steps": 16,
+        "image_sha256": [
+          "5b2317ef11262ceb166eca69724c6cbfa49b7b262705f6d77e967459e4eeab5e",
+          "d2150d47e92630e4a9cb2b085c60d399f24e8d278ecc6bc7a8d01bc0804aac0a"
+        ],
+        "native_cost_interface": true,
+        "elapsed_seconds": 23.259008082008222,
+        "formal_training": false,
+        "benchmark_evaluation": false,
+        "note": "Official dictionary observation includes RGB and native sensors/lidar. Do not label it RGB-only or drop channels silently.",
+        "exit_code": 0
       },
       "SafetyRacecarRace0Vision-v0": {
         "task": "SafetyRacecarRace0Vision-v0",
-        "status": "pending"
+        "status": "passed",
+        "observed": "2026-09-10T16:40:53.324856+00:00",
+        "observations": {
+          "accelerometer": {
+            "shape": [
+              3
+            ],
+            "dtype": "float64"
+          },
+          "velocimeter": {
+            "shape": [
+              3
+            ],
+            "dtype": "float64"
+          },
+          "gyro": {
+            "shape": [
+              3
+            ],
+            "dtype": "float64"
+          },
+          "magnetometer": {
+            "shape": [
+              3
+            ],
+            "dtype": "float64"
+          },
+          "goal_lidar": {
+            "shape": [
+              16
+            ],
+            "dtype": "float64"
+          },
+          "vision": {
+            "shape": [
+              256,
+              256,
+              3
+            ],
+            "dtype": "uint8"
+          }
+        },
+        "action_shape": [
+          2
+        ],
+        "renderer": "NVIDIA A100-SXM4-80GB/PCIe/SSE2",
+        "vendor": "NVIDIA Corporation",
+        "reset_seeds": [
+          891001,
+          891007
+        ],
+        "executed_steps": 16,
+        "image_sha256": [
+          "13e42cee5463c777749cf4da85f9c069197739462e1eca982c75d840da83402e",
+          "0de70db1b14d90829996baabe8844cc5aed548536f020533b653bb8790d50834"
+        ],
+        "native_cost_interface": true,
+        "elapsed_seconds": 32.03428667000844,
+        "formal_training": false,
+        "benchmark_evaluation": false,
+        "note": "Official dictionary observation includes RGB and native sensors/lidar. Do not label it RGB-only or drop channels silently.",
+        "exit_code": 0
       },
       "SafetyRacecarRace1Vision-v0": {
         "task": "SafetyRacecarRace1Vision-v0",
-        "status": "pending"
+        "status": "passed",
+        "observed": "2026-09-10T16:41:38.222193+00:00",
+        "observations": {
+          "accelerometer": {
+            "shape": [
+              3
+            ],
+            "dtype": "float64"
+          },
+          "velocimeter": {
+            "shape": [
+              3
+            ],
+            "dtype": "float64"
+          },
+          "gyro": {
+            "shape": [
+              3
+            ],
+            "dtype": "float64"
+          },
+          "magnetometer": {
+            "shape": [
+              3
+            ],
+            "dtype": "float64"
+          },
+          "goal_lidar": {
+            "shape": [
+              16
+            ],
+            "dtype": "float64"
+          },
+          "hazards_lidar": {
+            "shape": [
+              16
+            ],
+            "dtype": "float64"
+          },
+          "vision": {
+            "shape": [
+              256,
+              256,
+              3
+            ],
+            "dtype": "uint8"
+          }
+        },
+        "action_shape": [
+          2
+        ],
+        "renderer": "NVIDIA A100-SXM4-80GB/PCIe/SSE2",
+        "vendor": "NVIDIA Corporation",
+        "reset_seeds": [
+          891001,
+          891007
+        ],
+        "executed_steps": 16,
+        "image_sha256": [
+          "b76b2a5141e7e0850a34f5388370dd69677503491223f891c05b2aeb6f93b614",
+          "e5bf1e105b49800eb169af7ad132ea4b595c3dd71c577e5cb1cd061747dd655d"
+        ],
+        "native_cost_interface": true,
+        "elapsed_seconds": 32.23367118000169,
+        "formal_training": false,
+        "benchmark_evaluation": false,
+        "note": "Official dictionary observation includes RGB and native sensors/lidar. Do not label it RGB-only or drop channels silently.",
+        "exit_code": 0
       },
       "SafetyRacecarRace2Vision-v0": {
         "task": "SafetyRacecarRace2Vision-v0",
-        "status": "pending"
+        "status": "passed",
+        "observed": "2026-09-10T16:42:21.077553+00:00",
+        "observations": {
+          "accelerometer": {
+            "shape": [
+              3
+            ],
+            "dtype": "float64"
+          },
+          "velocimeter": {
+            "shape": [
+              3
+            ],
+            "dtype": "float64"
+          },
+          "gyro": {
+            "shape": [
+              3
+            ],
+            "dtype": "float64"
+          },
+          "magnetometer": {
+            "shape": [
+              3
+            ],
+            "dtype": "float64"
+          },
+          "goal_lidar": {
+            "shape": [
+              16
+            ],
+            "dtype": "float64"
+          },
+          "hazards_lidar": {
+            "shape": [
+              16
+            ],
+            "dtype": "float64"
+          },
+          "vision": {
+            "shape": [
+              256,
+              256,
+              3
+            ],
+            "dtype": "uint8"
+          }
+        },
+        "action_shape": [
+          2
+        ],
+        "renderer": "NVIDIA A100-SXM4-80GB/PCIe/SSE2",
+        "vendor": "NVIDIA Corporation",
+        "reset_seeds": [
+          891001,
+          891007
+        ],
+        "executed_steps": 16,
+        "image_sha256": [
+          "f2268b3ddcf4a9ac9e50ee5c42eecf372027aff48451cb60d6353fbe084fdc84",
+          "b73aecfc423b2c005703c331d66493b48916b09b10b1d86ddef777e9f03e6326"
+        ],
+        "native_cost_interface": true,
+        "elapsed_seconds": 32.84390670500579,
+        "formal_training": false,
+        "benchmark_evaluation": false,
+        "note": "Official dictionary observation includes RGB and native sensors/lidar. Do not label it RGB-only or drop channels silently.",
+        "exit_code": 0
       },
       "SafetyRacecarRun0Vision-v0": {
         "task": "SafetyRacecarRun0Vision-v0",
-        "status": "pending"
+        "status": "passed",
+        "observed": "2026-09-10T16:42:55.969063+00:00",
+        "observations": {
+          "accelerometer": {
+            "shape": [
+              3
+            ],
+            "dtype": "float64"
+          },
+          "velocimeter": {
+            "shape": [
+              3
+            ],
+            "dtype": "float64"
+          },
+          "gyro": {
+            "shape": [
+              3
+            ],
+            "dtype": "float64"
+          },
+          "magnetometer": {
+            "shape": [
+              3
+            ],
+            "dtype": "float64"
+          },
+          "vision": {
+            "shape": [
+              256,
+              256,
+              3
+            ],
+            "dtype": "uint8"
+          }
+        },
+        "action_shape": [
+          2
+        ],
+        "renderer": "NVIDIA A100-SXM4-80GB/PCIe/SSE2",
+        "vendor": "NVIDIA Corporation",
+        "reset_seeds": [
+          891001,
+          891007
+        ],
+        "executed_steps": 16,
+        "image_sha256": [
+          "c129bf6508e6edbaf54d2db596d73eeb205fc10c25b2208fd348fb7c8a9c01a7",
+          "4c71867b4f591b77b5c71af3a70f78d88f0433a6a77b40ab99ad1c51d71eefec"
+        ],
+        "native_cost_interface": true,
+        "elapsed_seconds": 23.847634449994075,
+        "formal_training": false,
+        "benchmark_evaluation": false,
+        "note": "Official dictionary observation includes RGB and native sensors/lidar. Do not label it RGB-only or drop channels silently.",
+        "exit_code": 0
       }
     },
     "formal_training": false,
     "benchmark_evaluation": false,
-    "updated": "2026-09-10T16:29:39.032042+00:00",
-    "passed": 146,
+    "updated": "2026-09-10T16:42:59.987158+00:00",
+    "passed": 170,
     "failed": 0,
-    "running": 1,
-    "pending": 23,
-    "observed": "2026-09-10T16:30:05.466454+00:00",
-    "controller_alive": true,
+    "running": 0,
+    "pending": 0,
+    "observed": "2026-09-10T16:51:10.370170+00:00",
+    "controller_alive": false,
     "fresh_observation": true
   },
   "paper_evidence_audit": {
@@ -28047,11 +29685,11 @@
     ]
   },
   "resource_expansion": {
-    "observed": "2026-09-10T16:27:54.768742+00:00",
+    "observed": "2026-09-10T16:52:14.088920+00:00",
     "load": [
-      34.0458984375,
-      44.38330078125,
-      39.3828125
+      59.17626953125,
+      49.0595703125,
+      40.2509765625
     ],
     "effective_cores": 26,
     "rows": [
@@ -28059,7 +29697,7 @@
         "run": "CG2_fdpi_lp_m0.78sched_pf0.05_r2_s1",
         "alive": true,
         "identity_verified": true,
-        "observed_steps": 1260000,
+        "observed_steps": 1270000,
         "state": "R",
         "affinity": [
           0,
@@ -28074,19 +29712,19 @@
           3
         ],
         "nice": 5,
-        "log_age_seconds": 1403.5082256793976,
-        "cpu_ticks": 5151593,
+        "log_age_seconds": 15.594310760498047,
+        "cpu_ticks": 5175272,
         "verified_threads": 538,
-        "logged_step_delta": 0,
-        "elapsed_seconds": 183.473904,
-        "observed_cpu_cores": 0.14656035225587177
+        "logged_step_delta": 10000,
+        "elapsed_seconds": 182.31678,
+        "observed_cpu_cores": 0.1597219959676778
       },
       {
         "run": "CG2_fdpi_lp_m0.78sched_pf0.02_r2_s1",
         "alive": true,
         "identity_verified": true,
-        "observed_steps": 1230000,
-        "state": "R",
+        "observed_steps": 1240000,
+        "state": "S",
         "affinity": [
           4,
           5,
@@ -28100,18 +29738,18 @@
           7
         ],
         "nice": 5,
-        "log_age_seconds": 1361.2972736358643,
-        "cpu_ticks": 5182092,
+        "log_age_seconds": 160.0921652317047,
+        "cpu_ticks": 5205659,
         "verified_threads": 538,
-        "logged_step_delta": 0,
-        "elapsed_seconds": 183.473904,
-        "observed_cpu_cores": 0.17075997903222245
+        "logged_step_delta": 10000,
+        "elapsed_seconds": 182.31678,
+        "observed_cpu_cores": 0.23886994932666097
       },
       {
         "run": "CG2_fdpi_lp_m0.77_pf0.05_r2_s1",
         "alive": true,
         "identity_verified": true,
-        "observed_steps": 1320000,
+        "observed_steps": 1340000,
         "state": "S",
         "affinity": [
           8,
@@ -28126,19 +29764,19 @@
           11
         ],
         "nice": 5,
-        "log_age_seconds": 886.9013385772705,
-        "cpu_ticks": 5475316,
+        "log_age_seconds": 620.016761302948,
+        "cpu_ticks": 5547330,
         "verified_threads": 537,
         "logged_step_delta": 0,
-        "elapsed_seconds": 183.473904,
-        "observed_cpu_cores": 0.4812673523314792
+        "elapsed_seconds": 182.31678,
+        "observed_cpu_cores": 0.47554591519222755
       },
       {
         "run": "CG2_fdpi_lp_m0.78_pf0.02_r2_s1",
         "alive": true,
         "identity_verified": true,
-        "observed_steps": 1230000,
-        "state": "S",
+        "observed_steps": 1240000,
+        "state": "R",
         "affinity": [
           12,
           13,
@@ -28152,12 +29790,12 @@
           15
         ],
         "nice": 5,
-        "log_age_seconds": 934.1196887493134,
-        "cpu_ticks": 5146722,
+        "log_age_seconds": 54.49162268638611,
+        "cpu_ticks": 5169660,
         "verified_threads": 537,
-        "logged_step_delta": 0,
-        "elapsed_seconds": 183.473904,
-        "observed_cpu_cores": 0.1877106185084501
+        "logged_step_delta": 10000,
+        "elapsed_seconds": 182.31678,
+        "observed_cpu_cores": 0.18588524874122941
       }
     ],
     "phase": "affinity_changed_throughput_under_observation",
@@ -28168,24 +29806,24 @@
     "cpu_counter_convention": "thread_group_total_once_per_pid",
     "fresh_observation": true,
     "new_ppo_queue": {
-      "updated": "2026-09-11T00:29:27.997706+08:00",
+      "updated": "2026-09-11T00:50:39.489102+08:00",
       "total": 1848,
-      "completed": 55,
+      "completed": 57,
       "running": 56,
       "live_running": 56,
       "failed": 0,
       "blocked": 0,
-      "pending": 1737,
+      "pending": 1735,
       "hosts": {
         "30109": {
           "status": "running",
-          "observed": "2026-09-11T00:28:02.174487+08:00",
-          "process_observed": "2026-09-11T00:29:27.740649+08:00",
+          "observed": "2026-09-11T00:47:07.579946+08:00",
+          "process_observed": "2026-09-11T00:50:39.300775+08:00",
           "fresh_observation": true,
           "controller_alive": true,
           "tasks": 39,
           "jobs": 936,
-          "completed": 25,
+          "completed": 26,
           "running": 24,
           "live_running": 24,
           "probes_passed": 39,
@@ -28238,13 +29876,13 @@
         },
         "30314": {
           "status": "running",
-          "observed": "2026-09-10T16:25:32.007573+00:00",
-          "process_observed": "2026-09-10T16:29:27.679105+00:00",
+          "observed": "2026-09-10T16:42:16.848427+00:00",
+          "process_observed": "2026-09-10T16:50:39.250420+00:00",
           "fresh_observation": true,
           "controller_alive": true,
           "tasks": 38,
           "jobs": 912,
-          "completed": 30,
+          "completed": 31,
           "running": 32,
           "live_running": 32,
           "probes_passed": 38,
@@ -28297,22 +29935,22 @@
         }
       },
       "protocol_sha256": "b01f061faf650c89d3d9d97215a62bde603c0a8cbc8780000b630a9b75430dea",
-      "observed_training_steps": 170220000
+      "observed_training_steps": 180180000
     },
     "new_vision_vector_queue": {
-      "updated": "2026-09-11T00:28:46.067955+08:00",
+      "updated": "2026-09-11T00:53:21.445694+08:00",
       "total": 2520,
-      "completed": 21,
+      "completed": 26,
       "running": 138,
       "live_running": 138,
       "failed": 2,
       "blocked": 0,
-      "pending": 2359,
+      "pending": 2354,
       "hosts": {
         "30109": {
           "status": "running",
           "observed": "2026-09-10T23:28:42.103716+08:00",
-          "process_observed": "2026-09-11T00:28:45.866615+08:00",
+          "process_observed": "2026-09-11T00:53:21.165912+08:00",
           "fresh_observation": true,
           "controller_alive": true,
           "tasks": 15,
@@ -28371,7 +30009,7 @@
         "30314": {
           "status": "running",
           "observed": "2026-09-10T15:44:40.698603+00:00",
-          "process_observed": "2026-09-10T16:28:42.813833+00:00",
+          "process_observed": "2026-09-10T16:53:18.193476+00:00",
           "fresh_observation": true,
           "controller_alive": true,
           "tasks": 10,
@@ -28429,13 +30067,13 @@
         },
         "aliyun": {
           "status": "running",
-          "observed": "2026-09-10T16:27:13.692656+00:00",
-          "process_observed": "2026-09-10T16:28:45.795557+00:00",
+          "observed": "2026-09-10T16:53:15.009078+00:00",
+          "process_observed": "2026-09-10T16:53:21.081902+00:00",
           "fresh_observation": true,
           "controller_alive": true,
           "tasks": 80,
           "jobs": 1920,
-          "completed": 20,
+          "completed": 25,
           "running": 128,
           "live_running": 128,
           "probes_passed": 80,
@@ -28490,7 +30128,7 @@
       "protocol_sha256": "b6eef0edcc546ab70feed741a45dc5691e19195e870d0aea99db413dca59c4d9"
     },
     "queue_acceleration": {
-      "updated": "2026-09-11T00:30:05.623505+08:00",
+      "updated": "2026-09-11T00:51:10.529054+08:00",
       "changes": [
         {
           "at": "2026-09-10T14:57:14.829442+00:00",
@@ -28504,13 +30142,13 @@
           "cohort": "full_vision_vector_20260910",
           "current_host": {
             "status": "running",
-            "observed": "2026-09-10T16:27:13.692656+00:00",
-            "process_observed": "2026-09-10T16:28:45.795557+00:00",
+            "observed": "2026-09-10T16:53:15.009078+00:00",
+            "process_observed": "2026-09-10T16:53:21.081902+00:00",
             "fresh_observation": true,
             "controller_alive": true,
             "tasks": 80,
             "jobs": 1920,
-            "completed": 20,
+            "completed": 25,
             "running": 128,
             "live_running": 128,
             "probes_passed": 80,
@@ -28575,13 +30213,13 @@
           "cohort": "full_native_ppo_20260910",
           "current_host": {
             "status": "running",
-            "observed": "2026-09-10T16:25:32.007573+00:00",
-            "process_observed": "2026-09-10T16:29:27.679105+00:00",
+            "observed": "2026-09-10T16:42:16.848427+00:00",
+            "process_observed": "2026-09-10T16:50:39.250420+00:00",
             "fresh_observation": true,
             "controller_alive": true,
             "tasks": 38,
             "jobs": 912,
-            "completed": 30,
+            "completed": 31,
             "running": 32,
             "live_running": 32,
             "probes_passed": 38,
@@ -28644,7 +30282,7 @@
       "scientific_goal_acceptance": "open",
       "actual_speedup": "unmeasured; added concurrency is not a measured throughput ratio",
       "formal_live_total": 248,
-      "completed_cells": 180,
+      "completed_cells": 191,
       "wall_budget_amendment": {
         "observed": "2026-09-10T23:27:04.411539+08:00",
         "reason": "Observed slow native FormulaOne physics exceeds generic wall-clock watchdog despite steady progress.",
