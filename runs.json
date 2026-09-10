@@ -1,28 +1,28 @@
 {
- "updated": "2026-09-10T20:01:21",
+ "updated": "2026-09-10T20:11:52",
  "servers": [
   {
    "name": "tianyiyun-30109",
    "desc": "8x A100-80G, 128 核; SafeRL 训练/评估主力(共享账号,多项目并行)",
    "host": "ide-650ef93f23324f04881bde87cf05d6c1-0f2fcc",
-   "load": "93.07",
+   "load": "96.24",
    "ncpu": 128,
    "cards": [
     {
      "idx": 0,
-     "used_mb": 447,
+     "used_mb": 1143,
      "total_mb": 81920,
-     "util": 0,
+     "util": 32,
      "mine": true,
      "procs": [
-      "safeot: fdpi_strict_eval.py --env SafetyCarGoal2-v0"
+      "safeot: fdpi_safeot_dual.py --env SafetyCarGoal2-v0 --seed 3 --env_n"
      ]
     },
     {
      "idx": 1,
      "used_mb": 3423,
      "total_mb": 81920,
-     "util": 70,
+     "util": 65,
      "mine": true,
      "procs": [
       "safeot: fdpi_safeot_dual.py --env SafetyCarGoal2-v0 --seed 1 --env_n",
@@ -32,7 +32,7 @@
     },
     {
      "idx": 2,
-     "used_mb": 26795,
+     "used_mb": 26915,
      "total_mb": 81920,
      "util": 100,
      "mine": false,
@@ -45,7 +45,7 @@
      "idx": 3,
      "used_mb": 1143,
      "total_mb": 81920,
-     "util": 13,
+     "util": 0,
      "mine": true,
      "procs": [
       "safeot: fdpi_safeot_dual.py --env SafetyCarGoal2-v0 --seed 2 --env_n",
@@ -66,7 +66,7 @@
      "idx": 5,
      "used_mb": 3423,
      "total_mb": 81920,
-     "util": 74,
+     "util": 70,
      "mine": true,
      "procs": [
       "safeot: fdpi_safeot_dual.py --env SafetyCarGoal2-v0 --seed 1 --env_n",
@@ -98,12 +98,12 @@
   },
   {
    "host": "di-20260831162150-5ll6n",
-   "load": "17.52",
+   "load": "8.94",
    "ncpu": 26,
    "cards": [
     {
      "idx": 0,
-     "used_mb": 23436,
+     "used_mb": 23405,
      "total_mb": 81920,
      "util": 22,
      "mine": false,
@@ -113,9 +113,9 @@
     },
     {
      "idx": 1,
-     "used_mb": 23177,
+     "used_mb": 23735,
      "total_mb": 81920,
-     "util": 20,
+     "util": 21,
      "mine": false,
      "procs": [
       "other: ?"
@@ -124,11 +124,11 @@
    ],
    "name": "volc-a100",
    "desc": "2x A100-80G, 128 核, 3PB vepfs; SafeRL 第二算力(DP/ACT 训练共用 GPU); 环境部署中",
-   "snap_time": "2026-09-10T20:01:38"
+   "snap_time": "2026-09-10T20:12:07"
   },
   {
    "host": "dsw-1008180-7cb5796fcd-xt4lh",
-   "load": "127.82",
+   "load": "130.02",
    "ncpu": 184,
    "cards": [
     {
@@ -262,7 +262,7 @@
    ],
    "name": "aliyun-ppu",
    "desc": "16x PPU-ZW810E 96G, 184 核; VLA(Safety-CHORES)评测; 共享(act_train 等他人任务)",
-   "snap_time": "2026-09-10T20:01:32"
+   "snap_time": "2026-09-10T20:12:02"
   }
  ],
  "runs": [
@@ -12224,7 +12224,7 @@
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1789041679.8954291
+    "mtime": 1789042259.366263
    },
    {
     "name": "benchmark_coverage_20260910",
@@ -12259,7 +12259,7 @@
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1789041656.7245185
+    "mtime": 1789042257.3432708
    },
    {
     "name": "cg2_diagnostic_20260910",
@@ -12273,7 +12273,7 @@
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1789041660.7655025
+    "mtime": 1789042260.9402568
    },
    {
     "name": "confirm_20260909_pg2",
@@ -12287,14 +12287,14 @@
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1789041660.7705023
+    "mtime": 1789042260.9432569
    },
    {
     "name": "pg2_bridge_20260910",
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1789041660.0265052
+    "mtime": 1789042260.2532597
    },
    {
     "name": "priority_expansion_20260910",
@@ -12315,14 +12315,14 @@
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1789041636.3715994
+    "mtime": 1789042310.760067
    },
    {
     "name": "resource_expansion_20260910",
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1789041565.9008791
+    "mtime": 1789042300.003108
    },
    {
     "name": "review_20260909_evening",
@@ -12353,6 +12353,6 @@
     "mtime": 1788616474.922712
    }
   ],
-  "n_procs": 76
+  "n_procs": 80
  }
 }
