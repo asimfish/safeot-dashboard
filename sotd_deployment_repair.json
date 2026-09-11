@@ -389,7 +389,7 @@
     "interpretation": "Complete CG2 development cohort; all3 seeds per cell. Error bars are training-seed SD. No monotonic epsilon effect, SOTA or safety acceptance claimed."
   },
   "repair": {
-    "observed": "2026-09-11T06:04:55.472800+00:00",
+    "observed": "2026-09-11T07:02:06.120425+00:00",
     "total": 12,
     "protocol_sha256": "b1f1c06bd9b0108fe9c7942be5adb15844ef88017bd4bca5b1c06ef99a72ef80",
     "controller_alive": true,
@@ -526,10 +526,10 @@
       "trajectory_parity": "not_claimed",
       "matched_probe_budget": true
     },
-    "completed": 0,
+    "completed": 1,
     "failed": 0,
     "running": 6,
-    "pending": 6,
+    "pending": 5,
     "jobs": {
       "smoke_paired_bias_h0p1": {
         "id": "smoke_paired_bias_h0p1",
@@ -704,7 +704,7 @@
         "status": "training",
         "started": "2026-09-10T20:37:00.119616+00:00",
         "gpu": 1,
-        "sample_steps": 1730000
+        "sample_steps": 1910000
       },
       "paired_bias_h0p1_s11": {
         "id": "paired_bias_h0p1_s11",
@@ -716,10 +716,35 @@
         "seed": 11,
         "trainer": "fdpi_deployment_feedback.py",
         "deployment_feedback": "paired-bias",
-        "status": "training",
+        "status": "complete",
         "started": "2026-09-10T20:37:05.124768+00:00",
         "gpu": 1,
-        "sample_steps": 1930000
+        "probe_episodes": 336,
+        "probe_steps": 336000,
+        "checkpoint": "params_1990002.pkl",
+        "checkpoint_sha256": "b5657c1b057a2e639d82c3aaa0a3c85acae7b9b719e1065e5befbd1f65ba1e89",
+        "config_sha256": "35f0db417ebe4d8a43e97c7dce121375888d42bcbd65179151b345945ff9b00d",
+        "finished": "2026-09-11T06:58:57.154410+00:00",
+        "final_eval_sha256": "603c2087ca10fb7369fe5b36d6bfa8c9c94d167bb236fba1770f95074ce804fd",
+        "sample_steps": 2000000,
+        "final_evaluation": {
+          "reward_mean": 22.90517842506096,
+          "channel_means": {
+            "cost_vases_contact": 0.0,
+            "cost_hazards": 40.40064102564103
+          },
+          "hard_any_leak_rate": 0.0,
+          "hard_any_leak_cp95": 0.009555756807037344,
+          "n_episodes": 312,
+          "provenance": {
+            "checkpoint_sha256": "b5657c1b057a2e639d82c3aaa0a3c85acae7b9b719e1065e5befbd1f65ba1e89",
+            "config_sha256": "35f0db417ebe4d8a43e97c7dce121375888d42bcbd65179151b345945ff9b00d",
+            "evaluator_sha256": "461cafdf64a200278f165b3f30ae604af76dc7199798c4f547068eaccef2a35f",
+            "parallel_envs": 1,
+            "seed_protocol": "numpy.default_rng(block).integers(0,2**31-1), serial episode order",
+            "action_policy": "deterministic_unmodified"
+          }
+        }
       },
       "control_h0p02_s11": {
         "id": "control_h0p02_s11",
@@ -734,7 +759,7 @@
         "status": "training",
         "started": "2026-09-10T20:37:10.129280+00:00",
         "gpu": 1,
-        "sample_steps": 1750000
+        "sample_steps": 1930000
       },
       "paired_bias_h0p02_s11": {
         "id": "paired_bias_h0p02_s11",
@@ -749,7 +774,7 @@
         "status": "training",
         "started": "2026-09-10T20:37:15.134253+00:00",
         "gpu": 1,
-        "sample_steps": 1500000
+        "sample_steps": 1670000
       },
       "control_h0p1_s12": {
         "id": "control_h0p1_s12",
@@ -764,7 +789,7 @@
         "status": "training",
         "started": "2026-09-10T20:37:20.140272+00:00",
         "gpu": 1,
-        "sample_steps": 1500000
+        "sample_steps": 1660000
       },
       "paired_bias_h0p1_s12": {
         "id": "paired_bias_h0p1_s12",
@@ -779,7 +804,22 @@
         "status": "training",
         "started": "2026-09-10T20:37:25.137562+00:00",
         "gpu": 1,
-        "sample_steps": 1500000
+        "sample_steps": 1660000
+      },
+      "paired_bias_h0p02_s12": {
+        "id": "paired_bias_h0p02_s12",
+        "margin_mode": "approach",
+        "soft_mode": "lp",
+        "budget_estimator": "primal",
+        "epsilon": 0.02,
+        "eps": 1,
+        "seed": 12,
+        "trainer": "fdpi_deployment_feedback.py",
+        "deployment_feedback": "paired-bias",
+        "status": "training",
+        "started": "2026-09-11T06:58:57.155988+00:00",
+        "gpu": 1,
+        "sample_steps": 10000
       }
     },
     "diagnostics": {
