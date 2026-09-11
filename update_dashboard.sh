@@ -111,6 +111,9 @@ if [ -s frontier_arms.csv ] && [ -x "$TOOLS/.venv-plot/bin/python" ]; then
   "$TOOLS/.venv-plot/bin/python" "$TOOLS/make_paper_fig.py" frontier_arms.csv --suite all --outdir figs >/dev/null 2>&1 \
     && cp figs/fig_frontier_paper.png fig_frontier_paper.png && echo "$(ts) figures ok" >> "$LOG" \
     || echo "$(ts) make_paper_fig failed" >> "$LOG"
+  # per-suite Fisher / Welch significance tables (tab_stats_<suite>.tex + stats_<suite>.json)
+  "$TOOLS/.venv-plot/bin/python" "$TOOLS/suite_stats.py" frontier_arms.csv --suite all --outdir figs >/dev/null 2>&1 \
+    || echo "$(ts) suite_stats failed" >> "$LOG"
 fi
 python3 -c "import json;[json.load(open(f)) for f in ('status.json','runs.json','matrix.json','plan.json')]" 2>/dev/null || { echo "$(ts) invalid json, abort" >> "$LOG"; exit 1; }
 git add -A >/dev/null 2>&1
