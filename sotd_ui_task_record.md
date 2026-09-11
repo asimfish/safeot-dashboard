@@ -14,3 +14,5 @@ Scientificgoalsremainopen.763inventoryentriesstillawaittheirfullprotocol/adapter
 
 
 2026-09-11 pixel continuation (Refs: T-1484): realRGB+all-sensor CNN adapter and full170×8×3=4080 matrix deployed. The page explains environment checks, training/load gates and formal training separately. All945 rows remain;10296 total cells,352 frozenSG tracks and593 unfrozen task/scenario entries. Validation:20 behavior/matrix/fleet regressions,eight realdevelopment training+load checks,109dataartifact checks anddesktop/mobile table tests. Science andwhole-benchmark acceptance remainopen.
+
+2026-09-11 fleet continuation (Refs: T-1484): all945 rows remain; SG375 tracks frozen with10848 policy cells; CHORES543 scenarios frozen with3258 evaluation-instance cells;27 SG tracks unfrozen,9 frozen SG tracks retain missing-asset blockers. UI explicitly distinguishes policy and evaluation units, preserves failed attempts, and labels environment preflight generally. Existing full-queue monitoring runs every180 seconds. Scientific goals remain open.
