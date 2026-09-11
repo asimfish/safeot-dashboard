@@ -1,0 +1,109 @@
+{
+  "date": "2026-09-11",
+  "statistics_boundary": [
+    "simulator",
+    "robot",
+    "controller",
+    "prompt",
+    "budget",
+    "seed",
+    "input_configuration"
+  ],
+  "robocore": {
+    "url": "https://asimfish.github.io/astra-control-dashboard/",
+    "page_sha256": "50af836616bef6dfaed22e142702d37da7e5884c85954e9cb9ae3e7d685d4851",
+    "all_model_episodes": 370,
+    "main_matrix_episodes": 300,
+    "Square_waypoint_none": [
+      0,
+      20
+    ],
+    "Square_waypoint_proprio": [
+      18,
+      20
+    ],
+    "proprio_includes": [
+      "EEF pose",
+      "gripper opening",
+      "EEF image markers",
+      "mm per pixel",
+      "camera image axes",
+      "fixed landmarks"
+    ],
+    "scene_priors": [
+      "peg positions",
+      "object dimensions",
+      "handle grasp instruction",
+      "press-down instruction"
+    ],
+    "interfaces_separate": [
+      "delta",
+      "waypoint",
+      "code"
+    ],
+    "none_boundary": {
+      "source_audit": "parent SSH read robocore agent.py lines 223 and 295–311",
+      "targets": {},
+      "history_retains": [
+        "actual gripper opening in cm",
+        "pos_error_m when waypoint not reached"
+      ],
+      "scene_prior_scope": "listed coordinates and geometry instructions verified in public proprio query; not assumed for none"
+    }
+  },
+  "safeduo_v02": {
+    "source": "bjxy_5090:/home/liyufeng/safeduo/artifacts/astra_fr3_fourcam/episode_v02/",
+    "requests": 20,
+    "stages": [
+      0,
+      4
+    ],
+    "wall_s": 1548.3161958140263,
+    "sim_s": 35.931896,
+    "max_position_error_m": 0.038675516843795776,
+    "max_hand_joint_error_rad": 1.3816038370132446,
+    "source_hashes": {
+      "episode.mp4": "e04e6703848a75d1b60de190064e2f0316c6d584b8e5ac963be8ccceb4eef98a",
+      "manifest.json": "27ee7d675e3fe88d3dc07b67e849addfff9a1d5f6f74a67677cd718195dff8dc",
+      "run_summary.json": "c3e51d3f139a4d6604193a2023f2042959c513a17eed12f142a8a5dbf954466c",
+      "audit.json": "072e5d8a8ebfd213df7765cb0a6dabb1f6ffd8b209d307c0428ba6a3c7f1db28",
+      "evaluation.json": "b279287cfa767c843cac6ebfcbe4fbac990527d37f1c256d7e9efd61de330db7"
+    }
+  },
+  "historical_summary_from_parent_audit": {
+    "safeduo_v01": {
+      "requests": 20,
+      "stages": [
+        0,
+        4
+      ]
+    },
+    "safeduo_threecam": {
+      "stages": [
+        2,
+        4
+      ],
+      "stop": "sphere alarm",
+      "comparison": "not pooled with fourcam"
+    }
+  },
+  "roadmap_status": "planned; not executed as strict input-only experiment",
+  "input_dependency_contract": {
+    "source": "/home/liyufeng/ops/reports/astra_input_dependency_20260911/README.md",
+    "S": "EEF world pose, base pose, gripper width",
+    "J": "7 arm q/qd",
+    "K": "3 fixed-camera K/T and wrist K; never wrist dynamic T",
+    "F": "allowlisted numeric execution errors",
+    "H": "previous two RGB observations and own relative actions",
+    "fixed": "task priors, own text memory, categorical feedback",
+    "boundary": "minus_S keeps J, conditional marginal contribution"
+  },
+  "safeduo_model_visible_protocol_parent_audited": [
+    "4RGB",
+    "dual FR3 q/qd/limits",
+    "flange pose",
+    "hand q/qd",
+    "camera K/T",
+    "numeric execution feedback"
+  ]
+}
