@@ -389,7 +389,7 @@
     "interpretation": "Complete CG2 development cohort; all3 seeds per cell. Error bars are training-seed SD. No monotonic epsilon effect, SOTA or safety acceptance claimed."
   },
   "repair": {
-    "observed": "2026-09-11T15:52:04.439689+00:00",
+    "observed": "2026-09-11T16:25:11.851362+00:00",
     "total": 12,
     "protocol_sha256": "b1f1c06bd9b0108fe9c7942be5adb15844ef88017bd4bca5b1c06ef99a72ef80",
     "controller_alive": true,
@@ -526,9 +526,9 @@
       "trajectory_parity": "not_claimed",
       "matched_probe_budget": true
     },
-    "completed": 6,
+    "completed": 7,
     "failed": 0,
-    "running": 6,
+    "running": 5,
     "pending": 0,
     "jobs": {
       "smoke_paired_bias_h0p1": {
@@ -941,7 +941,7 @@
         "seed": 12,
         "trainer": "fdpi_deployment_feedback.py",
         "deployment_feedback": "paired-bias",
-        "status": "evaluating",
+        "status": "complete",
         "started": "2026-09-11T06:58:57.155988+00:00",
         "gpu": 1,
         "probe_episodes": 336,
@@ -949,7 +949,27 @@
         "checkpoint": "params_1990002.pkl",
         "checkpoint_sha256": "6fd0414286ad04ebcd272486cbe7a1585801929162a13a6eeb3f45c2638f3fc3",
         "config_sha256": "ca9b8e0674bc1d89afa5f03e028ca9c0f1a6ea7a08e8adc1b49dd8937645bdbe",
-        "sample_steps": 2000000
+        "finished": "2026-09-11T16:15:42.785799+00:00",
+        "final_eval_sha256": "ca6480c893e1749ccd3718a9d06ddde829bd2040151f3e902147cea1fdbfb497",
+        "sample_steps": 2000000,
+        "final_evaluation": {
+          "reward_mean": 11.915326230453356,
+          "channel_means": {
+            "cost_vases_contact": 0.0,
+            "cost_hazards": 20.307692307692307
+          },
+          "hard_any_leak_rate": 0.0,
+          "hard_any_leak_cp95": 0.009555756807037344,
+          "n_episodes": 312,
+          "provenance": {
+            "checkpoint_sha256": "6fd0414286ad04ebcd272486cbe7a1585801929162a13a6eeb3f45c2638f3fc3",
+            "config_sha256": "ca9b8e0674bc1d89afa5f03e028ca9c0f1a6ea7a08e8adc1b49dd8937645bdbe",
+            "evaluator_sha256": "461cafdf64a200278f165b3f30ae604af76dc7199798c4f547068eaccef2a35f",
+            "parallel_envs": 1,
+            "seed_protocol": "numpy.default_rng(block).integers(0,2**31-1), serial episode order",
+            "action_policy": "deterministic_unmodified"
+          }
+        }
       },
       "control_h0p1_s13": {
         "id": "control_h0p1_s13",
@@ -964,7 +984,7 @@
         "status": "training",
         "started": "2026-09-11T08:00:28.374027+00:00",
         "gpu": 1,
-        "sample_steps": 1570000
+        "sample_steps": 1690000
       },
       "control_h0p02_s12": {
         "id": "control_h0p02_s12",
@@ -979,7 +999,7 @@
         "status": "training",
         "started": "2026-09-11T08:08:34.125583+00:00",
         "gpu": 1,
-        "sample_steps": 1610000
+        "sample_steps": 1730000
       },
       "paired_bias_h0p1_s13": {
         "id": "paired_bias_h0p1_s13",
@@ -994,7 +1014,7 @@
         "status": "training",
         "started": "2026-09-11T09:49:23.642389+00:00",
         "gpu": 1,
-        "sample_steps": 1040000
+        "sample_steps": 1140000
       },
       "control_h0p02_s13": {
         "id": "control_h0p02_s13",
@@ -1009,7 +1029,7 @@
         "status": "training",
         "started": "2026-09-11T09:52:19.932670+00:00",
         "gpu": 1,
-        "sample_steps": 1040000
+        "sample_steps": 1140000
       },
       "paired_bias_h0p02_s13": {
         "id": "paired_bias_h0p02_s13",
@@ -1024,7 +1044,7 @@
         "status": "training",
         "started": "2026-09-11T09:53:05.626427+00:00",
         "gpu": 1,
-        "sample_steps": 1120000
+        "sample_steps": 1250000
       }
     },
     "diagnostics": {
@@ -2499,7 +2519,7 @@
         "seed": 12,
         "hard_tolerance": 0.02,
         "feedback": "paired-bias",
-        "status": "evaluating",
+        "status": "reported_complete_unvalidated",
         "validated": false
       },
       {
@@ -2583,7 +2603,12 @@
         "aggregate": null
       }
     ],
-    "integrity_errors": [],
+    "integrity_errors": [
+      {
+        "job": "paired_bias_h0p02_s12",
+        "error_type": "FileNotFoundError"
+      }
+    ],
     "all_seed_comparisons_ready": false,
     "scientific_goal_acceptance": "open",
     "limits": "Fixed12-policy exploratory CG2 matrix; partial paired rows are descriptive only. Aggregate comparisons require all3training seeds at a fixed hard tolerance. No checkpoint selection, automatic promotion, SOTA or zero-risk conclusion."
