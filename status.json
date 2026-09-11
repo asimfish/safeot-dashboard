@@ -1,5 +1,5 @@
 {
- "updated": "2026-09-12T01:46:15",
+ "updated": "2026-09-12T03:15:13",
  "goals": [
   {
    "id": "G1",
@@ -48,14 +48,26 @@
   }
  ],
  "focus": [
-  "Circle 4/4 定稿(24 臂全 n=3、936 集):可行性端点(FDPI/typed δ=0)四任务逐集泄漏 2.6–61%;typed 状态边距 sm/smg 0.00–0.11% 且保留 FDPI 回报 80–99%(PC2 smg 34.23@0.00%);SAC-Lag/Pen 到零靠坍塌(Car 回报 0.15–2.4)。HARVEST §30。",
-  "Velocity 4/6 齐(SWV/WAV/ANV/HUV):Ant/Walker 上 smg ≤0.11% 保留 88–97% 回报,SAC-Lag Ant 18.8%;**Swimmer 状态边距失败案例**(sm/smg 回报 6–12 vs 42,如实写 Limitations)。HCV 18 终档 + HOV 12 终档在 volc CPU 12 lane 验证;HOV v1b/v1gg 6 路在 30109 重跑。HARVEST §31。",
+  "**Point/Car 16 导航任务全部 n=3 入表**(L2 6/6、L1 6/6、Circle 4/4)+ Velocity 5/6(HOV 4/6 臂)。Button 四任务(PB1/CB1/PB2/CB2)趴地:六族回报 ≤1.4,不做主张,附录覆盖表;typed 支配 FDPI 但漏 2.6–15%。HARVEST §30–§32。",
+  "Velocity:Ant/Walker smg ≤0.11% 保留 88–97% 回报;Humanoid SAC-Lag 5844@2.88% vs smg 5442@0.43%;Swimmer/HalfCheetah 状态边距过保守(HCV 白丢 10%,SWV 丢 75–85%)→ 正确臂 δ=0,如实报;Hopper 方差极大。HOV v1b/v1gg 6 路在 30109 重跑(~1 h/档,03:00 UTC 约 2/10 档)。",
   "09-11 事故:volc GPU0 CUDA_ERROR_ILLEGAL_ADDRESS(他租户 MPS)拖死 5 路 HOV + 验证 lane 14 h;已清理、改名 crash0911_*、6 路挪 30109 CPU;volc 验证 GPU→CPU。教训:共享 GPU 有 MPS 时不放长训练。",
   "L1:Goal/Push 4/4 定稿 + .75g 刀位齐(四任务零违规、回报低于 .8g → 刀位单调,.8g 为 L1 工作点;PP1 .75g s1 09-09 死亡,30109 补跑);Button PB1/CB1 18/18 终档验证中(PB1 12、CB1 15 已验)。L2 CB2 18/18 终档验证中(1/18)。",
   "阿里云注意:另一条 SafeOT 线 W2(/mnt/data/safeot_w2 full_vision/full_native)09-11 起占 ~160 核,只剩 ~19 核空闲;keeper idle_cores 只数自家进程,发车前先看 /proc/stat。",
   "【待 owner】论文主线切换 + 08-30 ICLR tex 源路径"
  ],
  "verdicts": [
+  {
+   "date": "09-12",
+   "topic": "Button 三任务定稿(PB1/CB1/CB2,18 臂全 n=3、936 集)→ L2 6/6、L1 6/6 齐",
+   "verdict": "与 PB2 同款趴地:六族回报 ≤1.4(Goal 26–34),1M 步内无人学会任务,不做安全性主张。如实列:typed 支配 FDPI(CB1 .8g 1.24@15.5% vs 1.26@22.8%;CB2 δ=0 1.36@16.5% vs 1.15@18.4%;PB1 .8g 3.74% vs 5.88%),刀位单调,但 typed 最好仍漏 2.6–15%;能到 ~1–3% 的只有回报为负的 SAC-Lag/Pen(停摆)。放附录覆盖表。",
+   "evidence": "HARVEST §32;figs/tab_frontier_l1.tex + tab_frontier_l2.tex;paper/tables 同名;FRONTIER_WRITEUP_EN.md Button 节"
+  },
+  {
+   "date": "09-12",
+   "topic": "HalfCheetahVelocity 定稿(n=3)+ Hopper 4/6",
+   "verdict": "HCV 六族违规≈0(δ=0 2893@0.11%、Lag 2882、FDPI 2868、Pen 2610、smg 2595、sm 2593 @0.00%):阈值宽松只能比回报,状态边距白丢 10% → 正确臂 δ=0,sm/smg 如实报过保守。Hopper 4 臂全 0%(Lag 902±294、Pen 800±535、FDPI 761±580、sm 518±10),方差极大,等 v1b/v1gg。",
+   "evidence": "HARVEST §32;figs/tab_frontier_velocity.tex"
+  },
   {
    "date": "09-12",
    "topic": "Circle 四任务定稿(PC1/PC2/CC1/CC2,24 臂全 n=3、936 集)",
@@ -211,31 +223,29 @@
  ],
  "queue": [
   {
-   "task": "volc CPU 12 lane 消化 CB1 3 / CB2 17 / HCV 13 / PB1 6 / HOV 12 臂",
-   "eta": "~3–5 h",
-   "owner": "verify_loop@volc(核 64-87)",
-   "note": "GPU lane 因 MPS 事故停用"
-  },
-  {
-   "task": "30109:HOV v1b/v1gg 6 路 + v1e75_pp1_s1 训练 → verify_loop CPU 车道",
-   "eta": "训练 ~10 h + 验证 ~1 h",
+   "task": "30109:HOV v1b/v1gg 6 路(~2/10 档)+ v1e75_pp1_s1(1/10)→ verify_loop CPU 车道",
+   "eta": "训练 ~8 h + 验证 ~1 h(≈ 09-12 12:00–13:00 北京)",
    "owner": "30109 CPU",
-   "note": "09-11 17:18 UTC 发车"
+   "note": "load 160 有竞争"
   },
   {
-   "task": "HCV/HOV 齐后:Velocity 6/6 定稿(HARVEST §32、写作稿 Velocity 节转定稿、paper/tables)",
+   "task": "HOV 齐后:Velocity 6/6 定稿(HARVEST §33、写作稿 Velocity 节转定稿、paper/tables/tab_frontier_velocity)",
+   "eta": "HOV 之后",
+   "owner": "agent",
+   "note": "22/22 收官"
+  },
+  {
+   "task": "全套件收官:headline_stats(Fisher/Welch)扩到 Circle/Velocity/L1;附录覆盖总表;status 22/22",
    "eta": "HOV 之后",
    "owner": "agent",
    "note": ""
-  },
-  {
-   "task": "PB1/CB1/CB2 验完:L1 Button 定稿 + L2 六任务全表(tab_frontier_l2)",
-   "eta": "~5 h",
-   "owner": "agent",
-   "note": "Button 回报≈0,主张要克制"
   }
  ],
  "changelog": [
+  {
+   "date": "2026-09-12 03:15",
+   "text": "volc 51 臂 CPU 验证完毕:Button 三任务(PB1/CB1/CB2)定稿趴地不做主张、HCV 定稿(HARVEST §32);Point/Car 16 导航任务全部 n=3 入表;论文目录同步 l1/l2/circle 图表。"
+  },
   {
    "date": "2026-09-12 01:46",
    "text": "Circle 4/4 定稿(HARVEST §30)+ Velocity 4/6 初读(§31)+ L1 .75g 刀位;09-11 volc GPU0 MPS 事故处置:6 路 HOV 挪 30109 重跑、volc 验证 GPU→CPU 12 lane;修看板收集器(30109 CSV 从不重算,anv/huv 49 行漏入);阿里云被 W2 占 160 核。"
@@ -406,8 +416,8 @@
     {
      "name": "Level-2 安全导航 · Point/Car x Goal/Button/Push(6 任务)",
      "total": 6,
-     "covered": 5,
-     "note": "Goal/Push 4/4 完成;PB2 趴地;CB2 18/18 终档在 volc CPU 验证",
+     "covered": 6,
+     "note": "6/6 完成:Goal/Push 四任务 typed 支配;PB2/CB2 趴地(回报 ≤1.4)不做主张",
      "tasks": [
       {
        "id": "PG2",
@@ -453,7 +463,7 @@
        "budget": "软 25/集;2M 步",
        "baselines": "FDPI、SAC-Lag、SAC-Pen c5",
        "covered": true,
-       "status": "18/18 终档;volc CPU 12 lane 验证中(1/18 已验)",
+       "status": "完成:6 臂全 n=3;趴地(回报 ≤1.36),typed δ=0 1.36@16.5% vs FDPI 1.15@18.4%,不做主张",
        "status_kind": "training"
       },
       {
@@ -472,7 +482,7 @@
      "name": "Level-1 安全导航 · Point/Car x Goal/Button/Push(6 任务)",
      "total": 6,
      "covered": 6,
-     "note": "Goal1/Push1 单通道 hazards(逐集 any-cost + 官方 J_c/CSR@25 双口径);Button1 三通道。Goal/Push 4/4 定稿 + .75g 刀位;Button 18/18 终档验证中",
+     "note": "6/6 完成:Goal/Push 定稿 + .75g 刀位;Button1 两任务趴地(回报 ≤1.3)不做主张",
      "tasks": [
       {
        "id": "PG1",
@@ -502,7 +512,7 @@
        "baselines": "同上",
        "covered": true,
        "status_kind": "training",
-       "status": "18/18 终档;volc CPU 验证中(12/18 已验)"
+       "status": "完成:6 臂全 n=3;趴地(回报 ≤0.54),typed .8g 3.74% vs FDPI 5.88%;Lag −0.35@0.85% 停摆"
       },
       {
        "id": "CB1",
@@ -512,7 +522,7 @@
        "baselines": "同上",
        "covered": true,
        "status_kind": "training",
-       "status": "18/18 终档;volc CPU 验证中(15/18 已验)"
+       "status": "完成:6 臂全 n=3;趴地(回报 ≤1.26),typed .8g 1.24@15.5% vs FDPI 1.26@22.8%;Lag/Pen 负回报"
       },
       {
        "id": "PP1",
@@ -595,7 +605,7 @@
      "name": "安全速度控制(HalfCheetah/Hopper/Swimmer/Walker2d/Ant/Humanoid)",
      "total": 6,
      "covered": 6,
-     "note": "成本=速度超阈值;边距=速度到阈值 0.1·v_thr,门控=加速时才罚。4/6 齐(SWV/WAV/ANV/HUV);HCV/HOV 验证/重跑中",
+     "note": "成本=速度超阈值;边距=0.1·v_thr,门控=加速时才罚。5/6 齐;HOV 4/6 臂,v1b/v1gg 30109 重跑中",
      "tasks": [
       {
        "id": "hcv",
@@ -605,7 +615,7 @@
        "baselines": "FDPI、SAC-Lag、SAC-Pen c5",
        "covered": true,
        "status_kind": "training",
-       "status": "18/18 终档;volc CPU 验证中(5/18 已验)"
+       "status": "完成:6 臂全 n=3;六族≈0 违规,δ=0 2893@0.11% 最高;sm/smg 过保守丢 10%"
       },
       {
        "id": "hov",
@@ -615,7 +625,7 @@
        "baselines": "FDPI、SAC-Lag、SAC-Pen c5",
        "covered": true,
        "status_kind": "paused",
-       "status": "12/18 终档(fdpi/v1g/lag/pen5)验证中;v1b/v1gg 6 路 09-11 GPU0 MPS 事故后在 30109 CPU 重跑(3 核/路,~10 h)"
+       "status": "4/6 臂 n=3(Lag 902±294 / Pen 800±535 / FDPI 761±580 / sm 518±10,全 0%);v1b/v1gg 6 路 30109 CPU 重跑(~1 h/档)"
       },
       {
        "id": "swv",
