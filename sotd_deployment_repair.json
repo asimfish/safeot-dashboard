@@ -389,7 +389,7 @@
     "interpretation": "Complete CG2 development cohort; all3 seeds per cell. Error bars are training-seed SD. No monotonic epsilon effect, SOTA or safety acceptance claimed."
   },
   "repair": {
-    "observed": "2026-09-11T18:16:34.003969+00:00",
+    "observed": "2026-09-11T18:19:35.086040+00:00",
     "total": 12,
     "protocol_sha256": "b1f1c06bd9b0108fe9c7942be5adb15844ef88017bd4bca5b1c06ef99a72ef80",
     "controller_alive": true,
@@ -526,9 +526,9 @@
       "trajectory_parity": "not_claimed",
       "matched_probe_budget": true
     },
-    "completed": 8,
+    "completed": 9,
     "failed": 0,
-    "running": 4,
+    "running": 3,
     "pending": 0,
     "jobs": {
       "smoke_paired_bias_h0p1": {
@@ -981,7 +981,7 @@
         "seed": 13,
         "trainer": "fdpi_deployment_feedback.py",
         "deployment_feedback": "control",
-        "status": "evaluating",
+        "status": "complete",
         "started": "2026-09-11T08:00:28.374027+00:00",
         "gpu": 1,
         "probe_episodes": 336,
@@ -989,7 +989,27 @@
         "checkpoint": "params_1990002.pkl",
         "checkpoint_sha256": "29baaef9cb3cd004284c29be8b56679bc961526d58335269f93f1ac12737e4d6",
         "config_sha256": "85c948c9790e66af5299c6b8d1b6011bd870cd9eed417a359ccd4095e000736c",
-        "sample_steps": 2000000
+        "finished": "2026-09-11T18:17:07.947270+00:00",
+        "final_eval_sha256": "578705a43d333d65c568fd53175a513a1d6717f419f47421ba7a2c1a82821dbe",
+        "sample_steps": 2000000,
+        "final_evaluation": {
+          "reward_mean": 20.601822232292434,
+          "channel_means": {
+            "cost_vases_contact": 0.08012820512820513,
+            "cost_hazards": 16.846153846153847
+          },
+          "hard_any_leak_rate": 0.016025641025641024,
+          "hard_any_leak_cp95": 0.033398624446883726,
+          "n_episodes": 312,
+          "provenance": {
+            "checkpoint_sha256": "29baaef9cb3cd004284c29be8b56679bc961526d58335269f93f1ac12737e4d6",
+            "config_sha256": "85c948c9790e66af5299c6b8d1b6011bd870cd9eed417a359ccd4095e000736c",
+            "evaluator_sha256": "461cafdf64a200278f165b3f30ae604af76dc7199798c4f547068eaccef2a35f",
+            "parallel_envs": 1,
+            "seed_protocol": "numpy.default_rng(block).integers(0,2**31-1), serial episode order",
+            "action_policy": "deterministic_unmodified"
+          }
+        }
       },
       "control_h0p02_s12": {
         "id": "control_h0p02_s12",
@@ -1044,7 +1064,7 @@
         "status": "training",
         "started": "2026-09-11T09:49:23.642389+00:00",
         "gpu": 1,
-        "sample_steps": 1490000
+        "sample_steps": 1500000
       },
       "control_h0p02_s13": {
         "id": "control_h0p02_s13",
@@ -1074,7 +1094,7 @@
         "status": "training",
         "started": "2026-09-11T09:53:05.626427+00:00",
         "gpu": 1,
-        "sample_steps": 1670000
+        "sample_steps": 1690000
       }
     },
     "diagnostics": {
@@ -2424,9 +2444,9 @@
   "extra_probe_budget": "Both arms: up to336k extra simulation steps, separately from2M training steps and312 final episodes.",
   "paired_final_recount": {
     "total": 12,
-    "validated_policies": 7,
+    "validated_policies": 9,
     "expected_final_episodes": 3744,
-    "validated_final_episodes": 2184,
+    "validated_final_episodes": 2808,
     "rows": [
       {
         "id": "control_h0p1_s11",
@@ -2541,8 +2561,18 @@
         "seed": 12,
         "hard_tolerance": 0.02,
         "feedback": "control",
-        "status": "reported_complete_unvalidated",
-        "validated": false
+        "status": "complete",
+        "validated": true,
+        "episodes": 312,
+        "reward": 12.70590381487224,
+        "soft_cost": 24.044871794871796,
+        "soft_budget": 25.0,
+        "soft_feasible": true,
+        "hard_events": 2,
+        "hard_rate": 0.00641025641025641,
+        "hard_cp95_upper": 0.02004035719137593,
+        "probe_steps": 336000,
+        "final_eval_sha256": "738675491db3a22f496f3f4dcd1f57269ea58b64bfc236183e9b9bc051cf8c46"
       },
       {
         "id": "paired_bias_h0p02_s12",
@@ -2567,8 +2597,18 @@
         "seed": 13,
         "hard_tolerance": 0.1,
         "feedback": "control",
-        "status": "evaluating",
-        "validated": false
+        "status": "complete",
+        "validated": true,
+        "episodes": 312,
+        "reward": 20.601822232292434,
+        "soft_cost": 16.846153846153847,
+        "soft_budget": 25.0,
+        "soft_feasible": true,
+        "hard_events": 5,
+        "hard_rate": 0.016025641025641024,
+        "hard_cp95_upper": 0.033398624446883726,
+        "probe_steps": 336000,
+        "final_eval_sha256": "578705a43d333d65c568fd53175a513a1d6717f419f47421ba7a2c1a82821dbe"
       },
       {
         "id": "paired_bias_h0p1_s13",
@@ -2625,6 +2665,16 @@
         "hard_rate_delta": 0.0,
         "control_soft_feasible": true,
         "treatment_soft_feasible": true
+      },
+      {
+        "hard_tolerance": 0.02,
+        "seed": 12,
+        "reward_delta": -0.7905775844188838,
+        "reward_relative_delta": -0.06222127885884938,
+        "soft_cost_delta": -3.737179487179489,
+        "hard_rate_delta": -0.00641025641025641,
+        "control_soft_feasible": true,
+        "treatment_soft_feasible": true
       }
     ],
     "groups": [
@@ -2638,17 +2688,12 @@
       {
         "hard_tolerance": 0.02,
         "required_seed_pairs": 3,
-        "completed_seed_pairs": 1,
+        "completed_seed_pairs": 2,
         "all_seeds_ready": false,
         "aggregate": null
       }
     ],
-    "integrity_errors": [
-      {
-        "job": "control_h0p02_s12",
-        "error_type": "FileNotFoundError"
-      }
-    ],
+    "integrity_errors": [],
     "all_seed_comparisons_ready": false,
     "scientific_goal_acceptance": "open",
     "limits": "Fixed12-policy exploratory CG2 matrix; partial paired rows are descriptive only. Aggregate comparisons require all3training seeds at a fixed hard tolerance. No checkpoint selection, automatic promotion, SOTA or zero-risk conclusion."
