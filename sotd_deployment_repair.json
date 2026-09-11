@@ -389,7 +389,7 @@
     "interpretation": "Complete CG2 development cohort; all3 seeds per cell. Error bars are training-seed SD. No monotonic epsilon effect, SOTA or safety acceptance claimed."
   },
   "repair": {
-    "observed": "2026-09-11T20:10:58.540369+00:00",
+    "observed": "2026-09-11T20:17:00.471127+00:00",
     "total": 12,
     "protocol_sha256": "b1f1c06bd9b0108fe9c7942be5adb15844ef88017bd4bca5b1c06ef99a72ef80",
     "controller_alive": true,
@@ -1064,7 +1064,7 @@
         "status": "training",
         "started": "2026-09-11T09:49:23.642389+00:00",
         "gpu": 1,
-        "sample_steps": 1860000
+        "sample_steps": 1880000
       },
       "control_h0p02_s13": {
         "id": "control_h0p02_s13",
@@ -1079,7 +1079,7 @@
         "status": "training",
         "started": "2026-09-11T09:52:19.932670+00:00",
         "gpu": 1,
-        "sample_steps": 1870000
+        "sample_steps": 1890000
       },
       "paired_bias_h0p02_s13": {
         "id": "paired_bias_h0p02_s13",
@@ -2469,9 +2469,9 @@
   "extra_probe_budget": "Both arms: up to336k extra simulation steps, separately from2M training steps and312 final episodes.",
   "paired_final_recount": {
     "total": 12,
-    "validated_policies": 9,
+    "validated_policies": 10,
     "expected_final_episodes": 3744,
-    "validated_final_episodes": 2808,
+    "validated_final_episodes": 3120,
     "rows": [
       {
         "id": "control_h0p1_s11",
@@ -2656,8 +2656,18 @@
         "seed": 13,
         "hard_tolerance": 0.02,
         "feedback": "paired-bias",
-        "status": "reported_complete_unvalidated",
-        "validated": false
+        "status": "complete",
+        "validated": true,
+        "episodes": 312,
+        "reward": 11.905690771775346,
+        "soft_cost": 21.326923076923077,
+        "soft_budget": 25.0,
+        "soft_feasible": true,
+        "hard_events": 4,
+        "hard_rate": 0.01282051282051282,
+        "hard_cp95_upper": 0.029096557340277707,
+        "probe_steps": 336000,
+        "final_eval_sha256": "59f3c3e60f3d001f61615b892a7b9c5d53e0ebf1b39aa17358f1caf0095610ef"
       }
     ],
     "pairs": [
@@ -2718,12 +2728,7 @@
         "aggregate": null
       }
     ],
-    "integrity_errors": [
-      {
-        "job": "paired_bias_h0p02_s13",
-        "error_type": "FileNotFoundError"
-      }
-    ],
+    "integrity_errors": [],
     "all_seed_comparisons_ready": false,
     "scientific_goal_acceptance": "open",
     "limits": "Fixed12-policy exploratory CG2 matrix; partial paired rows are descriptive only. Aggregate comparisons require all3training seeds at a fixed hard tolerance. No checkpoint selection, automatic promotion, SOTA or zero-risk conclusion."
