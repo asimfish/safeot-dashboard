@@ -389,7 +389,7 @@
     "interpretation": "Complete CG2 development cohort; all3 seeds per cell. Error bars are training-seed SD. No monotonic epsilon effect, SOTA or safety acceptance claimed."
   },
   "repair": {
-    "observed": "2026-09-11T19:37:51.846685+00:00",
+    "observed": "2026-09-11T20:10:58.540369+00:00",
     "total": 12,
     "protocol_sha256": "b1f1c06bd9b0108fe9c7942be5adb15844ef88017bd4bca5b1c06ef99a72ef80",
     "controller_alive": true,
@@ -526,9 +526,9 @@
       "trajectory_parity": "not_claimed",
       "matched_probe_budget": true
     },
-    "completed": 9,
+    "completed": 10,
     "failed": 0,
-    "running": 3,
+    "running": 2,
     "pending": 0,
     "jobs": {
       "smoke_paired_bias_h0p1": {
@@ -1064,7 +1064,7 @@
         "status": "training",
         "started": "2026-09-11T09:49:23.642389+00:00",
         "gpu": 1,
-        "sample_steps": 1750000
+        "sample_steps": 1860000
       },
       "control_h0p02_s13": {
         "id": "control_h0p02_s13",
@@ -1079,7 +1079,7 @@
         "status": "training",
         "started": "2026-09-11T09:52:19.932670+00:00",
         "gpu": 1,
-        "sample_steps": 1760000
+        "sample_steps": 1870000
       },
       "paired_bias_h0p02_s13": {
         "id": "paired_bias_h0p02_s13",
@@ -1091,10 +1091,35 @@
         "seed": 13,
         "trainer": "fdpi_deployment_feedback.py",
         "deployment_feedback": "paired-bias",
-        "status": "training",
+        "status": "complete",
         "started": "2026-09-11T09:53:05.626427+00:00",
         "gpu": 1,
-        "sample_steps": 1990000
+        "probe_episodes": 336,
+        "probe_steps": 336000,
+        "checkpoint": "params_1990002.pkl",
+        "checkpoint_sha256": "e7a88f2c05f454d7eb20f93ed10b0e278d26b9eda5e10afa88d121881ab37520",
+        "config_sha256": "bdf8e3ce0b83e3e04d92719223e1322433abe342bfe148fe4ce11f0b945178db",
+        "finished": "2026-09-11T20:08:44.021821+00:00",
+        "final_eval_sha256": "59f3c3e60f3d001f61615b892a7b9c5d53e0ebf1b39aa17358f1caf0095610ef",
+        "sample_steps": 2000000,
+        "final_evaluation": {
+          "reward_mean": 11.905690771775346,
+          "channel_means": {
+            "cost_vases_contact": 0.019230769230769232,
+            "cost_hazards": 21.326923076923077
+          },
+          "hard_any_leak_rate": 0.01282051282051282,
+          "hard_any_leak_cp95": 0.029096557340277707,
+          "n_episodes": 312,
+          "provenance": {
+            "checkpoint_sha256": "e7a88f2c05f454d7eb20f93ed10b0e278d26b9eda5e10afa88d121881ab37520",
+            "config_sha256": "bdf8e3ce0b83e3e04d92719223e1322433abe342bfe148fe4ce11f0b945178db",
+            "evaluator_sha256": "461cafdf64a200278f165b3f30ae604af76dc7199798c4f547068eaccef2a35f",
+            "parallel_envs": 1,
+            "seed_protocol": "numpy.default_rng(block).integers(0,2**31-1), serial episode order",
+            "action_policy": "deterministic_unmodified"
+          }
+        }
       }
     },
     "diagnostics": {
@@ -2631,7 +2656,7 @@
         "seed": 13,
         "hard_tolerance": 0.02,
         "feedback": "paired-bias",
-        "status": "training",
+        "status": "reported_complete_unvalidated",
         "validated": false
       }
     ],
@@ -2693,7 +2718,12 @@
         "aggregate": null
       }
     ],
-    "integrity_errors": [],
+    "integrity_errors": [
+      {
+        "job": "paired_bias_h0p02_s13",
+        "error_type": "FileNotFoundError"
+      }
+    ],
     "all_seed_comparisons_ready": false,
     "scientific_goal_acceptance": "open",
     "limits": "Fixed12-policy exploratory CG2 matrix; partial paired rows are descriptive only. Aggregate comparisons require all3training seeds at a fixed hard tolerance. No checkpoint selection, automatic promotion, SOTA or zero-risk conclusion."
