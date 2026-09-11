@@ -389,10 +389,10 @@
     "interpretation": "Complete CG2 development cohort; all3 seeds per cell. Error bars are training-seed SD. No monotonic epsilon effect, SOTA or safety acceptance claimed."
   },
   "repair": {
-    "observed": "2026-09-11T21:29:15.299491+00:00",
+    "observed": "2026-09-11T21:35:16.457884+00:00",
     "total": 12,
     "protocol_sha256": "b1f1c06bd9b0108fe9c7942be5adb15844ef88017bd4bca5b1c06ef99a72ef80",
-    "controller_alive": true,
+    "controller_alive": false,
     "diagnostic_alive": false,
     "diagnostic_report": {
       "jobs": [
@@ -526,9 +526,9 @@
       "trajectory_parity": "not_claimed",
       "matched_probe_budget": true
     },
-    "completed": 10,
+    "completed": 12,
     "failed": 0,
-    "running": 2,
+    "running": 0,
     "pending": 0,
     "jobs": {
       "smoke_paired_bias_h0p1": {
@@ -1061,7 +1061,7 @@
         "seed": 13,
         "trainer": "fdpi_deployment_feedback.py",
         "deployment_feedback": "paired-bias",
-        "status": "evaluating",
+        "status": "complete",
         "started": "2026-09-11T09:49:23.642389+00:00",
         "gpu": 1,
         "probe_episodes": 336,
@@ -1069,7 +1069,27 @@
         "checkpoint": "params_1990002.pkl",
         "checkpoint_sha256": "0484ef3e704a553b3fa6700d52071fc1966621931bd5e392e977b2f39b3b92aa",
         "config_sha256": "f02e0bc61c8f2bb435e3b5bd1af35def1cd325dad893e76aeccea5a1c537dc2f",
-        "sample_steps": 2000000
+        "finished": "2026-09-11T21:33:42.206939+00:00",
+        "final_eval_sha256": "aa01b0f0cf492aeb47e57de79ac2923338e0af7b25af5b0713cfa312e6ff4538",
+        "sample_steps": 2000000,
+        "final_evaluation": {
+          "reward_mean": 22.876909029622215,
+          "channel_means": {
+            "cost_vases_contact": 0.003205128205128205,
+            "cost_hazards": 36.2724358974359
+          },
+          "hard_any_leak_rate": 0.003205128205128205,
+          "hard_any_leak_cp95": 0.015113773151500549,
+          "n_episodes": 312,
+          "provenance": {
+            "checkpoint_sha256": "0484ef3e704a553b3fa6700d52071fc1966621931bd5e392e977b2f39b3b92aa",
+            "config_sha256": "f02e0bc61c8f2bb435e3b5bd1af35def1cd325dad893e76aeccea5a1c537dc2f",
+            "evaluator_sha256": "461cafdf64a200278f165b3f30ae604af76dc7199798c4f547068eaccef2a35f",
+            "parallel_envs": 1,
+            "seed_protocol": "numpy.default_rng(block).integers(0,2**31-1), serial episode order",
+            "action_policy": "deterministic_unmodified"
+          }
+        }
       },
       "control_h0p02_s13": {
         "id": "control_h0p02_s13",
@@ -1081,7 +1101,7 @@
         "seed": 13,
         "trainer": "fdpi_deployment_feedback.py",
         "deployment_feedback": "control",
-        "status": "evaluating",
+        "status": "complete",
         "started": "2026-09-11T09:52:19.932670+00:00",
         "gpu": 1,
         "probe_episodes": 336,
@@ -1089,7 +1109,27 @@
         "checkpoint": "params_1990002.pkl",
         "checkpoint_sha256": "519ba36441dbaeec350324f36b93132b2758810392d1b6b8350943523f764124",
         "config_sha256": "04649172a405a9ac396f4203ea058f06db2aecb7dcf09f8510e4058543aeb940",
-        "sample_steps": 2000000
+        "finished": "2026-09-11T21:29:31.005379+00:00",
+        "final_eval_sha256": "32a1abfac831a9e1f31199c157f5a420ff1e486795958a85c4dafb4937e69a82",
+        "sample_steps": 2000000,
+        "final_evaluation": {
+          "reward_mean": 9.40055014732854,
+          "channel_means": {
+            "cost_vases_contact": 0.0,
+            "cost_hazards": 14.064102564102564
+          },
+          "hard_any_leak_rate": 0.0,
+          "hard_any_leak_cp95": 0.009555756807037344,
+          "n_episodes": 312,
+          "provenance": {
+            "checkpoint_sha256": "519ba36441dbaeec350324f36b93132b2758810392d1b6b8350943523f764124",
+            "config_sha256": "04649172a405a9ac396f4203ea058f06db2aecb7dcf09f8510e4058543aeb940",
+            "evaluator_sha256": "461cafdf64a200278f165b3f30ae604af76dc7199798c4f547068eaccef2a35f",
+            "parallel_envs": 1,
+            "seed_protocol": "numpy.default_rng(block).integers(0,2**31-1), serial episode order",
+            "action_policy": "deterministic_unmodified"
+          }
+        }
       },
       "paired_bias_h0p02_s13": {
         "id": "paired_bias_h0p02_s13",
@@ -2469,7 +2509,7 @@
         "interpretation": "Development diagnostic, same checkpoint/reset seeds; no training or final-test reuse."
       }
     },
-    "status": "running",
+    "status": "complete",
     "new_method_performance_accepted": false,
     "whole_benchmark_complete": false
   },
@@ -2479,9 +2519,9 @@
   "extra_probe_budget": "Both arms: up to336k extra simulation steps, separately from2M training steps and312 final episodes.",
   "paired_final_recount": {
     "total": 12,
-    "validated_policies": 10,
+    "validated_policies": 12,
     "expected_final_episodes": 3744,
-    "validated_final_episodes": 3120,
+    "validated_final_episodes": 3744,
     "rows": [
       {
         "id": "control_h0p1_s11",
@@ -2650,16 +2690,36 @@
         "seed": 13,
         "hard_tolerance": 0.1,
         "feedback": "paired-bias",
-        "status": "evaluating",
-        "validated": false
+        "status": "complete",
+        "validated": true,
+        "episodes": 312,
+        "reward": 22.876909029622215,
+        "soft_cost": 36.2724358974359,
+        "soft_budget": 25.0,
+        "soft_feasible": false,
+        "hard_events": 1,
+        "hard_rate": 0.003205128205128205,
+        "hard_cp95_upper": 0.015113773151500549,
+        "probe_steps": 336000,
+        "final_eval_sha256": "aa01b0f0cf492aeb47e57de79ac2923338e0af7b25af5b0713cfa312e6ff4538"
       },
       {
         "id": "control_h0p02_s13",
         "seed": 13,
         "hard_tolerance": 0.02,
         "feedback": "control",
-        "status": "evaluating",
-        "validated": false
+        "status": "complete",
+        "validated": true,
+        "episodes": 312,
+        "reward": 9.400550147328538,
+        "soft_cost": 14.064102564102564,
+        "soft_budget": 25.0,
+        "soft_feasible": true,
+        "hard_events": 0,
+        "hard_rate": 0.0,
+        "hard_cp95_upper": 0.009555756807037344,
+        "probe_steps": 336000,
+        "final_eval_sha256": "32a1abfac831a9e1f31199c157f5a420ff1e486795958a85c4dafb4937e69a82"
       },
       {
         "id": "paired_bias_h0p02_s13",
@@ -2702,6 +2762,16 @@
         "treatment_soft_feasible": false
       },
       {
+        "hard_tolerance": 0.1,
+        "seed": 13,
+        "reward_delta": 2.275086797329781,
+        "reward_relative_delta": 0.11043133814462704,
+        "soft_cost_delta": 19.42628205128205,
+        "hard_rate_delta": -0.01282051282051282,
+        "control_soft_feasible": true,
+        "treatment_soft_feasible": false
+      },
+      {
         "hard_tolerance": 0.02,
         "seed": 11,
         "reward_delta": -1.130404173116288,
@@ -2720,26 +2790,62 @@
         "hard_rate_delta": -0.00641025641025641,
         "control_soft_feasible": true,
         "treatment_soft_feasible": true
+      },
+      {
+        "hard_tolerance": 0.02,
+        "seed": 13,
+        "reward_delta": 2.505140624446808,
+        "reward_relative_delta": 0.26648872514750876,
+        "soft_cost_delta": 7.262820512820513,
+        "hard_rate_delta": 0.01282051282051282,
+        "control_soft_feasible": true,
+        "treatment_soft_feasible": true
       }
     ],
     "groups": [
       {
         "hard_tolerance": 0.1,
         "required_seed_pairs": 3,
-        "completed_seed_pairs": 2,
-        "all_seeds_ready": false,
-        "aggregate": null
+        "completed_seed_pairs": 3,
+        "all_seeds_ready": true,
+        "aggregate": {
+          "reward_delta": {
+            "mean": 0.9422811990298712,
+            "seed_sd": 1.5569888832411543
+          },
+          "soft_cost_delta": {
+            "mean": 16.018162393162395,
+            "seed_sd": 6.412006438467724
+          },
+          "hard_rate_delta": {
+            "mean": -0.01388888888888889,
+            "seed_sd": 0.014452723566740046
+          }
+        }
       },
       {
         "hard_tolerance": 0.02,
         "required_seed_pairs": 3,
-        "completed_seed_pairs": 2,
-        "all_seeds_ready": false,
-        "aggregate": null
+        "completed_seed_pairs": 3,
+        "all_seeds_ready": true,
+        "aggregate": {
+          "reward_delta": {
+            "mean": 0.19471962230387874,
+            "seed_sd": 2.008084767372578
+          },
+          "soft_cost_delta": {
+            "mean": 0.8696581196581192,
+            "seed_sd": 5.713424295611059
+          },
+          "hard_rate_delta": {
+            "mean": 0.0021367521367521365,
+            "seed_sd": 0.009791828408025298
+          }
+        }
       }
     ],
     "integrity_errors": [],
-    "all_seed_comparisons_ready": false,
+    "all_seed_comparisons_ready": true,
     "scientific_goal_acceptance": "open",
     "limits": "Fixed12-policy exploratory CG2 matrix; partial paired rows are descriptive only. Aggregate comparisons require all3training seeds at a fixed hard tolerance. No checkpoint selection, automatic promotion, SOTA or zero-risk conclusion."
   }
