@@ -18,7 +18,7 @@ fi
 trap 'rmdir "$LOCK" 2>/dev/null' EXIT
 git pull -q --rebase origin data >/dev/null 2>&1 || git rebase --abort >/dev/null 2>&1
 if [ "${1:-}" != "--no-server" ]; then
-  if timeout 120 ssh -o BatchMode=yes -o ConnectTimeout=20 $R1 "cd /home/dataset-local/liyufeng/goal34_prep/sota_h2h && python3 collect_dashboard.py" >/dev/null 2>&1; then
+  if timeout 120 ssh -o BatchMode=yes -o ConnectTimeout=20 $R1 "cd /home/dataset-local/liyufeng/goal34_prep/sota_h2h && python3 collect_dashboard.py && ../venv_fdpi/bin/python make_frontier_csv.py >/dev/null" >/dev/null 2>&1; then
     timeout 60 scp -q $R1:$RLOGS/dash_runs.json runs.json 2>/dev/null
     timeout 60 scp -q $R1:$RLOGS/dash_frontier.json frontier_pooled.json 2>/dev/null
     timeout 60 scp -q $R1:$RLOGS/frontier_arms.csv frontier_arms.csv 2>/dev/null
