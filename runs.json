@@ -1,37 +1,39 @@
 {
- "updated": "2026-09-11T14:23:10",
+ "updated": "2026-09-11T14:33:43",
  "servers": [
   {
    "name": "tianyiyun-30109",
    "desc": "8x A100-80G, 128 核; SafeRL 训练/评估主力(共享账号,多项目并行)",
    "host": "ide-650ef93f23324f04881bde87cf05d6c1-0f2fcc",
-   "load": "77.06",
+   "load": "80.92",
    "ncpu": 128,
    "cards": [
     {
      "idx": 0,
-     "used_mb": 7705,
+     "used_mb": 55482,
      "total_mb": 81920,
-     "util": 27,
+     "util": 100,
      "mine": false,
      "procs": [
       "other: full_pixel_runtime.py --task SafetyAntCircle0Vision-v0 --seed",
       "other: full_pixel_runtime.py --task SafetyAntBuildingPush2Vision-v0 -",
       "other: full_pixel_runtime.py --task SafetyAntBuildingButton0Vision-v0",
-      "other: full_pixel_runtime.py --task SafetyAntBuildingGoal1Vision-v0 -"
+      "other: full_pixel_runtime.py --task SafetyAntBuildingGoal1Vision-v0 -",
+      "asbs: train.py --config-name raw_s1"
      ]
     },
     {
      "idx": 1,
-     "used_mb": 7241,
+     "used_mb": 55018,
      "total_mb": 81920,
-     "util": 44,
+     "util": 100,
      "mine": false,
      "procs": [
       "other: full_pixel_runtime.py --task SafetyAntButton0Vision-v0 --seed",
       "other: full_pixel_runtime.py --task SafetyAntCircle1Vision-v0 --seed",
       "other: full_pixel_runtime.py --task SafetyAntBuildingButton1Vision-v0",
-      "other: full_pixel_runtime.py --task SafetyAntBuildingGoal2Vision-v0 -"
+      "other: full_pixel_runtime.py --task SafetyAntBuildingGoal2Vision-v0 -",
+      "asbs: train.py --config-name raw_s1"
      ]
     },
     {
@@ -46,15 +48,16 @@
     },
     {
      "idx": 3,
-     "used_mb": 7233,
+     "used_mb": 55510,
      "total_mb": 81920,
-     "util": 48,
+     "util": 100,
      "mine": false,
      "procs": [
       "other: full_pixel_runtime.py --task SafetyAntCircle2Vision-v0 --seed",
       "other: full_pixel_runtime.py --task SafetyAntButton1Vision-v0 --seed",
       "other: full_pixel_runtime.py --task SafetyAntBuildingButton2Vision-v0",
-      "other: full_pixel_runtime.py --task SafetyAntBuildingPush0Vision-v0 -"
+      "other: full_pixel_runtime.py --task SafetyAntBuildingPush0Vision-v0 -",
+      "asbs: train.py --config-name raw_s1"
      ]
     },
     {
@@ -69,15 +72,16 @@
     },
     {
      "idx": 5,
-     "used_mb": 7213,
+     "used_mb": 55092,
      "total_mb": 81920,
-     "util": 31,
+     "util": 100,
      "mine": false,
      "procs": [
       "other: full_pixel_runtime.py --task SafetyAntFadingEasy0Vision-v0 --s",
       "other: full_pixel_runtime.py --task SafetyAntButton2Vision-v0 --seed",
       "other: full_pixel_runtime.py --task SafetyAntBuildingPush1Vision-v0 -",
-      "other: full_pixel_runtime.py --task SafetyAntBuildingGoal0Vision-v0 -"
+      "other: full_pixel_runtime.py --task SafetyAntBuildingGoal0Vision-v0 -",
+      "asbs: train.py --config-name raw_s1"
      ]
     },
     {
@@ -92,24 +96,26 @@
     },
     {
      "idx": 7,
-     "used_mb": 1,
+     "used_mb": 4822,
      "total_mb": 81920,
      "util": 0,
      "mine": false,
-     "procs": []
+     "procs": [
+      "asbs: e0_paired_fork_runtime.py --config-name sim_libero.yaml"
+     ]
     }
    ]
   },
   {
    "host": "di-20260831162150-5ll6n",
-   "load": "32.40",
+   "load": "31.40",
    "ncpu": 26,
    "cards": [
     {
      "idx": 0,
      "used_mb": 8133,
      "total_mb": 81920,
-     "util": 8,
+     "util": 0,
      "mine": false,
      "procs": [
       "other: ?"
@@ -119,7 +125,7 @@
      "idx": 1,
      "used_mb": 9667,
      "total_mb": 81920,
-     "util": 27,
+     "util": 31,
      "mine": false,
      "procs": [
       "other: ?"
@@ -128,18 +134,18 @@
    ],
    "name": "volc-a100",
    "desc": "2x A100-80G, 128 核, 3PB vepfs; SafeRL 第二算力(DP/ACT 训练共用 GPU); 环境部署中",
-   "snap_time": "2026-09-11T14:23:28"
+   "snap_time": "2026-09-11T14:34:01"
   },
   {
    "host": "dsw-1008180-7cb5796fcd-xt4lh",
-   "load": "156.41",
+   "load": "156.26",
    "ncpu": 184,
    "cards": [
     {
      "idx": 0,
      "used_mb": 37807,
      "total_mb": 98304,
-     "util": 70,
+     "util": 100,
      "mine": false,
      "procs": [
       "other: train_ppu.py --config-name candidate50000"
@@ -268,7 +274,7 @@
    ],
    "name": "aliyun-ppu",
    "desc": "16x PPU-ZW810E 96G, 184 核; VLA(Safety-CHORES)评测; 共享(act_train 等他人任务)",
-   "snap_time": "2026-09-11T14:23:26"
+   "snap_time": "2026-09-11T14:34:00"
   }
  ],
  "runs": [
@@ -5177,15 +5183,15 @@
    "variant": "v1b",
    "task": "cb2",
    "seed": "s3",
-   "ckpts": 9,
-   "done": false,
-   "running": true,
+   "ckpts": 10,
+   "done": true,
+   "running": false,
    "blocks": 0,
    "eps": 0,
    "hv": 0,
    "ret": null,
    "soft": null,
-   "mtime": 1789104978.2361994,
+   "mtime": 1789108345.61851,
    "confirm_n": 0,
    "confirm_clean": 0,
    "server": "volc"
@@ -5626,11 +5632,11 @@
    "ckpts": 10,
    "done": true,
    "running": false,
-   "blocks": 0,
-   "eps": 0,
-   "hv": 0,
-   "ret": null,
-   "soft": null,
+   "blocks": 1,
+   "eps": 104,
+   "hv": 19,
+   "ret": 1.5586285467583068,
+   "soft": 0.40384615384615385,
    "mtime": 1789049243.2778206,
    "scan_n": 1,
    "scan_last": "ck100k 0.4/12",
@@ -10646,7 +10652,7 @@
  "lanes": [
   "volc: d2v2_lag_cb2_s1/proto3_ck995002_seed5000.json",
   "volc: d2v2_v1b_cb2_s2/eval_all_ckpts_30ep.json",
-  "volc: d2v2_v1c_cb1_s3/proto3_ck995002_seed5000.json"
+  "volc: d2v2_v1c_cb1_s3/proto3_ck995002_seed9000.json"
  ],
  "parallel": {
   "workspace": "/home/dataset-local/liyufeng/SafeTransport/results/safeot_dual_fdpi",
@@ -12245,7 +12251,7 @@
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1789107780.2727036
+    "mtime": 1789108377.2835462
    },
    {
     "name": "benchmark_coverage_20260910",
@@ -12280,7 +12286,7 @@
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1789107775.9817219
+    "mtime": 1789108372.1575649
    },
    {
     "name": "cg2_diagnostic_20260910",
@@ -12294,7 +12300,7 @@
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1789107785.2656825
+    "mtime": 1789108379.4465382
    },
    {
     "name": "confirm_20260909_pg2",
@@ -12308,7 +12314,7 @@
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1789107785.2676823
+    "mtime": 1789108379.4485383
    },
    {
     "name": "manuscript_audit_20260911",
@@ -12322,7 +12328,7 @@
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1789107778.8867095
+    "mtime": 1789108320.5097551
    },
    {
     "name": "paper_evidence_publish_20260911",
@@ -12336,7 +12342,7 @@
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1789107784.4626858
+    "mtime": 1789108378.704541
    },
    {
     "name": "pixel_training_20260911",
@@ -12357,7 +12363,7 @@
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1789107681.5340166
+    "mtime": 1789108404.8144453
    },
    {
     "name": "r2_analysis_20260906",
@@ -12371,14 +12377,14 @@
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1789107710.8049583
+    "mtime": 1789108310.8127909
    },
    {
     "name": "resource_expansion_20260910",
     "latest_step": 0,
     "done": false,
     "strict_evals": 0,
-    "mtime": 1789107705.1919694
+    "mtime": 1789108253.242002
    },
    {
     "name": "review_20260909_evening",
