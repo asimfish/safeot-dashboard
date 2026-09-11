@@ -11,3 +11,6 @@ Validation: real Chromium desktop/mobile browser checks; all945rows; CHORES543/F
 Operational acceleration:5090nativequeue12to20workers;12liveworkerspreserved,8pendingcellsstarted,zerotrainingrestarts; 2Msteps/312finalepisodes unchanged. Totalformalworkers256atverification. Newpairedfeedbackcohort6fulltrainersrunningseparately; all4operationalgatespassed.
 
 Scientificgoalsremainopen.763inventoryentriesstillawaittheirfullprotocol/adapters. Thispage makes that backlog explicit.
+
+
+2026-09-11 pixel continuation (Refs: T-1484): realRGB+all-sensor CNN adapter and full170×8×3=4080 matrix deployed. The page explains environment checks, training/load gates and formal training separately. All945 rows remain;10296 total cells,352 frozenSG tracks and593 unfrozen task/scenario entries. Validation:20 behavior/matrix/fleet regressions,eight realdevelopment training+load checks,109dataartifact checks anddesktop/mobile table tests. Science andwhole-benchmark acceptance remainopen.
