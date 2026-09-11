@@ -389,7 +389,7 @@
     "interpretation": "Complete CG2 development cohort; all3 seeds per cell. Error bars are training-seed SD. No monotonic epsilon effect, SOTA or safety acceptance claimed."
   },
   "repair": {
-    "observed": "2026-09-11T16:25:11.851362+00:00",
+    "observed": "2026-09-11T16:28:12.454365+00:00",
     "total": 12,
     "protocol_sha256": "b1f1c06bd9b0108fe9c7942be5adb15844ef88017bd4bca5b1c06ef99a72ef80",
     "controller_alive": true,
@@ -984,7 +984,7 @@
         "status": "training",
         "started": "2026-09-11T08:00:28.374027+00:00",
         "gpu": 1,
-        "sample_steps": 1690000
+        "sample_steps": 1700000
       },
       "control_h0p02_s12": {
         "id": "control_h0p02_s12",
@@ -999,7 +999,7 @@
         "status": "training",
         "started": "2026-09-11T08:08:34.125583+00:00",
         "gpu": 1,
-        "sample_steps": 1730000
+        "sample_steps": 1740000
       },
       "paired_bias_h0p1_s13": {
         "id": "paired_bias_h0p1_s13",
@@ -1014,7 +1014,7 @@
         "status": "training",
         "started": "2026-09-11T09:49:23.642389+00:00",
         "gpu": 1,
-        "sample_steps": 1140000
+        "sample_steps": 1150000
       },
       "control_h0p02_s13": {
         "id": "control_h0p02_s13",
@@ -1029,7 +1029,7 @@
         "status": "training",
         "started": "2026-09-11T09:52:19.932670+00:00",
         "gpu": 1,
-        "sample_steps": 1140000
+        "sample_steps": 1150000
       },
       "paired_bias_h0p02_s13": {
         "id": "paired_bias_h0p02_s13",
@@ -1044,7 +1044,7 @@
         "status": "training",
         "started": "2026-09-11T09:53:05.626427+00:00",
         "gpu": 1,
-        "sample_steps": 1250000
+        "sample_steps": 1260000
       }
     },
     "diagnostics": {
@@ -2394,9 +2394,9 @@
   "extra_probe_budget": "Both arms: up to336k extra simulation steps, separately from2M training steps and312 final episodes.",
   "paired_final_recount": {
     "total": 12,
-    "validated_policies": 6,
+    "validated_policies": 7,
     "expected_final_episodes": 3744,
-    "validated_final_episodes": 1872,
+    "validated_final_episodes": 2184,
     "rows": [
       {
         "id": "control_h0p1_s11",
@@ -2519,8 +2519,18 @@
         "seed": 12,
         "hard_tolerance": 0.02,
         "feedback": "paired-bias",
-        "status": "reported_complete_unvalidated",
-        "validated": false
+        "status": "complete",
+        "validated": true,
+        "episodes": 312,
+        "reward": 11.915326230453356,
+        "soft_cost": 20.307692307692307,
+        "soft_budget": 25.0,
+        "soft_feasible": true,
+        "hard_events": 0,
+        "hard_rate": 0.0,
+        "hard_cp95_upper": 0.009555756807037344,
+        "probe_steps": 336000,
+        "final_eval_sha256": "ca6480c893e1749ccd3718a9d06ddde829bd2040151f3e902147cea1fdbfb497"
       },
       {
         "id": "control_h0p1_s13",
@@ -2603,12 +2613,7 @@
         "aggregate": null
       }
     ],
-    "integrity_errors": [
-      {
-        "job": "paired_bias_h0p02_s12",
-        "error_type": "FileNotFoundError"
-      }
-    ],
+    "integrity_errors": [],
     "all_seed_comparisons_ready": false,
     "scientific_goal_acceptance": "open",
     "limits": "Fixed12-policy exploratory CG2 matrix; partial paired rows are descriptive only. Aggregate comparisons require all3training seeds at a fixed hard tolerance. No checkpoint selection, automatic promotion, SOTA or zero-risk conclusion."
