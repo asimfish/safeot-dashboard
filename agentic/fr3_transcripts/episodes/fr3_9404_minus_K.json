@@ -1,0 +1,1094 @@
+{
+  "episode_id": "fr3_9404_minus_K",
+  "robot": "Franka FR3",
+  "seed": 9404,
+  "condition": "minus_K",
+  "task": "抓取瓶子，直立放置到绿色目标垫并释放撤离",
+  "model": "gpt-6-astra",
+  "reasoning_effort": "xhigh",
+  "summary": {
+    "success": false,
+    "attempt_validity": "valid_attempt",
+    "stop_reason": "geometric_hard_abort",
+    "decisions": 5,
+    "input_tokens": 27210,
+    "output_tokens": 9123,
+    "unknown_usage_requests": 0,
+    "known_standard_equivalent_usd": 0.72825,
+    "wall_collection_s": 378.4119662620069,
+    "simulation_duration_s": 9.816666666666666,
+    "action_time_s": 9.816666666666666,
+    "total_inference_s": 344.91493116901256,
+    "decision_rate_per_wall_s": 0.013213112812976092
+  },
+  "artifact_sync_verified": true,
+  "training_export_status": "not_exported",
+  "videos": [
+    {
+      "camera": "chest_camera",
+      "file_name": "chest_camera.mp4",
+      "sha256": "047dda0019cc848fdd158ec7661fabf401d2711285f1eaa43ed3ecf7b95af67f",
+      "fps": 15,
+      "frame_count": 148,
+      "public_url": null
+    },
+    {
+      "camera": "head_camera",
+      "file_name": "head_camera.mp4",
+      "sha256": "c1f83588facd1f47a792f798f56529ac004b1d826e8ca58579cd8429da38d637",
+      "fps": 15,
+      "frame_count": 148,
+      "public_url": null
+    },
+    {
+      "camera": "wrist_camera",
+      "file_name": "wrist_camera.mp4",
+      "sha256": "bcf8f1636c995b0e36218bc275ae5e54fd2a27bf267b53f270352388d33d50db",
+      "fps": 15,
+      "frame_count": 148,
+      "public_url": null
+    },
+    {
+      "camera": "third_camera",
+      "file_name": "third_camera.mp4",
+      "sha256": "656f8dbabf3cafd2970d64043af046405c88bc2051373698701034ecbda5ba08",
+      "fps": 15,
+      "frame_count": 148,
+      "public_url": null
+    }
+  ],
+  "decisions": [
+    {
+      "decision_number": 1,
+      "title_zh": "第1次请求：返回1个路点",
+      "policy_observation": {
+        "task_instruction": "Pick up the brown bottle and place it upright at the center of the green target pad; release and withdraw.",
+        "requests_remaining_including_this": 30,
+        "memory_from_previous_decision": "",
+        "last_action_status": "none",
+        "S": {
+          "position_world_m": [
+            -0.8428294062614441,
+            -4.799976348876953,
+            1.5399258136749268
+          ],
+          "quaternion_world_wxyz": [
+            -2.699461401789449e-05,
+            0.9999998807907104,
+            0.00021511940576601774,
+            -0.0004724037426058203
+          ],
+          "robot_base_position_world_m": [
+            -1.149999976158142,
+            -4.800000190734863,
+            0.9499999284744263
+          ],
+          "robot_base_quaternion_world_wxyz": [
+            1.0000001192092896,
+            4.6293330280278155e-11,
+            6.917044159671093e-10,
+            2.0330671868240557e-10
+          ],
+          "gripper_width_m": 0.07999970018863678
+        },
+        "J": {
+          "arm_joint_position_rad": [
+            9.010252142616082e-06,
+            -0.7843809127807617,
+            3.153977377223782e-05,
+            -2.356325149536133,
+            7.627801824128255e-05,
+            1.5709999799728394,
+            0.7850000262260437
+          ],
+          "arm_joint_velocity_rad_s": [
+            -9.225235407939181e-05,
+            -0.006212950684130192,
+            -0.00031647738069295883,
+            0.003278420539572835,
+            -0.0007632238557562232,
+            1.0167107120651053e-06,
+            -5.261101065912044e-08
+          ]
+        },
+        "K": null,
+        "F": null,
+        "previous_observations_own_actions": []
+      },
+      "image_evidence": [
+        {
+          "label": "CURRENT observation 1 RGB CAMERA: head_camera",
+          "sha256": "6e644fa672fb345361350ae608f3db1968fe96ed583872c5948810d310914a7a",
+          "bytes": 298635
+        },
+        {
+          "label": "CURRENT observation 1 RGB CAMERA: chest_camera",
+          "sha256": "9283b522a9741b8ed209724479eb7f80b78e0741797880926eb35037703f98a4",
+          "bytes": 221986
+        },
+        {
+          "label": "CURRENT observation 1 RGB CAMERA: third_camera",
+          "sha256": "dec4f67b0a9fd77c3bda23defde7268c23de2cba43852d062ffe58bc0c411b6b",
+          "bytes": 213835
+        },
+        {
+          "label": "CURRENT observation 1 RGB CAMERA: wrist_camera",
+          "sha256": "acd2168e4973598995525deaa0c6f2278e8c89969ccbbeeb3dd2c30e46970582",
+          "bytes": 255613
+        }
+      ],
+      "candidate": {
+        "visual_observation": "The brown bottle is upright on the wooden table, with the green pad nearby. The gripper is open and suspended well above the table. In the wrist view, the bottle cap is right of and slightly below the center between the fingers.",
+        "memory_for_next_observation": "Initial hand orientation is approximately world diag(1,-1,-1), so local +Z is downward. Estimate bottle lies toward local +X and slightly +Y from grasp center based on wrist view; camera calibration unavailable. Make a cautious open-gripper approach, then use image displacement and pose feedback to refine alignment. Target pad is beyond bottle in wrist image downward direction.",
+        "task_done": false,
+        "actions": [
+          {
+            "duration_s": 2,
+            "delta_position_wrist_m": [
+              0.1,
+              0.02,
+              0.08
+            ],
+            "delta_rotation_wrist_rotvec_rad": [
+              0,
+              0,
+              0
+            ],
+            "gripper_width_m": 0.07999999821186066
+          }
+        ]
+      },
+      "execution_feedback": [
+        {
+          "requested_duration_s": 2,
+          "executed_duration_s": 2.0,
+          "position_error_m": 0.00011916638322873041,
+          "orientation_error_rad": 0.0002834275073837489,
+          "max_finger_joint_error_m": 1.6391277313232422e-07,
+          "arm_rate_limited_ticks": 4,
+          "hand_rate_limited_ticks": 0,
+          "arm_limit_clipped_ticks": 0
+        }
+      ],
+      "request_status": "executed",
+      "request_stop_reason": null,
+      "episode_stop_reason_if_last": null,
+      "call_elapsed_wall_s": 32.58759458002169,
+      "usage": {
+        "input_tokens": 2857,
+        "output_tokens": 725,
+        "total_tokens": 3582,
+        "cached_input_tokens": 0
+      },
+      "known_standard_equivalent_usd": 0.06482,
+      "usage_unknown": false,
+      "video_mapping": {
+        "observation_sim_time_s": 0.0,
+        "preceding_recorded_frame_index": 0,
+        "recorded_frame_sim_time_s": 0.0,
+        "video_seek_s": 0.0,
+        "offset_from_recorded_sim_time_s": 0.0,
+        "is_exact_input_image_claim": false
+      }
+    },
+    {
+      "decision_number": 2,
+      "title_zh": "第2次请求：返回1个路点",
+      "policy_observation": {
+        "task_instruction": "Pick up the brown bottle and place it upright at the center of the green target pad; release and withdraw.",
+        "requests_remaining_including_this": 29,
+        "memory_from_previous_decision": "Initial hand orientation is approximately world diag(1,-1,-1), so local +Z is downward. Estimate bottle lies toward local +X and slightly +Y from grasp center based on wrist view; camera calibration unavailable. Make a cautious open-gripper approach, then use image displacement and pose feedback to refine alignment. Target pad is beyond bottle in wrist image downward direction.",
+        "last_action_status": "accepted",
+        "S": {
+          "position_world_m": [
+            -0.7428911328315735,
+            -4.819924831390381,
+            1.4597113132476807
+          ],
+          "quaternion_world_wxyz": [
+            -4.5890705223428085e-05,
+            0.9999997615814209,
+            0.00020997716637793928,
+            -0.0006127866799943149
+          ],
+          "robot_base_position_world_m": [
+            -1.149999976158142,
+            -4.800000190734863,
+            0.9499999284744263
+          ],
+          "robot_base_quaternion_world_wxyz": [
+            1.0000001192092896,
+            4.6293330280278155e-11,
+            6.917044159671093e-10,
+            2.0330671868240557e-10
+          ],
+          "gripper_width_m": 0.07999967038631439
+        },
+        "J": {
+          "arm_joint_position_rad": [
+            -0.011513976380228996,
+            -0.4763105809688568,
+            -0.03176471218466759,
+            -2.347295045852661,
+            -0.015194471925497055,
+            1.8699294328689575,
+            0.749729573726654
+          ],
+          "arm_joint_velocity_rad_s": [
+            -0.00023189111379906535,
+            -0.006736500654369593,
+            0.00028753114747814834,
+            0.004443298559635878,
+            -0.001159037696197629,
+            0.0001382956252200529,
+            -0.00010478105104994029
+          ]
+        },
+        "K": null,
+        "F": [
+          {
+            "position_error_m": 0.00011916638322873041,
+            "orientation_error_rad": 0.0002834275073837489,
+            "max_finger_joint_error_m": 1.6391277313232422e-07
+          }
+        ],
+        "previous_observations_own_actions": [
+          {
+            "observation_index": 1,
+            "own_requested_action": {
+              "visual_observation": "The brown bottle is upright on the wooden table, with the green pad nearby. The gripper is open and suspended well above the table. In the wrist view, the bottle cap is right of and slightly below the center between the fingers.",
+              "memory_for_next_observation": "Initial hand orientation is approximately world diag(1,-1,-1), so local +Z is downward. Estimate bottle lies toward local +X and slightly +Y from grasp center based on wrist view; camera calibration unavailable. Make a cautious open-gripper approach, then use image displacement and pose feedback to refine alignment. Target pad is beyond bottle in wrist image downward direction.",
+              "task_done": false,
+              "actions": [
+                {
+                  "duration_s": 2,
+                  "delta_position_wrist_m": [
+                    0.1,
+                    0.02,
+                    0.08
+                  ],
+                  "delta_rotation_wrist_rotvec_rad": [
+                    0,
+                    0,
+                    0
+                  ],
+                  "gripper_width_m": 0.07999999821186066
+                }
+              ]
+            },
+            "action_status": "accepted"
+          }
+        ]
+      },
+      "image_evidence": [
+        {
+          "label": "PREVIOUS observation 1 RGB CAMERA: head_camera",
+          "sha256": "6e644fa672fb345361350ae608f3db1968fe96ed583872c5948810d310914a7a",
+          "bytes": 298635
+        },
+        {
+          "label": "PREVIOUS observation 1 RGB CAMERA: chest_camera",
+          "sha256": "9283b522a9741b8ed209724479eb7f80b78e0741797880926eb35037703f98a4",
+          "bytes": 221986
+        },
+        {
+          "label": "PREVIOUS observation 1 RGB CAMERA: third_camera",
+          "sha256": "dec4f67b0a9fd77c3bda23defde7268c23de2cba43852d062ffe58bc0c411b6b",
+          "bytes": 213835
+        },
+        {
+          "label": "PREVIOUS observation 1 RGB CAMERA: wrist_camera",
+          "sha256": "acd2168e4973598995525deaa0c6f2278e8c89969ccbbeeb3dd2c30e46970582",
+          "bytes": 255613
+        },
+        {
+          "label": "CURRENT observation 2 RGB CAMERA: head_camera",
+          "sha256": "791a119aece80b43d6aace16023d9128ee6dea1b16f415834d971bd8ab2068e9",
+          "bytes": 299564
+        },
+        {
+          "label": "CURRENT observation 2 RGB CAMERA: chest_camera",
+          "sha256": "d416eca2e67e3f29771af0be2ce807c61ffcafd6361f8e2e9632a91ad5e015fb",
+          "bytes": 221695
+        },
+        {
+          "label": "CURRENT observation 2 RGB CAMERA: third_camera",
+          "sha256": "d4cf1ca336792c8eeadf7a2aea099e5767ba77d297c3dd83f03ff738ed39c561",
+          "bytes": 213120
+        },
+        {
+          "label": "CURRENT observation 2 RGB CAMERA: wrist_camera",
+          "sha256": "b5e9e6c48fabf6b0f3e1d4be86fac2d494e94f634b9bb12b06ffbdaec7d36c0e",
+          "bytes": 254427
+        }
+      ],
+      "candidate": {
+        "visual_observation": "The brown bottle remains upright on the table, separate from the green pad. The gripper is open and still above the bottle. In the wrist view, the bottle cap is around pixel (352,278), right of and slightly below the midpoint between the visible fingers; it moved left relative to the preceding view.",
+        "memory_for_next_observation": "Current hand orientation remains approximately world diag(1,-1,-1): local +Z descends. Prior local motion [+0.10,+0.02,+0.08] shifted cap from roughly (462,291) to (352,278) in wrist image. Finger-tip midpoint appears near (250,240), but perspective/camera offset is unknown. Continue a cautious open approach with +0.055 X, +0.018 Y, +0.10 Z, then reassess cap alignment and vertical clearance before grasping. Bottle and pad have not moved.",
+        "task_done": false,
+        "actions": [
+          {
+            "duration_s": 2,
+            "delta_position_wrist_m": [
+              0.055,
+              0.018,
+              0.131
+            ],
+            "delta_rotation_wrist_rotvec_rad": [
+              0,
+              0,
+              0
+            ],
+            "gripper_width_m": 0.07999999821186066
+          }
+        ]
+      },
+      "execution_feedback": [
+        {
+          "requested_duration_s": 2,
+          "executed_duration_s": 2.0,
+          "position_error_m": 0.0001248873013537377,
+          "orientation_error_rad": 0.00028636501519940794,
+          "max_finger_joint_error_m": 1.4156103134155273e-07,
+          "arm_rate_limited_ticks": 6,
+          "hand_rate_limited_ticks": 0,
+          "arm_limit_clipped_ticks": 0
+        }
+      ],
+      "request_status": "executed",
+      "request_stop_reason": null,
+      "episode_stop_reason_if_last": null,
+      "call_elapsed_wall_s": 40.143638729001395,
+      "usage": {
+        "input_tokens": 4683,
+        "output_tokens": 1167,
+        "total_tokens": 5850,
+        "cached_input_tokens": 0
+      },
+      "known_standard_equivalent_usd": 0.10518,
+      "usage_unknown": false,
+      "video_mapping": {
+        "observation_sim_time_s": 2.0,
+        "preceding_recorded_frame_index": 30,
+        "recorded_frame_sim_time_s": 2.0,
+        "video_seek_s": 2.0,
+        "offset_from_recorded_sim_time_s": 0.0,
+        "is_exact_input_image_claim": false
+      }
+    },
+    {
+      "decision_number": 3,
+      "title_zh": "第3次请求：返回1个路点",
+      "policy_observation": {
+        "task_instruction": "Pick up the brown bottle and place it upright at the center of the green target pad; release and withdraw.",
+        "requests_remaining_including_this": 28,
+        "memory_from_previous_decision": "Current hand orientation remains approximately world diag(1,-1,-1): local +Z descends. Prior local motion [+0.10,+0.02,+0.08] shifted cap from roughly (462,291) to (352,278) in wrist image. Finger-tip midpoint appears near (250,240), but perspective/camera offset is unknown. Continue a cautious open approach with +0.055 X, +0.018 Y, +0.10 Z, then reassess cap alignment and vertical clearance before grasping. Bottle and pad have not moved.",
+        "last_action_status": "accepted",
+        "S": {
+          "position_world_m": [
+            -0.6880831718444824,
+            -4.837892532348633,
+            1.3285237550735474
+          ],
+          "quaternion_world_wxyz": [
+            -7.820614700904116e-05,
+            0.9999997019767761,
+            0.00018032094521913677,
+            -0.0007490957505069673
+          ],
+          "robot_base_position_world_m": [
+            -1.149999976158142,
+            -4.800000190734863,
+            0.9499999284744263
+          ],
+          "robot_base_quaternion_world_wxyz": [
+            1.0000001192092896,
+            4.6293330280278155e-11,
+            6.917044159671093e-10,
+            2.0330671868240557e-10
+          ],
+          "gripper_width_m": 0.07999972999095917
+        },
+        "J": {
+          "arm_joint_position_rad": [
+            -0.021437780931591988,
+            -0.18497636914253235,
+            -0.05946213752031326,
+            -2.4235141277313232,
+            -0.01386143360286951,
+            2.2373056411743164,
+            0.7137373685836792
+          ],
+          "arm_joint_velocity_rad_s": [
+            -0.00035717515856958926,
+            -0.005612474400550127,
+            0.0007651825435459614,
+            0.005128477234393358,
+            -0.0023929220624268055,
+            0.00036985246697440743,
+            -7.417385495500639e-05
+          ]
+        },
+        "K": null,
+        "F": [
+          {
+            "position_error_m": 0.0001248873013537377,
+            "orientation_error_rad": 0.00028636501519940794,
+            "max_finger_joint_error_m": 1.4156103134155273e-07
+          }
+        ],
+        "previous_observations_own_actions": [
+          {
+            "observation_index": 1,
+            "own_requested_action": {
+              "visual_observation": "The brown bottle is upright on the wooden table, with the green pad nearby. The gripper is open and suspended well above the table. In the wrist view, the bottle cap is right of and slightly below the center between the fingers.",
+              "memory_for_next_observation": "Initial hand orientation is approximately world diag(1,-1,-1), so local +Z is downward. Estimate bottle lies toward local +X and slightly +Y from grasp center based on wrist view; camera calibration unavailable. Make a cautious open-gripper approach, then use image displacement and pose feedback to refine alignment. Target pad is beyond bottle in wrist image downward direction.",
+              "task_done": false,
+              "actions": [
+                {
+                  "duration_s": 2,
+                  "delta_position_wrist_m": [
+                    0.1,
+                    0.02,
+                    0.08
+                  ],
+                  "delta_rotation_wrist_rotvec_rad": [
+                    0,
+                    0,
+                    0
+                  ],
+                  "gripper_width_m": 0.07999999821186066
+                }
+              ]
+            },
+            "action_status": "accepted"
+          },
+          {
+            "observation_index": 2,
+            "own_requested_action": {
+              "visual_observation": "The brown bottle remains upright on the table, separate from the green pad. The gripper is open and still above the bottle. In the wrist view, the bottle cap is around pixel (352,278), right of and slightly below the midpoint between the visible fingers; it moved left relative to the preceding view.",
+              "memory_for_next_observation": "Current hand orientation remains approximately world diag(1,-1,-1): local +Z descends. Prior local motion [+0.10,+0.02,+0.08] shifted cap from roughly (462,291) to (352,278) in wrist image. Finger-tip midpoint appears near (250,240), but perspective/camera offset is unknown. Continue a cautious open approach with +0.055 X, +0.018 Y, +0.10 Z, then reassess cap alignment and vertical clearance before grasping. Bottle and pad have not moved.",
+              "task_done": false,
+              "actions": [
+                {
+                  "duration_s": 2,
+                  "delta_position_wrist_m": [
+                    0.055,
+                    0.018,
+                    0.131
+                  ],
+                  "delta_rotation_wrist_rotvec_rad": [
+                    0,
+                    0,
+                    0
+                  ],
+                  "gripper_width_m": 0.07999999821186066
+                }
+              ]
+            },
+            "action_status": "accepted"
+          }
+        ]
+      },
+      "image_evidence": [
+        {
+          "label": "PREVIOUS observation 1 RGB CAMERA: head_camera",
+          "sha256": "6e644fa672fb345361350ae608f3db1968fe96ed583872c5948810d310914a7a",
+          "bytes": 298635
+        },
+        {
+          "label": "PREVIOUS observation 1 RGB CAMERA: chest_camera",
+          "sha256": "9283b522a9741b8ed209724479eb7f80b78e0741797880926eb35037703f98a4",
+          "bytes": 221986
+        },
+        {
+          "label": "PREVIOUS observation 1 RGB CAMERA: third_camera",
+          "sha256": "dec4f67b0a9fd77c3bda23defde7268c23de2cba43852d062ffe58bc0c411b6b",
+          "bytes": 213835
+        },
+        {
+          "label": "PREVIOUS observation 1 RGB CAMERA: wrist_camera",
+          "sha256": "acd2168e4973598995525deaa0c6f2278e8c89969ccbbeeb3dd2c30e46970582",
+          "bytes": 255613
+        },
+        {
+          "label": "PREVIOUS observation 2 RGB CAMERA: head_camera",
+          "sha256": "791a119aece80b43d6aace16023d9128ee6dea1b16f415834d971bd8ab2068e9",
+          "bytes": 299564
+        },
+        {
+          "label": "PREVIOUS observation 2 RGB CAMERA: chest_camera",
+          "sha256": "d416eca2e67e3f29771af0be2ce807c61ffcafd6361f8e2e9632a91ad5e015fb",
+          "bytes": 221695
+        },
+        {
+          "label": "PREVIOUS observation 2 RGB CAMERA: third_camera",
+          "sha256": "d4cf1ca336792c8eeadf7a2aea099e5767ba77d297c3dd83f03ff738ed39c561",
+          "bytes": 213120
+        },
+        {
+          "label": "PREVIOUS observation 2 RGB CAMERA: wrist_camera",
+          "sha256": "b5e9e6c48fabf6b0f3e1d4be86fac2d494e94f634b9bb12b06ffbdaec7d36c0e",
+          "bytes": 254427
+        },
+        {
+          "label": "CURRENT observation 3 RGB CAMERA: head_camera",
+          "sha256": "cb62dd8d8c5724dcf56992588d2058113c3bd21da3cdccea2d26ddd3fd81d644",
+          "bytes": 302726
+        },
+        {
+          "label": "CURRENT observation 3 RGB CAMERA: chest_camera",
+          "sha256": "d42288df71f39e6f66d4a62e7ab1d42a286bbea8748cd1f2923cf8c2dbd2d160",
+          "bytes": 218205
+        },
+        {
+          "label": "CURRENT observation 3 RGB CAMERA: third_camera",
+          "sha256": "dc6e749bd07afefffe84281238c85534234db13a5ea98ef219c6e598ba0a585e",
+          "bytes": 216918
+        },
+        {
+          "label": "CURRENT observation 3 RGB CAMERA: wrist_camera",
+          "sha256": "94c49eca5dd09416aceb712ccad0365df66684097025c370bdde17a82f6315c0",
+          "bytes": 230451
+        }
+      ],
+      "candidate": {
+        "visual_observation": "The bottle remains upright on the wooden table and the green pad is clear. In the overhead view, the bottle cap is near (325,191), while the open gripper is substantially to its right, around (417,200). The side views show the fingers still above the cap. In the wrist view, the cap is near (220,267), with the bottle body extending to the right.",
+        "memory_for_next_observation": "Fixed overhead views indicate the prior approach overshot laterally; wrist fingertip pixels are not a reliable grasp-axis reference at the bottle depth. Comparing overhead gripper displacement with known hand translations suggests bottle world XY approximately (-0.84,-4.77), versus current hand (-0.688,-4.838). Orientation is approximately diag(1,-1,-1). Move local [-0.135,-0.060,0] with gripper open to correct horizontal alignment without lowering; reassess overhead and side clearances before descending. Bottle and pad remain stationary.",
+        "task_done": false,
+        "actions": [
+          {
+            "duration_s": 2,
+            "delta_position_wrist_m": [
+              -0.135,
+              -0.06,
+              0
+            ],
+            "delta_rotation_wrist_rotvec_rad": [
+              0,
+              0,
+              0
+            ],
+            "gripper_width_m": 0.07999999821186066
+          }
+        ]
+      },
+      "execution_feedback": [
+        {
+          "requested_duration_s": 2,
+          "executed_duration_s": 2.0,
+          "position_error_m": 8.970536873675883e-05,
+          "orientation_error_rad": 0.00022236764198169112,
+          "max_finger_joint_error_m": 1.4901161193847656e-07,
+          "arm_rate_limited_ticks": 12,
+          "hand_rate_limited_ticks": 0,
+          "arm_limit_clipped_ticks": 0
+        }
+      ],
+      "request_status": "executed",
+      "request_stop_reason": null,
+      "episode_stop_reason_if_last": null,
+      "call_elapsed_wall_s": 92.38164242898347,
+      "usage": {
+        "input_tokens": 6498,
+        "output_tokens": 2494,
+        "total_tokens": 8992,
+        "cached_input_tokens": 0
+      },
+      "known_standard_equivalent_usd": 0.18968,
+      "usage_unknown": false,
+      "video_mapping": {
+        "observation_sim_time_s": 4.0,
+        "preceding_recorded_frame_index": 60,
+        "recorded_frame_sim_time_s": 4.0,
+        "video_seek_s": 4.0,
+        "offset_from_recorded_sim_time_s": 0.0,
+        "is_exact_input_image_claim": false
+      }
+    },
+    {
+      "decision_number": 4,
+      "title_zh": "第4次请求：返回1个路点",
+      "policy_observation": {
+        "task_instruction": "Pick up the brown bottle and place it upright at the center of the green target pad; release and withdraw.",
+        "requests_remaining_including_this": 27,
+        "memory_from_previous_decision": "Fixed overhead views indicate the prior approach overshot laterally; wrist fingertip pixels are not a reliable grasp-axis reference at the bottle depth. Comparing overhead gripper displacement with known hand translations suggests bottle world XY approximately (-0.84,-4.77), versus current hand (-0.688,-4.838). Orientation is approximately diag(1,-1,-1). Move local [-0.135,-0.060,0] with gripper open to correct horizontal alignment without lowering; reassess overhead and side clearances before descending. Bottle and pad remain stationary.",
+        "last_action_status": "accepted",
+        "S": {
+          "position_world_m": [
+            -0.8231329917907715,
+            -4.777933597564697,
+            1.3286505937576294
+          ],
+          "quaternion_world_wxyz": [
+            -8.885253191692755e-05,
+            0.9999997019767761,
+            0.0001747711794450879,
+            -0.0008595871622674167
+          ],
+          "robot_base_position_world_m": [
+            -1.149999976158142,
+            -4.800000190734863,
+            0.9499999284744263
+          ],
+          "robot_base_quaternion_world_wxyz": [
+            1.0000001192092896,
+            4.6293330280278155e-11,
+            6.917044159671093e-10,
+            2.0330671868240557e-10
+          ],
+          "gripper_width_m": 0.07999970018863678
+        },
+        "J": {
+          "arm_joint_position_rad": [
+            0.038647621870040894,
+            -0.6429593563079834,
+            0.029622994363307953,
+            -2.8158445358276367,
+            0.021869201213121414,
+            2.171279191970825,
+            0.83501797914505
+          ],
+          "arm_joint_velocity_rad_s": [
+            -0.0008149066125042737,
+            -0.0048010582104325294,
+            -1.8515760530135594e-05,
+            0.0043175192549824715,
+            -0.0015786410076543689,
+            -0.0002532165090087801,
+            -0.0002712374844122678
+          ]
+        },
+        "K": null,
+        "F": [
+          {
+            "position_error_m": 8.970536873675883e-05,
+            "orientation_error_rad": 0.00022236764198169112,
+            "max_finger_joint_error_m": 1.4901161193847656e-07
+          }
+        ],
+        "previous_observations_own_actions": [
+          {
+            "observation_index": 2,
+            "own_requested_action": {
+              "visual_observation": "The brown bottle remains upright on the table, separate from the green pad. The gripper is open and still above the bottle. In the wrist view, the bottle cap is around pixel (352,278), right of and slightly below the midpoint between the visible fingers; it moved left relative to the preceding view.",
+              "memory_for_next_observation": "Current hand orientation remains approximately world diag(1,-1,-1): local +Z descends. Prior local motion [+0.10,+0.02,+0.08] shifted cap from roughly (462,291) to (352,278) in wrist image. Finger-tip midpoint appears near (250,240), but perspective/camera offset is unknown. Continue a cautious open approach with +0.055 X, +0.018 Y, +0.10 Z, then reassess cap alignment and vertical clearance before grasping. Bottle and pad have not moved.",
+              "task_done": false,
+              "actions": [
+                {
+                  "duration_s": 2,
+                  "delta_position_wrist_m": [
+                    0.055,
+                    0.018,
+                    0.131
+                  ],
+                  "delta_rotation_wrist_rotvec_rad": [
+                    0,
+                    0,
+                    0
+                  ],
+                  "gripper_width_m": 0.07999999821186066
+                }
+              ]
+            },
+            "action_status": "accepted"
+          },
+          {
+            "observation_index": 3,
+            "own_requested_action": {
+              "visual_observation": "The bottle remains upright on the wooden table and the green pad is clear. In the overhead view, the bottle cap is near (325,191), while the open gripper is substantially to its right, around (417,200). The side views show the fingers still above the cap. In the wrist view, the cap is near (220,267), with the bottle body extending to the right.",
+              "memory_for_next_observation": "Fixed overhead views indicate the prior approach overshot laterally; wrist fingertip pixels are not a reliable grasp-axis reference at the bottle depth. Comparing overhead gripper displacement with known hand translations suggests bottle world XY approximately (-0.84,-4.77), versus current hand (-0.688,-4.838). Orientation is approximately diag(1,-1,-1). Move local [-0.135,-0.060,0] with gripper open to correct horizontal alignment without lowering; reassess overhead and side clearances before descending. Bottle and pad remain stationary.",
+              "task_done": false,
+              "actions": [
+                {
+                  "duration_s": 2,
+                  "delta_position_wrist_m": [
+                    -0.135,
+                    -0.06,
+                    0
+                  ],
+                  "delta_rotation_wrist_rotvec_rad": [
+                    0,
+                    0,
+                    0
+                  ],
+                  "gripper_width_m": 0.07999999821186066
+                }
+              ]
+            },
+            "action_status": "accepted"
+          }
+        ]
+      },
+      "image_evidence": [
+        {
+          "label": "PREVIOUS observation 2 RGB CAMERA: head_camera",
+          "sha256": "791a119aece80b43d6aace16023d9128ee6dea1b16f415834d971bd8ab2068e9",
+          "bytes": 299564
+        },
+        {
+          "label": "PREVIOUS observation 2 RGB CAMERA: chest_camera",
+          "sha256": "d416eca2e67e3f29771af0be2ce807c61ffcafd6361f8e2e9632a91ad5e015fb",
+          "bytes": 221695
+        },
+        {
+          "label": "PREVIOUS observation 2 RGB CAMERA: third_camera",
+          "sha256": "d4cf1ca336792c8eeadf7a2aea099e5767ba77d297c3dd83f03ff738ed39c561",
+          "bytes": 213120
+        },
+        {
+          "label": "PREVIOUS observation 2 RGB CAMERA: wrist_camera",
+          "sha256": "b5e9e6c48fabf6b0f3e1d4be86fac2d494e94f634b9bb12b06ffbdaec7d36c0e",
+          "bytes": 254427
+        },
+        {
+          "label": "PREVIOUS observation 3 RGB CAMERA: head_camera",
+          "sha256": "cb62dd8d8c5724dcf56992588d2058113c3bd21da3cdccea2d26ddd3fd81d644",
+          "bytes": 302726
+        },
+        {
+          "label": "PREVIOUS observation 3 RGB CAMERA: chest_camera",
+          "sha256": "d42288df71f39e6f66d4a62e7ab1d42a286bbea8748cd1f2923cf8c2dbd2d160",
+          "bytes": 218205
+        },
+        {
+          "label": "PREVIOUS observation 3 RGB CAMERA: third_camera",
+          "sha256": "dc6e749bd07afefffe84281238c85534234db13a5ea98ef219c6e598ba0a585e",
+          "bytes": 216918
+        },
+        {
+          "label": "PREVIOUS observation 3 RGB CAMERA: wrist_camera",
+          "sha256": "94c49eca5dd09416aceb712ccad0365df66684097025c370bdde17a82f6315c0",
+          "bytes": 230451
+        },
+        {
+          "label": "CURRENT observation 4 RGB CAMERA: head_camera",
+          "sha256": "9a0026a07617a28c51266324b17ee67877ef0469f87795cf557ec9240f341e90",
+          "bytes": 304562
+        },
+        {
+          "label": "CURRENT observation 4 RGB CAMERA: chest_camera",
+          "sha256": "cefa9597969851918ebbe5bc2368159e33c601354bea41697a61f8424f219d90",
+          "bytes": 220381
+        },
+        {
+          "label": "CURRENT observation 4 RGB CAMERA: third_camera",
+          "sha256": "7af4b1d370f74961fb2519026dc5692f1e3b2b07e65481cc106f6dd8c8553094",
+          "bytes": 217878
+        },
+        {
+          "label": "CURRENT observation 4 RGB CAMERA: wrist_camera",
+          "sha256": "5457d78700e89053d8c5e959d24f5315793d9c747f2b07f1fc08c7901f0d77d3",
+          "bytes": 266934
+        }
+      ],
+      "candidate": {
+        "visual_observation": "The brown bottle is upright on the table and the green pad is clear. The open gripper remains above the bottle in both side views. In the overhead view, the lower gripper outline overlaps the upper-right part of the bottle cap. In the wrist view, the bottle is in the lower-right portion of the image, between the two visible fingers vertically.",
+        "memory_for_next_observation": "Hand orientation is approximately diag(1,-1,-1), so local +Z lowers the hand and local +Y moves world -Y. Current hand is (-0.8231,-4.7779,1.3287). Bottle XY estimate is approximately (-0.84,-4.80), with uncertainty from perspective and the obscured gripper center. Lower 0.10 m while correcting local X -0.012 and Y +0.015, keeping fully open. Expected hand height about 1.229 m; reassess finger/cap clearance and centering before descending farther or closing. No grasp has been attempted.",
+        "task_done": false,
+        "actions": [
+          {
+            "duration_s": 2,
+            "delta_position_wrist_m": [
+              -0.012,
+              0.015,
+              0.1321
+            ],
+            "delta_rotation_wrist_rotvec_rad": [
+              0,
+              0,
+              0
+            ],
+            "gripper_width_m": 0.07999999821186066
+          }
+        ]
+      },
+      "execution_feedback": [
+        {
+          "requested_duration_s": 2,
+          "executed_duration_s": 2.0,
+          "position_error_m": 9.4565526524093e-05,
+          "orientation_error_rad": 0.00024000086705200374,
+          "max_finger_joint_error_m": 9.685754776000977e-08,
+          "arm_rate_limited_ticks": 11,
+          "hand_rate_limited_ticks": 0,
+          "arm_limit_clipped_ticks": 0
+        }
+      ],
+      "request_status": "executed",
+      "request_stop_reason": null,
+      "episode_stop_reason_if_last": null,
+      "call_elapsed_wall_s": 83.22387557901675,
+      "usage": {
+        "input_tokens": 6569,
+        "output_tokens": 2048,
+        "total_tokens": 8617,
+        "cached_input_tokens": 0
+      },
+      "known_standard_equivalent_usd": 0.16809,
+      "usage_unknown": false,
+      "video_mapping": {
+        "observation_sim_time_s": 6.0,
+        "preceding_recorded_frame_index": 90,
+        "recorded_frame_sim_time_s": 6.0,
+        "video_seek_s": 6.0,
+        "offset_from_recorded_sim_time_s": 0.0,
+        "is_exact_input_image_claim": false
+      }
+    },
+    {
+      "decision_number": 5,
+      "title_zh": "第5次请求：返回2个路点",
+      "policy_observation": {
+        "task_instruction": "Pick up the brown bottle and place it upright at the center of the green target pad; release and withdraw.",
+        "requests_remaining_including_this": 26,
+        "memory_from_previous_decision": "Hand orientation is approximately diag(1,-1,-1), so local +Z lowers the hand and local +Y moves world -Y. Current hand is (-0.8231,-4.7779,1.3287). Bottle XY estimate is approximately (-0.84,-4.80), with uncertainty from perspective and the obscured gripper center. Lower 0.10 m while correcting local X -0.012 and Y +0.015, keeping fully open. Expected hand height about 1.229 m; reassess finger/cap clearance and centering before descending farther or closing. No grasp has been attempted.",
+        "last_action_status": "accepted",
+        "S": {
+          "position_world_m": [
+            -0.8354218006134033,
+            -4.792912006378174,
+            1.1965019702911377
+          ],
+          "quaternion_world_wxyz": [
+            -0.00011601181176956743,
+            0.9999995231628418,
+            0.00012657111801672727,
+            -0.0009660770883783698
+          ],
+          "robot_base_position_world_m": [
+            -1.149999976158142,
+            -4.800000190734863,
+            0.9499999284744263
+          ],
+          "robot_base_quaternion_world_wxyz": [
+            1.0000001192092896,
+            4.6293330280278155e-11,
+            6.917044159671093e-10,
+            2.0330671868240557e-10
+          ],
+          "gripper_width_m": 0.07999980449676514
+        },
+        "J": {
+          "arm_joint_position_rad": [
+            0.013277333229780197,
+            -0.3173906207084656,
+            0.011653872206807137,
+            -2.990150213241577,
+            0.00863182358443737,
+            2.6708385944366455,
+            0.8017942905426025
+          ],
+          "arm_joint_velocity_rad_s": [
+            -0.0016052969731390476,
+            -0.0032034963369369507,
+            0.0010634338250383735,
+            0.0051633757539093494,
+            -0.004285710398107767,
+            0.00016866529767867178,
+            -0.0006367798778228462
+          ]
+        },
+        "K": null,
+        "F": [
+          {
+            "position_error_m": 9.4565526524093e-05,
+            "orientation_error_rad": 0.00024000086705200374,
+            "max_finger_joint_error_m": 9.685754776000977e-08
+          }
+        ],
+        "previous_observations_own_actions": [
+          {
+            "observation_index": 3,
+            "own_requested_action": {
+              "visual_observation": "The bottle remains upright on the wooden table and the green pad is clear. In the overhead view, the bottle cap is near (325,191), while the open gripper is substantially to its right, around (417,200). The side views show the fingers still above the cap. In the wrist view, the cap is near (220,267), with the bottle body extending to the right.",
+              "memory_for_next_observation": "Fixed overhead views indicate the prior approach overshot laterally; wrist fingertip pixels are not a reliable grasp-axis reference at the bottle depth. Comparing overhead gripper displacement with known hand translations suggests bottle world XY approximately (-0.84,-4.77), versus current hand (-0.688,-4.838). Orientation is approximately diag(1,-1,-1). Move local [-0.135,-0.060,0] with gripper open to correct horizontal alignment without lowering; reassess overhead and side clearances before descending. Bottle and pad remain stationary.",
+              "task_done": false,
+              "actions": [
+                {
+                  "duration_s": 2,
+                  "delta_position_wrist_m": [
+                    -0.135,
+                    -0.06,
+                    0
+                  ],
+                  "delta_rotation_wrist_rotvec_rad": [
+                    0,
+                    0,
+                    0
+                  ],
+                  "gripper_width_m": 0.07999999821186066
+                }
+              ]
+            },
+            "action_status": "accepted"
+          },
+          {
+            "observation_index": 4,
+            "own_requested_action": {
+              "visual_observation": "The brown bottle is upright on the table and the green pad is clear. The open gripper remains above the bottle in both side views. In the overhead view, the lower gripper outline overlaps the upper-right part of the bottle cap. In the wrist view, the bottle is in the lower-right portion of the image, between the two visible fingers vertically.",
+              "memory_for_next_observation": "Hand orientation is approximately diag(1,-1,-1), so local +Z lowers the hand and local +Y moves world -Y. Current hand is (-0.8231,-4.7779,1.3287). Bottle XY estimate is approximately (-0.84,-4.80), with uncertainty from perspective and the obscured gripper center. Lower 0.10 m while correcting local X -0.012 and Y +0.015, keeping fully open. Expected hand height about 1.229 m; reassess finger/cap clearance and centering before descending farther or closing. No grasp has been attempted.",
+              "task_done": false,
+              "actions": [
+                {
+                  "duration_s": 2,
+                  "delta_position_wrist_m": [
+                    -0.012,
+                    0.015,
+                    0.1321
+                  ],
+                  "delta_rotation_wrist_rotvec_rad": [
+                    0,
+                    0,
+                    0
+                  ],
+                  "gripper_width_m": 0.07999999821186066
+                }
+              ]
+            },
+            "action_status": "accepted"
+          }
+        ]
+      },
+      "image_evidence": [
+        {
+          "label": "PREVIOUS observation 3 RGB CAMERA: head_camera",
+          "sha256": "cb62dd8d8c5724dcf56992588d2058113c3bd21da3cdccea2d26ddd3fd81d644",
+          "bytes": 302726
+        },
+        {
+          "label": "PREVIOUS observation 3 RGB CAMERA: chest_camera",
+          "sha256": "d42288df71f39e6f66d4a62e7ab1d42a286bbea8748cd1f2923cf8c2dbd2d160",
+          "bytes": 218205
+        },
+        {
+          "label": "PREVIOUS observation 3 RGB CAMERA: third_camera",
+          "sha256": "dc6e749bd07afefffe84281238c85534234db13a5ea98ef219c6e598ba0a585e",
+          "bytes": 216918
+        },
+        {
+          "label": "PREVIOUS observation 3 RGB CAMERA: wrist_camera",
+          "sha256": "94c49eca5dd09416aceb712ccad0365df66684097025c370bdde17a82f6315c0",
+          "bytes": 230451
+        },
+        {
+          "label": "PREVIOUS observation 4 RGB CAMERA: head_camera",
+          "sha256": "9a0026a07617a28c51266324b17ee67877ef0469f87795cf557ec9240f341e90",
+          "bytes": 304562
+        },
+        {
+          "label": "PREVIOUS observation 4 RGB CAMERA: chest_camera",
+          "sha256": "cefa9597969851918ebbe5bc2368159e33c601354bea41697a61f8424f219d90",
+          "bytes": 220381
+        },
+        {
+          "label": "PREVIOUS observation 4 RGB CAMERA: third_camera",
+          "sha256": "7af4b1d370f74961fb2519026dc5692f1e3b2b07e65481cc106f6dd8c8553094",
+          "bytes": 217878
+        },
+        {
+          "label": "PREVIOUS observation 4 RGB CAMERA: wrist_camera",
+          "sha256": "5457d78700e89053d8c5e959d24f5315793d9c747f2b07f1fc08c7901f0d77d3",
+          "bytes": 266934
+        },
+        {
+          "label": "CURRENT observation 5 RGB CAMERA: head_camera",
+          "sha256": "be0b56910692e801fc64c5c0326d88c8344a137c56d83ce3bd26d4b569323943",
+          "bytes": 307518
+        },
+        {
+          "label": "CURRENT observation 5 RGB CAMERA: chest_camera",
+          "sha256": "400c3231edff3b11e909992155c4219923cb4f1be46239b4abc9d87fefeb6af8",
+          "bytes": 213251
+        },
+        {
+          "label": "CURRENT observation 5 RGB CAMERA: third_camera",
+          "sha256": "d4bb8935074f03fed9e41993486987a598eb3f4bf9256bb1b9ff0f2f3602840b",
+          "bytes": 219033
+        },
+        {
+          "label": "CURRENT observation 5 RGB CAMERA: wrist_camera",
+          "sha256": "4f49a2fcc23b8a5cb88ccbd9d1224aa1e79112b3b4ba71886f9c68e1e7a22e3e",
+          "bytes": 240032
+        }
+      ],
+      "candidate": {
+        "visual_observation": "The brown bottle remains upright on the wooden tabletop, and the green pad is unoccupied. The open fingers are just above the bottle cap in the head and chest views. In the wrist view, the enlarged cap is near the lower finger and partly cropped by the bottom edge; it is not centered between the fingers.",
+        "memory_for_next_observation": "Current hand position is (-0.8354,-4.7929,1.1965), with orientation approximately diag(1,-1,-1). The wrist image suggests the bottle is displaced toward the local +Y finger by about 0.045 m. First shift local +Y 0.045 m without lowering, then lower local +Z 0.025 m, keeping fully open. This should center the cap between the fingers and bring their tips slightly below its top. Reassess cap alignment and palm clearance before closing; no grasp has yet been attempted. Expected hand position about (-0.8354,-4.8379,1.1715).",
+        "task_done": false,
+        "actions": [
+          {
+            "duration_s": 1.5,
+            "delta_position_wrist_m": [
+              0,
+              0.045,
+              0
+            ],
+            "delta_rotation_wrist_rotvec_rad": [
+              0,
+              0,
+              0
+            ],
+            "gripper_width_m": 0.07999999821186066
+          },
+          {
+            "duration_s": 1.25,
+            "delta_position_wrist_m": [
+              0,
+              0,
+              0.025
+            ],
+            "delta_rotation_wrist_rotvec_rad": [
+              0,
+              0,
+              0
+            ],
+            "gripper_width_m": 0.07999999821186066
+          }
+        ]
+      },
+      "execution_feedback": [
+        {
+          "requested_duration_s": 1.5,
+          "executed_duration_s": 1.5,
+          "position_error_m": 9.446433978155255e-05,
+          "orientation_error_rad": 0.0002534066152293235,
+          "max_finger_joint_error_m": 1.2665987014770508e-07,
+          "arm_rate_limited_ticks": 0,
+          "hand_rate_limited_ticks": 0,
+          "arm_limit_clipped_ticks": 0
+        },
+        {
+          "requested_duration_s": 1.25,
+          "executed_duration_s": 0.31666666666666665,
+          "position_error_m": 0.017688846215605736,
+          "orientation_error_rad": 0.004069334361702204,
+          "max_finger_joint_error_m": 0.0,
+          "arm_rate_limited_ticks": 0,
+          "hand_rate_limited_ticks": 0,
+          "arm_limit_clipped_ticks": 0
+        }
+      ],
+      "request_status": "executed",
+      "request_stop_reason": null,
+      "episode_stop_reason_if_last": "geometric_hard_abort",
+      "call_elapsed_wall_s": 96.57817985198926,
+      "usage": {
+        "input_tokens": 6603,
+        "output_tokens": 2689,
+        "total_tokens": 9292,
+        "cached_input_tokens": 0
+      },
+      "known_standard_equivalent_usd": 0.20048,
+      "usage_unknown": false,
+      "video_mapping": {
+        "observation_sim_time_s": 8.0,
+        "preceding_recorded_frame_index": 120,
+        "recorded_frame_sim_time_s": 8.0,
+        "video_seek_s": 8.0,
+        "offset_from_recorded_sim_time_s": 0.0,
+        "is_exact_input_image_claim": false
+      }
+    }
+  ]
+}

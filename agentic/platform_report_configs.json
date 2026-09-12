@@ -1,0 +1,56 @@
+{
+  "configs": {
+    "FR3 本轮固定配置": {
+      "任务": "瓶子抓起，放到目标区域并松手撤离。",
+      "输入": "当前四图与五类可选信息；共同任务先验、文字记忆与分类反馈。无物体真值或动态腕外参。",
+      "输出": "1–2 个相对末端路点＋夹爪宽度；位置变化、旋转、时长。",
+      "控制器": "通用 DLS / IK 与伺服；120 Hz 物理控制。输入移除不改变执行器。",
+      "推理强度": "gpt-6-astra，xhigh。",
+      "调用预算": "每条最多 30 次请求、120 秒动作；每路点最多 15 cm。",
+      "样本": "七条件 × 两初态；13 条有效终态，另 1 条服务中断。按条件分开统计。",
+      "成功判据": "最终水平偏差 ≤4 cm，直立倾角 ≤15°，稳定 ≥1 秒且速度 ≤5 cm/s，松手撤离，无硬终止。",
+      "视频时间": "15 fps，按仿真时间播放；推理时物理暂停。",
+      "费用": "逐次已知 token 的标准等值；服务中断条有 1 次未知用量。"
+    },
+    "PsiBot 历史实验配置": {
+      "任务": "原生 PsiBot 稳定抓起瓶子；不是 FR3 放置任务。",
+      "输入": "四图、腕/底座位姿、臂/手关节状态和限位、手语义与 mimic、相机 K/T、数值反馈、文字记忆等旧完整输入。",
+      "输出": "绝对世界末端位姿＋六维主动手关节角度，另有五个原生从动关节。",
+      "控制器": "通用 DLS 转机械臂目标；原生手部 mimic。另一只手臂保持目标。",
+      "推理强度": "历史 xhigh。",
+      "调用预算": "每条最多 8 次请求。",
+      "样本": "10 条有效历史试验，稳定抓起 3 条；新输入消融暂无结果。",
+      "成功判据": "稳定抬升判据按历史评估报告；不与 FR3 放置成功率合并。",
+      "视频时间": "历史原始仿真录像；不代表实际采集墙钟时间。",
+      "费用": "本页不重算历史均值；保留历史报告口径，不套用 FR3 的单条费用。"
+    },
+    "robomimic / robosuite 独立配置": {
+      "任务": "Lift 拿起方块、Can 放置罐子等；Square 历史结果另存。",
+      "输入": "两图；观察档位可能附本体状态、像素标记、标定、地标与历史反馈，依原站条件区分。",
+      "输出": "原始增量动作、末端航点或程序三种接口，分开比较。",
+      "控制器": "MuJoCo / Panda；OSC_POSE 20 Hz，航点接口有位置控制器。",
+      "推理强度": "gpt-6-astra，经 Codex CLI，medium。",
+      "调用预算": "航点 Lift 10 / Can 14 / Square 16 次；增量最多 10 次；程序最多 3 轮。预算不等同于 FR3。",
+      "样本": "服务器主矩阵 300 回合，原站含历史 370 回合；按任务/接口/观察分别统计。",
+      "成功判据": "依任务定义，由原站报告给出；不套用 FR3 或外部报告的阶段分。",
+      "视频时间": "原站逐回合录像；回合耗时与模型等待以原站记录为准。",
+      "费用": "原站运行口径独立，本页不与 API 等值金额合算。"
+    }
+  },
+  "reference": "https://openai.robocurve.org/gpt-6-astra/",
+  "replication_claim": false,
+  "reference_boundaries": {
+    "main_report_version": "0.58.0",
+    "sample_transcript_version": "0.57.1",
+    "sample_visible_fields": [
+      "joint_pos",
+      "eef_state",
+      "joint_eff",
+      "robot dimensions",
+      "contact guidance"
+    ],
+    "image_horizon_semantics": "not verified, not equated to own history",
+    "cost_comparison": "own recorded-cache accounting differs from external non-discount accounting"
+  },
+  "psibot_current_status": "Local control/recording zero-model preflight passed; no new Astra result"
+}

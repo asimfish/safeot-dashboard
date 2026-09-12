@@ -1,0 +1,90 @@
+{
+  "common_instruction_verbatim": "You control a Franka FR3 arm with a native parallel gripper using four CURRENT RGB views. The observation has optional S, J, K and F fields; null means unavailable. S is current hand world pose, base world pose and total gripper opening. J is current seven arm joint positions and velocities. K gives three fixed cameras OpenCV intrinsics/extrinsics and wrist intrinsics only; the dynamic wrist-camera world transform is never supplied. F gives previous action tracking error magnitudes only. No object pose or simulator time is supplied. Your only tool is execute_motion; call it exactly once with 1 or 2 wrist-relative waypoints. Each action contains delta_position_wrist_m (3 metre values, Euclidean norm <=0.15), delta_rotation_wrist_rotvec_rad (3 radian axis-angle values, norm <=0.6), gripper_width_m (total finger separation 0 to 0.07999999821186066 metres; larger opens), and duration_s (0.25 to 2 seconds). The right-handed local frame is fr3_hand: +Z extends from the palm along the fingers toward the grasp area; the two fingers open along opposite Y directions; X completes the frame. The first waypoint is relative to the current actual wrist. Each subsequent waypoint is relative to the PREVIOUS TARGET wrist, including its orientation. Translation is expressed in that starting wrist frame; rotation is a local right-hand axis-angle increment, right-multiplied onto the starting orientation. Zero rotation preserves orientation. No absolute WORLD pose is requested. A generic live Jacobian DLS servo converts targets to joints with fixed gain 4, arm target slew <=0.72 rad/s, native finger speed limits, position interpolation and shortest-sign normalized quaternion interpolation; last 30 percent holds the endpoint. No planner chooses a grasp or avoids obstacles for you. The complete chunk is validated before execution; each waypoint is rechecked against the actual wrist just before execution using unchanged 0.15 m and 0.6 rad limits. Rejected requests consume budget. Avoid geometric penetration. Pick up the brown bottle, place it upright at the green pad center, release and withdraw until contact ends. Final horizontal center error <=0.04 m, upright within 15 degrees, stable >=1 second at COM position-difference speed <=0.05 m/s. task_done executes the final action then holds for independent evaluation, not automatic success. Physics pauses during inference. Write only observable visual details in visual_observation and your own visual estimates/action plan in memory_for_next_observation. Do not request code or other tools.\n Previous RGB observations, when present, are explicitly labelled PREVIOUS and accompanied only by your own requested relative actions and categorical status. All text memory is your own. Use the information actually provided; never assume a null field has a particular value.\n",
+  "action_schema_verbatim": {
+    "type": "object",
+    "properties": {
+      "visual_observation": {
+        "type": "string",
+        "maxLength": 1000
+      },
+      "memory_for_next_observation": {
+        "type": "string",
+        "maxLength": 1600
+      },
+      "task_done": {
+        "type": "boolean"
+      },
+      "actions": {
+        "type": "array",
+        "minItems": 1,
+        "maxItems": 2,
+        "items": {
+          "type": "object",
+          "properties": {
+            "duration_s": {
+              "type": "number",
+              "minimum": 0.25,
+              "maximum": 2.0
+            },
+            "delta_position_wrist_m": {
+              "type": "array",
+              "minItems": 3,
+              "maxItems": 3,
+              "items": {
+                "type": "number",
+                "minimum": -0.15,
+                "maximum": 0.15
+              }
+            },
+            "delta_rotation_wrist_rotvec_rad": {
+              "type": "array",
+              "minItems": 3,
+              "maxItems": 3,
+              "items": {
+                "type": "number",
+                "minimum": -0.6,
+                "maximum": 0.6
+              }
+            },
+            "gripper_width_m": {
+              "type": "number",
+              "minimum": 0.0,
+              "maximum": 0.07999999821186066
+            }
+          },
+          "required": [
+            "duration_s",
+            "delta_position_wrist_m",
+            "delta_rotation_wrist_rotvec_rad",
+            "gripper_width_m"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    "required": [
+      "visual_observation",
+      "memory_for_next_observation",
+      "task_done",
+      "actions"
+    ],
+    "additionalProperties": false
+  },
+  "field_explanations_zh": {
+    "S": "当前末端世界位置/四元数、机器人底座位姿、夹爪总宽度；null表示该组不可见。",
+    "J": "当前7维手臂关节位置与速度；不含额外手指关节状态。",
+    "K": "三路固定相机内外参、腕相机仅内参；不含动态腕相机世界变换。",
+    "F": "上次执行的末端位置/姿态误差与手指跟踪误差；null表示无反馈或被屏蔽。",
+    "previous_observations_own_actions": "H：过去至多两轮图像对应的自身请求动作与分类状态；图像本身由image_evidence列出。",
+    "memory_from_previous_decision": "模型自己留下的文字记忆，不是额外真值。",
+    "requests_remaining_including_this": "剩余请求预算，包含当前请求。",
+    "last_action_status": "上次动作接受/拒绝分类；不等于任务成功。",
+    "task_instruction": "所有组共享的任务描述。"
+  },
+  "action_fields_zh": {
+    "delta_position_wrist_m": "手腕局部坐标平移，米",
+    "delta_rotation_wrist_rotvec_rad": "手腕局部旋转向量，弧度",
+    "gripper_width_m": "夹爪总开口，米",
+    "duration_s": "本路点持续秒数"
+  }
+}

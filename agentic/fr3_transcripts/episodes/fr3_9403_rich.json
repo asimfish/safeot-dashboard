@@ -1,0 +1,733 @@
+{
+  "episode_id": "fr3_9403_rich",
+  "robot": "Franka FR3",
+  "seed": 9403,
+  "condition": "rich",
+  "task": "抓取瓶子，直立放置到绿色目标垫并释放撤离",
+  "model": "gpt-6-astra",
+  "reasoning_effort": "xhigh",
+  "summary": {
+    "success": false,
+    "attempt_validity": "valid_attempt",
+    "stop_reason": "geometric_hard_abort",
+    "decisions": 2,
+    "input_tokens": 9116,
+    "output_tokens": 2844,
+    "unknown_usage_requests": 0,
+    "known_standard_equivalent_usd": 0.23336,
+    "wall_collection_s": 130.10532397701172,
+    "simulation_duration_s": 5.183333333333334,
+    "action_time_s": 5.183333333333334,
+    "total_inference_s": 108.38645214500139,
+    "decision_rate_per_wall_s": 0.01537216109890614
+  },
+  "artifact_sync_verified": true,
+  "training_export_status": "not_exported",
+  "videos": [
+    {
+      "camera": "chest_camera",
+      "file_name": "chest_camera.mp4",
+      "sha256": "b22599282d6faa9622c71cf0799d3e1e00b16e42127a69773241374bc6ddce03",
+      "fps": 15,
+      "frame_count": 78,
+      "public_url": null
+    },
+    {
+      "camera": "head_camera",
+      "file_name": "head_camera.mp4",
+      "sha256": "e1342535fc9af2cdc50394e9f6243d831595e87d654c91130e6ceede21c470aa",
+      "fps": 15,
+      "frame_count": 78,
+      "public_url": null
+    },
+    {
+      "camera": "wrist_camera",
+      "file_name": "wrist_camera.mp4",
+      "sha256": "8f963cd36c8820359c93388cff1a0481696e765d0bd7393560c98ddad85e61ba",
+      "fps": 15,
+      "frame_count": 78,
+      "public_url": null
+    },
+    {
+      "camera": "third_camera",
+      "file_name": "third_camera.mp4",
+      "sha256": "f0d7eadf8a46dfefbd53b7945db78b2019be6c732ead38c546c49a2735b661d4",
+      "fps": 15,
+      "frame_count": 78,
+      "public_url": null
+    }
+  ],
+  "decisions": [
+    {
+      "decision_number": 1,
+      "title_zh": "第1次请求：返回2个路点",
+      "policy_observation": {
+        "task_instruction": "Pick up the brown bottle and place it upright at the center of the green target pad; release and withdraw.",
+        "requests_remaining_including_this": 30,
+        "memory_from_previous_decision": "",
+        "last_action_status": "none",
+        "S": {
+          "position_world_m": [
+            -0.8428294062614441,
+            -4.799976348876953,
+            1.5399258136749268
+          ],
+          "quaternion_world_wxyz": [
+            -2.699461401789449e-05,
+            0.9999998807907104,
+            0.00021511940576601774,
+            -0.0004724037426058203
+          ],
+          "robot_base_position_world_m": [
+            -1.149999976158142,
+            -4.800000190734863,
+            0.9499999284744263
+          ],
+          "robot_base_quaternion_world_wxyz": [
+            1.0000001192092896,
+            4.6293330280278155e-11,
+            6.917044159671093e-10,
+            2.0330671868240557e-10
+          ],
+          "gripper_width_m": 0.07999970018863678
+        },
+        "J": {
+          "arm_joint_position_rad": [
+            9.010252142616082e-06,
+            -0.7843809127807617,
+            3.153977377223782e-05,
+            -2.356325149536133,
+            7.627801824128255e-05,
+            1.5709999799728394,
+            0.7850000262260437
+          ],
+          "arm_joint_velocity_rad_s": [
+            -9.225235407939181e-05,
+            -0.006212950684130192,
+            -0.00031647738069295883,
+            0.003278420539572835,
+            -0.0007632238557562232,
+            1.0167107120651053e-06,
+            -5.261101065912044e-08
+          ]
+        },
+        "K": {
+          "head_camera": {
+            "K_pixels": [
+              [
+                554.3306917472469,
+                0.0,
+                320.0
+              ],
+              [
+                0.0,
+                554.3306917472469,
+                240.0
+              ],
+              [
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "T_world_from_camera_opencv": [
+              [
+                0.8362443694874696,
+                0.2784660512721505,
+                -0.4723896831953475,
+                -0.4499999880790712
+              ],
+              [
+                0.5483569590152964,
+                -0.42466078280213826,
+                0.7203942427930498,
+                -5.550000190734863
+              ],
+              [
+                -3.250361860602002e-08,
+                -0.8614637994940769,
+                -0.5078189856250234,
+                1.4999999999999996
+              ],
+              [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            ]
+          },
+          "chest_camera": {
+            "K_pixels": [
+              [
+                554.3306917472469,
+                0.0,
+                320.0
+              ],
+              [
+                0.0,
+                554.3306917472469,
+                240.0
+              ],
+              [
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "T_world_from_camera_opencv": [
+              [
+                0.7838884144985125,
+                0.38539045682296075,
+                -0.4868194217621127,
+                -0.15000000596046423
+              ],
+              [
+                0.6209017262135835,
+                -0.48655542518842987,
+                0.6146095220582722,
+                -5.949999809265136
+              ],
+              [
+                1.3728328777720356e-08,
+                -0.7840523031083421,
+                -0.6206947607242258,
+                2.299999952316283
+              ],
+              [
+                0.0,
+                0.0,
+                0.0,
+                0.9999999999999998
+              ]
+            ]
+          },
+          "third_camera": {
+            "K_pixels": [
+              [
+                554.3306917472469,
+                0.0,
+                320.0
+              ],
+              [
+                0.0,
+                554.3306917472469,
+                240.0
+              ],
+              [
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "T_world_from_camera_opencv": [
+              [
+                1.0,
+                0.0,
+                0.0,
+                -0.8500000238418579
+              ],
+              [
+                0.0,
+                -1.0,
+                0.0,
+                -4.96999979019165
+              ],
+              [
+                0.0,
+                0.0,
+                -1.0,
+                2.25
+              ],
+              [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            ]
+          },
+          "wrist_camera": {
+            "K_pixels": [
+              [
+                366.4996579879497,
+                0.0,
+                320.0
+              ],
+              [
+                0.0,
+                366.4996579879497,
+                240.0
+              ],
+              [
+                0.0,
+                0.0,
+                1.0
+              ]
+            ]
+          }
+        },
+        "F": null,
+        "previous_observations_own_actions": []
+      },
+      "image_evidence": [
+        {
+          "label": "CURRENT observation 1 RGB CAMERA: head_camera",
+          "sha256": "31ccc44f8034e216309afda869822c7b078fc941de2fa214cbc75ce6e06768f0",
+          "bytes": 299537
+        },
+        {
+          "label": "CURRENT observation 1 RGB CAMERA: chest_camera",
+          "sha256": "a9e2affa8dbe4bb1e44ba9e72f898e7e76a3499350691bf7c820fb283240d086",
+          "bytes": 222068
+        },
+        {
+          "label": "CURRENT observation 1 RGB CAMERA: third_camera",
+          "sha256": "11626a354f4b25a5bacaa8798af047696bab8e2967915de44bcc1e0d66f983e7",
+          "bytes": 213995
+        },
+        {
+          "label": "CURRENT observation 1 RGB CAMERA: wrist_camera",
+          "sha256": "0d0286299b6987254ebc6a1aa0cdefd1749f2645037359b87b5c066711d135e3",
+          "bytes": 256129
+        }
+      ],
+      "candidate": {
+        "visual_observation": "A brown bottle stands upright on the wooden tabletop. A green circular pad is separated from the bottle toward the lower part of the overhead view. The robot's open gripper is above the table, with the bottle visible between and beyond its fingers in the wrist view.",
+        "memory_for_next_observation": "Initial approach. From calibrated fixed views I estimate bottle center near world (-0.855,-4.840), tabletop z about 0.94, bottle top about 1.09. Green pad center approximately (-0.845,-5.028). Initial hand is (-0.8428,-4.8000,1.5399), pointing down: local X approximately world +X, local Y world -Y, local Z world -Z. Request two open-gripper downward approach steps totaling 0.28 m with small XY alignment; target hand roughly (-0.855,-4.840,1.260). Fingers should remain above the bottle. Next inspect actual tracking and bottle alignment before descending for a body/neck grasp; do not close yet.",
+        "task_done": false,
+        "actions": [
+          {
+            "duration_s": 2,
+            "delta_position_wrist_m": [
+              -0.012,
+              0.04,
+              0.14
+            ],
+            "delta_rotation_wrist_rotvec_rad": [
+              0,
+              0,
+              0
+            ],
+            "gripper_width_m": 0.07999999821186066
+          },
+          {
+            "duration_s": 2,
+            "delta_position_wrist_m": [
+              0,
+              0,
+              0.14
+            ],
+            "delta_rotation_wrist_rotvec_rad": [
+              0,
+              0,
+              0
+            ],
+            "gripper_width_m": 0.07999999821186066
+          }
+        ]
+      },
+      "execution_feedback": [
+        {
+          "requested_duration_s": 2,
+          "executed_duration_s": 2.0,
+          "position_error_m": 7.970113074406981e-05,
+          "orientation_error_rad": 0.00022278568940237164,
+          "max_finger_joint_error_m": 1.4156103134155273e-07,
+          "arm_rate_limited_ticks": 9,
+          "hand_rate_limited_ticks": 0,
+          "arm_limit_clipped_ticks": 0
+        },
+        {
+          "requested_duration_s": 2,
+          "executed_duration_s": 2.0,
+          "position_error_m": 9.365846926812083e-05,
+          "orientation_error_rad": 0.0002367857377976179,
+          "max_finger_joint_error_m": 1.3783574104309082e-07,
+          "arm_rate_limited_ticks": 9,
+          "hand_rate_limited_ticks": 0,
+          "arm_limit_clipped_ticks": 0
+        }
+      ],
+      "request_status": "executed",
+      "request_stop_reason": null,
+      "episode_stop_reason_if_last": null,
+      "call_elapsed_wall_s": 67.92781574800028,
+      "usage": {
+        "input_tokens": 3505,
+        "output_tokens": 1722,
+        "total_tokens": 5227,
+        "cached_input_tokens": 0
+      },
+      "known_standard_equivalent_usd": 0.12115,
+      "usage_unknown": false,
+      "video_mapping": {
+        "observation_sim_time_s": 0.0,
+        "preceding_recorded_frame_index": 0,
+        "recorded_frame_sim_time_s": 0.0,
+        "video_seek_s": 0.0,
+        "offset_from_recorded_sim_time_s": 0.0,
+        "is_exact_input_image_claim": false
+      }
+    },
+    {
+      "decision_number": 2,
+      "title_zh": "第2次请求：返回1个路点",
+      "policy_observation": {
+        "task_instruction": "Pick up the brown bottle and place it upright at the center of the green target pad; release and withdraw.",
+        "requests_remaining_including_this": 29,
+        "memory_from_previous_decision": "Initial approach. From calibrated fixed views I estimate bottle center near world (-0.855,-4.840), tabletop z about 0.94, bottle top about 1.09. Green pad center approximately (-0.845,-5.028). Initial hand is (-0.8428,-4.8000,1.5399), pointing down: local X approximately world +X, local Y world -Y, local Z world -Z. Request two open-gripper downward approach steps totaling 0.28 m with small XY alignment; target hand roughly (-0.855,-4.840,1.260). Fingers should remain above the bottle. Next inspect actual tracking and bottle alignment before descending for a body/neck grasp; do not close yet.",
+        "last_action_status": "accepted",
+        "S": {
+          "position_world_m": [
+            -0.8551262617111206,
+            -4.839953422546387,
+            1.2598567008972168
+          ],
+          "quaternion_world_wxyz": [
+            -6.001622386975214e-05,
+            0.9999997615814209,
+            0.00019804717157967389,
+            -0.0005848107393831015
+          ],
+          "robot_base_position_world_m": [
+            -1.149999976158142,
+            -4.800000190734863,
+            0.9499999284744263
+          ],
+          "robot_base_quaternion_world_wxyz": [
+            1.0000001192092896,
+            4.6293330280278155e-11,
+            6.917044159671093e-10,
+            2.0330671868240557e-10
+          ],
+          "gripper_width_m": 0.07999986410140991
+        },
+        "J": {
+          "arm_joint_position_rad": [
+            -0.05230647698044777,
+            -0.615220308303833,
+            -0.1027832105755806,
+            -2.995403528213501,
+            -0.0859440490603447,
+            2.3796515464782715,
+            0.7109836339950562
+          ],
+          "arm_joint_velocity_rad_s": [
+            -0.0007072630105540156,
+            -0.003914594184607267,
+            0.0008147668559104204,
+            0.004926989786326885,
+            -0.0018772273324429989,
+            0.00033484393497928977,
+            -0.000335522840032354
+          ]
+        },
+        "K": {
+          "head_camera": {
+            "K_pixels": [
+              [
+                554.3306917472469,
+                0.0,
+                320.0
+              ],
+              [
+                0.0,
+                554.3306917472469,
+                240.0
+              ],
+              [
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "T_world_from_camera_opencv": [
+              [
+                0.8362443694874696,
+                0.2784660512721505,
+                -0.4723896831953475,
+                -0.4499999880790712
+              ],
+              [
+                0.5483569590152964,
+                -0.42466078280213826,
+                0.7203942427930498,
+                -5.550000190734863
+              ],
+              [
+                -3.250361860602002e-08,
+                -0.8614637994940769,
+                -0.5078189856250234,
+                1.4999999999999996
+              ],
+              [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            ]
+          },
+          "chest_camera": {
+            "K_pixels": [
+              [
+                554.3306917472469,
+                0.0,
+                320.0
+              ],
+              [
+                0.0,
+                554.3306917472469,
+                240.0
+              ],
+              [
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "T_world_from_camera_opencv": [
+              [
+                0.7838884144985125,
+                0.38539045682296075,
+                -0.4868194217621127,
+                -0.15000000596046423
+              ],
+              [
+                0.6209017262135835,
+                -0.48655542518842987,
+                0.6146095220582722,
+                -5.949999809265136
+              ],
+              [
+                1.3728328777720356e-08,
+                -0.7840523031083421,
+                -0.6206947607242258,
+                2.299999952316283
+              ],
+              [
+                0.0,
+                0.0,
+                0.0,
+                0.9999999999999998
+              ]
+            ]
+          },
+          "third_camera": {
+            "K_pixels": [
+              [
+                554.3306917472469,
+                0.0,
+                320.0
+              ],
+              [
+                0.0,
+                554.3306917472469,
+                240.0
+              ],
+              [
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "T_world_from_camera_opencv": [
+              [
+                1.0,
+                0.0,
+                0.0,
+                -0.8500000238418579
+              ],
+              [
+                0.0,
+                -1.0,
+                0.0,
+                -4.96999979019165
+              ],
+              [
+                0.0,
+                0.0,
+                -1.0,
+                2.25
+              ],
+              [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            ]
+          },
+          "wrist_camera": {
+            "K_pixels": [
+              [
+                366.4996579879497,
+                0.0,
+                320.0
+              ],
+              [
+                0.0,
+                366.4996579879497,
+                240.0
+              ],
+              [
+                0.0,
+                0.0,
+                1.0
+              ]
+            ]
+          }
+        },
+        "F": [
+          {
+            "position_error_m": 7.970113074406981e-05,
+            "orientation_error_rad": 0.00022278568940237164,
+            "max_finger_joint_error_m": 1.4156103134155273e-07
+          },
+          {
+            "position_error_m": 9.365846926812083e-05,
+            "orientation_error_rad": 0.0002367857377976179,
+            "max_finger_joint_error_m": 1.3783574104309082e-07
+          }
+        ],
+        "previous_observations_own_actions": [
+          {
+            "observation_index": 1,
+            "own_requested_action": {
+              "visual_observation": "A brown bottle stands upright on the wooden tabletop. A green circular pad is separated from the bottle toward the lower part of the overhead view. The robot's open gripper is above the table, with the bottle visible between and beyond its fingers in the wrist view.",
+              "memory_for_next_observation": "Initial approach. From calibrated fixed views I estimate bottle center near world (-0.855,-4.840), tabletop z about 0.94, bottle top about 1.09. Green pad center approximately (-0.845,-5.028). Initial hand is (-0.8428,-4.8000,1.5399), pointing down: local X approximately world +X, local Y world -Y, local Z world -Z. Request two open-gripper downward approach steps totaling 0.28 m with small XY alignment; target hand roughly (-0.855,-4.840,1.260). Fingers should remain above the bottle. Next inspect actual tracking and bottle alignment before descending for a body/neck grasp; do not close yet.",
+              "task_done": false,
+              "actions": [
+                {
+                  "duration_s": 2,
+                  "delta_position_wrist_m": [
+                    -0.012,
+                    0.04,
+                    0.14
+                  ],
+                  "delta_rotation_wrist_rotvec_rad": [
+                    0,
+                    0,
+                    0
+                  ],
+                  "gripper_width_m": 0.07999999821186066
+                },
+                {
+                  "duration_s": 2,
+                  "delta_position_wrist_m": [
+                    0,
+                    0,
+                    0.14
+                  ],
+                  "delta_rotation_wrist_rotvec_rad": [
+                    0,
+                    0,
+                    0
+                  ],
+                  "gripper_width_m": 0.07999999821186066
+                }
+              ]
+            },
+            "action_status": "accepted"
+          }
+        ]
+      },
+      "image_evidence": [
+        {
+          "label": "PREVIOUS observation 1 RGB CAMERA: head_camera",
+          "sha256": "31ccc44f8034e216309afda869822c7b078fc941de2fa214cbc75ce6e06768f0",
+          "bytes": 299537
+        },
+        {
+          "label": "PREVIOUS observation 1 RGB CAMERA: chest_camera",
+          "sha256": "a9e2affa8dbe4bb1e44ba9e72f898e7e76a3499350691bf7c820fb283240d086",
+          "bytes": 222068
+        },
+        {
+          "label": "PREVIOUS observation 1 RGB CAMERA: third_camera",
+          "sha256": "11626a354f4b25a5bacaa8798af047696bab8e2967915de44bcc1e0d66f983e7",
+          "bytes": 213995
+        },
+        {
+          "label": "PREVIOUS observation 1 RGB CAMERA: wrist_camera",
+          "sha256": "0d0286299b6987254ebc6a1aa0cdefd1749f2645037359b87b5c066711d135e3",
+          "bytes": 256129
+        },
+        {
+          "label": "CURRENT observation 2 RGB CAMERA: head_camera",
+          "sha256": "a90b0c46c394b4980306125d3ac71eacce4af128d2a2f1e4fe404c38f74bf1ee",
+          "bytes": 307647
+        },
+        {
+          "label": "CURRENT observation 2 RGB CAMERA: chest_camera",
+          "sha256": "9b160eafaa0fc78c6c07a6b233fe1f35d311bd8d4627731d858499e66aad62e0",
+          "bytes": 215502
+        },
+        {
+          "label": "CURRENT observation 2 RGB CAMERA: third_camera",
+          "sha256": "fc1c338efa756ea8857b137f06341a7fecba7ee11f9ad11fbd31851a31266d53",
+          "bytes": 220518
+        },
+        {
+          "label": "CURRENT observation 2 RGB CAMERA: wrist_camera",
+          "sha256": "48e754d38071162a30a34a5e5ecf3c6804f80260706adff702dd72b2ce2911ca",
+          "bytes": 244778
+        }
+      ],
+      "candidate": {
+        "visual_observation": "The brown bottle remains upright on the tabletop. The open gripper is directly above its cap, with a visible vertical gap in the head view. The green pad is clear and separate from the bottle. The wrist view shows the bottle cap and shoulder between the open fingers.",
+        "memory_for_next_observation": "Current hand is approximately (-0.8551,-4.8400,1.2599), with local +Z pointing down and +Y toward world -Y. Bottle top estimated z 1.08, neck/cap around 1.05-1.08, tabletop about 0.94. Descend 0.10 m with fingers fully open, targeting hand z 1.1599 so fingertips straddle the upper bottle without bringing the palm onto its cap. Inspect alignment and finger overlap before closing. Bottle XY estimate remains (-0.855,-4.840); pad center approximately (-0.845,-5.028).",
+        "task_done": false,
+        "actions": [
+          {
+            "duration_s": 2,
+            "delta_position_wrist_m": [
+              0,
+              0,
+              0.143720089549
+            ],
+            "delta_rotation_wrist_rotvec_rad": [
+              0,
+              0,
+              0
+            ],
+            "gripper_width_m": 0.07999999821186066
+          }
+        ]
+      },
+      "execution_feedback": [
+        {
+          "requested_duration_s": 2,
+          "executed_duration_s": 1.1833333333333333,
+          "position_error_m": 0.024977179244160652,
+          "orientation_error_rad": 0.006470616441220045,
+          "max_finger_joint_error_m": 0.0,
+          "arm_rate_limited_ticks": 56,
+          "hand_rate_limited_ticks": 0,
+          "arm_limit_clipped_ticks": 60
+        }
+      ],
+      "request_status": "executed",
+      "request_stop_reason": null,
+      "episode_stop_reason_if_last": "geometric_hard_abort",
+      "call_elapsed_wall_s": 40.4586363970011,
+      "usage": {
+        "input_tokens": 5611,
+        "output_tokens": 1122,
+        "total_tokens": 6733,
+        "cached_input_tokens": 0
+      },
+      "known_standard_equivalent_usd": 0.11221,
+      "usage_unknown": false,
+      "video_mapping": {
+        "observation_sim_time_s": 4.0,
+        "preceding_recorded_frame_index": 60,
+        "recorded_frame_sim_time_s": 4.0,
+        "video_seek_s": 4.0,
+        "offset_from_recorded_sim_time_s": 0.0,
+        "is_exact_input_image_claim": false
+      }
+    }
+  ]
+}
