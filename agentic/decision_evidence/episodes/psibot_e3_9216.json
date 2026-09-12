@@ -1,0 +1,5845 @@
+{
+  "episode_id": "psibot_e3_9216",
+  "robot": "PsiBot",
+  "seed": 9216,
+  "condition": "historical_xhigh",
+  "protocol_family": "psibot_e3",
+  "task": "Grasp the bottle around its body with the thumb opposing the other fingers, keep the bottle upright, and lift it stably.",
+  "summary": {
+    "success": false,
+    "attempt_validity": "valid_attempt",
+    "stop_reason": "model_claimed_done",
+    "decisions": 8,
+    "input_tokens": 47157,
+    "output_tokens": 16012,
+    "unknown_usage_requests": 0,
+    "known_standard_equivalent_usd": 1.27217,
+    "wall_collection_s": null,
+    "simulation_duration_s": null,
+    "action_time_s": 31.5,
+    "total_inference_s": 608.6468304020054,
+    "decision_rate_per_wall_s": null
+  },
+  "decisions": [
+    {
+      "decision_number": 1,
+      "title_zh": "第1次请求：实际输入与动作",
+      "policy_observation": {
+        "task_instruction": "Grasp the bottle around its body with the thumb opposing the other fingers, keep the bottle upright, and lift it stably.",
+        "hand_semantics": {
+          "frame": "arm2_link7 wrist coordinates; right-handed XYZ; all directions are unit vectors in this wrist frame",
+          "units": "metres and radians",
+          "command_dimensions": [
+            {
+              "index": 0,
+              "joint_name": "hand2_joint_link_1_1",
+              "finger": "thumb",
+              "motion": "rotation/opposition",
+              "increasing_value": "opposes toward fingers",
+              "range_rad": [
+                0.0,
+                1.5699999332427979
+              ]
+            },
+            {
+              "index": 1,
+              "joint_name": "hand2_joint_link_2_1",
+              "finger": "index",
+              "motion": "proximal flexion",
+              "increasing_value": "opens/extends",
+              "range_rad": [
+                1.749999761581421,
+                3.109999895095825
+              ]
+            },
+            {
+              "index": 2,
+              "joint_name": "hand2_joint_link_3_1",
+              "finger": "middle",
+              "motion": "proximal flexion",
+              "increasing_value": "opens/extends",
+              "range_rad": [
+                1.709999918937683,
+                3.0699994564056396
+              ]
+            },
+            {
+              "index": 3,
+              "joint_name": "hand2_joint_link_4_1",
+              "finger": "ring",
+              "motion": "proximal flexion",
+              "increasing_value": "opens/extends",
+              "range_rad": [
+                1.7699997425079346,
+                3.0799999237060547
+              ]
+            },
+            {
+              "index": 4,
+              "joint_name": "hand2_joint_link_5_1",
+              "finger": "little",
+              "motion": "proximal flexion",
+              "increasing_value": "opens/extends",
+              "range_rad": [
+                1.7299998998641968,
+                3.049999952316284
+              ]
+            },
+            {
+              "index": 5,
+              "joint_name": "hand2_joint_link_1_2",
+              "finger": "thumb",
+              "motion": "flexion",
+              "increasing_value": "opens/extends",
+              "range_rad": [
+                0.03999999538064003,
+                0.6415999531745911
+              ]
+            }
+          ],
+          "extended_fingers_longitudinal_axis_wrist": [
+            0.00131,
+            -5e-05,
+            1.0
+          ],
+          "palm_outward_normal_wrist": [
+            -0.99994,
+            0.01076,
+            0.00131
+          ],
+          "finger_row_axis_from_little_to_index_wrist": [
+            -0.01076,
+            -0.99994,
+            -3e-05
+          ],
+          "thumb_opposition_sweep_direction_wrist": [
+            -0.67665,
+            0.72066,
+            -0.15095
+          ],
+          "thumb_opposition_description": "Increasing dimension 0 swings the thumb from the index side across the palm toward the other fingers; the vector is its tip displacement from minimum to maximum opposition with fingers extended, not a fixed rotation axis.",
+          "approximate_opening_width_m": {
+            "fully_open_thumb_index_tip_surface_gap": 0.077,
+            "fully_closed_thumb_index_tip_surface_gap": 0.0,
+            "fully_open_thumb_index_tip_center_distance": 0.09,
+            "fully_closed_thumb_index_tip_center_distance": 0.012,
+            "definition": "Measured unloaded stable open/close command endpoints under native drives and self-contact; fingertip-pad surface separation estimated from validated USD geometry. Intermediate posture and gravity change the gap. Target limits may be unreachable together due to self-contact; this is not an object clearance guarantee."
+          },
+          "native_mimic": {
+            "equation": "q_follower = multiplier * q_driver + offset_rad",
+            "couplings": [
+              {
+                "follower_joint": "hand2_joint_link_1_3",
+                "driver_joint": "hand2_joint_link_1_2",
+                "multiplier": 0.8976100087165833,
+                "offset_rad": -0.5359042110206326
+              },
+              {
+                "follower_joint": "hand2_joint_link_2_2",
+                "driver_joint": "hand2_joint_link_2_1",
+                "multiplier": 1.133489966392517,
+                "offset_rad": -1.9551615784944358
+              },
+              {
+                "follower_joint": "hand2_joint_link_3_2",
+                "driver_joint": "hand2_joint_link_3_1",
+                "multiplier": 1.1038199663162231,
+                "offset_rad": -1.8187386216520913
+              },
+              {
+                "follower_joint": "hand2_joint_link_4_2",
+                "driver_joint": "hand2_joint_link_4_1",
+                "multiplier": 1.1526700258255005,
+                "offset_rad": -1.9802281827806432
+              },
+              {
+                "follower_joint": "hand2_joint_link_5_2",
+                "driver_joint": "hand2_joint_link_5_1",
+                "multiplier": 1.121209979057312,
+                "offset_rad": -1.8496972035339898
+              }
+            ]
+          },
+          "source": "Native robot USD joint frames and fingertip meshes, E2 hand-local-axis and mimic probes; independently checked with measured simulator links before policy requests."
+        },
+        "sim_time_s": 0.0,
+        "robot": {
+          "wrist_link": "arm2_link7",
+          "position_world_m": [
+            -1.2959834337234497,
+            -5.512760639190674,
+            1.3538978099822998
+          ],
+          "quaternion_world_wxyz": [
+            0.2702353298664093,
+            -0.7881494760513306,
+            0.12675444781780243,
+            -0.5382626056671143
+          ],
+          "robot_base_position_world_m": [
+            -1.649999976158142,
+            -5.0,
+            -0.010519921779632568
+          ],
+          "robot_base_quaternion_world_wxyz": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "arm_joint_names": [
+            "arm2_joint_link1",
+            "arm2_joint_link2",
+            "arm2_joint_link3",
+            "arm2_joint_link4",
+            "arm2_joint_link5",
+            "arm2_joint_link6",
+            "arm2_joint_link7"
+          ],
+          "arm_joint_position_rad": [
+            0.2340599000453949,
+            -0.6471589803695679,
+            1.5070055723190308,
+            -0.8151229619979858,
+            -0.29954347014427185,
+            -1.0303738117218018,
+            -0.36014604568481445
+          ],
+          "arm_joint_velocity_rad_s": [
+            0.0009451359510421753,
+            0.012265217490494251,
+            0.02668885327875614,
+            0.0010863151401281357,
+            0.0009609917760826647,
+            0.007666762452572584,
+            6.689515430480242e-08
+          ],
+          "arm_joint_limits_rad": [
+            [
+              -3.1049997806549072,
+              3.1049997806549072
+            ],
+            [
+              -2.2689998149871826,
+              2.2689998149871826
+            ],
+            [
+              -3.1049997806549072,
+              3.1049997806549072
+            ],
+            [
+              -2.355999708175659,
+              2.355999708175659
+            ],
+            [
+              -3.1049997806549072,
+              3.1049997806549072
+            ],
+            [
+              -2.2339999675750732,
+              2.2339999675750732
+            ],
+            [
+              -6.279999732971191,
+              6.279999732971191
+            ]
+          ],
+          "hand_joint_names": [
+            "hand2_joint_link_1_1",
+            "hand2_joint_link_2_1",
+            "hand2_joint_link_3_1",
+            "hand2_joint_link_4_1",
+            "hand2_joint_link_5_1",
+            "hand2_joint_link_1_2"
+          ],
+          "hand_joint_position_rad": [
+            0.11076578497886658,
+            3.103214740753174,
+            3.0530221462249756,
+            3.0736865997314453,
+            3.0455074310302734,
+            0.519919216632843
+          ],
+          "hand_joint_velocity_rad_s": [
+            -0.006100674159824848,
+            -0.00238589383661747,
+            -0.0015911762602627277,
+            -0.0020314608700573444,
+            -0.001537816016934812,
+            -0.007738425396382809
+          ],
+          "hand_joint_limits_rad": [
+            [
+              0.0,
+              1.5699999332427979
+            ],
+            [
+              1.749999761581421,
+              3.109999895095825
+            ],
+            [
+              1.709999918937683,
+              3.0699994564056396
+            ],
+            [
+              1.7699997425079346,
+              3.0799999237060547
+            ],
+            [
+              1.7299998998641968,
+              3.049999952316284
+            ],
+            [
+              0.03999999538064003,
+              0.6415999531745911
+            ]
+          ],
+          "hand_command_semantics": {
+            "dimension": 6,
+            "units": "rad",
+            "source": "Native hand2 actuator order, formal LeRobot collector first six joints",
+            "ordered_meanings": [
+              "thumb rotation/opposition (larger closes/opposes)",
+              "index finger proximal flexion (smaller closes)",
+              "middle finger proximal flexion (smaller closes)",
+              "ring finger proximal flexion (smaller closes)",
+              "little finger proximal flexion (smaller closes)",
+              "thumb flexion (smaller closes)"
+            ],
+            "followers": "Remaining five hand joints follow native USD PhysX mimic constraints; they are not independent commands",
+            "coupling_equation": "q_follower_rad = multiplier * q_driver_rad + offset_rad",
+            "native_couplings": [
+              {
+                "follower_joint": "hand2_joint_link_1_3",
+                "driver_joint": "hand2_joint_link_1_2",
+                "multiplier": 0.8976100087165833,
+                "offset_rad": -0.5359042110206326
+              },
+              {
+                "follower_joint": "hand2_joint_link_2_2",
+                "driver_joint": "hand2_joint_link_2_1",
+                "multiplier": 1.133489966392517,
+                "offset_rad": -1.9551615784944358
+              },
+              {
+                "follower_joint": "hand2_joint_link_3_2",
+                "driver_joint": "hand2_joint_link_3_1",
+                "multiplier": 1.1038199663162231,
+                "offset_rad": -1.8187386216520913
+              },
+              {
+                "follower_joint": "hand2_joint_link_4_2",
+                "driver_joint": "hand2_joint_link_4_1",
+                "multiplier": 1.1526700258255005,
+                "offset_rad": -1.9802281827806432
+              },
+              {
+                "follower_joint": "hand2_joint_link_5_2",
+                "driver_joint": "hand2_joint_link_5_1",
+                "multiplier": 1.121209979057312,
+                "offset_rad": -1.8496972035339898
+              }
+            ]
+          }
+        },
+        "cameras": {
+          "head_camera": {
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "K_pixels": [
+              [
+                615.8730332370546,
+                0.0,
+                320.0
+              ],
+              [
+                0.0,
+                615.8730332370546,
+                240.0
+              ],
+              [
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "T_world_from_camera_opencv": [
+              [
+                4.277902283695927e-08,
+                -0.8684111649121298,
+                0.49584478282619426,
+                -1.4460942411438373
+              ],
+              [
+                -0.9999999999999991,
+                -2.894899213961315e-08,
+                3.5574428341499705e-08,
+                -4.965000000000002
+              ],
+              [
+                -1.653902401725672e-08,
+                -0.49584478282619554,
+                -0.8684111649121304,
+                1.6082024469910106
+              ],
+              [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "frame": "OpenCV X right Y down Z forward",
+            "distortion": [
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "chest_camera": {
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "K_pixels": [
+              [
+                555.5555650987377,
+                0.0,
+                320.0
+              ],
+              [
+                0.0,
+                555.5555650987376,
+                240.0
+              ],
+              [
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "T_world_from_camera_opencv": [
+              [
+                4.384457409078169e-09,
+                -0.23554049200376248,
+                0.9718645361502938,
+                -1.5327025035328656
+              ],
+              [
+                -1.0,
+                -3.3901765802379406e-09,
+                3.6897464027607807e-09,
+                -5.012000004877337
+              ],
+              [
+                2.425707797820558e-09,
+                -0.9718645361502939,
+                -0.23554049200376245,
+                1.1096944144487395
+              ],
+              [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "frame": "OpenCV X right Y down Z forward",
+            "distortion": [
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "third_camera": {
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "K_pixels": [
+              [
+                555.5555650987377,
+                0.0,
+                320.0
+              ],
+              [
+                0.0,
+                555.5555650987376,
+                240.0
+              ],
+              [
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "T_world_from_camera_opencv": [
+              [
+                -2.992927681391134e-08,
+                0.07427169595009141,
+                -0.9972380433881853,
+                -0.17535564225681136
+              ],
+              [
+                0.9999999999999994,
+                2.0634252618692948e-08,
+                -2.847538315656851e-08,
+                -4.988999994448692
+              ],
+              [
+                1.846234660159487e-08,
+                -0.9972380433881854,
+                -0.07427169595009205,
+                1.151976349756701
+              ],
+              [
+                0.0,
+                0.0,
+                0.0,
+                0.9999999999999998
+              ]
+            ],
+            "frame": "OpenCV X right Y down Z forward",
+            "distortion": [
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "wrist_camera": {
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "K_pixels": [
+              [
+                480.0,
+                0.0,
+                320.0
+              ],
+              [
+                0.0,
+                480.0,
+                240.0
+              ],
+              [
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "T_world_from_camera_opencv": [
+              [
+                -0.4647024376631923,
+                -0.09531985057914526,
+                0.8803214018274557,
+                -1.2406115585461923
+              ],
+              [
+                0.455205964930384,
+                0.8270373137053325,
+                0.3298436163257765,
+                -5.536006440694747
+              ],
+              [
+                -0.7594992915873489,
+                0.5540066857219663,
+                -0.3409360911573863,
+                1.3981715334589113
+              ],
+              [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "frame": "OpenCV X right Y down Z forward",
+            "distortion": [
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        "last_execution_feedback": null,
+        "memory_from_previous_decision": "",
+        "requests_remaining_including_this": 8
+      },
+      "input_private_path_redaction": false,
+      "image_evidence": [
+        {
+          "label": "head_camera",
+          "sha256": "70fea3a5e184b9fefca701bdc3b3832d1722f838280362d4611a1f2fe76c3490",
+          "bytes": 324510,
+          "url": "images/70fea3a5e184b9fefca701bdc3b3832d1722f838280362d4611a1f2fe76c3490.png",
+          "is_model_input": true,
+          "missing_reason": null,
+          "camera": "head_camera",
+          "temporal_role": "current",
+          "observation_index": 1
+        },
+        {
+          "label": "chest_camera",
+          "sha256": "c3d900d17bd1ffc6a4d7cd33e8d6168d1a8dafb7b47d9593b289e3909a006d1e",
+          "bytes": 161825,
+          "url": "images/c3d900d17bd1ffc6a4d7cd33e8d6168d1a8dafb7b47d9593b289e3909a006d1e.png",
+          "is_model_input": true,
+          "missing_reason": null,
+          "camera": "chest_camera",
+          "temporal_role": "current",
+          "observation_index": 1
+        },
+        {
+          "label": "third_camera",
+          "sha256": "0402eaed3de225e0e1eb7995c602f5b7df6a5432a55fccd4d940533f5d1ceebb",
+          "bytes": 189730,
+          "url": "images/0402eaed3de225e0e1eb7995c602f5b7df6a5432a55fccd4d940533f5d1ceebb.png",
+          "is_model_input": true,
+          "missing_reason": null,
+          "camera": "third_camera",
+          "temporal_role": "current",
+          "observation_index": 1
+        },
+        {
+          "label": "wrist_camera",
+          "sha256": "7e970ccd8baee3d5d05c674de7813b70e6a6787c4bacbd90203d6111f0879d53",
+          "bytes": 147880,
+          "url": "images/7e970ccd8baee3d5d05c674de7813b70e6a6787c4bacbd90203d6111f0879d53.png",
+          "is_model_input": true,
+          "missing_reason": null,
+          "camera": "wrist_camera",
+          "temporal_role": "current",
+          "observation_index": 1
+        }
+      ],
+      "candidate": {
+        "visual_observation": "The brown bottle is upright on the tabletop, separated from both raised hands. Multi-view RGB suggests its body is near world (-1.18, -5.11, 1.02), with the tabletop near z=0.95. The right hand is open and well above/right of the bottle.",
+        "memory_for_next_observation": "Approaching in two bounded steps with the hand open. Estimated bottle axis x=-1.18,y=-5.11, body z~1.02, top~1.09, table~0.95. Desired side-grasp orientation q=(0.5,-0.5,0.5,-0.5): fingers extend +X, palm faces +Y, index above little. Tentative grasp wrist ~(-1.32,-5.17,1.04), refine from next images before contact. No grasp yet.",
+        "task_done": false,
+        "actions": [
+          {
+            "duration_s": 2,
+            "position_world_m": [
+              -1.305,
+              -5.4,
+              1.27
+            ],
+            "quaternion_world_wxyz": [
+              0.39925,
+              -0.66773,
+              0.32489,
+              -0.53824
+            ],
+            "hand_joint_position_rad": [
+              0.05,
+              3.1099,
+              3.0699,
+              3.0799,
+              3.0499,
+              0.62
+            ]
+          },
+          {
+            "duration_s": 2,
+            "position_world_m": [
+              -1.315,
+              -5.285,
+              1.19
+            ],
+            "quaternion_world_wxyz": [
+              0.5,
+              -0.5,
+              0.5,
+              -0.5
+            ],
+            "hand_joint_position_rad": [
+              0.05,
+              3.1099,
+              3.0699,
+              3.0799,
+              3.0499,
+              0.62
+            ]
+          }
+        ]
+      },
+      "execution_feedback": [
+        {
+          "requested_duration_s": 2,
+          "executed_duration_s": 2.0,
+          "position_error_m": 0.002318653045222163,
+          "orientation_error_rad": 0.002642897656187415,
+          "max_hand_joint_error_rad": 0.10021799802780151,
+          "arm_rate_limited_ticks": 240,
+          "hand_rate_limited_ticks": 10,
+          "arm_limit_clipped_ticks": 145
+        },
+        {
+          "requested_duration_s": 2,
+          "executed_duration_s": 2.0,
+          "position_error_m": 0.0024100015871226788,
+          "orientation_error_rad": 0.008840336464345455,
+          "max_hand_joint_error_rad": 0.10025185346603394,
+          "arm_rate_limited_ticks": 239,
+          "hand_rate_limited_ticks": 0,
+          "arm_limit_clipped_ticks": 90
+        }
+      ],
+      "request_status": "executed",
+      "request_stop_reason": null,
+      "episode_stop_reason_if_last": null,
+      "call_elapsed_wall_s": 51.94427538400123,
+      "usage": {
+        "input_tokens": 5653,
+        "output_tokens": 1400,
+        "total_tokens": 7053,
+        "cached_input_tokens": 0
+      },
+      "known_standard_equivalent_usd": 0.12653,
+      "usage_unknown": false,
+      "video_mapping": {
+        "observation_sim_time_s": 0.0,
+        "video_seek_s": null,
+        "missing_reason": "历史记录未提供本次导出可独立核验的逐帧映射；仅显示实际观察simtime",
+        "is_exact_input_image_claim": false
+      },
+      "mask_metadata": {
+        "groups": {},
+        "field_groups_zh": {
+          "robot": "实时腕/base/arm/六维手状态（按原协议）",
+          "cameras": "实际相机参数（历史含动态腕T；不能按FR3协议解读）",
+          "hand_semantics": "手部语义/mimic",
+          "last_execution_feedback": "上次执行反馈",
+          "memory_from_previous_decision": "自身文字记忆",
+          "requests_remaining_including_this": "剩余请求预算",
+          "sim_time_s": "历史协议中可见的仿真时间"
+        },
+        "scope": "组mask仅适用于对应协议；不从首轮null推断缺state"
+      }
+    },
+    {
+      "decision_number": 2,
+      "title_zh": "第2次请求：实际输入与动作",
+      "policy_observation": {
+        "task_instruction": "Grasp the bottle around its body with the thumb opposing the other fingers, keep the bottle upright, and lift it stably.",
+        "hand_semantics": {
+          "frame": "arm2_link7 wrist coordinates; right-handed XYZ; all directions are unit vectors in this wrist frame",
+          "units": "metres and radians",
+          "command_dimensions": [
+            {
+              "index": 0,
+              "joint_name": "hand2_joint_link_1_1",
+              "finger": "thumb",
+              "motion": "rotation/opposition",
+              "increasing_value": "opposes toward fingers",
+              "range_rad": [
+                0.0,
+                1.5699999332427979
+              ]
+            },
+            {
+              "index": 1,
+              "joint_name": "hand2_joint_link_2_1",
+              "finger": "index",
+              "motion": "proximal flexion",
+              "increasing_value": "opens/extends",
+              "range_rad": [
+                1.749999761581421,
+                3.109999895095825
+              ]
+            },
+            {
+              "index": 2,
+              "joint_name": "hand2_joint_link_3_1",
+              "finger": "middle",
+              "motion": "proximal flexion",
+              "increasing_value": "opens/extends",
+              "range_rad": [
+                1.709999918937683,
+                3.0699994564056396
+              ]
+            },
+            {
+              "index": 3,
+              "joint_name": "hand2_joint_link_4_1",
+              "finger": "ring",
+              "motion": "proximal flexion",
+              "increasing_value": "opens/extends",
+              "range_rad": [
+                1.7699997425079346,
+                3.0799999237060547
+              ]
+            },
+            {
+              "index": 4,
+              "joint_name": "hand2_joint_link_5_1",
+              "finger": "little",
+              "motion": "proximal flexion",
+              "increasing_value": "opens/extends",
+              "range_rad": [
+                1.7299998998641968,
+                3.049999952316284
+              ]
+            },
+            {
+              "index": 5,
+              "joint_name": "hand2_joint_link_1_2",
+              "finger": "thumb",
+              "motion": "flexion",
+              "increasing_value": "opens/extends",
+              "range_rad": [
+                0.03999999538064003,
+                0.6415999531745911
+              ]
+            }
+          ],
+          "extended_fingers_longitudinal_axis_wrist": [
+            0.00131,
+            -5e-05,
+            1.0
+          ],
+          "palm_outward_normal_wrist": [
+            -0.99994,
+            0.01076,
+            0.00131
+          ],
+          "finger_row_axis_from_little_to_index_wrist": [
+            -0.01076,
+            -0.99994,
+            -3e-05
+          ],
+          "thumb_opposition_sweep_direction_wrist": [
+            -0.67665,
+            0.72066,
+            -0.15095
+          ],
+          "thumb_opposition_description": "Increasing dimension 0 swings the thumb from the index side across the palm toward the other fingers; the vector is its tip displacement from minimum to maximum opposition with fingers extended, not a fixed rotation axis.",
+          "approximate_opening_width_m": {
+            "fully_open_thumb_index_tip_surface_gap": 0.077,
+            "fully_closed_thumb_index_tip_surface_gap": 0.0,
+            "fully_open_thumb_index_tip_center_distance": 0.09,
+            "fully_closed_thumb_index_tip_center_distance": 0.012,
+            "definition": "Measured unloaded stable open/close command endpoints under native drives and self-contact; fingertip-pad surface separation estimated from validated USD geometry. Intermediate posture and gravity change the gap. Target limits may be unreachable together due to self-contact; this is not an object clearance guarantee."
+          },
+          "native_mimic": {
+            "equation": "q_follower = multiplier * q_driver + offset_rad",
+            "couplings": [
+              {
+                "follower_joint": "hand2_joint_link_1_3",
+                "driver_joint": "hand2_joint_link_1_2",
+                "multiplier": 0.8976100087165833,
+                "offset_rad": -0.5359042110206326
+              },
+              {
+                "follower_joint": "hand2_joint_link_2_2",
+                "driver_joint": "hand2_joint_link_2_1",
+                "multiplier": 1.133489966392517,
+                "offset_rad": -1.9551615784944358
+              },
+              {
+                "follower_joint": "hand2_joint_link_3_2",
+                "driver_joint": "hand2_joint_link_3_1",
+                "multiplier": 1.1038199663162231,
+                "offset_rad": -1.8187386216520913
+              },
+              {
+                "follower_joint": "hand2_joint_link_4_2",
+                "driver_joint": "hand2_joint_link_4_1",
+                "multiplier": 1.1526700258255005,
+                "offset_rad": -1.9802281827806432
+              },
+              {
+                "follower_joint": "hand2_joint_link_5_2",
+                "driver_joint": "hand2_joint_link_5_1",
+                "multiplier": 1.121209979057312,
+                "offset_rad": -1.8496972035339898
+              }
+            ]
+          },
+          "source": "Native robot USD joint frames and fingertip meshes, E2 hand-local-axis and mimic probes; independently checked with measured simulator links before policy requests."
+        },
+        "sim_time_s": 4.0,
+        "robot": {
+          "wrist_link": "arm2_link7",
+          "position_world_m": [
+            -1.3150092363357544,
+            -5.287013053894043,
+            1.1886752843856812
+          ],
+          "quaternion_world_wxyz": [
+            0.49703240394592285,
+            -0.4992004334926605,
+            0.5031126737594604,
+            -0.5006349682807922
+          ],
+          "robot_base_position_world_m": [
+            -1.649999976158142,
+            -5.0,
+            -0.010519921779632568
+          ],
+          "robot_base_quaternion_world_wxyz": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "arm_joint_names": [
+            "arm2_joint_link1",
+            "arm2_joint_link2",
+            "arm2_joint_link3",
+            "arm2_joint_link4",
+            "arm2_joint_link5",
+            "arm2_joint_link6",
+            "arm2_joint_link7"
+          ],
+          "arm_joint_position_rad": [
+            0.2695257067680359,
+            -1.2807316780090332,
+            1.3199055194854736,
+            -2.329169988632202,
+            -0.18978233635425568,
+            1.036380410194397,
+            -0.07979384064674377
+          ],
+          "arm_joint_velocity_rad_s": [
+            0.03637394681572914,
+            0.0006162164499983191,
+            0.0067121656611561775,
+            -0.017721423879265785,
+            -0.008312076330184937,
+            0.06936913728713989,
+            -0.002293456345796585
+          ],
+          "arm_joint_limits_rad": [
+            [
+              -3.1049997806549072,
+              3.1049997806549072
+            ],
+            [
+              -2.2689998149871826,
+              2.2689998149871826
+            ],
+            [
+              -3.1049997806549072,
+              3.1049997806549072
+            ],
+            [
+              -2.355999708175659,
+              2.355999708175659
+            ],
+            [
+              -3.1049997806549072,
+              3.1049997806549072
+            ],
+            [
+              -2.2339999675750732,
+              2.2339999675750732
+            ],
+            [
+              -6.279999732971191,
+              6.279999732971191
+            ]
+          ],
+          "hand_joint_names": [
+            "hand2_joint_link_1_1",
+            "hand2_joint_link_2_1",
+            "hand2_joint_link_3_1",
+            "hand2_joint_link_4_1",
+            "hand2_joint_link_5_1",
+            "hand2_joint_link_1_2"
+          ],
+          "hand_joint_position_rad": [
+            0.11074728518724442,
+            3.1083273887634277,
+            3.069260835647583,
+            3.0793750286102295,
+            3.0500001907348633,
+            0.5197481513023376
+          ],
+          "hand_joint_velocity_rad_s": [
+            0.00030948666972108185,
+            0.0023732634726911783,
+            0.0025102023500949144,
+            0.0023632156662642956,
+            5.25205950907548e-06,
+            0.0013383561745285988
+          ],
+          "hand_joint_limits_rad": [
+            [
+              0.0,
+              1.5699999332427979
+            ],
+            [
+              1.749999761581421,
+              3.109999895095825
+            ],
+            [
+              1.709999918937683,
+              3.0699994564056396
+            ],
+            [
+              1.7699997425079346,
+              3.0799999237060547
+            ],
+            [
+              1.7299998998641968,
+              3.049999952316284
+            ],
+            [
+              0.03999999538064003,
+              0.6415999531745911
+            ]
+          ],
+          "hand_command_semantics": {
+            "dimension": 6,
+            "units": "rad",
+            "source": "Native hand2 actuator order, formal LeRobot collector first six joints",
+            "ordered_meanings": [
+              "thumb rotation/opposition (larger closes/opposes)",
+              "index finger proximal flexion (smaller closes)",
+              "middle finger proximal flexion (smaller closes)",
+              "ring finger proximal flexion (smaller closes)",
+              "little finger proximal flexion (smaller closes)",
+              "thumb flexion (smaller closes)"
+            ],
+            "followers": "Remaining five hand joints follow native USD PhysX mimic constraints; they are not independent commands",
+            "coupling_equation": "q_follower_rad = multiplier * q_driver_rad + offset_rad",
+            "native_couplings": [
+              {
+                "follower_joint": "hand2_joint_link_1_3",
+                "driver_joint": "hand2_joint_link_1_2",
+                "multiplier": 0.8976100087165833,
+                "offset_rad": -0.5359042110206326
+              },
+              {
+                "follower_joint": "hand2_joint_link_2_2",
+                "driver_joint": "hand2_joint_link_2_1",
+                "multiplier": 1.133489966392517,
+                "offset_rad": -1.9551615784944358
+              },
+              {
+                "follower_joint": "hand2_joint_link_3_2",
+                "driver_joint": "hand2_joint_link_3_1",
+                "multiplier": 1.1038199663162231,
+                "offset_rad": -1.8187386216520913
+              },
+              {
+                "follower_joint": "hand2_joint_link_4_2",
+                "driver_joint": "hand2_joint_link_4_1",
+                "multiplier": 1.1526700258255005,
+                "offset_rad": -1.9802281827806432
+              },
+              {
+                "follower_joint": "hand2_joint_link_5_2",
+                "driver_joint": "hand2_joint_link_5_1",
+                "multiplier": 1.121209979057312,
+                "offset_rad": -1.8496972035339898
+              }
+            ]
+          }
+        },
+        "cameras": {
+          "head_camera": {
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "K_pixels": [
+              [
+                615.8730332370546,
+                0.0,
+                320.0
+              ],
+              [
+                0.0,
+                615.8730332370546,
+                240.0
+              ],
+              [
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "T_world_from_camera_opencv": [
+              [
+                4.277902283695927e-08,
+                -0.8684111649121298,
+                0.49584478282619426,
+                -1.4460942411438373
+              ],
+              [
+                -0.9999999999999991,
+                -2.894899213961315e-08,
+                3.5574428341499705e-08,
+                -4.965000000000002
+              ],
+              [
+                -1.653902401725672e-08,
+                -0.49584478282619554,
+                -0.8684111649121304,
+                1.6082024469910106
+              ],
+              [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "frame": "OpenCV X right Y down Z forward",
+            "distortion": [
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "chest_camera": {
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "K_pixels": [
+              [
+                555.5555650987377,
+                0.0,
+                320.0
+              ],
+              [
+                0.0,
+                555.5555650987376,
+                240.0
+              ],
+              [
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "T_world_from_camera_opencv": [
+              [
+                4.384457409078169e-09,
+                -0.23554049200376248,
+                0.9718645361502938,
+                -1.5327025035328656
+              ],
+              [
+                -1.0,
+                -3.3901765802379406e-09,
+                3.6897464027607807e-09,
+                -5.012000004877337
+              ],
+              [
+                2.425707797820558e-09,
+                -0.9718645361502939,
+                -0.23554049200376245,
+                1.1096944144487395
+              ],
+              [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "frame": "OpenCV X right Y down Z forward",
+            "distortion": [
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "third_camera": {
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "K_pixels": [
+              [
+                555.5555650987377,
+                0.0,
+                320.0
+              ],
+              [
+                0.0,
+                555.5555650987376,
+                240.0
+              ],
+              [
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "T_world_from_camera_opencv": [
+              [
+                -2.992927681391134e-08,
+                0.07427169595009141,
+                -0.9972380433881853,
+                -0.17535564225681136
+              ],
+              [
+                0.9999999999999994,
+                2.0634252618692948e-08,
+                -2.847538315656851e-08,
+                -4.988999994448692
+              ],
+              [
+                1.846234660159487e-08,
+                -0.9972380433881854,
+                -0.07427169595009205,
+                1.151976349756701
+              ],
+              [
+                0.0,
+                0.0,
+                0.0,
+                0.9999999999999998
+              ]
+            ],
+            "frame": "OpenCV X right Y down Z forward",
+            "distortion": [
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "wrist_camera": {
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "K_pixels": [
+              [
+                480.0,
+                0.0,
+                320.0
+              ],
+              [
+                0.0,
+                480.0,
+                240.0
+              ],
+              [
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "T_world_from_camera_opencv": [
+              [
+                -0.07841042199742254,
+                0.004690746261927911,
+                0.9969101276552927,
+                -1.2836224447717428
+              ],
+              [
+                0.9968706265770415,
+                0.010437717314955826,
+                0.0783582026666632,
+                -5.354696994981241
+              ],
+              [
+                -0.010037907654632378,
+                0.9999345233347827,
+                -0.005494492984597332,
+                1.1892592473880677
+              ],
+              [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "frame": "OpenCV X right Y down Z forward",
+            "distortion": [
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        "last_execution_feedback": {
+          "execution": [
+            {
+              "requested_duration_s": 2,
+              "executed_duration_s": 2.0,
+              "position_error_m": 0.002318653045222163,
+              "orientation_error_rad": 0.002642897656187415,
+              "max_hand_joint_error_rad": 0.10021799802780151,
+              "arm_rate_limited_ticks": 240,
+              "hand_rate_limited_ticks": 10,
+              "arm_limit_clipped_ticks": 145
+            },
+            {
+              "requested_duration_s": 2,
+              "executed_duration_s": 2.0,
+              "position_error_m": 0.0024100015871226788,
+              "orientation_error_rad": 0.008840336464345455,
+              "max_hand_joint_error_rad": 0.10025185346603394,
+              "arm_rate_limited_ticks": 239,
+              "hand_rate_limited_ticks": 0,
+              "arm_limit_clipped_ticks": 90
+            }
+          ]
+        },
+        "memory_from_previous_decision": "Approaching in two bounded steps with the hand open. Estimated bottle axis x=-1.18,y=-5.11, body z~1.02, top~1.09, table~0.95. Desired side-grasp orientation q=(0.5,-0.5,0.5,-0.5): fingers extend +X, palm faces +Y, index above little. Tentative grasp wrist ~(-1.32,-5.17,1.04), refine from next images before contact. No grasp yet.",
+        "requests_remaining_including_this": 7
+      },
+      "input_private_path_redaction": false,
+      "image_evidence": [
+        {
+          "label": "head_camera",
+          "sha256": "d8b2bbc10f26d7ed31cc6f3152b538410985cd0223cf987c3251eb3f345c6237",
+          "bytes": 322724,
+          "url": "images/d8b2bbc10f26d7ed31cc6f3152b538410985cd0223cf987c3251eb3f345c6237.png",
+          "is_model_input": true,
+          "missing_reason": null,
+          "camera": "head_camera",
+          "temporal_role": "current",
+          "observation_index": 2
+        },
+        {
+          "label": "chest_camera",
+          "sha256": "c3533423d31b2c3f0f4573e280c2cffaa2105cb0d4e83f2e41871abe7f5dc2af",
+          "bytes": 161484,
+          "url": "images/c3533423d31b2c3f0f4573e280c2cffaa2105cb0d4e83f2e41871abe7f5dc2af.png",
+          "is_model_input": true,
+          "missing_reason": null,
+          "camera": "chest_camera",
+          "temporal_role": "current",
+          "observation_index": 2
+        },
+        {
+          "label": "third_camera",
+          "sha256": "e858ac642cc3d078ca9b8f0b3ddd15ffeb5aa66eca9c245a0ed0ee56469f1e00",
+          "bytes": 184293,
+          "url": "images/e858ac642cc3d078ca9b8f0b3ddd15ffeb5aa66eca9c245a0ed0ee56469f1e00.png",
+          "is_model_input": true,
+          "missing_reason": null,
+          "camera": "third_camera",
+          "temporal_role": "current",
+          "observation_index": 2
+        },
+        {
+          "label": "wrist_camera",
+          "sha256": "cd994a28f5cd0c2555d3930a47f8e6f055dadac8c1c0b20057d09726c3eea22c",
+          "bytes": 109226,
+          "url": "images/cd994a28f5cd0c2555d3930a47f8e6f055dadac8c1c0b20057d09726c3eea22c.png",
+          "is_model_input": true,
+          "missing_reason": null,
+          "camera": "wrist_camera",
+          "temporal_role": "current",
+          "observation_index": 2
+        }
+      ],
+      "candidate": {
+        "visual_observation": "The bottle is upright on the table; the open right hand is above and to its side. The body appears centered near world (-1.17, -5.11), with its base near z=0.94 and cap near z=1.08. No hand contact is visible.",
+        "memory_for_next_observation": "Lower the open hand in two bounded side-approach steps, maintaining fingers toward +X and palm toward +Y. Refined visual bottle estimate: axis x~-1.17,y~-5.11, body z~0.96–1.02, table~0.935. End wrist (-1.315,-5.185,1.04) remains offset laterally; inspect finger/body clearance before moving inward and closing. No grasp yet.",
+        "task_done": false,
+        "actions": [
+          {
+            "duration_s": 2,
+            "position_world_m": [
+              -1.32,
+              -5.245,
+              1.075
+            ],
+            "quaternion_world_wxyz": [
+              0.5,
+              -0.5,
+              0.5,
+              -0.5
+            ],
+            "hand_joint_position_rad": [
+              0.1,
+              3.109,
+              3.069,
+              3.079,
+              3.049,
+              0.6
+            ]
+          },
+          {
+            "duration_s": 2,
+            "position_world_m": [
+              -1.315,
+              -5.185,
+              1.04
+            ],
+            "quaternion_world_wxyz": [
+              0.5,
+              -0.5,
+              0.5,
+              -0.5
+            ],
+            "hand_joint_position_rad": [
+              0.1,
+              3.109,
+              3.069,
+              3.079,
+              3.049,
+              0.6
+            ]
+          }
+        ]
+      },
+      "execution_feedback": [
+        {
+          "requested_duration_s": 2,
+          "executed_duration_s": 2.0,
+          "position_error_m": 0.0008412880706600845,
+          "orientation_error_rad": 0.0027228619437664747,
+          "max_hand_joint_error_rad": 0.07112067937850952,
+          "arm_rate_limited_ticks": 98,
+          "hand_rate_limited_ticks": 5,
+          "arm_limit_clipped_ticks": 0
+        },
+        {
+          "requested_duration_s": 2,
+          "executed_duration_s": 2.0,
+          "position_error_m": 0.0008568867924623191,
+          "orientation_error_rad": 0.002615037141367793,
+          "max_hand_joint_error_rad": 0.0692170262336731,
+          "arm_rate_limited_ticks": 4,
+          "hand_rate_limited_ticks": 0,
+          "arm_limit_clipped_ticks": 0
+        }
+      ],
+      "request_status": "executed",
+      "request_stop_reason": null,
+      "episode_stop_reason_if_last": null,
+      "call_elapsed_wall_s": 78.92264857100236,
+      "usage": {
+        "input_tokens": 5960,
+        "output_tokens": 1886,
+        "total_tokens": 7846,
+        "cached_input_tokens": 0
+      },
+      "known_standard_equivalent_usd": 0.1539,
+      "usage_unknown": false,
+      "video_mapping": {
+        "observation_sim_time_s": 4.0,
+        "video_seek_s": null,
+        "missing_reason": "历史记录未提供本次导出可独立核验的逐帧映射；仅显示实际观察simtime",
+        "is_exact_input_image_claim": false
+      },
+      "mask_metadata": {
+        "groups": {},
+        "field_groups_zh": {
+          "robot": "实时腕/base/arm/六维手状态（按原协议）",
+          "cameras": "实际相机参数（历史含动态腕T；不能按FR3协议解读）",
+          "hand_semantics": "手部语义/mimic",
+          "last_execution_feedback": "上次执行反馈",
+          "memory_from_previous_decision": "自身文字记忆",
+          "requests_remaining_including_this": "剩余请求预算",
+          "sim_time_s": "历史协议中可见的仿真时间"
+        },
+        "scope": "组mask仅适用于对应协议；不从首轮null推断缺state"
+      }
+    },
+    {
+      "decision_number": 3,
+      "title_zh": "第3次请求：实际输入与动作",
+      "policy_observation": {
+        "task_instruction": "Grasp the bottle around its body with the thumb opposing the other fingers, keep the bottle upright, and lift it stably.",
+        "hand_semantics": {
+          "frame": "arm2_link7 wrist coordinates; right-handed XYZ; all directions are unit vectors in this wrist frame",
+          "units": "metres and radians",
+          "command_dimensions": [
+            {
+              "index": 0,
+              "joint_name": "hand2_joint_link_1_1",
+              "finger": "thumb",
+              "motion": "rotation/opposition",
+              "increasing_value": "opposes toward fingers",
+              "range_rad": [
+                0.0,
+                1.5699999332427979
+              ]
+            },
+            {
+              "index": 1,
+              "joint_name": "hand2_joint_link_2_1",
+              "finger": "index",
+              "motion": "proximal flexion",
+              "increasing_value": "opens/extends",
+              "range_rad": [
+                1.749999761581421,
+                3.109999895095825
+              ]
+            },
+            {
+              "index": 2,
+              "joint_name": "hand2_joint_link_3_1",
+              "finger": "middle",
+              "motion": "proximal flexion",
+              "increasing_value": "opens/extends",
+              "range_rad": [
+                1.709999918937683,
+                3.0699994564056396
+              ]
+            },
+            {
+              "index": 3,
+              "joint_name": "hand2_joint_link_4_1",
+              "finger": "ring",
+              "motion": "proximal flexion",
+              "increasing_value": "opens/extends",
+              "range_rad": [
+                1.7699997425079346,
+                3.0799999237060547
+              ]
+            },
+            {
+              "index": 4,
+              "joint_name": "hand2_joint_link_5_1",
+              "finger": "little",
+              "motion": "proximal flexion",
+              "increasing_value": "opens/extends",
+              "range_rad": [
+                1.7299998998641968,
+                3.049999952316284
+              ]
+            },
+            {
+              "index": 5,
+              "joint_name": "hand2_joint_link_1_2",
+              "finger": "thumb",
+              "motion": "flexion",
+              "increasing_value": "opens/extends",
+              "range_rad": [
+                0.03999999538064003,
+                0.6415999531745911
+              ]
+            }
+          ],
+          "extended_fingers_longitudinal_axis_wrist": [
+            0.00131,
+            -5e-05,
+            1.0
+          ],
+          "palm_outward_normal_wrist": [
+            -0.99994,
+            0.01076,
+            0.00131
+          ],
+          "finger_row_axis_from_little_to_index_wrist": [
+            -0.01076,
+            -0.99994,
+            -3e-05
+          ],
+          "thumb_opposition_sweep_direction_wrist": [
+            -0.67665,
+            0.72066,
+            -0.15095
+          ],
+          "thumb_opposition_description": "Increasing dimension 0 swings the thumb from the index side across the palm toward the other fingers; the vector is its tip displacement from minimum to maximum opposition with fingers extended, not a fixed rotation axis.",
+          "approximate_opening_width_m": {
+            "fully_open_thumb_index_tip_surface_gap": 0.077,
+            "fully_closed_thumb_index_tip_surface_gap": 0.0,
+            "fully_open_thumb_index_tip_center_distance": 0.09,
+            "fully_closed_thumb_index_tip_center_distance": 0.012,
+            "definition": "Measured unloaded stable open/close command endpoints under native drives and self-contact; fingertip-pad surface separation estimated from validated USD geometry. Intermediate posture and gravity change the gap. Target limits may be unreachable together due to self-contact; this is not an object clearance guarantee."
+          },
+          "native_mimic": {
+            "equation": "q_follower = multiplier * q_driver + offset_rad",
+            "couplings": [
+              {
+                "follower_joint": "hand2_joint_link_1_3",
+                "driver_joint": "hand2_joint_link_1_2",
+                "multiplier": 0.8976100087165833,
+                "offset_rad": -0.5359042110206326
+              },
+              {
+                "follower_joint": "hand2_joint_link_2_2",
+                "driver_joint": "hand2_joint_link_2_1",
+                "multiplier": 1.133489966392517,
+                "offset_rad": -1.9551615784944358
+              },
+              {
+                "follower_joint": "hand2_joint_link_3_2",
+                "driver_joint": "hand2_joint_link_3_1",
+                "multiplier": 1.1038199663162231,
+                "offset_rad": -1.8187386216520913
+              },
+              {
+                "follower_joint": "hand2_joint_link_4_2",
+                "driver_joint": "hand2_joint_link_4_1",
+                "multiplier": 1.1526700258255005,
+                "offset_rad": -1.9802281827806432
+              },
+              {
+                "follower_joint": "hand2_joint_link_5_2",
+                "driver_joint": "hand2_joint_link_5_1",
+                "multiplier": 1.121209979057312,
+                "offset_rad": -1.8496972035339898
+              }
+            ]
+          },
+          "source": "Native robot USD joint frames and fingertip meshes, E2 hand-local-axis and mimic probes; independently checked with measured simulator links before policy requests."
+        },
+        "sim_time_s": 8.0,
+        "robot": {
+          "wrist_link": "arm2_link7",
+          "position_world_m": [
+            -1.3150765895843506,
+            -5.18516206741333,
+            1.039162039756775
+          ],
+          "quaternion_world_wxyz": [
+            0.49899277091026306,
+            -0.5005565285682678,
+            0.5006016492843628,
+            -0.49984729290008545
+          ],
+          "robot_base_position_world_m": [
+            -1.649999976158142,
+            -5.0,
+            -0.010519921779632568
+          ],
+          "robot_base_quaternion_world_wxyz": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "arm_joint_names": [
+            "arm2_joint_link1",
+            "arm2_joint_link2",
+            "arm2_joint_link3",
+            "arm2_joint_link4",
+            "arm2_joint_link5",
+            "arm2_joint_link6",
+            "arm2_joint_link7"
+          ],
+          "arm_joint_position_rad": [
+            0.2885562777519226,
+            -1.9927898645401,
+            0.876818835735321,
+            -1.968145728111267,
+            -0.9538634419441223,
+            1.0363072156906128,
+            -0.06866751611232758
+          ],
+          "arm_joint_velocity_rad_s": [
+            0.0014674896374344826,
+            0.0016575796762481332,
+            0.007257704623043537,
+            -0.013126668520271778,
+            -0.007953210733830929,
+            -0.005018658936023712,
+            -2.9045622795820236e-08
+          ],
+          "arm_joint_limits_rad": [
+            [
+              -3.1049997806549072,
+              3.1049997806549072
+            ],
+            [
+              -2.2689998149871826,
+              2.2689998149871826
+            ],
+            [
+              -3.1049997806549072,
+              3.1049997806549072
+            ],
+            [
+              -2.355999708175659,
+              2.355999708175659
+            ],
+            [
+              -3.1049997806549072,
+              3.1049997806549072
+            ],
+            [
+              -2.2339999675750732,
+              2.2339999675750732
+            ],
+            [
+              -6.279999732971191,
+              6.279999732971191
+            ]
+          ],
+          "hand_joint_names": [
+            "hand2_joint_link_1_1",
+            "hand2_joint_link_2_1",
+            "hand2_joint_link_3_1",
+            "hand2_joint_link_4_1",
+            "hand2_joint_link_5_1",
+            "hand2_joint_link_1_2"
+          ],
+          "hand_joint_position_rad": [
+            0.1296907216310501,
+            3.1079459190368652,
+            3.068903684616089,
+            3.079045295715332,
+            3.0499017238616943,
+            0.5307829976081848
+          ],
+          "hand_joint_velocity_rad_s": [
+            0.004741563927382231,
+            0.00011713281128322706,
+            7.82517236075364e-05,
+            3.816511161858216e-05,
+            -4.730118962470442e-05,
+            -0.0012067360803484917
+          ],
+          "hand_joint_limits_rad": [
+            [
+              0.0,
+              1.5699999332427979
+            ],
+            [
+              1.749999761581421,
+              3.109999895095825
+            ],
+            [
+              1.709999918937683,
+              3.0699994564056396
+            ],
+            [
+              1.7699997425079346,
+              3.0799999237060547
+            ],
+            [
+              1.7299998998641968,
+              3.049999952316284
+            ],
+            [
+              0.03999999538064003,
+              0.6415999531745911
+            ]
+          ],
+          "hand_command_semantics": {
+            "dimension": 6,
+            "units": "rad",
+            "source": "Native hand2 actuator order, formal LeRobot collector first six joints",
+            "ordered_meanings": [
+              "thumb rotation/opposition (larger closes/opposes)",
+              "index finger proximal flexion (smaller closes)",
+              "middle finger proximal flexion (smaller closes)",
+              "ring finger proximal flexion (smaller closes)",
+              "little finger proximal flexion (smaller closes)",
+              "thumb flexion (smaller closes)"
+            ],
+            "followers": "Remaining five hand joints follow native USD PhysX mimic constraints; they are not independent commands",
+            "coupling_equation": "q_follower_rad = multiplier * q_driver_rad + offset_rad",
+            "native_couplings": [
+              {
+                "follower_joint": "hand2_joint_link_1_3",
+                "driver_joint": "hand2_joint_link_1_2",
+                "multiplier": 0.8976100087165833,
+                "offset_rad": -0.5359042110206326
+              },
+              {
+                "follower_joint": "hand2_joint_link_2_2",
+                "driver_joint": "hand2_joint_link_2_1",
+                "multiplier": 1.133489966392517,
+                "offset_rad": -1.9551615784944358
+              },
+              {
+                "follower_joint": "hand2_joint_link_3_2",
+                "driver_joint": "hand2_joint_link_3_1",
+                "multiplier": 1.1038199663162231,
+                "offset_rad": -1.8187386216520913
+              },
+              {
+                "follower_joint": "hand2_joint_link_4_2",
+                "driver_joint": "hand2_joint_link_4_1",
+                "multiplier": 1.1526700258255005,
+                "offset_rad": -1.9802281827806432
+              },
+              {
+                "follower_joint": "hand2_joint_link_5_2",
+                "driver_joint": "hand2_joint_link_5_1",
+                "multiplier": 1.121209979057312,
+                "offset_rad": -1.8496972035339898
+              }
+            ]
+          }
+        },
+        "cameras": {
+          "head_camera": {
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "K_pixels": [
+              [
+                615.8730332370546,
+                0.0,
+                320.0
+              ],
+              [
+                0.0,
+                615.8730332370546,
+                240.0
+              ],
+              [
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "T_world_from_camera_opencv": [
+              [
+                4.277902283695927e-08,
+                -0.8684111649121298,
+                0.49584478282619426,
+                -1.4460942411438373
+              ],
+              [
+                -0.9999999999999991,
+                -2.894899213961315e-08,
+                3.5574428341499705e-08,
+                -4.965000000000002
+              ],
+              [
+                -1.653902401725672e-08,
+                -0.49584478282619554,
+                -0.8684111649121304,
+                1.6082024469910106
+              ],
+              [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "frame": "OpenCV X right Y down Z forward",
+            "distortion": [
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "chest_camera": {
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "K_pixels": [
+              [
+                555.5555650987377,
+                0.0,
+                320.0
+              ],
+              [
+                0.0,
+                555.5555650987376,
+                240.0
+              ],
+              [
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "T_world_from_camera_opencv": [
+              [
+                4.384457409078169e-09,
+                -0.23554049200376248,
+                0.9718645361502938,
+                -1.5327025035328656
+              ],
+              [
+                -1.0,
+                -3.3901765802379406e-09,
+                3.6897464027607807e-09,
+                -5.012000004877337
+              ],
+              [
+                2.425707797820558e-09,
+                -0.9718645361502939,
+                -0.23554049200376245,
+                1.1096944144487395
+              ],
+              [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "frame": "OpenCV X right Y down Z forward",
+            "distortion": [
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "third_camera": {
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "K_pixels": [
+              [
+                555.5555650987377,
+                0.0,
+                320.0
+              ],
+              [
+                0.0,
+                555.5555650987376,
+                240.0
+              ],
+              [
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "T_world_from_camera_opencv": [
+              [
+                -2.992927681391134e-08,
+                0.07427169595009141,
+                -0.9972380433881853,
+                -0.17535564225681136
+              ],
+              [
+                0.9999999999999994,
+                2.0634252618692948e-08,
+                -2.847538315656851e-08,
+                -4.988999994448692
+              ],
+              [
+                1.846234660159487e-08,
+                -0.9972380433881854,
+                -0.07427169595009205,
+                1.151976349756701
+              ],
+              [
+                0.0,
+                0.0,
+                0.0,
+                0.9999999999999998
+              ]
+            ],
+            "frame": "OpenCV X right Y down Z forward",
+            "distortion": [
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "wrist_camera": {
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "K_pixels": [
+              [
+                480.0,
+                0.0,
+                320.0
+              ],
+              [
+                0.0,
+                480.0,
+                240.0
+              ],
+              [
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "T_world_from_camera_opencv": [
+              [
+                -0.08498054355270035,
+                0.0022936246190499348,
+                0.9963799709466233,
+                -1.283244110036745
+              ],
+              [
+                0.9963181168481414,
+                0.01157328110172392,
+                0.08494862685596284,
+                -5.252636561955042
+              ],
+              [
+                -0.011336545225981478,
+                0.9999303968030213,
+                -0.003268683479921105,
+                1.0398945932129127
+              ],
+              [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "frame": "OpenCV X right Y down Z forward",
+            "distortion": [
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        "last_execution_feedback": {
+          "execution": [
+            {
+              "requested_duration_s": 2,
+              "executed_duration_s": 2.0,
+              "position_error_m": 0.0008412880706600845,
+              "orientation_error_rad": 0.0027228619437664747,
+              "max_hand_joint_error_rad": 0.07112067937850952,
+              "arm_rate_limited_ticks": 98,
+              "hand_rate_limited_ticks": 5,
+              "arm_limit_clipped_ticks": 0
+            },
+            {
+              "requested_duration_s": 2,
+              "executed_duration_s": 2.0,
+              "position_error_m": 0.0008568867924623191,
+              "orientation_error_rad": 0.002615037141367793,
+              "max_hand_joint_error_rad": 0.0692170262336731,
+              "arm_rate_limited_ticks": 4,
+              "hand_rate_limited_ticks": 0,
+              "arm_limit_clipped_ticks": 0
+            }
+          ]
+        },
+        "memory_from_previous_decision": "Lower the open hand in two bounded side-approach steps, maintaining fingers toward +X and palm toward +Y. Refined visual bottle estimate: axis x~-1.17,y~-5.11, body z~0.96–1.02, table~0.935. End wrist (-1.315,-5.185,1.04) remains offset laterally; inspect finger/body clearance before moving inward and closing. No grasp yet.",
+        "requests_remaining_including_this": 6
+      },
+      "input_private_path_redaction": false,
+      "image_evidence": [
+        {
+          "label": "head_camera",
+          "sha256": "e29264ff688e34be40c8b3e3f1c629a3725e11d40da8d7fd183072ad6c855507",
+          "bytes": 329694,
+          "url": "images/e29264ff688e34be40c8b3e3f1c629a3725e11d40da8d7fd183072ad6c855507.png",
+          "is_model_input": true,
+          "missing_reason": null,
+          "camera": "head_camera",
+          "temporal_role": "current",
+          "observation_index": 3
+        },
+        {
+          "label": "chest_camera",
+          "sha256": "e73353a66f3452390fb96ec7f32462dadc914c70a3892268c998b059784ecc6d",
+          "bytes": 180231,
+          "url": "images/e73353a66f3452390fb96ec7f32462dadc914c70a3892268c998b059784ecc6d.png",
+          "is_model_input": true,
+          "missing_reason": null,
+          "camera": "chest_camera",
+          "temporal_role": "current",
+          "observation_index": 3
+        },
+        {
+          "label": "third_camera",
+          "sha256": "542daae5dd2e343d71bc8a7e224c76ea09d6bff478cf8e55031d2bc38c163057",
+          "bytes": 185175,
+          "url": "images/542daae5dd2e343d71bc8a7e224c76ea09d6bff478cf8e55031d2bc38c163057.png",
+          "is_model_input": true,
+          "missing_reason": null,
+          "camera": "third_camera",
+          "temporal_role": "current",
+          "observation_index": 3
+        },
+        {
+          "label": "wrist_camera",
+          "sha256": "11582c8a28c8441c5795e79fb3afa0109cce801c5de53e789e6f13e3ddefb20b",
+          "bytes": 147236,
+          "url": "images/11582c8a28c8441c5795e79fb3afa0109cce801c5de53e789e6f13e3ddefb20b.png",
+          "is_model_input": true,
+          "missing_reason": null,
+          "camera": "wrist_camera",
+          "temporal_role": "current",
+          "observation_index": 3
+        }
+      ],
+      "candidate": {
+        "visual_observation": "The bottle is upright on the table. The open right hand is beside it, with the finger row above much of the bottle body and a visible lateral gap; no grasp is visible.",
+        "memory_for_next_observation": "Bottle visually estimated at x~-1.17,y~-5.11, table z~0.935, body z~0.94–1.02. Lower open wrist to z0.996, then approach laterally to y-5.160, maintaining fingers +X, palm +Y. Inspect lower-finger/table clearance and thumb/body alignment before closing. No lift or grasp yet; keep upright.",
+        "task_done": false,
+        "actions": [
+          {
+            "duration_s": 2,
+            "position_world_m": [
+              -1.315,
+              -5.181,
+              0.996
+            ],
+            "quaternion_world_wxyz": [
+              0.5,
+              -0.5,
+              0.5,
+              -0.5
+            ],
+            "hand_joint_position_rad": [
+              0.13,
+              3.1099,
+              3.0699,
+              3.0799,
+              3.0499,
+              0.6
+            ]
+          },
+          {
+            "duration_s": 2,
+            "position_world_m": [
+              -1.315,
+              -5.16,
+              0.996
+            ],
+            "quaternion_world_wxyz": [
+              0.5,
+              -0.5,
+              0.5,
+              -0.5
+            ],
+            "hand_joint_position_rad": [
+              0.13,
+              3.1099,
+              3.0699,
+              3.0799,
+              3.0499,
+              0.6
+            ]
+          }
+        ]
+      },
+      "execution_feedback": [
+        {
+          "requested_duration_s": 2,
+          "executed_duration_s": 2.0,
+          "position_error_m": 0.0008488656603731215,
+          "orientation_error_rad": 0.002615094417706132,
+          "max_hand_joint_error_rad": 0.05717259645462036,
+          "arm_rate_limited_ticks": 2,
+          "hand_rate_limited_ticks": 2,
+          "arm_limit_clipped_ticks": 0
+        },
+        {
+          "requested_duration_s": 2,
+          "executed_duration_s": 2.0,
+          "position_error_m": 0.0008888955344446003,
+          "orientation_error_rad": 0.0026523065753281116,
+          "max_hand_joint_error_rad": 0.055456340312957764,
+          "arm_rate_limited_ticks": 1,
+          "hand_rate_limited_ticks": 0,
+          "arm_limit_clipped_ticks": 0
+        }
+      ],
+      "request_status": "executed",
+      "request_stop_reason": null,
+      "episode_stop_reason_if_last": null,
+      "call_elapsed_wall_s": 83.39416539000013,
+      "usage": {
+        "input_tokens": 5946,
+        "output_tokens": 2049,
+        "total_tokens": 7995,
+        "cached_input_tokens": 0
+      },
+      "known_standard_equivalent_usd": 0.16191,
+      "usage_unknown": false,
+      "video_mapping": {
+        "observation_sim_time_s": 8.0,
+        "video_seek_s": null,
+        "missing_reason": "历史记录未提供本次导出可独立核验的逐帧映射；仅显示实际观察simtime",
+        "is_exact_input_image_claim": false
+      },
+      "mask_metadata": {
+        "groups": {},
+        "field_groups_zh": {
+          "robot": "实时腕/base/arm/六维手状态（按原协议）",
+          "cameras": "实际相机参数（历史含动态腕T；不能按FR3协议解读）",
+          "hand_semantics": "手部语义/mimic",
+          "last_execution_feedback": "上次执行反馈",
+          "memory_from_previous_decision": "自身文字记忆",
+          "requests_remaining_including_this": "剩余请求预算",
+          "sim_time_s": "历史协议中可见的仿真时间"
+        },
+        "scope": "组mask仅适用于对应协议；不从首轮null推断缺state"
+      }
+    },
+    {
+      "decision_number": 4,
+      "title_zh": "第4次请求：实际输入与动作",
+      "policy_observation": {
+        "task_instruction": "Grasp the bottle around its body with the thumb opposing the other fingers, keep the bottle upright, and lift it stably.",
+        "hand_semantics": {
+          "frame": "arm2_link7 wrist coordinates; right-handed XYZ; all directions are unit vectors in this wrist frame",
+          "units": "metres and radians",
+          "command_dimensions": [
+            {
+              "index": 0,
+              "joint_name": "hand2_joint_link_1_1",
+              "finger": "thumb",
+              "motion": "rotation/opposition",
+              "increasing_value": "opposes toward fingers",
+              "range_rad": [
+                0.0,
+                1.5699999332427979
+              ]
+            },
+            {
+              "index": 1,
+              "joint_name": "hand2_joint_link_2_1",
+              "finger": "index",
+              "motion": "proximal flexion",
+              "increasing_value": "opens/extends",
+              "range_rad": [
+                1.749999761581421,
+                3.109999895095825
+              ]
+            },
+            {
+              "index": 2,
+              "joint_name": "hand2_joint_link_3_1",
+              "finger": "middle",
+              "motion": "proximal flexion",
+              "increasing_value": "opens/extends",
+              "range_rad": [
+                1.709999918937683,
+                3.0699994564056396
+              ]
+            },
+            {
+              "index": 3,
+              "joint_name": "hand2_joint_link_4_1",
+              "finger": "ring",
+              "motion": "proximal flexion",
+              "increasing_value": "opens/extends",
+              "range_rad": [
+                1.7699997425079346,
+                3.0799999237060547
+              ]
+            },
+            {
+              "index": 4,
+              "joint_name": "hand2_joint_link_5_1",
+              "finger": "little",
+              "motion": "proximal flexion",
+              "increasing_value": "opens/extends",
+              "range_rad": [
+                1.7299998998641968,
+                3.049999952316284
+              ]
+            },
+            {
+              "index": 5,
+              "joint_name": "hand2_joint_link_1_2",
+              "finger": "thumb",
+              "motion": "flexion",
+              "increasing_value": "opens/extends",
+              "range_rad": [
+                0.03999999538064003,
+                0.6415999531745911
+              ]
+            }
+          ],
+          "extended_fingers_longitudinal_axis_wrist": [
+            0.00131,
+            -5e-05,
+            1.0
+          ],
+          "palm_outward_normal_wrist": [
+            -0.99994,
+            0.01076,
+            0.00131
+          ],
+          "finger_row_axis_from_little_to_index_wrist": [
+            -0.01076,
+            -0.99994,
+            -3e-05
+          ],
+          "thumb_opposition_sweep_direction_wrist": [
+            -0.67665,
+            0.72066,
+            -0.15095
+          ],
+          "thumb_opposition_description": "Increasing dimension 0 swings the thumb from the index side across the palm toward the other fingers; the vector is its tip displacement from minimum to maximum opposition with fingers extended, not a fixed rotation axis.",
+          "approximate_opening_width_m": {
+            "fully_open_thumb_index_tip_surface_gap": 0.077,
+            "fully_closed_thumb_index_tip_surface_gap": 0.0,
+            "fully_open_thumb_index_tip_center_distance": 0.09,
+            "fully_closed_thumb_index_tip_center_distance": 0.012,
+            "definition": "Measured unloaded stable open/close command endpoints under native drives and self-contact; fingertip-pad surface separation estimated from validated USD geometry. Intermediate posture and gravity change the gap. Target limits may be unreachable together due to self-contact; this is not an object clearance guarantee."
+          },
+          "native_mimic": {
+            "equation": "q_follower = multiplier * q_driver + offset_rad",
+            "couplings": [
+              {
+                "follower_joint": "hand2_joint_link_1_3",
+                "driver_joint": "hand2_joint_link_1_2",
+                "multiplier": 0.8976100087165833,
+                "offset_rad": -0.5359042110206326
+              },
+              {
+                "follower_joint": "hand2_joint_link_2_2",
+                "driver_joint": "hand2_joint_link_2_1",
+                "multiplier": 1.133489966392517,
+                "offset_rad": -1.9551615784944358
+              },
+              {
+                "follower_joint": "hand2_joint_link_3_2",
+                "driver_joint": "hand2_joint_link_3_1",
+                "multiplier": 1.1038199663162231,
+                "offset_rad": -1.8187386216520913
+              },
+              {
+                "follower_joint": "hand2_joint_link_4_2",
+                "driver_joint": "hand2_joint_link_4_1",
+                "multiplier": 1.1526700258255005,
+                "offset_rad": -1.9802281827806432
+              },
+              {
+                "follower_joint": "hand2_joint_link_5_2",
+                "driver_joint": "hand2_joint_link_5_1",
+                "multiplier": 1.121209979057312,
+                "offset_rad": -1.8496972035339898
+              }
+            ]
+          },
+          "source": "Native robot USD joint frames and fingertip meshes, E2 hand-local-axis and mimic probes; independently checked with measured simulator links before policy requests."
+        },
+        "sim_time_s": 12.0,
+        "robot": {
+          "wrist_link": "arm2_link7",
+          "position_world_m": [
+            -1.3151155710220337,
+            -5.160253524780273,
+            0.995155930519104
+          ],
+          "quaternion_world_wxyz": [
+            0.49891120195388794,
+            -0.5005334615707397,
+            0.5005369782447815,
+            -0.5000165700912476
+          ],
+          "robot_base_position_world_m": [
+            -1.649999976158142,
+            -5.0,
+            -0.010519921779632568
+          ],
+          "robot_base_quaternion_world_wxyz": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "arm_joint_names": [
+            "arm2_joint_link1",
+            "arm2_joint_link2",
+            "arm2_joint_link3",
+            "arm2_joint_link4",
+            "arm2_joint_link5",
+            "arm2_joint_link6",
+            "arm2_joint_link7"
+          ],
+          "arm_joint_position_rad": [
+            0.28773051500320435,
+            -2.1242945194244385,
+            0.8059951066970825,
+            -1.7610172033309937,
+            -1.1441034078598022,
+            1.0104141235351562,
+            0.07534020394086838
+          ],
+          "arm_joint_velocity_rad_s": [
+            0.0018624598160386086,
+            0.0016691453056409955,
+            0.005559967365115881,
+            -0.01562931202352047,
+            -0.007586847059428692,
+            -0.005032258108258247,
+            -7.869675755500793e-08
+          ],
+          "arm_joint_limits_rad": [
+            [
+              -3.1049997806549072,
+              3.1049997806549072
+            ],
+            [
+              -2.2689998149871826,
+              2.2689998149871826
+            ],
+            [
+              -3.1049997806549072,
+              3.1049997806549072
+            ],
+            [
+              -2.355999708175659,
+              2.355999708175659
+            ],
+            [
+              -3.1049997806549072,
+              3.1049997806549072
+            ],
+            [
+              -2.2339999675750732,
+              2.2339999675750732
+            ],
+            [
+              -6.279999732971191,
+              6.279999732971191
+            ]
+          ],
+          "hand_joint_names": [
+            "hand2_joint_link_1_1",
+            "hand2_joint_link_2_1",
+            "hand2_joint_link_3_1",
+            "hand2_joint_link_4_1",
+            "hand2_joint_link_5_1",
+            "hand2_joint_link_1_2"
+          ],
+          "hand_joint_position_rad": [
+            0.15373753011226654,
+            3.1087443828582764,
+            3.069676160812378,
+            3.079800844192505,
+            3.0499989986419678,
+            0.5445436835289001
+          ],
+          "hand_joint_velocity_rad_s": [
+            0.0013619603123515844,
+            0.00023227781639434397,
+            0.00020720937754958868,
+            0.0001874087320175022,
+            -6.960234168218449e-05,
+            0.002371461596339941
+          ],
+          "hand_joint_limits_rad": [
+            [
+              0.0,
+              1.5699999332427979
+            ],
+            [
+              1.749999761581421,
+              3.109999895095825
+            ],
+            [
+              1.709999918937683,
+              3.0699994564056396
+            ],
+            [
+              1.7699997425079346,
+              3.0799999237060547
+            ],
+            [
+              1.7299998998641968,
+              3.049999952316284
+            ],
+            [
+              0.03999999538064003,
+              0.6415999531745911
+            ]
+          ],
+          "hand_command_semantics": {
+            "dimension": 6,
+            "units": "rad",
+            "source": "Native hand2 actuator order, formal LeRobot collector first six joints",
+            "ordered_meanings": [
+              "thumb rotation/opposition (larger closes/opposes)",
+              "index finger proximal flexion (smaller closes)",
+              "middle finger proximal flexion (smaller closes)",
+              "ring finger proximal flexion (smaller closes)",
+              "little finger proximal flexion (smaller closes)",
+              "thumb flexion (smaller closes)"
+            ],
+            "followers": "Remaining five hand joints follow native USD PhysX mimic constraints; they are not independent commands",
+            "coupling_equation": "q_follower_rad = multiplier * q_driver_rad + offset_rad",
+            "native_couplings": [
+              {
+                "follower_joint": "hand2_joint_link_1_3",
+                "driver_joint": "hand2_joint_link_1_2",
+                "multiplier": 0.8976100087165833,
+                "offset_rad": -0.5359042110206326
+              },
+              {
+                "follower_joint": "hand2_joint_link_2_2",
+                "driver_joint": "hand2_joint_link_2_1",
+                "multiplier": 1.133489966392517,
+                "offset_rad": -1.9551615784944358
+              },
+              {
+                "follower_joint": "hand2_joint_link_3_2",
+                "driver_joint": "hand2_joint_link_3_1",
+                "multiplier": 1.1038199663162231,
+                "offset_rad": -1.8187386216520913
+              },
+              {
+                "follower_joint": "hand2_joint_link_4_2",
+                "driver_joint": "hand2_joint_link_4_1",
+                "multiplier": 1.1526700258255005,
+                "offset_rad": -1.9802281827806432
+              },
+              {
+                "follower_joint": "hand2_joint_link_5_2",
+                "driver_joint": "hand2_joint_link_5_1",
+                "multiplier": 1.121209979057312,
+                "offset_rad": -1.8496972035339898
+              }
+            ]
+          }
+        },
+        "cameras": {
+          "head_camera": {
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "K_pixels": [
+              [
+                615.8730332370546,
+                0.0,
+                320.0
+              ],
+              [
+                0.0,
+                615.8730332370546,
+                240.0
+              ],
+              [
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "T_world_from_camera_opencv": [
+              [
+                4.277902283695927e-08,
+                -0.8684111649121298,
+                0.49584478282619426,
+                -1.4460942411438373
+              ],
+              [
+                -0.9999999999999991,
+                -2.894899213961315e-08,
+                3.5574428341499705e-08,
+                -4.965000000000002
+              ],
+              [
+                -1.653902401725672e-08,
+                -0.49584478282619554,
+                -0.8684111649121304,
+                1.6082024469910106
+              ],
+              [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "frame": "OpenCV X right Y down Z forward",
+            "distortion": [
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "chest_camera": {
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "K_pixels": [
+              [
+                555.5555650987377,
+                0.0,
+                320.0
+              ],
+              [
+                0.0,
+                555.5555650987376,
+                240.0
+              ],
+              [
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "T_world_from_camera_opencv": [
+              [
+                4.384457409078169e-09,
+                -0.23554049200376248,
+                0.9718645361502938,
+                -1.5327025035328656
+              ],
+              [
+                -1.0,
+                -3.3901765802379406e-09,
+                3.6897464027607807e-09,
+                -5.012000004877337
+              ],
+              [
+                2.425707797820558e-09,
+                -0.9718645361502939,
+                -0.23554049200376245,
+                1.1096944144487395
+              ],
+              [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "frame": "OpenCV X right Y down Z forward",
+            "distortion": [
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "third_camera": {
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "K_pixels": [
+              [
+                555.5555650987377,
+                0.0,
+                320.0
+              ],
+              [
+                0.0,
+                555.5555650987376,
+                240.0
+              ],
+              [
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "T_world_from_camera_opencv": [
+              [
+                -2.992927681391134e-08,
+                0.07427169595009141,
+                -0.9972380433881853,
+                -0.17535564225681136
+              ],
+              [
+                0.9999999999999994,
+                2.0634252618692948e-08,
+                -2.847538315656851e-08,
+                -4.988999994448692
+              ],
+              [
+                1.846234660159487e-08,
+                -0.9972380433881854,
+                -0.07427169595009205,
+                1.151976349756701
+              ],
+              [
+                0.0,
+                0.0,
+                0.0,
+                0.9999999999999998
+              ]
+            ],
+            "frame": "OpenCV X right Y down Z forward",
+            "distortion": [
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "wrist_camera": {
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "K_pixels": [
+              [
+                480.0,
+                0.0,
+                320.0
+              ],
+              [
+                0.0,
+                480.0,
+                240.0
+              ],
+              [
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "T_world_from_camera_opencv": [
+              [
+                -0.08477032812375378,
+                0.0021204668893491613,
+                0.9963982612840924,
+                -1.2832975066897365
+              ],
+              [
+                0.9963324883689667,
+                0.01186562345377991,
+                0.0847394807663804,
+                -5.227733939740101
+              ],
+              [
+                -0.011643199315212294,
+                0.9999273526612941,
+                -0.003118542845938974,
+                0.995913896057602
+              ],
+              [
+                0.0,
+                0.0,
+                0.0,
+                0.9999999999999998
+              ]
+            ],
+            "frame": "OpenCV X right Y down Z forward",
+            "distortion": [
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        "last_execution_feedback": {
+          "execution": [
+            {
+              "requested_duration_s": 2,
+              "executed_duration_s": 2.0,
+              "position_error_m": 0.0008488656603731215,
+              "orientation_error_rad": 0.002615094417706132,
+              "max_hand_joint_error_rad": 0.05717259645462036,
+              "arm_rate_limited_ticks": 2,
+              "hand_rate_limited_ticks": 2,
+              "arm_limit_clipped_ticks": 0
+            },
+            {
+              "requested_duration_s": 2,
+              "executed_duration_s": 2.0,
+              "position_error_m": 0.0008888955344446003,
+              "orientation_error_rad": 0.0026523065753281116,
+              "max_hand_joint_error_rad": 0.055456340312957764,
+              "arm_rate_limited_ticks": 1,
+              "hand_rate_limited_ticks": 0,
+              "arm_limit_clipped_ticks": 0
+            }
+          ]
+        },
+        "memory_from_previous_decision": "Bottle visually estimated at x~-1.17,y~-5.11, table z~0.935, body z~0.94–1.02. Lower open wrist to z0.996, then approach laterally to y-5.160, maintaining fingers +X, palm +Y. Inspect lower-finger/table clearance and thumb/body alignment before closing. No lift or grasp yet; keep upright.",
+        "requests_remaining_including_this": 5
+      },
+      "input_private_path_redaction": false,
+      "image_evidence": [
+        {
+          "label": "head_camera",
+          "sha256": "96616e9e498bfb0e36f1b5bebe356ee308df80651d0a7cf5382465617d31a0df",
+          "bytes": 327192,
+          "url": "images/96616e9e498bfb0e36f1b5bebe356ee308df80651d0a7cf5382465617d31a0df.png",
+          "is_model_input": true,
+          "missing_reason": null,
+          "camera": "head_camera",
+          "temporal_role": "current",
+          "observation_index": 4
+        },
+        {
+          "label": "chest_camera",
+          "sha256": "a9ca1cf25135250afbea4288b7731a708b90065e067e91c56e06fd570410606b",
+          "bytes": 175185,
+          "url": "images/a9ca1cf25135250afbea4288b7731a708b90065e067e91c56e06fd570410606b.png",
+          "is_model_input": true,
+          "missing_reason": null,
+          "camera": "chest_camera",
+          "temporal_role": "current",
+          "observation_index": 4
+        },
+        {
+          "label": "third_camera",
+          "sha256": "028588c9538d248f9483541b0901bd156b4d4e0eb2b25fb2b4183525b3f9ce08",
+          "bytes": 184608,
+          "url": "images/028588c9538d248f9483541b0901bd156b4d4e0eb2b25fb2b4183525b3f9ce08.png",
+          "is_model_input": true,
+          "missing_reason": null,
+          "camera": "third_camera",
+          "temporal_role": "current",
+          "observation_index": 4
+        },
+        {
+          "label": "wrist_camera",
+          "sha256": "274dc595d498c265c1ffdf4448b1b2012c28bf1c60a44ce27036ede7a4ebf981",
+          "bytes": 154934,
+          "url": "images/274dc595d498c265c1ffdf4448b1b2012c28bf1c60a44ce27036ede7a4ebf981.png",
+          "is_model_input": true,
+          "missing_reason": null,
+          "camera": "wrist_camera",
+          "temporal_role": "current",
+          "observation_index": 4
+        }
+      ],
+      "candidate": {
+        "visual_observation": "The bottle remains upright on the table. The open hand is beside its body, with the extended fingers beyond the bottle and the thumb nearer the shoulder. No visible lift yet.",
+        "memory_for_next_observation": "Maintain fingers pointing +X and palm toward +Y. Bring wrist 6 mm toward bottle, then partially oppose thumb and curl fingers at fixed pose. Inspect bottle tilt/displacement and whether thumb reaches body opposite fingers before tightening or lifting. Estimated bottle center x~-1.17,y~-5.11; table z~0.935.",
+        "task_done": false,
+        "actions": [
+          {
+            "duration_s": 1.5,
+            "position_world_m": [
+              -1.313,
+              -5.154,
+              0.996
+            ],
+            "quaternion_world_wxyz": [
+              0.5,
+              -0.5,
+              0.5,
+              -0.5
+            ],
+            "hand_joint_position_rad": [
+              0.15,
+              3.109,
+              3.069,
+              3.079,
+              3.049,
+              0.55
+            ]
+          },
+          {
+            "duration_s": 2,
+            "position_world_m": [
+              -1.313,
+              -5.154,
+              0.996
+            ],
+            "quaternion_world_wxyz": [
+              0.5,
+              -0.5,
+              0.5,
+              -0.5
+            ],
+            "hand_joint_position_rad": [
+              0.85,
+              2.65,
+              2.62,
+              2.65,
+              2.62,
+              0.38
+            ]
+          }
+        ]
+      },
+      "execution_feedback": [
+        {
+          "requested_duration_s": 1.5,
+          "executed_duration_s": 1.5,
+          "position_error_m": 0.0009215655736625195,
+          "orientation_error_rad": 0.002797861350700259,
+          "max_hand_joint_error_rad": 0.007257521152496338,
+          "arm_rate_limited_ticks": 1,
+          "hand_rate_limited_ticks": 5,
+          "arm_limit_clipped_ticks": 0
+        },
+        {
+          "requested_duration_s": 2,
+          "executed_duration_s": 2.0,
+          "position_error_m": 0.0007596881478093565,
+          "orientation_error_rad": 0.002392940456047654,
+          "max_hand_joint_error_rad": 0.05141806602478027,
+          "arm_rate_limited_ticks": 1,
+          "hand_rate_limited_ticks": 70,
+          "arm_limit_clipped_ticks": 0
+        }
+      ],
+      "request_status": "executed",
+      "request_stop_reason": null,
+      "episode_stop_reason_if_last": null,
+      "call_elapsed_wall_s": 88.99501715200313,
+      "usage": {
+        "input_tokens": 5942,
+        "output_tokens": 2331,
+        "total_tokens": 8273,
+        "cached_input_tokens": 0
+      },
+      "known_standard_equivalent_usd": 0.17597,
+      "usage_unknown": false,
+      "video_mapping": {
+        "observation_sim_time_s": 12.0,
+        "video_seek_s": null,
+        "missing_reason": "历史记录未提供本次导出可独立核验的逐帧映射；仅显示实际观察simtime",
+        "is_exact_input_image_claim": false
+      },
+      "mask_metadata": {
+        "groups": {},
+        "field_groups_zh": {
+          "robot": "实时腕/base/arm/六维手状态（按原协议）",
+          "cameras": "实际相机参数（历史含动态腕T；不能按FR3协议解读）",
+          "hand_semantics": "手部语义/mimic",
+          "last_execution_feedback": "上次执行反馈",
+          "memory_from_previous_decision": "自身文字记忆",
+          "requests_remaining_including_this": "剩余请求预算",
+          "sim_time_s": "历史协议中可见的仿真时间"
+        },
+        "scope": "组mask仅适用于对应协议；不从首轮null推断缺state"
+      }
+    },
+    {
+      "decision_number": 5,
+      "title_zh": "第5次请求：实际输入与动作",
+      "policy_observation": {
+        "task_instruction": "Grasp the bottle around its body with the thumb opposing the other fingers, keep the bottle upright, and lift it stably.",
+        "hand_semantics": {
+          "frame": "arm2_link7 wrist coordinates; right-handed XYZ; all directions are unit vectors in this wrist frame",
+          "units": "metres and radians",
+          "command_dimensions": [
+            {
+              "index": 0,
+              "joint_name": "hand2_joint_link_1_1",
+              "finger": "thumb",
+              "motion": "rotation/opposition",
+              "increasing_value": "opposes toward fingers",
+              "range_rad": [
+                0.0,
+                1.5699999332427979
+              ]
+            },
+            {
+              "index": 1,
+              "joint_name": "hand2_joint_link_2_1",
+              "finger": "index",
+              "motion": "proximal flexion",
+              "increasing_value": "opens/extends",
+              "range_rad": [
+                1.749999761581421,
+                3.109999895095825
+              ]
+            },
+            {
+              "index": 2,
+              "joint_name": "hand2_joint_link_3_1",
+              "finger": "middle",
+              "motion": "proximal flexion",
+              "increasing_value": "opens/extends",
+              "range_rad": [
+                1.709999918937683,
+                3.0699994564056396
+              ]
+            },
+            {
+              "index": 3,
+              "joint_name": "hand2_joint_link_4_1",
+              "finger": "ring",
+              "motion": "proximal flexion",
+              "increasing_value": "opens/extends",
+              "range_rad": [
+                1.7699997425079346,
+                3.0799999237060547
+              ]
+            },
+            {
+              "index": 4,
+              "joint_name": "hand2_joint_link_5_1",
+              "finger": "little",
+              "motion": "proximal flexion",
+              "increasing_value": "opens/extends",
+              "range_rad": [
+                1.7299998998641968,
+                3.049999952316284
+              ]
+            },
+            {
+              "index": 5,
+              "joint_name": "hand2_joint_link_1_2",
+              "finger": "thumb",
+              "motion": "flexion",
+              "increasing_value": "opens/extends",
+              "range_rad": [
+                0.03999999538064003,
+                0.6415999531745911
+              ]
+            }
+          ],
+          "extended_fingers_longitudinal_axis_wrist": [
+            0.00131,
+            -5e-05,
+            1.0
+          ],
+          "palm_outward_normal_wrist": [
+            -0.99994,
+            0.01076,
+            0.00131
+          ],
+          "finger_row_axis_from_little_to_index_wrist": [
+            -0.01076,
+            -0.99994,
+            -3e-05
+          ],
+          "thumb_opposition_sweep_direction_wrist": [
+            -0.67665,
+            0.72066,
+            -0.15095
+          ],
+          "thumb_opposition_description": "Increasing dimension 0 swings the thumb from the index side across the palm toward the other fingers; the vector is its tip displacement from minimum to maximum opposition with fingers extended, not a fixed rotation axis.",
+          "approximate_opening_width_m": {
+            "fully_open_thumb_index_tip_surface_gap": 0.077,
+            "fully_closed_thumb_index_tip_surface_gap": 0.0,
+            "fully_open_thumb_index_tip_center_distance": 0.09,
+            "fully_closed_thumb_index_tip_center_distance": 0.012,
+            "definition": "Measured unloaded stable open/close command endpoints under native drives and self-contact; fingertip-pad surface separation estimated from validated USD geometry. Intermediate posture and gravity change the gap. Target limits may be unreachable together due to self-contact; this is not an object clearance guarantee."
+          },
+          "native_mimic": {
+            "equation": "q_follower = multiplier * q_driver + offset_rad",
+            "couplings": [
+              {
+                "follower_joint": "hand2_joint_link_1_3",
+                "driver_joint": "hand2_joint_link_1_2",
+                "multiplier": 0.8976100087165833,
+                "offset_rad": -0.5359042110206326
+              },
+              {
+                "follower_joint": "hand2_joint_link_2_2",
+                "driver_joint": "hand2_joint_link_2_1",
+                "multiplier": 1.133489966392517,
+                "offset_rad": -1.9551615784944358
+              },
+              {
+                "follower_joint": "hand2_joint_link_3_2",
+                "driver_joint": "hand2_joint_link_3_1",
+                "multiplier": 1.1038199663162231,
+                "offset_rad": -1.8187386216520913
+              },
+              {
+                "follower_joint": "hand2_joint_link_4_2",
+                "driver_joint": "hand2_joint_link_4_1",
+                "multiplier": 1.1526700258255005,
+                "offset_rad": -1.9802281827806432
+              },
+              {
+                "follower_joint": "hand2_joint_link_5_2",
+                "driver_joint": "hand2_joint_link_5_1",
+                "multiplier": 1.121209979057312,
+                "offset_rad": -1.8496972035339898
+              }
+            ]
+          },
+          "source": "Native robot USD joint frames and fingertip meshes, E2 hand-local-axis and mimic probes; independently checked with measured simulator links before policy requests."
+        },
+        "sim_time_s": 15.5,
+        "robot": {
+          "wrist_link": "arm2_link7",
+          "position_world_m": [
+            -1.313043236732483,
+            -5.154365062713623,
+            0.9953352808952332
+          ],
+          "quaternion_world_wxyz": [
+            0.49898868799209595,
+            -0.500288188457489,
+            0.5005414485931396,
+            -0.5001803040504456
+          ],
+          "robot_base_position_world_m": [
+            -1.649999976158142,
+            -5.0,
+            -0.010519921779632568
+          ],
+          "robot_base_quaternion_world_wxyz": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "arm_joint_names": [
+            "arm2_joint_link1",
+            "arm2_joint_link2",
+            "arm2_joint_link3",
+            "arm2_joint_link4",
+            "arm2_joint_link5",
+            "arm2_joint_link6",
+            "arm2_joint_link7"
+          ],
+          "arm_joint_position_rad": [
+            0.30021578073501587,
+            -2.148480176925659,
+            0.8183785676956177,
+            -1.7471296787261963,
+            -1.1458368301391602,
+            1.008272647857666,
+            0.06095479801297188
+          ],
+          "arm_joint_velocity_rad_s": [
+            0.0018112869001924992,
+            0.0017201388254761696,
+            0.004600402899086475,
+            -0.013776109553873539,
+            -0.007943842560052872,
+            -0.007560295052826405,
+            -0.0004425424267537892
+          ],
+          "arm_joint_limits_rad": [
+            [
+              -3.1049997806549072,
+              3.1049997806549072
+            ],
+            [
+              -2.2689998149871826,
+              2.2689998149871826
+            ],
+            [
+              -3.1049997806549072,
+              3.1049997806549072
+            ],
+            [
+              -2.355999708175659,
+              2.355999708175659
+            ],
+            [
+              -3.1049997806549072,
+              3.1049997806549072
+            ],
+            [
+              -2.2339999675750732,
+              2.2339999675750732
+            ],
+            [
+              -6.279999732971191,
+              6.279999732971191
+            ]
+          ],
+          "hand_joint_names": [
+            "hand2_joint_link_1_1",
+            "hand2_joint_link_2_1",
+            "hand2_joint_link_3_1",
+            "hand2_joint_link_4_1",
+            "hand2_joint_link_5_1",
+            "hand2_joint_link_1_2"
+          ],
+          "hand_joint_position_rad": [
+            0.8363980650901794,
+            2.701418161392212,
+            2.6267483234405518,
+            2.6767680644989014,
+            2.654054641723633,
+            0.42628926038742065
+          ],
+          "hand_joint_velocity_rad_s": [
+            0.03172275796532631,
+            -0.010919168591499329,
+            -0.016779663041234016,
+            -0.01240443717688322,
+            -0.018727097660303116,
+            0.010519013740122318
+          ],
+          "hand_joint_limits_rad": [
+            [
+              0.0,
+              1.5699999332427979
+            ],
+            [
+              1.749999761581421,
+              3.109999895095825
+            ],
+            [
+              1.709999918937683,
+              3.0699994564056396
+            ],
+            [
+              1.7699997425079346,
+              3.0799999237060547
+            ],
+            [
+              1.7299998998641968,
+              3.049999952316284
+            ],
+            [
+              0.03999999538064003,
+              0.6415999531745911
+            ]
+          ],
+          "hand_command_semantics": {
+            "dimension": 6,
+            "units": "rad",
+            "source": "Native hand2 actuator order, formal LeRobot collector first six joints",
+            "ordered_meanings": [
+              "thumb rotation/opposition (larger closes/opposes)",
+              "index finger proximal flexion (smaller closes)",
+              "middle finger proximal flexion (smaller closes)",
+              "ring finger proximal flexion (smaller closes)",
+              "little finger proximal flexion (smaller closes)",
+              "thumb flexion (smaller closes)"
+            ],
+            "followers": "Remaining five hand joints follow native USD PhysX mimic constraints; they are not independent commands",
+            "coupling_equation": "q_follower_rad = multiplier * q_driver_rad + offset_rad",
+            "native_couplings": [
+              {
+                "follower_joint": "hand2_joint_link_1_3",
+                "driver_joint": "hand2_joint_link_1_2",
+                "multiplier": 0.8976100087165833,
+                "offset_rad": -0.5359042110206326
+              },
+              {
+                "follower_joint": "hand2_joint_link_2_2",
+                "driver_joint": "hand2_joint_link_2_1",
+                "multiplier": 1.133489966392517,
+                "offset_rad": -1.9551615784944358
+              },
+              {
+                "follower_joint": "hand2_joint_link_3_2",
+                "driver_joint": "hand2_joint_link_3_1",
+                "multiplier": 1.1038199663162231,
+                "offset_rad": -1.8187386216520913
+              },
+              {
+                "follower_joint": "hand2_joint_link_4_2",
+                "driver_joint": "hand2_joint_link_4_1",
+                "multiplier": 1.1526700258255005,
+                "offset_rad": -1.9802281827806432
+              },
+              {
+                "follower_joint": "hand2_joint_link_5_2",
+                "driver_joint": "hand2_joint_link_5_1",
+                "multiplier": 1.121209979057312,
+                "offset_rad": -1.8496972035339898
+              }
+            ]
+          }
+        },
+        "cameras": {
+          "head_camera": {
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "K_pixels": [
+              [
+                615.8730332370546,
+                0.0,
+                320.0
+              ],
+              [
+                0.0,
+                615.8730332370546,
+                240.0
+              ],
+              [
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "T_world_from_camera_opencv": [
+              [
+                4.277902283695927e-08,
+                -0.8684111649121298,
+                0.49584478282619426,
+                -1.4460942411438373
+              ],
+              [
+                -0.9999999999999991,
+                -2.894899213961315e-08,
+                3.5574428341499705e-08,
+                -4.965000000000002
+              ],
+              [
+                -1.653902401725672e-08,
+                -0.49584478282619554,
+                -0.8684111649121304,
+                1.6082024469910106
+              ],
+              [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "frame": "OpenCV X right Y down Z forward",
+            "distortion": [
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "chest_camera": {
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "K_pixels": [
+              [
+                555.5555650987377,
+                0.0,
+                320.0
+              ],
+              [
+                0.0,
+                555.5555650987376,
+                240.0
+              ],
+              [
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "T_world_from_camera_opencv": [
+              [
+                4.384457409078169e-09,
+                -0.23554049200376248,
+                0.9718645361502938,
+                -1.5327025035328656
+              ],
+              [
+                -1.0,
+                -3.3901765802379406e-09,
+                3.6897464027607807e-09,
+                -5.012000004877337
+              ],
+              [
+                2.425707797820558e-09,
+                -0.9718645361502939,
+                -0.23554049200376245,
+                1.1096944144487395
+              ],
+              [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "frame": "OpenCV X right Y down Z forward",
+            "distortion": [
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "third_camera": {
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "K_pixels": [
+              [
+                555.5555650987377,
+                0.0,
+                320.0
+              ],
+              [
+                0.0,
+                555.5555650987376,
+                240.0
+              ],
+              [
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "T_world_from_camera_opencv": [
+              [
+                -2.992927681391134e-08,
+                0.07427169595009141,
+                -0.9972380433881853,
+                -0.17535564225681136
+              ],
+              [
+                0.9999999999999994,
+                2.0634252618692948e-08,
+                -2.847538315656851e-08,
+                -4.988999994448692
+              ],
+              [
+                1.846234660159487e-08,
+                -0.9972380433881854,
+                -0.07427169595009205,
+                1.151976349756701
+              ],
+              [
+                0.0,
+                0.0,
+                0.0,
+                0.9999999999999998
+              ]
+            ],
+            "frame": "OpenCV X right Y down Z forward",
+            "distortion": [
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "wrist_camera": {
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "K_pixels": [
+              [
+                480.0,
+                0.0,
+                320.0
+              ],
+              [
+                0.0,
+                480.0,
+                240.0
+              ],
+              [
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "T_world_from_camera_opencv": [
+              [
+                -0.08443001239327974,
+                0.0016421789071874966,
+                0.9964280587456916,
+                -1.2812481310052806
+              ],
+              [
+                0.9963627970904605,
+                0.01170210813024356,
+                0.08440519675577933,
+                -5.221856804645957
+              ],
+              [
+                -0.011521700453681484,
+                0.9999301795194228,
+                -0.0026242151037520105,
+                0.996097559703678
+              ],
+              [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "frame": "OpenCV X right Y down Z forward",
+            "distortion": [
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        "last_execution_feedback": {
+          "execution": [
+            {
+              "requested_duration_s": 1.5,
+              "executed_duration_s": 1.5,
+              "position_error_m": 0.0009215655736625195,
+              "orientation_error_rad": 0.002797861350700259,
+              "max_hand_joint_error_rad": 0.007257521152496338,
+              "arm_rate_limited_ticks": 1,
+              "hand_rate_limited_ticks": 5,
+              "arm_limit_clipped_ticks": 0
+            },
+            {
+              "requested_duration_s": 2,
+              "executed_duration_s": 2.0,
+              "position_error_m": 0.0007596881478093565,
+              "orientation_error_rad": 0.002392940456047654,
+              "max_hand_joint_error_rad": 0.05141806602478027,
+              "arm_rate_limited_ticks": 1,
+              "hand_rate_limited_ticks": 70,
+              "arm_limit_clipped_ticks": 0
+            }
+          ]
+        },
+        "memory_from_previous_decision": "Maintain fingers pointing +X and palm toward +Y. Bring wrist 6 mm toward bottle, then partially oppose thumb and curl fingers at fixed pose. Inspect bottle tilt/displacement and whether thumb reaches body opposite fingers before tightening or lifting. Estimated bottle center x~-1.17,y~-5.11; table z~0.935.",
+        "requests_remaining_including_this": 4
+      },
+      "input_private_path_redaction": false,
+      "image_evidence": [
+        {
+          "label": "head_camera",
+          "sha256": "253bebee47d4eef9b49cc37c563d36280676366f449eaf207356462647d90d83",
+          "bytes": 330917,
+          "url": "images/253bebee47d4eef9b49cc37c563d36280676366f449eaf207356462647d90d83.png",
+          "is_model_input": true,
+          "missing_reason": null,
+          "camera": "head_camera",
+          "temporal_role": "current",
+          "observation_index": 5
+        },
+        {
+          "label": "chest_camera",
+          "sha256": "2411beb73972619f6119ee7402eb3d813788fafdfdf87220fd7c71ff75e7cd7a",
+          "bytes": 176940,
+          "url": "images/2411beb73972619f6119ee7402eb3d813788fafdfdf87220fd7c71ff75e7cd7a.png",
+          "is_model_input": true,
+          "missing_reason": null,
+          "camera": "chest_camera",
+          "temporal_role": "current",
+          "observation_index": 5
+        },
+        {
+          "label": "third_camera",
+          "sha256": "7f3e1043ba8cd31bf5d8d12e766513689cdc3f73d875a56cce384de72411846c",
+          "bytes": 186662,
+          "url": "images/7f3e1043ba8cd31bf5d8d12e766513689cdc3f73d875a56cce384de72411846c.png",
+          "is_model_input": true,
+          "missing_reason": null,
+          "camera": "third_camera",
+          "temporal_role": "current",
+          "observation_index": 5
+        },
+        {
+          "label": "wrist_camera",
+          "sha256": "5422c54fd65eb3c2b4eade40a0b9146174f3e3d9ab5d230f41b3b84a9d3b0519",
+          "bytes": 138597,
+          "url": "images/5422c54fd65eb3c2b4eade40a0b9146174f3e3d9ab5d230f41b3b84a9d3b0519.png",
+          "is_model_input": true,
+          "missing_reason": null,
+          "camera": "wrist_camera",
+          "temporal_role": "current",
+          "observation_index": 5
+        }
+      ],
+      "candidate": {
+        "visual_observation": "The bottle is upright with its base on the table. The right hand surrounds its body, with the fingers partly curled and the thumb near the upper body; stable support is not yet demonstrated.",
+        "memory_for_next_observation": "Tighten the opposing thumb and fingers at the current wrist pose, then attempt a slow 2 cm test lift without changing orientation. Check whether the bottle follows upright and whether its base clears the table. If secure, lift a further 5–6 cm and hold; otherwise adjust before lifting farther.",
+        "task_done": false,
+        "actions": [
+          {
+            "duration_s": 2.0,
+            "position_world_m": [
+              -1.31304,
+              -5.15437,
+              0.99534
+            ],
+            "quaternion_world_wxyz": [
+              0.5,
+              -0.5,
+              0.5,
+              -0.5
+            ],
+            "hand_joint_position_rad": [
+              1.08,
+              2.48,
+              2.44,
+              2.49,
+              2.46,
+              0.31
+            ]
+          },
+          {
+            "duration_s": 2.0,
+            "position_world_m": [
+              -1.31304,
+              -5.15437,
+              1.01534
+            ],
+            "quaternion_world_wxyz": [
+              0.5,
+              -0.5,
+              0.5,
+              -0.5
+            ],
+            "hand_joint_position_rad": [
+              1.08,
+              2.48,
+              2.44,
+              2.49,
+              2.46,
+              0.31
+            ]
+          }
+        ]
+      },
+      "execution_feedback": [
+        {
+          "requested_duration_s": 2.0,
+          "executed_duration_s": 2.0,
+          "position_error_m": 0.000653543509542942,
+          "orientation_error_rad": 0.0021289505530148745,
+          "max_hand_joint_error_rad": 0.22407490015029907,
+          "arm_rate_limited_ticks": 1,
+          "hand_rate_limited_ticks": 23,
+          "arm_limit_clipped_ticks": 0
+        },
+        {
+          "requested_duration_s": 2.0,
+          "executed_duration_s": 2.0,
+          "position_error_m": 0.0008352634031325579,
+          "orientation_error_rad": 0.0025161735247820616,
+          "max_hand_joint_error_rad": 0.02590993046760559,
+          "arm_rate_limited_ticks": 0,
+          "hand_rate_limited_ticks": 0,
+          "arm_limit_clipped_ticks": 0
+        }
+      ],
+      "request_status": "executed",
+      "request_stop_reason": null,
+      "episode_stop_reason_if_last": null,
+      "call_elapsed_wall_s": 53.67783316799978,
+      "usage": {
+        "input_tokens": 5913,
+        "output_tokens": 1325,
+        "total_tokens": 7238,
+        "cached_input_tokens": 0
+      },
+      "known_standard_equivalent_usd": 0.12538,
+      "usage_unknown": false,
+      "video_mapping": {
+        "observation_sim_time_s": 15.5,
+        "video_seek_s": null,
+        "missing_reason": "历史记录未提供本次导出可独立核验的逐帧映射；仅显示实际观察simtime",
+        "is_exact_input_image_claim": false
+      },
+      "mask_metadata": {
+        "groups": {},
+        "field_groups_zh": {
+          "robot": "实时腕/base/arm/六维手状态（按原协议）",
+          "cameras": "实际相机参数（历史含动态腕T；不能按FR3协议解读）",
+          "hand_semantics": "手部语义/mimic",
+          "last_execution_feedback": "上次执行反馈",
+          "memory_from_previous_decision": "自身文字记忆",
+          "requests_remaining_including_this": "剩余请求预算",
+          "sim_time_s": "历史协议中可见的仿真时间"
+        },
+        "scope": "组mask仅适用于对应协议；不从首轮null推断缺state"
+      }
+    },
+    {
+      "decision_number": 6,
+      "title_zh": "第6次请求：实际输入与动作",
+      "policy_observation": {
+        "task_instruction": "Grasp the bottle around its body with the thumb opposing the other fingers, keep the bottle upright, and lift it stably.",
+        "hand_semantics": {
+          "frame": "arm2_link7 wrist coordinates; right-handed XYZ; all directions are unit vectors in this wrist frame",
+          "units": "metres and radians",
+          "command_dimensions": [
+            {
+              "index": 0,
+              "joint_name": "hand2_joint_link_1_1",
+              "finger": "thumb",
+              "motion": "rotation/opposition",
+              "increasing_value": "opposes toward fingers",
+              "range_rad": [
+                0.0,
+                1.5699999332427979
+              ]
+            },
+            {
+              "index": 1,
+              "joint_name": "hand2_joint_link_2_1",
+              "finger": "index",
+              "motion": "proximal flexion",
+              "increasing_value": "opens/extends",
+              "range_rad": [
+                1.749999761581421,
+                3.109999895095825
+              ]
+            },
+            {
+              "index": 2,
+              "joint_name": "hand2_joint_link_3_1",
+              "finger": "middle",
+              "motion": "proximal flexion",
+              "increasing_value": "opens/extends",
+              "range_rad": [
+                1.709999918937683,
+                3.0699994564056396
+              ]
+            },
+            {
+              "index": 3,
+              "joint_name": "hand2_joint_link_4_1",
+              "finger": "ring",
+              "motion": "proximal flexion",
+              "increasing_value": "opens/extends",
+              "range_rad": [
+                1.7699997425079346,
+                3.0799999237060547
+              ]
+            },
+            {
+              "index": 4,
+              "joint_name": "hand2_joint_link_5_1",
+              "finger": "little",
+              "motion": "proximal flexion",
+              "increasing_value": "opens/extends",
+              "range_rad": [
+                1.7299998998641968,
+                3.049999952316284
+              ]
+            },
+            {
+              "index": 5,
+              "joint_name": "hand2_joint_link_1_2",
+              "finger": "thumb",
+              "motion": "flexion",
+              "increasing_value": "opens/extends",
+              "range_rad": [
+                0.03999999538064003,
+                0.6415999531745911
+              ]
+            }
+          ],
+          "extended_fingers_longitudinal_axis_wrist": [
+            0.00131,
+            -5e-05,
+            1.0
+          ],
+          "palm_outward_normal_wrist": [
+            -0.99994,
+            0.01076,
+            0.00131
+          ],
+          "finger_row_axis_from_little_to_index_wrist": [
+            -0.01076,
+            -0.99994,
+            -3e-05
+          ],
+          "thumb_opposition_sweep_direction_wrist": [
+            -0.67665,
+            0.72066,
+            -0.15095
+          ],
+          "thumb_opposition_description": "Increasing dimension 0 swings the thumb from the index side across the palm toward the other fingers; the vector is its tip displacement from minimum to maximum opposition with fingers extended, not a fixed rotation axis.",
+          "approximate_opening_width_m": {
+            "fully_open_thumb_index_tip_surface_gap": 0.077,
+            "fully_closed_thumb_index_tip_surface_gap": 0.0,
+            "fully_open_thumb_index_tip_center_distance": 0.09,
+            "fully_closed_thumb_index_tip_center_distance": 0.012,
+            "definition": "Measured unloaded stable open/close command endpoints under native drives and self-contact; fingertip-pad surface separation estimated from validated USD geometry. Intermediate posture and gravity change the gap. Target limits may be unreachable together due to self-contact; this is not an object clearance guarantee."
+          },
+          "native_mimic": {
+            "equation": "q_follower = multiplier * q_driver + offset_rad",
+            "couplings": [
+              {
+                "follower_joint": "hand2_joint_link_1_3",
+                "driver_joint": "hand2_joint_link_1_2",
+                "multiplier": 0.8976100087165833,
+                "offset_rad": -0.5359042110206326
+              },
+              {
+                "follower_joint": "hand2_joint_link_2_2",
+                "driver_joint": "hand2_joint_link_2_1",
+                "multiplier": 1.133489966392517,
+                "offset_rad": -1.9551615784944358
+              },
+              {
+                "follower_joint": "hand2_joint_link_3_2",
+                "driver_joint": "hand2_joint_link_3_1",
+                "multiplier": 1.1038199663162231,
+                "offset_rad": -1.8187386216520913
+              },
+              {
+                "follower_joint": "hand2_joint_link_4_2",
+                "driver_joint": "hand2_joint_link_4_1",
+                "multiplier": 1.1526700258255005,
+                "offset_rad": -1.9802281827806432
+              },
+              {
+                "follower_joint": "hand2_joint_link_5_2",
+                "driver_joint": "hand2_joint_link_5_1",
+                "multiplier": 1.121209979057312,
+                "offset_rad": -1.8496972035339898
+              }
+            ]
+          },
+          "source": "Native robot USD joint frames and fingertip meshes, E2 hand-local-axis and mimic probes; independently checked with measured simulator links before policy requests."
+        },
+        "sim_time_s": 19.5,
+        "robot": {
+          "wrist_link": "arm2_link7",
+          "position_world_m": [
+            -1.3130954504013062,
+            -5.154600143432617,
+            1.0145390033721924
+          ],
+          "quaternion_world_wxyz": [
+            0.4989623427391052,
+            -0.5004647374153137,
+            0.5005375146865845,
+            -0.5000338554382324
+          ],
+          "robot_base_position_world_m": [
+            -1.649999976158142,
+            -5.0,
+            -0.010519921779632568
+          ],
+          "robot_base_quaternion_world_wxyz": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "arm_joint_names": [
+            "arm2_joint_link1",
+            "arm2_joint_link2",
+            "arm2_joint_link3",
+            "arm2_joint_link4",
+            "arm2_joint_link5",
+            "arm2_joint_link6",
+            "arm2_joint_link7"
+          ],
+          "arm_joint_position_rad": [
+            0.30686742067337036,
+            -2.139500379562378,
+            0.8538694977760315,
+            -1.8302778005599976,
+            -1.074921727180481,
+            1.0182082653045654,
+            -0.04025539755821228
+          ],
+          "arm_joint_velocity_rad_s": [
+            0.0011681572068482637,
+            0.0009518457227386534,
+            0.00013188575394451618,
+            -0.004724476952105761,
+            -0.0013139275833964348,
+            -0.005001761019229889,
+            -0.014510639011859894
+          ],
+          "arm_joint_limits_rad": [
+            [
+              -3.1049997806549072,
+              3.1049997806549072
+            ],
+            [
+              -2.2689998149871826,
+              2.2689998149871826
+            ],
+            [
+              -3.1049997806549072,
+              3.1049997806549072
+            ],
+            [
+              -2.355999708175659,
+              2.355999708175659
+            ],
+            [
+              -3.1049997806549072,
+              3.1049997806549072
+            ],
+            [
+              -2.2339999675750732,
+              2.2339999675750732
+            ],
+            [
+              -6.279999732971191,
+              6.279999732971191
+            ]
+          ],
+          "hand_joint_names": [
+            "hand2_joint_link_1_1",
+            "hand2_joint_link_2_1",
+            "hand2_joint_link_3_1",
+            "hand2_joint_link_4_1",
+            "hand2_joint_link_5_1",
+            "hand2_joint_link_1_2"
+          ],
+          "hand_joint_position_rad": [
+            1.0868589878082275,
+            2.486098289489746,
+            2.4590203762054443,
+            2.510019540786743,
+            2.4618523120880127,
+            0.3359099328517914
+          ],
+          "hand_joint_velocity_rad_s": [
+            -0.009964684955775738,
+            -0.017591331154108047,
+            -0.009879346936941147,
+            -0.00690870825201273,
+            -0.0017957387026399374,
+            -0.011660406365990639
+          ],
+          "hand_joint_limits_rad": [
+            [
+              0.0,
+              1.5699999332427979
+            ],
+            [
+              1.749999761581421,
+              3.109999895095825
+            ],
+            [
+              1.709999918937683,
+              3.0699994564056396
+            ],
+            [
+              1.7699997425079346,
+              3.0799999237060547
+            ],
+            [
+              1.7299998998641968,
+              3.049999952316284
+            ],
+            [
+              0.03999999538064003,
+              0.6415999531745911
+            ]
+          ],
+          "hand_command_semantics": {
+            "dimension": 6,
+            "units": "rad",
+            "source": "Native hand2 actuator order, formal LeRobot collector first six joints",
+            "ordered_meanings": [
+              "thumb rotation/opposition (larger closes/opposes)",
+              "index finger proximal flexion (smaller closes)",
+              "middle finger proximal flexion (smaller closes)",
+              "ring finger proximal flexion (smaller closes)",
+              "little finger proximal flexion (smaller closes)",
+              "thumb flexion (smaller closes)"
+            ],
+            "followers": "Remaining five hand joints follow native USD PhysX mimic constraints; they are not independent commands",
+            "coupling_equation": "q_follower_rad = multiplier * q_driver_rad + offset_rad",
+            "native_couplings": [
+              {
+                "follower_joint": "hand2_joint_link_1_3",
+                "driver_joint": "hand2_joint_link_1_2",
+                "multiplier": 0.8976100087165833,
+                "offset_rad": -0.5359042110206326
+              },
+              {
+                "follower_joint": "hand2_joint_link_2_2",
+                "driver_joint": "hand2_joint_link_2_1",
+                "multiplier": 1.133489966392517,
+                "offset_rad": -1.9551615784944358
+              },
+              {
+                "follower_joint": "hand2_joint_link_3_2",
+                "driver_joint": "hand2_joint_link_3_1",
+                "multiplier": 1.1038199663162231,
+                "offset_rad": -1.8187386216520913
+              },
+              {
+                "follower_joint": "hand2_joint_link_4_2",
+                "driver_joint": "hand2_joint_link_4_1",
+                "multiplier": 1.1526700258255005,
+                "offset_rad": -1.9802281827806432
+              },
+              {
+                "follower_joint": "hand2_joint_link_5_2",
+                "driver_joint": "hand2_joint_link_5_1",
+                "multiplier": 1.121209979057312,
+                "offset_rad": -1.8496972035339898
+              }
+            ]
+          }
+        },
+        "cameras": {
+          "head_camera": {
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "K_pixels": [
+              [
+                615.8730332370546,
+                0.0,
+                320.0
+              ],
+              [
+                0.0,
+                615.8730332370546,
+                240.0
+              ],
+              [
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "T_world_from_camera_opencv": [
+              [
+                4.277902283695927e-08,
+                -0.8684111649121298,
+                0.49584478282619426,
+                -1.4460942411438373
+              ],
+              [
+                -0.9999999999999991,
+                -2.894899213961315e-08,
+                3.5574428341499705e-08,
+                -4.965000000000002
+              ],
+              [
+                -1.653902401725672e-08,
+                -0.49584478282619554,
+                -0.8684111649121304,
+                1.6082024469910106
+              ],
+              [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "frame": "OpenCV X right Y down Z forward",
+            "distortion": [
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "chest_camera": {
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "K_pixels": [
+              [
+                555.5555650987377,
+                0.0,
+                320.0
+              ],
+              [
+                0.0,
+                555.5555650987376,
+                240.0
+              ],
+              [
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "T_world_from_camera_opencv": [
+              [
+                4.384457409078169e-09,
+                -0.23554049200376248,
+                0.9718645361502938,
+                -1.5327025035328656
+              ],
+              [
+                -1.0,
+                -3.3901765802379406e-09,
+                3.6897464027607807e-09,
+                -5.012000004877337
+              ],
+              [
+                2.425707797820558e-09,
+                -0.9718645361502939,
+                -0.23554049200376245,
+                1.1096944144487395
+              ],
+              [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "frame": "OpenCV X right Y down Z forward",
+            "distortion": [
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "third_camera": {
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "K_pixels": [
+              [
+                555.5555650987377,
+                0.0,
+                320.0
+              ],
+              [
+                0.0,
+                555.5555650987376,
+                240.0
+              ],
+              [
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "T_world_from_camera_opencv": [
+              [
+                -2.992927681391134e-08,
+                0.07427169595009141,
+                -0.9972380433881853,
+                -0.17535564225681136
+              ],
+              [
+                0.9999999999999994,
+                2.0634252618692948e-08,
+                -2.847538315656851e-08,
+                -4.988999994448692
+              ],
+              [
+                1.846234660159487e-08,
+                -0.9972380433881854,
+                -0.07427169595009205,
+                1.151976349756701
+              ],
+              [
+                0.0,
+                0.0,
+                0.0,
+                0.9999999999999998
+              ]
+            ],
+            "frame": "OpenCV X right Y down Z forward",
+            "distortion": [
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "wrist_camera": {
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "K_pixels": [
+              [
+                480.0,
+                0.0,
+                320.0
+              ],
+              [
+                0.0,
+                480.0,
+                240.0
+              ],
+              [
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "T_world_from_camera_opencv": [
+              [
+                -0.08473360890397472,
+                0.001984336507462202,
+                0.9964016649578289,
+                -1.281279720053207
+              ],
+              [
+                0.9963366718185146,
+                0.01176254696493045,
+                0.08470465676988459,
+                -5.222081519810576
+              ],
+              [
+                -0.011552138837220957,
+                0.9999288499175945,
+                -0.002973750285853694,
+                1.0152942773272338
+              ],
+              [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "frame": "OpenCV X right Y down Z forward",
+            "distortion": [
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        "last_execution_feedback": {
+          "execution": [
+            {
+              "requested_duration_s": 2.0,
+              "executed_duration_s": 2.0,
+              "position_error_m": 0.000653543509542942,
+              "orientation_error_rad": 0.0021289505530148745,
+              "max_hand_joint_error_rad": 0.22407490015029907,
+              "arm_rate_limited_ticks": 1,
+              "hand_rate_limited_ticks": 23,
+              "arm_limit_clipped_ticks": 0
+            },
+            {
+              "requested_duration_s": 2.0,
+              "executed_duration_s": 2.0,
+              "position_error_m": 0.0008352634031325579,
+              "orientation_error_rad": 0.0025161735247820616,
+              "max_hand_joint_error_rad": 0.02590993046760559,
+              "arm_rate_limited_ticks": 0,
+              "hand_rate_limited_ticks": 0,
+              "arm_limit_clipped_ticks": 0
+            }
+          ]
+        },
+        "memory_from_previous_decision": "Tighten the opposing thumb and fingers at the current wrist pose, then attempt a slow 2 cm test lift without changing orientation. Check whether the bottle follows upright and whether its base clears the table. If secure, lift a further 5–6 cm and hold; otherwise adjust before lifting farther.",
+        "requests_remaining_including_this": 3
+      },
+      "input_private_path_redaction": false,
+      "image_evidence": [
+        {
+          "label": "head_camera",
+          "sha256": "cb363f5a417139e6a83290b60b036a51c677ce6f17a8fc91245561a1da14c577",
+          "bytes": 328329,
+          "url": "images/cb363f5a417139e6a83290b60b036a51c677ce6f17a8fc91245561a1da14c577.png",
+          "is_model_input": true,
+          "missing_reason": null,
+          "camera": "head_camera",
+          "temporal_role": "current",
+          "observation_index": 6
+        },
+        {
+          "label": "chest_camera",
+          "sha256": "74e3dc3f7a39c167392bc9477d1d72b4309e2b8f4291557980d67a38a8223c5f",
+          "bytes": 177167,
+          "url": "images/74e3dc3f7a39c167392bc9477d1d72b4309e2b8f4291557980d67a38a8223c5f.png",
+          "is_model_input": true,
+          "missing_reason": null,
+          "camera": "chest_camera",
+          "temporal_role": "current",
+          "observation_index": 6
+        },
+        {
+          "label": "third_camera",
+          "sha256": "79d52eedd1315e11d4659e9bfdeacb135ed8db0195bc6e16ffc3b11e7e9acdb8",
+          "bytes": 186103,
+          "url": "images/79d52eedd1315e11d4659e9bfdeacb135ed8db0195bc6e16ffc3b11e7e9acdb8.png",
+          "is_model_input": true,
+          "missing_reason": null,
+          "camera": "third_camera",
+          "temporal_role": "current",
+          "observation_index": 6
+        },
+        {
+          "label": "wrist_camera",
+          "sha256": "5b09ddaf63f8f8ee6922543d8f62a4f44b6d5d337341517e9dad428ae2453a8c",
+          "bytes": 137130,
+          "url": "images/5b09ddaf63f8f8ee6922543d8f62a4f44b6d5d337341517e9dad428ae2453a8c.png",
+          "is_model_input": true,
+          "missing_reason": null,
+          "camera": "wrist_camera",
+          "temporal_role": "current",
+          "observation_index": 6
+        }
+      ],
+      "candidate": {
+        "visual_observation": "The bottle remains between the opposed thumb and fingers, with a modest lean and an apparent small gap beneath its base. The hand is stationary beside the bottle body.",
+        "memory_for_next_observation": "Continue the apparent successful small test lift by raising the wrist 6 cm without rotating or changing the established grip, then hold 2 seconds. Check that the bottle follows, remains within 15 degrees of upright, and settles without slipping before final evaluation.",
+        "task_done": false,
+        "actions": [
+          {
+            "duration_s": 2.0,
+            "position_world_m": [
+              -1.31309545,
+              -5.15460014,
+              1.074539
+            ],
+            "quaternion_world_wxyz": [
+              0.49896234,
+              -0.50046474,
+              0.50053751,
+              -0.50003386
+            ],
+            "hand_joint_position_rad": [
+              1.1,
+              2.48,
+              2.45,
+              2.5,
+              2.45,
+              0.31
+            ]
+          },
+          {
+            "duration_s": 2.0,
+            "position_world_m": [
+              -1.31309545,
+              -5.15460014,
+              1.074539
+            ],
+            "quaternion_world_wxyz": [
+              0.49896234,
+              -0.50046474,
+              0.50053751,
+              -0.50003386
+            ],
+            "hand_joint_position_rad": [
+              1.1,
+              2.48,
+              2.45,
+              2.5,
+              2.45,
+              0.31
+            ]
+          }
+        ]
+      },
+      "execution_feedback": [
+        {
+          "requested_duration_s": 2.0,
+          "executed_duration_s": 2.0,
+          "position_error_m": 0.0009082024917006493,
+          "orientation_error_rad": 0.002640033606439829,
+          "max_hand_joint_error_rad": 0.01240229606628418,
+          "arm_rate_limited_ticks": 2,
+          "hand_rate_limited_ticks": 1,
+          "arm_limit_clipped_ticks": 0
+        },
+        {
+          "requested_duration_s": 2.0,
+          "executed_duration_s": 2.0,
+          "position_error_m": 0.0008579579298384488,
+          "orientation_error_rad": 0.0026776615995913744,
+          "max_hand_joint_error_rad": 0.012765884399414062,
+          "arm_rate_limited_ticks": 1,
+          "hand_rate_limited_ticks": 0,
+          "arm_limit_clipped_ticks": 0
+        }
+      ],
+      "request_status": "executed",
+      "request_stop_reason": null,
+      "episode_stop_reason_if_last": null,
+      "call_elapsed_wall_s": 64.90957777700169,
+      "usage": {
+        "input_tokens": 5911,
+        "output_tokens": 1970,
+        "total_tokens": 7881,
+        "cached_input_tokens": 0
+      },
+      "known_standard_equivalent_usd": 0.15761,
+      "usage_unknown": false,
+      "video_mapping": {
+        "observation_sim_time_s": 19.5,
+        "video_seek_s": null,
+        "missing_reason": "历史记录未提供本次导出可独立核验的逐帧映射；仅显示实际观察simtime",
+        "is_exact_input_image_claim": false
+      },
+      "mask_metadata": {
+        "groups": {},
+        "field_groups_zh": {
+          "robot": "实时腕/base/arm/六维手状态（按原协议）",
+          "cameras": "实际相机参数（历史含动态腕T；不能按FR3协议解读）",
+          "hand_semantics": "手部语义/mimic",
+          "last_execution_feedback": "上次执行反馈",
+          "memory_from_previous_decision": "自身文字记忆",
+          "requests_remaining_including_this": "剩余请求预算",
+          "sim_time_s": "历史协议中可见的仿真时间"
+        },
+        "scope": "组mask仅适用于对应协议；不从首轮null推断缺state"
+      }
+    },
+    {
+      "decision_number": 7,
+      "title_zh": "第7次请求：实际输入与动作",
+      "policy_observation": {
+        "task_instruction": "Grasp the bottle around its body with the thumb opposing the other fingers, keep the bottle upright, and lift it stably.",
+        "hand_semantics": {
+          "frame": "arm2_link7 wrist coordinates; right-handed XYZ; all directions are unit vectors in this wrist frame",
+          "units": "metres and radians",
+          "command_dimensions": [
+            {
+              "index": 0,
+              "joint_name": "hand2_joint_link_1_1",
+              "finger": "thumb",
+              "motion": "rotation/opposition",
+              "increasing_value": "opposes toward fingers",
+              "range_rad": [
+                0.0,
+                1.5699999332427979
+              ]
+            },
+            {
+              "index": 1,
+              "joint_name": "hand2_joint_link_2_1",
+              "finger": "index",
+              "motion": "proximal flexion",
+              "increasing_value": "opens/extends",
+              "range_rad": [
+                1.749999761581421,
+                3.109999895095825
+              ]
+            },
+            {
+              "index": 2,
+              "joint_name": "hand2_joint_link_3_1",
+              "finger": "middle",
+              "motion": "proximal flexion",
+              "increasing_value": "opens/extends",
+              "range_rad": [
+                1.709999918937683,
+                3.0699994564056396
+              ]
+            },
+            {
+              "index": 3,
+              "joint_name": "hand2_joint_link_4_1",
+              "finger": "ring",
+              "motion": "proximal flexion",
+              "increasing_value": "opens/extends",
+              "range_rad": [
+                1.7699997425079346,
+                3.0799999237060547
+              ]
+            },
+            {
+              "index": 4,
+              "joint_name": "hand2_joint_link_5_1",
+              "finger": "little",
+              "motion": "proximal flexion",
+              "increasing_value": "opens/extends",
+              "range_rad": [
+                1.7299998998641968,
+                3.049999952316284
+              ]
+            },
+            {
+              "index": 5,
+              "joint_name": "hand2_joint_link_1_2",
+              "finger": "thumb",
+              "motion": "flexion",
+              "increasing_value": "opens/extends",
+              "range_rad": [
+                0.03999999538064003,
+                0.6415999531745911
+              ]
+            }
+          ],
+          "extended_fingers_longitudinal_axis_wrist": [
+            0.00131,
+            -5e-05,
+            1.0
+          ],
+          "palm_outward_normal_wrist": [
+            -0.99994,
+            0.01076,
+            0.00131
+          ],
+          "finger_row_axis_from_little_to_index_wrist": [
+            -0.01076,
+            -0.99994,
+            -3e-05
+          ],
+          "thumb_opposition_sweep_direction_wrist": [
+            -0.67665,
+            0.72066,
+            -0.15095
+          ],
+          "thumb_opposition_description": "Increasing dimension 0 swings the thumb from the index side across the palm toward the other fingers; the vector is its tip displacement from minimum to maximum opposition with fingers extended, not a fixed rotation axis.",
+          "approximate_opening_width_m": {
+            "fully_open_thumb_index_tip_surface_gap": 0.077,
+            "fully_closed_thumb_index_tip_surface_gap": 0.0,
+            "fully_open_thumb_index_tip_center_distance": 0.09,
+            "fully_closed_thumb_index_tip_center_distance": 0.012,
+            "definition": "Measured unloaded stable open/close command endpoints under native drives and self-contact; fingertip-pad surface separation estimated from validated USD geometry. Intermediate posture and gravity change the gap. Target limits may be unreachable together due to self-contact; this is not an object clearance guarantee."
+          },
+          "native_mimic": {
+            "equation": "q_follower = multiplier * q_driver + offset_rad",
+            "couplings": [
+              {
+                "follower_joint": "hand2_joint_link_1_3",
+                "driver_joint": "hand2_joint_link_1_2",
+                "multiplier": 0.8976100087165833,
+                "offset_rad": -0.5359042110206326
+              },
+              {
+                "follower_joint": "hand2_joint_link_2_2",
+                "driver_joint": "hand2_joint_link_2_1",
+                "multiplier": 1.133489966392517,
+                "offset_rad": -1.9551615784944358
+              },
+              {
+                "follower_joint": "hand2_joint_link_3_2",
+                "driver_joint": "hand2_joint_link_3_1",
+                "multiplier": 1.1038199663162231,
+                "offset_rad": -1.8187386216520913
+              },
+              {
+                "follower_joint": "hand2_joint_link_4_2",
+                "driver_joint": "hand2_joint_link_4_1",
+                "multiplier": 1.1526700258255005,
+                "offset_rad": -1.9802281827806432
+              },
+              {
+                "follower_joint": "hand2_joint_link_5_2",
+                "driver_joint": "hand2_joint_link_5_1",
+                "multiplier": 1.121209979057312,
+                "offset_rad": -1.8496972035339898
+              }
+            ]
+          },
+          "source": "Native robot USD joint frames and fingertip meshes, E2 hand-local-axis and mimic probes; independently checked with measured simulator links before policy requests."
+        },
+        "sim_time_s": 23.5,
+        "robot": {
+          "wrist_link": "arm2_link7",
+          "position_world_m": [
+            -1.3130816221237183,
+            -5.154629230499268,
+            1.0736815929412842
+          ],
+          "quaternion_world_wxyz": [
+            0.49794405698776245,
+            -0.501086413860321,
+            0.5011155605316162,
+            -0.4998471140861511
+          ],
+          "robot_base_position_world_m": [
+            -1.649999976158142,
+            -5.0,
+            -0.010519921779632568
+          ],
+          "robot_base_quaternion_world_wxyz": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "arm_joint_names": [
+            "arm2_joint_link1",
+            "arm2_joint_link2",
+            "arm2_joint_link3",
+            "arm2_joint_link4",
+            "arm2_joint_link5",
+            "arm2_joint_link6",
+            "arm2_joint_link7"
+          ],
+          "arm_joint_position_rad": [
+            0.40040823817253113,
+            -2.100494384765625,
+            0.981046736240387,
+            -2.0510241985321045,
+            -0.8397257924079895,
+            1.1336699724197388,
+            -0.31303641200065613
+          ],
+          "arm_joint_velocity_rad_s": [
+            0.0006030537188053131,
+            0.0019388506188988686,
+            0.006975662428885698,
+            -0.014197674579918385,
+            -0.007416130509227514,
+            -0.006324688903987408,
+            -1.4086253941059113e-08
+          ],
+          "arm_joint_limits_rad": [
+            [
+              -3.1049997806549072,
+              3.1049997806549072
+            ],
+            [
+              -2.2689998149871826,
+              2.2689998149871826
+            ],
+            [
+              -3.1049997806549072,
+              3.1049997806549072
+            ],
+            [
+              -2.355999708175659,
+              2.355999708175659
+            ],
+            [
+              -3.1049997806549072,
+              3.1049997806549072
+            ],
+            [
+              -2.2339999675750732,
+              2.2339999675750732
+            ],
+            [
+              -6.279999732971191,
+              6.279999732971191
+            ]
+          ],
+          "hand_joint_names": [
+            "hand2_joint_link_1_1",
+            "hand2_joint_link_2_1",
+            "hand2_joint_link_3_1",
+            "hand2_joint_link_4_1",
+            "hand2_joint_link_5_1",
+            "hand2_joint_link_1_2"
+          ],
+          "hand_joint_position_rad": [
+            1.112765908241272,
+            2.479119300842285,
+            2.4500732421875,
+            2.5006213188171387,
+            2.451270341873169,
+            0.3056107461452484
+          ],
+          "hand_joint_velocity_rad_s": [
+            -0.00226086494512856,
+            3.332503911224194e-05,
+            -9.324299753643572e-06,
+            -5.5751421314198524e-05,
+            -0.00015070689551066607,
+            0.0006807558820582926
+          ],
+          "hand_joint_limits_rad": [
+            [
+              0.0,
+              1.5699999332427979
+            ],
+            [
+              1.749999761581421,
+              3.109999895095825
+            ],
+            [
+              1.709999918937683,
+              3.0699994564056396
+            ],
+            [
+              1.7699997425079346,
+              3.0799999237060547
+            ],
+            [
+              1.7299998998641968,
+              3.049999952316284
+            ],
+            [
+              0.03999999538064003,
+              0.6415999531745911
+            ]
+          ],
+          "hand_command_semantics": {
+            "dimension": 6,
+            "units": "rad",
+            "source": "Native hand2 actuator order, formal LeRobot collector first six joints",
+            "ordered_meanings": [
+              "thumb rotation/opposition (larger closes/opposes)",
+              "index finger proximal flexion (smaller closes)",
+              "middle finger proximal flexion (smaller closes)",
+              "ring finger proximal flexion (smaller closes)",
+              "little finger proximal flexion (smaller closes)",
+              "thumb flexion (smaller closes)"
+            ],
+            "followers": "Remaining five hand joints follow native USD PhysX mimic constraints; they are not independent commands",
+            "coupling_equation": "q_follower_rad = multiplier * q_driver_rad + offset_rad",
+            "native_couplings": [
+              {
+                "follower_joint": "hand2_joint_link_1_3",
+                "driver_joint": "hand2_joint_link_1_2",
+                "multiplier": 0.8976100087165833,
+                "offset_rad": -0.5359042110206326
+              },
+              {
+                "follower_joint": "hand2_joint_link_2_2",
+                "driver_joint": "hand2_joint_link_2_1",
+                "multiplier": 1.133489966392517,
+                "offset_rad": -1.9551615784944358
+              },
+              {
+                "follower_joint": "hand2_joint_link_3_2",
+                "driver_joint": "hand2_joint_link_3_1",
+                "multiplier": 1.1038199663162231,
+                "offset_rad": -1.8187386216520913
+              },
+              {
+                "follower_joint": "hand2_joint_link_4_2",
+                "driver_joint": "hand2_joint_link_4_1",
+                "multiplier": 1.1526700258255005,
+                "offset_rad": -1.9802281827806432
+              },
+              {
+                "follower_joint": "hand2_joint_link_5_2",
+                "driver_joint": "hand2_joint_link_5_1",
+                "multiplier": 1.121209979057312,
+                "offset_rad": -1.8496972035339898
+              }
+            ]
+          }
+        },
+        "cameras": {
+          "head_camera": {
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "K_pixels": [
+              [
+                615.8730332370546,
+                0.0,
+                320.0
+              ],
+              [
+                0.0,
+                615.8730332370546,
+                240.0
+              ],
+              [
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "T_world_from_camera_opencv": [
+              [
+                4.277902283695927e-08,
+                -0.8684111649121298,
+                0.49584478282619426,
+                -1.4460942411438373
+              ],
+              [
+                -0.9999999999999991,
+                -2.894899213961315e-08,
+                3.5574428341499705e-08,
+                -4.965000000000002
+              ],
+              [
+                -1.653902401725672e-08,
+                -0.49584478282619554,
+                -0.8684111649121304,
+                1.6082024469910106
+              ],
+              [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "frame": "OpenCV X right Y down Z forward",
+            "distortion": [
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "chest_camera": {
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "K_pixels": [
+              [
+                555.5555650987377,
+                0.0,
+                320.0
+              ],
+              [
+                0.0,
+                555.5555650987376,
+                240.0
+              ],
+              [
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "T_world_from_camera_opencv": [
+              [
+                4.384457409078169e-09,
+                -0.23554049200376248,
+                0.9718645361502938,
+                -1.5327025035328656
+              ],
+              [
+                -1.0,
+                -3.3901765802379406e-09,
+                3.6897464027607807e-09,
+                -5.012000004877337
+              ],
+              [
+                2.425707797820558e-09,
+                -0.9718645361502939,
+                -0.23554049200376245,
+                1.1096944144487395
+              ],
+              [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "frame": "OpenCV X right Y down Z forward",
+            "distortion": [
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "third_camera": {
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "K_pixels": [
+              [
+                555.5555650987377,
+                0.0,
+                320.0
+              ],
+              [
+                0.0,
+                555.5555650987376,
+                240.0
+              ],
+              [
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "T_world_from_camera_opencv": [
+              [
+                -2.992927681391134e-08,
+                0.07427169595009141,
+                -0.9972380433881853,
+                -0.17535564225681136
+              ],
+              [
+                0.9999999999999994,
+                2.0634252618692948e-08,
+                -2.847538315656851e-08,
+                -4.988999994448692
+              ],
+              [
+                1.846234660159487e-08,
+                -0.9972380433881854,
+                -0.07427169595009205,
+                1.151976349756701
+              ],
+              [
+                0.0,
+                0.0,
+                0.0,
+                0.9999999999999998
+              ]
+            ],
+            "frame": "OpenCV X right Y down Z forward",
+            "distortion": [
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "wrist_camera": {
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "K_pixels": [
+              [
+                480.0,
+                0.0,
+                320.0
+              ],
+              [
+                0.0,
+                480.0,
+                240.0
+              ],
+              [
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "T_world_from_camera_opencv": [
+              [
+                -0.0839767247510557,
+                0.004398572200686184,
+                0.9964580082786634,
+                -1.2813173605615447
+              ],
+              [
+                0.9963927776954425,
+                0.01263442617138561,
+                0.08391545645278894,
+                -5.222135195240804
+              ],
+              [
+                -0.012220566944521383,
+                0.9999105079145407,
+                -0.005443703301917646,
+                1.0744194144174666
+              ],
+              [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "frame": "OpenCV X right Y down Z forward",
+            "distortion": [
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        "last_execution_feedback": {
+          "execution": [
+            {
+              "requested_duration_s": 2.0,
+              "executed_duration_s": 2.0,
+              "position_error_m": 0.0009082024917006493,
+              "orientation_error_rad": 0.002640033606439829,
+              "max_hand_joint_error_rad": 0.01240229606628418,
+              "arm_rate_limited_ticks": 2,
+              "hand_rate_limited_ticks": 1,
+              "arm_limit_clipped_ticks": 0
+            },
+            {
+              "requested_duration_s": 2.0,
+              "executed_duration_s": 2.0,
+              "position_error_m": 0.0008579579298384488,
+              "orientation_error_rad": 0.0026776615995913744,
+              "max_hand_joint_error_rad": 0.012765884399414062,
+              "arm_rate_limited_ticks": 1,
+              "hand_rate_limited_ticks": 0,
+              "arm_limit_clipped_ticks": 0
+            }
+          ]
+        },
+        "memory_from_previous_decision": "Continue the apparent successful small test lift by raising the wrist 6 cm without rotating or changing the established grip, then hold 2 seconds. Check that the bottle follows, remains within 15 degrees of upright, and settles without slipping before final evaluation.",
+        "requests_remaining_including_this": 2
+      },
+      "input_private_path_redaction": false,
+      "image_evidence": [
+        {
+          "label": "head_camera",
+          "sha256": "eb1bc029a08352e4bb2b881d49f6540e0652afc11d4b01441e2512efc312b9cd",
+          "bytes": 327502,
+          "url": "images/eb1bc029a08352e4bb2b881d49f6540e0652afc11d4b01441e2512efc312b9cd.png",
+          "is_model_input": true,
+          "missing_reason": null,
+          "camera": "head_camera",
+          "temporal_role": "current",
+          "observation_index": 7
+        },
+        {
+          "label": "chest_camera",
+          "sha256": "ba0978f1f6e62be6ebc8cce8039ae2ad94efb7caed2249afefcc7f648523441e",
+          "bytes": 181363,
+          "url": "images/ba0978f1f6e62be6ebc8cce8039ae2ad94efb7caed2249afefcc7f648523441e.png",
+          "is_model_input": true,
+          "missing_reason": null,
+          "camera": "chest_camera",
+          "temporal_role": "current",
+          "observation_index": 7
+        },
+        {
+          "label": "third_camera",
+          "sha256": "6444175a671ba7235222dd2f517376a095e81f2d99d351b5245689cae1b64229",
+          "bytes": 184029,
+          "url": "images/6444175a671ba7235222dd2f517376a095e81f2d99d351b5245689cae1b64229.png",
+          "is_model_input": true,
+          "missing_reason": null,
+          "camera": "third_camera",
+          "temporal_role": "current",
+          "observation_index": 7
+        },
+        {
+          "label": "wrist_camera",
+          "sha256": "28f998edef8331e2e09e3daeafbb810e276a870d2c40c9fc3dd238687bcaeb96",
+          "bytes": 124085,
+          "url": "images/28f998edef8331e2e09e3daeafbb810e276a870d2c40c9fc3dd238687bcaeb96.png",
+          "is_model_input": true,
+          "missing_reason": null,
+          "camera": "wrist_camera",
+          "temporal_role": "current",
+          "observation_index": 7
+        }
+      ],
+      "candidate": {
+        "visual_observation": "The bottle is upright with its base still at the tabletop. The hand is beside the cap and neck rather than securely surrounding the body; the images do not show a successful lift.",
+        "memory_for_next_observation": "Repositioning from neck height to the bottle body: open while lowering the wrist 8.5 cm, then approach 2.4 cm toward the bottle and close with thumb opposition. One request remains. Inspect whether the bottle is captured; if secure, lift vertically about 7 cm with unchanged orientation and grip, then hold for final evaluation.",
+        "task_done": false,
+        "actions": [
+          {
+            "duration_s": 2.0,
+            "position_world_m": [
+              -1.31308,
+              -5.15463,
+              0.98868
+            ],
+            "quaternion_world_wxyz": [
+              0.497944057,
+              -0.501086414,
+              0.501115561,
+              -0.499847114
+            ],
+            "hand_joint_position_rad": [
+              0.35,
+              3.08,
+              3.04,
+              3.05,
+              3.02,
+              0.62
+            ]
+          },
+          {
+            "duration_s": 2.0,
+            "position_world_m": [
+              -1.31308,
+              -5.13063,
+              0.98868
+            ],
+            "quaternion_world_wxyz": [
+              0.497944057,
+              -0.501086414,
+              0.501115561,
+              -0.499847114
+            ],
+            "hand_joint_position_rad": [
+              1.4,
+              2.25,
+              2.2,
+              2.25,
+              2.2,
+              0.18
+            ]
+          }
+        ]
+      },
+      "execution_feedback": [
+        {
+          "requested_duration_s": 2.0,
+          "executed_duration_s": 2.0,
+          "position_error_m": 0.00041798973688855767,
+          "orientation_error_rad": 0.0015374330105260015,
+          "max_hand_joint_error_rad": 0.016775190830230713,
+          "arm_rate_limited_ticks": 18,
+          "hand_rate_limited_ticks": 75,
+          "arm_limit_clipped_ticks": 0
+        },
+        {
+          "requested_duration_s": 2.0,
+          "executed_duration_s": 2.0,
+          "position_error_m": 0.00345320301130414,
+          "orientation_error_rad": 0.009702341631054878,
+          "max_hand_joint_error_rad": 0.536178469657898,
+          "arm_rate_limited_ticks": 0,
+          "hand_rate_limited_ticks": 105,
+          "arm_limit_clipped_ticks": 11
+        }
+      ],
+      "request_status": "executed",
+      "request_stop_reason": null,
+      "episode_stop_reason_if_last": null,
+      "call_elapsed_wall_s": 94.69206856799792,
+      "usage": {
+        "input_tokens": 5907,
+        "output_tokens": 2542,
+        "total_tokens": 8449,
+        "cached_input_tokens": 0
+      },
+      "known_standard_equivalent_usd": 0.18617,
+      "usage_unknown": false,
+      "video_mapping": {
+        "observation_sim_time_s": 23.5,
+        "video_seek_s": null,
+        "missing_reason": "历史记录未提供本次导出可独立核验的逐帧映射；仅显示实际观察simtime",
+        "is_exact_input_image_claim": false
+      },
+      "mask_metadata": {
+        "groups": {},
+        "field_groups_zh": {
+          "robot": "实时腕/base/arm/六维手状态（按原协议）",
+          "cameras": "实际相机参数（历史含动态腕T；不能按FR3协议解读）",
+          "hand_semantics": "手部语义/mimic",
+          "last_execution_feedback": "上次执行反馈",
+          "memory_from_previous_decision": "自身文字记忆",
+          "requests_remaining_including_this": "剩余请求预算",
+          "sim_time_s": "历史协议中可见的仿真时间"
+        },
+        "scope": "组mask仅适用于对应协议；不从首轮null推断缺state"
+      }
+    },
+    {
+      "decision_number": 8,
+      "title_zh": "第8次请求：实际输入与动作",
+      "policy_observation": {
+        "task_instruction": "Grasp the bottle around its body with the thumb opposing the other fingers, keep the bottle upright, and lift it stably.",
+        "hand_semantics": {
+          "frame": "arm2_link7 wrist coordinates; right-handed XYZ; all directions are unit vectors in this wrist frame",
+          "units": "metres and radians",
+          "command_dimensions": [
+            {
+              "index": 0,
+              "joint_name": "hand2_joint_link_1_1",
+              "finger": "thumb",
+              "motion": "rotation/opposition",
+              "increasing_value": "opposes toward fingers",
+              "range_rad": [
+                0.0,
+                1.5699999332427979
+              ]
+            },
+            {
+              "index": 1,
+              "joint_name": "hand2_joint_link_2_1",
+              "finger": "index",
+              "motion": "proximal flexion",
+              "increasing_value": "opens/extends",
+              "range_rad": [
+                1.749999761581421,
+                3.109999895095825
+              ]
+            },
+            {
+              "index": 2,
+              "joint_name": "hand2_joint_link_3_1",
+              "finger": "middle",
+              "motion": "proximal flexion",
+              "increasing_value": "opens/extends",
+              "range_rad": [
+                1.709999918937683,
+                3.0699994564056396
+              ]
+            },
+            {
+              "index": 3,
+              "joint_name": "hand2_joint_link_4_1",
+              "finger": "ring",
+              "motion": "proximal flexion",
+              "increasing_value": "opens/extends",
+              "range_rad": [
+                1.7699997425079346,
+                3.0799999237060547
+              ]
+            },
+            {
+              "index": 4,
+              "joint_name": "hand2_joint_link_5_1",
+              "finger": "little",
+              "motion": "proximal flexion",
+              "increasing_value": "opens/extends",
+              "range_rad": [
+                1.7299998998641968,
+                3.049999952316284
+              ]
+            },
+            {
+              "index": 5,
+              "joint_name": "hand2_joint_link_1_2",
+              "finger": "thumb",
+              "motion": "flexion",
+              "increasing_value": "opens/extends",
+              "range_rad": [
+                0.03999999538064003,
+                0.6415999531745911
+              ]
+            }
+          ],
+          "extended_fingers_longitudinal_axis_wrist": [
+            0.00131,
+            -5e-05,
+            1.0
+          ],
+          "palm_outward_normal_wrist": [
+            -0.99994,
+            0.01076,
+            0.00131
+          ],
+          "finger_row_axis_from_little_to_index_wrist": [
+            -0.01076,
+            -0.99994,
+            -3e-05
+          ],
+          "thumb_opposition_sweep_direction_wrist": [
+            -0.67665,
+            0.72066,
+            -0.15095
+          ],
+          "thumb_opposition_description": "Increasing dimension 0 swings the thumb from the index side across the palm toward the other fingers; the vector is its tip displacement from minimum to maximum opposition with fingers extended, not a fixed rotation axis.",
+          "approximate_opening_width_m": {
+            "fully_open_thumb_index_tip_surface_gap": 0.077,
+            "fully_closed_thumb_index_tip_surface_gap": 0.0,
+            "fully_open_thumb_index_tip_center_distance": 0.09,
+            "fully_closed_thumb_index_tip_center_distance": 0.012,
+            "definition": "Measured unloaded stable open/close command endpoints under native drives and self-contact; fingertip-pad surface separation estimated from validated USD geometry. Intermediate posture and gravity change the gap. Target limits may be unreachable together due to self-contact; this is not an object clearance guarantee."
+          },
+          "native_mimic": {
+            "equation": "q_follower = multiplier * q_driver + offset_rad",
+            "couplings": [
+              {
+                "follower_joint": "hand2_joint_link_1_3",
+                "driver_joint": "hand2_joint_link_1_2",
+                "multiplier": 0.8976100087165833,
+                "offset_rad": -0.5359042110206326
+              },
+              {
+                "follower_joint": "hand2_joint_link_2_2",
+                "driver_joint": "hand2_joint_link_2_1",
+                "multiplier": 1.133489966392517,
+                "offset_rad": -1.9551615784944358
+              },
+              {
+                "follower_joint": "hand2_joint_link_3_2",
+                "driver_joint": "hand2_joint_link_3_1",
+                "multiplier": 1.1038199663162231,
+                "offset_rad": -1.8187386216520913
+              },
+              {
+                "follower_joint": "hand2_joint_link_4_2",
+                "driver_joint": "hand2_joint_link_4_1",
+                "multiplier": 1.1526700258255005,
+                "offset_rad": -1.9802281827806432
+              },
+              {
+                "follower_joint": "hand2_joint_link_5_2",
+                "driver_joint": "hand2_joint_link_5_1",
+                "multiplier": 1.121209979057312,
+                "offset_rad": -1.8496972035339898
+              }
+            ]
+          },
+          "source": "Native robot USD joint frames and fingertip meshes, E2 hand-local-axis and mimic probes; independently checked with measured simulator links before policy requests."
+        },
+        "sim_time_s": 27.5,
+        "robot": {
+          "wrist_link": "arm2_link7",
+          "position_world_m": [
+            -1.3120871782302856,
+            -5.133026599884033,
+            0.9909593462944031
+          ],
+          "quaternion_world_wxyz": [
+            0.4985092282295227,
+            -0.49708762764930725,
+            0.5019962787628174,
+            -0.5023864507675171
+          ],
+          "robot_base_position_world_m": [
+            -1.649999976158142,
+            -5.0,
+            -0.010519921779632568
+          ],
+          "robot_base_quaternion_world_wxyz": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "arm_joint_names": [
+            "arm2_joint_link1",
+            "arm2_joint_link2",
+            "arm2_joint_link3",
+            "arm2_joint_link4",
+            "arm2_joint_link5",
+            "arm2_joint_link6",
+            "arm2_joint_link7"
+          ],
+          "arm_joint_position_rad": [
+            0.32302361726760864,
+            -2.243356466293335,
+            0.8362499475479126,
+            -1.6876767873764038,
+            -1.1917301416397095,
+            1.0111734867095947,
+            0.03895954042673111
+          ],
+          "arm_joint_velocity_rad_s": [
+            0.0015616572927683592,
+            -0.0001052382867783308,
+            5.445163697004318e-05,
+            -0.009857024066150188,
+            -0.04209168255329132,
+            -0.032361485064029694,
+            -0.03462500125169754
+          ],
+          "arm_joint_limits_rad": [
+            [
+              -3.1049997806549072,
+              3.1049997806549072
+            ],
+            [
+              -2.2689998149871826,
+              2.2689998149871826
+            ],
+            [
+              -3.1049997806549072,
+              3.1049997806549072
+            ],
+            [
+              -2.355999708175659,
+              2.355999708175659
+            ],
+            [
+              -3.1049997806549072,
+              3.1049997806549072
+            ],
+            [
+              -2.2339999675750732,
+              2.2339999675750732
+            ],
+            [
+              -6.279999732971191,
+              6.279999732971191
+            ]
+          ],
+          "hand_joint_names": [
+            "hand2_joint_link_1_1",
+            "hand2_joint_link_2_1",
+            "hand2_joint_link_3_1",
+            "hand2_joint_link_4_1",
+            "hand2_joint_link_5_1",
+            "hand2_joint_link_1_2"
+          ],
+          "hand_joint_position_rad": [
+            0.8638215065002441,
+            2.418383836746216,
+            2.388291597366333,
+            2.479868173599243,
+            2.4166629314422607,
+            0.6416000127792358
+          ],
+          "hand_joint_velocity_rad_s": [
+            -0.0013643079437315464,
+            -0.01486657839268446,
+            -0.003307046601548791,
+            0.008218984119594097,
+            0.0003386155003681779,
+            0.005471397656947374
+          ],
+          "hand_joint_limits_rad": [
+            [
+              0.0,
+              1.5699999332427979
+            ],
+            [
+              1.749999761581421,
+              3.109999895095825
+            ],
+            [
+              1.709999918937683,
+              3.0699994564056396
+            ],
+            [
+              1.7699997425079346,
+              3.0799999237060547
+            ],
+            [
+              1.7299998998641968,
+              3.049999952316284
+            ],
+            [
+              0.03999999538064003,
+              0.6415999531745911
+            ]
+          ],
+          "hand_command_semantics": {
+            "dimension": 6,
+            "units": "rad",
+            "source": "Native hand2 actuator order, formal LeRobot collector first six joints",
+            "ordered_meanings": [
+              "thumb rotation/opposition (larger closes/opposes)",
+              "index finger proximal flexion (smaller closes)",
+              "middle finger proximal flexion (smaller closes)",
+              "ring finger proximal flexion (smaller closes)",
+              "little finger proximal flexion (smaller closes)",
+              "thumb flexion (smaller closes)"
+            ],
+            "followers": "Remaining five hand joints follow native USD PhysX mimic constraints; they are not independent commands",
+            "coupling_equation": "q_follower_rad = multiplier * q_driver_rad + offset_rad",
+            "native_couplings": [
+              {
+                "follower_joint": "hand2_joint_link_1_3",
+                "driver_joint": "hand2_joint_link_1_2",
+                "multiplier": 0.8976100087165833,
+                "offset_rad": -0.5359042110206326
+              },
+              {
+                "follower_joint": "hand2_joint_link_2_2",
+                "driver_joint": "hand2_joint_link_2_1",
+                "multiplier": 1.133489966392517,
+                "offset_rad": -1.9551615784944358
+              },
+              {
+                "follower_joint": "hand2_joint_link_3_2",
+                "driver_joint": "hand2_joint_link_3_1",
+                "multiplier": 1.1038199663162231,
+                "offset_rad": -1.8187386216520913
+              },
+              {
+                "follower_joint": "hand2_joint_link_4_2",
+                "driver_joint": "hand2_joint_link_4_1",
+                "multiplier": 1.1526700258255005,
+                "offset_rad": -1.9802281827806432
+              },
+              {
+                "follower_joint": "hand2_joint_link_5_2",
+                "driver_joint": "hand2_joint_link_5_1",
+                "multiplier": 1.121209979057312,
+                "offset_rad": -1.8496972035339898
+              }
+            ]
+          }
+        },
+        "cameras": {
+          "head_camera": {
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "K_pixels": [
+              [
+                615.8730332370546,
+                0.0,
+                320.0
+              ],
+              [
+                0.0,
+                615.8730332370546,
+                240.0
+              ],
+              [
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "T_world_from_camera_opencv": [
+              [
+                4.277902283695927e-08,
+                -0.8684111649121298,
+                0.49584478282619426,
+                -1.4460942411438373
+              ],
+              [
+                -0.9999999999999991,
+                -2.894899213961315e-08,
+                3.5574428341499705e-08,
+                -4.965000000000002
+              ],
+              [
+                -1.653902401725672e-08,
+                -0.49584478282619554,
+                -0.8684111649121304,
+                1.6082024469910106
+              ],
+              [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "frame": "OpenCV X right Y down Z forward",
+            "distortion": [
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "chest_camera": {
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "K_pixels": [
+              [
+                555.5555650987377,
+                0.0,
+                320.0
+              ],
+              [
+                0.0,
+                555.5555650987376,
+                240.0
+              ],
+              [
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "T_world_from_camera_opencv": [
+              [
+                4.384457409078169e-09,
+                -0.23554049200376248,
+                0.9718645361502938,
+                -1.5327025035328656
+              ],
+              [
+                -1.0,
+                -3.3901765802379406e-09,
+                3.6897464027607807e-09,
+                -5.012000004877337
+              ],
+              [
+                2.425707797820558e-09,
+                -0.9718645361502939,
+                -0.23554049200376245,
+                1.1096944144487395
+              ],
+              [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "frame": "OpenCV X right Y down Z forward",
+            "distortion": [
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "third_camera": {
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "K_pixels": [
+              [
+                555.5555650987377,
+                0.0,
+                320.0
+              ],
+              [
+                0.0,
+                555.5555650987376,
+                240.0
+              ],
+              [
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "T_world_from_camera_opencv": [
+              [
+                -2.992927681391134e-08,
+                0.07427169595009141,
+                -0.9972380433881853,
+                -0.17535564225681136
+              ],
+              [
+                0.9999999999999994,
+                2.0634252618692948e-08,
+                -2.847538315656851e-08,
+                -4.988999994448692
+              ],
+              [
+                1.846234660159487e-08,
+                -0.9972380433881854,
+                -0.07427169595009205,
+                1.151976349756701
+              ],
+              [
+                0.0,
+                0.0,
+                0.0,
+                0.9999999999999998
+              ]
+            ],
+            "frame": "OpenCV X right Y down Z forward",
+            "distortion": [
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "wrist_camera": {
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "K_pixels": [
+              [
+                480.0,
+                0.0,
+                320.0
+              ],
+              [
+                0.0,
+                480.0,
+                240.0
+              ],
+              [
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "T_world_from_camera_opencv": [
+              [
+                -0.07707637744109436,
+                -0.001756095868025505,
+                0.9970236447386092,
+                -1.2807909671313735
+              ],
+              [
+                0.9969765562899789,
+                0.009741370018320181,
+                0.07708989504688976,
+                -5.200751068928148
+              ],
+              [
+                -0.009847753486571345,
+                0.9999510097187104,
+                0.0009999568986938157,
+                0.99169878464647
+              ],
+              [
+                0.0,
+                0.0,
+                0.0,
+                0.9999999999999998
+              ]
+            ],
+            "frame": "OpenCV X right Y down Z forward",
+            "distortion": [
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        "last_execution_feedback": {
+          "execution": [
+            {
+              "requested_duration_s": 2.0,
+              "executed_duration_s": 2.0,
+              "position_error_m": 0.00041798973688855767,
+              "orientation_error_rad": 0.0015374330105260015,
+              "max_hand_joint_error_rad": 0.016775190830230713,
+              "arm_rate_limited_ticks": 18,
+              "hand_rate_limited_ticks": 75,
+              "arm_limit_clipped_ticks": 0
+            },
+            {
+              "requested_duration_s": 2.0,
+              "executed_duration_s": 2.0,
+              "position_error_m": 0.00345320301130414,
+              "orientation_error_rad": 0.009702341631054878,
+              "max_hand_joint_error_rad": 0.536178469657898,
+              "arm_rate_limited_ticks": 0,
+              "hand_rate_limited_ticks": 105,
+              "arm_limit_clipped_ticks": 11
+            }
+          ]
+        },
+        "memory_from_previous_decision": "Repositioning from neck height to the bottle body: open while lowering the wrist 8.5 cm, then approach 2.4 cm toward the bottle and close with thumb opposition. One request remains. Inspect whether the bottle is captured; if secure, lift vertically about 7 cm with unchanged orientation and grip, then hold for final evaluation.",
+        "requests_remaining_including_this": 1
+      },
+      "input_private_path_redaction": false,
+      "image_evidence": [
+        {
+          "label": "head_camera",
+          "sha256": "ab509681a47e46eed1b3212ff3ec930fd5335f72564ab14ce4db9d45860bae6f",
+          "bytes": 327979,
+          "url": "images/ab509681a47e46eed1b3212ff3ec930fd5335f72564ab14ce4db9d45860bae6f.png",
+          "is_model_input": true,
+          "missing_reason": null,
+          "camera": "head_camera",
+          "temporal_role": "current",
+          "observation_index": 8
+        },
+        {
+          "label": "chest_camera",
+          "sha256": "f6b34ee5cfad20b6e72b26bb218d2abce025b190a61847dccca197e41d4c7e2c",
+          "bytes": 177795,
+          "url": "images/f6b34ee5cfad20b6e72b26bb218d2abce025b190a61847dccca197e41d4c7e2c.png",
+          "is_model_input": true,
+          "missing_reason": null,
+          "camera": "chest_camera",
+          "temporal_role": "current",
+          "observation_index": 8
+        },
+        {
+          "label": "third_camera",
+          "sha256": "eb6b292c1a5a395c9ed189055e65844ed7f6d3ad21e33e46b9c2f9596bf4e0d2",
+          "bytes": 186992,
+          "url": "images/eb6b292c1a5a395c9ed189055e65844ed7f6d3ad21e33e46b9c2f9596bf4e0d2.png",
+          "is_model_input": true,
+          "missing_reason": null,
+          "camera": "third_camera",
+          "temporal_role": "current",
+          "observation_index": 8
+        },
+        {
+          "label": "wrist_camera",
+          "sha256": "f3a009faf918f6c50008ddafa184b29b046c10aef82d4e25310ac545a5c39068",
+          "bytes": 136870,
+          "url": "images/f3a009faf918f6c50008ddafa184b29b046c10aef82d4e25310ac545a5c39068.png",
+          "is_model_input": true,
+          "missing_reason": null,
+          "camera": "wrist_camera",
+          "temporal_role": "current",
+          "observation_index": 8
+        }
+      ],
+      "candidate": {
+        "visual_observation": "The fingers surround the bottle body, with the thumb contacting the opposite upper side. The bottle is near the tabletop and visibly leans toward positive world Y by roughly 18 degrees.",
+        "memory_for_next_observation": "Final attempt: maintain opposing grip with slight finger tightening, raise the wrist 8.5 cm, and rotate approximately +0.30 rad about world X to straighten the visible lean. Then hold the same pose and grip for 2 seconds. Success remains subject to execution and independent evaluation.",
+        "task_done": true,
+        "actions": [
+          {
+            "duration_s": 2.0,
+            "position_world_m": [
+              -1.312087,
+              -5.133027,
+              1.075959
+            ],
+            "quaternion_world_wxyz": [
+              0.567196,
+              -0.41701,
+              0.571434,
+              -0.421728
+            ],
+            "hand_joint_position_rad": [
+              1.4,
+              2.38,
+              2.35,
+              2.44,
+              2.38,
+              0.55
+            ]
+          },
+          {
+            "duration_s": 2.0,
+            "position_world_m": [
+              -1.312087,
+              -5.133027,
+              1.075959
+            ],
+            "quaternion_world_wxyz": [
+              0.567196,
+              -0.41701,
+              0.571434,
+              -0.421728
+            ],
+            "hand_joint_position_rad": [
+              1.4,
+              2.38,
+              2.35,
+              2.44,
+              2.38,
+              0.55
+            ]
+          }
+        ]
+      },
+      "execution_feedback": [
+        {
+          "requested_duration_s": 2.0,
+          "executed_duration_s": 2.0,
+          "position_error_m": 0.0009074524277821183,
+          "orientation_error_rad": 0.0027647048700600863,
+          "max_hand_joint_error_rad": 0.004602670669555664,
+          "arm_rate_limited_ticks": 35,
+          "hand_rate_limited_ticks": 37,
+          "arm_limit_clipped_ticks": 23
+        },
+        {
+          "requested_duration_s": 2.0,
+          "executed_duration_s": 2.0,
+          "position_error_m": 0.0008377911290153861,
+          "orientation_error_rad": 0.002710398519411683,
+          "max_hand_joint_error_rad": 0.014452815055847168,
+          "arm_rate_limited_ticks": 1,
+          "hand_rate_limited_ticks": 0,
+          "arm_limit_clipped_ticks": 0
+        }
+      ],
+      "request_status": "executed",
+      "request_stop_reason": null,
+      "episode_stop_reason_if_last": "model_claimed_done",
+      "call_elapsed_wall_s": 92.11124439199921,
+      "usage": {
+        "input_tokens": 5925,
+        "output_tokens": 2509,
+        "total_tokens": 8434,
+        "cached_input_tokens": 0
+      },
+      "known_standard_equivalent_usd": 0.1847,
+      "usage_unknown": false,
+      "video_mapping": {
+        "observation_sim_time_s": 27.5,
+        "video_seek_s": null,
+        "missing_reason": "历史记录未提供本次导出可独立核验的逐帧映射；仅显示实际观察simtime",
+        "is_exact_input_image_claim": false
+      },
+      "mask_metadata": {
+        "groups": {},
+        "field_groups_zh": {
+          "robot": "实时腕/base/arm/六维手状态（按原协议）",
+          "cameras": "实际相机参数（历史含动态腕T；不能按FR3协议解读）",
+          "hand_semantics": "手部语义/mimic",
+          "last_execution_feedback": "上次执行反馈",
+          "memory_from_previous_decision": "自身文字记忆",
+          "requests_remaining_including_this": "剩余请求预算",
+          "sim_time_s": "历史协议中可见的仿真时间"
+        },
+        "scope": "组mask仅适用于对应协议；不从首轮null推断缺state"
+      }
+    }
+  ],
+  "videos": [],
+  "training_export_status": "not_exported",
+  "input_contract": "历史PsiBot：绝对WORLD末端位姿+原生6维手目标；真实4RGB+robot/cameras/hand_semantics。"
+}

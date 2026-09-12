@@ -1,0 +1,15 @@
+# 多视角实际输入证据包
+
+manifest.json为机器入口，26集、212次决策，包含FR3输入依赖14集、FR3放置释放重抓抬升1集、PsiBot历史稳定抬升10集、PsiBot新full9511中断1集。四种protocol_family必须分组展示，不共用一个成功率。9511与9404 rgb_only中断success=null；图像存在不意味着模型已返回动作。
+
+每集episodes/<episode_id>.json含summary、input_contract和decisions。每个decision包括中文标题、模型实际可见policy_observation、candidate原始动作、自己的文字memory（保留在原字段）、执行后的feedback、耗时/usage/金额/unknown、image_evidence、mask_metadata及可证的video_mapping。
+
+image_evidence.url相对于本public根目录，例如images/<SHA>.png。848张唯一PNG保持原始字节，全部按原请求manifest逐SHA核验；1376次图片引用包括H历史重用。camera字段供四格布局，temporal_role=current/previous区分当前与历史，observation_index标记所属观察。主视图仅显示当前四张；历史图片仍属于实际输入，应在H折叠区可看/至少明确计数。前端按所选episode和decision加载，不全量加载图片。没有生成缩略图或AI编辑，CSS缩放即可。
+
+mask_metadata.groups的状态：visible=实际可见；removed_by_condition=实验条件主动删除；not_yet_available=首轮或尚无上次执行/历史记录。rich/full首轮F=null、H空不能被解读为无state。历史PsiBot不使用S/J/K/F/H架构，groups为空，使用field_groups_zh解释原生robot/cameras/hand_semantics等字段。新PsiBot与FR3也不共享手部控制接口，须阅读input_contract。
+
+执行后的feedback是公开审计信息，并不意味着该条件下模型下次看到它；是否可见以实际policy_observation为准。模型自身memory中的物体位置估计是模型原话，并非导出器注入GT。历史PUBLIC STATE含原协议simtime和动态相机参数，不伪称同FR3严格RGB协议。仅内部文件路径显式替换为[内部路径已隐藏]时input_private_path_redaction=true，其他输入信息不改。
+
+原PNG是模型实际输入，视频不是。视频回看时刻仅在同步证据支持时提供邻近前一帧，is_exact_input_image_claim=false；历史PsiBot缺少本次导出可验证的逐帧映射，因此video_seek_s=null，不能凭simtime假造准确视频对应帧。缺图时应显示missing_reason，不使用视频抽帧补图。
+
+只发布public目录；PRIVATE_SOURCE_MAP、private_psibot、抓取/构建脚本、内部索引均不发布。公开包不含auth、HTTP头、原provider response或评估器物体真值。已知费用使用原usage标准等值，unknown不填0，不能当作实际账户付款凭据。未作新增实验、未追加阶段评分、未宣称训练数据导出验收。
