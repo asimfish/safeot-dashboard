@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-12T17:35:14+08:00",
+  "updated": "2026-09-12T17:52:05+08:00",
   "task": "T-1484/T-1490 — 五目标差距与解决办法（数据驱动，每 30 分钟刷新）",
   "gap_plan": [
     {
@@ -199,21 +199,16 @@
     }
   ],
   "supervision": {
-    "observed": "2026-09-12T17:31:50+08:00",
-    "next_check": "2026-09-12T17:36:50+08:00",
+    "observed": "2026-09-12T17:51:50+08:00",
+    "next_check": "2026-09-12T17:56:50+08:00",
     "interval_seconds": 300,
     "overall": "critical",
     "coverage": "冻结 beta 修复队列与共享采集/发布链路；远端其他队列仅由原采集器覆盖。",
     "alerts": [
       {
-        "code": "workspace_disk_low",
-        "level": "warning",
-        "detail": "workspace 剩余空间 3.23 GiB。"
-      },
-      {
         "code": "system_disk_low",
         "level": "critical",
-        "detail": "system 剩余空间 0.17 GiB。"
+        "detail": "system 剩余空间 0.56 GiB。"
       }
     ],
     "repair": {
@@ -221,15 +216,15 @@
       "active": null,
       "completed": 8
     },
-    "summary": "后台监督：异常；None。workspace 剩余空间 3.23 GiB。；system 剩余空间 0.17 GiB。",
+    "summary": "后台监督：异常；None。system 剩余空间 0.56 GiB。",
     "harvest": {
-      "last_published": "2026-09-12T17:23:34.961716+08:00",
-      "log_updated": "2026-09-12T17:29:33+08:00",
-      "commit": "b3a32eee707548cf82829d815c18ec0d52167383"
+      "last_published": "2026-09-12T17:35:34.839457+08:00",
+      "log_updated": "2026-09-12T17:35:36+08:00",
+      "commit": "5a2ca95a30409429a82e0a9e988f4df277dbcae6"
     }
   },
   "post_repair_evaluations": {
-    "observed": "2026-09-12T17:35:06+08:00",
+    "observed": "2026-09-12T17:51:55+08:00",
     "training_done": 145,
     "complete_evaluations": 145,
     "evaluation_episodes": 45240,
@@ -258,7 +253,7 @@
     "protocol": "Validated serial evaluator, 3 x104 final-checkpoint episodes; no retraining"
   },
   "g4_connection": {
-    "observed": "2026-09-12T09:35:04+00:00",
+    "observed": "2026-09-12T09:51:52+00:00",
     "host": "30314",
     "status": "connected",
     "training_steps": {
@@ -274,12 +269,12 @@
     "metric_scope": "training only; last 10 log windows of completed-episode averages",
     "final_evaluation_complete": false,
     "latest_connection_check": {
-      "observed_unix": 1789205705.544451,
+      "observed_unix": 1789206713.7485363,
       "status": "connected"
     }
   },
   "isolated_formal_evaluations": {
-    "observed": "2026-09-12T17:35:06+08:00",
+    "observed": "2026-09-12T17:51:55+08:00",
     "complete_evaluations": 6,
     "evaluation_episodes": 1872,
     "integrity_errors": []
@@ -290,8 +285,8 @@
     "repair_queue": "2026-09-10T11:37:54.984063+08:00",
     "pilot_audit": "2026-09-05T21:25:56.853232+08:00",
     "terminal_component": "2026-09-05T21:46:22.695030+08:00",
-    "supervision": "2026-09-12T17:31:50+08:00",
-    "post_repair_evaluations": "2026-09-12T17:35:06+08:00"
+    "supervision": "2026-09-12T17:51:50+08:00",
+    "post_repair_evaluations": "2026-09-12T17:51:55+08:00"
   },
   "goals": [
     {
@@ -492,7 +487,7 @@
   ],
   "focus": [
     "需要处理的门检或观测问题：CHORES正式训练调度、多智能体视觉开发门检。原失败保留；修复诊断与正式训练分别计数，健康正式队列继续。",
-    "SG队列健康监督：每180秒核查中；核实运行278路，已完成2114/11208，保留失败24项，严重告警4项。核对控制器身份、真实训练步数、磁盘和句柄趋势；已有队列完成一项后自动接续，未适配任务仍单列，不代表全部基准已开跑。",
+    "SG队列健康监督：每180秒核查中；核实运行278路，已完成2126/11208，保留失败24项，严重告警4项。核对控制器身份、真实训练步数、磁盘和句柄趋势；已有队列完成一项后自动接续，未适配任务仍单列，不代表全部基准已开跑。",
     "CHORES健康监督单列：核实运行2个评测实例；全3258实例格与SG训练策略分开计数。",
     "本轮扩展：aliyun与5090各新增3个正式训练槽，已有任务保持训练；mainskill为VLA逐步释放16个CPU槽位。volc承接双视觉开发门检；新增执行槽不等于已经测得相同比例的训练加速。",
     "完整任务清单已逐项列出：Safety-Gymnasium402轨道、CHORES543场景，共945项；未适配、排队、失败项全部保留。全任务页可按基准/状态搜索并展开方法与种子进度。",
@@ -502,17 +497,17 @@
     "已逐回合复算PG2全部24个开发策略/7488回合，发布完整非单调epsilon曲线。distance eps0.1回报8.846、硬接触0.321%、软预算3/3达标；仅为待独立确认候选，不是SOTA或零风险证据。",
     "正在为VLA释放CPU56–71：指定PPO槽位完成当前训练和312回合评测后不再补位，其余槽位继续队列。预留资源不计为已启动的VLA正式训练。",
     "新增正式执行槽：aliyun原生队列24→27、5090原生队列20→23；6个新增任务已记录真实训练步数。全部77原生及77PPO轨道统一采用96小时训练/24小时终档评测时限，仍为2M步/312回合；原失败保留。",
-    "加速现有队列：核实正式运行278路，已完成2114个训练+终档评测单元。aliyun目标32→128路，mainskill PPO目标24→32路；原活跃训练进程保留，仅替换队列调度器。未宣称等比例实际提速。",
+    "加速现有队列：核实正式运行278路，已完成2126个训练+终档评测单元。aliyun目标32→128路，mainskill PPO目标24→32路；原活跃训练进程保留，仅替换队列调度器。未宣称等比例实际提速。",
     "失败保留：SafetyCarFormulaOne1-v0 / safeot_eps0.1 / seed1，最后记录160000步，MuJoCo物理求解器异常；未计入完成、未自动重跑。",
     "Safe Vision全部105向量轨道统一延长运行时限：训练96小时、终档评测24小时。已观测慢任务按当前速度约需47–57小时；仍为2M训练步和312评测回合，失败尝试不重跑。",
     "全基准尚未全跑：Safety-Gymnasium 390/402轨道已冻结排队，168个不同任务当前有训练/评测进程，12轨道尚未冻结；CHORES三类全任务父协议已列入面板，Pickup171/Fetch172的正式训练仍在准备。",
     "多智能体视觉15任务已冻结完整360格：当前核实0路20k前置门检、4路正式训练/评测，0格完成，216格缺失官方资产仍保留。独立20k机制诊断已通过补充验收；原2k失败保留，八臂门检全过后自动接续2M/312正式实验。",
-    "CHORES三种子完整父协议已冻结：543实例×A/B×3种子，共3258个评测格；当前实际评测2项，核验完成477项。三类尚未全部开跑，排队不当作运行。",
-    "CHORES 待补正式队列：14个训练策略（含已接入的 ObjectNav 第三种子），当前核实运行4项。内存数据副本已校验26049个HDF5；各类型配对门检和资源条件满足后自动派发，开发门检不计入正式完成。",
+    "CHORES三种子完整父协议已冻结：543实例×A/B×3种子，共3258个评测格；当前实际评测2项，核验完成490项。三类尚未全部开跑，排队不当作运行。",
+    "CHORES 待补正式队列：14个训练策略（含已接入的 ObjectNav 第三种子），当前核实运行3项。内存数据副本已校验26049个HDF5；各类型配对门检和资源条件满足后自动派发，开发门检不计入正式完成。",
     "像素策略完整4080次矩阵已冻结：本机环境检查170/170，八种训练回读检查8/8，检查中0路；正式完成23、运行20。CNN实际学习RGB并保留所有传感器；尚无像素性能或硬约束达标结论。",
-    "新增Safe Vision完整105向量轨道2520单元：已完成650，核实运行138，失败23，阻塞0。像素输入策略仍未完成；整个基准验收保持开放。",
-    "新增完整PPO骨干队列1848次：已完成578，核实运行40，失败0，阻塞0。与TRPO/CPO的1848次共同检验多算法适用性；所有77轨道和3种子均保留，完整基准验收仍开放。",
-    "完整向量系列已实际启动：77任务×8设置×3种子=1848次；正在训练/评测68，完整终档832，失败1，阻塞0。三档SafeOT ε、三档固定惩罚、TRPO-Lag和CPO；逐任务比较，尚无优势结论。",
+    "新增Safe Vision完整105向量轨道2520单元：已完成652，核实运行138，失败23，阻塞0。像素输入策略仍未完成；整个基准验收保持开放。",
+    "新增完整PPO骨干队列1848次：已完成582，核实运行40，失败0，阻塞0。与TRPO/CPO的1848次共同检验多算法适用性；所有77轨道和3种子均保留，完整基准验收仍开放。",
+    "完整向量系列已实际启动：77任务×8设置×3种子=1848次；正在训练/评测68，完整终档838，失败1，阻塞0。三档SafeOT ε、三档固定惩罚、TRPO-Lag和CPO；逐任务比较，尚无优势结论。",
     "环境来源更正：旧afc6a34提交改动了Button/Push/Circle，未用于这批正式结果。新批次固定官方主分支ae966e5，1302个包文件逐一核对Git对象；旧失败记录保留。导航60、速度12、Run5全部派发；其余325个SG轨道及Safety-CHORES完整计划继续保留。",
     "完整基准验收尚未通过：Safety-Gymnasium官方表格197个任务配置，导航仅60个；注册代码额外14个配置及观察/版本分别保留，共402个轨道，含9个待解决的MultiGoal配置差异。现有汇总涉及20个轨道，需逐协议审计；不等于完成比例。",
     "Safety-CHORES必须覆盖ObjectNav200、Pickup171、Fetch172，共543场景/策略。当前Dual旧ObjectNav评测396/400有效、196/200成对；完整任务清单和缺口已公开。失败、缺种子和未适配项保留在分母，既有部分任务结果作为开发证据；五目标仍未验收。",
@@ -523,7 +518,7 @@
     "CPO独立补实验SafetyCarGoal1-v0已齐3种子/90集：奖励12.525、平均成本25.256；1/3种子经验平均成本≤25。比较候选前仍需匹配评测协议。",
     "G2缺失CPO终档证据已安排独立重建：CG1/PB1各3种子，固定2M步；每个终档使用保存的归一化状态评测。",
     "冻结400评测保留4个任务失败（A_103, A_112, B_170, A_172）。首轮GPU1后端诊断complete：覆盖A103/A112与两个已完成对照；不替换冻结400集。",
-    "全局资源监测 2026-09-12T17:34:54+08:00：30109：配额96核、活动训练组59、暂停0、部分暂停0、活动评测组9；30314：配额96核、活动训练组24、暂停0、部分暂停0、活动评测组5；5090：配额48核、活动训练组21、暂停0、部分暂停0、活动评测组2；volc：配额26核、活动训练组0、暂停0、部分暂停0、活动评测组0；aliyun：配额184核、活动训练组147、暂停0、部分暂停0、活动评测组8。暂停与僵尸不计入活动；活动仍须用训练日志验证产出。每分钟采样，五分钟窗口判断余量。",
+    "全局资源监测 2026-09-12T17:51:52+08:00：30109：配额96核、活动训练组62、暂停0、部分暂停0、活动评测组6；30314：配额96核、活动训练组22、暂停0、部分暂停0、活动评测组6；5090：配额48核、活动训练组20、暂停0、部分暂停0、活动评测组3；volc：配额26核、活动训练组0、暂停0、部分暂停0、活动评测组0；aliyun：配额184核、活动训练组147、暂停0、部分暂停0、活动评测组8。暂停与僵尸不计入活动；活动仍须用训练日志验证产出。每分钟采样，五分钟窗口判断余量。",
     "资源告警：30109: root disk below 1 GiB；vla_training: observer stale；vla_fixed400: 4 preserved failures",
     "V2 三臂试验当前阶段 complete_training_pending_evaluation，活跃进程 0；先接续SafeVLA/SafeOT对照；第三臂需同时通过真实训练/恢复和预算旋钮生效检查。",
     "VLA基线seed1在199680步因Unity场景重置超时退出，尚无检查点；失败日志保留。采用NVIDIA-only后端做一次同种子重新训练，旧步数不累加；其余三个训练继续。",
@@ -536,7 +531,7 @@
     "原 VLA 评测在 359/400 回合因模拟器超时结束；新进程复现检查动作不一致，因此另跑两臂执行条件一致的完整400回合，不混合旧数据。",
     "VLA 配对终档评测已收取 396/400 回合；两臂均通过全部模型权重严格加载，原始逐动作数据持续核验。",
     "CG2 刹车候选完整审计：0/5 配置通过联合门槛；逐种子软预算、硬违规和相对原策略的奖励变化同时公开，低平均违规不能替代联合通过。",
-    "2026-09-12 17:35：按独立种子、完整训练预算和终档评测分别验收。五台允许服务器的产物进度见下表；进程状态以实际监督记录为准。看板约每 30 分钟刷新。",
+    "2026-09-12 17:52：按独立种子、完整训练预算和终档评测分别验收。五台允许服务器的产物进度见下表；进程状态以实际监督记录为准。看板约每 30 分钟刷新。",
     "G1 差距：三导航任务曲线已覆盖；速度任务点位与终档覆盖见逐项检查。现有点位数量不等于多引擎统一性全部验收。 → 解决：保留已完成曲线，复核匹配种子终档前沿与独立种子不确定性；补充多引擎统一性证据，只对确实缺失且无重复的点位安排算力。（曲线覆盖按当前产物更新；剩余分析与跨引擎验收待完成。）",
     "G2 差距：三导航任务训练筛选两端点已达；终档复核单列；独立种子计数已去重；训练完成度与终档覆盖分开验收。按 owner 09-08 要求，两端点各自接近。 → 解决：先补齐 CPO 参考的终档评测，尤其 CG1/PB1；对已有完整旋钮点按终档回报和成本复核。缺口若是性能不足，再做配置筛选；若是产物缺失，先找回允许服务器上的原检查点，避免重复训练。（训练队列完成数见下表；参考终档补齐和安全验收时间以产物为准。）",
     "G3 差距：已有候选改善，SOTA 完整复核仍待完成。PG2 筛选点 15.5 @ 1.6% 观测硬违规率；CG2 低违规侧筛选点 8.6 @ 0.3%。观测均值达标不等于逐种子风险上界达标。 → 解决：（a）边距日程（0.95 起、前 0.5–1.5M 步线性收紧到目标阈值）：56 个 run，已完成 52；（b）执行时可行性筛选：从策略分布采 K=16 个候选动作，在 g≤pf 的集合内选最高 q；集合为空时选最低 g（同权重、不重训、随机采样对照组用于排除随机性）；已有增补种子与评测继续按产物收集；后加块保留为探索性数据，不能承诺加块后达标。PG2 m0.83 日程候选已冻结新评测块，与无筛选/随机动作配对复验；未分型 FDPI 的同筛选对照仍需完整收齐。（PG2 冻结复验已完成；CG2 按逐训练种子的奖励、硬风险上界与软预算共同验收，探索队列进度不等于通过。）",
@@ -701,10 +696,10 @@
       "task": "Safety-CHORES三类全543实例：A/B各3个训练种子",
       "status": "run",
       "n": 3258,
-      "done": 477,
+      "done": 490,
       "running": 2,
       "failed": 5,
-      "pending": 2774,
+      "pending": 2761,
       "blocked": 0,
       "eta": "18个训练政策对应3258个评测实例格；输入与训练门禁通过后逐项派发",
       "note": "沿用已有ObjectNav训练身份；只把实际执行中的评测实例标为运行。Pickup/Fetch正式训练按配对门检、数据校验和资源准入依次派发，训练政策与评测实例分别计数；C辅助设置单列延期。"
@@ -727,11 +722,11 @@
       "task": "Safe Vision七系列：全部105向量轨道×8配置×3种子",
       "status": "run",
       "n": 2520,
-      "done": 650,
+      "done": 652,
       "running": 138,
       "failed": 23,
       "blocked": 0,
-      "pending": 1709,
+      "pending": 1707,
       "eta": "30109/mainskill保留6/4槽；aliyun接管后目标128槽；旧训练进程和冻结协议保持",
       "note": "完整105向量轨道，包含Building/Fading/Race/FormulaOne全部机器人和难度；像素输入策略、多智能体、Isaac、CHORES仍待补齐。失败不减少分母。"
     },
@@ -740,9 +735,9 @@
       "task": "完整77向量轨道：PPO骨干SafeOT/惩罚/PPO-Lag/PID-Lag对照",
       "status": "run",
       "n": 1848,
-      "done": 578,
+      "done": 582,
       "running": 40,
-      "pending": 1230,
+      "pending": 1226,
       "failed": 0,
       "blocked": 0,
       "eta": "30109保留24槽；mainskill指定16个槽位完成当前任务后让出VLA资源，其余16槽继续派发；2M步/312回合不变",
@@ -753,13 +748,13 @@
       "task": "完整 Navigation / Velocity / Run 向量系列：77任务 × 8设置 × 3种子",
       "status": "run",
       "n": 1848,
-      "done": 832,
+      "done": 838,
       "running": 68,
-      "pending": 947,
+      "pending": 941,
       "failed": 1,
       "blocked": 0,
       "eta": "每策略2M训练步及312终档回合；各机器固定队列逐项接续",
-      "note": "30109/5090/阿里云分别624/624/600个任务单元；已观测训练步数1,747,820,000。观测2026-09-12T17:32:21.857945+08:00；失败保留，整基准验收仍未通过。"
+      "note": "30109/5090/阿里云分别624/624/600个任务单元；已观测训练步数1,758,980,000。观测2026-09-12T17:50:21.194377+08:00；失败保留，整基准验收仍未通过。"
     },
     {
       "goal": "G1–G5",
@@ -1060,7 +1055,7 @@
   ],
   "changelog": [
     {
-      "time": "09-12 17:35",
+      "time": "09-12 17:52",
       "text": "五目标卡片、焦点、队列改为由 sotd_gap_plan.py 从收割表实时生成（差距 / 原因 / 解决办法 / 预计）；新增 sotd_gap_plan.json 与 sotd_gap_plan.md。"
     },
     {
@@ -1098,8 +1093,8 @@
     "sotd_cg2_epsilon_completed.png"
   ],
   "fleet": {
-    "observed": "2026-09-12T17:34:54+08:00",
-    "observed_unix": 1789205694.762873,
+    "observed": "2026-09-12T17:51:52+08:00",
+    "observed_unix": 1789206712.8103826,
     "next_check_seconds": 60,
     "window_seconds": 300,
     "hosts": {
@@ -1107,28 +1102,28 @@
         "status": "connected",
         "effective_cores": 96.0,
         "load": [
-          87.0546875,
-          83.62646484375,
-          78.8037109375
+          77.6337890625,
+          80.78857421875,
+          81.0625
         ],
-        "mem_available_gib": 297.4012145996094,
+        "mem_available_gib": 302.7259712219238,
         "disks_free_gib": {
-          "root": 0.667,
+          "root": 0.557,
           "shm": 5.118,
-          "workspace": 3.217
+          "workspace": 16.725
         },
         "process_counts": {
           "unity": 0,
           "keeper": 0,
           "watcher": 12,
-          "train": 59,
-          "train_total": 59,
+          "train": 62,
+          "train_total": 62,
           "train_paused": 0,
           "train_partial_paused": 0,
           "train_defunct": 0,
           "train_unknown": 0,
-          "eval": 9,
-          "eval_total": 9,
+          "eval": 6,
+          "eval_total": 6,
           "eval_paused": 0,
           "eval_partial_paused": 0,
           "eval_defunct": 0,
@@ -1138,11 +1133,11 @@
           {
             "index": 0,
             "name": "NVIDIA A100-SXM4-80GB",
-            "util": 17.0,
+            "util": 43.0,
             "used_mib": 6663.0,
             "total_mib": 81920.0,
-            "mean_util": 51.43,
-            "max_util": 89.0,
+            "mean_util": 49.0,
+            "max_util": 73.0,
             "allowed": true,
             "candidate_for_preflight": false,
             "note": "Allocation still requires process/session, dependency and live-memory checks."
@@ -1150,11 +1145,11 @@
           {
             "index": 1,
             "name": "NVIDIA A100-SXM4-80GB",
-            "util": 41.0,
+            "util": 32.0,
             "used_mib": 19401.0,
             "total_mib": 81920.0,
-            "mean_util": 66.29,
-            "max_util": 91.0,
+            "mean_util": 58.0,
+            "max_util": 96.0,
             "allowed": true,
             "candidate_for_preflight": false,
             "note": "Allocation still requires process/session, dependency and live-memory checks."
@@ -1162,11 +1157,11 @@
           {
             "index": 2,
             "name": "NVIDIA A100-SXM4-80GB",
-            "util": 23.0,
+            "util": 19.0,
             "used_mib": 9112.0,
             "total_mib": 81920.0,
-            "mean_util": 36.14,
-            "max_util": 42.0,
+            "mean_util": 35.71,
+            "max_util": 43.0,
             "allowed": true,
             "candidate_for_preflight": false,
             "note": "Allocation still requires process/session, dependency and live-memory checks."
@@ -1174,11 +1169,11 @@
           {
             "index": 3,
             "name": "NVIDIA A100-SXM4-80GB",
-            "util": 61.0,
+            "util": 45.0,
             "used_mib": 5667.0,
             "total_mib": 81920.0,
-            "mean_util": 41.57,
-            "max_util": 67.0,
+            "mean_util": 36.86,
+            "max_util": 63.0,
             "allowed": true,
             "candidate_for_preflight": false,
             "note": "Allocation still requires process/session, dependency and live-memory checks."
@@ -1198,11 +1193,11 @@
           {
             "index": 5,
             "name": "NVIDIA A100-SXM4-80GB",
-            "util": 40.0,
+            "util": 83.0,
             "used_mib": 5663.0,
             "total_mib": 81920.0,
-            "mean_util": 30.86,
-            "max_util": 65.0,
+            "mean_util": 47.29,
+            "max_util": 83.0,
             "allowed": true,
             "candidate_for_preflight": false,
             "note": "Allocation still requires process/session, dependency and live-memory checks."
@@ -1222,11 +1217,11 @@
           {
             "index": 7,
             "name": "NVIDIA A100-SXM4-80GB",
-            "util": 15.0,
+            "util": 77.0,
             "used_mib": 7575.0,
             "total_mib": 81920.0,
-            "mean_util": 35.14,
-            "max_util": 66.0,
+            "mean_util": 55.57,
+            "max_util": 82.0,
             "allowed": true,
             "candidate_for_preflight": false,
             "note": "Allocation still requires process/session, dependency and live-memory checks."
@@ -1237,7 +1232,7 @@
         "window_ready": true,
         "training_by_line": {
           "safeot_dual": {
-            "active": 59,
+            "active": 62,
             "paused": 0,
             "partial_paused": 0,
             "defunct": 0,
@@ -1250,28 +1245,28 @@
         "status": "connected",
         "effective_cores": 96.0,
         "load": [
-          40.93359375,
-          40.6923828125,
-          39.62255859375
+          47.48046875,
+          51.44091796875,
+          44.72265625
         ],
-        "mem_available_gib": 449.22238540649414,
+        "mem_available_gib": 564.4320678710938,
         "disks_free_gib": {
-          "root": 46.68,
-          "shm": 453.154,
-          "workspace": 80.747
+          "root": 46.675,
+          "shm": 453.784,
+          "workspace": 78.625
         },
         "process_counts": {
-          "unity": 35,
+          "unity": 26,
           "keeper": 0,
-          "watcher": 0,
-          "train": 24,
-          "train_total": 24,
+          "watcher": 1,
+          "train": 22,
+          "train_total": 22,
           "train_paused": 0,
           "train_partial_paused": 0,
           "train_defunct": 0,
           "train_unknown": 0,
-          "eval": 5,
-          "eval_total": 5,
+          "eval": 6,
+          "eval_total": 6,
           "eval_paused": 0,
           "eval_partial_paused": 0,
           "eval_defunct": 0,
@@ -1281,11 +1276,11 @@
           {
             "index": 0,
             "name": "NVIDIA A100-SXM4-80GB",
-            "util": 50.0,
-            "used_mib": 76695.0,
+            "util": 2.0,
+            "used_mib": 76558.0,
             "total_mib": 81920.0,
-            "mean_util": 27.86,
-            "max_util": 94.0,
+            "mean_util": 15.57,
+            "max_util": 92.0,
             "allowed": true,
             "candidate_for_preflight": false,
             "note": "Allocation still requires process/session, dependency and live-memory checks."
@@ -1293,11 +1288,11 @@
           {
             "index": 1,
             "name": "NVIDIA A100-SXM4-80GB",
-            "util": 88.0,
-            "used_mib": 67593.0,
+            "util": 1.0,
+            "used_mib": 67994.0,
             "total_mib": 81920.0,
-            "mean_util": 19.57,
-            "max_util": 88.0,
+            "mean_util": 1.14,
+            "max_util": 4.0,
             "allowed": true,
             "candidate_for_preflight": false,
             "note": "Allocation still requires process/session, dependency and live-memory checks."
@@ -1305,11 +1300,11 @@
           {
             "index": 2,
             "name": "NVIDIA A100-SXM4-80GB",
-            "util": 3.0,
-            "used_mib": 65645.0,
+            "util": 1.0,
+            "used_mib": 65643.0,
             "total_mib": 81920.0,
-            "mean_util": 9.43,
-            "max_util": 37.0,
+            "mean_util": 1.71,
+            "max_util": 11.0,
             "allowed": true,
             "candidate_for_preflight": false,
             "note": "Allocation still requires process/session, dependency and live-memory checks."
@@ -1318,10 +1313,10 @@
             "index": 3,
             "name": "NVIDIA A100-SXM4-80GB",
             "util": 0.0,
-            "used_mib": 21274.0,
+            "used_mib": 32.0,
             "total_mib": 81920.0,
-            "mean_util": 0.14,
-            "max_util": 1.0,
+            "mean_util": 40.0,
+            "max_util": 97.0,
             "allowed": true,
             "candidate_for_preflight": false,
             "note": "Allocation still requires process/session, dependency and live-memory checks."
@@ -1330,10 +1325,10 @@
             "index": 4,
             "name": "NVIDIA A100-SXM4-80GB",
             "util": 0.0,
-            "used_mib": 13.0,
+            "used_mib": 4063.0,
             "total_mib": 81920.0,
-            "mean_util": 2.57,
-            "max_util": 16.0,
+            "mean_util": 0.0,
+            "max_util": 0.0,
             "allowed": true,
             "candidate_for_preflight": false,
             "note": "Allocation still requires process/session, dependency and live-memory checks."
@@ -1342,10 +1337,10 @@
             "index": 5,
             "name": "NVIDIA A100-SXM4-80GB",
             "util": 0.0,
-            "used_mib": 4509.0,
+            "used_mib": 2556.0,
             "total_mib": 81920.0,
-            "mean_util": 0.29,
-            "max_util": 2.0,
+            "mean_util": 3.43,
+            "max_util": 24.0,
             "allowed": true,
             "candidate_for_preflight": false,
             "note": "Allocation still requires process/session, dependency and live-memory checks."
@@ -1353,11 +1348,11 @@
           {
             "index": 6,
             "name": "NVIDIA A100-SXM4-80GB",
-            "util": 70.0,
-            "used_mib": 9691.0,
+            "util": 72.0,
+            "used_mib": 9659.0,
             "total_mib": 81920.0,
-            "mean_util": 64.29,
-            "max_util": 76.0,
+            "mean_util": 42.29,
+            "max_util": 79.0,
             "allowed": false,
             "candidate_for_preflight": false,
             "note": "Allocation still requires process/session, dependency and live-memory checks."
@@ -1365,10 +1360,10 @@
           {
             "index": 7,
             "name": "NVIDIA A100-SXM4-80GB",
-            "util": 3.0,
-            "used_mib": 7354.0,
+            "util": 0.0,
+            "used_mib": 2.0,
             "total_mib": 81920.0,
-            "mean_util": 0.43,
+            "mean_util": 0.86,
             "max_util": 3.0,
             "allowed": false,
             "candidate_for_preflight": false,
@@ -1380,7 +1375,7 @@
         "window_ready": true,
         "training_by_line": {
           "safeot_dual": {
-            "active": 20,
+            "active": 19,
             "paused": 0,
             "partial_paused": 0,
             "defunct": 0,
@@ -1388,7 +1383,7 @@
             "paused_runs": []
           },
           "vla": {
-            "active": 4,
+            "active": 3,
             "paused": 0,
             "partial_paused": 0,
             "defunct": 0,
@@ -1401,28 +1396,28 @@
         "status": "connected",
         "effective_cores": 48,
         "load": [
-          58.42431640625,
-          53.3818359375,
-          52.28515625
+          44.22607421875,
+          48.89453125,
+          51.2763671875
         ],
-        "mem_available_gib": 119.72697448730469,
+        "mem_available_gib": 107.86039733886719,
         "disks_free_gib": {
-          "root": 183.431,
-          "shm": 125.418,
-          "workspace": 180.597
+          "root": 183.417,
+          "shm": 125.416,
+          "workspace": 179.111
         },
         "process_counts": {
           "unity": 0,
           "keeper": 0,
           "watcher": 0,
-          "train": 21,
-          "train_total": 21,
+          "train": 20,
+          "train_total": 20,
           "train_paused": 0,
           "train_partial_paused": 0,
           "train_defunct": 0,
           "train_unknown": 0,
-          "eval": 2,
-          "eval_total": 2,
+          "eval": 3,
+          "eval_total": 3,
           "eval_paused": 0,
           "eval_partial_paused": 0,
           "eval_defunct": 0,
@@ -1432,11 +1427,11 @@
           {
             "index": 0,
             "name": "NVIDIA GeForce RTX 5090",
-            "util": 93.0,
-            "used_mib": 11574.0,
+            "util": 82.0,
+            "used_mib": 28223.0,
             "total_mib": 32607.0,
-            "mean_util": 83.71,
-            "max_util": 94.0,
+            "mean_util": 88.86,
+            "max_util": 98.0,
             "allowed": true,
             "candidate_for_preflight": false,
             "note": "Allocation still requires process/session, dependency and live-memory checks."
@@ -1444,22 +1439,22 @@
           {
             "index": 1,
             "name": "NVIDIA GeForce RTX 5090",
-            "util": 93.0,
-            "used_mib": 30198.0,
+            "util": 91.0,
+            "used_mib": 30214.0,
             "total_mib": 32607.0,
-            "mean_util": 92.0,
-            "max_util": 96.0,
+            "mean_util": 91.0,
+            "max_util": 93.0,
             "allowed": true,
             "candidate_for_preflight": false,
             "note": "Allocation still requires process/session, dependency and live-memory checks."
           }
         ],
         "samples": 7,
-        "span_seconds": 361,
+        "span_seconds": 360,
         "window_ready": true,
         "training_by_line": {
           "safeot_dual": {
-            "active": 21,
+            "active": 20,
             "paused": 0,
             "partial_paused": 0,
             "defunct": 0,
@@ -1472,15 +1467,15 @@
         "status": "connected",
         "effective_cores": 26,
         "load": [
-          16.34228515625,
-          16.4052734375,
-          16.36669921875
+          14.982421875,
+          16.140625,
+          16.138671875
         ],
-        "mem_available_gib": 424.70134353637695,
+        "mem_available_gib": 423.3468437194824,
         "disks_free_gib": {
           "root": 5.056,
           "shm": 324.437,
-          "workspace": 711365.391
+          "workspace": 710990.066
         },
         "process_counts": {
           "unity": 0,
@@ -1503,11 +1498,11 @@
           {
             "index": 0,
             "name": "NVIDIA A100-SXM4-80GB",
-            "util": 93.0,
+            "util": 90.0,
             "used_mib": 20631.0,
             "total_mib": 81920.0,
-            "mean_util": 95.14,
-            "max_util": 99.0,
+            "mean_util": 94.57,
+            "max_util": 97.0,
             "allowed": true,
             "candidate_for_preflight": false,
             "note": "Allocation still requires process/session, dependency and live-memory checks."
@@ -1518,7 +1513,7 @@
             "util": 100.0,
             "used_mib": 44025.0,
             "total_mib": 81920.0,
-            "mean_util": 99.71,
+            "mean_util": 100.0,
             "max_util": 100.0,
             "allowed": true,
             "candidate_for_preflight": false,
@@ -1534,20 +1529,20 @@
         "status": "connected",
         "effective_cores": 184,
         "load": [
-          166.06787109375,
-          166.30419921875,
-          165.92236328125
+          174.27392578125,
+          173.20654296875,
+          169.97998046875
         ],
-        "mem_available_gib": 478.6270408630371,
+        "mem_available_gib": 465.0552101135254,
         "disks_free_gib": {
-          "root": 4988.644,
+          "root": 4988.643,
           "shm": 666.946,
-          "workspace": 7230.305
+          "workspace": 7227.52
         },
         "process_counts": {
           "unity": 2,
           "keeper": 0,
-          "watcher": 0,
+          "watcher": 1,
           "train": 147,
           "train_total": 147,
           "train_paused": 0,
@@ -1565,11 +1560,11 @@
           {
             "index": 0,
             "name": "PPU-ZW810E",
-            "util": 0.0,
-            "used_mib": 1.0,
+            "util": 100.0,
+            "used_mib": 37819.0,
             "total_mib": 98304.0,
-            "mean_util": 0.0,
-            "max_util": 0.0,
+            "mean_util": 57.14,
+            "max_util": 100.0,
             "allowed": true,
             "candidate_for_preflight": false,
             "note": "Allocation still requires process/session, dependency and live-memory checks."
@@ -1578,10 +1573,10 @@
             "index": 1,
             "name": "PPU-ZW810E",
             "util": 0.0,
-            "used_mib": 1.0,
+            "used_mib": 125.0,
             "total_mib": 98304.0,
-            "mean_util": 0.0,
-            "max_util": 0.0,
+            "mean_util": 1.43,
+            "max_util": 10.0,
             "allowed": true,
             "candidate_for_preflight": false,
             "note": "Allocation still requires process/session, dependency and live-memory checks."
@@ -1756,7 +1751,7 @@
           }
         ],
         "samples": 7,
-        "span_seconds": 365,
+        "span_seconds": 360,
         "window_ready": true,
         "training_by_line": {
           "safeot_dual": {
@@ -1817,7 +1812,7 @@
       "vla_training": {
         "observed": "2026-09-11T17:30:01.707869+00:00",
         "status": "complete_training_pending_evaluation",
-        "observation_age_seconds": 57761,
+        "observation_age_seconds": 58779,
         "terminal_evidence": false,
         "runs": {
           "full/A/s1": {
@@ -1847,7 +1842,7 @@
         "status": "blocked",
         "completed_episodes": 396,
         "completed_pairs": 196,
-        "observation_age_seconds": 215198,
+        "observation_age_seconds": 216216,
         "terminal_evidence": true,
         "failed_jobs": [
           "A_103",
@@ -1857,9 +1852,9 @@
         ]
       },
       "repair_queue": {
-        "observed": "2026-09-12T17:31:50+08:00",
+        "observed": "2026-09-12T17:51:50+08:00",
         "overall": "critical",
-        "observation_age_seconds": 184,
+        "observation_age_seconds": 2,
         "terminal_evidence": false
       }
     },
@@ -1871,7 +1866,7 @@
       "completed": 12,
       "failed": 0,
       "protocol_sha256": "6fef896c16565741b588579a449510a0c549325b4fe07e8532d0780c8f6acd1f",
-      "observed": "2026-09-12T17:34:54.768255+08:00",
+      "observed": "2026-09-12T17:51:52.815092+08:00",
       "host": "30109",
       "backend": "JAX GPU",
       "max_parallel": 12,
@@ -2255,7 +2250,7 @@
       }
     },
     "vla_failure_diagnosis": {
-      "observed": "2026-09-12T17:34:54.782152+08:00",
+      "observed": "2026-09-12T17:51:52.829088+08:00",
       "failed_jobs": 4,
       "rows": [
         {
@@ -2515,7 +2510,7 @@
       "completed": 12,
       "failed": 0,
       "protocol_sha256": "10f575603d27aa7ede3addbcddefc44a3ad2bfbb28fc297e7c426bf7ea603359",
-      "observed": "2026-09-12T17:34:57.091622+08:00",
+      "observed": "2026-09-12T17:51:54.917328+08:00",
       "jobs": {
         "smoke_fixed": {
           "margin_mode": "approach",
@@ -2747,7 +2742,7 @@
       "completed": 24,
       "failed": 0,
       "protocol_sha256": "bd73daf512bfd14456543e32c3d6168aee44f8ea352e56c47868bb8d30b0b1f3",
-      "observed": "2026-09-12T09:34:57.882253+00:00",
+      "observed": "2026-09-12T09:51:55.810363+00:00",
       "host": "aliyun",
       "backend": "jax_cpu",
       "max_parallel": 24,
@@ -3212,7 +3207,7 @@
       "completed": 18,
       "failed": 0,
       "protocol_sha256": "6b42a9e95a87645b0adb652046ed5a7fe5107e95ae7f39506b3e447bb805bfed",
-      "observed": "2026-09-12T09:34:59.298434+00:00",
+      "observed": "2026-09-12T09:51:57.030845+00:00",
       "host": "30314",
       "backend": "jax_cuda",
       "max_parallel": 9,
@@ -4256,27 +4251,27 @@
     "backlog": "sotd_benchmark_backlog.csv"
   },
   "full_native_queue": {
-    "updated": "2026-09-12T17:32:21.857945+08:00",
+    "updated": "2026-09-12T17:50:21.194377+08:00",
     "task_count": 77,
     "total": 1848,
-    "completed": 832,
+    "completed": 838,
     "running": 68,
     "live_running": 68,
     "failed": 1,
     "blocked": 0,
-    "pending": 947,
+    "pending": 941,
     "hosts": {
       "30109": {
         "status": "running",
-        "observed": "2026-09-12T17:30:15.414118+08:00",
-        "process_observed": "2026-09-12T17:32:19.369126+08:00",
+        "observed": "2026-09-12T17:47:30.489664+08:00",
+        "process_observed": "2026-09-12T17:50:19.340507+08:00",
         "fresh_observation": true,
         "mirror_sync": null,
         "artifact_sync": null,
         "controller_alive": true,
         "tasks": 26,
         "jobs": 624,
-        "completed": 170,
+        "completed": 172,
         "running": 18,
         "live_running": 18,
         "probes_passed": 26,
@@ -4329,18 +4324,18 @@
       },
       "5090": {
         "status": "running",
-        "observed": "2026-09-12T17:29:12.772538+08:00",
-        "process_observed": "2026-09-12T17:32:15.395040+08:00",
+        "observed": "2026-09-12T17:42:17.349327+08:00",
+        "process_observed": "2026-09-12T17:50:15.427450+08:00",
         "fresh_observation": true,
         "mirror_sync": {
           "ok": true,
-          "observed": "2026-09-12T17:32:14.747231+08:00"
+          "observed": "2026-09-12T17:50:14.778949+08:00"
         },
         "artifact_sync": null,
         "controller_alive": true,
         "tasks": 26,
         "jobs": 624,
-        "completed": 390,
+        "completed": 393,
         "running": 23,
         "live_running": 23,
         "probes_passed": 26,
@@ -4393,18 +4388,18 @@
       },
       "aliyun": {
         "status": "running",
-        "observed": "2026-09-12T09:30:37.671596+00:00",
-        "process_observed": "2026-09-12T09:32:19.297303+00:00",
+        "observed": "2026-09-12T09:44:28.817429+00:00",
+        "process_observed": "2026-09-12T09:50:19.276488+00:00",
         "fresh_observation": true,
         "mirror_sync": {
           "ok": true,
-          "observed": "2026-09-12T17:32:18.446532+08:00"
+          "observed": "2026-09-12T17:50:18.528505+08:00"
         },
         "artifact_sync": null,
         "controller_alive": true,
         "tasks": 25,
         "jobs": 600,
-        "completed": 272,
+        "completed": 273,
         "running": 27,
         "live_running": 27,
         "probes_passed": 25,
@@ -4466,26 +4461,26 @@
     "whole_benchmark_complete": false
   },
   "full_native_ppo": {
-    "updated": "2026-09-12T17:32:56.558234+08:00",
+    "updated": "2026-09-12T17:50:57.317496+08:00",
     "total": 1848,
-    "completed": 578,
+    "completed": 582,
     "running": 40,
     "live_running": 40,
     "failed": 0,
     "blocked": 0,
-    "pending": 1230,
+    "pending": 1226,
     "hosts": {
       "30109": {
         "status": "running",
-        "observed": "2026-09-12T17:30:09.441533+08:00",
-        "process_observed": "2026-09-12T17:32:55.007811+08:00",
+        "observed": "2026-09-12T17:50:28.330642+08:00",
+        "process_observed": "2026-09-12T17:50:55.892197+08:00",
         "fresh_observation": true,
         "mirror_sync": null,
         "artifact_sync": null,
         "controller_alive": true,
         "tasks": 39,
         "jobs": 936,
-        "completed": 238,
+        "completed": 242,
         "running": 24,
         "live_running": 24,
         "probes_passed": 39,
@@ -4538,12 +4533,12 @@
       },
       "30314": {
         "status": "running",
-        "observed": "2026-09-12T09:29:56.131830+00:00",
-        "process_observed": "2026-09-12T09:32:54.951865+00:00",
+        "observed": "2026-09-12T09:44:26.541279+00:00",
+        "process_observed": "2026-09-12T09:50:55.828910+00:00",
         "fresh_observation": true,
         "mirror_sync": {
           "ok": true,
-          "observed": "2026-09-12T17:32:54.405875+08:00"
+          "observed": "2026-09-12T17:50:55.173431+08:00"
         },
         "artifact_sync": null,
         "controller_alive": true,
@@ -4602,22 +4597,22 @@
       }
     },
     "protocol_sha256": "b01f061faf650c89d3d9d97215a62bde603c0a8cbc8780000b630a9b75430dea",
-    "observed_training_steps": 1202720000
+    "observed_training_steps": 1209880000
   },
   "full_vision_vector": {
-    "updated": "2026-09-12T17:32:32.245463+08:00",
+    "updated": "2026-09-12T17:48:54.355892+08:00",
     "total": 2520,
-    "completed": 650,
+    "completed": 652,
     "running": 138,
     "live_running": 138,
     "failed": 23,
     "blocked": 0,
-    "pending": 1709,
+    "pending": 1707,
     "hosts": {
       "30109": {
         "status": "running",
         "observed": "2026-09-12T17:05:36.678096+08:00",
-        "process_observed": "2026-09-12T17:32:28.878670+08:00",
+        "process_observed": "2026-09-12T17:48:51.031722+08:00",
         "fresh_observation": true,
         "controller_alive": true,
         "tasks": 15,
@@ -4676,7 +4671,7 @@
       "30314": {
         "status": "running",
         "observed": "2026-09-12T09:18:59.468472+00:00",
-        "process_observed": "2026-09-12T09:32:17.627471+00:00",
+        "process_observed": "2026-09-12T09:48:38.926652+00:00",
         "fresh_observation": true,
         "controller_alive": true,
         "tasks": 10,
@@ -4734,13 +4729,13 @@
       },
       "aliyun": {
         "status": "running",
-        "observed": "2026-09-12T09:31:53.478654+00:00",
-        "process_observed": "2026-09-12T09:32:28.796379+00:00",
+        "observed": "2026-09-12T09:47:29.246018+00:00",
+        "process_observed": "2026-09-12T09:48:50.948188+00:00",
         "fresh_observation": true,
         "controller_alive": true,
         "tasks": 80,
         "jobs": 1920,
-        "completed": 621,
+        "completed": 623,
         "running": 128,
         "live_running": 128,
         "probes_passed": 80,
@@ -4795,7 +4790,7 @@
     "protocol_sha256": "b6eef0edcc546ab70feed741a45dc5691e19195e870d0aea99db413dca59c4d9"
   },
   "full_pixel": {
-    "updated": "2026-09-12T17:34:48.925751+08:00",
+    "updated": "2026-09-12T17:49:50.036741+08:00",
     "task_count": 170,
     "total": 4080,
     "completed": 23,
@@ -5075,7 +5070,7 @@
     "formal_training": false,
     "benchmark_evaluation": false,
     "vision_development": {
-      "updated": "2026-09-12T09:34:55.115570+00:00",
+      "updated": "2026-09-12T09:50:37.821619+00:00",
       "cohort": "full_multi_agent_vision_20260911_development_v3",
       "stage": "development_gates",
       "formal_frozen": true,
@@ -5459,17 +5454,17 @@
   },
   "chores_full": {
     "cohort": "T1504-CHORES-three-seed-parent-v1",
-    "updated": "2026-09-12T17:32:32.836213+08:00",
+    "updated": "2026-09-12T17:50:38.837058+08:00",
     "fresh_observation": true,
     "cell_unit": "evaluation_instance",
     "training_policy_count": 18,
     "total": 3258,
-    "completed": 477,
+    "completed": 490,
     "running": 2,
     "live_running": 2,
     "failed": 5,
     "blocked": 0,
-    "pending": 2774,
+    "pending": 2761,
     "protocol_sha256": "19ace62d4cc8fe5bc91c3c71f66f6dc858b5941ddfee678dee1be1f515df5e32",
     "source_revision": "2aa82559d272b5f888e53433e258914057f15bed",
     "training": {
@@ -5516,7 +5511,7 @@
     ],
     "training_phase": {
       "schema_version": 1,
-      "observed": "2026-09-12T09:33:47.858099+00:00",
+      "observed": "2026-09-12T09:49:14.739847+00:00",
       "fresh": true,
       "expires_after_seconds": 600,
       "gpu_process_probe_ok": true,
@@ -5530,9 +5525,8 @@
         "nav_seed3_controller_live": false,
         "counts": {
           "running": 3,
-          "initializing": 1,
-          "pending_resource_margin": 8,
-          "failed_retained": 2
+          "failed_retained": 3,
+          "pending_resource_margin": 8
         },
         "jobs": [
           {
@@ -5543,7 +5537,7 @@
             "status": "running",
             "process_live": true,
             "trainer_gpu_live": true,
-            "latest_steps": 415744
+            "latest_steps": 425984
           },
           {
             "job_id": "PickupType/B/s1",
@@ -5553,7 +5547,7 @@
             "status": "running",
             "process_live": true,
             "trainer_gpu_live": true,
-            "latest_steps": 51200
+            "latest_steps": 56320
           },
           {
             "job_id": "PickupType/A/s2",
@@ -5563,16 +5557,16 @@
             "status": "running",
             "process_live": true,
             "trainer_gpu_live": true,
-            "latest_steps": 46080
+            "latest_steps": 51200
           },
           {
             "job_id": "PickupType/B/s2",
             "family": "PickupType",
             "arm": "B",
             "training_seed": 2,
-            "status": "initializing",
-            "process_live": true,
-            "trainer_gpu_live": true,
+            "status": "failed_retained",
+            "process_live": false,
+            "trainer_gpu_live": false,
             "latest_steps": 0
           },
           {
@@ -5682,7 +5676,7 @@
           "PickupType"
         ],
         "all_missing_families_running": false,
-        "verified_live_jobs": 4
+        "verified_live_jobs": 3
       },
       "gates": {
         "cell_unit": "development_gate",
@@ -5794,7 +5788,7 @@
     }
   },
   "full_multi_agent_queue": {
-    "updated": "2026-09-12T09:32:21.287707+00:00",
+    "updated": "2026-09-12T09:51:05.743586+00:00",
     "task_count": 23,
     "total": 552,
     "completed": 31,
@@ -5807,7 +5801,7 @@
       "aliyun": {
         "status": "running",
         "observed": "2026-09-12T09:15:58.676377+00:00",
-        "process_observed": "2026-09-12T09:32:21.104096+00:00",
+        "process_observed": "2026-09-12T09:51:05.552525+00:00",
         "fresh_observation": true,
         "controller_alive": true,
         "tasks": 23,
@@ -5833,7 +5827,7 @@
             "status": "complete",
             "live": false,
             "observed_steps": 20000,
-            "progress_age_seconds": 89160.43809843063,
+            "progress_age_seconds": 90284.88505458832,
             "started": "2026-09-11T08:41:38.270446+00:00",
             "finished": "2026-09-11T08:46:49.805280+00:00",
             "training_reward": -2.340659319952711,
@@ -5854,7 +5848,7 @@
             "status": "complete",
             "live": false,
             "observed_steps": 20000,
-            "progress_age_seconds": 89180.86771011353,
+            "progress_age_seconds": 90305.31536269188,
             "started": "2026-09-11T08:41:38.276032+00:00",
             "finished": "2026-09-11T08:46:31.991164+00:00",
             "training_reward": -3.36865164956022,
@@ -5875,7 +5869,7 @@
             "status": "complete",
             "live": false,
             "observed_steps": 20000,
-            "progress_age_seconds": 89177.69335055351,
+            "progress_age_seconds": 90302.14180827141,
             "started": "2026-09-11T08:41:38.276227+00:00",
             "finished": "2026-09-11T08:46:33.777607+00:00",
             "training_reward": -0.6548681061126888,
@@ -5896,7 +5890,7 @@
             "status": "complete",
             "live": false,
             "observed_steps": 20000,
-            "progress_age_seconds": 89152.32164907455,
+            "progress_age_seconds": 90276.76714777946,
             "started": "2026-09-11T08:41:38.276113+00:00",
             "finished": "2026-09-11T08:46:57.262450+00:00",
             "training_reward": -0.9979978848437587,
@@ -5917,7 +5911,7 @@
             "status": "complete",
             "live": false,
             "observed_steps": 20000,
-            "progress_age_seconds": 88864.2124903202,
+            "progress_age_seconds": 89988.65904188156,
             "started": "2026-09-11T08:46:32.024190+00:00",
             "finished": "2026-09-11T08:51:48.635627+00:00",
             "training_reward": 1.6367097079698016,
@@ -5938,7 +5932,7 @@
             "status": "complete",
             "live": false,
             "observed_steps": 20000,
-            "progress_age_seconds": 88869.60493016243,
+            "progress_age_seconds": 89994.05212426186,
             "started": "2026-09-11T08:46:33.806905+00:00",
             "finished": "2026-09-11T08:51:43.619546+00:00",
             "training_reward": -1.0304727962920595,
@@ -5959,7 +5953,7 @@
             "status": "complete",
             "live": false,
             "observed_steps": 20000,
-            "progress_age_seconds": 88852.64170718193,
+            "progress_age_seconds": 89977.08887171745,
             "started": "2026-09-11T08:46:49.838631+00:00",
             "finished": "2026-09-11T08:51:58.402386+00:00",
             "training_reward": 0.05886094760360305,
@@ -5980,7 +5974,7 @@
             "status": "complete",
             "live": false,
             "observed_steps": 20000,
-            "progress_age_seconds": 88842.88720440865,
+            "progress_age_seconds": 89967.33452653885,
             "started": "2026-09-11T08:46:57.302842+00:00",
             "finished": "2026-09-11T08:52:05.996378+00:00",
             "training_reward": -2.588830806461623,
@@ -6005,8 +5999,8 @@
     "whole_benchmark_complete": false
   },
   "full_multi_agent_vision": {
-    "updated": "2026-09-12T09:34:58.615495+00:00",
-    "observed": "2026-09-12T09:34:58.615495+00:00",
+    "updated": "2026-09-12T09:50:39.431283+00:00",
+    "observed": "2026-09-12T09:50:39.431283+00:00",
     "cohort": "full_multi_agent_vision_20260911_formal_v1",
     "cohort_id": "full_multi_agent_vision_20260911_formal_v1",
     "formal_frozen": true,
@@ -6028,7 +6022,7 @@
       "files": 1361,
       "manifest_sha256": "7c61f2c27297d5e4bedab4aefc4ab6d19d07112b554f232c71f48d0228b292e4"
     },
-    "observed_training_steps": 2825369,
+    "observed_training_steps": 2856009,
     "steps_per_policy": 2000000,
     "episodes_per_final_policy": 312,
     "arms": [
@@ -6081,8 +6075,8 @@
     "hosts": {
       "volc-a100": {
         "status": "running",
-        "observed": "2026-09-12T09:34:58.615495+00:00",
-        "process_observed": "2026-09-12T09:34:58.615495+00:00",
+        "observed": "2026-09-12T09:50:39.431283+00:00",
+        "process_observed": "2026-09-12T09:50:39.431283+00:00",
         "fresh_observation": true,
         "controller_alive": true,
         "tasks": 15,
@@ -6103,7 +6097,7 @@
             "status": "complete",
             "live": false,
             "observed_steps": 20000,
-            "progress_age_seconds": 69242.01929068565,
+            "progress_age_seconds": 70182.80437684059,
             "started": "2026-09-11T14:06:13.015148+00:00",
             "finished": "2026-09-11T14:22:00.809153+00:00",
             "training_reward": 1.1000913998252322,
@@ -6124,7 +6118,7 @@
             "status": "complete",
             "live": false,
             "observed_steps": 20000,
-            "progress_age_seconds": 69242.53062152863,
+            "progress_age_seconds": 70183.31567788124,
             "started": "2026-09-11T14:06:13.015365+00:00",
             "finished": "2026-09-11T14:22:00.659428+00:00",
             "training_reward": -0.7946496557170948,
@@ -6145,7 +6139,7 @@
             "status": "complete",
             "live": false,
             "observed_steps": 20000,
-            "progress_age_seconds": 69192.00367951393,
+            "progress_age_seconds": 70132.78887820244,
             "started": "2026-09-11T14:06:13.015521+00:00",
             "finished": "2026-09-11T14:22:50.923815+00:00",
             "training_reward": 0.35214404001568267,
@@ -6166,7 +6160,7 @@
             "status": "complete",
             "live": false,
             "observed_steps": 20000,
-            "progress_age_seconds": 68980.99815535545,
+            "progress_age_seconds": 69921.78342700005,
             "started": "2026-09-11T14:06:13.016414+00:00",
             "finished": "2026-09-11T14:26:22.283361+00:00",
             "training_reward": -1.267075037107142,
@@ -6187,7 +6181,7 @@
             "status": "complete",
             "live": false,
             "observed_steps": 20000,
-            "progress_age_seconds": 68172.68355679512,
+            "progress_age_seconds": 69113.46847105026,
             "started": "2026-09-11T14:22:00.815343+00:00",
             "finished": "2026-09-11T14:39:49.709766+00:00",
             "training_reward": -1.6012833002639666,
@@ -6216,7 +6210,7 @@
             "status": "complete",
             "live": false,
             "observed_steps": 20000,
-            "progress_age_seconds": 68172.35823106766,
+            "progress_age_seconds": 69113.14298892021,
             "started": "2026-09-11T14:22:00.665191+00:00",
             "finished": "2026-09-11T14:39:50.160716+00:00",
             "training_reward": -1.30973369156114,
@@ -6258,7 +6252,7 @@
             "status": "complete",
             "live": false,
             "observed_steps": 20000,
-            "progress_age_seconds": 68134.2945959568,
+            "progress_age_seconds": 69075.07905626297,
             "started": "2026-09-11T14:22:50.932157+00:00",
             "finished": "2026-09-11T14:40:23.470960+00:00",
             "training_reward": 0.08724029927404786,
@@ -6300,7 +6294,7 @@
             "status": "complete",
             "live": false,
             "observed_steps": 20000,
-            "progress_age_seconds": 67967.64336848259,
+            "progress_age_seconds": 68908.42780470848,
             "started": "2026-09-11T14:26:22.290394+00:00",
             "finished": "2026-09-11T14:43:06.401290+00:00",
             "training_reward": -0.8733499701943246,
@@ -6351,7 +6345,7 @@
         "status": "complete",
         "live": false,
         "observed_steps": 20000,
-        "progress_age_seconds": 69242.01929068565,
+        "progress_age_seconds": 70182.80437684059,
         "started": "2026-09-11T14:06:13.015148+00:00",
         "finished": "2026-09-11T14:22:00.809153+00:00",
         "training_reward": 1.1000913998252322,
@@ -6372,7 +6366,7 @@
         "status": "complete",
         "live": false,
         "observed_steps": 20000,
-        "progress_age_seconds": 69242.53062152863,
+        "progress_age_seconds": 70183.31567788124,
         "started": "2026-09-11T14:06:13.015365+00:00",
         "finished": "2026-09-11T14:22:00.659428+00:00",
         "training_reward": -0.7946496557170948,
@@ -6393,7 +6387,7 @@
         "status": "complete",
         "live": false,
         "observed_steps": 20000,
-        "progress_age_seconds": 69192.00367951393,
+        "progress_age_seconds": 70132.78887820244,
         "started": "2026-09-11T14:06:13.015521+00:00",
         "finished": "2026-09-11T14:22:50.923815+00:00",
         "training_reward": 0.35214404001568267,
@@ -6414,7 +6408,7 @@
         "status": "complete",
         "live": false,
         "observed_steps": 20000,
-        "progress_age_seconds": 68980.99815535545,
+        "progress_age_seconds": 69921.78342700005,
         "started": "2026-09-11T14:06:13.016414+00:00",
         "finished": "2026-09-11T14:26:22.283361+00:00",
         "training_reward": -1.267075037107142,
@@ -6435,7 +6429,7 @@
         "status": "complete",
         "live": false,
         "observed_steps": 20000,
-        "progress_age_seconds": 68172.68355679512,
+        "progress_age_seconds": 69113.46847105026,
         "started": "2026-09-11T14:22:00.815343+00:00",
         "finished": "2026-09-11T14:39:49.709766+00:00",
         "training_reward": -1.6012833002639666,
@@ -6464,7 +6458,7 @@
         "status": "complete",
         "live": false,
         "observed_steps": 20000,
-        "progress_age_seconds": 68172.35823106766,
+        "progress_age_seconds": 69113.14298892021,
         "started": "2026-09-11T14:22:00.665191+00:00",
         "finished": "2026-09-11T14:39:50.160716+00:00",
         "training_reward": -1.30973369156114,
@@ -6506,7 +6500,7 @@
         "status": "complete",
         "live": false,
         "observed_steps": 20000,
-        "progress_age_seconds": 68134.2945959568,
+        "progress_age_seconds": 69075.07905626297,
         "started": "2026-09-11T14:22:50.932157+00:00",
         "finished": "2026-09-11T14:40:23.470960+00:00",
         "training_reward": 0.08724029927404786,
@@ -6548,7 +6542,7 @@
         "status": "complete",
         "live": false,
         "observed_steps": 20000,
-        "progress_age_seconds": 67967.64336848259,
+        "progress_age_seconds": 68908.42780470848,
         "started": "2026-09-11T14:26:22.290394+00:00",
         "finished": "2026-09-11T14:43:06.401290+00:00",
         "training_reward": -0.8733499701943246,
@@ -6698,7 +6692,7 @@
           "group": "Safe Navigation",
           "required": 120,
           "frozen": 120,
-          "active_now": 59,
+          "active_now": 56,
           "complete_frozen_matrix": 0,
           "with_failed_or_blocked_cells": 0,
           "unfrozen": 0
@@ -6707,7 +6701,7 @@
           "group": "Safe Velocity",
           "required": 12,
           "frozen": 12,
-          "active_now": 3,
+          "active_now": 5,
           "complete_frozen_matrix": 0,
           "with_failed_or_blocked_cells": 0,
           "unfrozen": 0
@@ -6716,7 +6710,7 @@
           "group": "Safe Vision",
           "required": 210,
           "frozen": 210,
-          "active_now": 90,
+          "active_now": 91,
           "complete_frozen_matrix": 0,
           "with_failed_or_blocked_cells": 9,
           "unfrozen": 0
@@ -6753,28 +6747,28 @@
       ],
       "core_training_policies": 18,
       "evaluation_cells": 3258,
-      "completed_evaluation_cells": 477,
+      "completed_evaluation_cells": 490,
       "live_evaluation_cells": 2,
       "all_families_running": false
     },
     "cohort_cells": 11208,
-    "completed_cells": 2114,
+    "completed_cells": 2126,
     "live_workers": 278,
     "whole_benchmark_complete": false,
     "scientific_goal_acceptance": "open",
     "counting_note": "Frozen means a protocol and queue exist, not that every task is training now. Completion here covers frozen cells only; SOTA and full benchmark acceptance remain separate.",
-    "updated": "2026-09-12T17:35:14+08:00",
+    "updated": "2026-09-12T17:52:05+08:00",
     "cohort_observations": {
-      "T1484-full-native-vector-20260910-v2": "2026-09-12T17:32:21.857945+08:00",
-      "T1484-full-native-ppo-20260910": "2026-09-12T17:32:56.558234+08:00",
-      "T1484-full-vision-vector-20260910": "2026-09-12T17:32:32.245463+08:00",
-      "full_multi_agent_vector_20260911": "2026-09-12T09:32:21.287707+00:00",
-      "full_multi_agent_vision_20260911_formal_v1": "2026-09-12T09:34:58.615495+00:00",
-      "T1484-full-pixel-20260911": "2026-09-12T17:34:48.925751+08:00"
+      "T1484-full-native-vector-20260910-v2": "2026-09-12T17:50:21.194377+08:00",
+      "T1484-full-native-ppo-20260910": "2026-09-12T17:50:57.317496+08:00",
+      "T1484-full-vision-vector-20260910": "2026-09-12T17:48:54.355892+08:00",
+      "full_multi_agent_vector_20260911": "2026-09-12T09:51:05.743586+00:00",
+      "full_multi_agent_vision_20260911_formal_v1": "2026-09-12T09:50:39.431283+00:00",
+      "T1484-full-pixel-20260911": "2026-09-12T17:49:50.036741+08:00"
     }
   },
   "queue_acceleration": {
-    "updated": "2026-09-12T17:34:38.852302+08:00",
+    "updated": "2026-09-12T17:49:42.530632+08:00",
     "changes": [
       {
         "at": "2026-09-10T14:57:14.829442+00:00",
@@ -6788,13 +6782,13 @@
         "cohort": "full_vision_vector_20260910",
         "current_host": {
           "status": "running",
-          "observed": "2026-09-12T09:31:53.478654+00:00",
-          "process_observed": "2026-09-12T09:32:28.796379+00:00",
+          "observed": "2026-09-12T09:47:29.246018+00:00",
+          "process_observed": "2026-09-12T09:48:50.948188+00:00",
           "fresh_observation": true,
           "controller_alive": true,
           "tasks": 80,
           "jobs": 1920,
-          "completed": 621,
+          "completed": 623,
           "running": 128,
           "live_running": 128,
           "probes_passed": 80,
@@ -6859,12 +6853,12 @@
         "cohort": "full_native_ppo_20260910",
         "current_host": {
           "status": "running",
-          "observed": "2026-09-12T09:29:56.131830+00:00",
-          "process_observed": "2026-09-12T09:32:54.951865+00:00",
+          "observed": "2026-09-12T09:44:26.541279+00:00",
+          "process_observed": "2026-09-12T09:50:55.828910+00:00",
           "fresh_observation": true,
           "mirror_sync": {
             "ok": true,
-            "observed": "2026-09-12T17:32:54.405875+08:00"
+            "observed": "2026-09-12T17:50:55.173431+08:00"
           },
           "artifact_sync": null,
           "controller_alive": true,
@@ -6933,7 +6927,7 @@
     "scientific_goal_acceptance": "open",
     "actual_speedup": "unmeasured; added concurrency is not a measured throughput ratio",
     "formal_live_total": 278,
-    "completed_cells": 2114,
+    "completed_cells": 2126,
     "wall_budget_amendment": {
       "observed": "2026-09-10T23:27:04.411539+08:00",
       "reason": "Observed slow native FormulaOne physics exceeds generic wall-clock watchdog despite steady progress.",
@@ -7053,7 +7047,7 @@
           "host": "aliyun",
           "previous_lanes": 24,
           "target_lanes": 27,
-          "process_observed": "2026-09-12T09:32:19.297303+00:00",
+          "process_observed": "2026-09-12T09:50:19.276488+00:00",
           "fresh_observation": true,
           "current_verified_live": 27,
           "new_jobs": [
@@ -7081,7 +7075,7 @@
           "host": "5090",
           "previous_lanes": 20,
           "target_lanes": 23,
-          "process_observed": "2026-09-12T17:32:15.395040+08:00",
+          "process_observed": "2026-09-12T17:50:15.427450+08:00",
           "fresh_observation": true,
           "current_verified_live": 23,
           "new_jobs": [
@@ -7271,7 +7265,7 @@
           "The other16 lanes continue all pending host-owned jobs.",
           "Future controller replacement must preserve the retirement implementation and allocation fields."
         ],
-        "current_process_observed": "2026-09-12T09:32:54.951865+00:00",
+        "current_process_observed": "2026-09-12T09:50:55.828910+00:00",
         "fresh_observation": true,
         "verified_retired_cpu_count": 16
       },
@@ -30394,7 +30388,7 @@
     "failed": 0,
     "running": 0,
     "pending": 0,
-    "observed": "2026-09-12T09:34:38.673681+00:00",
+    "observed": "2026-09-12T09:49:42.350189+00:00",
     "controller_alive": false,
     "fresh_observation": true
   },
@@ -30416,7 +30410,7 @@
         "host": "aliyun",
         "previous_lanes": 24,
         "target_lanes": 27,
-        "process_observed": "2026-09-12T09:32:19.297303+00:00",
+        "process_observed": "2026-09-12T09:50:19.276488+00:00",
         "fresh_observation": true,
         "current_verified_live": 27,
         "new_jobs": [
@@ -30444,7 +30438,7 @@
         "host": "5090",
         "previous_lanes": 20,
         "target_lanes": 23,
-        "process_observed": "2026-09-12T17:32:15.395040+08:00",
+        "process_observed": "2026-09-12T17:50:15.427450+08:00",
         "fresh_observation": true,
         "current_verified_live": 23,
         "new_jobs": [
@@ -30634,7 +30628,7 @@
         "The other16 lanes continue all pending host-owned jobs.",
         "Future controller replacement must preserve the retirement implementation and allocation fields."
       ],
-      "current_process_observed": "2026-09-12T09:32:54.951865+00:00",
+      "current_process_observed": "2026-09-12T09:50:55.828910+00:00",
       "fresh_observation": true,
       "verified_retired_cpu_count": 16
     },
@@ -32290,7 +32284,7 @@
       "interpretation": "Complete CG2 development cohort; all3 seeds per cell. Error bars are training-seed SD. No monotonic epsilon effect, SOTA or safety acceptance claimed."
     },
     "repair": {
-      "observed": "2026-09-12T09:34:42.580617+00:00",
+      "observed": "2026-09-12T09:49:45.709478+00:00",
       "total": 12,
       "protocol_sha256": "b1f1c06bd9b0108fe9c7942be5adb15844ef88017bd4bca5b1c06ef99a72ef80",
       "controller_alive": false,
@@ -34761,17 +34755,17 @@
     "tasks_with_failures": 33,
     "complete_frozen_tasks": 0,
     "total_cells": 14466,
-    "completed_cells": 2591,
+    "completed_cells": 2616,
     "running_cells": 280,
     "failed_cells": 461,
     "cell_units_note": "Training-policy runs and evaluation-instance cells are counted separately by cohort_cell_units; total_cells is a queue inventory, not a policy count."
   },
   "resource_expansion": {
-    "observed": "2026-09-12T09:33:26.229620+00:00",
+    "observed": "2026-09-12T09:51:43.677943+00:00",
     "load": [
-      16.01416015625,
-      16.443359375,
-      16.3779296875
+      15.068359375,
+      16.17724609375,
+      16.150390625
     ],
     "effective_cores": 26,
     "rows": [
@@ -34780,7 +34774,7 @@
         "alive": false,
         "identity_verified": false,
         "observed_steps": 2000000,
-        "log_age_seconds": 91429.01796889305,
+        "log_age_seconds": 92526.46553516388,
         "cpu_ticks": 0,
         "verified_threads": 0
       },
@@ -34789,7 +34783,7 @@
         "alive": false,
         "identity_verified": false,
         "observed_steps": 2000000,
-        "log_age_seconds": 91697.8993537426,
+        "log_age_seconds": 92795.34686541557,
         "cpu_ticks": 0,
         "verified_threads": 0
       },
@@ -34798,7 +34792,7 @@
         "alive": false,
         "identity_verified": false,
         "observed_steps": 2000000,
-        "log_age_seconds": 98897.13814687729,
+        "log_age_seconds": 99994.5856692791,
         "cpu_ticks": 0,
         "verified_threads": 0
       },
@@ -34807,7 +34801,7 @@
         "alive": false,
         "identity_verified": false,
         "observed_steps": 2000000,
-        "log_age_seconds": 94404.24805808067,
+        "log_age_seconds": 95501.69569540024,
         "cpu_ticks": 0,
         "verified_threads": 0
       }
@@ -34820,26 +34814,26 @@
     "cpu_counter_convention": "thread_group_total_once_per_pid",
     "fresh_observation": true,
     "new_ppo_queue": {
-      "updated": "2026-09-12T17:32:56.558234+08:00",
+      "updated": "2026-09-12T17:50:57.317496+08:00",
       "total": 1848,
-      "completed": 578,
+      "completed": 582,
       "running": 40,
       "live_running": 40,
       "failed": 0,
       "blocked": 0,
-      "pending": 1230,
+      "pending": 1226,
       "hosts": {
         "30109": {
           "status": "running",
-          "observed": "2026-09-12T17:30:09.441533+08:00",
-          "process_observed": "2026-09-12T17:32:55.007811+08:00",
+          "observed": "2026-09-12T17:50:28.330642+08:00",
+          "process_observed": "2026-09-12T17:50:55.892197+08:00",
           "fresh_observation": true,
           "mirror_sync": null,
           "artifact_sync": null,
           "controller_alive": true,
           "tasks": 39,
           "jobs": 936,
-          "completed": 238,
+          "completed": 242,
           "running": 24,
           "live_running": 24,
           "probes_passed": 39,
@@ -34892,12 +34886,12 @@
         },
         "30314": {
           "status": "running",
-          "observed": "2026-09-12T09:29:56.131830+00:00",
-          "process_observed": "2026-09-12T09:32:54.951865+00:00",
+          "observed": "2026-09-12T09:44:26.541279+00:00",
+          "process_observed": "2026-09-12T09:50:55.828910+00:00",
           "fresh_observation": true,
           "mirror_sync": {
             "ok": true,
-            "observed": "2026-09-12T17:32:54.405875+08:00"
+            "observed": "2026-09-12T17:50:55.173431+08:00"
           },
           "artifact_sync": null,
           "controller_alive": true,
@@ -34956,22 +34950,22 @@
         }
       },
       "protocol_sha256": "b01f061faf650c89d3d9d97215a62bde603c0a8cbc8780000b630a9b75430dea",
-      "observed_training_steps": 1202720000
+      "observed_training_steps": 1209880000
     },
     "new_vision_vector_queue": {
-      "updated": "2026-09-12T17:32:32.245463+08:00",
+      "updated": "2026-09-12T17:48:54.355892+08:00",
       "total": 2520,
-      "completed": 650,
+      "completed": 652,
       "running": 138,
       "live_running": 138,
       "failed": 23,
       "blocked": 0,
-      "pending": 1709,
+      "pending": 1707,
       "hosts": {
         "30109": {
           "status": "running",
           "observed": "2026-09-12T17:05:36.678096+08:00",
-          "process_observed": "2026-09-12T17:32:28.878670+08:00",
+          "process_observed": "2026-09-12T17:48:51.031722+08:00",
           "fresh_observation": true,
           "controller_alive": true,
           "tasks": 15,
@@ -35030,7 +35024,7 @@
         "30314": {
           "status": "running",
           "observed": "2026-09-12T09:18:59.468472+00:00",
-          "process_observed": "2026-09-12T09:32:17.627471+00:00",
+          "process_observed": "2026-09-12T09:48:38.926652+00:00",
           "fresh_observation": true,
           "controller_alive": true,
           "tasks": 10,
@@ -35088,13 +35082,13 @@
         },
         "aliyun": {
           "status": "running",
-          "observed": "2026-09-12T09:31:53.478654+00:00",
-          "process_observed": "2026-09-12T09:32:28.796379+00:00",
+          "observed": "2026-09-12T09:47:29.246018+00:00",
+          "process_observed": "2026-09-12T09:48:50.948188+00:00",
           "fresh_observation": true,
           "controller_alive": true,
           "tasks": 80,
           "jobs": 1920,
-          "completed": 621,
+          "completed": 623,
           "running": 128,
           "live_running": 128,
           "probes_passed": 80,
@@ -35149,7 +35143,7 @@
       "protocol_sha256": "b6eef0edcc546ab70feed741a45dc5691e19195e870d0aea99db413dca59c4d9"
     },
     "queue_acceleration": {
-      "updated": "2026-09-12T17:34:38.852302+08:00",
+      "updated": "2026-09-12T17:49:42.530632+08:00",
       "changes": [
         {
           "at": "2026-09-10T14:57:14.829442+00:00",
@@ -35163,13 +35157,13 @@
           "cohort": "full_vision_vector_20260910",
           "current_host": {
             "status": "running",
-            "observed": "2026-09-12T09:31:53.478654+00:00",
-            "process_observed": "2026-09-12T09:32:28.796379+00:00",
+            "observed": "2026-09-12T09:47:29.246018+00:00",
+            "process_observed": "2026-09-12T09:48:50.948188+00:00",
             "fresh_observation": true,
             "controller_alive": true,
             "tasks": 80,
             "jobs": 1920,
-            "completed": 621,
+            "completed": 623,
             "running": 128,
             "live_running": 128,
             "probes_passed": 80,
@@ -35234,12 +35228,12 @@
           "cohort": "full_native_ppo_20260910",
           "current_host": {
             "status": "running",
-            "observed": "2026-09-12T09:29:56.131830+00:00",
-            "process_observed": "2026-09-12T09:32:54.951865+00:00",
+            "observed": "2026-09-12T09:44:26.541279+00:00",
+            "process_observed": "2026-09-12T09:50:55.828910+00:00",
             "fresh_observation": true,
             "mirror_sync": {
               "ok": true,
-              "observed": "2026-09-12T17:32:54.405875+08:00"
+              "observed": "2026-09-12T17:50:55.173431+08:00"
             },
             "artifact_sync": null,
             "controller_alive": true,
@@ -35308,7 +35302,7 @@
       "scientific_goal_acceptance": "open",
       "actual_speedup": "unmeasured; added concurrency is not a measured throughput ratio",
       "formal_live_total": 278,
-      "completed_cells": 2114,
+      "completed_cells": 2126,
       "wall_budget_amendment": {
         "observed": "2026-09-10T23:27:04.411539+08:00",
         "reason": "Observed slow native FormulaOne physics exceeds generic wall-clock watchdog despite steady progress.",
@@ -35428,7 +35422,7 @@
             "host": "aliyun",
             "previous_lanes": 24,
             "target_lanes": 27,
-            "process_observed": "2026-09-12T09:32:19.297303+00:00",
+            "process_observed": "2026-09-12T09:50:19.276488+00:00",
             "fresh_observation": true,
             "current_verified_live": 27,
             "new_jobs": [
@@ -35456,7 +35450,7 @@
             "host": "5090",
             "previous_lanes": 20,
             "target_lanes": 23,
-            "process_observed": "2026-09-12T17:32:15.395040+08:00",
+            "process_observed": "2026-09-12T17:50:15.427450+08:00",
             "fresh_observation": true,
             "current_verified_live": 23,
             "new_jobs": [
@@ -35646,7 +35640,7 @@
             "The other16 lanes continue all pending host-owned jobs.",
             "Future controller replacement must preserve the retirement implementation and allocation fields."
           ],
-          "current_process_observed": "2026-09-12T09:32:54.951865+00:00",
+          "current_process_observed": "2026-09-12T09:50:55.828910+00:00",
           "fresh_observation": true,
           "verified_retired_cpu_count": 16
         },
@@ -35663,8 +35657,8 @@
   },
   "fleet_health": {
     "schema_version": 1,
-    "observed": "2026-09-12T17:33:28+08:00",
-    "observed_unix": 1789205608.5327852,
+    "observed": "2026-09-12T17:51:28+08:00",
+    "observed_unix": 1789206688.4902306,
     "next_check_seconds": 180,
     "status": "needs_attention",
     "observer_policy": {
@@ -35685,8 +35679,8 @@
     },
     "full_matrix": {
       "total": 11208,
-      "completed": 2114,
-      "pending": 8360,
+      "completed": 2126,
+      "pending": 8348,
       "failed": 24,
       "blocked": 432,
       "running": 278,
@@ -35722,8 +35716,8 @@
     "cohorts": {
       "native": {
         "total": 1848,
-        "completed": 832,
-        "pending": 947,
+        "completed": 838,
+        "pending": 941,
         "failed": 1,
         "blocked": 0,
         "running": 68,
@@ -35731,11 +35725,11 @@
         "verified_live": 68,
         "task_count": 77,
         "protocol_sha256": "82f5c8c7c040464db50f3cc5c67154bcffbc14dc0e39ff5f0edb1c353280b5ac",
-        "report_updated": "2026-09-12T17:32:21.857945+08:00",
+        "report_updated": "2026-09-12T17:50:21.194377+08:00",
         "report_age_seconds": 67,
         "report_fresh": true,
         "terminal_evidence": false,
-        "observed_training_steps": 1747820000,
+        "observed_training_steps": 1758980000,
         "controllers": {
           "aliyun": {
             "controller": {
@@ -35744,13 +35738,13 @@
               "process_state": "S",
               "open_fds": 31
             },
-            "state_updated": "2026-09-12T09:30:37.671596+00:00",
+            "state_updated": "2026-09-12T09:44:28.817429+00:00",
             "state_status": "running",
             "state_protocol_sha256": "82f5c8c7c040464db50f3cc5c67154bcffbc14dc0e39ff5f0edb1c353280b5ac",
             "state_counts": {
               "total": 600,
-              "completed": 272,
-              "pending": 301,
+              "completed": 273,
+              "pending": 300,
               "running": 27,
               "failed": 0,
               "blocked": 0
@@ -35764,13 +35758,13 @@
               "process_state": "S",
               "open_fds": 21
             },
-            "state_updated": "2026-09-12T17:33:22.175521+08:00",
+            "state_updated": "2026-09-12T17:47:30.489664+08:00",
             "state_status": "running",
             "state_protocol_sha256": "82f5c8c7c040464db50f3cc5c67154bcffbc14dc0e39ff5f0edb1c353280b5ac",
             "state_counts": {
               "total": 624,
-              "completed": 171,
-              "pending": 434,
+              "completed": 172,
+              "pending": 433,
               "running": 18,
               "failed": 1,
               "blocked": 0
@@ -35790,13 +35784,13 @@
               "process_state": "S",
               "open_fds": 27
             },
-            "state_updated": "2026-09-12T17:29:12.772538+08:00",
+            "state_updated": "2026-09-12T17:42:17.349327+08:00",
             "state_status": "running",
             "state_protocol_sha256": "82f5c8c7c040464db50f3cc5c67154bcffbc14dc0e39ff5f0edb1c353280b5ac",
             "state_counts": {
               "total": 624,
-              "completed": 390,
-              "pending": 211,
+              "completed": 393,
+              "pending": 208,
               "running": 23,
               "failed": 0,
               "blocked": 0
@@ -35812,23 +35806,23 @@
         },
         "progress": {
           "states": {
-            "unchanged": 20,
-            "advanced": 46,
-            "first_observation": 2
+            "unchanged": 19,
+            "advanced": 48,
+            "first_observation": 1
           },
           "review_needed": 0,
-          "max_unchanged_seconds": 1080,
+          "max_unchanged_seconds": 1620,
           "slow_formulaone_count": 0
         },
         "jobs_needing_review": [],
         "integrity_errors": [],
-        "queued": 947,
-        "complete": 832
+        "queued": 941,
+        "complete": 838
       },
       "ppo": {
         "total": 1848,
-        "completed": 578,
-        "pending": 1230,
+        "completed": 582,
+        "pending": 1226,
         "failed": 0,
         "blocked": 0,
         "running": 40,
@@ -35836,11 +35830,11 @@
         "verified_live": 40,
         "task_count": 77,
         "protocol_sha256": "b01f061faf650c89d3d9d97215a62bde603c0a8cbc8780000b630a9b75430dea",
-        "report_updated": "2026-09-12T17:32:56.558234+08:00",
-        "report_age_seconds": 32,
+        "report_updated": "2026-09-12T17:50:57.317496+08:00",
+        "report_age_seconds": 31,
         "report_fresh": true,
         "terminal_evidence": false,
-        "observed_training_steps": 1202720000,
+        "observed_training_steps": 1209880000,
         "controllers": {
           "30314": {
             "controller": {
@@ -35849,7 +35843,7 @@
               "process_state": "S",
               "open_fds": 20
             },
-            "state_updated": "2026-09-12T09:29:56.131830+00:00",
+            "state_updated": "2026-09-12T09:44:26.541279+00:00",
             "state_status": "running",
             "state_protocol_sha256": "b01f061faf650c89d3d9d97215a62bde603c0a8cbc8780000b630a9b75430dea",
             "state_counts": {
@@ -35869,13 +35863,13 @@
               "process_state": "S",
               "open_fds": 28
             },
-            "state_updated": "2026-09-12T17:30:09.441533+08:00",
+            "state_updated": "2026-09-12T17:51:04.683773+08:00",
             "state_status": "running",
             "state_protocol_sha256": "b01f061faf650c89d3d9d97215a62bde603c0a8cbc8780000b630a9b75430dea",
             "state_counts": {
               "total": 936,
-              "completed": 238,
-              "pending": 674,
+              "completed": 243,
+              "pending": 669,
               "running": 24,
               "failed": 0,
               "blocked": 0
@@ -35897,23 +35891,22 @@
         },
         "progress": {
           "states": {
-            "unchanged": 5,
             "advanced": 34,
-            "first_observation": 1
+            "unchanged": 6
           },
           "review_needed": 0,
-          "max_unchanged_seconds": 900,
+          "max_unchanged_seconds": 1259,
           "slow_formulaone_count": 0
         },
         "jobs_needing_review": [],
         "integrity_errors": [],
-        "queued": 1230,
-        "complete": 578
+        "queued": 1226,
+        "complete": 582
       },
       "vision": {
         "total": 2520,
-        "completed": 650,
-        "pending": 1709,
+        "completed": 652,
+        "pending": 1707,
         "failed": 23,
         "blocked": 0,
         "running": 138,
@@ -35921,11 +35914,11 @@
         "verified_live": 138,
         "task_count": 105,
         "protocol_sha256": "b6eef0edcc546ab70feed741a45dc5691e19195e870d0aea99db413dca59c4d9",
-        "report_updated": "2026-09-12T17:32:32.245463+08:00",
-        "report_age_seconds": 56,
+        "report_updated": "2026-09-12T17:48:54.355892+08:00",
+        "report_age_seconds": 154,
         "report_fresh": true,
         "terminal_evidence": false,
-        "observed_training_steps": 1424800000,
+        "observed_training_steps": 1432540000,
         "controllers": {
           "aliyun": {
             "controller": {
@@ -35934,13 +35927,13 @@
               "process_state": "S",
               "open_fds": 122
             },
-            "state_updated": "2026-09-12T09:31:53.478654+00:00",
+            "state_updated": "2026-09-12T09:48:56.537401+00:00",
             "state_status": "running",
             "state_protocol_sha256": "b6eef0edcc546ab70feed741a45dc5691e19195e870d0aea99db413dca59c4d9",
             "state_counts": {
               "total": 1920,
-              "completed": 621,
-              "pending": 1150,
+              "completed": 624,
+              "pending": 1147,
               "running": 128,
               "failed": 21,
               "blocked": 0
@@ -36002,18 +35995,17 @@
         },
         "progress": {
           "states": {
-            "unchanged": 71,
-            "advanced": 65,
-            "first_observation": 2
+            "unchanged": 68,
+            "advanced": 70
           },
           "review_needed": 0,
-          "max_unchanged_seconds": 2520,
+          "max_unchanged_seconds": 2700,
           "slow_formulaone_count": 60
         },
         "jobs_needing_review": [],
         "integrity_errors": [],
-        "queued": 1709,
-        "complete": 650
+        "queued": 1707,
+        "complete": 652
       },
       "pixel": {
         "total": 4080,
@@ -36026,11 +36018,11 @@
         "verified_live": 20,
         "task_count": 170,
         "protocol_sha256": "cc79a72ae0e19faacc636606a5509fd9b105123b2f196fb2481497f10e08e084",
-        "report_updated": "2026-09-12T17:31:48.639076+08:00",
-        "report_age_seconds": 100,
+        "report_updated": "2026-09-12T17:49:50.036741+08:00",
+        "report_age_seconds": 98,
         "report_fresh": true,
         "terminal_evidence": false,
-        "observed_training_steps": 57500000,
+        "observed_training_steps": 58440000,
         "controllers": {
           "30109": {
             "controller": {
@@ -36039,7 +36031,7 @@
               "process_state": "S",
               "open_fds": 4
             },
-            "state_updated": "2026-09-12T17:33:14.496279+08:00",
+            "state_updated": "2026-09-12T17:51:16.351533+08:00",
             "state_status": "running",
             "state_protocol_sha256": "cc79a72ae0e19faacc636606a5509fd9b105123b2f196fb2481497f10e08e084",
             "state_counts": {
@@ -36067,11 +36059,11 @@
         },
         "progress": {
           "states": {
-            "unchanged": 12,
-            "advanced": 8
+            "unchanged": 10,
+            "advanced": 10
           },
           "review_needed": 0,
-          "max_unchanged_seconds": 2700,
+          "max_unchanged_seconds": 3780,
           "slow_formulaone_count": 3
         },
         "jobs_needing_review": [],
@@ -36090,11 +36082,11 @@
         "verified_live": 8,
         "task_count": 23,
         "protocol_sha256": "220ec556ed4af7bc18f8ed799ab4ce74016624f81835ba56ea3f9dc86e6428a5",
-        "report_updated": "2026-09-12T09:32:21.287707+00:00",
-        "report_age_seconds": 67,
+        "report_updated": "2026-09-12T09:51:05.743586+00:00",
+        "report_age_seconds": 23,
         "report_fresh": true,
         "terminal_evidence": false,
-        "observed_training_steps": 69865131,
+        "observed_training_steps": 70869658,
         "controllers": {
           "aliyun": {
             "controller": {
@@ -36147,11 +36139,11 @@
         "verified_live": 4,
         "task_count": 15,
         "protocol_sha256": "16b12775b496b59c8083d22e6ab0603a1552c0d9cd4138479e4d72c4b65b44ef",
-        "report_updated": "2026-09-12T09:31:52.894380+00:00",
-        "report_age_seconds": 96,
+        "report_updated": "2026-09-12T09:50:39.431283+00:00",
+        "report_age_seconds": 49,
         "report_fresh": true,
         "terminal_evidence": false,
-        "observed_training_steps": 2819000,
+        "observed_training_steps": 2856009,
         "controllers": {
           "volc-a100": {
             "controller": {
@@ -36196,7 +36188,7 @@
     },
     "vla_training": {
       "observed": "2026-09-11T17:30:01.707869+00:00",
-      "age_seconds": 57807,
+      "age_seconds": 58887,
       "fresh": false,
       "supervisor_alive": false,
       "runs": {
@@ -36246,8 +36238,8 @@
       "auxiliary_total": 1086,
       "registered_instances": 543,
       "core_status_counts": {
-        "complete": 477,
-        "pending_final_checkpoint_and_dispatch": 2774,
+        "complete": 490,
+        "pending_final_checkpoint_and_dispatch": 2761,
         "failed": 5,
         "running": 2
       },
@@ -36255,8 +36247,8 @@
         "deferred_inactive_mechanism": 1086
       },
       "observation_fresh": true,
-      "report_age_seconds": 56,
-      "report_observed": "2026-09-12T17:32:32.836213+08:00",
+      "report_age_seconds": 50,
+      "report_observed": "2026-09-12T17:50:38.837058+08:00",
       "core_training_seeds": [
         1,
         2,
@@ -36304,24 +36296,24 @@
             "open_fds": 4
           },
           "status": "running",
-          "updated": "2026-09-12T09:32:36.516428+00:00",
+          "updated": "2026-09-12T09:51:08.138380+00:00",
           "planned": 200,
           "counts": {
-            "complete": 50,
+            "complete": 57,
             "running": 1,
             "failed": 0,
-            "pending": 149
+            "pending": 142
           },
           "workers": [
             {
-              "sample_index": 50,
+              "sample_index": 57,
               "identity": {
                 "identity_alive": true,
                 "status": "alive",
-                "process_state": "R",
-                "open_fds": 89
+                "process_state": "D",
+                "open_fds": 39
               },
-              "updated": "2026-09-12T09:33:25.092847+00:00",
+              "updated": "2026-09-12T09:51:08.214150+00:00",
               "status": "preflight"
             }
           ],
@@ -36366,24 +36358,24 @@
             "open_fds": 4
           },
           "status": "running",
-          "updated": "2026-09-12T09:32:22.838403+00:00",
+          "updated": "2026-09-12T09:50:18.583597+00:00",
           "planned": 200,
           "counts": {
-            "complete": 31,
+            "complete": 37,
             "running": 1,
             "failed": 2,
-            "pending": 166
+            "pending": 160
           },
           "workers": [
             {
-              "sample_index": 33,
+              "sample_index": 39,
               "identity": {
                 "identity_alive": true,
                 "status": "alive",
                 "process_state": "S",
                 "open_fds": 90
               },
-              "updated": "2026-09-12T09:33:20.216119+00:00",
+              "updated": "2026-09-12T09:51:10.652052+00:00",
               "status": "evaluating"
             }
           ],
@@ -36433,9 +36425,9 @@
         },
         "passed_verified": 4,
         "unresolved_failures": 0,
-        "observed": "2026-09-12T09:30:42.803151+00:00",
+        "observed": "2026-09-12T09:49:14.739847+00:00",
         "observation_fresh": true,
-        "report_age_seconds": 166,
+        "report_age_seconds": 134,
         "controller_live": false,
         "controller_state_fresh": false,
         "collector": {
@@ -36485,15 +36477,14 @@
         "expected": 12,
         "counts": {
           "running": 3,
-          "initializing": 1,
-          "pending_resource_margin": 8,
-          "failed_retained": 2
+          "failed_retained": 3,
+          "pending_resource_margin": 8
         },
         "passed_verified": 0,
-        "unresolved_failures": 2,
-        "observed": "2026-09-12T09:30:42.803151+00:00",
+        "unresolved_failures": 3,
+        "observed": "2026-09-12T09:49:14.739847+00:00",
         "observation_fresh": true,
-        "report_age_seconds": 166,
+        "report_age_seconds": 134,
         "controller_live": true,
         "controller_state_fresh": true,
         "collector": {
@@ -36502,7 +36493,7 @@
           "process_state": "S",
           "open_fds": 4
         },
-        "verified_live_jobs": 4,
+        "verified_live_jobs": 3,
         "target_steps_per_job": 2201600,
         "samplers": 8,
         "jobs": [
@@ -36512,7 +36503,7 @@
             "arm": "A",
             "training_seed": 1,
             "status": "running",
-            "latest_steps": 415744
+            "latest_steps": 425984
           },
           {
             "job_id": "PickupType/B/s1",
@@ -36520,7 +36511,7 @@
             "arm": "B",
             "training_seed": 1,
             "status": "running",
-            "latest_steps": 46080
+            "latest_steps": 56320
           },
           {
             "job_id": "PickupType/A/s2",
@@ -36528,14 +36519,14 @@
             "arm": "A",
             "training_seed": 2,
             "status": "running",
-            "latest_steps": 46080
+            "latest_steps": 51200
           },
           {
             "job_id": "PickupType/B/s2",
             "family": "PickupType",
             "arm": "B",
             "training_seed": 2,
-            "status": "initializing",
+            "status": "failed_retained",
             "latest_steps": 0
           },
           {
@@ -36625,9 +36616,9 @@
         "status": "needs_attention",
         "unit": "development_gate",
         "observation_fresh": true,
-        "observed": "2026-09-12T09:31:51.498810+00:00",
-        "report_age_seconds": 97,
-        "raw_audit_age_seconds": 97,
+        "observed": "2026-09-12T09:50:37.821619+00:00",
+        "report_age_seconds": 51,
+        "raw_audit_age_seconds": 51,
         "controller_live": false,
         "collector": {
           "identity_alive": true,
@@ -36652,7 +36643,7 @@
     },
     "hosts": {
       "30109": {
-        "observed_unix": 1789205607.200597,
+        "observed_unix": 1789206687.1630108,
         "status": "connected",
         "queues": {
           "native": {
@@ -36662,13 +36653,13 @@
               "process_state": "S",
               "open_fds": 21
             },
-            "state_updated": "2026-09-12T17:33:22.175521+08:00",
+            "state_updated": "2026-09-12T17:47:30.489664+08:00",
             "state_status": "running",
             "state_protocol_sha256": "82f5c8c7c040464db50f3cc5c67154bcffbc14dc0e39ff5f0edb1c353280b5ac",
             "state_counts": {
               "total": 624,
-              "completed": 171,
-              "pending": 434,
+              "completed": 172,
+              "pending": 433,
               "running": 18,
               "failed": 1,
               "blocked": 0
@@ -36688,13 +36679,13 @@
               "process_state": "S",
               "open_fds": 28
             },
-            "state_updated": "2026-09-12T17:30:09.441533+08:00",
+            "state_updated": "2026-09-12T17:51:04.683773+08:00",
             "state_status": "running",
             "state_protocol_sha256": "b01f061faf650c89d3d9d97215a62bde603c0a8cbc8780000b630a9b75430dea",
             "state_counts": {
               "total": 936,
-              "completed": 238,
-              "pending": 674,
+              "completed": 243,
+              "pending": 669,
               "running": 24,
               "failed": 0,
               "blocked": 0
@@ -36740,7 +36731,7 @@
               "process_state": "S",
               "open_fds": 4
             },
-            "state_updated": "2026-09-12T17:33:14.496279+08:00",
+            "state_updated": "2026-09-12T17:51:16.351533+08:00",
             "state_status": "running",
             "state_protocol_sha256": "cc79a72ae0e19faacc636606a5509fd9b105123b2f196fb2481497f10e08e084",
             "state_counts": {
@@ -36808,14 +36799,14 @@
         },
         "disks": {
           "root": {
-            "free_gib": 0.673,
+            "free_gib": 0.545,
             "total_gib": 50.0,
-            "free_inodes": 1485730361
+            "free_inodes": 1485733897
           },
           "workspace": {
-            "free_gib": 3.227,
+            "free_gib": 11.048,
             "total_gib": 6000.0,
-            "free_inodes": 1485730361
+            "free_inodes": 1485733897
           },
           "shm": {
             "free_gib": 5.118,
@@ -36823,16 +36814,16 @@
             "free_inodes": 131217675
           }
         },
-        "mem_available_gib": 299.093,
+        "mem_available_gib": 301.165,
         "mem_total_gib": 1007.031,
         "load": [
-          87.70361328125,
-          82.54931640625,
-          78.0234375
+          77.328125,
+          80.96337890625,
+          81.12451171875
         ],
         "effective_cores": 96.0,
         "file_nr": [
-          "18720",
+          "16672",
           "0",
           "9223372036854775807"
         ],
@@ -36842,30 +36833,30 @@
           "process_state": "S",
           "open_fds": 4
         },
-        "received_unix": 1789205607.210218,
+        "received_unix": 1789206687.168839,
         "resource_trend": {
           "ready": true,
-          "samples": 21,
+          "samples": 20,
           "scope": "Observed short-window trend; not proof of a descriptor leak.",
           "disks": {
             "root": {
-              "net_gib_per_hour": 0.183,
-              "extrapolated_hours_to_zero": 3.68
+              "net_gib_per_hour": 0.316,
+              "extrapolated_hours_to_zero": 1.73
             },
             "workspace": {
-              "net_gib_per_hour": 0.491,
-              "extrapolated_hours_to_zero": 6.57
+              "net_gib_per_hour": -7.724,
+              "extrapolated_hours_to_zero": null
             },
             "shm": {
               "net_gib_per_hour": 0.0,
               "extrapolated_hours_to_zero": null
             }
           },
-          "file_handles_delta": 4864
+          "file_handles_delta": 2816
         }
       },
       "30314": {
-        "observed_unix": 1789205607.605994,
+        "observed_unix": 1789206687.6160712,
         "status": "connected",
         "queues": {
           "ppo": {
@@ -36875,7 +36866,7 @@
               "process_state": "S",
               "open_fds": 20
             },
-            "state_updated": "2026-09-12T09:29:56.131830+00:00",
+            "state_updated": "2026-09-12T09:44:26.541279+00:00",
             "state_status": "running",
             "state_protocol_sha256": "b01f061faf650c89d3d9d97215a62bde603c0a8cbc8780000b630a9b75430dea",
             "state_counts": {
@@ -36911,31 +36902,31 @@
         },
         "disks": {
           "root": {
-            "free_gib": 46.682,
+            "free_gib": 46.675,
             "total_gib": 50.0,
-            "free_inodes": 1479097111
+            "free_inodes": 1479095509
           },
           "workspace": {
-            "free_gib": 80.792,
+            "free_gib": 78.625,
             "total_gib": 6000.0,
-            "free_inodes": 1479097111
+            "free_inodes": 1479095509
           },
           "shm": {
-            "free_gib": 453.154,
+            "free_gib": 453.784,
             "total_gib": 480.0,
-            "free_inodes": 131937445
+            "free_inodes": 131937874
           }
         },
-        "mem_available_gib": 456.297,
+        "mem_available_gib": 559.345,
         "mem_total_gib": 1007.016,
         "load": [
-          38.7138671875,
-          40.54052734375,
-          39.4833984375
+          54.87890625,
+          53.0205078125,
+          45.033203125
         ],
         "effective_cores": 96.0,
         "file_nr": [
-          "39680",
+          "35520",
           "0",
           "9223372036854775807"
         ],
@@ -36969,24 +36960,24 @@
                 "open_fds": 4
               },
               "status": "running",
-              "updated": "2026-09-12T09:32:36.516428+00:00",
+              "updated": "2026-09-12T09:51:08.138380+00:00",
               "planned": 200,
               "counts": {
-                "complete": 50,
+                "complete": 57,
                 "running": 1,
                 "failed": 0,
-                "pending": 149
+                "pending": 142
               },
               "workers": [
                 {
-                  "sample_index": 50,
+                  "sample_index": 57,
                   "identity": {
                     "identity_alive": true,
                     "status": "alive",
-                    "process_state": "R",
-                    "open_fds": 89
+                    "process_state": "D",
+                    "open_fds": 39
                   },
-                  "updated": "2026-09-12T09:33:25.092847+00:00",
+                  "updated": "2026-09-12T09:51:08.214150+00:00",
                   "status": "preflight"
                 }
               ],
@@ -37021,24 +37012,24 @@
                 "open_fds": 4
               },
               "status": "running",
-              "updated": "2026-09-12T09:32:22.838403+00:00",
+              "updated": "2026-09-12T09:50:18.583597+00:00",
               "planned": 200,
               "counts": {
-                "complete": 31,
+                "complete": 37,
                 "running": 1,
                 "failed": 2,
-                "pending": 166
+                "pending": 160
               },
               "workers": [
                 {
-                  "sample_index": 33,
+                  "sample_index": 39,
                   "identity": {
                     "identity_alive": true,
                     "status": "alive",
                     "process_state": "S",
                     "open_fds": 90
                   },
-                  "updated": "2026-09-12T09:33:20.216119+00:00",
+                  "updated": "2026-09-12T09:51:10.652052+00:00",
                   "status": "evaluating"
                 }
               ],
@@ -37059,30 +37050,30 @@
             "formal_training_launched": 0
           }
         },
-        "received_unix": 1789205607.6287587,
+        "received_unix": 1789206687.6401677,
         "resource_trend": {
           "ready": true,
-          "samples": 21,
+          "samples": 20,
           "scope": "Observed short-window trend; not proof of a descriptor leak.",
           "disks": {
             "root": {
-              "net_gib_per_hour": 0.011,
-              "extrapolated_hours_to_zero": 4243.26
+              "net_gib_per_hour": 0.002,
+              "extrapolated_hours_to_zero": null
             },
             "workspace": {
-              "net_gib_per_hour": 1.15,
-              "extrapolated_hours_to_zero": 70.24
+              "net_gib_per_hour": 3.043,
+              "extrapolated_hours_to_zero": 25.84
             },
             "shm": {
-              "net_gib_per_hour": 0.63,
-              "extrapolated_hours_to_zero": 719.2
+              "net_gib_per_hour": 0.0,
+              "extrapolated_hours_to_zero": null
             }
           },
-          "file_handles_delta": 6720
+          "file_handles_delta": 3840
         }
       },
       "aliyun": {
-        "observed_unix": 1789205607.872145,
+        "observed_unix": 1789206687.8492,
         "status": "connected",
         "queues": {
           "native": {
@@ -37092,13 +37083,13 @@
               "process_state": "S",
               "open_fds": 31
             },
-            "state_updated": "2026-09-12T09:30:37.671596+00:00",
+            "state_updated": "2026-09-12T09:44:28.817429+00:00",
             "state_status": "running",
             "state_protocol_sha256": "82f5c8c7c040464db50f3cc5c67154bcffbc14dc0e39ff5f0edb1c353280b5ac",
             "state_counts": {
               "total": 600,
-              "completed": 272,
-              "pending": 301,
+              "completed": 273,
+              "pending": 300,
               "running": 27,
               "failed": 0,
               "blocked": 0
@@ -37112,13 +37103,13 @@
               "process_state": "S",
               "open_fds": 122
             },
-            "state_updated": "2026-09-12T09:31:53.478654+00:00",
+            "state_updated": "2026-09-12T09:48:56.537401+00:00",
             "state_status": "running",
             "state_protocol_sha256": "b6eef0edcc546ab70feed741a45dc5691e19195e870d0aea99db413dca59c4d9",
             "state_counts": {
               "total": 1920,
-              "completed": 621,
-              "pending": 1150,
+              "completed": 624,
+              "pending": 1147,
               "running": 128,
               "failed": 21,
               "blocked": 0
@@ -37148,27 +37139,27 @@
         },
         "disks": {
           "root": {
-            "free_gib": 4988.644,
+            "free_gib": 4988.643,
             "total_gib": 5357.34,
-            "free_inodes": 176467467
+            "free_inodes": 176467447
           },
           "workspace": {
-            "free_gib": 7230.547,
+            "free_gib": 7227.539,
             "total_gib": 10240.0,
-            "free_inodes": 18642802
+            "free_inodes": 18640523
           },
           "shm": {
             "free_gib": 666.946,
             "total_gib": 1800.0,
-            "free_inodes": 243046740
+            "free_inodes": 243046721
           }
         },
-        "mem_available_gib": 479.162,
+        "mem_available_gib": 467.081,
         "mem_total_gib": 1800.0,
         "load": [
-          166.43310546875,
-          166.416015625,
-          165.916015625
+          175.01513671875,
+          173.24072265625,
+          169.90185546875
         ],
         "effective_cores": 184,
         "file_nr": [
@@ -37176,30 +37167,30 @@
           "0",
           "9848858"
         ],
-        "received_unix": 1789205607.9025137,
+        "received_unix": 1789206687.8792367,
         "resource_trend": {
           "ready": true,
-          "samples": 21,
+          "samples": 20,
           "scope": "Observed short-window trend; not proof of a descriptor leak.",
           "disks": {
             "root": {
-              "net_gib_per_hour": 0.0,
+              "net_gib_per_hour": 0.001,
               "extrapolated_hours_to_zero": null
             },
             "workspace": {
-              "net_gib_per_hour": 1.316,
-              "extrapolated_hours_to_zero": 5493.62
+              "net_gib_per_hour": 4.19,
+              "extrapolated_hours_to_zero": 1724.76
             },
             "shm": {
               "net_gib_per_hour": 0.0,
               "extrapolated_hours_to_zero": null
             }
           },
-          "file_handles_delta": -1104
+          "file_handles_delta": -368
         }
       },
       "5090": {
-        "observed_unix": 1789205607.8229804,
+        "observed_unix": 1789206687.7906706,
         "status": "connected",
         "queues": {
           "native": {
@@ -37209,13 +37200,13 @@
               "process_state": "S",
               "open_fds": 27
             },
-            "state_updated": "2026-09-12T17:29:12.772538+08:00",
+            "state_updated": "2026-09-12T17:42:17.349327+08:00",
             "state_status": "running",
             "state_protocol_sha256": "82f5c8c7c040464db50f3cc5c67154bcffbc14dc0e39ff5f0edb1c353280b5ac",
             "state_counts": {
               "total": 624,
-              "completed": 390,
-              "pending": 211,
+              "completed": 393,
+              "pending": 208,
               "running": 23,
               "failed": 0,
               "blocked": 0
@@ -37225,58 +37216,58 @@
         },
         "disks": {
           "root": {
-            "free_gib": 183.447,
+            "free_gib": 183.416,
             "total_gib": 3753.978,
-            "free_inodes": 236119193
+            "free_inodes": 236118987
           },
           "workspace": {
-            "free_gib": 180.656,
+            "free_gib": 179.143,
             "total_gib": 3754.456,
-            "free_inodes": 240257181
+            "free_inodes": 240254816
           },
           "shm": {
             "free_gib": 125.418,
             "total_gib": 125.6,
-            "free_inodes": 32924718
+            "free_inodes": 32924709
           }
         },
-        "mem_available_gib": 123.399,
+        "mem_available_gib": 108.137,
         "mem_total_gib": 251.199,
         "load": [
-          51.3486328125,
-          50.9833984375,
-          51.47509765625
+          45.22900390625,
+          49.34912109375,
+          51.46875
         ],
         "effective_cores": 48,
         "file_nr": [
-          "39008",
+          "43328",
           "0",
           "9223372036854775807"
         ],
-        "received_unix": 1789205607.9481132,
+        "received_unix": 1789206687.8846083,
         "resource_trend": {
           "ready": true,
-          "samples": 20,
+          "samples": 19,
           "scope": "Observed short-window trend; not proof of a descriptor leak.",
           "disks": {
             "root": {
-              "net_gib_per_hour": 0.795,
-              "extrapolated_hours_to_zero": 230.72
+              "net_gib_per_hour": 0.78,
+              "extrapolated_hours_to_zero": 235.15
             },
             "workspace": {
-              "net_gib_per_hour": 3.352,
-              "extrapolated_hours_to_zero": 53.89
+              "net_gib_per_hour": 3.247,
+              "extrapolated_hours_to_zero": 55.17
             },
             "shm": {
               "net_gib_per_hour": 0.0,
               "extrapolated_hours_to_zero": null
             }
           },
-          "file_handles_delta": -2400
+          "file_handles_delta": 2016
         }
       },
       "volc-a100": {
-        "observed_unix": 1789205608.498212,
+        "observed_unix": 1789206688.4566445,
         "status": "connected",
         "queues": {
           "multi_agent_vision": {
@@ -37304,12 +37295,12 @@
           "root": {
             "free_gib": 5.056,
             "total_gib": 19.518,
-            "free_inodes": 1188926
+            "free_inodes": 1188922
           },
           "workspace": {
-            "free_gib": 711311.523,
+            "free_gib": 711011.688,
             "total_gib": 3211766.438,
-            "free_inodes": 55897177076
+            "free_inodes": 55897046092
           },
           "shm": {
             "free_gib": 324.437,
@@ -37317,23 +37308,23 @@
             "free_inodes": 264125716
           }
         },
-        "mem_available_gib": 424.826,
+        "mem_available_gib": 423.214,
         "mem_total_gib": 463.5,
         "load": [
-          16.01416015625,
-          16.443359375,
-          16.3779296875
+          15.4599609375,
+          16.30712890625,
+          16.19140625
         ],
         "effective_cores": 128,
         "file_nr": [
-          "37888",
+          "36608",
           "0",
           "9223372036854775807"
         ],
-        "received_unix": 1789205608.5325122,
+        "received_unix": 1789206688.489959,
         "resource_trend": {
           "ready": true,
-          "samples": 20,
+          "samples": 18,
           "scope": "Observed short-window trend; not proof of a descriptor leak.",
           "disks": {
             "root": {
@@ -37341,15 +37332,15 @@
               "extrapolated_hours_to_zero": null
             },
             "workspace": {
-              "net_gib_per_hour": 1429.852,
-              "extrapolated_hours_to_zero": 497.47
+              "net_gib_per_hour": 1771.369,
+              "extrapolated_hours_to_zero": 401.39
             },
             "shm": {
               "net_gib_per_hour": 0.0,
               "extrapolated_hours_to_zero": null
             }
           },
-          "file_handles_delta": -256
+          "file_handles_delta": -3072
         }
       }
     },
@@ -37360,7 +37351,7 @@
       "open_fds": 4
     },
     "fleet_resource_cache": {
-      "observed": "2026-09-12T17:32:54+08:00",
+      "observed": "2026-09-12T17:50:53+08:00",
       "age_seconds": 35,
       "hosts": {
         "30109": {
@@ -37370,11 +37361,11 @@
             {
               "index": 0,
               "name": "NVIDIA A100-SXM4-80GB",
-              "util": 52.0,
+              "util": 33.0,
               "used_mib": 6663.0,
               "total_mib": 81920.0,
-              "mean_util": 55.33,
-              "max_util": 89.0,
+              "mean_util": 49.71,
+              "max_util": 73.0,
               "allowed": true,
               "candidate_for_preflight": false,
               "note": "Allocation still requires process/session, dependency and live-memory checks."
@@ -37382,11 +37373,11 @@
             {
               "index": 1,
               "name": "NVIDIA A100-SXM4-80GB",
-              "util": 75.0,
+              "util": 96.0,
               "used_mib": 19401.0,
               "total_mib": 81920.0,
-              "mean_util": 67.83,
-              "max_util": 75.0,
+              "mean_util": 60.14,
+              "max_util": 96.0,
               "allowed": true,
               "candidate_for_preflight": false,
               "note": "Allocation still requires process/session, dependency and live-memory checks."
@@ -37394,11 +37385,11 @@
             {
               "index": 2,
               "name": "NVIDIA A100-SXM4-80GB",
-              "util": 41.0,
+              "util": 32.0,
               "used_mib": 9112.0,
               "total_mib": 81920.0,
-              "mean_util": 38.0,
-              "max_util": 42.0,
+              "mean_util": 36.57,
+              "max_util": 43.0,
               "allowed": true,
               "candidate_for_preflight": false,
               "note": "Allocation still requires process/session, dependency and live-memory checks."
@@ -37406,11 +37397,11 @@
             {
               "index": 3,
               "name": "NVIDIA A100-SXM4-80GB",
-              "util": 45.0,
+              "util": 16.0,
               "used_mib": 5667.0,
               "total_mib": 81920.0,
-              "mean_util": 34.33,
-              "max_util": 67.0,
+              "mean_util": 36.86,
+              "max_util": 63.0,
               "allowed": true,
               "candidate_for_preflight": false,
               "note": "Allocation still requires process/session, dependency and live-memory checks."
@@ -37430,11 +37421,11 @@
             {
               "index": 5,
               "name": "NVIDIA A100-SXM4-80GB",
-              "util": 22.0,
+              "util": 45.0,
               "used_mib": 5663.0,
               "total_mib": 81920.0,
-              "mean_util": 27.67,
-              "max_util": 65.0,
+              "mean_util": 43.14,
+              "max_util": 54.0,
               "allowed": true,
               "candidate_for_preflight": false,
               "note": "Allocation still requires process/session, dependency and live-memory checks."
@@ -37454,11 +37445,11 @@
             {
               "index": 7,
               "name": "NVIDIA A100-SXM4-80GB",
-              "util": 17.0,
+              "util": 54.0,
               "used_mib": 7575.0,
               "total_mib": 81920.0,
-              "mean_util": 40.83,
-              "max_util": 66.0,
+              "mean_util": 51.0,
+              "max_util": 82.0,
               "allowed": true,
               "candidate_for_preflight": false,
               "note": "Allocation still requires process/session, dependency and live-memory checks."
@@ -37468,14 +37459,14 @@
             "unity": 0,
             "keeper": 0,
             "watcher": 12,
-            "train": 58,
-            "train_total": 58,
+            "train": 61,
+            "train_total": 61,
             "train_paused": 0,
             "train_partial_paused": 0,
             "train_defunct": 0,
             "train_unknown": 0,
-            "eval": 10,
-            "eval_total": 10,
+            "eval": 7,
+            "eval_total": 7,
             "eval_paused": 0,
             "eval_partial_paused": 0,
             "eval_defunct": 0,
@@ -37483,7 +37474,7 @@
           },
           "training_by_line": {
             "safeot_dual": {
-              "active": 58,
+              "active": 61,
               "paused": 0,
               "partial_paused": 0,
               "defunct": 0,
@@ -37500,11 +37491,11 @@
             {
               "index": 0,
               "name": "NVIDIA A100-SXM4-80GB",
-              "util": 0.0,
-              "used_mib": 76533.0,
+              "util": 9.0,
+              "used_mib": 76573.0,
               "total_mib": 81920.0,
-              "mean_util": 24.33,
-              "max_util": 94.0,
+              "mean_util": 15.29,
+              "max_util": 92.0,
               "allowed": true,
               "candidate_for_preflight": false,
               "note": "Allocation still requires process/session, dependency and live-memory checks."
@@ -37513,10 +37504,10 @@
               "index": 1,
               "name": "NVIDIA A100-SXM4-80GB",
               "util": 0.0,
-              "used_mib": 67575.0,
+              "used_mib": 67807.0,
               "total_mib": 81920.0,
-              "mean_util": 8.33,
-              "max_util": 38.0,
+              "mean_util": 1.0,
+              "max_util": 4.0,
               "allowed": true,
               "candidate_for_preflight": false,
               "note": "Allocation still requires process/session, dependency and live-memory checks."
@@ -37524,11 +37515,11 @@
             {
               "index": 2,
               "name": "NVIDIA A100-SXM4-80GB",
-              "util": 2.0,
-              "used_mib": 65640.0,
+              "util": 0.0,
+              "used_mib": 65584.0,
               "total_mib": 81920.0,
-              "mean_util": 11.0,
-              "max_util": 37.0,
+              "mean_util": 1.57,
+              "max_util": 11.0,
               "allowed": true,
               "candidate_for_preflight": false,
               "note": "Allocation still requires process/session, dependency and live-memory checks."
@@ -37537,10 +37528,10 @@
               "index": 3,
               "name": "NVIDIA A100-SXM4-80GB",
               "util": 0.0,
-              "used_mib": 21274.0,
+              "used_mib": 32.0,
               "total_mib": 81920.0,
-              "mean_util": 0.17,
-              "max_util": 1.0,
+              "mean_util": 40.0,
+              "max_util": 97.0,
               "allowed": true,
               "candidate_for_preflight": false,
               "note": "Allocation still requires process/session, dependency and live-memory checks."
@@ -37549,10 +37540,10 @@
               "index": 4,
               "name": "NVIDIA A100-SXM4-80GB",
               "util": 0.0,
-              "used_mib": 13.0,
+              "used_mib": 512.0,
               "total_mib": 81920.0,
-              "mean_util": 2.83,
-              "max_util": 16.0,
+              "mean_util": 0.0,
+              "max_util": 0.0,
               "allowed": true,
               "candidate_for_preflight": false,
               "note": "Allocation still requires process/session, dependency and live-memory checks."
@@ -37560,11 +37551,11 @@
             {
               "index": 5,
               "name": "NVIDIA A100-SXM4-80GB",
-              "util": 0.0,
-              "used_mib": 33.0,
+              "util": 24.0,
+              "used_mib": 4700.0,
               "total_mib": 81920.0,
-              "mean_util": 1.33,
-              "max_util": 6.0,
+              "mean_util": 3.43,
+              "max_util": 24.0,
               "allowed": true,
               "candidate_for_preflight": false,
               "note": "Allocation still requires process/session, dependency and live-memory checks."
@@ -37572,11 +37563,11 @@
             {
               "index": 6,
               "name": "NVIDIA A100-SXM4-80GB",
-              "util": 69.0,
-              "used_mib": 9691.0,
+              "util": 79.0,
+              "used_mib": 9659.0,
               "total_mib": 81920.0,
-              "mean_util": 67.0,
-              "max_util": 82.0,
+              "mean_util": 41.14,
+              "max_util": 79.0,
               "allowed": false,
               "candidate_for_preflight": false,
               "note": "Allocation still requires process/session, dependency and live-memory checks."
@@ -37584,28 +37575,28 @@
             {
               "index": 7,
               "name": "NVIDIA A100-SXM4-80GB",
-              "util": 0.0,
-              "used_mib": 2.0,
+              "util": 3.0,
+              "used_mib": 9423.0,
               "total_mib": 81920.0,
-              "mean_util": 12.17,
-              "max_util": 73.0,
+              "mean_util": 0.86,
+              "max_util": 3.0,
               "allowed": false,
               "candidate_for_preflight": false,
               "note": "Allocation still requires process/session, dependency and live-memory checks."
             }
           ],
           "process_counts": {
-            "unity": 34,
+            "unity": 26,
             "keeper": 0,
-            "watcher": 0,
-            "train": 24,
-            "train_total": 24,
+            "watcher": 1,
+            "train": 22,
+            "train_total": 22,
             "train_paused": 0,
             "train_partial_paused": 0,
             "train_defunct": 0,
             "train_unknown": 0,
-            "eval": 5,
-            "eval_total": 5,
+            "eval": 6,
+            "eval_total": 6,
             "eval_paused": 0,
             "eval_partial_paused": 0,
             "eval_defunct": 0,
@@ -37613,7 +37604,7 @@
           },
           "training_by_line": {
             "safeot_dual": {
-              "active": 20,
+              "active": 19,
               "paused": 0,
               "partial_paused": 0,
               "defunct": 0,
@@ -37621,7 +37612,7 @@
               "paused_runs": []
             },
             "vla": {
-              "active": 4,
+              "active": 3,
               "paused": 0,
               "partial_paused": 0,
               "defunct": 0,
@@ -37638,11 +37629,11 @@
             {
               "index": 0,
               "name": "NVIDIA GeForce RTX 5090",
-              "util": 92.0,
-              "used_mib": 18422.0,
+              "util": 84.0,
+              "used_mib": 28221.0,
               "total_mib": 32607.0,
-              "mean_util": 86.17,
-              "max_util": 94.0,
+              "mean_util": 90.14,
+              "max_util": 98.0,
               "allowed": true,
               "candidate_for_preflight": false,
               "note": "Allocation still requires process/session, dependency and live-memory checks."
@@ -37650,11 +37641,11 @@
             {
               "index": 1,
               "name": "NVIDIA GeForce RTX 5090",
-              "util": 96.0,
-              "used_mib": 30183.0,
+              "util": 93.0,
+              "used_mib": 30214.0,
               "total_mib": 32607.0,
-              "mean_util": 91.83,
-              "max_util": 96.0,
+              "mean_util": 91.57,
+              "max_util": 95.0,
               "allowed": true,
               "candidate_for_preflight": false,
               "note": "Allocation still requires process/session, dependency and live-memory checks."
@@ -37699,8 +37690,8 @@
               "util": 96.0,
               "used_mib": 20631.0,
               "total_mib": 81920.0,
-              "mean_util": 95.67,
-              "max_util": 99.0,
+              "mean_util": 94.71,
+              "max_util": 97.0,
               "allowed": true,
               "candidate_for_preflight": false,
               "note": "Allocation still requires process/session, dependency and live-memory checks."
@@ -37711,7 +37702,7 @@
               "util": 100.0,
               "used_mib": 44025.0,
               "total_mib": 81920.0,
-              "mean_util": 99.67,
+              "mean_util": 100.0,
               "max_util": 100.0,
               "allowed": true,
               "candidate_for_preflight": false,
@@ -37746,10 +37737,10 @@
               "index": 0,
               "name": "PPU-ZW810E",
               "util": 0.0,
-              "used_mib": 1.0,
+              "used_mib": 37819.0,
               "total_mib": 98304.0,
-              "mean_util": 0.0,
-              "max_util": 0.0,
+              "mean_util": 57.14,
+              "max_util": 100.0,
               "allowed": true,
               "candidate_for_preflight": false,
               "note": "Allocation still requires process/session, dependency and live-memory checks."
@@ -37757,11 +37748,11 @@
             {
               "index": 1,
               "name": "PPU-ZW810E",
-              "util": 0.0,
-              "used_mib": 1.0,
+              "util": 10.0,
+              "used_mib": 125.0,
               "total_mib": 98304.0,
-              "mean_util": 0.0,
-              "max_util": 0.0,
+              "mean_util": 1.43,
+              "max_util": 10.0,
               "allowed": true,
               "candidate_for_preflight": false,
               "note": "Allocation still requires process/session, dependency and live-memory checks."
@@ -37938,7 +37929,7 @@
           "process_counts": {
             "unity": 2,
             "keeper": 0,
-            "watcher": 0,
+            "watcher": 1,
             "train": 147,
             "train_total": 147,
             "train_paused": 0,
@@ -37997,14 +37988,7 @@
         "code": "low_disk_space",
         "host": "30109",
         "volume": "root",
-        "free_gib": 0.673
-      },
-      {
-        "severity": "warning",
-        "code": "low_disk_space",
-        "host": "30109",
-        "volume": "workspace",
-        "free_gib": 3.227
+        "free_gib": 0.545
       },
       {
         "severity": "critical",
@@ -38034,7 +38018,7 @@
     "guard_expires": "2026-09-16T17:05:12+08:00",
     "guard_lifecycle": "active",
     "expiry_semantics": "Guard expiry stops this observer only; training queues continue independently.",
-    "observation_age_seconds": 110,
+    "observation_age_seconds": 45,
     "fresh_observation": true,
     "monitoring_active": true
   }
