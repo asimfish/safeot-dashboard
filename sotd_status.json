@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-13T01:22:06+08:00",
+  "updated": "2026-09-13T01:24:39+08:00",
   "task": "T-1484/T-1490 — 五目标差距与解决办法（数据驱动，每 30 分钟刷新）",
   "gap_plan": [
     {
@@ -224,7 +224,7 @@
     }
   },
   "post_repair_evaluations": {
-    "observed": "2026-09-13T01:21:55+08:00",
+    "observed": "2026-09-13T01:24:32+08:00",
     "training_done": 145,
     "complete_evaluations": 145,
     "evaluation_episodes": 45240,
@@ -253,7 +253,7 @@
     "protocol": "Validated serial evaluator, 3 x104 final-checkpoint episodes; no retraining"
   },
   "g4_connection": {
-    "observed": "2026-09-12T17:21:53+00:00",
+    "observed": "2026-09-12T17:24:29+00:00",
     "host": "30314",
     "status": "connected",
     "training_steps": {
@@ -269,24 +269,24 @@
     "metric_scope": "training only; last 10 log windows of completed-episode averages",
     "final_evaluation_complete": false,
     "latest_connection_check": {
-      "observed_unix": 1789233714.4012868,
+      "observed_unix": 1789233871.23914,
       "status": "connected"
     }
   },
   "isolated_formal_evaluations": {
-    "observed": "2026-09-13T01:21:56+08:00",
+    "observed": "2026-09-13T01:24:32+08:00",
     "complete_evaluations": 6,
     "evaluation_episodes": 1872,
     "integrity_errors": []
   },
   "data_observed_at": {
     "legacy_audit": "2026-09-05T19:21:47.615992+08:00",
-    "refs_table": "2026-09-13T00:48:45.066441+08:00",
+    "refs_table": "2026-09-13T01:24:14.892501+08:00",
     "repair_queue": "2026-09-10T11:37:54.984063+08:00",
     "pilot_audit": "2026-09-05T21:25:56.853232+08:00",
     "terminal_component": "2026-09-05T21:46:22.695030+08:00",
     "supervision": "2026-09-13T01:21:50+08:00",
-    "post_repair_evaluations": "2026-09-13T01:21:55+08:00"
+    "post_repair_evaluations": "2026-09-13T01:24:32+08:00"
   },
   "goals": [
     {
@@ -487,7 +487,7 @@
   ],
   "focus": [
     "需要处理的门检或观测问题：CHORES正式训练调度、多智能体视觉开发门检。原失败保留；修复诊断与正式训练分别计数，健康正式队列继续。",
-    "SG队列健康监督：每180秒核查中；核实运行150路，已完成2467/11208，保留失败33项，严重告警7项。核对控制器身份、真实训练步数、磁盘和句柄趋势；已有队列完成一项后自动接续，未适配任务仍单列，不代表全部基准已开跑。",
+    "SG队列健康监督：每180秒核查中；核实运行278路，已完成2470/11208，保留失败33项，严重告警4项。核对控制器身份、真实训练步数、磁盘和句柄趋势；已有队列完成一项后自动接续，未适配任务仍单列，不代表全部基准已开跑。",
     "CHORES健康监督单列：核实运行2个评测实例；全3258实例格与SG训练策略分开计数。",
     "本轮扩展：aliyun与5090各新增3个正式训练槽，已有任务保持训练；mainskill为VLA逐步释放16个CPU槽位。volc承接双视觉开发门检；新增执行槽不等于已经测得相同比例的训练加速。",
     "完整任务清单已逐项列出：Safety-Gymnasium402轨道、CHORES543场景，共945项；未适配、排队、失败项全部保留。全任务页可按基准/状态搜索并展开方法与种子进度。",
@@ -497,16 +497,16 @@
     "已逐回合复算PG2全部24个开发策略/7488回合，发布完整非单调epsilon曲线。distance eps0.1回报8.846、硬接触0.321%、软预算3/3达标；仅为待独立确认候选，不是SOTA或零风险证据。",
     "正在为VLA释放CPU56–71：指定PPO槽位完成当前训练和312回合评测后不再补位，其余槽位继续队列。预留资源不计为已启动的VLA正式训练。",
     "新增正式执行槽：aliyun原生队列24→27、5090原生队列20→23；6个新增任务已记录真实训练步数。全部77原生及77PPO轨道统一采用96小时训练/24小时终档评测时限，仍为2M步/312回合；原失败保留。",
-    "加速现有队列：核实正式运行278路，已完成2467个训练+终档评测单元。aliyun目标32→128路，mainskill PPO目标24→32路；原活跃训练进程保留，仅替换队列调度器。未宣称等比例实际提速。",
+    "加速现有队列：核实正式运行278路，已完成2470个训练+终档评测单元。aliyun目标32→128路，mainskill PPO目标24→32路；原活跃训练进程保留，仅替换队列调度器。未宣称等比例实际提速。",
     "失败保留：SafetyCarFormulaOne1-v0 / safeot_eps0.1 / seed1，最后记录160000步，MuJoCo物理求解器异常；未计入完成、未自动重跑。",
     "Safe Vision全部105向量轨道统一延长运行时限：训练96小时、终档评测24小时。已观测慢任务按当前速度约需47–57小时；仍为2M训练步和312评测回合，失败尝试不重跑。",
-    "全基准尚未全跑：Safety-Gymnasium 390/402轨道已冻结排队，172个不同任务当前有训练/评测进程，12轨道尚未冻结；CHORES三类全任务父协议已列入面板，Pickup171/Fetch172的正式训练仍在准备。",
+    "全基准尚未全跑：Safety-Gymnasium 390/402轨道已冻结排队，173个不同任务当前有训练/评测进程，12轨道尚未冻结；CHORES三类全任务父协议已列入面板，Pickup171/Fetch172的正式训练仍在准备。",
     "多智能体视觉15任务已冻结完整360格：当前核实0路20k前置门检、4路正式训练/评测，0格完成，216格缺失官方资产仍保留。独立20k机制诊断已通过补充验收；原2k失败保留，八臂门检全过后自动接续2M/312正式实验。",
-    "CHORES三种子完整父协议已冻结：543实例×A/B×3种子，共3258个评测格；当前实际评测2项，核验完成715项。三类尚未全部开跑，排队不当作运行。",
+    "CHORES三种子完整父协议已冻结：543实例×A/B×3种子，共3258个评测格；当前实际评测2项，核验完成716项。三类尚未全部开跑，排队不当作运行。",
     "CHORES 待补正式队列：14个训练策略（含已接入的 ObjectNav 第三种子），当前核实运行5项。内存数据副本已校验26049个HDF5；各类型配对门检和资源条件满足后自动派发，开发门检不计入正式完成。",
-    "像素策略完整4080次矩阵已冻结：本机环境检查170/170，八种训练回读检查8/8，检查中0路；正式完成30、运行20。CNN实际学习RGB并保留所有传感器；尚无像素性能或硬约束达标结论。",
+    "像素策略完整4080次矩阵已冻结：本机环境检查170/170，八种训练回读检查8/8，检查中0路；正式完成31、运行20。CNN实际学习RGB并保留所有传感器；尚无像素性能或硬约束达标结论。",
     "新增Safe Vision完整105向量轨道2520单元：已完成744，核实运行138，失败32，阻塞0。像素输入策略仍未完成；整个基准验收保持开放。",
-    "新增完整PPO骨干队列1848次：已完成667，核实运行40，失败0，阻塞0。与TRPO/CPO的1848次共同检验多算法适用性；所有77轨道和3种子均保留，完整基准验收仍开放。",
+    "新增完整PPO骨干队列1848次：已完成668，核实运行40，失败0，阻塞0。与TRPO/CPO的1848次共同检验多算法适用性；所有77轨道和3种子均保留，完整基准验收仍开放。",
     "完整向量系列已实际启动：77任务×8设置×3种子=1848次；正在训练/评测68，完整终档986，失败1，阻塞0。三档SafeOT ε、三档固定惩罚、TRPO-Lag和CPO；逐任务比较，尚无优势结论。",
     "环境来源更正：旧afc6a34提交改动了Button/Push/Circle，未用于这批正式结果。新批次固定官方主分支ae966e5，1302个包文件逐一核对Git对象；旧失败记录保留。导航60、速度12、Run5全部派发；其余325个SG轨道及Safety-CHORES完整计划继续保留。",
     "完整基准验收尚未通过：Safety-Gymnasium官方表格197个任务配置，导航仅60个；注册代码额外14个配置及观察/版本分别保留，共402个轨道，含9个待解决的MultiGoal配置差异。现有汇总涉及20个轨道，需逐协议审计；不等于完成比例。",
@@ -518,7 +518,7 @@
     "CPO独立补实验SafetyCarGoal1-v0已齐3种子/90集：奖励12.525、平均成本25.256；1/3种子经验平均成本≤25。比较候选前仍需匹配评测协议。",
     "G2缺失CPO终档证据已安排独立重建：CG1/PB1各3种子，固定2M步；每个终档使用保存的归一化状态评测。",
     "冻结400评测保留4个任务失败（A_103, A_112, B_170, A_172）。首轮GPU1后端诊断complete：覆盖A103/A112与两个已完成对照；不替换冻结400集。",
-    "全局资源监测 2026-09-13T01:21:56+08:00：30109：配额96核、活动训练组64、暂停0、部分暂停0、活动评测组3；30314：配额96核、活动训练组23、暂停0、部分暂停0、活动评测组7；5090：配额48核、活动训练组20、暂停0、部分暂停0、活动评测组3；volc：配额26核、活动训练组0、暂停0、部分暂停0、活动评测组0；aliyun：配额184核、活动训练组147、暂停0、部分暂停0、活动评测组8。暂停与僵尸不计入活动；活动仍须用训练日志验证产出。每分钟采样，五分钟窗口判断余量。",
+    "全局资源监测 2026-09-13T01:23:57+08:00：30109：配额96核、活动训练组65、暂停0、部分暂停0、活动评测组3；30314：配额96核、活动训练组23、暂停0、部分暂停0、活动评测组7；5090：配额48核、活动训练组19、暂停0、部分暂停0、活动评测组4；volc：配额26核、活动训练组0、暂停0、部分暂停0、活动评测组0；aliyun：配额184核、活动训练组146、暂停0、部分暂停0、活动评测组9。暂停与僵尸不计入活动；活动仍须用训练日志验证产出。每分钟采样，五分钟窗口判断余量。",
     "资源告警：vla_training: observer stale；vla_fixed400: 4 preserved failures",
     "V2 三臂试验当前阶段 complete_training_pending_evaluation，活跃进程 0；先接续SafeVLA/SafeOT对照；第三臂需同时通过真实训练/恢复和预算旋钮生效检查。",
     "VLA基线seed1在199680步因Unity场景重置超时退出，尚无检查点；失败日志保留。采用NVIDIA-only后端做一次同种子重新训练，旧步数不累加；其余三个训练继续。",
@@ -531,7 +531,7 @@
     "原 VLA 评测在 359/400 回合因模拟器超时结束；新进程复现检查动作不一致，因此另跑两臂执行条件一致的完整400回合，不混合旧数据。",
     "VLA 配对终档评测已收取 396/400 回合；两臂均通过全部模型权重严格加载，原始逐动作数据持续核验。",
     "CG2 刹车候选完整审计：0/5 配置通过联合门槛；逐种子软预算、硬违规和相对原策略的奖励变化同时公开，低平均违规不能替代联合通过。",
-    "2026-09-13 01:22：按独立种子、完整训练预算和终档评测分别验收。五台允许服务器的产物进度见下表；进程状态以实际监督记录为准。看板约每 30 分钟刷新。",
+    "2026-09-13 01:24：按独立种子、完整训练预算和终档评测分别验收。五台允许服务器的产物进度见下表；进程状态以实际监督记录为准。看板约每 30 分钟刷新。",
     "G1 差距：三导航任务曲线已覆盖；速度任务点位与终档覆盖见逐项检查。现有点位数量不等于多引擎统一性全部验收。 → 解决：保留已完成曲线，复核匹配种子终档前沿与独立种子不确定性；补充多引擎统一性证据，只对确实缺失且无重复的点位安排算力。（曲线覆盖按当前产物更新；剩余分析与跨引擎验收待完成。）",
     "G2 差距：三导航任务训练筛选两端点已达；终档复核单列；独立种子计数已去重；训练完成度与终档覆盖分开验收。按 owner 09-08 要求，两端点各自接近。 → 解决：先补齐 CPO 参考的终档评测，尤其 CG1/PB1；对已有完整旋钮点按终档回报和成本复核。缺口若是性能不足，再做配置筛选；若是产物缺失，先找回允许服务器上的原检查点，避免重复训练。（训练队列完成数见下表；参考终档补齐和安全验收时间以产物为准。）",
     "G3 差距：已有候选改善，SOTA 完整复核仍待完成。PG2 筛选点 15.5 @ 1.6% 观测硬违规率；CG2 低违规侧筛选点 8.6 @ 0.3%。观测均值达标不等于逐种子风险上界达标。 → 解决：（a）边距日程（0.95 起、前 0.5–1.5M 步线性收紧到目标阈值）：56 个 run，已完成 52；（b）执行时可行性筛选：从策略分布采 K=16 个候选动作，在 g≤pf 的集合内选最高 q；集合为空时选最低 g（同权重、不重训、随机采样对照组用于排除随机性）；已有增补种子与评测继续按产物收集；后加块保留为探索性数据，不能承诺加块后达标。PG2 m0.83 日程候选已冻结新评测块，与无筛选/随机动作配对复验；未分型 FDPI 的同筛选对照仍需完整收齐。（PG2 冻结复验已完成；CG2 按逐训练种子的奖励、硬风险上界与软预算共同验收，探索队列进度不等于通过。）",
@@ -683,9 +683,9 @@
       "task": "全部多智能体向量注册项：23任务 × 8设置 × 3种子",
       "status": "run",
       "n": 552,
-      "done": 40,
+      "done": 41,
       "running": 8,
-      "pending": 288,
+      "pending": 287,
       "failed": 0,
       "blocked": 216,
       "eta": "14可运行任务的336单元按固定队列接续；9项缺官方XML的216单元保留阻塞",
@@ -696,10 +696,10 @@
       "task": "Safety-CHORES三类全543实例：A/B各3个训练种子",
       "status": "run",
       "n": 3258,
-      "done": 715,
+      "done": 716,
       "running": 2,
       "failed": 5,
-      "pending": 2536,
+      "pending": 2535,
       "blocked": 0,
       "eta": "18个训练政策对应3258个评测实例格；输入与训练门禁通过后逐项派发",
       "note": "沿用已有ObjectNav训练身份；只把实际执行中的评测实例标为运行。Pickup/Fetch正式训练按配对门检、数据校验和资源准入依次派发，训练政策与评测实例分别计数；C辅助设置单列延期。"
@@ -709,9 +709,9 @@
       "task": "完整170像素轨道：可训练CNN＋全部原生传感器，8设置×3种子",
       "status": "run",
       "n": 4080,
-      "done": 30,
+      "done": 31,
       "running": 20,
-      "pending": 4030,
+      "pending": 4029,
       "failed": 0,
       "blocked": 0,
       "eta": "30109四张A100、十六路；逐项环境检查和八种20k训练/回读检查通过后，执行2M/312正式矩阵",
@@ -735,9 +735,9 @@
       "task": "完整77向量轨道：PPO骨干SafeOT/惩罚/PPO-Lag/PID-Lag对照",
       "status": "run",
       "n": 1848,
-      "done": 667,
+      "done": 668,
       "running": 40,
-      "pending": 1141,
+      "pending": 1140,
       "failed": 0,
       "blocked": 0,
       "eta": "30109保留24槽；mainskill指定16个槽位完成当前任务后让出VLA资源，其余16槽继续派发；2M步/312回合不变",
@@ -754,7 +754,7 @@
       "failed": 1,
       "blocked": 0,
       "eta": "每策略2M训练步及312终档回合；各机器固定队列逐项接续",
-      "note": "30109/5090/阿里云分别624/624/600个任务单元；已观测训练步数2,056,080,000。观测2026-09-13T01:20:39.424405+08:00；失败保留，整基准验收仍未通过。"
+      "note": "30109/5090/阿里云分别624/624/600个任务单元；已观测训练步数2,058,020,000。观测2026-09-13T01:23:36.452646+08:00；失败保留，整基准验收仍未通过。"
     },
     {
       "goal": "G1–G5",
@@ -1055,7 +1055,7 @@
   ],
   "changelog": [
     {
-      "time": "09-13 01:22",
+      "time": "09-13 01:24",
       "text": "五目标卡片、焦点、队列改为由 sotd_gap_plan.py 从收割表实时生成（差距 / 原因 / 解决办法 / 预计）；新增 sotd_gap_plan.json 与 sotd_gap_plan.md。"
     },
     {
@@ -1093,8 +1093,8 @@
     "sotd_cg2_epsilon_completed.png"
   ],
   "fleet": {
-    "observed": "2026-09-13T01:21:56+08:00",
-    "observed_unix": 1789233716.2455683,
+    "observed": "2026-09-13T01:23:57+08:00",
+    "observed_unix": 1789233837.780717,
     "next_check_seconds": 60,
     "window_seconds": 300,
     "hosts": {
@@ -1102,22 +1102,22 @@
         "status": "connected",
         "effective_cores": 96.0,
         "load": [
-          76.85498046875,
-          76.48779296875,
-          76.53125
+          76.08984375,
+          76.2744140625,
+          76.4453125
         ],
-        "mem_available_gib": 300.0336456298828,
+        "mem_available_gib": 297.3738441467285,
         "disks_free_gib": {
-          "root": 2.595,
+          "root": 2.598,
           "shm": 5.118,
-          "workspace": 26.236
+          "workspace": 26.239
         },
         "process_counts": {
           "unity": 0,
           "keeper": 0,
           "watcher": 12,
-          "train": 64,
-          "train_total": 64,
+          "train": 65,
+          "train_total": 65,
           "train_paused": 0,
           "train_partial_paused": 0,
           "train_defunct": 0,
@@ -1133,10 +1133,10 @@
           {
             "index": 0,
             "name": "NVIDIA A100-SXM4-80GB",
-            "util": 37.0,
-            "used_mib": 5584.0,
+            "util": 14.0,
+            "used_mib": 6547.0,
             "total_mib": 81920.0,
-            "mean_util": 46.17,
+            "mean_util": 44.0,
             "max_util": 74.0,
             "allowed": true,
             "candidate_for_preflight": false,
@@ -1145,11 +1145,11 @@
           {
             "index": 1,
             "name": "NVIDIA A100-SXM4-80GB",
-            "util": 77.0,
+            "util": 53.0,
             "used_mib": 19293.0,
             "total_mib": 81920.0,
-            "mean_util": 80.5,
-            "max_util": 96.0,
+            "mean_util": 76.83,
+            "max_util": 98.0,
             "allowed": true,
             "candidate_for_preflight": false,
             "note": "Allocation still requires process/session, dependency and live-memory checks."
@@ -1157,10 +1157,10 @@
           {
             "index": 2,
             "name": "NVIDIA A100-SXM4-80GB",
-            "util": 38.0,
+            "util": 39.0,
             "used_mib": 3276.0,
             "total_mib": 81920.0,
-            "mean_util": 36.0,
+            "mean_util": 34.67,
             "max_util": 39.0,
             "allowed": true,
             "candidate_for_preflight": false,
@@ -1169,10 +1169,10 @@
           {
             "index": 3,
             "name": "NVIDIA A100-SXM4-80GB",
-            "util": 53.0,
+            "util": 36.0,
             "used_mib": 7161.0,
             "total_mib": 81920.0,
-            "mean_util": 45.5,
+            "mean_util": 45.33,
             "max_util": 59.0,
             "allowed": true,
             "candidate_for_preflight": false,
@@ -1193,11 +1193,11 @@
           {
             "index": 5,
             "name": "NVIDIA A100-SXM4-80GB",
-            "util": 47.0,
+            "util": 86.0,
             "used_mib": 7391.0,
             "total_mib": 81920.0,
-            "mean_util": 32.83,
-            "max_util": 71.0,
+            "mean_util": 50.5,
+            "max_util": 86.0,
             "allowed": true,
             "candidate_for_preflight": false,
             "note": "Allocation still requires process/session, dependency and live-memory checks."
@@ -1217,11 +1217,11 @@
           {
             "index": 7,
             "name": "NVIDIA A100-SXM4-80GB",
-            "util": 61.0,
+            "util": 38.0,
             "used_mib": 6991.0,
             "total_mib": 81920.0,
-            "mean_util": 51.33,
-            "max_util": 70.0,
+            "mean_util": 49.83,
+            "max_util": 72.0,
             "allowed": true,
             "candidate_for_preflight": false,
             "note": "Allocation still requires process/session, dependency and live-memory checks."
@@ -1232,7 +1232,7 @@
         "window_ready": true,
         "training_by_line": {
           "safeot_dual": {
-            "active": 64,
+            "active": 65,
             "paused": 0,
             "partial_paused": 0,
             "defunct": 0,
@@ -1245,18 +1245,18 @@
         "status": "connected",
         "effective_cores": 96.0,
         "load": [
-          47.5302734375,
-          50.54833984375,
-          50.09814453125
+          47.9072265625,
+          49.54541015625,
+          49.76806640625
         ],
-        "mem_available_gib": 316.65777587890625,
+        "mem_available_gib": 310.07150650024414,
         "disks_free_gib": {
           "root": 46.654,
           "shm": 452.525,
-          "workspace": 77.027
+          "workspace": 77.025
         },
         "process_counts": {
-          "unity": 42,
+          "unity": 43,
           "keeper": 0,
           "watcher": 0,
           "train": 23,
@@ -1277,10 +1277,10 @@
             "index": 0,
             "name": "NVIDIA A100-SXM4-80GB",
             "util": 0.0,
-            "used_mib": 73713.0,
+            "used_mib": 73787.0,
             "total_mib": 81920.0,
-            "mean_util": 29.33,
-            "max_util": 97.0,
+            "mean_util": 13.33,
+            "max_util": 46.0,
             "allowed": true,
             "candidate_for_preflight": false,
             "note": "Allocation still requires process/session, dependency and live-memory checks."
@@ -1288,10 +1288,10 @@
           {
             "index": 1,
             "name": "NVIDIA A100-SXM4-80GB",
-            "util": 0.0,
-            "used_mib": 71057.0,
+            "util": 2.0,
+            "used_mib": 70937.0,
             "total_mib": 81920.0,
-            "mean_util": 7.17,
+            "mean_util": 10.33,
             "max_util": 43.0,
             "allowed": true,
             "candidate_for_preflight": false,
@@ -1301,10 +1301,10 @@
             "index": 2,
             "name": "NVIDIA A100-SXM4-80GB",
             "util": 0.0,
-            "used_mib": 71357.0,
+            "used_mib": 71389.0,
             "total_mib": 81920.0,
-            "mean_util": 16.17,
-            "max_util": 93.0,
+            "mean_util": 0.67,
+            "max_util": 4.0,
             "allowed": true,
             "candidate_for_preflight": false,
             "note": "Allocation still requires process/session, dependency and live-memory checks."
@@ -1313,9 +1313,9 @@
             "index": 3,
             "name": "NVIDIA A100-SXM4-80GB",
             "util": 0.0,
-            "used_mib": 79147.0,
+            "used_mib": 79131.0,
             "total_mib": 81920.0,
-            "mean_util": 11.67,
+            "mean_util": 9.33,
             "max_util": 44.0,
             "allowed": true,
             "candidate_for_preflight": false,
@@ -1325,10 +1325,10 @@
             "index": 4,
             "name": "NVIDIA A100-SXM4-80GB",
             "util": 0.0,
-            "used_mib": 512.0,
+            "used_mib": 4263.0,
             "total_mib": 81920.0,
-            "mean_util": 0.17,
-            "max_util": 1.0,
+            "mean_util": 0.0,
+            "max_util": 0.0,
             "allowed": true,
             "candidate_for_preflight": false,
             "note": "Allocation still requires process/session, dependency and live-memory checks."
@@ -1337,7 +1337,7 @@
             "index": 5,
             "name": "NVIDIA A100-SXM4-80GB",
             "util": 0.0,
-            "used_mib": 2556.0,
+            "used_mib": 4756.0,
             "total_mib": 81920.0,
             "mean_util": 0.0,
             "max_util": 0.0,
@@ -1348,10 +1348,10 @@
           {
             "index": 6,
             "name": "NVIDIA A100-SXM4-80GB",
-            "util": 69.0,
+            "util": 59.0,
             "used_mib": 10603.0,
             "total_mib": 81920.0,
-            "mean_util": 64.83,
+            "mean_util": 63.5,
             "max_util": 82.0,
             "allowed": false,
             "candidate_for_preflight": false,
@@ -1361,17 +1361,17 @@
             "index": 7,
             "name": "NVIDIA A100-SXM4-80GB",
             "util": 0.0,
-            "used_mib": 73067.0,
+            "used_mib": 73142.0,
             "total_mib": 81920.0,
-            "mean_util": 12.17,
-            "max_util": 34.0,
+            "mean_util": 24.0,
+            "max_util": 100.0,
             "allowed": false,
             "candidate_for_preflight": false,
             "note": "Allocation still requires process/session, dependency and live-memory checks."
           }
         ],
         "samples": 6,
-        "span_seconds": 297,
+        "span_seconds": 302,
         "window_ready": true,
         "training_by_line": {
           "vla": {
@@ -1396,28 +1396,28 @@
         "status": "connected",
         "effective_cores": 48,
         "load": [
-          51.1845703125,
-          48.38818359375,
-          43.9833984375
+          48.49169921875,
+          48.134765625,
+          44.4150390625
         ],
-        "mem_available_gib": 155.40496826171875,
+        "mem_available_gib": 155.52552032470703,
         "disks_free_gib": {
           "root": 188.347,
-          "shm": 125.418,
-          "workspace": 127.459
+          "shm": 125.416,
+          "workspace": 127.452
         },
         "process_counts": {
           "unity": 0,
           "keeper": 0,
           "watcher": 0,
-          "train": 20,
-          "train_total": 20,
+          "train": 19,
+          "train_total": 19,
           "train_paused": 0,
           "train_partial_paused": 0,
           "train_defunct": 0,
           "train_unknown": 0,
-          "eval": 3,
-          "eval_total": 3,
+          "eval": 4,
+          "eval_total": 4,
           "eval_paused": 0,
           "eval_partial_paused": 0,
           "eval_defunct": 0,
@@ -1428,9 +1428,9 @@
             "index": 0,
             "name": "NVIDIA GeForce RTX 5090",
             "util": 1.0,
-            "used_mib": 3517.0,
+            "used_mib": 10328.0,
             "total_mib": 32607.0,
-            "mean_util": 0.67,
+            "mean_util": 1.0,
             "max_util": 2.0,
             "allowed": true,
             "candidate_for_preflight": false,
@@ -1439,10 +1439,10 @@
           {
             "index": 1,
             "name": "NVIDIA GeForce RTX 5090",
-            "util": 94.0,
-            "used_mib": 7644.0,
+            "util": 87.0,
+            "used_mib": 7646.0,
             "total_mib": 32607.0,
-            "mean_util": 87.33,
+            "mean_util": 85.5,
             "max_util": 95.0,
             "allowed": true,
             "candidate_for_preflight": false,
@@ -1454,7 +1454,7 @@
         "window_ready": true,
         "training_by_line": {
           "safeot_dual": {
-            "active": 20,
+            "active": 19,
             "paused": 0,
             "partial_paused": 0,
             "defunct": 0,
@@ -1467,15 +1467,15 @@
         "status": "connected",
         "effective_cores": 26,
         "load": [
-          11.52001953125,
-          11.0048828125,
-          10.78466796875
+          10.3515625,
+          10.779296875,
+          10.7333984375
         ],
-        "mem_available_gib": 453.96516036987305,
+        "mem_available_gib": 454.0082473754883,
         "disks_free_gib": {
           "root": 5.055,
           "shm": 324.437,
-          "workspace": 705086.457
+          "workspace": 705070.906
         },
         "process_counts": {
           "unity": 0,
@@ -1510,17 +1510,17 @@
           {
             "index": 1,
             "name": "NVIDIA A100-SXM4-80GB",
-            "util": 80.0,
+            "util": 78.0,
             "used_mib": 23480.0,
             "total_mib": 81920.0,
-            "mean_util": 76.0,
-            "max_util": 82.0,
+            "mean_util": 78.0,
+            "max_util": 92.0,
             "allowed": true,
             "candidate_for_preflight": false,
             "note": "Allocation still requires process/session, dependency and live-memory checks."
           }
         ],
-        "samples": 5,
+        "samples": 6,
         "span_seconds": 300,
         "window_ready": true,
         "training_by_line": {}
@@ -1529,28 +1529,28 @@
         "status": "connected",
         "effective_cores": 184,
         "load": [
-          193.22509765625,
-          191.36669921875,
-          188.73779296875
+          193.69677734375,
+          192.24169921875,
+          189.3837890625
         ],
-        "mem_available_gib": 441.62901306152344,
+        "mem_available_gib": 439.1100082397461,
         "disks_free_gib": {
-          "root": 4988.628,
-          "shm": 666.945,
-          "workspace": 7370.434
+          "root": 4988.627,
+          "shm": 666.893,
+          "workspace": 7179.988
         },
         "process_counts": {
           "unity": 2,
           "keeper": 0,
           "watcher": 2,
-          "train": 147,
-          "train_total": 147,
+          "train": 146,
+          "train_total": 146,
           "train_paused": 0,
           "train_partial_paused": 0,
           "train_defunct": 0,
           "train_unknown": 0,
-          "eval": 8,
-          "eval_total": 8,
+          "eval": 9,
+          "eval_total": 9,
           "eval_paused": 0,
           "eval_partial_paused": 0,
           "eval_defunct": 0,
@@ -1560,11 +1560,11 @@
           {
             "index": 0,
             "name": "PPU-ZW810E",
-            "util": 94.0,
+            "util": 0.0,
             "used_mib": 37819.0,
             "total_mib": 98304.0,
-            "mean_util": 32.33,
-            "max_util": 100.0,
+            "mean_util": 15.67,
+            "max_util": 94.0,
             "allowed": true,
             "candidate_for_preflight": false,
             "note": "Allocation still requires process/session, dependency and live-memory checks."
@@ -1608,11 +1608,11 @@
           {
             "index": 4,
             "name": "PPU-ZW810E",
-            "util": 0.0,
+            "util": 100.0,
             "used_mib": 37813.0,
             "total_mib": 98304.0,
-            "mean_util": 0.0,
-            "max_util": 0.0,
+            "mean_util": 16.67,
+            "max_util": 100.0,
             "allowed": true,
             "candidate_for_preflight": false,
             "note": "Allocation still requires process/session, dependency and live-memory checks."
@@ -1755,7 +1755,7 @@
         "window_ready": true,
         "training_by_line": {
           "safeot_dual": {
-            "active": 147,
+            "active": 146,
             "paused": 0,
             "partial_paused": 0,
             "defunct": 0,
@@ -1811,7 +1811,7 @@
       "vla_training": {
         "observed": "2026-09-11T17:30:01.707869+00:00",
         "status": "complete_training_pending_evaluation",
-        "observation_age_seconds": 85782,
+        "observation_age_seconds": 85904,
         "terminal_evidence": false,
         "runs": {
           "full/A/s1": {
@@ -1841,7 +1841,7 @@
         "status": "blocked",
         "completed_episodes": 396,
         "completed_pairs": 196,
-        "observation_age_seconds": 243220,
+        "observation_age_seconds": 243341,
         "terminal_evidence": true,
         "failed_jobs": [
           "A_103",
@@ -1853,7 +1853,7 @@
       "repair_queue": {
         "observed": "2026-09-13T01:21:50+08:00",
         "overall": "warning",
-        "observation_age_seconds": 5,
+        "observation_age_seconds": 127,
         "terminal_evidence": false
       }
     },
@@ -1865,7 +1865,7 @@
       "completed": 12,
       "failed": 0,
       "protocol_sha256": "6fef896c16565741b588579a449510a0c549325b4fe07e8532d0780c8f6acd1f",
-      "observed": "2026-09-13T01:21:56.252986+08:00",
+      "observed": "2026-09-13T01:23:57.785137+08:00",
       "host": "30109",
       "backend": "JAX GPU",
       "max_parallel": 12,
@@ -2249,7 +2249,7 @@
       }
     },
     "vla_failure_diagnosis": {
-      "observed": "2026-09-13T01:21:56.272617+08:00",
+      "observed": "2026-09-13T01:23:57.796383+08:00",
       "failed_jobs": 4,
       "rows": [
         {
@@ -2509,7 +2509,7 @@
       "completed": 12,
       "failed": 0,
       "protocol_sha256": "10f575603d27aa7ede3addbcddefc44a3ad2bfbb28fc297e7c426bf7ea603359",
-      "observed": "2026-09-13T01:21:58.434046+08:00",
+      "observed": "2026-09-13T01:23:59.966274+08:00",
       "jobs": {
         "smoke_fixed": {
           "margin_mode": "approach",
@@ -2741,7 +2741,7 @@
       "completed": 24,
       "failed": 0,
       "protocol_sha256": "bd73daf512bfd14456543e32c3d6168aee44f8ea352e56c47868bb8d30b0b1f3",
-      "observed": "2026-09-12T17:21:59.216943+00:00",
+      "observed": "2026-09-12T17:24:00.684361+00:00",
       "host": "aliyun",
       "backend": "jax_cpu",
       "max_parallel": 24,
@@ -3206,7 +3206,7 @@
       "completed": 18,
       "failed": 0,
       "protocol_sha256": "6b42a9e95a87645b0adb652046ed5a7fe5107e95ae7f39506b3e447bb805bfed",
-      "observed": "2026-09-12T17:22:01.477551+00:00",
+      "observed": "2026-09-12T17:24:02.476233+00:00",
       "host": "30314",
       "backend": "jax_cuda",
       "max_parallel": 9,
@@ -4250,7 +4250,7 @@
     "backlog": "sotd_benchmark_backlog.csv"
   },
   "full_native_queue": {
-    "updated": "2026-09-13T01:20:39.424405+08:00",
+    "updated": "2026-09-13T01:23:36.452646+08:00",
     "task_count": 77,
     "total": 1848,
     "completed": 986,
@@ -4263,7 +4263,7 @@
       "30109": {
         "status": "running",
         "observed": "2026-09-13T01:06:31.040097+08:00",
-        "process_observed": "2026-09-13T01:20:37.275794+08:00",
+        "process_observed": "2026-09-13T01:23:34.089959+08:00",
         "fresh_observation": true,
         "mirror_sync": null,
         "artifact_sync": null,
@@ -4323,12 +4323,12 @@
       },
       "5090": {
         "status": "running",
-        "observed": "2026-09-13T01:20:02.605660+08:00",
-        "process_observed": "2026-09-13T01:20:17.806952+08:00",
+        "observed": "2026-09-13T01:20:21.618684+08:00",
+        "process_observed": "2026-09-13T01:23:15.569233+08:00",
         "fresh_observation": true,
         "mirror_sync": {
           "ok": true,
-          "observed": "2026-09-13T01:20:16.509444+08:00"
+          "observed": "2026-09-13T01:23:14.881134+08:00"
         },
         "artifact_sync": null,
         "controller_alive": true,
@@ -4388,11 +4388,11 @@
       "aliyun": {
         "status": "running",
         "observed": "2026-09-12T17:17:04.479583+00:00",
-        "process_observed": "2026-09-12T17:20:37.208031+00:00",
+        "process_observed": "2026-09-12T17:23:34.023303+00:00",
         "fresh_observation": true,
         "mirror_sync": {
           "ok": true,
-          "observed": "2026-09-13T01:20:36.318674+08:00"
+          "observed": "2026-09-13T01:23:32.997932+08:00"
         },
         "artifact_sync": null,
         "controller_alive": true,
@@ -4460,19 +4460,19 @@
     "whole_benchmark_complete": false
   },
   "full_native_ppo": {
-    "updated": "2026-09-13T01:20:56.660732+08:00",
+    "updated": "2026-09-13T01:23:58.112473+08:00",
     "total": 1848,
-    "completed": 667,
+    "completed": 668,
     "running": 40,
     "live_running": 40,
     "failed": 0,
     "blocked": 0,
-    "pending": 1141,
+    "pending": 1140,
     "hosts": {
       "30109": {
         "status": "running",
-        "observed": "2026-09-13T01:15:17.908945+08:00",
-        "process_observed": "2026-09-13T01:20:55.010786+08:00",
+        "observed": "2026-09-13T01:21:11.739560+08:00",
+        "process_observed": "2026-09-13T01:23:55.457697+08:00",
         "fresh_observation": true,
         "mirror_sync": null,
         "artifact_sync": null,
@@ -4532,18 +4532,18 @@
       },
       "30314": {
         "status": "running",
-        "observed": "2026-09-12T17:18:04.716604+00:00",
-        "process_observed": "2026-09-12T17:20:54.956067+00:00",
+        "observed": "2026-09-12T17:21:08.827773+00:00",
+        "process_observed": "2026-09-12T17:23:55.370472+00:00",
         "fresh_observation": true,
         "mirror_sync": {
           "ok": true,
-          "observed": "2026-09-13T01:20:54.430947+08:00"
+          "observed": "2026-09-13T01:23:54.887760+08:00"
         },
         "artifact_sync": null,
         "controller_alive": true,
         "tasks": 38,
         "jobs": 912,
-        "completed": 380,
+        "completed": 381,
         "running": 16,
         "live_running": 16,
         "probes_passed": 38,
@@ -4596,7 +4596,7 @@
       }
     },
     "protocol_sha256": "b01f061faf650c89d3d9d97215a62bde603c0a8cbc8780000b630a9b75430dea",
-    "observed_training_steps": 1381300000
+    "observed_training_steps": 1382380000
   },
   "full_vision_vector": {
     "updated": "2026-09-13T01:21:46.690442+08:00",
@@ -4789,13 +4789,13 @@
     "protocol_sha256": "b6eef0edcc546ab70feed741a45dc5691e19195e870d0aea99db413dca59c4d9"
   },
   "full_pixel": {
-    "updated": "2026-09-13T01:20:25.157737+08:00",
+    "updated": "2026-09-13T01:23:25.380927+08:00",
     "task_count": 170,
     "total": 4080,
-    "completed": 30,
+    "completed": 31,
     "running": 20,
     "live_running": 20,
-    "pending": 4030,
+    "pending": 4029,
     "failed": 0,
     "blocked": 0,
     "state": "running",
@@ -5069,7 +5069,7 @@
     "formal_training": false,
     "benchmark_evaluation": false,
     "vision_development": {
-      "updated": "2026-09-12T17:20:32.578443+00:00",
+      "updated": "2026-09-12T17:23:39.962356+00:00",
       "cohort": "full_multi_agent_vision_20260911_development_v3",
       "stage": "development_gates",
       "formal_frozen": true,
@@ -5453,17 +5453,17 @@
   },
   "chores_full": {
     "cohort": "T1504-CHORES-three-seed-parent-v1",
-    "updated": "2026-09-13T01:20:32.656944+08:00",
+    "updated": "2026-09-13T01:23:33.816445+08:00",
     "fresh_observation": true,
     "cell_unit": "evaluation_instance",
     "training_policy_count": 18,
     "total": 3258,
-    "completed": 715,
+    "completed": 716,
     "running": 2,
     "live_running": 2,
     "failed": 5,
     "blocked": 0,
-    "pending": 2536,
+    "pending": 2535,
     "protocol_sha256": "19ace62d4cc8fe5bc91c3c71f66f6dc858b5941ddfee678dee1be1f515df5e32",
     "source_revision": "2aa82559d272b5f888e53433e258914057f15bed",
     "training": {
@@ -5510,7 +5510,7 @@
     ],
     "training_phase": {
       "schema_version": 1,
-      "observed": "2026-09-12T17:19:43.172071+00:00",
+      "observed": "2026-09-12T17:22:52.396254+00:00",
       "fresh": true,
       "expires_after_seconds": 600,
       "gpu_process_probe_ok": true,
@@ -5626,7 +5626,7 @@
             "status": "running",
             "process_live": true,
             "trainer_gpu_live": true,
-            "latest_steps": 20480
+            "latest_steps": 25600
           },
           {
             "job_id": "FetchType/A/s3",
@@ -5788,27 +5788,27 @@
     }
   },
   "full_multi_agent_queue": {
-    "updated": "2026-09-12T17:20:50.848099+00:00",
+    "updated": "2026-09-12T17:24:11.063904+00:00",
     "task_count": 23,
     "total": 552,
-    "completed": 40,
+    "completed": 41,
     "running": 8,
     "live_running": 8,
     "failed": 0,
     "blocked": 216,
-    "pending": 288,
+    "pending": 287,
     "hosts": {
       "aliyun": {
         "status": "running",
-        "observed": "2026-09-12T17:13:02.488095+00:00",
-        "process_observed": "2026-09-12T17:20:50.624007+00:00",
+        "observed": "2026-09-12T17:23:12.152808+00:00",
+        "process_observed": "2026-09-12T17:24:10.876790+00:00",
         "fresh_observation": true,
         "controller_alive": true,
         "tasks": 23,
         "jobs": 552,
-        "completed": 40,
+        "completed": 41,
         "running": 8,
-        "pending": 288,
+        "pending": 287,
         "blocked": 216,
         "failed": 0,
         "live_running": 8,
@@ -5827,7 +5827,7 @@
             "status": "complete",
             "live": false,
             "observed_steps": 20000,
-            "progress_age_seconds": 117269.71180701256,
+            "progress_age_seconds": 117470.12993836403,
             "started": "2026-09-11T08:41:38.270446+00:00",
             "finished": "2026-09-11T08:46:49.805280+00:00",
             "training_reward": -2.340659319952711,
@@ -5848,7 +5848,7 @@
             "status": "complete",
             "live": false,
             "observed_steps": 20000,
-            "progress_age_seconds": 117290.1581735611,
+            "progress_age_seconds": 117490.56826472282,
             "started": "2026-09-11T08:41:38.276032+00:00",
             "finished": "2026-09-11T08:46:31.991164+00:00",
             "training_reward": -3.36865164956022,
@@ -5869,7 +5869,7 @@
             "status": "complete",
             "live": false,
             "observed_steps": 20000,
-            "progress_age_seconds": 117287.01200842857,
+            "progress_age_seconds": 117487.40434575081,
             "started": "2026-09-11T08:41:38.276227+00:00",
             "finished": "2026-09-11T08:46:33.777607+00:00",
             "training_reward": -0.6548681061126888,
@@ -5890,7 +5890,7 @@
             "status": "complete",
             "live": false,
             "observed_steps": 20000,
-            "progress_age_seconds": 117261.66723012924,
+            "progress_age_seconds": 117462.03960561752,
             "started": "2026-09-11T08:41:38.276113+00:00",
             "finished": "2026-09-11T08:46:57.262450+00:00",
             "training_reward": -0.9979978848437587,
@@ -5911,7 +5911,7 @@
             "status": "complete",
             "live": false,
             "observed_steps": 20000,
-            "progress_age_seconds": 116973.65147662163,
+            "progress_age_seconds": 117173.94701766968,
             "started": "2026-09-11T08:46:32.024190+00:00",
             "finished": "2026-09-11T08:51:48.635627+00:00",
             "training_reward": 1.6367097079698016,
@@ -5932,7 +5932,7 @@
             "status": "complete",
             "live": false,
             "observed_steps": 20000,
-            "progress_age_seconds": 116979.0499329567,
+            "progress_age_seconds": 117179.34428048134,
             "started": "2026-09-11T08:46:33.806905+00:00",
             "finished": "2026-09-11T08:51:43.619546+00:00",
             "training_reward": -1.0304727962920595,
@@ -5953,7 +5953,7 @@
             "status": "complete",
             "live": false,
             "observed_steps": 20000,
-            "progress_age_seconds": 116962.08753371239,
+            "progress_age_seconds": 117162.38770890236,
             "started": "2026-09-11T08:46:49.838631+00:00",
             "finished": "2026-09-11T08:51:58.402386+00:00",
             "training_reward": 0.05886094760360305,
@@ -5974,7 +5974,7 @@
             "status": "complete",
             "live": false,
             "observed_steps": 20000,
-            "progress_age_seconds": 116952.35820960999,
+            "progress_age_seconds": 117152.65064287186,
             "started": "2026-09-11T08:46:57.302842+00:00",
             "finished": "2026-09-11T08:52:05.996378+00:00",
             "training_reward": -2.588830806461623,
@@ -5999,8 +5999,8 @@
     "whole_benchmark_complete": false
   },
   "full_multi_agent_vision": {
-    "updated": "2026-09-12T17:20:34.351847+00:00",
-    "observed": "2026-09-12T17:20:34.351847+00:00",
+    "updated": "2026-09-12T17:23:41.697613+00:00",
+    "observed": "2026-09-12T17:23:41.697613+00:00",
     "cohort": "full_multi_agent_vision_20260911_formal_v1",
     "cohort_id": "full_multi_agent_vision_20260911_formal_v1",
     "formal_frozen": true,
@@ -6022,7 +6022,7 @@
       "files": 1361,
       "manifest_sha256": "7c61f2c27297d5e4bedab4aefc4ab6d19d07112b554f232c71f48d0228b292e4"
     },
-    "observed_training_steps": 4407032,
+    "observed_training_steps": 4426305,
     "steps_per_policy": 2000000,
     "episodes_per_final_policy": 312,
     "arms": [
@@ -6075,8 +6075,8 @@
     "hosts": {
       "volc-a100": {
         "status": "running",
-        "observed": "2026-09-12T17:20:34.351847+00:00",
-        "process_observed": "2026-09-12T17:20:34.351847+00:00",
+        "observed": "2026-09-12T17:23:41.697613+00:00",
+        "process_observed": "2026-09-12T17:23:41.697613+00:00",
         "fresh_observation": true,
         "controller_alive": true,
         "tasks": 15,
@@ -6097,7 +6097,7 @@
             "status": "complete",
             "live": false,
             "observed_steps": 20000,
-            "progress_age_seconds": 97177.7364051342,
+            "progress_age_seconds": 97365.07447767258,
             "started": "2026-09-11T14:06:13.015148+00:00",
             "finished": "2026-09-11T14:22:00.809153+00:00",
             "training_reward": 1.1000913998252322,
@@ -6118,7 +6118,7 @@
             "status": "complete",
             "live": false,
             "observed_steps": 20000,
-            "progress_age_seconds": 97178.2478029728,
+            "progress_age_seconds": 97365.58578920364,
             "started": "2026-09-11T14:06:13.015365+00:00",
             "finished": "2026-09-11T14:22:00.659428+00:00",
             "training_reward": -0.7946496557170948,
@@ -6139,7 +6139,7 @@
             "status": "complete",
             "live": false,
             "observed_steps": 20000,
-            "progress_age_seconds": 97127.72094082832,
+            "progress_age_seconds": 97315.05885314941,
             "started": "2026-09-11T14:06:13.015521+00:00",
             "finished": "2026-09-11T14:22:50.923815+00:00",
             "training_reward": 0.35214404001568267,
@@ -6160,7 +6160,7 @@
             "status": "complete",
             "live": false,
             "observed_steps": 20000,
-            "progress_age_seconds": 96916.71544718742,
+            "progress_age_seconds": 97104.0533194542,
             "started": "2026-09-11T14:06:13.016414+00:00",
             "finished": "2026-09-11T14:26:22.283361+00:00",
             "training_reward": -1.267075037107142,
@@ -6181,7 +6181,7 @@
             "status": "complete",
             "live": false,
             "observed_steps": 20000,
-            "progress_age_seconds": 96108.40059113503,
+            "progress_age_seconds": 96295.73841691017,
             "started": "2026-09-11T14:22:00.815343+00:00",
             "finished": "2026-09-11T14:39:49.709766+00:00",
             "training_reward": -1.6012833002639666,
@@ -6210,7 +6210,7 @@
             "status": "complete",
             "live": false,
             "observed_steps": 20000,
-            "progress_age_seconds": 96108.07515621185,
+            "progress_age_seconds": 96295.41295647621,
             "started": "2026-09-11T14:22:00.665191+00:00",
             "finished": "2026-09-11T14:39:50.160716+00:00",
             "training_reward": -1.30973369156114,
@@ -6252,7 +6252,7 @@
             "status": "complete",
             "live": false,
             "observed_steps": 20000,
-            "progress_age_seconds": 96070.01129817963,
+            "progress_age_seconds": 96257.34900188446,
             "started": "2026-09-11T14:22:50.932157+00:00",
             "finished": "2026-09-11T14:40:23.470960+00:00",
             "training_reward": 0.08724029927404786,
@@ -6294,7 +6294,7 @@
             "status": "complete",
             "live": false,
             "observed_steps": 20000,
-            "progress_age_seconds": 95903.3600757122,
+            "progress_age_seconds": 96090.69782590866,
             "started": "2026-09-11T14:26:22.290394+00:00",
             "finished": "2026-09-11T14:43:06.401290+00:00",
             "training_reward": -0.8733499701943246,
@@ -6345,7 +6345,7 @@
         "status": "complete",
         "live": false,
         "observed_steps": 20000,
-        "progress_age_seconds": 97177.7364051342,
+        "progress_age_seconds": 97365.07447767258,
         "started": "2026-09-11T14:06:13.015148+00:00",
         "finished": "2026-09-11T14:22:00.809153+00:00",
         "training_reward": 1.1000913998252322,
@@ -6366,7 +6366,7 @@
         "status": "complete",
         "live": false,
         "observed_steps": 20000,
-        "progress_age_seconds": 97178.2478029728,
+        "progress_age_seconds": 97365.58578920364,
         "started": "2026-09-11T14:06:13.015365+00:00",
         "finished": "2026-09-11T14:22:00.659428+00:00",
         "training_reward": -0.7946496557170948,
@@ -6387,7 +6387,7 @@
         "status": "complete",
         "live": false,
         "observed_steps": 20000,
-        "progress_age_seconds": 97127.72094082832,
+        "progress_age_seconds": 97315.05885314941,
         "started": "2026-09-11T14:06:13.015521+00:00",
         "finished": "2026-09-11T14:22:50.923815+00:00",
         "training_reward": 0.35214404001568267,
@@ -6408,7 +6408,7 @@
         "status": "complete",
         "live": false,
         "observed_steps": 20000,
-        "progress_age_seconds": 96916.71544718742,
+        "progress_age_seconds": 97104.0533194542,
         "started": "2026-09-11T14:06:13.016414+00:00",
         "finished": "2026-09-11T14:26:22.283361+00:00",
         "training_reward": -1.267075037107142,
@@ -6429,7 +6429,7 @@
         "status": "complete",
         "live": false,
         "observed_steps": 20000,
-        "progress_age_seconds": 96108.40059113503,
+        "progress_age_seconds": 96295.73841691017,
         "started": "2026-09-11T14:22:00.815343+00:00",
         "finished": "2026-09-11T14:39:49.709766+00:00",
         "training_reward": -1.6012833002639666,
@@ -6458,7 +6458,7 @@
         "status": "complete",
         "live": false,
         "observed_steps": 20000,
-        "progress_age_seconds": 96108.07515621185,
+        "progress_age_seconds": 96295.41295647621,
         "started": "2026-09-11T14:22:00.665191+00:00",
         "finished": "2026-09-11T14:39:50.160716+00:00",
         "training_reward": -1.30973369156114,
@@ -6500,7 +6500,7 @@
         "status": "complete",
         "live": false,
         "observed_steps": 20000,
-        "progress_age_seconds": 96070.01129817963,
+        "progress_age_seconds": 96257.34900188446,
         "started": "2026-09-11T14:22:50.932157+00:00",
         "finished": "2026-09-11T14:40:23.470960+00:00",
         "training_reward": 0.08724029927404786,
@@ -6542,7 +6542,7 @@
         "status": "complete",
         "live": false,
         "observed_steps": 20000,
-        "progress_age_seconds": 95903.3600757122,
+        "progress_age_seconds": 96090.69782590866,
         "started": "2026-09-11T14:26:22.290394+00:00",
         "finished": "2026-09-11T14:43:06.401290+00:00",
         "training_reward": -0.8733499701943246,
@@ -6639,7 +6639,7 @@
     "safety_gymnasium": {
       "required_tracks": 402,
       "frozen_tracks": 390,
-      "active_tasks_now": 172,
+      "active_tasks_now": 173,
       "complete_frozen_matrix_tasks": 0,
       "unfrozen_tracks": 12,
       "groups": [
@@ -6674,7 +6674,7 @@
           "group": "Safe Multi-Agent / MultiGoal",
           "required": 30,
           "frozen": 30,
-          "active_now": 7,
+          "active_now": 8,
           "complete_frozen_matrix": 0,
           "with_failed_or_blocked_cells": 18,
           "unfrozen": 0
@@ -6683,7 +6683,7 @@
           "group": "Safe Multi-Agent / Velocity",
           "required": 8,
           "frozen": 8,
-          "active_now": 4,
+          "active_now": 3,
           "complete_frozen_matrix": 0,
           "with_failed_or_blocked_cells": 0,
           "unfrozen": 0
@@ -6710,7 +6710,7 @@
           "group": "Safe Vision",
           "required": 210,
           "frozen": 210,
-          "active_now": 95,
+          "active_now": 96,
           "complete_frozen_matrix": 0,
           "with_failed_or_blocked_cells": 9,
           "unfrozen": 0
@@ -6747,24 +6747,24 @@
       ],
       "core_training_policies": 18,
       "evaluation_cells": 3258,
-      "completed_evaluation_cells": 715,
+      "completed_evaluation_cells": 716,
       "live_evaluation_cells": 2,
       "all_families_running": false
     },
     "cohort_cells": 11208,
-    "completed_cells": 2467,
+    "completed_cells": 2470,
     "live_workers": 278,
     "whole_benchmark_complete": false,
     "scientific_goal_acceptance": "open",
     "counting_note": "Frozen means a protocol and queue exist, not that every task is training now. Completion here covers frozen cells only; SOTA and full benchmark acceptance remain separate.",
-    "updated": "2026-09-13T01:22:06+08:00",
+    "updated": "2026-09-13T01:24:39+08:00",
     "cohort_observations": {
-      "T1484-full-native-vector-20260910-v2": "2026-09-13T01:20:39.424405+08:00",
-      "T1484-full-native-ppo-20260910": "2026-09-13T01:20:56.660732+08:00",
+      "T1484-full-native-vector-20260910-v2": "2026-09-13T01:23:36.452646+08:00",
+      "T1484-full-native-ppo-20260910": "2026-09-13T01:23:58.112473+08:00",
       "T1484-full-vision-vector-20260910": "2026-09-13T01:21:46.690442+08:00",
-      "full_multi_agent_vector_20260911": "2026-09-12T17:20:50.848099+00:00",
-      "full_multi_agent_vision_20260911_formal_v1": "2026-09-12T17:20:34.351847+00:00",
-      "T1484-full-pixel-20260911": "2026-09-13T01:20:25.157737+08:00"
+      "full_multi_agent_vector_20260911": "2026-09-12T17:24:11.063904+00:00",
+      "full_multi_agent_vision_20260911_formal_v1": "2026-09-12T17:23:41.697613+00:00",
+      "T1484-full-pixel-20260911": "2026-09-13T01:23:25.380927+08:00"
     }
   },
   "queue_acceleration": {
@@ -6853,18 +6853,18 @@
         "cohort": "full_native_ppo_20260910",
         "current_host": {
           "status": "running",
-          "observed": "2026-09-12T17:18:04.716604+00:00",
-          "process_observed": "2026-09-12T17:20:54.956067+00:00",
+          "observed": "2026-09-12T17:21:08.827773+00:00",
+          "process_observed": "2026-09-12T17:23:55.370472+00:00",
           "fresh_observation": true,
           "mirror_sync": {
             "ok": true,
-            "observed": "2026-09-13T01:20:54.430947+08:00"
+            "observed": "2026-09-13T01:23:54.887760+08:00"
           },
           "artifact_sync": null,
           "controller_alive": true,
           "tasks": 38,
           "jobs": 912,
-          "completed": 380,
+          "completed": 381,
           "running": 16,
           "live_running": 16,
           "probes_passed": 38,
@@ -6927,7 +6927,7 @@
     "scientific_goal_acceptance": "open",
     "actual_speedup": "unmeasured; added concurrency is not a measured throughput ratio",
     "formal_live_total": 278,
-    "completed_cells": 2467,
+    "completed_cells": 2470,
     "wall_budget_amendment": {
       "observed": "2026-09-10T23:27:04.411539+08:00",
       "reason": "Observed slow native FormulaOne physics exceeds generic wall-clock watchdog despite steady progress.",
@@ -7047,7 +7047,7 @@
           "host": "aliyun",
           "previous_lanes": 24,
           "target_lanes": 27,
-          "process_observed": "2026-09-12T17:20:37.208031+00:00",
+          "process_observed": "2026-09-12T17:23:34.023303+00:00",
           "fresh_observation": true,
           "current_verified_live": 27,
           "new_jobs": [
@@ -7075,7 +7075,7 @@
           "host": "5090",
           "previous_lanes": 20,
           "target_lanes": 23,
-          "process_observed": "2026-09-13T01:20:17.806952+08:00",
+          "process_observed": "2026-09-13T01:23:15.569233+08:00",
           "fresh_observation": true,
           "current_verified_live": 23,
           "new_jobs": [
@@ -7265,7 +7265,7 @@
           "The other16 lanes continue all pending host-owned jobs.",
           "Future controller replacement must preserve the retirement implementation and allocation fields."
         ],
-        "current_process_observed": "2026-09-12T17:20:54.956067+00:00",
+        "current_process_observed": "2026-09-12T17:23:55.370472+00:00",
         "fresh_observation": true,
         "verified_retired_cpu_count": 16
       },
@@ -30410,7 +30410,7 @@
         "host": "aliyun",
         "previous_lanes": 24,
         "target_lanes": 27,
-        "process_observed": "2026-09-12T17:20:37.208031+00:00",
+        "process_observed": "2026-09-12T17:23:34.023303+00:00",
         "fresh_observation": true,
         "current_verified_live": 27,
         "new_jobs": [
@@ -30438,7 +30438,7 @@
         "host": "5090",
         "previous_lanes": 20,
         "target_lanes": 23,
-        "process_observed": "2026-09-13T01:20:17.806952+08:00",
+        "process_observed": "2026-09-13T01:23:15.569233+08:00",
         "fresh_observation": true,
         "current_verified_live": 23,
         "new_jobs": [
@@ -30628,7 +30628,7 @@
         "The other16 lanes continue all pending host-owned jobs.",
         "Future controller replacement must preserve the retirement implementation and allocation fields."
       ],
-      "current_process_observed": "2026-09-12T17:20:54.956067+00:00",
+      "current_process_observed": "2026-09-12T17:23:55.370472+00:00",
       "fresh_observation": true,
       "verified_retired_cpu_count": 16
     },
@@ -32284,7 +32284,7 @@
       "interpretation": "Complete CG2 development cohort; all3 seeds per cell. Error bars are training-seed SD. No monotonic epsilon effect, SOTA or safety acceptance claimed."
     },
     "repair": {
-      "observed": "2026-09-12T17:21:25.093904+00:00",
+      "observed": "2026-09-12T17:24:25.665425+00:00",
       "total": 12,
       "protocol_sha256": "b1f1c06bd9b0108fe9c7942be5adb15844ef88017bd4bca5b1c06ef99a72ef80",
       "controller_alive": false,
@@ -34751,21 +34751,21 @@
     "chores_scenarios": 543,
     "frozen_tasks": 933,
     "unfrozen_tasks": 12,
-    "active_tasks": 174,
+    "active_tasks": 175,
     "tasks_with_failures": 33,
     "complete_frozen_tasks": 0,
     "total_cells": 14466,
-    "completed_cells": 3182,
+    "completed_cells": 3186,
     "running_cells": 280,
     "failed_cells": 470,
     "cell_units_note": "Training-policy runs and evaluation-instance cells are counted separately by cohort_cell_units; total_cells is a queue inventory, not a policy count."
   },
   "resource_expansion": {
-    "observed": "2026-09-12T17:20:58.259557+00:00",
+    "observed": "2026-09-12T17:23:59.764029+00:00",
     "load": [
-      11.36181640625,
-      10.86572265625,
-      10.72802734375
+      10.216796875,
+      10.736328125,
+      10.71923828125
     ],
     "effective_cores": 26,
     "rows": [
@@ -34774,7 +34774,7 @@
         "alive": false,
         "identity_verified": false,
         "observed_steps": 2000000,
-        "log_age_seconds": 119481.01777720451,
+        "log_age_seconds": 119662.51423239708,
         "cpu_ticks": 0,
         "verified_threads": 0
       },
@@ -34783,7 +34783,7 @@
         "alive": false,
         "identity_verified": false,
         "observed_steps": 2000000,
-        "log_age_seconds": 119749.89918756485,
+        "log_age_seconds": 119931.39570116997,
         "cpu_ticks": 0,
         "verified_threads": 0
       },
@@ -34792,7 +34792,7 @@
         "alive": false,
         "identity_verified": false,
         "observed_steps": 2000000,
-        "log_age_seconds": 126949.13800144196,
+        "log_age_seconds": 127130.63447189331,
         "cpu_ticks": 0,
         "verified_threads": 0
       },
@@ -34801,7 +34801,7 @@
         "alive": false,
         "identity_verified": false,
         "observed_steps": 2000000,
-        "log_age_seconds": 122456.24797725677,
+        "log_age_seconds": 122637.74435830116,
         "cpu_ticks": 0,
         "verified_threads": 0
       }
@@ -34814,19 +34814,19 @@
     "cpu_counter_convention": "thread_group_total_once_per_pid",
     "fresh_observation": true,
     "new_ppo_queue": {
-      "updated": "2026-09-13T01:20:56.660732+08:00",
+      "updated": "2026-09-13T01:23:58.112473+08:00",
       "total": 1848,
-      "completed": 667,
+      "completed": 668,
       "running": 40,
       "live_running": 40,
       "failed": 0,
       "blocked": 0,
-      "pending": 1141,
+      "pending": 1140,
       "hosts": {
         "30109": {
           "status": "running",
-          "observed": "2026-09-13T01:15:17.908945+08:00",
-          "process_observed": "2026-09-13T01:20:55.010786+08:00",
+          "observed": "2026-09-13T01:21:11.739560+08:00",
+          "process_observed": "2026-09-13T01:23:55.457697+08:00",
           "fresh_observation": true,
           "mirror_sync": null,
           "artifact_sync": null,
@@ -34886,18 +34886,18 @@
         },
         "30314": {
           "status": "running",
-          "observed": "2026-09-12T17:18:04.716604+00:00",
-          "process_observed": "2026-09-12T17:20:54.956067+00:00",
+          "observed": "2026-09-12T17:21:08.827773+00:00",
+          "process_observed": "2026-09-12T17:23:55.370472+00:00",
           "fresh_observation": true,
           "mirror_sync": {
             "ok": true,
-            "observed": "2026-09-13T01:20:54.430947+08:00"
+            "observed": "2026-09-13T01:23:54.887760+08:00"
           },
           "artifact_sync": null,
           "controller_alive": true,
           "tasks": 38,
           "jobs": 912,
-          "completed": 380,
+          "completed": 381,
           "running": 16,
           "live_running": 16,
           "probes_passed": 38,
@@ -34950,7 +34950,7 @@
         }
       },
       "protocol_sha256": "b01f061faf650c89d3d9d97215a62bde603c0a8cbc8780000b630a9b75430dea",
-      "observed_training_steps": 1381300000
+      "observed_training_steps": 1382380000
     },
     "new_vision_vector_queue": {
       "updated": "2026-09-13T01:21:46.690442+08:00",
@@ -35228,18 +35228,18 @@
           "cohort": "full_native_ppo_20260910",
           "current_host": {
             "status": "running",
-            "observed": "2026-09-12T17:18:04.716604+00:00",
-            "process_observed": "2026-09-12T17:20:54.956067+00:00",
+            "observed": "2026-09-12T17:21:08.827773+00:00",
+            "process_observed": "2026-09-12T17:23:55.370472+00:00",
             "fresh_observation": true,
             "mirror_sync": {
               "ok": true,
-              "observed": "2026-09-13T01:20:54.430947+08:00"
+              "observed": "2026-09-13T01:23:54.887760+08:00"
             },
             "artifact_sync": null,
             "controller_alive": true,
             "tasks": 38,
             "jobs": 912,
-            "completed": 380,
+            "completed": 381,
             "running": 16,
             "live_running": 16,
             "probes_passed": 38,
@@ -35302,7 +35302,7 @@
       "scientific_goal_acceptance": "open",
       "actual_speedup": "unmeasured; added concurrency is not a measured throughput ratio",
       "formal_live_total": 278,
-      "completed_cells": 2467,
+      "completed_cells": 2470,
       "wall_budget_amendment": {
         "observed": "2026-09-10T23:27:04.411539+08:00",
         "reason": "Observed slow native FormulaOne physics exceeds generic wall-clock watchdog despite steady progress.",
@@ -35422,7 +35422,7 @@
             "host": "aliyun",
             "previous_lanes": 24,
             "target_lanes": 27,
-            "process_observed": "2026-09-12T17:20:37.208031+00:00",
+            "process_observed": "2026-09-12T17:23:34.023303+00:00",
             "fresh_observation": true,
             "current_verified_live": 27,
             "new_jobs": [
@@ -35450,7 +35450,7 @@
             "host": "5090",
             "previous_lanes": 20,
             "target_lanes": 23,
-            "process_observed": "2026-09-13T01:20:17.806952+08:00",
+            "process_observed": "2026-09-13T01:23:15.569233+08:00",
             "fresh_observation": true,
             "current_verified_live": 23,
             "new_jobs": [
@@ -35640,7 +35640,7 @@
             "The other16 lanes continue all pending host-owned jobs.",
             "Future controller replacement must preserve the retirement implementation and allocation fields."
           ],
-          "current_process_observed": "2026-09-12T17:20:54.956067+00:00",
+          "current_process_observed": "2026-09-12T17:23:55.370472+00:00",
           "fresh_observation": true,
           "verified_retired_cpu_count": 16
         },
@@ -35657,8 +35657,8 @@
   },
   "fleet_health": {
     "schema_version": 1,
-    "observed": "2026-09-13T01:21:29+08:00",
-    "observed_unix": 1789233689.284732,
+    "observed": "2026-09-13T01:24:28+08:00",
+    "observed_unix": 1789233868.5212762,
     "next_check_seconds": 180,
     "status": "needs_attention",
     "observer_policy": {
@@ -35679,13 +35679,13 @@
     },
     "full_matrix": {
       "total": 11208,
-      "completed": 2467,
-      "pending": 7998,
+      "completed": 2470,
+      "pending": 7995,
       "failed": 33,
       "blocked": 432,
       "running": 278,
-      "live_running": 150,
-      "verified_live": 150
+      "live_running": 278,
+      "verified_live": 278
     },
     "coverage": {
       "denominators": {
@@ -35697,7 +35697,7 @@
         "Safety-CHORES": "released evaluation instances"
       },
       "frozen_sg_tracks": 390,
-      "active_distinct_sg_tracks": 101,
+      "active_distinct_sg_tracks": 173,
       "registered_inventory_entries": 933,
       "inventory_entries_total": 945,
       "unfrozen_inventory_entries": 12,
@@ -35725,11 +35725,11 @@
         "verified_live": 68,
         "task_count": 77,
         "protocol_sha256": "82f5c8c7c040464db50f3cc5c67154bcffbc14dc0e39ff5f0edb1c353280b5ac",
-        "report_updated": "2026-09-13T01:20:39.424405+08:00",
-        "report_age_seconds": 50,
+        "report_updated": "2026-09-13T01:23:36.452646+08:00",
+        "report_age_seconds": 52,
         "report_fresh": true,
         "terminal_evidence": false,
-        "observed_training_steps": 2056080000,
+        "observed_training_steps": 2058020000,
         "controllers": {
           "aliyun": {
             "controller": {
@@ -35778,6 +35778,23 @@
             "terminal_evidence": false
           },
           "5090": {
+            "controller": {
+              "identity_alive": true,
+              "status": "alive",
+              "process_state": "S",
+              "open_fds": 27
+            },
+            "state_updated": "2026-09-13T01:24:10.863481+08:00",
+            "state_status": "running",
+            "state_protocol_sha256": "82f5c8c7c040464db50f3cc5c67154bcffbc14dc0e39ff5f0edb1c353280b5ac",
+            "state_counts": {
+              "total": 624,
+              "completed": 468,
+              "pending": 133,
+              "running": 23,
+              "failed": 0,
+              "blocked": 0
+            },
             "terminal_evidence": false
           }
         },
@@ -35789,12 +35806,11 @@
         },
         "progress": {
           "states": {
-            "unchanged": 19,
-            "advanced": 48,
-            "first_observation": 1
+            "unchanged": 13,
+            "advanced": 55
           },
           "review_needed": 0,
-          "max_unchanged_seconds": 1621,
+          "max_unchanged_seconds": 1800,
           "slow_formulaone_count": 0
         },
         "jobs_needing_review": [],
@@ -35804,8 +35820,8 @@
       },
       "ppo": {
         "total": 1848,
-        "completed": 667,
-        "pending": 1141,
+        "completed": 668,
+        "pending": 1140,
         "failed": 0,
         "blocked": 0,
         "running": 40,
@@ -35813,11 +35829,11 @@
         "verified_live": 40,
         "task_count": 77,
         "protocol_sha256": "b01f061faf650c89d3d9d97215a62bde603c0a8cbc8780000b630a9b75430dea",
-        "report_updated": "2026-09-13T01:20:56.660732+08:00",
-        "report_age_seconds": 33,
+        "report_updated": "2026-09-13T01:23:58.112473+08:00",
+        "report_age_seconds": 30,
         "report_fresh": true,
         "terminal_evidence": false,
-        "observed_training_steps": 1381300000,
+        "observed_training_steps": 1382380000,
         "controllers": {
           "30314": {
             "controller": {
@@ -35874,18 +35890,18 @@
         },
         "progress": {
           "states": {
-            "advanced": 32,
-            "unchanged": 7,
+            "advanced": 35,
+            "unchanged": 4,
             "first_observation": 1
           },
           "review_needed": 0,
-          "max_unchanged_seconds": 1441,
+          "max_unchanged_seconds": 1620,
           "slow_formulaone_count": 0
         },
         "jobs_needing_review": [],
         "integrity_errors": [],
-        "queued": 1141,
-        "complete": 667
+        "queued": 1140,
+        "complete": 668
       },
       "vision": {
         "total": 2520,
@@ -35894,15 +35910,15 @@
         "failed": 32,
         "blocked": 0,
         "running": 138,
-        "live_running": 10,
-        "verified_live": 10,
+        "live_running": 138,
+        "verified_live": 138,
         "task_count": 105,
         "protocol_sha256": "b6eef0edcc546ab70feed741a45dc5691e19195e870d0aea99db413dca59c4d9",
-        "report_updated": "2026-09-13T01:17:57.719232+08:00",
-        "report_age_seconds": 212,
+        "report_updated": "2026-09-13T01:21:46.690442+08:00",
+        "report_age_seconds": 162,
         "report_fresh": true,
         "terminal_evidence": false,
-        "observed_training_steps": 1635180000,
+        "observed_training_steps": 1636860000,
         "controllers": {
           "aliyun": {
             "controller": {
@@ -35911,15 +35927,15 @@
               "process_state": "S",
               "open_fds": 125
             },
-            "state_updated": "2026-09-12T17:20:33.862731+00:00",
+            "state_updated": "2026-09-12T17:24:10.323105+00:00",
             "state_status": "running",
             "state_protocol_sha256": "b6eef0edcc546ab70feed741a45dc5691e19195e870d0aea99db413dca59c4d9",
             "state_counts": {
               "total": 1920,
               "completed": 711,
-              "pending": 1051,
+              "pending": 1050,
               "running": 128,
-              "failed": 30,
+              "failed": 31,
               "blocked": 0
             },
             "terminal_evidence": false
@@ -35966,7 +35982,7 @@
               "identity_alive": true,
               "status": "alive",
               "process_state": "S",
-              "open_fds": 6
+              "open_fds": 4
             },
             "terminal_evidence": false
           }
@@ -35975,1951 +35991,26 @@
           "identity_alive": true,
           "status": "alive",
           "process_state": "S",
-          "open_fds": 6
+          "open_fds": 4
         },
         "progress": {
           "states": {
-            "unchanged": 138
+            "unchanged": 71,
+            "advanced": 67
           },
           "review_needed": 0,
-          "max_unchanged_seconds": 2700,
+          "max_unchanged_seconds": 2697,
           "slow_formulaone_count": 63
         },
-        "jobs_needing_review": [
-          {
-            "id": "SafetyDoggoFormulaOne1-v0__safeot_eps0.1__s1",
-            "task": "SafetyDoggoFormulaOne1-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 1400000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 1261,
-            "warning_after_seconds": 21600,
-            "review_needed": false,
-            "training_wall_budget_hours": 96,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyDoggoFormulaOne2-v0__safeot_eps0.1__s1",
-            "task": "SafetyDoggoFormulaOne2-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 1400000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 1079,
-            "warning_after_seconds": 21600,
-            "review_needed": false,
-            "training_wall_budget_hours": 96,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyPointFormulaOne1-v0__safeot_eps0.1__s1",
-            "task": "SafetyPointFormulaOne1-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 1420000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 1079,
-            "warning_after_seconds": 21600,
-            "review_needed": false,
-            "training_wall_budget_hours": 96,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyRacecarFormulaOne2-v0__safeot_eps0.1__s1",
-            "task": "SafetyRacecarFormulaOne2-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 1360000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 1261,
-            "warning_after_seconds": 21600,
-            "review_needed": false,
-            "training_wall_budget_hours": 96,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyDoggoFormulaOne1-v0__safeot_eps1__s1",
-            "task": "SafetyDoggoFormulaOne1-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 1300000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 2518,
-            "warning_after_seconds": 21600,
-            "review_needed": false,
-            "training_wall_budget_hours": 96,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyDoggoFormulaOne2-v0__safeot_eps1__s1",
-            "task": "SafetyDoggoFormulaOne2-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 1300000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 2700,
-            "warning_after_seconds": 21600,
-            "review_needed": false,
-            "training_wall_budget_hours": 96,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyPointFormulaOne1-v0__safeot_eps1__s1",
-            "task": "SafetyPointFormulaOne1-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 1420000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 1079,
-            "warning_after_seconds": 21600,
-            "review_needed": false,
-            "training_wall_budget_hours": 96,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyRacecarFormulaOne1-v0__safeot_eps1__s1",
-            "task": "SafetyRacecarFormulaOne1-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 1300000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 361,
-            "warning_after_seconds": 21600,
-            "review_needed": false,
-            "training_wall_budget_hours": 96,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyCarFormulaOne1-v0__safeot_eps3__s1",
-            "task": "SafetyCarFormulaOne1-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 1280000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 2518,
-            "warning_after_seconds": 21600,
-            "review_needed": false,
-            "training_wall_budget_hours": 96,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyDoggoFormulaOne1-v0__safeot_eps3__s1",
-            "task": "SafetyDoggoFormulaOne1-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 1260000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 1621,
-            "warning_after_seconds": 21600,
-            "review_needed": false,
-            "training_wall_budget_hours": 96,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyDoggoFormulaOne2-v0__safeot_eps3__s1",
-            "task": "SafetyDoggoFormulaOne2-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 1280000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 181,
-            "warning_after_seconds": 21600,
-            "review_needed": false,
-            "training_wall_budget_hours": 96,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyPointFormulaOne1-v0__safeot_eps3__s1",
-            "task": "SafetyPointFormulaOne1-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 1260000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 900,
-            "warning_after_seconds": 21600,
-            "review_needed": false,
-            "training_wall_budget_hours": 96,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyPointFormulaOne2-v0__safeot_eps3__s1",
-            "task": "SafetyPointFormulaOne2-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 1340000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 1621,
-            "warning_after_seconds": 21600,
-            "review_needed": false,
-            "training_wall_budget_hours": 96,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyCarFormulaOne2-v0__penalty_lambda0.1__s1",
-            "task": "SafetyCarFormulaOne2-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 1160000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 1441,
-            "warning_after_seconds": 21600,
-            "review_needed": false,
-            "training_wall_budget_hours": 96,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyPointFormulaOne2-v0__penalty_lambda0.1__s1",
-            "task": "SafetyPointFormulaOne2-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 1220000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 1621,
-            "warning_after_seconds": 21600,
-            "review_needed": false,
-            "training_wall_budget_hours": 96,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyRacecarFormulaOne1-v0__penalty_lambda0.1__s1",
-            "task": "SafetyRacecarFormulaOne1-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 1140000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 900,
-            "warning_after_seconds": 21600,
-            "review_needed": false,
-            "training_wall_budget_hours": 96,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyRacecarFormulaOne2-v0__penalty_lambda0.1__s1",
-            "task": "SafetyRacecarFormulaOne2-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 1140000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 1079,
-            "warning_after_seconds": 21600,
-            "review_needed": false,
-            "training_wall_budget_hours": 96,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyDoggoFormulaOne2-v0__penalty_lambda1__s1",
-            "task": "SafetyDoggoFormulaOne2-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 1020000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 1261,
-            "warning_after_seconds": 21600,
-            "review_needed": false,
-            "training_wall_budget_hours": 96,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyPointFormulaOne1-v0__penalty_lambda1__s1",
-            "task": "SafetyPointFormulaOne1-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 1080000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 1441,
-            "warning_after_seconds": 21600,
-            "review_needed": false,
-            "training_wall_budget_hours": 96,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyRacecarFormulaOne1-v0__penalty_lambda1__s1",
-            "task": "SafetyRacecarFormulaOne1-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 980000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 1621,
-            "warning_after_seconds": 21600,
-            "review_needed": false,
-            "training_wall_budget_hours": 96,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyCarFormulaOne1-v0__penalty_lambda10__s1",
-            "task": "SafetyCarFormulaOne1-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 980000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 1621,
-            "warning_after_seconds": 21600,
-            "review_needed": false,
-            "training_wall_budget_hours": 96,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyCarFormulaOne2-v0__penalty_lambda10__s1",
-            "task": "SafetyCarFormulaOne2-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 920000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 1079,
-            "warning_after_seconds": 21600,
-            "review_needed": false,
-            "training_wall_budget_hours": 96,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyDoggoFormulaOne1-v0__penalty_lambda10__s1",
-            "task": "SafetyDoggoFormulaOne1-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 820000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 1981,
-            "warning_after_seconds": 21600,
-            "review_needed": false,
-            "training_wall_budget_hours": 96,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyDoggoFormulaOne2-v0__penalty_lambda10__s1",
-            "task": "SafetyDoggoFormulaOne2-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 880000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 1621,
-            "warning_after_seconds": 21600,
-            "review_needed": false,
-            "training_wall_budget_hours": 96,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyPointFormulaOne1-v0__penalty_lambda10__s1",
-            "task": "SafetyPointFormulaOne1-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 880000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 541,
-            "warning_after_seconds": 21600,
-            "review_needed": false,
-            "training_wall_budget_hours": 96,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyPointFormulaOne2-v0__penalty_lambda10__s1",
-            "task": "SafetyPointFormulaOne2-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 940000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 361,
-            "warning_after_seconds": 21600,
-            "review_needed": false,
-            "training_wall_budget_hours": 96,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyRacecarFormulaOne1-v0__penalty_lambda10__s1",
-            "task": "SafetyRacecarFormulaOne1-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 840000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 1079,
-            "warning_after_seconds": 21600,
-            "review_needed": false,
-            "training_wall_budget_hours": 96,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyRacecarFormulaOne2-v0__penalty_lambda10__s1",
-            "task": "SafetyRacecarFormulaOne2-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 780000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 1261,
-            "warning_after_seconds": 21600,
-            "review_needed": false,
-            "training_wall_budget_hours": 96,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyCarFormulaOne2-v0__trpo_lag__s1",
-            "task": "SafetyCarFormulaOne2-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 780000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 900,
-            "warning_after_seconds": 21600,
-            "review_needed": false,
-            "training_wall_budget_hours": 96,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyDoggoFormulaOne1-v0__trpo_lag__s1",
-            "task": "SafetyDoggoFormulaOne1-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 700000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 361,
-            "warning_after_seconds": 21600,
-            "review_needed": false,
-            "training_wall_budget_hours": 96,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyDoggoFormulaOne2-v0__trpo_lag__s1",
-            "task": "SafetyDoggoFormulaOne2-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 740000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 1261,
-            "warning_after_seconds": 21600,
-            "review_needed": false,
-            "training_wall_budget_hours": 96,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyPointFormulaOne1-v0__trpo_lag__s1",
-            "task": "SafetyPointFormulaOne1-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 720000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 1079,
-            "warning_after_seconds": 21600,
-            "review_needed": false,
-            "training_wall_budget_hours": 96,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyPointFormulaOne2-v0__trpo_lag__s1",
-            "task": "SafetyPointFormulaOne2-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 760000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 1621,
-            "warning_after_seconds": 21600,
-            "review_needed": false,
-            "training_wall_budget_hours": 96,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyRacecarFormulaOne1-v0__trpo_lag__s1",
-            "task": "SafetyRacecarFormulaOne1-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 680000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 2340,
-            "warning_after_seconds": 21600,
-            "review_needed": false,
-            "training_wall_budget_hours": 96,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyRacecarFormulaOne2-v0__trpo_lag__s1",
-            "task": "SafetyRacecarFormulaOne2-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 680000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 2340,
-            "warning_after_seconds": 21600,
-            "review_needed": false,
-            "training_wall_budget_hours": 96,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyCarFormulaOne1-v0__cpo__s1",
-            "task": "SafetyCarFormulaOne1-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 660000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 2340,
-            "warning_after_seconds": 21600,
-            "review_needed": false,
-            "training_wall_budget_hours": 96,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyCarFormulaOne2-v0__cpo__s1",
-            "task": "SafetyCarFormulaOne2-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 620000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 1079,
-            "warning_after_seconds": 21600,
-            "review_needed": false,
-            "training_wall_budget_hours": 96,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyDoggoFormulaOne2-v0__cpo__s1",
-            "task": "SafetyDoggoFormulaOne2-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 540000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 1261,
-            "warning_after_seconds": 21600,
-            "review_needed": false,
-            "training_wall_budget_hours": 96,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyPointFormulaOne1-v0__cpo__s1",
-            "task": "SafetyPointFormulaOne1-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 580000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 181,
-            "warning_after_seconds": 21600,
-            "review_needed": false,
-            "training_wall_budget_hours": 96,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyPointFormulaOne2-v0__cpo__s1",
-            "task": "SafetyPointFormulaOne2-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 540000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 361,
-            "warning_after_seconds": 21600,
-            "review_needed": false,
-            "training_wall_budget_hours": 96,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyRacecarFormulaOne1-v0__cpo__s1",
-            "task": "SafetyRacecarFormulaOne1-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 480000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 361,
-            "warning_after_seconds": 21600,
-            "review_needed": false,
-            "training_wall_budget_hours": 96,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyCarFormulaOne1-v0__safeot_eps0.1__s2",
-            "task": "SafetyCarFormulaOne1-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 440000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 900,
-            "warning_after_seconds": 21600,
-            "review_needed": false,
-            "training_wall_budget_hours": 96,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyCarFormulaOne2-v0__safeot_eps0.1__s2",
-            "task": "SafetyCarFormulaOne2-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 440000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 541,
-            "warning_after_seconds": 21600,
-            "review_needed": false,
-            "training_wall_budget_hours": 96,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyRacecarFormulaOne1-v0__safeot_eps0.1__s2",
-            "task": "SafetyRacecarFormulaOne1-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 300000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 1441,
-            "warning_after_seconds": 21600,
-            "review_needed": false,
-            "training_wall_budget_hours": 96,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyRacecarFormulaOne2-v0__safeot_eps0.1__s2",
-            "task": "SafetyRacecarFormulaOne2-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 300000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 1441,
-            "warning_after_seconds": 21600,
-            "review_needed": false,
-            "training_wall_budget_hours": 96,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyCarFormulaOne2-v0__safeot_eps1__s2",
-            "task": "SafetyCarFormulaOne2-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 280000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 1621,
-            "warning_after_seconds": 21600,
-            "review_needed": false,
-            "training_wall_budget_hours": 96,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyCarRace0-v0__safeot_eps1__s2",
-            "task": "SafetyCarRace0-v0",
-            "host": "aliyun",
-            "phase": "evaluating",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 2000000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 181,
-            "warning_after_seconds": 7200,
-            "review_needed": false,
-            "training_wall_budget_hours": null,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyDoggoFormulaOne2-v0__safeot_eps1__s2",
-            "task": "SafetyDoggoFormulaOne2-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 220000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 541,
-            "warning_after_seconds": 21600,
-            "review_needed": false,
-            "training_wall_budget_hours": 96,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyPointFormulaOne1-v0__safeot_eps1__s2",
-            "task": "SafetyPointFormulaOne1-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 200000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 361,
-            "warning_after_seconds": 21600,
-            "review_needed": false,
-            "training_wall_budget_hours": 96,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyPointRace0-v0__safeot_eps1__s2",
-            "task": "SafetyPointRace0-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 1320000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 361,
-            "warning_after_seconds": 7200,
-            "review_needed": false,
-            "training_wall_budget_hours": null,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyRacecarBuildingButton1-v0__safeot_eps1__s2",
-            "task": "SafetyRacecarBuildingButton1-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 1600000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 181,
-            "warning_after_seconds": 7200,
-            "review_needed": false,
-            "training_wall_budget_hours": null,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyRacecarBuildingButton2-v0__safeot_eps1__s2",
-            "task": "SafetyRacecarBuildingButton2-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 1340000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 181,
-            "warning_after_seconds": 7200,
-            "review_needed": false,
-            "training_wall_budget_hours": null,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyRacecarBuildingGoal1-v0__safeot_eps1__s2",
-            "task": "SafetyRacecarBuildingGoal1-v0",
-            "host": "aliyun",
-            "phase": "evaluating",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 2000000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 2518,
-            "warning_after_seconds": 7200,
-            "review_needed": false,
-            "training_wall_budget_hours": null,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyRacecarBuildingGoal2-v0__safeot_eps1__s2",
-            "task": "SafetyRacecarBuildingGoal2-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 1320000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 181,
-            "warning_after_seconds": 7200,
-            "review_needed": false,
-            "training_wall_budget_hours": null,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyRacecarBuildingPush0-v0__safeot_eps1__s2",
-            "task": "SafetyRacecarBuildingPush0-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 1800000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 181,
-            "warning_after_seconds": 7200,
-            "review_needed": false,
-            "training_wall_budget_hours": null,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyRacecarBuildingPush1-v0__safeot_eps1__s2",
-            "task": "SafetyRacecarBuildingPush1-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 1600000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 181,
-            "warning_after_seconds": 7200,
-            "review_needed": false,
-            "training_wall_budget_hours": null,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyRacecarBuildingPush2-v0__safeot_eps1__s2",
-            "task": "SafetyRacecarBuildingPush2-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 1500000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 361,
-            "warning_after_seconds": 7200,
-            "review_needed": false,
-            "training_wall_budget_hours": null,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyRacecarFadingEasy2-v0__safeot_eps1__s2",
-            "task": "SafetyRacecarFadingEasy2-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 1740000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 181,
-            "warning_after_seconds": 7200,
-            "review_needed": false,
-            "training_wall_budget_hours": null,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyRacecarFadingHard2-v0__safeot_eps1__s2",
-            "task": "SafetyRacecarFadingHard2-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 1500000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 181,
-            "warning_after_seconds": 7200,
-            "review_needed": false,
-            "training_wall_budget_hours": null,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyRacecarFormulaOne1-v0__safeot_eps1__s2",
-            "task": "SafetyRacecarFormulaOne1-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 160000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 181,
-            "warning_after_seconds": 21600,
-            "review_needed": false,
-            "training_wall_budget_hours": 96,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyRacecarFormulaOne2-v0__safeot_eps1__s2",
-            "task": "SafetyRacecarFormulaOne2-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 140000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 1079,
-            "warning_after_seconds": 21600,
-            "review_needed": false,
-            "training_wall_budget_hours": 96,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyRacecarRace0-v0__safeot_eps1__s2",
-            "task": "SafetyRacecarRace0-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 1460000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 181,
-            "warning_after_seconds": 7200,
-            "review_needed": false,
-            "training_wall_budget_hours": null,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyRacecarRace1-v0__safeot_eps1__s2",
-            "task": "SafetyRacecarRace1-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 1420000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 181,
-            "warning_after_seconds": 7200,
-            "review_needed": false,
-            "training_wall_budget_hours": null,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyRacecarRace2-v0__safeot_eps1__s2",
-            "task": "SafetyRacecarRace2-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 1340000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 181,
-            "warning_after_seconds": 7200,
-            "review_needed": false,
-            "training_wall_budget_hours": null,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyCarBuildingGoal1-v0__safeot_eps3__s2",
-            "task": "SafetyCarBuildingGoal1-v0",
-            "host": "aliyun",
-            "phase": "evaluating",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 2000000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 1079,
-            "warning_after_seconds": 7200,
-            "review_needed": false,
-            "training_wall_budget_hours": null,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyCarBuildingGoal2-v0__safeot_eps3__s2",
-            "task": "SafetyCarBuildingGoal2-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 1580000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 181,
-            "warning_after_seconds": 7200,
-            "review_needed": false,
-            "training_wall_budget_hours": null,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyCarBuildingPush0-v0__safeot_eps3__s2",
-            "task": "SafetyCarBuildingPush0-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 1960000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 181,
-            "warning_after_seconds": 7200,
-            "review_needed": false,
-            "training_wall_budget_hours": null,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyCarBuildingPush1-v0__safeot_eps3__s2",
-            "task": "SafetyCarBuildingPush1-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 1820000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 181,
-            "warning_after_seconds": 7200,
-            "review_needed": false,
-            "training_wall_budget_hours": null,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyCarBuildingPush2-v0__safeot_eps3__s2",
-            "task": "SafetyCarBuildingPush2-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 1700000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 181,
-            "warning_after_seconds": 7200,
-            "review_needed": false,
-            "training_wall_budget_hours": null,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyCarFadingEasy2-v0__safeot_eps3__s2",
-            "task": "SafetyCarFadingEasy2-v0",
-            "host": "aliyun",
-            "phase": "evaluating",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 2000000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 1441,
-            "warning_after_seconds": 7200,
-            "review_needed": false,
-            "training_wall_budget_hours": null,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyCarFadingHard2-v0__safeot_eps3__s2",
-            "task": "SafetyCarFadingHard2-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 1700000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 181,
-            "warning_after_seconds": 7200,
-            "review_needed": false,
-            "training_wall_budget_hours": null,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyCarFormulaOne0-v0__safeot_eps3__s2",
-            "task": "SafetyCarFormulaOne0-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 1640000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 181,
-            "warning_after_seconds": 21600,
-            "review_needed": false,
-            "training_wall_budget_hours": 96,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyCarFormulaOne1-v0__safeot_eps3__s2",
-            "task": "SafetyCarFormulaOne1-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 100000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 1441,
-            "warning_after_seconds": 21600,
-            "review_needed": false,
-            "training_wall_budget_hours": 96,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyCarFormulaOne2-v0__safeot_eps3__s2",
-            "task": "SafetyCarFormulaOne2-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 100000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 1261,
-            "warning_after_seconds": 21600,
-            "review_needed": false,
-            "training_wall_budget_hours": 96,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyCarRace0-v0__safeot_eps3__s2",
-            "task": "SafetyCarRace0-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 880000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 361,
-            "warning_after_seconds": 7200,
-            "review_needed": false,
-            "training_wall_budget_hours": null,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyCarRace1-v0__safeot_eps3__s2",
-            "task": "SafetyCarRace1-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 1200000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 181,
-            "warning_after_seconds": 7200,
-            "review_needed": false,
-            "training_wall_budget_hours": null,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyCarRace2-v0__safeot_eps3__s2",
-            "task": "SafetyCarRace2-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 1120000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 181,
-            "warning_after_seconds": 7200,
-            "review_needed": false,
-            "training_wall_budget_hours": null,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyDoggoBuildingButton0-v0__safeot_eps3__s2",
-            "task": "SafetyDoggoBuildingButton0-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 1300000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 181,
-            "warning_after_seconds": 7200,
-            "review_needed": false,
-            "training_wall_budget_hours": null,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyDoggoBuildingButton1-v0__safeot_eps3__s2",
-            "task": "SafetyDoggoBuildingButton1-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 940000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 181,
-            "warning_after_seconds": 7200,
-            "review_needed": false,
-            "training_wall_budget_hours": null,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyDoggoBuildingButton2-v0__safeot_eps3__s2",
-            "task": "SafetyDoggoBuildingButton2-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 820000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 181,
-            "warning_after_seconds": 7200,
-            "review_needed": false,
-            "training_wall_budget_hours": null,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyDoggoBuildingGoal0-v0__safeot_eps3__s2",
-            "task": "SafetyDoggoBuildingGoal0-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 1280000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 181,
-            "warning_after_seconds": 7200,
-            "review_needed": false,
-            "training_wall_budget_hours": null,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyDoggoBuildingGoal1-v0__safeot_eps3__s2",
-            "task": "SafetyDoggoBuildingGoal1-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 1100000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 181,
-            "warning_after_seconds": 7200,
-            "review_needed": false,
-            "training_wall_budget_hours": null,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyDoggoBuildingGoal2-v0__safeot_eps3__s2",
-            "task": "SafetyDoggoBuildingGoal2-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 940000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 181,
-            "warning_after_seconds": 7200,
-            "review_needed": false,
-            "training_wall_budget_hours": null,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyDoggoBuildingPush0-v0__safeot_eps3__s2",
-            "task": "SafetyDoggoBuildingPush0-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 1060000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 181,
-            "warning_after_seconds": 7200,
-            "review_needed": false,
-            "training_wall_budget_hours": null,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyDoggoBuildingPush1-v0__safeot_eps3__s2",
-            "task": "SafetyDoggoBuildingPush1-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 920000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 181,
-            "warning_after_seconds": 7200,
-            "review_needed": false,
-            "training_wall_budget_hours": null,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyDoggoBuildingPush2-v0__safeot_eps3__s2",
-            "task": "SafetyDoggoBuildingPush2-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 860000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 361,
-            "warning_after_seconds": 7200,
-            "review_needed": false,
-            "training_wall_budget_hours": null,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyDoggoFadingEasy1-v0__safeot_eps3__s2",
-            "task": "SafetyDoggoFadingEasy1-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 1780000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 181,
-            "warning_after_seconds": 7200,
-            "review_needed": false,
-            "training_wall_budget_hours": null,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyDoggoFadingEasy2-v0__safeot_eps3__s2",
-            "task": "SafetyDoggoFadingEasy2-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 1120000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 181,
-            "warning_after_seconds": 7200,
-            "review_needed": false,
-            "training_wall_budget_hours": null,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyDoggoFadingHard0-v0__safeot_eps3__s2",
-            "task": "SafetyDoggoFadingHard0-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 1960000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 181,
-            "warning_after_seconds": 7200,
-            "review_needed": false,
-            "training_wall_budget_hours": null,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyDoggoFadingHard1-v0__safeot_eps3__s2",
-            "task": "SafetyDoggoFadingHard1-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 1640000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 181,
-            "warning_after_seconds": 7200,
-            "review_needed": false,
-            "training_wall_budget_hours": null,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyDoggoFadingHard2-v0__safeot_eps3__s2",
-            "task": "SafetyDoggoFadingHard2-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 980000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 181,
-            "warning_after_seconds": 7200,
-            "review_needed": false,
-            "training_wall_budget_hours": null,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyDoggoFormulaOne0-v0__safeot_eps3__s2",
-            "task": "SafetyDoggoFormulaOne0-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 880000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 181,
-            "warning_after_seconds": 21600,
-            "review_needed": false,
-            "training_wall_budget_hours": 96,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyDoggoFormulaOne1-v0__safeot_eps3__s2",
-            "task": "SafetyDoggoFormulaOne1-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 60000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 1261,
-            "warning_after_seconds": 21600,
-            "review_needed": false,
-            "training_wall_budget_hours": 96,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyDoggoFormulaOne2-v0__safeot_eps3__s2",
-            "task": "SafetyDoggoFormulaOne2-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 60000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 1261,
-            "warning_after_seconds": 21600,
-            "review_needed": false,
-            "training_wall_budget_hours": 96,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyDoggoRace0-v0__safeot_eps3__s2",
-            "task": "SafetyDoggoRace0-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 700000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 181,
-            "warning_after_seconds": 7200,
-            "review_needed": false,
-            "training_wall_budget_hours": null,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyDoggoRace1-v0__safeot_eps3__s2",
-            "task": "SafetyDoggoRace1-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 680000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 361,
-            "warning_after_seconds": 7200,
-            "review_needed": false,
-            "training_wall_budget_hours": null,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyDoggoRace2-v0__safeot_eps3__s2",
-            "task": "SafetyDoggoRace2-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 600000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 181,
-            "warning_after_seconds": 7200,
-            "review_needed": false,
-            "training_wall_budget_hours": null,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyPointBuildingButton0-v0__safeot_eps3__s2",
-            "task": "SafetyPointBuildingButton0-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 940000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 181,
-            "warning_after_seconds": 7200,
-            "review_needed": false,
-            "training_wall_budget_hours": null,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyPointBuildingButton1-v0__safeot_eps3__s2",
-            "task": "SafetyPointBuildingButton1-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 700000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 181,
-            "warning_after_seconds": 7200,
-            "review_needed": false,
-            "training_wall_budget_hours": null,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyPointBuildingButton2-v0__safeot_eps3__s2",
-            "task": "SafetyPointBuildingButton2-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 580000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 181,
-            "warning_after_seconds": 7200,
-            "review_needed": false,
-            "training_wall_budget_hours": null,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyPointBuildingGoal0-v0__safeot_eps3__s2",
-            "task": "SafetyPointBuildingGoal0-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 960000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 181,
-            "warning_after_seconds": 7200,
-            "review_needed": false,
-            "training_wall_budget_hours": null,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyPointBuildingGoal1-v0__safeot_eps3__s2",
-            "task": "SafetyPointBuildingGoal1-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 880000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 181,
-            "warning_after_seconds": 7200,
-            "review_needed": false,
-            "training_wall_budget_hours": null,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyPointBuildingGoal2-v0__safeot_eps3__s2",
-            "task": "SafetyPointBuildingGoal2-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 620000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 181,
-            "warning_after_seconds": 7200,
-            "review_needed": false,
-            "training_wall_budget_hours": null,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyPointBuildingPush0-v0__safeot_eps3__s2",
-            "task": "SafetyPointBuildingPush0-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 800000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 181,
-            "warning_after_seconds": 7200,
-            "review_needed": false,
-            "training_wall_budget_hours": null,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyPointBuildingPush1-v0__safeot_eps3__s2",
-            "task": "SafetyPointBuildingPush1-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 720000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 181,
-            "warning_after_seconds": 7200,
-            "review_needed": false,
-            "training_wall_budget_hours": null,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyPointBuildingPush2-v0__safeot_eps3__s2",
-            "task": "SafetyPointBuildingPush2-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 660000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 181,
-            "warning_after_seconds": 7200,
-            "review_needed": false,
-            "training_wall_budget_hours": null,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyPointFadingEasy0-v0__safeot_eps3__s2",
-            "task": "SafetyPointFadingEasy0-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 1940000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 181,
-            "warning_after_seconds": 7200,
-            "review_needed": false,
-            "training_wall_budget_hours": null,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyPointFadingEasy1-v0__safeot_eps3__s2",
-            "task": "SafetyPointFadingEasy1-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 1620000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 181,
-            "warning_after_seconds": 7200,
-            "review_needed": false,
-            "training_wall_budget_hours": null,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyPointFadingEasy2-v0__safeot_eps3__s2",
-            "task": "SafetyPointFadingEasy2-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 940000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 181,
-            "warning_after_seconds": 7200,
-            "review_needed": false,
-            "training_wall_budget_hours": null,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyPointFadingHard0-v0__safeot_eps3__s2",
-            "task": "SafetyPointFadingHard0-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 1660000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 181,
-            "warning_after_seconds": 7200,
-            "review_needed": false,
-            "training_wall_budget_hours": null,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyPointFadingHard1-v0__safeot_eps3__s2",
-            "task": "SafetyPointFadingHard1-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 1360000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 181,
-            "warning_after_seconds": 7200,
-            "review_needed": false,
-            "training_wall_budget_hours": null,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyPointFadingHard2-v0__safeot_eps3__s2",
-            "task": "SafetyPointFadingHard2-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 700000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 181,
-            "warning_after_seconds": 7200,
-            "review_needed": false,
-            "training_wall_budget_hours": null,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyPointFormulaOne0-v0__safeot_eps3__s2",
-            "task": "SafetyPointFormulaOne0-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 700000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 181,
-            "warning_after_seconds": 21600,
-            "review_needed": false,
-            "training_wall_budget_hours": 96,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyPointFormulaOne1-v0__safeot_eps3__s2",
-            "task": "SafetyPointFormulaOne1-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 20000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 1981,
-            "warning_after_seconds": 21600,
-            "review_needed": false,
-            "training_wall_budget_hours": 96,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyPointFormulaOne2-v0__safeot_eps3__s2",
-            "task": "SafetyPointFormulaOne2-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 20000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 1621,
-            "warning_after_seconds": 21600,
-            "review_needed": false,
-            "training_wall_budget_hours": 96,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyPointRace0-v0__safeot_eps3__s2",
-            "task": "SafetyPointRace0-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 320000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 181,
-            "warning_after_seconds": 7200,
-            "review_needed": false,
-            "training_wall_budget_hours": null,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyPointRace1-v0__safeot_eps3__s2",
-            "task": "SafetyPointRace1-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 340000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 181,
-            "warning_after_seconds": 7200,
-            "review_needed": false,
-            "training_wall_budget_hours": null,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyPointRace2-v0__safeot_eps3__s2",
-            "task": "SafetyPointRace2-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 340000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 181,
-            "warning_after_seconds": 7200,
-            "review_needed": false,
-            "training_wall_budget_hours": null,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyRacecarBuildingButton0-v0__safeot_eps3__s2",
-            "task": "SafetyRacecarBuildingButton0-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 360000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 181,
-            "warning_after_seconds": 7200,
-            "review_needed": false,
-            "training_wall_budget_hours": null,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyRacecarBuildingButton1-v0__safeot_eps3__s2",
-            "task": "SafetyRacecarBuildingButton1-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 240000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 181,
-            "warning_after_seconds": 7200,
-            "review_needed": false,
-            "training_wall_budget_hours": null,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyRacecarBuildingButton2-v0__safeot_eps3__s2",
-            "task": "SafetyRacecarBuildingButton2-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 140000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 181,
-            "warning_after_seconds": 7200,
-            "review_needed": false,
-            "training_wall_budget_hours": null,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyRacecarBuildingGoal0-v0__safeot_eps3__s2",
-            "task": "SafetyRacecarBuildingGoal0-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 240000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 181,
-            "warning_after_seconds": 7200,
-            "review_needed": false,
-            "training_wall_budget_hours": null,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyRacecarBuildingGoal1-v0__safeot_eps3__s2",
-            "task": "SafetyRacecarBuildingGoal1-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 140000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 181,
-            "warning_after_seconds": 7200,
-            "review_needed": false,
-            "training_wall_budget_hours": null,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyRacecarBuildingGoal2-v0__safeot_eps3__s2",
-            "task": "SafetyRacecarBuildingGoal2-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 40000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 361,
-            "warning_after_seconds": 7200,
-            "review_needed": false,
-            "training_wall_budget_hours": null,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyRacecarBuildingPush0-v0__safeot_eps3__s2",
-            "task": "SafetyRacecarBuildingPush0-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 60000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 181,
-            "warning_after_seconds": 7200,
-            "review_needed": false,
-            "training_wall_budget_hours": null,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyRacecarBuildingPush1-v0__safeot_eps3__s2",
-            "task": "SafetyRacecarBuildingPush1-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 40000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 181,
-            "warning_after_seconds": 7200,
-            "review_needed": false,
-            "training_wall_budget_hours": null,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyRacecarBuildingPush2-v0__safeot_eps3__s2",
-            "task": "SafetyRacecarBuildingPush2-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 40000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 181,
-            "warning_after_seconds": 7200,
-            "review_needed": false,
-            "training_wall_budget_hours": null,
-            "automatic_restart_allowed": false
-          },
-          {
-            "id": "SafetyRacecarFadingEasy0-v0__safeot_eps3__s2",
-            "task": "SafetyRacecarFadingEasy0-v0",
-            "host": "aliyun",
-            "phase": "training",
-            "live": false,
-            "liveness_observation_fresh": false,
-            "steps": 20000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 181,
-            "warning_after_seconds": 7200,
-            "review_needed": false,
-            "training_wall_budget_hours": null,
-            "automatic_restart_allowed": false
-          }
-        ],
-        "integrity_errors": [
-          {
-            "host": "aliyun",
-            "kind": "observation_failed_or_stale"
-          }
-        ],
+        "jobs_needing_review": [],
+        "integrity_errors": [],
         "queued": 1606,
         "complete": 744
       },
       "pixel": {
         "total": 4080,
-        "completed": 30,
-        "pending": 4030,
+        "completed": 31,
+        "pending": 4029,
         "failed": 0,
         "blocked": 0,
         "running": 20,
@@ -37927,11 +36018,11 @@
         "verified_live": 20,
         "task_count": 170,
         "protocol_sha256": "cc79a72ae0e19faacc636606a5509fd9b105123b2f196fb2481497f10e08e084",
-        "report_updated": "2026-09-13T01:20:25.157737+08:00",
-        "report_age_seconds": 64,
+        "report_updated": "2026-09-13T01:23:25.380927+08:00",
+        "report_age_seconds": 63,
         "report_fresh": true,
         "terminal_evidence": false,
-        "observed_training_steps": 83920000,
+        "observed_training_steps": 84040000,
         "controllers": {
           "30109": {
             "controller": {
@@ -37940,13 +36031,13 @@
               "process_state": "S",
               "open_fds": 4
             },
-            "state_updated": "2026-09-13T01:21:10.861817+08:00",
+            "state_updated": "2026-09-13T01:24:11.504516+08:00",
             "state_status": "running",
             "state_protocol_sha256": "cc79a72ae0e19faacc636606a5509fd9b105123b2f196fb2481497f10e08e084",
             "state_counts": {
               "total": 4080,
-              "completed": 30,
-              "pending": 4030,
+              "completed": 31,
+              "pending": 4029,
               "running": 20,
               "failed": 0,
               "blocked": 0
@@ -37968,22 +36059,23 @@
         },
         "progress": {
           "states": {
-            "unchanged": 12,
-            "advanced": 8
+            "advanced": 6,
+            "unchanged": 13,
+            "first_observation": 1
           },
           "review_needed": 0,
-          "max_unchanged_seconds": 3960,
+          "max_unchanged_seconds": 1259,
           "slow_formulaone_count": 3
         },
         "jobs_needing_review": [],
         "integrity_errors": [],
-        "queued": 4030,
-        "complete": 30
+        "queued": 4029,
+        "complete": 31
       },
       "multi_agent": {
         "total": 552,
-        "completed": 40,
-        "pending": 288,
+        "completed": 41,
+        "pending": 287,
         "failed": 0,
         "blocked": 216,
         "running": 8,
@@ -37991,11 +36083,11 @@
         "verified_live": 8,
         "task_count": 23,
         "protocol_sha256": "220ec556ed4af7bc18f8ed799ab4ce74016624f81835ba56ea3f9dc86e6428a5",
-        "report_updated": "2026-09-12T17:20:50.848099+00:00",
-        "report_age_seconds": 38,
+        "report_updated": "2026-09-12T17:24:11.063904+00:00",
+        "report_age_seconds": 17,
         "report_fresh": true,
         "terminal_evidence": false,
-        "observed_training_steps": 89639133,
+        "observed_training_steps": 89787345,
         "controllers": {
           "aliyun": {
             "controller": {
@@ -38004,13 +36096,13 @@
               "process_state": "S",
               "open_fds": 12
             },
-            "state_updated": "2026-09-12T17:13:02.488095+00:00",
+            "state_updated": "2026-09-12T17:23:12.152808+00:00",
             "state_status": "running",
             "state_protocol_sha256": "220ec556ed4af7bc18f8ed799ab4ce74016624f81835ba56ea3f9dc86e6428a5",
             "state_counts": {
               "total": 552,
-              "completed": 40,
-              "pending": 288,
+              "completed": 41,
+              "pending": 287,
               "running": 8,
               "failed": 0,
               "blocked": 216
@@ -38027,16 +36119,16 @@
         "progress": {
           "states": {
             "advanced": 7,
-            "unchanged": 1
+            "first_observation": 1
           },
           "review_needed": 0,
-          "max_unchanged_seconds": 361,
+          "max_unchanged_seconds": 0,
           "slow_formulaone_count": 0
         },
         "jobs_needing_review": [],
         "integrity_errors": [],
-        "queued": 288,
-        "complete": 40
+        "queued": 287,
+        "complete": 41
       },
       "multi_agent_vision": {
         "total": 360,
@@ -38049,11 +36141,11 @@
         "verified_live": 4,
         "task_count": 15,
         "protocol_sha256": "16b12775b496b59c8083d22e6ab0603a1552c0d9cd4138479e4d72c4b65b44ef",
-        "report_updated": "2026-09-12T17:20:34.351847+00:00",
-        "report_age_seconds": 55,
+        "report_updated": "2026-09-12T17:23:41.697613+00:00",
+        "report_age_seconds": 47,
         "report_fresh": true,
         "terminal_evidence": false,
-        "observed_training_steps": 4407032,
+        "observed_training_steps": 4426305,
         "controllers": {
           "volc-a100": {
             "controller": {
@@ -38098,7 +36190,7 @@
     },
     "vla_training": {
       "observed": "2026-09-11T17:30:01.707869+00:00",
-      "age_seconds": 85888,
+      "age_seconds": 86067,
       "fresh": false,
       "supervisor_alive": false,
       "runs": {
@@ -38148,8 +36240,8 @@
       "auxiliary_total": 1086,
       "registered_instances": 543,
       "core_status_counts": {
-        "complete": 715,
-        "pending_final_checkpoint_and_dispatch": 2536,
+        "complete": 716,
+        "pending_final_checkpoint_and_dispatch": 2535,
         "failed": 5,
         "running": 2
       },
@@ -38157,8 +36249,8 @@
         "deferred_inactive_mechanism": 1086
       },
       "observation_fresh": true,
-      "report_age_seconds": 57,
-      "report_observed": "2026-09-13T01:20:32.656944+08:00",
+      "report_age_seconds": 55,
+      "report_observed": "2026-09-13T01:23:33.816445+08:00",
       "core_training_seeds": [
         1,
         2,
@@ -38220,11 +36312,11 @@
               "identity": {
                 "identity_alive": true,
                 "status": "alive",
-                "process_state": "R",
-                "open_fds": 89
+                "process_state": "S",
+                "open_fds": 92
               },
-              "updated": "2026-09-12T17:20:28.481291+00:00",
-              "status": "preflight"
+              "updated": "2026-09-12T17:21:44.667794+00:00",
+              "status": "evaluating"
             }
           ],
           "protocol_sha256": "30bd8868516332bf81fdb37eb25308041b606c569de21a9f0a3fb5ea7737fac3",
@@ -38282,11 +36374,11 @@
               "identity": {
                 "identity_alive": true,
                 "status": "alive",
-                "process_state": "D",
-                "open_fds": 41
+                "process_state": "R",
+                "open_fds": 92
               },
-              "updated": "2026-09-12T17:21:10.995899+00:00",
-              "status": "preflight"
+              "updated": "2026-09-12T17:22:18.571408+00:00",
+              "status": "evaluating"
             }
           ],
           "protocol_sha256": "8aa97c446ed10122cd5663faa22b1964546dcb1cd54be903369de76d041ae762",
@@ -38335,9 +36427,9 @@
         },
         "passed_verified": 4,
         "unresolved_failures": 0,
-        "observed": "2026-09-12T17:19:43.172071+00:00",
+        "observed": "2026-09-12T17:22:52.396254+00:00",
         "observation_fresh": true,
-        "report_age_seconds": 106,
+        "report_age_seconds": 96,
         "controller_live": false,
         "controller_state_fresh": false,
         "collector": {
@@ -38392,9 +36484,9 @@
         },
         "passed_verified": 0,
         "unresolved_failures": 6,
-        "observed": "2026-09-12T17:19:43.172071+00:00",
+        "observed": "2026-09-12T17:22:52.396254+00:00",
         "observation_fresh": true,
-        "report_age_seconds": 106,
+        "report_age_seconds": 96,
         "controller_live": true,
         "controller_state_fresh": true,
         "collector": {
@@ -38485,7 +36577,7 @@
             "arm": "B",
             "training_seed": 2,
             "status": "running",
-            "latest_steps": 20480
+            "latest_steps": 25600
           },
           {
             "job_id": "FetchType/A/s3",
@@ -38526,9 +36618,9 @@
         "status": "needs_attention",
         "unit": "development_gate",
         "observation_fresh": true,
-        "observed": "2026-09-12T17:20:32.578443+00:00",
-        "report_age_seconds": 57,
-        "raw_audit_age_seconds": 57,
+        "observed": "2026-09-12T17:23:39.962356+00:00",
+        "report_age_seconds": 49,
+        "raw_audit_age_seconds": 49,
         "controller_live": false,
         "collector": {
           "identity_alive": true,
@@ -38553,7 +36645,7 @@
     },
     "hosts": {
       "30109": {
-        "observed_unix": 1789233687.178152,
+        "observed_unix": 1789233867.257991,
         "status": "connected",
         "queues": {
           "native": {
@@ -38630,7 +36722,7 @@
               "identity_alive": true,
               "status": "alive",
               "process_state": "S",
-              "open_fds": 6
+              "open_fds": 4
             },
             "terminal_evidence": false
           },
@@ -38641,13 +36733,13 @@
               "process_state": "S",
               "open_fds": 4
             },
-            "state_updated": "2026-09-13T01:21:10.861817+08:00",
+            "state_updated": "2026-09-13T01:24:11.504516+08:00",
             "state_status": "running",
             "state_protocol_sha256": "cc79a72ae0e19faacc636606a5509fd9b105123b2f196fb2481497f10e08e084",
             "state_counts": {
               "total": 4080,
-              "completed": 30,
-              "pending": 4030,
+              "completed": 31,
+              "pending": 4029,
               "running": 20,
               "failed": 0,
               "blocked": 0
@@ -38709,14 +36801,14 @@
         },
         "disks": {
           "root": {
-            "free_gib": 2.595,
+            "free_gib": 2.597,
             "total_gib": 50.0,
-            "free_inodes": 1485750115
+            "free_inodes": 1485750018
           },
           "workspace": {
-            "free_gib": 26.237,
+            "free_gib": 26.233,
             "total_gib": 6000.0,
-            "free_inodes": 1485750115
+            "free_inodes": 1485750018
           },
           "shm": {
             "free_gib": 5.118,
@@ -38724,16 +36816,16 @@
             "free_inodes": 131217673
           }
         },
-        "mem_available_gib": 300.244,
+        "mem_available_gib": 296.761,
         "mem_total_gib": 1007.031,
         "load": [
-          77.66455078125,
-          76.62109375,
-          76.57470703125
+          76.3876953125,
+          76.3203125,
+          76.45263671875
         ],
         "effective_cores": 96.0,
         "file_nr": [
-          "15136",
+          "15392",
           "0",
           "9223372036854775807"
         ],
@@ -38743,30 +36835,30 @@
           "process_state": "S",
           "open_fds": 4
         },
-        "received_unix": 1789233687.184037,
+        "received_unix": 1789233867.2682078,
         "resource_trend": {
           "ready": true,
           "samples": 21,
           "scope": "Observed short-window trend; not proof of a descriptor leak.",
           "disks": {
             "root": {
-              "net_gib_per_hour": 0.146,
-              "extrapolated_hours_to_zero": 17.77
+              "net_gib_per_hour": 0.137,
+              "extrapolated_hours_to_zero": 18.95
             },
             "workspace": {
-              "net_gib_per_hour": 0.724,
-              "extrapolated_hours_to_zero": 36.23
+              "net_gib_per_hour": 0.714,
+              "extrapolated_hours_to_zero": 36.72
             },
             "shm": {
               "net_gib_per_hour": 0.0,
               "extrapolated_hours_to_zero": null
             }
           },
-          "file_handles_delta": 1280
+          "file_handles_delta": 2560
         }
       },
       "30314": {
-        "observed_unix": 1789233687.7222784,
+        "observed_unix": 1789233867.6478252,
         "status": "connected",
         "queues": {
           "ppo": {
@@ -38814,29 +36906,29 @@
           "root": {
             "free_gib": 46.654,
             "total_gib": 50.0,
-            "free_inodes": 1479089596
+            "free_inodes": 1479089584
           },
           "workspace": {
-            "free_gib": 77.027,
+            "free_gib": 77.025,
             "total_gib": 6000.0,
-            "free_inodes": 1479089596
+            "free_inodes": 1479089584
           },
           "shm": {
             "free_gib": 452.525,
             "total_gib": 480.0,
-            "free_inodes": 131937013
+            "free_inodes": 131937012
           }
         },
-        "mem_available_gib": 317.984,
+        "mem_available_gib": 309.684,
         "mem_total_gib": 1007.016,
         "load": [
-          52.134765625,
-          51.5498046875,
-          50.39697265625
+          49.474609375,
+          49.72900390625,
+          49.8193359375
         ],
         "effective_cores": 96.0,
         "file_nr": [
-          "48640",
+          "50560",
           "0",
           "9223372036854775807"
         ],
@@ -38884,11 +36976,11 @@
                   "identity": {
                     "identity_alive": true,
                     "status": "alive",
-                    "process_state": "R",
-                    "open_fds": 89
+                    "process_state": "S",
+                    "open_fds": 92
                   },
-                  "updated": "2026-09-12T17:20:28.481291+00:00",
-                  "status": "preflight"
+                  "updated": "2026-09-12T17:21:44.667794+00:00",
+                  "status": "evaluating"
                 }
               ],
               "protocol_sha256": "30bd8868516332bf81fdb37eb25308041b606c569de21a9f0a3fb5ea7737fac3",
@@ -38936,11 +37028,11 @@
                   "identity": {
                     "identity_alive": true,
                     "status": "alive",
-                    "process_state": "D",
-                    "open_fds": 41
+                    "process_state": "R",
+                    "open_fds": 92
                   },
-                  "updated": "2026-09-12T17:21:10.995899+00:00",
-                  "status": "preflight"
+                  "updated": "2026-09-12T17:22:18.571408+00:00",
+                  "status": "evaluating"
                 }
               ],
               "protocol_sha256": "8aa97c446ed10122cd5663faa22b1964546dcb1cd54be903369de76d041ae762",
@@ -38960,7 +37052,7 @@
             "formal_training_launched": 0
           }
         },
-        "received_unix": 1789233687.7571769,
+        "received_unix": 1789233867.6708736,
         "resource_trend": {
           "ready": true,
           "samples": 21,
@@ -38968,22 +37060,22 @@
           "disks": {
             "root": {
               "net_gib_per_hour": 0.015,
-              "extrapolated_hours_to_zero": 3109.64
+              "extrapolated_hours_to_zero": 3108.48
             },
             "workspace": {
-              "net_gib_per_hour": 0.268,
-              "extrapolated_hours_to_zero": 287.36
+              "net_gib_per_hour": 0.059,
+              "extrapolated_hours_to_zero": 1304.76
             },
             "shm": {
               "net_gib_per_hour": 0.629,
-              "extrapolated_hours_to_zero": 719.29
+              "extrapolated_hours_to_zero": 719.02
             }
           },
-          "file_handles_delta": 7680
+          "file_handles_delta": 9600
         }
       },
       "aliyun": {
-        "observed_unix": 1789233688.2251074,
+        "observed_unix": 1789233868.2487185,
         "status": "connected",
         "queues": {
           "native": {
@@ -39013,15 +37105,15 @@
               "process_state": "S",
               "open_fds": 125
             },
-            "state_updated": "2026-09-12T17:20:33.862731+00:00",
+            "state_updated": "2026-09-12T17:24:10.323105+00:00",
             "state_status": "running",
             "state_protocol_sha256": "b6eef0edcc546ab70feed741a45dc5691e19195e870d0aea99db413dca59c4d9",
             "state_counts": {
               "total": 1920,
               "completed": 711,
-              "pending": 1051,
+              "pending": 1050,
               "running": 128,
-              "failed": 30,
+              "failed": 31,
               "blocked": 0
             },
             "terminal_evidence": false
@@ -39033,13 +37125,13 @@
               "process_state": "S",
               "open_fds": 12
             },
-            "state_updated": "2026-09-12T17:13:02.488095+00:00",
+            "state_updated": "2026-09-12T17:23:12.152808+00:00",
             "state_status": "running",
             "state_protocol_sha256": "220ec556ed4af7bc18f8ed799ab4ce74016624f81835ba56ea3f9dc86e6428a5",
             "state_counts": {
               "total": 552,
-              "completed": 40,
-              "pending": 288,
+              "completed": 41,
+              "pending": 287,
               "running": 8,
               "failed": 0,
               "blocked": 216
@@ -39049,67 +37141,135 @@
         },
         "disks": {
           "root": {
-            "free_gib": 4988.628,
+            "free_gib": 4988.627,
             "total_gib": 5357.34,
             "free_inodes": 176467391
           },
           "workspace": {
-            "free_gib": 7219.855,
+            "free_gib": 7219.449,
             "total_gib": 10240.0,
-            "free_inodes": 18630015
+            "free_inodes": 18630084
           },
           "shm": {
-            "free_gib": 666.834,
+            "free_gib": 666.945,
             "total_gib": 1800.0,
-            "free_inodes": 243046700
+            "free_inodes": 243046702
           }
         },
-        "mem_available_gib": 441.513,
+        "mem_available_gib": 442.273,
         "mem_total_gib": 1800.0,
         "load": [
-          193.365234375,
-          191.19677734375,
-          188.6103515625
+          192.08349609375,
+          192.00634765625,
+          189.41162109375
         ],
         "effective_cores": 184,
         "file_nr": [
-          "16928",
+          "18768",
           "0",
           "9848858"
         ],
-        "received_unix": 1789233688.2592142,
+        "received_unix": 1789233868.2768574,
         "resource_trend": {
           "ready": true,
           "samples": 19,
           "scope": "Observed short-window trend; not proof of a descriptor leak.",
           "disks": {
             "root": {
-              "net_gib_per_hour": 0.002,
+              "net_gib_per_hour": 0.003,
               "extrapolated_hours_to_zero": null
             },
             "workspace": {
-              "net_gib_per_hour": 3.693,
-              "extrapolated_hours_to_zero": 1955.14
+              "net_gib_per_hour": 4.073,
+              "extrapolated_hours_to_zero": 1772.36
             },
             "shm": {
-              "net_gib_per_hour": -0.027,
+              "net_gib_per_hour": 0.001,
               "extrapolated_hours_to_zero": null
             }
           },
-          "file_handles_delta": 3312
+          "file_handles_delta": 6256
         }
       },
       "5090": {
-        "status": "unreachable",
-        "error": "probe_exit_255",
+        "observed_unix": 1789233867.8386393,
+        "status": "connected",
+        "queues": {
+          "native": {
+            "controller": {
+              "identity_alive": true,
+              "status": "alive",
+              "process_state": "S",
+              "open_fds": 27
+            },
+            "state_updated": "2026-09-13T01:24:10.863481+08:00",
+            "state_status": "running",
+            "state_protocol_sha256": "82f5c8c7c040464db50f3cc5c67154bcffbc14dc0e39ff5f0edb1c353280b5ac",
+            "state_counts": {
+              "total": 624,
+              "completed": 468,
+              "pending": 133,
+              "running": 23,
+              "failed": 0,
+              "blocked": 0
+            },
+            "terminal_evidence": false
+          }
+        },
+        "disks": {
+          "root": {
+            "free_gib": 188.338,
+            "total_gib": 3753.978,
+            "free_inodes": 236115615
+          },
+          "workspace": {
+            "free_gib": 127.451,
+            "total_gib": 3754.456,
+            "free_inodes": 240214590
+          },
+          "shm": {
+            "free_gib": 125.418,
+            "total_gib": 125.6,
+            "free_inodes": 32924683
+          }
+        },
+        "mem_available_gib": 167.785,
+        "mem_total_gib": 251.199,
+        "load": [
+          43.0,
+          46.869140625,
+          44.1513671875
+        ],
+        "effective_cores": 48,
+        "file_nr": [
+          "32576",
+          "0",
+          "9223372036854775807"
+        ],
+        "received_unix": 1789233867.902976,
         "resource_trend": {
-          "ready": false,
-          "samples": 0,
-          "scope": "Observed short-window trend; not proof of a descriptor leak."
+          "ready": true,
+          "samples": 16,
+          "scope": "Observed short-window trend; not proof of a descriptor leak.",
+          "disks": {
+            "root": {
+              "net_gib_per_hour": 0.839,
+              "extrapolated_hours_to_zero": 224.35
+            },
+            "workspace": {
+              "net_gib_per_hour": 8.933,
+              "extrapolated_hours_to_zero": 14.27
+            },
+            "shm": {
+              "net_gib_per_hour": 0.001,
+              "extrapolated_hours_to_zero": null
+            }
+          },
+          "file_handles_delta": -2112
         }
       },
       "volc-a100": {
-        "observed_unix": 1789233689.2525225,
+        "observed_unix": 1789233868.4869652,
         "status": "connected",
         "queues": {
           "multi_agent_vision": {
@@ -39140,9 +37300,9 @@
             "free_inodes": 1188922
           },
           "workspace": {
-            "free_gib": 705088.754,
+            "free_gib": 705060.992,
             "total_gib": 3211766.438,
-            "free_inodes": 55893605220
+            "free_inodes": 55893587425
           },
           "shm": {
             "free_gib": 324.437,
@@ -39150,20 +37310,20 @@
             "free_inodes": 264125732
           }
         },
-        "mem_available_gib": 453.978,
+        "mem_available_gib": 453.996,
         "mem_total_gib": 463.5,
         "load": [
-          11.5595703125,
-          10.97265625,
-          10.7685546875
+          10.11572265625,
+          10.6640625,
+          10.6962890625
         ],
         "effective_cores": 128,
         "file_nr": [
-          "30720",
+          "28928",
           "0",
           "9223372036854775807"
         ],
-        "received_unix": 1789233689.2844224,
+        "received_unix": 1789233868.5208755,
         "resource_trend": {
           "ready": true,
           "samples": 18,
@@ -39174,15 +37334,15 @@
               "extrapolated_hours_to_zero": null
             },
             "workspace": {
-              "net_gib_per_hour": 979.065,
-              "extrapolated_hours_to_zero": 720.17
+              "net_gib_per_hour": 986.951,
+              "extrapolated_hours_to_zero": 714.38
             },
             "shm": {
               "net_gib_per_hour": 0.0,
               "extrapolated_hours_to_zero": null
             }
           },
-          "file_handles_delta": 2304
+          "file_handles_delta": -1024
         }
       }
     },
@@ -39193,7 +37353,7 @@
       "open_fds": 4
     },
     "fleet_resource_cache": {
-      "observed": "2026-09-13T01:20:57+08:00",
+      "observed": "2026-09-13T01:23:57+08:00",
       "age_seconds": 32,
       "hosts": {
         "30109": {
@@ -39203,10 +37363,10 @@
             {
               "index": 0,
               "name": "NVIDIA A100-SXM4-80GB",
-              "util": 27.0,
+              "util": 14.0,
               "used_mib": 6547.0,
               "total_mib": 81920.0,
-              "mean_util": 49.0,
+              "mean_util": 44.0,
               "max_util": 74.0,
               "allowed": true,
               "candidate_for_preflight": false,
@@ -39215,11 +37375,11 @@
             {
               "index": 1,
               "name": "NVIDIA A100-SXM4-80GB",
-              "util": 89.0,
+              "util": 53.0,
               "used_mib": 19293.0,
               "total_mib": 81920.0,
-              "mean_util": 77.67,
-              "max_util": 96.0,
+              "mean_util": 76.83,
+              "max_util": 98.0,
               "allowed": true,
               "candidate_for_preflight": false,
               "note": "Allocation still requires process/session, dependency and live-memory checks."
@@ -39227,10 +37387,10 @@
             {
               "index": 2,
               "name": "NVIDIA A100-SXM4-80GB",
-              "util": 33.0,
+              "util": 39.0,
               "used_mib": 3276.0,
               "total_mib": 81920.0,
-              "mean_util": 34.83,
+              "mean_util": 34.67,
               "max_util": 39.0,
               "allowed": true,
               "candidate_for_preflight": false,
@@ -39239,10 +37399,10 @@
             {
               "index": 3,
               "name": "NVIDIA A100-SXM4-80GB",
-              "util": 59.0,
+              "util": 36.0,
               "used_mib": 7161.0,
               "total_mib": 81920.0,
-              "mean_util": 44.0,
+              "mean_util": 45.33,
               "max_util": 59.0,
               "allowed": true,
               "candidate_for_preflight": false,
@@ -39263,11 +37423,11 @@
             {
               "index": 5,
               "name": "NVIDIA A100-SXM4-80GB",
-              "util": 11.0,
+              "util": 86.0,
               "used_mib": 7391.0,
               "total_mib": 81920.0,
-              "mean_util": 32.83,
-              "max_util": 71.0,
+              "mean_util": 50.5,
+              "max_util": 86.0,
               "allowed": true,
               "candidate_for_preflight": false,
               "note": "Allocation still requires process/session, dependency and live-memory checks."
@@ -39287,11 +37447,11 @@
             {
               "index": 7,
               "name": "NVIDIA A100-SXM4-80GB",
-              "util": 4.0,
+              "util": 38.0,
               "used_mib": 6991.0,
               "total_mib": 81920.0,
-              "mean_util": 49.17,
-              "max_util": 70.0,
+              "mean_util": 49.83,
+              "max_util": 72.0,
               "allowed": true,
               "candidate_for_preflight": false,
               "note": "Allocation still requires process/session, dependency and live-memory checks."
@@ -39334,10 +37494,10 @@
               "index": 0,
               "name": "NVIDIA A100-SXM4-80GB",
               "util": 0.0,
-              "used_mib": 73780.0,
+              "used_mib": 73787.0,
               "total_mib": 81920.0,
-              "mean_util": 29.33,
-              "max_util": 97.0,
+              "mean_util": 13.33,
+              "max_util": 46.0,
               "allowed": true,
               "candidate_for_preflight": false,
               "note": "Allocation still requires process/session, dependency and live-memory checks."
@@ -39345,10 +37505,10 @@
             {
               "index": 1,
               "name": "NVIDIA A100-SXM4-80GB",
-              "util": 0.0,
-              "used_mib": 71104.0,
+              "util": 2.0,
+              "used_mib": 70937.0,
               "total_mib": 81920.0,
-              "mean_util": 7.17,
+              "mean_util": 10.33,
               "max_util": 43.0,
               "allowed": true,
               "candidate_for_preflight": false,
@@ -39357,11 +37517,11 @@
             {
               "index": 2,
               "name": "NVIDIA A100-SXM4-80GB",
-              "util": 4.0,
-              "used_mib": 71590.0,
+              "util": 0.0,
+              "used_mib": 71389.0,
               "total_mib": 81920.0,
-              "mean_util": 16.17,
-              "max_util": 93.0,
+              "mean_util": 0.67,
+              "max_util": 4.0,
               "allowed": true,
               "candidate_for_preflight": false,
               "note": "Allocation still requires process/session, dependency and live-memory checks."
@@ -39369,10 +37529,10 @@
             {
               "index": 3,
               "name": "NVIDIA A100-SXM4-80GB",
-              "util": 44.0,
-              "used_mib": 79182.0,
+              "util": 0.0,
+              "used_mib": 79131.0,
               "total_mib": 81920.0,
-              "mean_util": 12.33,
+              "mean_util": 9.33,
               "max_util": 44.0,
               "allowed": true,
               "candidate_for_preflight": false,
@@ -39382,10 +37542,10 @@
               "index": 4,
               "name": "NVIDIA A100-SXM4-80GB",
               "util": 0.0,
-              "used_mib": 5342.0,
+              "used_mib": 4263.0,
               "total_mib": 81920.0,
-              "mean_util": 0.17,
-              "max_util": 1.0,
+              "mean_util": 0.0,
+              "max_util": 0.0,
               "allowed": true,
               "candidate_for_preflight": false,
               "note": "Allocation still requires process/session, dependency and live-memory checks."
@@ -39394,7 +37554,7 @@
               "index": 5,
               "name": "NVIDIA A100-SXM4-80GB",
               "util": 0.0,
-              "used_mib": 33.0,
+              "used_mib": 4756.0,
               "total_mib": 81920.0,
               "mean_util": 0.0,
               "max_util": 0.0,
@@ -39405,7 +37565,7 @@
             {
               "index": 6,
               "name": "NVIDIA A100-SXM4-80GB",
-              "util": 51.0,
+              "util": 59.0,
               "used_mib": 10603.0,
               "total_mib": 81920.0,
               "mean_util": 63.5,
@@ -39418,27 +37578,27 @@
               "index": 7,
               "name": "NVIDIA A100-SXM4-80GB",
               "util": 0.0,
-              "used_mib": 73002.0,
+              "used_mib": 73142.0,
               "total_mib": 81920.0,
-              "mean_util": 19.17,
-              "max_util": 42.0,
+              "mean_util": 24.0,
+              "max_util": 100.0,
               "allowed": false,
               "candidate_for_preflight": false,
               "note": "Allocation still requires process/session, dependency and live-memory checks."
             }
           ],
           "process_counts": {
-            "unity": 42,
+            "unity": 43,
             "keeper": 0,
             "watcher": 0,
-            "train": 22,
-            "train_total": 22,
+            "train": 23,
+            "train_total": 23,
             "train_paused": 0,
             "train_partial_paused": 0,
             "train_defunct": 0,
             "train_unknown": 0,
-            "eval": 8,
-            "eval_total": 8,
+            "eval": 7,
+            "eval_total": 7,
             "eval_paused": 0,
             "eval_partial_paused": 0,
             "eval_defunct": 0,
@@ -39454,7 +37614,7 @@
               "paused_runs": []
             },
             "safeot_dual": {
-              "active": 17,
+              "active": 18,
               "paused": 0,
               "partial_paused": 0,
               "defunct": 0,
@@ -39472,9 +37632,9 @@
               "index": 0,
               "name": "NVIDIA GeForce RTX 5090",
               "util": 1.0,
-              "used_mib": 3128.0,
+              "used_mib": 10328.0,
               "total_mib": 32607.0,
-              "mean_util": 0.5,
+              "mean_util": 1.0,
               "max_util": 2.0,
               "allowed": true,
               "candidate_for_preflight": false,
@@ -39484,9 +37644,9 @@
               "index": 1,
               "name": "NVIDIA GeForce RTX 5090",
               "util": 87.0,
-              "used_mib": 7644.0,
+              "used_mib": 7646.0,
               "total_mib": 32607.0,
-              "mean_util": 87.0,
+              "mean_util": 85.5,
               "max_util": 95.0,
               "allowed": true,
               "candidate_for_preflight": false,
@@ -39497,14 +37657,14 @@
             "unity": 0,
             "keeper": 0,
             "watcher": 0,
-            "train": 20,
-            "train_total": 20,
+            "train": 19,
+            "train_total": 19,
             "train_paused": 0,
             "train_partial_paused": 0,
             "train_defunct": 0,
             "train_unknown": 0,
-            "eval": 3,
-            "eval_total": 3,
+            "eval": 4,
+            "eval_total": 4,
             "eval_paused": 0,
             "eval_partial_paused": 0,
             "eval_defunct": 0,
@@ -39512,7 +37672,7 @@
           },
           "training_by_line": {
             "safeot_dual": {
-              "active": 20,
+              "active": 19,
               "paused": 0,
               "partial_paused": 0,
               "defunct": 0,
@@ -39541,11 +37701,11 @@
             {
               "index": 1,
               "name": "NVIDIA A100-SXM4-80GB",
-              "util": 79.0,
+              "util": 78.0,
               "used_mib": 23480.0,
               "total_mib": 81920.0,
-              "mean_util": 76.6,
-              "max_util": 83.0,
+              "mean_util": 78.0,
+              "max_util": 92.0,
               "allowed": true,
               "candidate_for_preflight": false,
               "note": "Allocation still requires process/session, dependency and live-memory checks."
@@ -39581,8 +37741,8 @@
               "util": 0.0,
               "used_mib": 37819.0,
               "total_mib": 98304.0,
-              "mean_util": 16.67,
-              "max_util": 100.0,
+              "mean_util": 15.67,
+              "max_util": 94.0,
               "allowed": true,
               "candidate_for_preflight": false,
               "note": "Allocation still requires process/session, dependency and live-memory checks."
@@ -39626,11 +37786,11 @@
             {
               "index": 4,
               "name": "PPU-ZW810E",
-              "util": 0.0,
+              "util": 100.0,
               "used_mib": 37813.0,
               "total_mib": 98304.0,
-              "mean_util": 0.0,
-              "max_util": 0.0,
+              "mean_util": 16.67,
+              "max_util": 100.0,
               "allowed": true,
               "candidate_for_preflight": false,
               "note": "Allocation still requires process/session, dependency and live-memory checks."
@@ -39771,15 +37931,15 @@
           "process_counts": {
             "unity": 2,
             "keeper": 0,
-            "watcher": 3,
-            "train": 147,
-            "train_total": 147,
+            "watcher": 2,
+            "train": 146,
+            "train_total": 146,
             "train_paused": 0,
             "train_partial_paused": 0,
             "train_defunct": 0,
             "train_unknown": 0,
-            "eval": 8,
-            "eval_total": 8,
+            "eval": 9,
+            "eval_total": 9,
             "eval_paused": 0,
             "eval_partial_paused": 0,
             "eval_defunct": 0,
@@ -39787,7 +37947,7 @@
           },
           "training_by_line": {
             "safeot_dual": {
-              "active": 147,
+              "active": 146,
               "paused": 0,
               "partial_paused": 0,
               "defunct": 0,
@@ -39800,12 +37960,6 @@
       }
     },
     "alerts": [
-      {
-        "severity": "critical",
-        "code": "controller_not_verified_alive",
-        "cohort": "native",
-        "host": "5090"
-      },
       {
         "severity": "warning",
         "code": "preserved_failed_jobs",
@@ -39822,780 +37976,6 @@
       },
       {
         "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyDoggoFormulaOne1-v0__safeot_eps0.1__s1"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyDoggoFormulaOne2-v0__safeot_eps0.1__s1"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyPointFormulaOne1-v0__safeot_eps0.1__s1"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyRacecarFormulaOne2-v0__safeot_eps0.1__s1"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyDoggoFormulaOne1-v0__safeot_eps1__s1"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyDoggoFormulaOne2-v0__safeot_eps1__s1"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyPointFormulaOne1-v0__safeot_eps1__s1"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyRacecarFormulaOne1-v0__safeot_eps1__s1"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyCarFormulaOne1-v0__safeot_eps3__s1"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyDoggoFormulaOne1-v0__safeot_eps3__s1"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyDoggoFormulaOne2-v0__safeot_eps3__s1"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyPointFormulaOne1-v0__safeot_eps3__s1"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyPointFormulaOne2-v0__safeot_eps3__s1"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyCarFormulaOne2-v0__penalty_lambda0.1__s1"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyPointFormulaOne2-v0__penalty_lambda0.1__s1"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyRacecarFormulaOne1-v0__penalty_lambda0.1__s1"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyRacecarFormulaOne2-v0__penalty_lambda0.1__s1"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyDoggoFormulaOne2-v0__penalty_lambda1__s1"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyPointFormulaOne1-v0__penalty_lambda1__s1"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyRacecarFormulaOne1-v0__penalty_lambda1__s1"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyCarFormulaOne1-v0__penalty_lambda10__s1"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyCarFormulaOne2-v0__penalty_lambda10__s1"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyDoggoFormulaOne1-v0__penalty_lambda10__s1"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyDoggoFormulaOne2-v0__penalty_lambda10__s1"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyPointFormulaOne1-v0__penalty_lambda10__s1"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyPointFormulaOne2-v0__penalty_lambda10__s1"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyRacecarFormulaOne1-v0__penalty_lambda10__s1"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyRacecarFormulaOne2-v0__penalty_lambda10__s1"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyCarFormulaOne2-v0__trpo_lag__s1"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyDoggoFormulaOne1-v0__trpo_lag__s1"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyDoggoFormulaOne2-v0__trpo_lag__s1"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyPointFormulaOne1-v0__trpo_lag__s1"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyPointFormulaOne2-v0__trpo_lag__s1"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyRacecarFormulaOne1-v0__trpo_lag__s1"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyRacecarFormulaOne2-v0__trpo_lag__s1"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyCarFormulaOne1-v0__cpo__s1"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyCarFormulaOne2-v0__cpo__s1"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyDoggoFormulaOne2-v0__cpo__s1"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyPointFormulaOne1-v0__cpo__s1"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyPointFormulaOne2-v0__cpo__s1"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyRacecarFormulaOne1-v0__cpo__s1"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyCarFormulaOne1-v0__safeot_eps0.1__s2"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyCarFormulaOne2-v0__safeot_eps0.1__s2"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyRacecarFormulaOne1-v0__safeot_eps0.1__s2"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyRacecarFormulaOne2-v0__safeot_eps0.1__s2"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyCarFormulaOne2-v0__safeot_eps1__s2"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyCarRace0-v0__safeot_eps1__s2"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyDoggoFormulaOne2-v0__safeot_eps1__s2"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyPointFormulaOne1-v0__safeot_eps1__s2"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyPointRace0-v0__safeot_eps1__s2"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyRacecarBuildingButton1-v0__safeot_eps1__s2"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyRacecarBuildingButton2-v0__safeot_eps1__s2"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyRacecarBuildingGoal1-v0__safeot_eps1__s2"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyRacecarBuildingGoal2-v0__safeot_eps1__s2"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyRacecarBuildingPush0-v0__safeot_eps1__s2"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyRacecarBuildingPush1-v0__safeot_eps1__s2"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyRacecarBuildingPush2-v0__safeot_eps1__s2"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyRacecarFadingEasy2-v0__safeot_eps1__s2"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyRacecarFadingHard2-v0__safeot_eps1__s2"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyRacecarFormulaOne1-v0__safeot_eps1__s2"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyRacecarFormulaOne2-v0__safeot_eps1__s2"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyRacecarRace0-v0__safeot_eps1__s2"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyRacecarRace1-v0__safeot_eps1__s2"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyRacecarRace2-v0__safeot_eps1__s2"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyCarBuildingGoal1-v0__safeot_eps3__s2"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyCarBuildingGoal2-v0__safeot_eps3__s2"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyCarBuildingPush0-v0__safeot_eps3__s2"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyCarBuildingPush1-v0__safeot_eps3__s2"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyCarBuildingPush2-v0__safeot_eps3__s2"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyCarFadingEasy2-v0__safeot_eps3__s2"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyCarFadingHard2-v0__safeot_eps3__s2"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyCarFormulaOne0-v0__safeot_eps3__s2"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyCarFormulaOne1-v0__safeot_eps3__s2"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyCarFormulaOne2-v0__safeot_eps3__s2"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyCarRace0-v0__safeot_eps3__s2"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyCarRace1-v0__safeot_eps3__s2"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyCarRace2-v0__safeot_eps3__s2"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyDoggoBuildingButton0-v0__safeot_eps3__s2"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyDoggoBuildingButton1-v0__safeot_eps3__s2"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyDoggoBuildingButton2-v0__safeot_eps3__s2"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyDoggoBuildingGoal0-v0__safeot_eps3__s2"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyDoggoBuildingGoal1-v0__safeot_eps3__s2"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyDoggoBuildingGoal2-v0__safeot_eps3__s2"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyDoggoBuildingPush0-v0__safeot_eps3__s2"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyDoggoBuildingPush1-v0__safeot_eps3__s2"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyDoggoBuildingPush2-v0__safeot_eps3__s2"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyDoggoFadingEasy1-v0__safeot_eps3__s2"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyDoggoFadingEasy2-v0__safeot_eps3__s2"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyDoggoFadingHard0-v0__safeot_eps3__s2"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyDoggoFadingHard1-v0__safeot_eps3__s2"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyDoggoFadingHard2-v0__safeot_eps3__s2"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyDoggoFormulaOne0-v0__safeot_eps3__s2"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyDoggoFormulaOne1-v0__safeot_eps3__s2"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyDoggoFormulaOne2-v0__safeot_eps3__s2"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyDoggoRace0-v0__safeot_eps3__s2"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyDoggoRace1-v0__safeot_eps3__s2"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyDoggoRace2-v0__safeot_eps3__s2"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyPointBuildingButton0-v0__safeot_eps3__s2"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyPointBuildingButton1-v0__safeot_eps3__s2"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyPointBuildingButton2-v0__safeot_eps3__s2"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyPointBuildingGoal0-v0__safeot_eps3__s2"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyPointBuildingGoal1-v0__safeot_eps3__s2"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyPointBuildingGoal2-v0__safeot_eps3__s2"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyPointBuildingPush0-v0__safeot_eps3__s2"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyPointBuildingPush1-v0__safeot_eps3__s2"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyPointBuildingPush2-v0__safeot_eps3__s2"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyPointFadingEasy0-v0__safeot_eps3__s2"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyPointFadingEasy1-v0__safeot_eps3__s2"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyPointFadingEasy2-v0__safeot_eps3__s2"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyPointFadingHard0-v0__safeot_eps3__s2"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyPointFadingHard1-v0__safeot_eps3__s2"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyPointFadingHard2-v0__safeot_eps3__s2"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyPointFormulaOne0-v0__safeot_eps3__s2"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyPointFormulaOne1-v0__safeot_eps3__s2"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyPointFormulaOne2-v0__safeot_eps3__s2"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyPointRace0-v0__safeot_eps3__s2"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyPointRace1-v0__safeot_eps3__s2"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyPointRace2-v0__safeot_eps3__s2"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyRacecarBuildingButton0-v0__safeot_eps3__s2"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyRacecarBuildingButton1-v0__safeot_eps3__s2"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyRacecarBuildingButton2-v0__safeot_eps3__s2"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyRacecarBuildingGoal0-v0__safeot_eps3__s2"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyRacecarBuildingGoal1-v0__safeot_eps3__s2"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyRacecarBuildingGoal2-v0__safeot_eps3__s2"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyRacecarBuildingPush0-v0__safeot_eps3__s2"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyRacecarBuildingPush1-v0__safeot_eps3__s2"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyRacecarBuildingPush2-v0__safeot_eps3__s2"
-      },
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "vision",
-        "job": "SafetyRacecarFadingEasy0-v0__safeot_eps3__s2"
-      },
-      {
-        "severity": "critical",
-        "code": "artifact_integrity_errors",
-        "cohort": "vision",
-        "count": 1
-      },
-      {
-        "severity": "warning",
         "code": "preserved_failed_jobs",
         "cohort": "vision",
         "count": 32
@@ -40604,11 +37984,6 @@
         "severity": "warning",
         "code": "chores_preserved_failed_evaluations",
         "count": 5
-      },
-      {
-        "severity": "critical",
-        "code": "host_unreachable",
-        "host": "5090"
       },
       {
         "severity": "critical",
@@ -40638,7 +38013,7 @@
     "guard_expires": "2026-09-16T17:05:12+08:00",
     "guard_lifecycle": "active",
     "expiry_semantics": "Guard expiry stops this observer only; training queues continue independently.",
-    "observation_age_seconds": 45,
+    "observation_age_seconds": 15,
     "fresh_observation": true,
     "monitoring_active": true
   }
