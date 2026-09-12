@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-12T14:34:36+08:00",
+  "updated": "2026-09-12T14:52:04+08:00",
   "task": "T-1484/T-1490 — 五目标差距与解决办法（数据驱动，每 30 分钟刷新）",
   "gap_plan": [
     {
@@ -199,16 +199,16 @@
     }
   ],
   "supervision": {
-    "observed": "2026-09-12T14:31:50+08:00",
-    "next_check": "2026-09-12T14:36:50+08:00",
+    "observed": "2026-09-12T14:51:50+08:00",
+    "next_check": "2026-09-12T14:56:50+08:00",
     "interval_seconds": 300,
-    "overall": "warning",
+    "overall": "critical",
     "coverage": "冻结 beta 修复队列与共享采集/发布链路；远端其他队列仅由原采集器覆盖。",
     "alerts": [
       {
         "code": "system_disk_low",
-        "level": "warning",
-        "detail": "system 剩余空间 1.03 GiB。"
+        "level": "critical",
+        "detail": "system 剩余空间 0.99 GiB。"
       }
     ],
     "repair": {
@@ -216,15 +216,15 @@
       "active": null,
       "completed": 8
     },
-    "summary": "后台监督：需检查；None。system 剩余空间 1.03 GiB。",
+    "summary": "后台监督：异常；None。system 剩余空间 0.99 GiB。",
     "harvest": {
-      "last_published": "2026-09-12T13:58:24.229586+08:00",
-      "log_updated": "2026-09-12T14:28:36+08:00",
-      "commit": "46041dbfc13757833937cfbc1c6eaef9dd0b6431"
+      "last_published": "2026-09-12T14:35:01.496851+08:00",
+      "log_updated": "2026-09-12T14:35:04+08:00",
+      "commit": "ccbaf89d3eaf6821a3f94c8a06179a783e601062"
     }
   },
   "post_repair_evaluations": {
-    "observed": "2026-09-12T14:34:28+08:00",
+    "observed": "2026-09-12T14:51:55+08:00",
     "training_done": 145,
     "complete_evaluations": 145,
     "evaluation_episodes": 45240,
@@ -253,7 +253,7 @@
     "protocol": "Validated serial evaluator, 3 x104 final-checkpoint episodes; no retraining"
   },
   "g4_connection": {
-    "observed": "2026-09-12T06:34:26+00:00",
+    "observed": "2026-09-12T06:51:52+00:00",
     "host": "30314",
     "status": "connected",
     "training_steps": {
@@ -269,12 +269,12 @@
     "metric_scope": "training only; last 10 log windows of completed-episode averages",
     "final_evaluation_complete": false,
     "latest_connection_check": {
-      "observed_unix": 1789194867.150194,
+      "observed_unix": 1789195913.875828,
       "status": "connected"
     }
   },
   "isolated_formal_evaluations": {
-    "observed": "2026-09-12T14:34:28+08:00",
+    "observed": "2026-09-12T14:51:55+08:00",
     "complete_evaluations": 6,
     "evaluation_episodes": 1872,
     "integrity_errors": []
@@ -285,8 +285,8 @@
     "repair_queue": "2026-09-10T11:37:54.984063+08:00",
     "pilot_audit": "2026-09-05T21:25:56.853232+08:00",
     "terminal_component": "2026-09-05T21:46:22.695030+08:00",
-    "supervision": "2026-09-12T14:31:50+08:00",
-    "post_repair_evaluations": "2026-09-12T14:34:28+08:00"
+    "supervision": "2026-09-12T14:51:50+08:00",
+    "post_repair_evaluations": "2026-09-12T14:51:55+08:00"
   },
   "goals": [
     {
@@ -487,7 +487,7 @@
   ],
   "focus": [
     "需要处理的门检或观测问题：多智能体视觉开发门检。原失败保留；修复诊断与正式训练分别计数，健康正式队列继续。",
-    "SG队列健康监督：每180秒核查中；核实运行273路，已完成1972/11208，保留失败21项，严重告警2项。核对控制器身份、真实训练步数、磁盘和句柄趋势；已有队列完成一项后自动接续，未适配任务仍单列，不代表全部基准已开跑。",
+    "SG队列健康监督：每180秒核查中；核实运行274路，已完成1992/11208，保留失败21项，严重告警2项。核对控制器身份、真实训练步数、磁盘和句柄趋势；已有队列完成一项后自动接续，未适配任务仍单列，不代表全部基准已开跑。",
     "CHORES健康监督单列：核实运行0个评测实例；全3258实例格与SG训练策略分开计数。",
     "本轮扩展：aliyun与5090各新增3个正式训练槽，已有任务保持训练；mainskill为VLA逐步释放16个CPU槽位。volc承接双视觉开发门检；新增执行槽不等于已经测得相同比例的训练加速。",
     "完整任务清单已逐项列出：Safety-Gymnasium402轨道、CHORES543场景，共945项；未适配、排队、失败项全部保留。全任务页可按基准/状态搜索并展开方法与种子进度。",
@@ -497,17 +497,17 @@
     "已逐回合复算PG2全部24个开发策略/7488回合，发布完整非单调epsilon曲线。distance eps0.1回报8.846、硬接触0.321%、软预算3/3达标；仅为待独立确认候选，不是SOTA或零风险证据。",
     "正在为VLA释放CPU56–71：指定PPO槽位完成当前训练和312回合评测后不再补位，其余槽位继续队列。预留资源不计为已启动的VLA正式训练。",
     "新增正式执行槽：aliyun原生队列24→27、5090原生队列20→23；6个新增任务已记录真实训练步数。全部77原生及77PPO轨道统一采用96小时训练/24小时终档评测时限，仍为2M步/312回合；原失败保留。",
-    "加速现有队列：核实正式运行273路，已完成1972个训练+终档评测单元。aliyun目标32→128路，mainskill PPO目标24→32路；原活跃训练进程保留，仅替换队列调度器。未宣称等比例实际提速。",
+    "加速现有队列：核实正式运行274路，已完成1992个训练+终档评测单元。aliyun目标32→128路，mainskill PPO目标24→32路；原活跃训练进程保留，仅替换队列调度器。未宣称等比例实际提速。",
     "失败保留：SafetyCarFormulaOne1-v0 / safeot_eps0.1 / seed1，最后记录160000步，MuJoCo物理求解器异常；未计入完成、未自动重跑。",
     "Safe Vision全部105向量轨道统一延长运行时限：训练96小时、终档评测24小时。已观测慢任务按当前速度约需47–57小时；仍为2M训练步和312评测回合，失败尝试不重跑。",
-    "全基准尚未全跑：Safety-Gymnasium 390/402轨道已冻结排队，159个不同任务当前有训练/评测进程，12轨道尚未冻结；CHORES三类全任务父协议已列入面板，Pickup171/Fetch172的正式训练仍在准备。",
+    "全基准尚未全跑：Safety-Gymnasium 390/402轨道已冻结排队，160个不同任务当前有训练/评测进程，12轨道尚未冻结；CHORES三类全任务父协议已列入面板，Pickup171/Fetch172的正式训练仍在准备。",
     "多智能体视觉15任务已冻结完整360格：当前核实0路20k前置门检、4路正式训练/评测，0格完成，216格缺失官方资产仍保留。独立20k机制诊断已通过补充验收；原2k失败保留，八臂门检全过后自动接续2M/312正式实验。",
     "CHORES三种子完整父协议已冻结：543实例×A/B×3种子，共3258个评测格；当前实际评测0项，核验完成397项。三类尚未全部开跑，排队不当作运行。",
     "CHORES Pickup/Fetch正式队列：12个训练策略，当前核实运行1项。内存数据副本已校验26049个HDF5；各类型配对门检和资源条件满足后自动派发，开发门检不计入正式完成。",
     "像素策略完整4080次矩阵已冻结：本机环境检查170/170，八种训练回读检查8/8，检查中0路；正式完成17、运行16。CNN实际学习RGB并保留所有传感器；尚无像素性能或硬约束达标结论。",
-    "新增Safe Vision完整105向量轨道2520单元：已完成605，核实运行138，失败20，阻塞0。像素输入策略仍未完成；整个基准验收保持开放。",
-    "新增完整PPO骨干队列1848次：已完成546，核实运行40，失败0，阻塞0。与TRPO/CPO的1848次共同检验多算法适用性；所有77轨道和3种子均保留，完整基准验收仍开放。",
-    "完整向量系列已实际启动：77任务×8设置×3种子=1848次；正在训练/评测67，完整终档779，失败1，阻塞0。三档SafeOT ε、三档固定惩罚、TRPO-Lag和CPO；逐任务比较，尚无优势结论。",
+    "新增Safe Vision完整105向量轨道2520单元：已完成608，核实运行138，失败20，阻塞0。像素输入策略仍未完成；整个基准验收保持开放。",
+    "新增完整PPO骨干队列1848次：已完成553，核实运行40，失败0，阻塞0。与TRPO/CPO的1848次共同检验多算法适用性；所有77轨道和3种子均保留，完整基准验收仍开放。",
+    "完整向量系列已实际启动：77任务×8设置×3种子=1848次；正在训练/评测68，完整终档788，失败1，阻塞0。三档SafeOT ε、三档固定惩罚、TRPO-Lag和CPO；逐任务比较，尚无优势结论。",
     "环境来源更正：旧afc6a34提交改动了Button/Push/Circle，未用于这批正式结果。新批次固定官方主分支ae966e5，1302个包文件逐一核对Git对象；旧失败记录保留。导航60、速度12、Run5全部派发；其余325个SG轨道及Safety-CHORES完整计划继续保留。",
     "完整基准验收尚未通过：Safety-Gymnasium官方表格197个任务配置，导航仅60个；注册代码额外14个配置及观察/版本分别保留，共402个轨道，含9个待解决的MultiGoal配置差异。现有汇总涉及20个轨道，需逐协议审计；不等于完成比例。",
     "Safety-CHORES必须覆盖ObjectNav200、Pickup171、Fetch172，共543场景/策略。当前Dual旧ObjectNav评测396/400有效、196/200成对；完整任务清单和缺口已公开。失败、缺种子和未适配项保留在分母，既有部分任务结果作为开发证据；五目标仍未验收。",
@@ -518,8 +518,8 @@
     "CPO独立补实验SafetyCarGoal1-v0已齐3种子/90集：奖励12.525、平均成本25.256；1/3种子经验平均成本≤25。比较候选前仍需匹配评测协议。",
     "G2缺失CPO终档证据已安排独立重建：CG1/PB1各3种子，固定2M步；每个终档使用保存的归一化状态评测。",
     "冻结400评测保留4个任务失败（A_103, A_112, B_170, A_172）。首轮GPU1后端诊断complete：覆盖A103/A112与两个已完成对照；不替换冻结400集。",
-    "全局资源监测 2026-09-12T14:33:50+08:00：30109：配额96核、活动训练组58、暂停0、部分暂停0、活动评测组7；30314：配额96核、活动训练组18、暂停0、部分暂停0、活动评测组3；5090：配额48核、活动训练组23、暂停0、部分暂停0、活动评测组0；volc：配额26核、活动训练组0、暂停0、部分暂停0、活动评测组0；aliyun：配额184核、活动训练组147、暂停0、部分暂停0、活动评测组8。暂停与僵尸不计入活动；活动仍须用训练日志验证产出。每分钟采样，五分钟窗口判断余量。",
-    "资源告警：vla_training: observer stale；vla_fixed400: 4 preserved failures",
+    "全局资源监测 2026-09-12T14:51:50+08:00：30109：配额96核、活动训练组60、暂停0、部分暂停0、活动评测组5；30314：配额96核、活动训练组19、暂停0、部分暂停0、活动评测组2；5090：配额48核、活动训练组22、暂停0、部分暂停0、活动评测组1；volc：配额26核、活动训练组0、暂停0、部分暂停0、活动评测组0；aliyun：配额184核、活动训练组146、暂停0、部分暂停0、活动评测组9。暂停与僵尸不计入活动；活动仍须用训练日志验证产出。每分钟采样，五分钟窗口判断余量。",
+    "资源告警：30109: root disk below 1 GiB；vla_training: observer stale；vla_fixed400: 4 preserved failures",
     "V2 三臂试验当前阶段 complete_training_pending_evaluation，活跃进程 0；先接续SafeVLA/SafeOT对照；第三臂需同时通过真实训练/恢复和预算旋钮生效检查。",
     "VLA基线seed1在199680步因Unity场景重置超时退出，尚无检查点；失败日志保留。采用NVIDIA-only后端做一次同种子重新训练，旧步数不累加；其余三个训练继续。",
     "VLA SafeOT seed1仿真超时后，从200704步算法状态检查点恢复；保留失败尝试，回退45056步，不额外累加。已验证加载后的训练进度。仿真器状态未序列化，不属于逐轨迹精确续跑。",
@@ -531,7 +531,7 @@
     "原 VLA 评测在 359/400 回合因模拟器超时结束；新进程复现检查动作不一致，因此另跑两臂执行条件一致的完整400回合，不混合旧数据。",
     "VLA 配对终档评测已收取 396/400 回合；两臂均通过全部模型权重严格加载，原始逐动作数据持续核验。",
     "CG2 刹车候选完整审计：0/5 配置通过联合门槛；逐种子软预算、硬违规和相对原策略的奖励变化同时公开，低平均违规不能替代联合通过。",
-    "2026-09-12 14:34：按独立种子、完整训练预算和终档评测分别验收。五台允许服务器的产物进度见下表；进程状态以实际监督记录为准。看板约每 30 分钟刷新。",
+    "2026-09-12 14:52：按独立种子、完整训练预算和终档评测分别验收。五台允许服务器的产物进度见下表；进程状态以实际监督记录为准。看板约每 30 分钟刷新。",
     "G1 差距：三导航任务曲线已覆盖；速度任务点位与终档覆盖见逐项检查。现有点位数量不等于多引擎统一性全部验收。 → 解决：保留已完成曲线，复核匹配种子终档前沿与独立种子不确定性；补充多引擎统一性证据，只对确实缺失且无重复的点位安排算力。（曲线覆盖按当前产物更新；剩余分析与跨引擎验收待完成。）",
     "G2 差距：三导航任务训练筛选两端点已达；终档复核单列；独立种子计数已去重；训练完成度与终档覆盖分开验收。按 owner 09-08 要求，两端点各自接近。 → 解决：先补齐 CPO 参考的终档评测，尤其 CG1/PB1；对已有完整旋钮点按终档回报和成本复核。缺口若是性能不足，再做配置筛选；若是产物缺失，先找回允许服务器上的原检查点，避免重复训练。（训练队列完成数见下表；参考终档补齐和安全验收时间以产物为准。）",
     "G3 差距：已有候选改善，SOTA 完整复核仍待完成。PG2 筛选点 15.5 @ 1.6% 观测硬违规率；CG2 低违规侧筛选点 8.6 @ 0.3%。观测均值达标不等于逐种子风险上界达标。 → 解决：（a）边距日程（0.95 起、前 0.5–1.5M 步线性收紧到目标阈值）：56 个 run，已完成 52；（b）执行时可行性筛选：从策略分布采 K=16 个候选动作，在 g≤pf 的集合内选最高 q；集合为空时选最低 g（同权重、不重训、随机采样对照组用于排除随机性）；已有增补种子与评测继续按产物收集；后加块保留为探索性数据，不能承诺加块后达标。PG2 m0.83 日程候选已冻结新评测块，与无筛选/随机动作配对复验；未分型 FDPI 的同筛选对照仍需完整收齐。（PG2 冻结复验已完成；CG2 按逐训练种子的奖励、硬风险上界与软预算共同验收，探索队列进度不等于通过。）",
@@ -683,9 +683,9 @@
       "task": "全部多智能体向量注册项：23任务 × 8设置 × 3种子",
       "status": "run",
       "n": 552,
-      "done": 25,
+      "done": 26,
       "running": 8,
-      "pending": 303,
+      "pending": 302,
       "failed": 0,
       "blocked": 216,
       "eta": "14可运行任务的336单元按固定队列接续；9项缺官方XML的216单元保留阻塞",
@@ -722,11 +722,11 @@
       "task": "Safe Vision七系列：全部105向量轨道×8配置×3种子",
       "status": "run",
       "n": 2520,
-      "done": 605,
+      "done": 608,
       "running": 138,
       "failed": 20,
       "blocked": 0,
-      "pending": 1757,
+      "pending": 1754,
       "eta": "30109/mainskill保留6/4槽；aliyun接管后目标128槽；旧训练进程和冻结协议保持",
       "note": "完整105向量轨道，包含Building/Fading/Race/FormulaOne全部机器人和难度；像素输入策略、多智能体、Isaac、CHORES仍待补齐。失败不减少分母。"
     },
@@ -735,9 +735,9 @@
       "task": "完整77向量轨道：PPO骨干SafeOT/惩罚/PPO-Lag/PID-Lag对照",
       "status": "run",
       "n": 1848,
-      "done": 546,
+      "done": 553,
       "running": 40,
-      "pending": 1262,
+      "pending": 1255,
       "failed": 0,
       "blocked": 0,
       "eta": "30109保留24槽；mainskill指定16个槽位完成当前任务后让出VLA资源，其余16槽继续派发；2M步/312回合不变",
@@ -748,13 +748,13 @@
       "task": "完整 Navigation / Velocity / Run 向量系列：77任务 × 8设置 × 3种子",
       "status": "run",
       "n": 1848,
-      "done": 779,
-      "running": 67,
-      "pending": 1000,
+      "done": 788,
+      "running": 68,
+      "pending": 991,
       "failed": 1,
       "blocked": 0,
       "eta": "每策略2M训练步及312终档回合；各机器固定队列逐项接续",
-      "note": "30109/5090/阿里云分别624/624/600个任务单元；已观测训练步数1,639,960,000。观测2026-09-12T14:32:21.701691+08:00；失败保留，整基准验收仍未通过。"
+      "note": "30109/5090/阿里云分别624/624/600个任务单元；已观测训练步数1,650,940,000。观测2026-09-12T14:50:22.439966+08:00；失败保留，整基准验收仍未通过。"
     },
     {
       "goal": "G1–G5",
@@ -1055,7 +1055,7 @@
   ],
   "changelog": [
     {
-      "time": "09-12 14:34",
+      "time": "09-12 14:52",
       "text": "五目标卡片、焦点、队列改为由 sotd_gap_plan.py 从收割表实时生成（差距 / 原因 / 解决办法 / 预计）；新增 sotd_gap_plan.json 与 sotd_gap_plan.md。"
     },
     {
@@ -1093,8 +1093,8 @@
     "sotd_cg2_epsilon_completed.png"
   ],
   "fleet": {
-    "observed": "2026-09-12T14:33:50+08:00",
-    "observed_unix": 1789194830.312289,
+    "observed": "2026-09-12T14:51:50+08:00",
+    "observed_unix": 1789195910.378902,
     "next_check_seconds": 60,
     "window_seconds": 300,
     "hosts": {
@@ -1102,28 +1102,28 @@
         "status": "connected",
         "effective_cores": 96.0,
         "load": [
-          95.07763671875,
-          94.00732421875,
-          94.439453125
+          93.38427734375,
+          93.43212890625,
+          93.3779296875
         ],
-        "mem_available_gib": 291.2463150024414,
+        "mem_available_gib": 290.9305610656738,
         "disks_free_gib": {
-          "root": 1.026,
-          "shm": 4.484,
-          "workspace": 15.695
+          "root": 0.986,
+          "shm": 5.017,
+          "workspace": 15.684
         },
         "process_counts": {
           "unity": 0,
           "keeper": 0,
           "watcher": 12,
-          "train": 58,
-          "train_total": 58,
+          "train": 60,
+          "train_total": 60,
           "train_paused": 0,
           "train_partial_paused": 0,
           "train_defunct": 0,
           "train_unknown": 0,
-          "eval": 7,
-          "eval_total": 7,
+          "eval": 5,
+          "eval_total": 5,
           "eval_paused": 0,
           "eval_partial_paused": 0,
           "eval_defunct": 0,
@@ -1133,10 +1133,10 @@
           {
             "index": 0,
             "name": "NVIDIA A100-SXM4-80GB",
-            "util": 100.0,
+            "util": 98.0,
             "used_mib": 44030.0,
             "total_mib": 81920.0,
-            "mean_util": 99.33,
+            "mean_util": 91.0,
             "max_util": 100.0,
             "allowed": true,
             "candidate_for_preflight": false,
@@ -1145,10 +1145,10 @@
           {
             "index": 1,
             "name": "NVIDIA A100-SXM4-80GB",
-            "util": 96.0,
+            "util": 100.0,
             "used_mib": 56430.0,
             "total_mib": 81920.0,
-            "mean_util": 97.67,
+            "mean_util": 90.14,
             "max_util": 100.0,
             "allowed": true,
             "candidate_for_preflight": false,
@@ -1169,10 +1169,10 @@
           {
             "index": 3,
             "name": "NVIDIA A100-SXM4-80GB",
-            "util": 91.0,
+            "util": 100.0,
             "used_mib": 44352.0,
             "total_mib": 81920.0,
-            "mean_util": 89.67,
+            "mean_util": 94.43,
             "max_util": 100.0,
             "allowed": true,
             "candidate_for_preflight": false,
@@ -1193,11 +1193,11 @@
           {
             "index": 5,
             "name": "NVIDIA A100-SXM4-80GB",
-            "util": 100.0,
+            "util": 98.0,
             "used_mib": 43880.0,
             "total_mib": 81920.0,
-            "mean_util": 98.17,
-            "max_util": 100.0,
+            "mean_util": 97.0,
+            "max_util": 99.0,
             "allowed": true,
             "candidate_for_preflight": false,
             "note": "Allocation still requires process/session, dependency and live-memory checks."
@@ -1227,12 +1227,12 @@
             "note": "Allocation still requires process/session, dependency and live-memory checks."
           }
         ],
-        "samples": 6,
-        "span_seconds": 300,
+        "samples": 7,
+        "span_seconds": 360,
         "window_ready": true,
         "training_by_line": {
           "safeot_dual": {
-            "active": 57,
+            "active": 59,
             "paused": 0,
             "partial_paused": 0,
             "defunct": 0,
@@ -1253,28 +1253,28 @@
         "status": "connected",
         "effective_cores": 96.0,
         "load": [
-          24.828125,
-          28.2021484375,
-          28.203125
+          33.603515625,
+          28.21337890625,
+          27.90283203125
         ],
-        "mem_available_gib": 807.0180892944336,
+        "mem_available_gib": 807.094596862793,
         "disks_free_gib": {
-          "root": 46.709,
+          "root": 46.706,
           "shm": 455.043,
-          "workspace": 82.334
+          "workspace": 82.333
         },
         "process_counts": {
           "unity": 9,
           "keeper": 0,
           "watcher": 0,
-          "train": 18,
-          "train_total": 18,
+          "train": 19,
+          "train_total": 19,
           "train_paused": 0,
           "train_partial_paused": 0,
           "train_defunct": 0,
           "train_unknown": 0,
-          "eval": 3,
-          "eval_total": 3,
+          "eval": 2,
+          "eval_total": 2,
           "eval_paused": 0,
           "eval_partial_paused": 0,
           "eval_defunct": 0,
@@ -1284,11 +1284,11 @@
           {
             "index": 0,
             "name": "NVIDIA A100-SXM4-80GB",
-            "util": 40.0,
-            "used_mib": 74511.0,
+            "util": 8.0,
+            "used_mib": 74455.0,
             "total_mib": 81920.0,
-            "mean_util": 14.67,
-            "max_util": 48.0,
+            "mean_util": 2.29,
+            "max_util": 8.0,
             "allowed": true,
             "candidate_for_preflight": false,
             "note": "Allocation still requires process/session, dependency and live-memory checks."
@@ -1378,12 +1378,12 @@
             "note": "Allocation still requires process/session, dependency and live-memory checks."
           }
         ],
-        "samples": 6,
-        "span_seconds": 300,
+        "samples": 7,
+        "span_seconds": 360,
         "window_ready": true,
         "training_by_line": {
           "safeot_dual": {
-            "active": 17,
+            "active": 18,
             "paused": 0,
             "partial_paused": 0,
             "defunct": 0,
@@ -1404,28 +1404,28 @@
         "status": "connected",
         "effective_cores": 48,
         "load": [
-          37.849609375,
-          39.29638671875,
-          39.90087890625
+          49.90185546875,
+          43.8505859375,
+          41.63330078125
         ],
-        "mem_available_gib": 125.79191970825195,
+        "mem_available_gib": 133.63042068481445,
         "disks_free_gib": {
-          "root": 184.509,
-          "shm": 125.416,
-          "workspace": 190.32
+          "root": 184.507,
+          "shm": 125.418,
+          "workspace": 190.194
         },
         "process_counts": {
           "unity": 0,
           "keeper": 0,
           "watcher": 0,
-          "train": 23,
-          "train_total": 23,
+          "train": 22,
+          "train_total": 22,
           "train_paused": 0,
           "train_partial_paused": 0,
           "train_defunct": 0,
           "train_unknown": 0,
-          "eval": 0,
-          "eval_total": 0,
+          "eval": 1,
+          "eval_total": 1,
           "eval_paused": 0,
           "eval_partial_paused": 0,
           "eval_defunct": 0,
@@ -1435,11 +1435,11 @@
           {
             "index": 0,
             "name": "NVIDIA GeForce RTX 5090",
-            "util": 94.0,
-            "used_mib": 13378.0,
+            "util": 71.0,
+            "used_mib": 13392.0,
             "total_mib": 32607.0,
-            "mean_util": 86.17,
-            "max_util": 94.0,
+            "mean_util": 86.57,
+            "max_util": 98.0,
             "allowed": true,
             "candidate_for_preflight": false,
             "note": "Allocation still requires process/session, dependency and live-memory checks."
@@ -1447,22 +1447,22 @@
           {
             "index": 1,
             "name": "NVIDIA GeForce RTX 5090",
-            "util": 84.0,
-            "used_mib": 20007.0,
+            "util": 60.0,
+            "used_mib": 11354.0,
             "total_mib": 32607.0,
-            "mean_util": 84.5,
-            "max_util": 87.0,
+            "mean_util": 69.71,
+            "max_util": 89.0,
             "allowed": true,
             "candidate_for_preflight": false,
             "note": "Allocation still requires process/session, dependency and live-memory checks."
           }
         ],
-        "samples": 6,
-        "span_seconds": 300,
+        "samples": 7,
+        "span_seconds": 360,
         "window_ready": true,
         "training_by_line": {
           "safeot_dual": {
-            "active": 23,
+            "active": 22,
             "paused": 0,
             "partial_paused": 0,
             "defunct": 0,
@@ -1475,15 +1475,15 @@
         "status": "connected",
         "effective_cores": 26,
         "load": [
-          14.3193359375,
-          15.05810546875,
-          15.955078125
+          18.72998046875,
+          17.24169921875,
+          16.74365234375
         ],
-        "mem_available_gib": 429.40533447265625,
+        "mem_available_gib": 427.62661361694336,
         "disks_free_gib": {
-          "root": 5.057,
+          "root": 5.056,
           "shm": 324.437,
-          "workspace": 714074.508
+          "workspace": 713784.445
         },
         "process_counts": {
           "unity": 0,
@@ -1509,7 +1509,7 @@
             "util": 96.0,
             "used_mib": 20631.0,
             "total_mib": 81920.0,
-            "mean_util": 96.0,
+            "mean_util": 95.43,
             "max_util": 97.0,
             "allowed": true,
             "candidate_for_preflight": false,
@@ -1521,15 +1521,15 @@
             "util": 100.0,
             "used_mib": 43993.0,
             "total_mib": 81920.0,
-            "mean_util": 99.83,
+            "mean_util": 99.86,
             "max_util": 100.0,
             "allowed": true,
             "candidate_for_preflight": false,
             "note": "Allocation still requires process/session, dependency and live-memory checks."
           }
         ],
-        "samples": 6,
-        "span_seconds": 300,
+        "samples": 7,
+        "span_seconds": 360,
         "window_ready": true,
         "training_by_line": {}
       },
@@ -1537,28 +1537,28 @@
         "status": "connected",
         "effective_cores": 184,
         "load": [
-          166.7421875,
-          166.318359375,
-          166.40576171875
+          165.341796875,
+          165.64013671875,
+          165.904296875
         ],
-        "mem_available_gib": 470.977237701416,
+        "mem_available_gib": 475.3403015136719,
         "disks_free_gib": {
           "root": 4988.644,
           "shm": 666.946,
-          "workspace": 7234.398
+          "workspace": 7234.152
         },
         "process_counts": {
           "unity": 2,
           "keeper": 0,
           "watcher": 0,
-          "train": 147,
-          "train_total": 147,
+          "train": 146,
+          "train_total": 146,
           "train_paused": 0,
           "train_partial_paused": 0,
           "train_defunct": 0,
           "train_unknown": 0,
-          "eval": 8,
-          "eval_total": 8,
+          "eval": 9,
+          "eval_total": 9,
           "eval_paused": 0,
           "eval_partial_paused": 0,
           "eval_defunct": 0,
@@ -1758,12 +1758,12 @@
             "note": "Allocation still requires process/session, dependency and live-memory checks."
           }
         ],
-        "samples": 6,
-        "span_seconds": 300,
+        "samples": 7,
+        "span_seconds": 359,
         "window_ready": true,
         "training_by_line": {
           "safeot_dual": {
-            "active": 147,
+            "active": 146,
             "paused": 0,
             "partial_paused": 0,
             "defunct": 0,
@@ -1774,6 +1774,7 @@
       }
     },
     "alerts": [
+      "30109: root disk below 1 GiB",
       "vla_training: observer stale",
       "vla_fixed400: 4 preserved failures"
     ],
@@ -1819,7 +1820,7 @@
       "vla_training": {
         "observed": "2026-09-11T17:30:01.707869+00:00",
         "status": "complete_training_pending_evaluation",
-        "observation_age_seconds": 46896,
+        "observation_age_seconds": 47976,
         "terminal_evidence": false,
         "runs": {
           "full/A/s1": {
@@ -1849,7 +1850,7 @@
         "status": "blocked",
         "completed_episodes": 396,
         "completed_pairs": 196,
-        "observation_age_seconds": 204334,
+        "observation_age_seconds": 205414,
         "terminal_evidence": true,
         "failed_jobs": [
           "A_103",
@@ -1859,9 +1860,9 @@
         ]
       },
       "repair_queue": {
-        "observed": "2026-09-12T14:31:50+08:00",
+        "observed": "2026-09-12T14:46:50+08:00",
         "overall": "warning",
-        "observation_age_seconds": 119,
+        "observation_age_seconds": 300,
         "terminal_evidence": false
       }
     },
@@ -1873,7 +1874,7 @@
       "completed": 12,
       "failed": 0,
       "protocol_sha256": "6fef896c16565741b588579a449510a0c549325b4fe07e8532d0780c8f6acd1f",
-      "observed": "2026-09-12T14:33:50.320721+08:00",
+      "observed": "2026-09-12T14:51:50.384711+08:00",
       "host": "30109",
       "backend": "JAX GPU",
       "max_parallel": 12,
@@ -2257,7 +2258,7 @@
       }
     },
     "vla_failure_diagnosis": {
-      "observed": "2026-09-12T14:33:50.346296+08:00",
+      "observed": "2026-09-12T14:51:50.398431+08:00",
       "failed_jobs": 4,
       "rows": [
         {
@@ -2517,7 +2518,7 @@
       "completed": 12,
       "failed": 0,
       "protocol_sha256": "10f575603d27aa7ede3addbcddefc44a3ad2bfbb28fc297e7c426bf7ea603359",
-      "observed": "2026-09-12T14:33:52.415682+08:00",
+      "observed": "2026-09-12T14:51:54.500397+08:00",
       "jobs": {
         "smoke_fixed": {
           "margin_mode": "approach",
@@ -2749,7 +2750,7 @@
       "completed": 24,
       "failed": 0,
       "protocol_sha256": "bd73daf512bfd14456543e32c3d6168aee44f8ea352e56c47868bb8d30b0b1f3",
-      "observed": "2026-09-12T06:33:53.183538+00:00",
+      "observed": "2026-09-12T06:51:55.430753+00:00",
       "host": "aliyun",
       "backend": "jax_cpu",
       "max_parallel": 24,
@@ -3214,7 +3215,7 @@
       "completed": 18,
       "failed": 0,
       "protocol_sha256": "6b42a9e95a87645b0adb652046ed5a7fe5107e95ae7f39506b3e447bb805bfed",
-      "observed": "2026-09-12T06:33:54.332223+00:00",
+      "observed": "2026-09-12T06:51:57.597572+00:00",
       "host": "30314",
       "backend": "jax_cuda",
       "max_parallel": 9,
@@ -4258,27 +4259,27 @@
     "backlog": "sotd_benchmark_backlog.csv"
   },
   "full_native_queue": {
-    "updated": "2026-09-12T14:32:21.701691+08:00",
+    "updated": "2026-09-12T14:50:22.439966+08:00",
     "task_count": 77,
     "total": 1848,
-    "completed": 779,
+    "completed": 788,
     "running": 68,
-    "live_running": 67,
+    "live_running": 68,
     "failed": 1,
     "blocked": 0,
-    "pending": 1000,
+    "pending": 991,
     "hosts": {
       "30109": {
         "status": "running",
-        "observed": "2026-09-12T14:21:26.070968+08:00",
-        "process_observed": "2026-09-12T14:32:19.433665+08:00",
+        "observed": "2026-09-12T14:49:01.968967+08:00",
+        "process_observed": "2026-09-12T14:50:19.191205+08:00",
         "fresh_observation": true,
         "mirror_sync": null,
         "artifact_sync": null,
         "controller_alive": true,
         "tasks": 26,
         "jobs": 624,
-        "completed": 158,
+        "completed": 159,
         "running": 18,
         "live_running": 18,
         "probes_passed": 26,
@@ -4331,18 +4332,18 @@
       },
       "5090": {
         "status": "running",
-        "observed": "2026-09-12T14:24:41.716863+08:00",
-        "process_observed": "2026-09-12T14:32:15.500701+08:00",
+        "observed": "2026-09-12T14:48:15.151734+08:00",
+        "process_observed": "2026-09-12T14:50:15.968907+08:00",
         "fresh_observation": true,
         "mirror_sync": {
           "ok": true,
-          "observed": "2026-09-12T14:32:14.739238+08:00"
+          "observed": "2026-09-12T14:50:15.123933+08:00"
         },
         "artifact_sync": null,
         "controller_alive": true,
         "tasks": 26,
         "jobs": 624,
-        "completed": 367,
+        "completed": 369,
         "running": 23,
         "live_running": 23,
         "probes_passed": 26,
@@ -4395,20 +4396,20 @@
       },
       "aliyun": {
         "status": "running",
-        "observed": "2026-09-12T06:28:48.696571+00:00",
-        "process_observed": "2026-09-12T06:32:19.354909+00:00",
+        "observed": "2026-09-12T06:48:28.783549+00:00",
+        "process_observed": "2026-09-12T06:50:19.105952+00:00",
         "fresh_observation": true,
         "mirror_sync": {
           "ok": true,
-          "observed": "2026-09-12T14:32:18.090086+08:00"
+          "observed": "2026-09-12T14:50:18.081845+08:00"
         },
         "artifact_sync": null,
         "controller_alive": true,
         "tasks": 25,
         "jobs": 600,
-        "completed": 254,
+        "completed": 260,
         "running": 27,
-        "live_running": 26,
+        "live_running": 27,
         "probes_passed": 25,
         "probes_failed": 0,
         "gates_passed": 8,
@@ -4468,26 +4469,26 @@
     "whole_benchmark_complete": false
   },
   "full_native_ppo": {
-    "updated": "2026-09-12T14:32:57.157822+08:00",
+    "updated": "2026-09-12T14:50:57.145093+08:00",
     "total": 1848,
-    "completed": 546,
+    "completed": 553,
     "running": 40,
     "live_running": 40,
     "failed": 0,
     "blocked": 0,
-    "pending": 1262,
+    "pending": 1255,
     "hosts": {
       "30109": {
         "status": "running",
-        "observed": "2026-09-12T14:30:08.744551+08:00",
-        "process_observed": "2026-09-12T14:32:55.208152+08:00",
+        "observed": "2026-09-12T14:42:12.286988+08:00",
+        "process_observed": "2026-09-12T14:50:54.955382+08:00",
         "fresh_observation": true,
         "mirror_sync": null,
         "artifact_sync": null,
         "controller_alive": true,
         "tasks": 39,
         "jobs": 936,
-        "completed": 224,
+        "completed": 228,
         "running": 24,
         "live_running": 24,
         "probes_passed": 39,
@@ -4540,18 +4541,18 @@
       },
       "30314": {
         "status": "running",
-        "observed": "2026-09-12T06:31:40.748892+00:00",
-        "process_observed": "2026-09-12T06:32:55.145001+00:00",
+        "observed": "2026-09-12T06:49:41.539459+00:00",
+        "process_observed": "2026-09-12T06:50:54.898386+00:00",
         "fresh_observation": true,
         "mirror_sync": {
           "ok": true,
-          "observed": "2026-09-12T14:32:54.635211+08:00"
+          "observed": "2026-09-12T14:50:54.381252+08:00"
         },
         "artifact_sync": null,
         "controller_alive": true,
         "tasks": 38,
         "jobs": 912,
-        "completed": 322,
+        "completed": 325,
         "running": 16,
         "live_running": 16,
         "probes_passed": 38,
@@ -4604,22 +4605,22 @@
       }
     },
     "protocol_sha256": "b01f061faf650c89d3d9d97215a62bde603c0a8cbc8780000b630a9b75430dea",
-    "observed_training_steps": 1135380000
+    "observed_training_steps": 1141760000
   },
   "full_vision_vector": {
-    "updated": "2026-09-12T14:32:48.586943+08:00",
+    "updated": "2026-09-12T14:49:02.016502+08:00",
     "total": 2520,
-    "completed": 605,
+    "completed": 608,
     "running": 138,
     "live_running": 138,
     "failed": 20,
     "blocked": 0,
-    "pending": 1757,
+    "pending": 1754,
     "hosts": {
       "30109": {
         "status": "running",
         "observed": "2026-09-12T08:35:29.857458+08:00",
-        "process_observed": "2026-09-12T14:32:45.529132+08:00",
+        "process_observed": "2026-09-12T14:48:59.863547+08:00",
         "fresh_observation": true,
         "controller_alive": true,
         "tasks": 15,
@@ -4678,7 +4679,7 @@
       "30314": {
         "status": "running",
         "observed": "2026-09-12T05:28:01.178216+00:00",
-        "process_observed": "2026-09-12T06:32:35.268353+00:00",
+        "process_observed": "2026-09-12T06:48:50.028019+00:00",
         "fresh_observation": true,
         "controller_alive": true,
         "tasks": 10,
@@ -4736,13 +4737,13 @@
       },
       "aliyun": {
         "status": "running",
-        "observed": "2026-09-12T06:24:53.927337+00:00",
-        "process_observed": "2026-09-12T06:32:45.463604+00:00",
+        "observed": "2026-09-12T06:48:13.139390+00:00",
+        "process_observed": "2026-09-12T06:48:59.791204+00:00",
         "fresh_observation": true,
         "controller_alive": true,
         "tasks": 80,
         "jobs": 1920,
-        "completed": 579,
+        "completed": 582,
         "running": 128,
         "live_running": 128,
         "probes_passed": 80,
@@ -4797,7 +4798,7 @@
     "protocol_sha256": "b6eef0edcc546ab70feed741a45dc5691e19195e870d0aea99db413dca59c4d9"
   },
   "full_pixel": {
-    "updated": "2026-09-12T14:34:34.636613+08:00",
+    "updated": "2026-09-12T14:49:35.973189+08:00",
     "task_count": 170,
     "total": 4080,
     "completed": 17,
@@ -5077,7 +5078,7 @@
     "formal_training": false,
     "benchmark_evaluation": false,
     "vision_development": {
-      "updated": "2026-09-12T06:33:14.358763+00:00",
+      "updated": "2026-09-12T06:51:39.912468+00:00",
       "cohort": "full_multi_agent_vision_20260911_development_v3",
       "stage": "development_gates",
       "formal_frozen": true,
@@ -5461,7 +5462,7 @@
   },
   "chores_full": {
     "cohort": "T1504-CHORES-three-seed-parent-v1",
-    "updated": "2026-09-12T14:34:34.663328+08:00",
+    "updated": "2026-09-12T14:49:39.588836+08:00",
     "fresh_observation": true,
     "cell_unit": "evaluation_instance",
     "training_policy_count": 18,
@@ -5518,7 +5519,7 @@
     ],
     "training_phase": {
       "schema_version": 1,
-      "observed": "2026-09-12T06:33:43.021868+00:00",
+      "observed": "2026-09-12T06:51:52.080127+00:00",
       "fresh": true,
       "expires_after_seconds": 600,
       "gpu_process_probe_ok": true,
@@ -5542,7 +5543,7 @@
             "status": "running",
             "process_live": true,
             "trainer_gpu_live": true,
-            "latest_steps": 338944
+            "latest_steps": 349184
           },
           {
             "job_id": "PickupType/B/s1",
@@ -5771,27 +5772,27 @@
     }
   },
   "full_multi_agent_queue": {
-    "updated": "2026-09-12T06:33:31.494563+00:00",
+    "updated": "2026-09-12T06:49:08.926700+00:00",
     "task_count": 23,
     "total": 552,
-    "completed": 25,
+    "completed": 26,
     "running": 8,
     "live_running": 8,
     "failed": 0,
     "blocked": 216,
-    "pending": 303,
+    "pending": 302,
     "hosts": {
       "aliyun": {
         "status": "running",
-        "observed": "2026-09-12T06:30:01.251141+00:00",
-        "process_observed": "2026-09-12T06:33:31.312683+00:00",
+        "observed": "2026-09-12T06:41:09.701161+00:00",
+        "process_observed": "2026-09-12T06:49:08.720025+00:00",
         "fresh_observation": true,
         "controller_alive": true,
         "tasks": 23,
         "jobs": 552,
-        "completed": 25,
+        "completed": 26,
         "running": 8,
-        "pending": 303,
+        "pending": 302,
         "blocked": 216,
         "failed": 0,
         "live_running": 8,
@@ -5810,7 +5811,7 @@
             "status": "complete",
             "live": false,
             "observed_steps": 20000,
-            "progress_age_seconds": 78430.65894532204,
+            "progress_age_seconds": 79368.05357384682,
             "started": "2026-09-11T08:41:38.270446+00:00",
             "finished": "2026-09-11T08:46:49.805280+00:00",
             "training_reward": -2.340659319952711,
@@ -5831,7 +5832,7 @@
             "status": "complete",
             "live": false,
             "observed_steps": 20000,
-            "progress_age_seconds": 78451.08905768394,
+            "progress_age_seconds": 79388.48440527916,
             "started": "2026-09-11T08:41:38.276032+00:00",
             "finished": "2026-09-11T08:46:31.991164+00:00",
             "training_reward": -3.36865164956022,
@@ -5852,7 +5853,7 @@
             "status": "complete",
             "live": false,
             "observed_steps": 20000,
-            "progress_age_seconds": 78447.91364693642,
+            "progress_age_seconds": 79385.31155586243,
             "started": "2026-09-11T08:41:38.276227+00:00",
             "finished": "2026-09-11T08:46:33.777607+00:00",
             "training_reward": -0.6548681061126888,
@@ -5873,7 +5874,7 @@
             "status": "complete",
             "live": false,
             "observed_steps": 20000,
-            "progress_age_seconds": 78422.53609323502,
+            "progress_age_seconds": 79359.93547344208,
             "started": "2026-09-11T08:41:38.276113+00:00",
             "finished": "2026-09-11T08:46:57.262450+00:00",
             "training_reward": -0.9979978848437587,
@@ -5894,7 +5895,7 @@
             "status": "complete",
             "live": false,
             "observed_steps": 20000,
-            "progress_age_seconds": 78134.42414975166,
+            "progress_age_seconds": 79071.82620120049,
             "started": "2026-09-11T08:46:32.024190+00:00",
             "finished": "2026-09-11T08:51:48.635627+00:00",
             "training_reward": 1.6367097079698016,
@@ -5915,7 +5916,7 @@
             "status": "complete",
             "live": false,
             "observed_steps": 20000,
-            "progress_age_seconds": 78139.81518936157,
+            "progress_age_seconds": 79077.21926188469,
             "started": "2026-09-11T08:46:33.806905+00:00",
             "finished": "2026-09-11T08:51:43.619546+00:00",
             "training_reward": -1.0304727962920595,
@@ -5936,7 +5937,7 @@
             "status": "complete",
             "live": false,
             "observed_steps": 20000,
-            "progress_age_seconds": 78122.85119390488,
+            "progress_age_seconds": 79060.25617337227,
             "started": "2026-09-11T08:46:49.838631+00:00",
             "finished": "2026-09-11T08:51:58.402386+00:00",
             "training_reward": 0.05886094760360305,
@@ -5957,7 +5958,7 @@
             "status": "complete",
             "live": false,
             "observed_steps": 20000,
-            "progress_age_seconds": 78113.09559226036,
+            "progress_age_seconds": 79050.50164437294,
             "started": "2026-09-11T08:46:57.302842+00:00",
             "finished": "2026-09-11T08:52:05.996378+00:00",
             "training_reward": -2.588830806461623,
@@ -5982,8 +5983,8 @@
     "whole_benchmark_complete": false
   },
   "full_multi_agent_vision": {
-    "updated": "2026-09-12T06:33:15.834562+00:00",
-    "observed": "2026-09-12T06:33:15.834562+00:00",
+    "updated": "2026-09-12T06:51:41.353929+00:00",
+    "observed": "2026-09-12T06:51:41.353929+00:00",
     "cohort": "full_multi_agent_vision_20260911_formal_v1",
     "cohort_id": "full_multi_agent_vision_20260911_formal_v1",
     "formal_frozen": true,
@@ -6005,7 +6006,7 @@
       "files": 1361,
       "manifest_sha256": "7c61f2c27297d5e4bedab4aefc4ab6d19d07112b554f232c71f48d0228b292e4"
     },
-    "observed_training_steps": 2468184,
+    "observed_training_steps": 2504242,
     "steps_per_policy": 2000000,
     "episodes_per_final_policy": 312,
     "arms": [
@@ -6058,8 +6059,8 @@
     "hosts": {
       "volc-a100": {
         "status": "running",
-        "observed": "2026-09-12T06:33:15.834562+00:00",
-        "process_observed": "2026-09-12T06:33:15.834562+00:00",
+        "observed": "2026-09-12T06:51:41.353929+00:00",
+        "process_observed": "2026-09-12T06:51:41.353929+00:00",
         "fresh_observation": true,
         "controller_alive": true,
         "tasks": 15,
@@ -6080,7 +6081,7 @@
             "status": "complete",
             "live": false,
             "observed_steps": 20000,
-            "progress_age_seconds": 58339.21181035042,
+            "progress_age_seconds": 59444.720079422,
             "started": "2026-09-11T14:06:13.015148+00:00",
             "finished": "2026-09-11T14:22:00.809153+00:00",
             "training_reward": 1.1000913998252322,
@@ -6101,7 +6102,7 @@
             "status": "complete",
             "live": false,
             "observed_steps": 20000,
-            "progress_age_seconds": 58339.72347021103,
+            "progress_age_seconds": 59445.23132061958,
             "started": "2026-09-11T14:06:13.015365+00:00",
             "finished": "2026-09-11T14:22:00.659428+00:00",
             "training_reward": -0.7946496557170948,
@@ -6122,7 +6123,7 @@
             "status": "complete",
             "live": false,
             "observed_steps": 20000,
-            "progress_age_seconds": 58289.19653558731,
+            "progress_age_seconds": 59394.70442986488,
             "started": "2026-09-11T14:06:13.015521+00:00",
             "finished": "2026-09-11T14:22:50.923815+00:00",
             "training_reward": 0.35214404001568267,
@@ -6143,7 +6144,7 @@
             "status": "complete",
             "live": false,
             "observed_steps": 20000,
-            "progress_age_seconds": 58078.19113492966,
+            "progress_age_seconds": 59183.69886803627,
             "started": "2026-09-11T14:06:13.016414+00:00",
             "finished": "2026-09-11T14:26:22.283361+00:00",
             "training_reward": -1.267075037107142,
@@ -6164,7 +6165,7 @@
             "status": "complete",
             "live": false,
             "observed_steps": 20000,
-            "progress_age_seconds": 57269.87615561485,
+            "progress_age_seconds": 58375.38380861282,
             "started": "2026-09-11T14:22:00.815343+00:00",
             "finished": "2026-09-11T14:39:49.709766+00:00",
             "training_reward": -1.6012833002639666,
@@ -6193,7 +6194,7 @@
             "status": "complete",
             "live": false,
             "observed_steps": 20000,
-            "progress_age_seconds": 57269.55071568489,
+            "progress_age_seconds": 58375.05846333504,
             "started": "2026-09-11T14:22:00.665191+00:00",
             "finished": "2026-09-11T14:39:50.160716+00:00",
             "training_reward": -1.30973369156114,
@@ -6235,7 +6236,7 @@
             "status": "complete",
             "live": false,
             "observed_steps": 20000,
-            "progress_age_seconds": 57231.48683428764,
+            "progress_age_seconds": 58336.99464893341,
             "started": "2026-09-11T14:22:50.932157+00:00",
             "finished": "2026-09-11T14:40:23.470960+00:00",
             "training_reward": 0.08724029927404786,
@@ -6277,7 +6278,7 @@
             "status": "complete",
             "live": false,
             "observed_steps": 20000,
-            "progress_age_seconds": 57064.835621356964,
+            "progress_age_seconds": 58170.34373116493,
             "started": "2026-09-11T14:26:22.290394+00:00",
             "finished": "2026-09-11T14:43:06.401290+00:00",
             "training_reward": -0.8733499701943246,
@@ -6328,7 +6329,7 @@
         "status": "complete",
         "live": false,
         "observed_steps": 20000,
-        "progress_age_seconds": 58339.21181035042,
+        "progress_age_seconds": 59444.720079422,
         "started": "2026-09-11T14:06:13.015148+00:00",
         "finished": "2026-09-11T14:22:00.809153+00:00",
         "training_reward": 1.1000913998252322,
@@ -6349,7 +6350,7 @@
         "status": "complete",
         "live": false,
         "observed_steps": 20000,
-        "progress_age_seconds": 58339.72347021103,
+        "progress_age_seconds": 59445.23132061958,
         "started": "2026-09-11T14:06:13.015365+00:00",
         "finished": "2026-09-11T14:22:00.659428+00:00",
         "training_reward": -0.7946496557170948,
@@ -6370,7 +6371,7 @@
         "status": "complete",
         "live": false,
         "observed_steps": 20000,
-        "progress_age_seconds": 58289.19653558731,
+        "progress_age_seconds": 59394.70442986488,
         "started": "2026-09-11T14:06:13.015521+00:00",
         "finished": "2026-09-11T14:22:50.923815+00:00",
         "training_reward": 0.35214404001568267,
@@ -6391,7 +6392,7 @@
         "status": "complete",
         "live": false,
         "observed_steps": 20000,
-        "progress_age_seconds": 58078.19113492966,
+        "progress_age_seconds": 59183.69886803627,
         "started": "2026-09-11T14:06:13.016414+00:00",
         "finished": "2026-09-11T14:26:22.283361+00:00",
         "training_reward": -1.267075037107142,
@@ -6412,7 +6413,7 @@
         "status": "complete",
         "live": false,
         "observed_steps": 20000,
-        "progress_age_seconds": 57269.87615561485,
+        "progress_age_seconds": 58375.38380861282,
         "started": "2026-09-11T14:22:00.815343+00:00",
         "finished": "2026-09-11T14:39:49.709766+00:00",
         "training_reward": -1.6012833002639666,
@@ -6441,7 +6442,7 @@
         "status": "complete",
         "live": false,
         "observed_steps": 20000,
-        "progress_age_seconds": 57269.55071568489,
+        "progress_age_seconds": 58375.05846333504,
         "started": "2026-09-11T14:22:00.665191+00:00",
         "finished": "2026-09-11T14:39:50.160716+00:00",
         "training_reward": -1.30973369156114,
@@ -6483,7 +6484,7 @@
         "status": "complete",
         "live": false,
         "observed_steps": 20000,
-        "progress_age_seconds": 57231.48683428764,
+        "progress_age_seconds": 58336.99464893341,
         "started": "2026-09-11T14:22:50.932157+00:00",
         "finished": "2026-09-11T14:40:23.470960+00:00",
         "training_reward": 0.08724029927404786,
@@ -6525,7 +6526,7 @@
         "status": "complete",
         "live": false,
         "observed_steps": 20000,
-        "progress_age_seconds": 57064.835621356964,
+        "progress_age_seconds": 58170.34373116493,
         "started": "2026-09-11T14:26:22.290394+00:00",
         "finished": "2026-09-11T14:43:06.401290+00:00",
         "training_reward": -0.8733499701943246,
@@ -6622,7 +6623,7 @@
     "safety_gymnasium": {
       "required_tracks": 402,
       "frozen_tracks": 390,
-      "active_tasks_now": 159,
+      "active_tasks_now": 160,
       "complete_frozen_matrix_tasks": 0,
       "unfrozen_tracks": 12,
       "groups": [
@@ -6666,7 +6667,7 @@
           "group": "Safe Multi-Agent / Velocity",
           "required": 8,
           "frozen": 8,
-          "active_now": 2,
+          "active_now": 1,
           "complete_frozen_matrix": 0,
           "with_failed_or_blocked_cells": 0,
           "unfrozen": 0
@@ -6675,7 +6676,7 @@
           "group": "Safe Navigation",
           "required": 120,
           "frozen": 120,
-          "active_now": 54,
+          "active_now": 55,
           "complete_frozen_matrix": 0,
           "with_failed_or_blocked_cells": 0,
           "unfrozen": 0
@@ -6684,7 +6685,7 @@
           "group": "Safe Velocity",
           "required": 12,
           "frozen": 12,
-          "active_now": 5,
+          "active_now": 3,
           "complete_frozen_matrix": 0,
           "with_failed_or_blocked_cells": 0,
           "unfrozen": 0
@@ -6693,7 +6694,7 @@
           "group": "Safe Vision",
           "required": 210,
           "frozen": 210,
-          "active_now": 84,
+          "active_now": 87,
           "complete_frozen_matrix": 0,
           "with_failed_or_blocked_cells": 8,
           "unfrozen": 0
@@ -6735,23 +6736,23 @@
       "all_families_running": false
     },
     "cohort_cells": 11208,
-    "completed_cells": 1972,
-    "live_workers": 273,
+    "completed_cells": 1992,
+    "live_workers": 274,
     "whole_benchmark_complete": false,
     "scientific_goal_acceptance": "open",
     "counting_note": "Frozen means a protocol and queue exist, not that every task is training now. Completion here covers frozen cells only; SOTA and full benchmark acceptance remain separate.",
-    "updated": "2026-09-12T14:34:36+08:00",
+    "updated": "2026-09-12T14:52:04+08:00",
     "cohort_observations": {
-      "T1484-full-native-vector-20260910-v2": "2026-09-12T14:32:21.701691+08:00",
-      "T1484-full-native-ppo-20260910": "2026-09-12T14:32:57.157822+08:00",
-      "T1484-full-vision-vector-20260910": "2026-09-12T14:32:48.586943+08:00",
-      "full_multi_agent_vector_20260911": "2026-09-12T06:33:31.494563+00:00",
-      "full_multi_agent_vision_20260911_formal_v1": "2026-09-12T06:33:15.834562+00:00",
-      "T1484-full-pixel-20260911": "2026-09-12T14:34:34.636613+08:00"
+      "T1484-full-native-vector-20260910-v2": "2026-09-12T14:50:22.439966+08:00",
+      "T1484-full-native-ppo-20260910": "2026-09-12T14:50:57.145093+08:00",
+      "T1484-full-vision-vector-20260910": "2026-09-12T14:49:02.016502+08:00",
+      "full_multi_agent_vector_20260911": "2026-09-12T06:49:08.926700+00:00",
+      "full_multi_agent_vision_20260911_formal_v1": "2026-09-12T06:51:41.353929+00:00",
+      "T1484-full-pixel-20260911": "2026-09-12T14:49:35.973189+08:00"
     }
   },
   "queue_acceleration": {
-    "updated": "2026-09-12T14:33:54.648015+08:00",
+    "updated": "2026-09-12T14:51:58.959897+08:00",
     "changes": [
       {
         "at": "2026-09-10T14:57:14.829442+00:00",
@@ -6765,13 +6766,13 @@
         "cohort": "full_vision_vector_20260910",
         "current_host": {
           "status": "running",
-          "observed": "2026-09-12T06:24:53.927337+00:00",
-          "process_observed": "2026-09-12T06:32:45.463604+00:00",
+          "observed": "2026-09-12T06:48:13.139390+00:00",
+          "process_observed": "2026-09-12T06:48:59.791204+00:00",
           "fresh_observation": true,
           "controller_alive": true,
           "tasks": 80,
           "jobs": 1920,
-          "completed": 579,
+          "completed": 582,
           "running": 128,
           "live_running": 128,
           "probes_passed": 80,
@@ -6836,18 +6837,18 @@
         "cohort": "full_native_ppo_20260910",
         "current_host": {
           "status": "running",
-          "observed": "2026-09-12T06:31:40.748892+00:00",
-          "process_observed": "2026-09-12T06:32:55.145001+00:00",
+          "observed": "2026-09-12T06:49:41.539459+00:00",
+          "process_observed": "2026-09-12T06:50:54.898386+00:00",
           "fresh_observation": true,
           "mirror_sync": {
             "ok": true,
-            "observed": "2026-09-12T14:32:54.635211+08:00"
+            "observed": "2026-09-12T14:50:54.381252+08:00"
           },
           "artifact_sync": null,
           "controller_alive": true,
           "tasks": 38,
           "jobs": 912,
-          "completed": 322,
+          "completed": 325,
           "running": 16,
           "live_running": 16,
           "probes_passed": 38,
@@ -6909,8 +6910,8 @@
     "whole_benchmark_complete": false,
     "scientific_goal_acceptance": "open",
     "actual_speedup": "unmeasured; added concurrency is not a measured throughput ratio",
-    "formal_live_total": 273,
-    "completed_cells": 1972,
+    "formal_live_total": 274,
+    "completed_cells": 1992,
     "wall_budget_amendment": {
       "observed": "2026-09-10T23:27:04.411539+08:00",
       "reason": "Observed slow native FormulaOne physics exceeds generic wall-clock watchdog despite steady progress.",
@@ -7030,9 +7031,9 @@
           "host": "aliyun",
           "previous_lanes": 24,
           "target_lanes": 27,
-          "process_observed": "2026-09-12T06:32:19.354909+00:00",
+          "process_observed": "2026-09-12T06:50:19.105952+00:00",
           "fresh_observation": true,
-          "current_verified_live": 26,
+          "current_verified_live": 27,
           "new_jobs": [
             {
               "id": "SafetyRacecarPush2-v0__safeot_eps3__s1",
@@ -7058,7 +7059,7 @@
           "host": "5090",
           "previous_lanes": 20,
           "target_lanes": 23,
-          "process_observed": "2026-09-12T14:32:15.500701+08:00",
+          "process_observed": "2026-09-12T14:50:15.968907+08:00",
           "fresh_observation": true,
           "current_verified_live": 23,
           "new_jobs": [
@@ -7248,7 +7249,7 @@
           "The other16 lanes continue all pending host-owned jobs.",
           "Future controller replacement must preserve the retirement implementation and allocation fields."
         ],
-        "current_process_observed": "2026-09-12T06:32:55.145001+00:00",
+        "current_process_observed": "2026-09-12T06:50:54.898386+00:00",
         "fresh_observation": true,
         "verified_retired_cpu_count": 16
       },
@@ -30371,7 +30372,7 @@
     "failed": 0,
     "running": 0,
     "pending": 0,
-    "observed": "2026-09-12T06:33:54.456887+00:00",
+    "observed": "2026-09-12T06:51:58.783030+00:00",
     "controller_alive": false,
     "fresh_observation": true
   },
@@ -30393,9 +30394,9 @@
         "host": "aliyun",
         "previous_lanes": 24,
         "target_lanes": 27,
-        "process_observed": "2026-09-12T06:32:19.354909+00:00",
+        "process_observed": "2026-09-12T06:50:19.105952+00:00",
         "fresh_observation": true,
-        "current_verified_live": 26,
+        "current_verified_live": 27,
         "new_jobs": [
           {
             "id": "SafetyRacecarPush2-v0__safeot_eps3__s1",
@@ -30421,7 +30422,7 @@
         "host": "5090",
         "previous_lanes": 20,
         "target_lanes": 23,
-        "process_observed": "2026-09-12T14:32:15.500701+08:00",
+        "process_observed": "2026-09-12T14:50:15.968907+08:00",
         "fresh_observation": true,
         "current_verified_live": 23,
         "new_jobs": [
@@ -30611,7 +30612,7 @@
         "The other16 lanes continue all pending host-owned jobs.",
         "Future controller replacement must preserve the retirement implementation and allocation fields."
       ],
-      "current_process_observed": "2026-09-12T06:32:55.145001+00:00",
+      "current_process_observed": "2026-09-12T06:50:54.898386+00:00",
       "fresh_observation": true,
       "verified_retired_cpu_count": 16
     },
@@ -32267,7 +32268,7 @@
       "interpretation": "Complete CG2 development cohort; all3 seeds per cell. Error bars are training-seed SD. No monotonic epsilon effect, SOTA or safety acceptance claimed."
     },
     "repair": {
-      "observed": "2026-09-12T06:34:06.377407+00:00",
+      "observed": "2026-09-12T06:52:09.914199+00:00",
       "total": 12,
       "protocol_sha256": "b1f1c06bd9b0108fe9c7942be5adb15844ef88017bd4bca5b1c06ef99a72ef80",
       "controller_alive": false,
@@ -34734,21 +34735,21 @@
     "chores_scenarios": 543,
     "frozen_tasks": 933,
     "unfrozen_tasks": 12,
-    "active_tasks": 159,
+    "active_tasks": 160,
     "tasks_with_failures": 30,
     "complete_frozen_tasks": 0,
     "total_cells": 14466,
-    "completed_cells": 2369,
-    "running_cells": 273,
+    "completed_cells": 2389,
+    "running_cells": 274,
     "failed_cells": 456,
     "cell_units_note": "Training-policy runs and evaluation-instance cells are counted separately by cohort_cell_units; total_cells is a queue inventory, not a policy count."
   },
   "resource_expansion": {
-    "observed": "2026-09-12T06:31:43.725574+00:00",
+    "observed": "2026-09-12T06:49:54.812231+00:00",
     "load": [
-      14.65966796875,
-      15.53662109375,
-      16.228515625
+      16.35498046875,
+      16.5703125,
+      16.49853515625
     ],
     "effective_cores": 26,
     "rows": [
@@ -34757,7 +34758,7 @@
         "alive": false,
         "identity_verified": false,
         "observed_steps": 2000000,
-        "log_age_seconds": 80526.48845005035,
+        "log_age_seconds": 81617.58809638023,
         "cpu_ticks": 0,
         "verified_threads": 0
       },
@@ -34766,7 +34767,7 @@
         "alive": false,
         "identity_verified": false,
         "observed_steps": 2000000,
-        "log_age_seconds": 80795.36999845505,
+        "log_age_seconds": 81886.46962213516,
         "cpu_ticks": 0,
         "verified_threads": 0
       },
@@ -34775,7 +34776,7 @@
         "alive": false,
         "identity_verified": false,
         "observed_steps": 2000000,
-        "log_age_seconds": 87994.60885763168,
+        "log_age_seconds": 89085.70835757256,
         "cpu_ticks": 0,
         "verified_threads": 0
       },
@@ -34784,7 +34785,7 @@
         "alive": false,
         "identity_verified": false,
         "observed_steps": 2000000,
-        "log_age_seconds": 83501.71870684624,
+        "log_age_seconds": 84592.81816601753,
         "cpu_ticks": 0,
         "verified_threads": 0
       }
@@ -34797,26 +34798,26 @@
     "cpu_counter_convention": "thread_group_total_once_per_pid",
     "fresh_observation": true,
     "new_ppo_queue": {
-      "updated": "2026-09-12T14:32:57.157822+08:00",
+      "updated": "2026-09-12T14:50:57.145093+08:00",
       "total": 1848,
-      "completed": 546,
+      "completed": 553,
       "running": 40,
       "live_running": 40,
       "failed": 0,
       "blocked": 0,
-      "pending": 1262,
+      "pending": 1255,
       "hosts": {
         "30109": {
           "status": "running",
-          "observed": "2026-09-12T14:30:08.744551+08:00",
-          "process_observed": "2026-09-12T14:32:55.208152+08:00",
+          "observed": "2026-09-12T14:42:12.286988+08:00",
+          "process_observed": "2026-09-12T14:50:54.955382+08:00",
           "fresh_observation": true,
           "mirror_sync": null,
           "artifact_sync": null,
           "controller_alive": true,
           "tasks": 39,
           "jobs": 936,
-          "completed": 224,
+          "completed": 228,
           "running": 24,
           "live_running": 24,
           "probes_passed": 39,
@@ -34869,18 +34870,18 @@
         },
         "30314": {
           "status": "running",
-          "observed": "2026-09-12T06:31:40.748892+00:00",
-          "process_observed": "2026-09-12T06:32:55.145001+00:00",
+          "observed": "2026-09-12T06:49:41.539459+00:00",
+          "process_observed": "2026-09-12T06:50:54.898386+00:00",
           "fresh_observation": true,
           "mirror_sync": {
             "ok": true,
-            "observed": "2026-09-12T14:32:54.635211+08:00"
+            "observed": "2026-09-12T14:50:54.381252+08:00"
           },
           "artifact_sync": null,
           "controller_alive": true,
           "tasks": 38,
           "jobs": 912,
-          "completed": 322,
+          "completed": 325,
           "running": 16,
           "live_running": 16,
           "probes_passed": 38,
@@ -34933,22 +34934,22 @@
         }
       },
       "protocol_sha256": "b01f061faf650c89d3d9d97215a62bde603c0a8cbc8780000b630a9b75430dea",
-      "observed_training_steps": 1135380000
+      "observed_training_steps": 1141760000
     },
     "new_vision_vector_queue": {
-      "updated": "2026-09-12T14:32:48.586943+08:00",
+      "updated": "2026-09-12T14:49:02.016502+08:00",
       "total": 2520,
-      "completed": 605,
+      "completed": 608,
       "running": 138,
       "live_running": 138,
       "failed": 20,
       "blocked": 0,
-      "pending": 1757,
+      "pending": 1754,
       "hosts": {
         "30109": {
           "status": "running",
           "observed": "2026-09-12T08:35:29.857458+08:00",
-          "process_observed": "2026-09-12T14:32:45.529132+08:00",
+          "process_observed": "2026-09-12T14:48:59.863547+08:00",
           "fresh_observation": true,
           "controller_alive": true,
           "tasks": 15,
@@ -35007,7 +35008,7 @@
         "30314": {
           "status": "running",
           "observed": "2026-09-12T05:28:01.178216+00:00",
-          "process_observed": "2026-09-12T06:32:35.268353+00:00",
+          "process_observed": "2026-09-12T06:48:50.028019+00:00",
           "fresh_observation": true,
           "controller_alive": true,
           "tasks": 10,
@@ -35065,13 +35066,13 @@
         },
         "aliyun": {
           "status": "running",
-          "observed": "2026-09-12T06:24:53.927337+00:00",
-          "process_observed": "2026-09-12T06:32:45.463604+00:00",
+          "observed": "2026-09-12T06:48:13.139390+00:00",
+          "process_observed": "2026-09-12T06:48:59.791204+00:00",
           "fresh_observation": true,
           "controller_alive": true,
           "tasks": 80,
           "jobs": 1920,
-          "completed": 579,
+          "completed": 582,
           "running": 128,
           "live_running": 128,
           "probes_passed": 80,
@@ -35126,7 +35127,7 @@
       "protocol_sha256": "b6eef0edcc546ab70feed741a45dc5691e19195e870d0aea99db413dca59c4d9"
     },
     "queue_acceleration": {
-      "updated": "2026-09-12T14:33:54.648015+08:00",
+      "updated": "2026-09-12T14:51:58.959897+08:00",
       "changes": [
         {
           "at": "2026-09-10T14:57:14.829442+00:00",
@@ -35140,13 +35141,13 @@
           "cohort": "full_vision_vector_20260910",
           "current_host": {
             "status": "running",
-            "observed": "2026-09-12T06:24:53.927337+00:00",
-            "process_observed": "2026-09-12T06:32:45.463604+00:00",
+            "observed": "2026-09-12T06:48:13.139390+00:00",
+            "process_observed": "2026-09-12T06:48:59.791204+00:00",
             "fresh_observation": true,
             "controller_alive": true,
             "tasks": 80,
             "jobs": 1920,
-            "completed": 579,
+            "completed": 582,
             "running": 128,
             "live_running": 128,
             "probes_passed": 80,
@@ -35211,18 +35212,18 @@
           "cohort": "full_native_ppo_20260910",
           "current_host": {
             "status": "running",
-            "observed": "2026-09-12T06:31:40.748892+00:00",
-            "process_observed": "2026-09-12T06:32:55.145001+00:00",
+            "observed": "2026-09-12T06:49:41.539459+00:00",
+            "process_observed": "2026-09-12T06:50:54.898386+00:00",
             "fresh_observation": true,
             "mirror_sync": {
               "ok": true,
-              "observed": "2026-09-12T14:32:54.635211+08:00"
+              "observed": "2026-09-12T14:50:54.381252+08:00"
             },
             "artifact_sync": null,
             "controller_alive": true,
             "tasks": 38,
             "jobs": 912,
-            "completed": 322,
+            "completed": 325,
             "running": 16,
             "live_running": 16,
             "probes_passed": 38,
@@ -35284,8 +35285,8 @@
       "whole_benchmark_complete": false,
       "scientific_goal_acceptance": "open",
       "actual_speedup": "unmeasured; added concurrency is not a measured throughput ratio",
-      "formal_live_total": 273,
-      "completed_cells": 1972,
+      "formal_live_total": 274,
+      "completed_cells": 1992,
       "wall_budget_amendment": {
         "observed": "2026-09-10T23:27:04.411539+08:00",
         "reason": "Observed slow native FormulaOne physics exceeds generic wall-clock watchdog despite steady progress.",
@@ -35405,9 +35406,9 @@
             "host": "aliyun",
             "previous_lanes": 24,
             "target_lanes": 27,
-            "process_observed": "2026-09-12T06:32:19.354909+00:00",
+            "process_observed": "2026-09-12T06:50:19.105952+00:00",
             "fresh_observation": true,
-            "current_verified_live": 26,
+            "current_verified_live": 27,
             "new_jobs": [
               {
                 "id": "SafetyRacecarPush2-v0__safeot_eps3__s1",
@@ -35433,7 +35434,7 @@
             "host": "5090",
             "previous_lanes": 20,
             "target_lanes": 23,
-            "process_observed": "2026-09-12T14:32:15.500701+08:00",
+            "process_observed": "2026-09-12T14:50:15.968907+08:00",
             "fresh_observation": true,
             "current_verified_live": 23,
             "new_jobs": [
@@ -35623,7 +35624,7 @@
             "The other16 lanes continue all pending host-owned jobs.",
             "Future controller replacement must preserve the retirement implementation and allocation fields."
           ],
-          "current_process_observed": "2026-09-12T06:32:55.145001+00:00",
+          "current_process_observed": "2026-09-12T06:50:54.898386+00:00",
           "fresh_observation": true,
           "verified_retired_cpu_count": 16
         },
@@ -35640,8 +35641,8 @@
   },
   "fleet_health": {
     "schema_version": 1,
-    "observed": "2026-09-12T14:33:28+08:00",
-    "observed_unix": 1789194808.6185944,
+    "observed": "2026-09-12T14:51:28+08:00",
+    "observed_unix": 1789195888.52891,
     "next_check_seconds": 180,
     "status": "needs_attention",
     "observer_policy": {
@@ -35662,13 +35663,13 @@
     },
     "full_matrix": {
       "total": 11208,
-      "completed": 1972,
-      "pending": 8509,
+      "completed": 1992,
+      "pending": 8489,
       "failed": 21,
       "blocked": 432,
       "running": 274,
-      "live_running": 273,
-      "verified_live": 273
+      "live_running": 274,
+      "verified_live": 274
     },
     "coverage": {
       "denominators": {
@@ -35680,7 +35681,7 @@
         "Safety-CHORES": "released evaluation instances"
       },
       "frozen_sg_tracks": 390,
-      "active_distinct_sg_tracks": 159,
+      "active_distinct_sg_tracks": 160,
       "registered_inventory_entries": 933,
       "inventory_entries_total": 945,
       "unfrozen_inventory_entries": 12,
@@ -35699,20 +35700,20 @@
     "cohorts": {
       "native": {
         "total": 1848,
-        "completed": 779,
-        "pending": 1000,
+        "completed": 788,
+        "pending": 991,
         "failed": 1,
         "blocked": 0,
         "running": 68,
-        "live_running": 67,
-        "verified_live": 67,
+        "live_running": 68,
+        "verified_live": 68,
         "task_count": 77,
         "protocol_sha256": "82f5c8c7c040464db50f3cc5c67154bcffbc14dc0e39ff5f0edb1c353280b5ac",
-        "report_updated": "2026-09-12T14:32:21.701691+08:00",
-        "report_age_seconds": 67,
+        "report_updated": "2026-09-12T14:50:22.439966+08:00",
+        "report_age_seconds": 66,
         "report_fresh": true,
         "terminal_evidence": false,
-        "observed_training_steps": 1639960000,
+        "observed_training_steps": 1650940000,
         "controllers": {
           "aliyun": {
             "controller": {
@@ -35721,13 +35722,13 @@
               "process_state": "S",
               "open_fds": 31
             },
-            "state_updated": "2026-09-12T06:32:15.415731+00:00",
+            "state_updated": "2026-09-12T06:48:28.783549+00:00",
             "state_status": "running",
             "state_protocol_sha256": "82f5c8c7c040464db50f3cc5c67154bcffbc14dc0e39ff5f0edb1c353280b5ac",
             "state_counts": {
               "total": 600,
-              "completed": 255,
-              "pending": 318,
+              "completed": 260,
+              "pending": 313,
               "running": 27,
               "failed": 0,
               "blocked": 0
@@ -35739,15 +35740,15 @@
               "identity_alive": true,
               "status": "alive",
               "process_state": "S",
-              "open_fds": 20
+              "open_fds": 21
             },
-            "state_updated": "2026-09-12T14:33:11.311381+08:00",
+            "state_updated": "2026-09-12T14:49:01.968967+08:00",
             "state_status": "running",
             "state_protocol_sha256": "82f5c8c7c040464db50f3cc5c67154bcffbc14dc0e39ff5f0edb1c353280b5ac",
             "state_counts": {
               "total": 624,
-              "completed": 158,
-              "pending": 447,
+              "completed": 159,
+              "pending": 446,
               "running": 18,
               "failed": 1,
               "blocked": 0
@@ -35767,13 +35768,13 @@
               "process_state": "S",
               "open_fds": 27
             },
-            "state_updated": "2026-09-12T14:24:41.716863+08:00",
+            "state_updated": "2026-09-12T14:48:15.151734+08:00",
             "state_status": "running",
             "state_protocol_sha256": "82f5c8c7c040464db50f3cc5c67154bcffbc14dc0e39ff5f0edb1c353280b5ac",
             "state_counts": {
               "total": 624,
-              "completed": 367,
-              "pending": 234,
+              "completed": 369,
+              "pending": 232,
               "running": 23,
               "failed": 0,
               "blocked": 0
@@ -35789,38 +35790,23 @@
         },
         "progress": {
           "states": {
-            "unchanged": 17,
-            "advanced": 51
+            "unchanged": 18,
+            "advanced": 47,
+            "first_observation": 3
           },
           "review_needed": 0,
-          "max_unchanged_seconds": 2520,
+          "max_unchanged_seconds": 1620,
           "slow_formulaone_count": 0
         },
-        "jobs_needing_review": [
-          {
-            "id": "SafetyCarButton2-v0__safeot_eps3__s2",
-            "task": "SafetyCarButton2-v0",
-            "host": "aliyun",
-            "phase": "evaluating",
-            "live": false,
-            "liveness_observation_fresh": true,
-            "steps": 2000000,
-            "progress_state": "unchanged",
-            "unchanged_seconds": 1980,
-            "warning_after_seconds": 7200,
-            "review_needed": false,
-            "training_wall_budget_hours": null,
-            "automatic_restart_allowed": false
-          }
-        ],
+        "jobs_needing_review": [],
         "integrity_errors": [],
-        "queued": 1000,
-        "complete": 779
+        "queued": 991,
+        "complete": 788
       },
       "ppo": {
         "total": 1848,
-        "completed": 546,
-        "pending": 1262,
+        "completed": 553,
+        "pending": 1255,
         "failed": 0,
         "blocked": 0,
         "running": 40,
@@ -35828,11 +35814,11 @@
         "verified_live": 40,
         "task_count": 77,
         "protocol_sha256": "b01f061faf650c89d3d9d97215a62bde603c0a8cbc8780000b630a9b75430dea",
-        "report_updated": "2026-09-12T14:32:57.157822+08:00",
+        "report_updated": "2026-09-12T14:50:57.145093+08:00",
         "report_age_seconds": 31,
         "report_fresh": true,
         "terminal_evidence": false,
-        "observed_training_steps": 1135380000,
+        "observed_training_steps": 1141760000,
         "controllers": {
           "30314": {
             "controller": {
@@ -35841,13 +35827,13 @@
               "process_state": "S",
               "open_fds": 20
             },
-            "state_updated": "2026-09-12T06:31:40.748892+00:00",
+            "state_updated": "2026-09-12T06:49:41.539459+00:00",
             "state_status": "running",
             "state_protocol_sha256": "b01f061faf650c89d3d9d97215a62bde603c0a8cbc8780000b630a9b75430dea",
             "state_counts": {
               "total": 912,
-              "completed": 322,
-              "pending": 574,
+              "completed": 325,
+              "pending": 571,
               "running": 16,
               "failed": 0,
               "blocked": 0
@@ -35861,13 +35847,13 @@
               "process_state": "S",
               "open_fds": 28
             },
-            "state_updated": "2026-09-12T14:30:08.744551+08:00",
+            "state_updated": "2026-09-12T14:42:12.286988+08:00",
             "state_status": "running",
             "state_protocol_sha256": "b01f061faf650c89d3d9d97215a62bde603c0a8cbc8780000b630a9b75430dea",
             "state_counts": {
               "total": 936,
-              "completed": 224,
-              "pending": 688,
+              "completed": 228,
+              "pending": 684,
               "running": 24,
               "failed": 0,
               "blocked": 0
@@ -35889,23 +35875,22 @@
         },
         "progress": {
           "states": {
-            "advanced": 28,
-            "unchanged": 10,
-            "first_observation": 2
+            "unchanged": 2,
+            "advanced": 38
           },
           "review_needed": 0,
-          "max_unchanged_seconds": 3060,
+          "max_unchanged_seconds": 360,
           "slow_formulaone_count": 0
         },
         "jobs_needing_review": [],
         "integrity_errors": [],
-        "queued": 1262,
-        "complete": 546
+        "queued": 1255,
+        "complete": 553
       },
       "vision": {
         "total": 2520,
-        "completed": 605,
-        "pending": 1757,
+        "completed": 608,
+        "pending": 1754,
         "failed": 20,
         "blocked": 0,
         "running": 138,
@@ -35913,11 +35898,11 @@
         "verified_live": 138,
         "task_count": 105,
         "protocol_sha256": "b6eef0edcc546ab70feed741a45dc5691e19195e870d0aea99db413dca59c4d9",
-        "report_updated": "2026-09-12T14:32:48.586943+08:00",
-        "report_age_seconds": 40,
+        "report_updated": "2026-09-12T14:49:02.016502+08:00",
+        "report_age_seconds": 147,
         "report_fresh": true,
         "terminal_evidence": false,
-        "observed_training_steps": 1344420000,
+        "observed_training_steps": 1352180000,
         "controllers": {
           "aliyun": {
             "controller": {
@@ -35926,13 +35911,13 @@
               "process_state": "S",
               "open_fds": 122
             },
-            "state_updated": "2026-09-12T06:24:53.927337+00:00",
+            "state_updated": "2026-09-12T06:48:13.139390+00:00",
             "state_status": "running",
             "state_protocol_sha256": "b6eef0edcc546ab70feed741a45dc5691e19195e870d0aea99db413dca59c4d9",
             "state_counts": {
               "total": 1920,
-              "completed": 579,
-              "pending": 1195,
+              "completed": 582,
+              "pending": 1192,
               "running": 128,
               "failed": 18,
               "blocked": 0
@@ -35994,17 +35979,17 @@
         },
         "progress": {
           "states": {
-            "unchanged": 76,
-            "advanced": 62
+            "unchanged": 70,
+            "advanced": 68
           },
           "review_needed": 0,
           "max_unchanged_seconds": 2520,
-          "slow_formulaone_count": 61
+          "slow_formulaone_count": 60
         },
         "jobs_needing_review": [],
         "integrity_errors": [],
-        "queued": 1757,
-        "complete": 605
+        "queued": 1754,
+        "complete": 608
       },
       "pixel": {
         "total": 4080,
@@ -36017,11 +36002,11 @@
         "verified_live": 16,
         "task_count": 170,
         "protocol_sha256": "cc79a72ae0e19faacc636606a5509fd9b105123b2f196fb2481497f10e08e084",
-        "report_updated": "2026-09-12T14:31:34.351678+08:00",
-        "report_age_seconds": 114,
+        "report_updated": "2026-09-12T14:49:35.973189+08:00",
+        "report_age_seconds": 113,
         "report_fresh": true,
         "terminal_evidence": false,
-        "observed_training_steps": 51400000,
+        "observed_training_steps": 51740000,
         "controllers": {
           "30109": {
             "controller": {
@@ -36058,11 +36043,11 @@
         },
         "progress": {
           "states": {
-            "unchanged": 14,
-            "advanced": 2
+            "unchanged": 13,
+            "advanced": 3
           },
           "review_needed": 1,
-          "max_unchanged_seconds": 7380,
+          "max_unchanged_seconds": 8460,
           "slow_formulaone_count": 2
         },
         "jobs_needing_review": [
@@ -36075,7 +36060,7 @@
             "liveness_observation_fresh": true,
             "steps": 2000000,
             "progress_state": "unchanged",
-            "unchanged_seconds": 7380,
+            "unchanged_seconds": 8460,
             "warning_after_seconds": 7200,
             "review_needed": true,
             "training_wall_budget_hours": null,
@@ -36088,8 +36073,8 @@
       },
       "multi_agent": {
         "total": 552,
-        "completed": 25,
-        "pending": 303,
+        "completed": 26,
+        "pending": 302,
         "failed": 0,
         "blocked": 216,
         "running": 8,
@@ -36097,11 +36082,11 @@
         "verified_live": 8,
         "task_count": 23,
         "protocol_sha256": "220ec556ed4af7bc18f8ed799ab4ce74016624f81835ba56ea3f9dc86e6428a5",
-        "report_updated": "2026-09-12T06:30:25.017434+00:00",
-        "report_age_seconds": 184,
+        "report_updated": "2026-09-12T06:49:08.926700+00:00",
+        "report_age_seconds": 140,
         "report_fresh": true,
         "terminal_evidence": false,
-        "observed_training_steps": 61029754,
+        "observed_training_steps": 61875975,
         "controllers": {
           "aliyun": {
             "controller": {
@@ -36110,13 +36095,13 @@
               "process_state": "S",
               "open_fds": 12
             },
-            "state_updated": "2026-09-12T06:30:01.251141+00:00",
+            "state_updated": "2026-09-12T06:41:09.701161+00:00",
             "state_status": "running",
             "state_protocol_sha256": "220ec556ed4af7bc18f8ed799ab4ce74016624f81835ba56ea3f9dc86e6428a5",
             "state_counts": {
               "total": 552,
-              "completed": 25,
-              "pending": 303,
+              "completed": 26,
+              "pending": 302,
               "running": 8,
               "failed": 0,
               "blocked": 216
@@ -36128,20 +36113,20 @@
           "identity_alive": true,
           "status": "alive",
           "process_state": "S",
-          "open_fds": 6
+          "open_fds": 4
         },
         "progress": {
           "states": {
-            "unchanged": 8
+            "advanced": 8
           },
           "review_needed": 0,
-          "max_unchanged_seconds": 180,
+          "max_unchanged_seconds": 0,
           "slow_formulaone_count": 0
         },
         "jobs_needing_review": [],
         "integrity_errors": [],
-        "queued": 303,
-        "complete": 25
+        "queued": 302,
+        "complete": 26
       },
       "multi_agent_vision": {
         "total": 360,
@@ -36154,11 +36139,11 @@
         "verified_live": 4,
         "task_count": 15,
         "protocol_sha256": "16b12775b496b59c8083d22e6ab0603a1552c0d9cd4138479e4d72c4b65b44ef",
-        "report_updated": "2026-09-12T06:33:15.834562+00:00",
-        "report_age_seconds": 13,
+        "report_updated": "2026-09-12T06:48:36.977380+00:00",
+        "report_age_seconds": 172,
         "report_fresh": true,
         "terminal_evidence": false,
-        "observed_training_steps": 2468184,
+        "observed_training_steps": 2498294,
         "controllers": {
           "volc-a100": {
             "controller": {
@@ -36203,7 +36188,7 @@
     },
     "vla_training": {
       "observed": "2026-09-11T17:30:01.707869+00:00",
-      "age_seconds": 47007,
+      "age_seconds": 48087,
       "fresh": false,
       "supervisor_alive": false,
       "runs": {
@@ -36261,8 +36246,8 @@
         "deferred_inactive_mechanism": 1086
       },
       "observation_fresh": true,
-      "report_age_seconds": 115,
-      "report_observed": "2026-09-12T14:31:33.714643+08:00",
+      "report_age_seconds": 109,
+      "report_observed": "2026-09-12T14:49:39.588836+08:00",
       "core_training_seeds": [
         1,
         2,
@@ -36363,9 +36348,9 @@
         },
         "passed_verified": 4,
         "unresolved_failures": 0,
-        "observed": "2026-09-12T06:30:41.743803+00:00",
+        "observed": "2026-09-12T06:48:50.698971+00:00",
         "observation_fresh": true,
-        "report_age_seconds": 167,
+        "report_age_seconds": 158,
         "controller_live": false,
         "controller_state_fresh": false,
         "collector": {
@@ -36419,9 +36404,9 @@
         },
         "passed_verified": 0,
         "unresolved_failures": 0,
-        "observed": "2026-09-12T06:30:41.743803+00:00",
+        "observed": "2026-09-12T06:48:50.698971+00:00",
         "observation_fresh": true,
-        "report_age_seconds": 167,
+        "report_age_seconds": 158,
         "controller_live": true,
         "controller_state_fresh": true,
         "collector": {
@@ -36440,7 +36425,7 @@
             "arm": "A",
             "training_seed": 1,
             "status": "running",
-            "latest_steps": 338944
+            "latest_steps": 349184
           },
           {
             "job_id": "PickupType/B/s1",
@@ -36537,9 +36522,9 @@
         "status": "needs_attention",
         "unit": "development_gate",
         "observation_fresh": true,
-        "observed": "2026-09-12T06:33:14.358763+00:00",
-        "report_age_seconds": 14,
-        "raw_audit_age_seconds": 14,
+        "observed": "2026-09-12T06:48:35.516380+00:00",
+        "report_age_seconds": 173,
+        "raw_audit_age_seconds": 173,
         "controller_live": false,
         "collector": {
           "identity_alive": true,
@@ -36564,7 +36549,7 @@
     },
     "hosts": {
       "30109": {
-        "observed_unix": 1789194807.1736279,
+        "observed_unix": 1789195887.1679988,
         "status": "connected",
         "queues": {
           "native": {
@@ -36572,15 +36557,15 @@
               "identity_alive": true,
               "status": "alive",
               "process_state": "S",
-              "open_fds": 20
+              "open_fds": 21
             },
-            "state_updated": "2026-09-12T14:33:11.311381+08:00",
+            "state_updated": "2026-09-12T14:49:01.968967+08:00",
             "state_status": "running",
             "state_protocol_sha256": "82f5c8c7c040464db50f3cc5c67154bcffbc14dc0e39ff5f0edb1c353280b5ac",
             "state_counts": {
               "total": 624,
-              "completed": 158,
-              "pending": 447,
+              "completed": 159,
+              "pending": 446,
               "running": 18,
               "failed": 1,
               "blocked": 0
@@ -36600,13 +36585,13 @@
               "process_state": "S",
               "open_fds": 28
             },
-            "state_updated": "2026-09-12T14:30:08.744551+08:00",
+            "state_updated": "2026-09-12T14:42:12.286988+08:00",
             "state_status": "running",
             "state_protocol_sha256": "b01f061faf650c89d3d9d97215a62bde603c0a8cbc8780000b630a9b75430dea",
             "state_counts": {
               "total": 936,
-              "completed": 224,
-              "pending": 688,
+              "completed": 228,
+              "pending": 684,
               "running": 24,
               "failed": 0,
               "blocked": 0
@@ -36691,7 +36676,7 @@
               "identity_alive": true,
               "status": "alive",
               "process_state": "S",
-              "open_fds": 6
+              "open_fds": 4
             }
           },
           "multi_agent_vision": {
@@ -36720,27 +36705,27 @@
         },
         "disks": {
           "root": {
-            "free_gib": 1.026,
+            "free_gib": 0.987,
             "total_gib": 50.0,
-            "free_inodes": 1485825574
+            "free_inodes": 1485824969
           },
           "workspace": {
-            "free_gib": 15.699,
+            "free_gib": 15.684,
             "total_gib": 6000.0,
-            "free_inodes": 1485825574
+            "free_inodes": 1485824969
           },
           "shm": {
-            "free_gib": 4.856,
+            "free_gib": 4.898,
             "total_gib": 480.0,
             "free_inodes": 131217476
           }
         },
-        "mem_available_gib": 291.001,
+        "mem_available_gib": 289.108,
         "mem_total_gib": 1007.031,
         "load": [
-          95.04150390625,
-          93.921875,
-          94.421875
+          93.107421875,
+          93.40576171875,
+          93.3701171875
         ],
         "effective_cores": 96.0,
         "file_nr": [
@@ -36754,30 +36739,30 @@
           "process_state": "S",
           "open_fds": 4
         },
-        "received_unix": 1789194807.1812334,
+        "received_unix": 1789195887.1749165,
         "resource_trend": {
           "ready": true,
           "samples": 21,
           "scope": "Observed short-window trend; not proof of a descriptor leak.",
           "disks": {
             "root": {
-              "net_gib_per_hour": 0.003,
-              "extrapolated_hours_to_zero": null
+              "net_gib_per_hour": 0.042,
+              "extrapolated_hours_to_zero": 23.5
             },
             "workspace": {
-              "net_gib_per_hour": -1.039,
+              "net_gib_per_hour": -1.471,
               "extrapolated_hours_to_zero": null
             },
             "shm": {
-              "net_gib_per_hour": -0.178,
+              "net_gib_per_hour": -0.189,
               "extrapolated_hours_to_zero": null
             }
           },
-          "file_handles_delta": 1280
+          "file_handles_delta": 512
         }
       },
       "30314": {
-        "observed_unix": 1789194807.6052177,
+        "observed_unix": 1789195887.6191032,
         "status": "connected",
         "queues": {
           "ppo": {
@@ -36787,13 +36772,13 @@
               "process_state": "S",
               "open_fds": 20
             },
-            "state_updated": "2026-09-12T06:31:40.748892+00:00",
+            "state_updated": "2026-09-12T06:49:41.539459+00:00",
             "state_status": "running",
             "state_protocol_sha256": "b01f061faf650c89d3d9d97215a62bde603c0a8cbc8780000b630a9b75430dea",
             "state_counts": {
               "total": 912,
-              "completed": 322,
-              "pending": 574,
+              "completed": 325,
+              "pending": 571,
               "running": 16,
               "failed": 0,
               "blocked": 0
@@ -36823,14 +36808,14 @@
         },
         "disks": {
           "root": {
-            "free_gib": 46.709,
+            "free_gib": 46.706,
             "total_gib": 50.0,
-            "free_inodes": 1479101350
+            "free_inodes": 1479101291
           },
           "workspace": {
-            "free_gib": 82.334,
+            "free_gib": 82.333,
             "total_gib": 6000.0,
-            "free_inodes": 1479101350
+            "free_inodes": 1479101291
           },
           "shm": {
             "free_gib": 455.043,
@@ -36838,16 +36823,16 @@
             "free_inodes": 131938746
           }
         },
-        "mem_available_gib": 807.2,
+        "mem_available_gib": 807.161,
         "mem_total_gib": 1007.016,
         "load": [
-          25.68603515625,
-          28.64013671875,
-          28.34130859375
+          26.80224609375,
+          26.70263671875,
+          27.4287109375
         ],
         "effective_cores": 96.0,
         "file_nr": [
-          "16640",
+          "17280",
           "0",
           "9223372036854775807"
         ],
@@ -36905,18 +36890,18 @@
             "formal_training_launched": 0
           }
         },
-        "received_unix": 1789194807.626996,
+        "received_unix": 1789195887.6418736,
         "resource_trend": {
           "ready": true,
           "samples": 21,
           "scope": "Observed short-window trend; not proof of a descriptor leak.",
           "disks": {
             "root": {
-              "net_gib_per_hour": 0.005,
+              "net_gib_per_hour": 0.008,
               "extrapolated_hours_to_zero": null
             },
             "workspace": {
-              "net_gib_per_hour": 0.006,
+              "net_gib_per_hour": 0.004,
               "extrapolated_hours_to_zero": null
             },
             "shm": {
@@ -36924,11 +36909,11 @@
               "extrapolated_hours_to_zero": null
             }
           },
-          "file_handles_delta": 640
+          "file_handles_delta": -1280
         }
       },
       "aliyun": {
-        "observed_unix": 1789194807.9501977,
+        "observed_unix": 1789195887.884265,
         "status": "connected",
         "queues": {
           "native": {
@@ -36938,13 +36923,13 @@
               "process_state": "S",
               "open_fds": 31
             },
-            "state_updated": "2026-09-12T06:32:15.415731+00:00",
+            "state_updated": "2026-09-12T06:48:28.783549+00:00",
             "state_status": "running",
             "state_protocol_sha256": "82f5c8c7c040464db50f3cc5c67154bcffbc14dc0e39ff5f0edb1c353280b5ac",
             "state_counts": {
               "total": 600,
-              "completed": 255,
-              "pending": 318,
+              "completed": 260,
+              "pending": 313,
               "running": 27,
               "failed": 0,
               "blocked": 0
@@ -36958,13 +36943,13 @@
               "process_state": "S",
               "open_fds": 122
             },
-            "state_updated": "2026-09-12T06:24:53.927337+00:00",
+            "state_updated": "2026-09-12T06:48:13.139390+00:00",
             "state_status": "running",
             "state_protocol_sha256": "b6eef0edcc546ab70feed741a45dc5691e19195e870d0aea99db413dca59c4d9",
             "state_counts": {
               "total": 1920,
-              "completed": 579,
-              "pending": 1195,
+              "completed": 582,
+              "pending": 1192,
               "running": 128,
               "failed": 18,
               "blocked": 0
@@ -36978,13 +36963,13 @@
               "process_state": "S",
               "open_fds": 12
             },
-            "state_updated": "2026-09-12T06:30:01.251141+00:00",
+            "state_updated": "2026-09-12T06:41:09.701161+00:00",
             "state_status": "running",
             "state_protocol_sha256": "220ec556ed4af7bc18f8ed799ab4ce74016624f81835ba56ea3f9dc86e6428a5",
             "state_counts": {
               "total": 552,
-              "completed": 25,
-              "pending": 303,
+              "completed": 26,
+              "pending": 302,
               "running": 8,
               "failed": 0,
               "blocked": 216
@@ -36999,9 +36984,9 @@
             "free_inodes": 176467496
           },
           "workspace": {
-            "free_gib": 7234.398,
+            "free_gib": 7234.152,
             "total_gib": 10240.0,
-            "free_inodes": 18651640
+            "free_inodes": 18651234
           },
           "shm": {
             "free_gib": 666.946,
@@ -37009,20 +36994,20 @@
             "free_inodes": 243046740
           }
         },
-        "mem_available_gib": 471.693,
+        "mem_available_gib": 474.157,
         "mem_total_gib": 1800.0,
         "load": [
-          167.43310546875,
-          166.41064453125,
-          166.43701171875
+          165.13330078125,
+          165.63134765625,
+          165.9072265625
         ],
         "effective_cores": 184,
         "file_nr": [
-          "11776",
+          "12144",
           "0",
           "9848858"
         ],
-        "received_unix": 1789194807.9798698,
+        "received_unix": 1789195887.919707,
         "resource_trend": {
           "ready": true,
           "samples": 21,
@@ -37033,7 +37018,7 @@
               "extrapolated_hours_to_zero": null
             },
             "workspace": {
-              "net_gib_per_hour": -1.07,
+              "net_gib_per_hour": -0.402,
               "extrapolated_hours_to_zero": null
             },
             "shm": {
@@ -37041,11 +37026,11 @@
               "extrapolated_hours_to_zero": null
             }
           },
-          "file_handles_delta": -2944
+          "file_handles_delta": -368
         }
       },
       "5090": {
-        "observed_unix": 1789194807.8713694,
+        "observed_unix": 1789195887.8369353,
         "status": "connected",
         "queues": {
           "native": {
@@ -37055,13 +37040,13 @@
               "process_state": "S",
               "open_fds": 27
             },
-            "state_updated": "2026-09-12T14:24:41.716863+08:00",
+            "state_updated": "2026-09-12T14:48:15.151734+08:00",
             "state_status": "running",
             "state_protocol_sha256": "82f5c8c7c040464db50f3cc5c67154bcffbc14dc0e39ff5f0edb1c353280b5ac",
             "state_counts": {
               "total": 624,
-              "completed": 367,
-              "pending": 234,
+              "completed": 369,
+              "pending": 232,
               "running": 23,
               "failed": 0,
               "blocked": 0
@@ -37071,58 +37056,58 @@
         },
         "disks": {
           "root": {
-            "free_gib": 184.502,
+            "free_gib": 184.503,
             "total_gib": 3753.978,
-            "free_inodes": 236198937
+            "free_inodes": 236198765
           },
           "workspace": {
-            "free_gib": 190.371,
+            "free_gib": 190.195,
             "total_gib": 3754.456,
-            "free_inodes": 240261000
+            "free_inodes": 240260771
           },
           "shm": {
-            "free_gib": 125.414,
+            "free_gib": 125.418,
             "total_gib": 125.6,
-            "free_inodes": 32924718
+            "free_inodes": 32924723
           }
         },
-        "mem_available_gib": 124.342,
+        "mem_available_gib": 134.592,
         "mem_total_gib": 251.199,
         "load": [
-          37.7919921875,
-          39.43798828125,
-          39.962890625
+          43.14697265625,
+          42.0810546875,
+          41.013671875
         ],
         "effective_cores": 48,
         "file_nr": [
-          "37760",
+          "36128",
           "0",
           "9223372036854775807"
         ],
-        "received_unix": 1789194807.9568934,
+        "received_unix": 1789195887.9195275,
         "resource_trend": {
           "ready": true,
           "samples": 21,
           "scope": "Observed short-window trend; not proof of a descriptor leak.",
           "disks": {
             "root": {
-              "net_gib_per_hour": 0.085,
-              "extrapolated_hours_to_zero": 2170.38
+              "net_gib_per_hour": 0.067,
+              "extrapolated_hours_to_zero": 2753.73
             },
             "workspace": {
-              "net_gib_per_hour": 3.688,
-              "extrapolated_hours_to_zero": 51.61
+              "net_gib_per_hour": 3.704,
+              "extrapolated_hours_to_zero": 51.35
             },
             "shm": {
               "net_gib_per_hour": 0.0,
               "extrapolated_hours_to_zero": null
             }
           },
-          "file_handles_delta": 1536
+          "file_handles_delta": -480
         }
       },
       "volc-a100": {
-        "observed_unix": 1789194808.5860844,
+        "observed_unix": 1789195888.4955566,
         "status": "connected",
         "queues": {
           "multi_agent_vision": {
@@ -37148,14 +37133,14 @@
         },
         "disks": {
           "root": {
-            "free_gib": 5.057,
+            "free_gib": 5.056,
             "total_gib": 19.518,
             "free_inodes": 1188926
           },
           "workspace": {
-            "free_gib": 714103.039,
+            "free_gib": 713785.418,
             "total_gib": 3211766.438,
-            "free_inodes": 55898352874
+            "free_inodes": 55898235521
           },
           "shm": {
             "free_gib": 324.437,
@@ -37163,39 +37148,39 @@
             "free_inodes": 264125716
           }
         },
-        "mem_available_gib": 429.422,
+        "mem_available_gib": 427.659,
         "mem_total_gib": 463.5,
         "load": [
-          14.59228515625,
-          15.16845703125,
-          16.01416015625
+          17.00830078125,
+          16.783203125,
+          16.58447265625
         ],
         "effective_cores": 128,
         "file_nr": [
-          "38656",
+          "38400",
           "0",
           "9223372036854775807"
         ],
-        "received_unix": 1789194808.618134,
+        "received_unix": 1789195888.528565,
         "resource_trend": {
           "ready": true,
           "samples": 21,
           "scope": "Observed short-window trend; not proof of a descriptor leak.",
           "disks": {
             "root": {
-              "net_gib_per_hour": 0.0,
+              "net_gib_per_hour": 0.001,
               "extrapolated_hours_to_zero": null
             },
             "workspace": {
-              "net_gib_per_hour": -22.342,
-              "extrapolated_hours_to_zero": null
+              "net_gib_per_hour": 295.575,
+              "extrapolated_hours_to_zero": 2414.9
             },
             "shm": {
               "net_gib_per_hour": 0.0,
               "extrapolated_hours_to_zero": null
             }
           },
-          "file_handles_delta": 1280
+          "file_handles_delta": -512
         }
       }
     },
@@ -37206,7 +37191,7 @@
       "open_fds": 4
     },
     "fleet_resource_cache": {
-      "observed": "2026-09-12T14:32:50+08:00",
+      "observed": "2026-09-12T14:50:50+08:00",
       "age_seconds": 39,
       "hosts": {
         "30109": {
@@ -37217,9 +37202,9 @@
               "index": 0,
               "name": "NVIDIA A100-SXM4-80GB",
               "util": 99.0,
-              "used_mib": 44028.0,
+              "used_mib": 44030.0,
               "total_mib": 81920.0,
-              "mean_util": 98.86,
+              "mean_util": 89.83,
               "max_util": 100.0,
               "allowed": true,
               "candidate_for_preflight": false,
@@ -37228,10 +37213,10 @@
             {
               "index": 1,
               "name": "NVIDIA A100-SXM4-80GB",
-              "util": 100.0,
+              "util": 32.0,
               "used_mib": 56430.0,
               "total_mib": 81920.0,
-              "mean_util": 98.43,
+              "mean_util": 88.5,
               "max_util": 100.0,
               "allowed": true,
               "candidate_for_preflight": false,
@@ -37252,11 +37237,11 @@
             {
               "index": 3,
               "name": "NVIDIA A100-SXM4-80GB",
-              "util": 52.0,
+              "util": 88.0,
               "used_mib": 44352.0,
               "total_mib": 81920.0,
-              "mean_util": 91.14,
-              "max_util": 100.0,
+              "mean_util": 93.5,
+              "max_util": 99.0,
               "allowed": true,
               "candidate_for_preflight": false,
               "note": "Allocation still requires process/session, dependency and live-memory checks."
@@ -37276,11 +37261,11 @@
             {
               "index": 5,
               "name": "NVIDIA A100-SXM4-80GB",
-              "util": 96.0,
+              "util": 95.0,
               "used_mib": 43880.0,
               "total_mib": 81920.0,
-              "mean_util": 98.29,
-              "max_util": 100.0,
+              "mean_util": 96.83,
+              "max_util": 99.0,
               "allowed": true,
               "candidate_for_preflight": false,
               "note": "Allocation still requires process/session, dependency and live-memory checks."
@@ -37314,14 +37299,14 @@
             "unity": 0,
             "keeper": 0,
             "watcher": 12,
-            "train": 58,
-            "train_total": 58,
+            "train": 60,
+            "train_total": 60,
             "train_paused": 0,
             "train_partial_paused": 0,
             "train_defunct": 0,
             "train_unknown": 0,
-            "eval": 7,
-            "eval_total": 7,
+            "eval": 5,
+            "eval_total": 5,
             "eval_paused": 0,
             "eval_partial_paused": 0,
             "eval_defunct": 0,
@@ -37329,7 +37314,7 @@
           },
           "training_by_line": {
             "safeot_dual": {
-              "active": 57,
+              "active": 59,
               "paused": 0,
               "partial_paused": 0,
               "defunct": 0,
@@ -37354,11 +37339,11 @@
             {
               "index": 0,
               "name": "NVIDIA A100-SXM4-80GB",
-              "util": 48.0,
-              "used_mib": 74586.0,
+              "util": 0.0,
+              "used_mib": 74547.0,
               "total_mib": 81920.0,
-              "mean_util": 21.71,
-              "max_util": 100.0,
+              "mean_util": 1.33,
+              "max_util": 7.0,
               "allowed": true,
               "candidate_for_preflight": false,
               "note": "Allocation still requires process/session, dependency and live-memory checks."
@@ -37452,14 +37437,14 @@
             "unity": 9,
             "keeper": 0,
             "watcher": 0,
-            "train": 18,
-            "train_total": 18,
+            "train": 19,
+            "train_total": 19,
             "train_paused": 0,
             "train_partial_paused": 0,
             "train_defunct": 0,
             "train_unknown": 0,
-            "eval": 3,
-            "eval_total": 3,
+            "eval": 2,
+            "eval_total": 2,
             "eval_paused": 0,
             "eval_partial_paused": 0,
             "eval_defunct": 0,
@@ -37467,7 +37452,7 @@
           },
           "training_by_line": {
             "safeot_dual": {
-              "active": 17,
+              "active": 18,
               "paused": 0,
               "partial_paused": 0,
               "defunct": 0,
@@ -37492,11 +37477,11 @@
             {
               "index": 0,
               "name": "NVIDIA GeForce RTX 5090",
-              "util": 87.0,
-              "used_mib": 13378.0,
+              "util": 83.0,
+              "used_mib": 13392.0,
               "total_mib": 32607.0,
-              "mean_util": 87.43,
-              "max_util": 95.0,
+              "mean_util": 89.17,
+              "max_util": 98.0,
               "allowed": true,
               "candidate_for_preflight": false,
               "note": "Allocation still requires process/session, dependency and live-memory checks."
@@ -37504,11 +37489,11 @@
             {
               "index": 1,
               "name": "NVIDIA GeForce RTX 5090",
-              "util": 85.0,
-              "used_mib": 20005.0,
+              "util": 86.0,
+              "used_mib": 20037.0,
               "total_mib": 32607.0,
-              "mean_util": 84.86,
-              "max_util": 87.0,
+              "mean_util": 71.33,
+              "max_util": 89.0,
               "allowed": true,
               "candidate_for_preflight": false,
               "note": "Allocation still requires process/session, dependency and live-memory checks."
@@ -37518,14 +37503,14 @@
             "unity": 0,
             "keeper": 0,
             "watcher": 0,
-            "train": 23,
-            "train_total": 23,
+            "train": 22,
+            "train_total": 22,
             "train_paused": 0,
             "train_partial_paused": 0,
             "train_defunct": 0,
             "train_unknown": 0,
-            "eval": 0,
-            "eval_total": 0,
+            "eval": 1,
+            "eval_total": 1,
             "eval_paused": 0,
             "eval_partial_paused": 0,
             "eval_defunct": 0,
@@ -37533,7 +37518,7 @@
           },
           "training_by_line": {
             "safeot_dual": {
-              "active": 23,
+              "active": 22,
               "paused": 0,
               "partial_paused": 0,
               "defunct": 0,
@@ -37550,10 +37535,10 @@
             {
               "index": 0,
               "name": "NVIDIA A100-SXM4-80GB",
-              "util": 97.0,
+              "util": 96.0,
               "used_mib": 20631.0,
               "total_mib": 81920.0,
-              "mean_util": 95.57,
+              "mean_util": 95.33,
               "max_util": 97.0,
               "allowed": true,
               "candidate_for_preflight": false,
@@ -37565,7 +37550,7 @@
               "util": 100.0,
               "used_mib": 43993.0,
               "total_mib": 81920.0,
-              "mean_util": 99.71,
+              "mean_util": 99.83,
               "max_util": 100.0,
               "allowed": true,
               "candidate_for_preflight": false,
@@ -37793,14 +37778,14 @@
             "unity": 2,
             "keeper": 0,
             "watcher": 0,
-            "train": 147,
-            "train_total": 147,
+            "train": 146,
+            "train_total": 146,
             "train_paused": 0,
             "train_partial_paused": 0,
             "train_defunct": 0,
             "train_unknown": 0,
-            "eval": 8,
-            "eval_total": 8,
+            "eval": 9,
+            "eval_total": 9,
             "eval_paused": 0,
             "eval_partial_paused": 0,
             "eval_defunct": 0,
@@ -37808,7 +37793,7 @@
           },
           "training_by_line": {
             "safeot_dual": {
-              "active": 147,
+              "active": 146,
               "paused": 0,
               "partial_paused": 0,
               "defunct": 0,
@@ -37821,12 +37806,6 @@
       }
     },
     "alerts": [
-      {
-        "severity": "warning",
-        "code": "worker_not_verified_live",
-        "cohort": "native",
-        "job": "SafetyCarButton2-v0__safeot_eps3__s2"
-      },
       {
         "severity": "warning",
         "code": "preserved_failed_jobs",
@@ -37863,7 +37842,7 @@
         "code": "low_disk_space",
         "host": "30109",
         "volume": "root",
-        "free_gib": 1.026
+        "free_gib": 0.987
       },
       {
         "severity": "critical",
@@ -37883,7 +37862,7 @@
     "guard_expires": "2026-09-16T17:05:12+08:00",
     "guard_lifecycle": "active",
     "expiry_semantics": "Guard expiry stops this observer only; training queues continue independently.",
-    "observation_age_seconds": 73,
+    "observation_age_seconds": 44,
     "fresh_observation": true,
     "monitoring_active": true
   }
