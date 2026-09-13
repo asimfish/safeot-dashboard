@@ -1,0 +1,1 @@
+(()=>{'use strict';const s=document.querySelector('#psibot-relative-camera'),v=document.querySelector('#psibot-relative-video');if(!s||!v)return;s.addEventListener('change',()=>{window.AstraVideo?.release(v);v.dataset.src='agentic/psibot_relative/full_'+s.value+'.mp4';});})();
