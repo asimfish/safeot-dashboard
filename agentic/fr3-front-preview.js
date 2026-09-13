@@ -1,0 +1,1 @@
+(()=>{'use strict';const d=document.querySelector('#fr3-front-other');if(!d)return;d.addEventListener('toggle',()=>{if(d.open)d.querySelectorAll('img[data-preview-src]').forEach(i=>{i.src=i.dataset.previewSrc;i.removeAttribute('data-preview-src');});});})();
