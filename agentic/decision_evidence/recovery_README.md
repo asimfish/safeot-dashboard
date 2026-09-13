@@ -1,0 +1,9 @@
+# PsiBot 恢复三集证据
+
+沿astra-model-input-evidence-v1格式：manifest→episodes/*.json→image_evidence.url（相对于本public根）。ID带recovery，与旧psibot_input_9511_full服务中断分开。3集47决策、188张原始PNG按SHA去重、528个图片引用。每决策当前4图，后续另含过去至多2轮历史图；图片为实际request_manifest中PNG原字节，不是视频帧。
+
+full 7请求，no_numeric_state与rgb_only各20请求。三集均valid_attempt但任务失败，后两组40请求全部rejected；candidate保留原始被拒绝WORLD动作，不改成空动作，不补规划。原始policy中的文字memory与H保留，不将被拒绝解释为模型没有生成动作或没有记忆。rgb_only删除S/J/K/F但保留H；no_numeric_state删除S/J/F，保留K/H。mask_metadata区分条件移除与尚无上次F/H。
+
+rejection_feedback/执行feedback仅后验审计，不能假称模型实际收到数值拒绝原因。真实模型所见以policy_observation为准。调用预算与拒绝状态原样记录，费用由真实usage独立重算标准等值，不代表实际付款凭据。
+
+视频seek由原同步样本前一帧建立，is_exact_input_image_claim=false；视频帧不等于模型输入PNG。public_url由面板关联其视频发布资源。本包只发布public，不发布构建脚本与内部源路径；未改旧账/实验，未用GPU/API。控制仍为原生PsiBot绝对WORLD腕位姿+6维手目标，不能据此把拒绝率归因于新相对接口表现。
