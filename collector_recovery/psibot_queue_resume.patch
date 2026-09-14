@@ -1,0 +1,16 @@
+--- a/pilot_run.py
++++ b/pilot_run.py
+@@ -45,8 +45,12 @@
+   from pilot_episode import episode,budget_stop
+   import api_client
+   label_payload(api_client)
+-  ledger={'experiment':budget['experiment'],'requests':[]};dump(ROOT/'REQUEST_LEDGER.json',ledger);results=[];verifications=[]
++  ledger={'experiment':budget['experiment'],'requests':[]};dump(ROOT/'REQUEST_LEDGER.json',ledger)
++  from resume_receipts import load_completed
++  results,verifications,completed=load_completed(ROOT,budget)
++  dump(out/'campaign_summary.json',results)
+   for seed,condition in [(seed,condition) for seed in budget['seeds'] for condition in budget['conditions']]:
++   if (seed,condition) in completed:continue
+    budget={**budget,'seed':seed}
+    reason=budget_stop(ledger,budget)
+    if reason:dump(out/'CAMPAIGN_PAUSE.json',{'reason':reason,'completed':len(results)});break
