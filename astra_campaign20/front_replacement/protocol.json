@@ -1,0 +1,63 @@
+{
+  "question_zh": "保持四路当前RGB，把FR3第三路俯视机位换为已验证的正面C机位，是否改善接近、抓取和放置？",
+  "status": "configured_cpu_audit_passed_runtime_pending",
+  "model_requests": 0,
+  "new_runtime_runs": 0,
+  "success_rate": null,
+  "source_rig_sha256": "dbd1d7844ba359588a36cc7a6bd978272e58124e098b76007c715baba1d08be7",
+  "arms": {
+    "control": "rig_original_four.json",
+    "replacement": "rig_replace_top_with_front.json"
+  },
+  "camera_order": [
+    "head_camera",
+    "chest_camera",
+    "third_camera",
+    "wrist_camera"
+  ],
+  "third_camera_display_label": {
+    "control": "俯视",
+    "replacement": "正面"
+  },
+  "invariants": [
+    "Four current RGB images at 640x480",
+    "Same instruction text and action schema",
+    "Same controller, evaluator and source snapshots",
+    "Same hand/wrist/base state masks and history limits",
+    "Same paired initial physical state",
+    "Same 30-call and 120s action budget per attempt",
+    "Current/previous image channels use the same camera within each arm",
+    "K includes matching intrinsics/extrinsics only when enabled; no evaluator target/object pose"
+  ],
+  "changed": [
+    "Only third_camera world position and orientation; fixed before calls",
+    "The corresponding K extrinsics in conditions that include K",
+    "Third-camera pixels in current and retained history observations"
+  ],
+  "pilot": {
+    "status": "not_launched",
+    "paired_seeds": [
+      10020,
+      10021
+    ],
+    "input_conditions": [
+      "rich",
+      "rgb_only"
+    ],
+    "camera_arms": [
+      "control",
+      "replacement"
+    ],
+    "episodes": 8,
+    "call_cap_per_episode": 30,
+    "max_calls": 240,
+    "order": "For each seed and input condition, alternate camera-arm order by seed parity",
+    "release_requirement": "Fresh zero-model runtime/recording audit before model requests",
+    "priority": "Separate follow-on; do not interrupt or silently change the active 7x20 baseline"
+  },
+  "limits": [
+    "Earlier four-versus-five tests do not measure replacing a view",
+    "Visual inspection is not evidence of higher success rate",
+    "Overhead may still help judge tabletop horizontal alignment"
+  ]
+}
