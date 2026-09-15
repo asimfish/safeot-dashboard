@@ -1,0 +1,151 @@
+{
+  "task_instruction": "Grasp and stably lift the brown bottle upright.",
+  "static_robot": {
+    "wrist_link": "arm2_link7",
+    "hand_semantics": {
+      "frame": "arm2_link7 wrist coordinates; right-handed XYZ; all directions are unit vectors in this wrist frame",
+      "units": "metres and radians",
+      "command_dimensions": [
+        {
+          "index": 0,
+          "joint_name": "hand2_joint_link_1_1",
+          "finger": "thumb",
+          "motion": "rotation/opposition",
+          "increasing_value": "opposes toward fingers",
+          "range_rad": [
+            0.0,
+            1.5699999084709084
+          ]
+        },
+        {
+          "index": 1,
+          "joint_name": "hand2_joint_link_2_1",
+          "finger": "index",
+          "motion": "proximal flexion",
+          "increasing_value": "opens/extends",
+          "range_rad": [
+            1.749999770756056,
+            3.109999839894292
+          ]
+        },
+        {
+          "index": 2,
+          "joint_name": "hand2_joint_link_3_1",
+          "finger": "middle",
+          "motion": "proximal flexion",
+          "increasing_value": "opens/extends",
+          "range_rad": [
+            1.7099998901313929,
+            3.069999426637411
+          ]
+        },
+        {
+          "index": 3,
+          "joint_name": "hand2_joint_link_4_1",
+          "finger": "ring",
+          "motion": "proximal flexion",
+          "increasing_value": "opens/extends",
+          "range_rad": [
+            1.7699997110683876,
+            3.0799998628467677
+          ]
+        },
+        {
+          "index": 4,
+          "joint_name": "hand2_joint_link_5_1",
+          "finger": "little",
+          "motion": "proximal flexion",
+          "increasing_value": "opens/extends",
+          "range_rad": [
+            1.7299999636017789,
+            3.049999885799243
+          ]
+        },
+        {
+          "index": 5,
+          "joint_name": "hand2_joint_link_1_2",
+          "finger": "thumb",
+          "motion": "flexion",
+          "increasing_value": "opens/extends",
+          "range_rad": [
+            0.039999997137960826,
+            0.6415999813902928
+          ]
+        }
+      ],
+      "extended_fingers_longitudinal_axis_wrist": [
+        0.00131,
+        -5e-05,
+        1.0
+      ],
+      "palm_outward_normal_wrist": [
+        -0.99994,
+        0.01076,
+        0.00131
+      ],
+      "finger_row_axis_from_little_to_index_wrist": [
+        -0.01076,
+        -0.99994,
+        -3e-05
+      ],
+      "thumb_opposition_sweep_direction_wrist": [
+        -0.67665,
+        0.72066,
+        -0.15095
+      ],
+      "thumb_opposition_description": "Increasing dimension 0 swings the thumb from the index side across the palm toward the other fingers; the vector is its tip displacement from minimum to maximum opposition with fingers extended, not a fixed rotation axis.",
+      "approximate_opening_width_m": {
+        "fully_open_thumb_index_tip_surface_gap": 0.077,
+        "fully_closed_thumb_index_tip_surface_gap": 0.0,
+        "fully_open_thumb_index_tip_center_distance": 0.09,
+        "fully_closed_thumb_index_tip_center_distance": 0.012,
+        "definition": "Measured unloaded stable open/close command endpoints under native drives and self-contact; fingertip-pad surface separation estimated from validated USD geometry. Intermediate posture and gravity change the gap. Target limits may be unreachable together due to self-contact; this is not an object clearance guarantee."
+      },
+      "native_mimic": {
+        "equation": "q_follower = multiplier * q_driver + offset_rad",
+        "couplings": [
+          {
+            "follower_joint": "hand2_joint_link_1_3",
+            "driver_joint": "hand2_joint_link_1_2",
+            "multiplier": 0.8976100087165833,
+            "offset_rad": -0.5359042110206326
+          },
+          {
+            "follower_joint": "hand2_joint_link_2_2",
+            "driver_joint": "hand2_joint_link_2_1",
+            "multiplier": 1.133489966392517,
+            "offset_rad": -1.9551615784944358
+          },
+          {
+            "follower_joint": "hand2_joint_link_3_2",
+            "driver_joint": "hand2_joint_link_3_1",
+            "multiplier": 1.1038199663162231,
+            "offset_rad": -1.8187386216520913
+          },
+          {
+            "follower_joint": "hand2_joint_link_4_2",
+            "driver_joint": "hand2_joint_link_4_1",
+            "multiplier": 1.1526700258255005,
+            "offset_rad": -1.9802281827806432
+          },
+          {
+            "follower_joint": "hand2_joint_link_5_2",
+            "driver_joint": "hand2_joint_link_5_1",
+            "multiplier": 1.121209979057312,
+            "offset_rad": -1.8496972035339898
+          }
+        ]
+      }
+    },
+    "interface": "wrist-relative displacement/rotvec plus six native hand radians",
+    "dynamic_state_omitted_is_not_zero": true
+  },
+  "requests_remaining_including_this": 20,
+  "memory_from_previous_decision": "",
+  "last_action_status": null,
+  "S": null,
+  "J": null,
+  "K": null,
+  "F": null,
+  "previous_observations_own_actions": []
+}
