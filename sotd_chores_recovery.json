@@ -2,7 +2,7 @@
   "recovery_queue": {
     "created": 1789292599.104151,
     "deadline": 1791711799.104151,
-    "status": "running_three_lane_recovery",
+    "status": "supervising_existing_attempts_admission_gated",
     "max_attempts_per_policy": 1,
     "policies": [
       "PickupType/A/s1",
@@ -16,7 +16,6 @@
       "FetchType/B/s3"
     ],
     "remaining_launch_order": [
-      "FetchType/B/s1",
       "FetchType/B/s2",
       "FetchType/A/s3",
       "PickupType/A/s1",
@@ -35,7 +34,9 @@
       "4": {
         "current": null,
         "cpuset": "89-95,149-155",
-        "admission_retry_after": 1789327626.562386
+        "admission_retry_after": 1789327626.562386,
+        "released_policy": "FetchType/B/s1",
+        "admission_blocker": "disk_free_below_frozen_35GiB"
       }
     },
     "operational_rejections": {
@@ -64,16 +65,60 @@
         }
       }
     },
-    "updated": 1789327446.9855795,
-    "controller_version": 4,
-    "prior_controller_state": "continuation_v3/state.json",
+    "updated": 1789489863.2886498,
+    "controller_version": 6,
+    "prior_controller_state": "continuation_v5/state.json",
     "reservations": {
       "FetchType/A/s2": "3",
       "FetchType/B/s3": "7",
-      "PickupType/B/s2": "4"
+      "PickupType/B/s2": "4",
+      "FetchType/B/s1": "4"
     },
     "original_deadline": 1789896774.9783938,
-    "budget_revision": "/home/dataset-local/liyufeng/safeot_w2/results_vla/chores_operational_recovery_20260913/queue_budget_revision_v1.json"
+    "budget_revision": "/home/dataset-local/liyufeng/safeot_w2/results_vla/chores_operational_recovery_20260913/queue_budget_revision_v1.json",
+    "controller_pid": 1346630,
+    "monitor_deadline": 1789493463.2271447,
+    "step_baseline": {
+      "PickupType/B/s2": 92160,
+      "FetchType/B/s1": 1559552,
+      "FetchType/A/s2": 651264,
+      "FetchType/B/s3": 715776
+    },
+    "observations": {
+      "PickupType/B/s2": {
+        "pid": 2354949,
+        "identity_alive": false,
+        "steps": 92160,
+        "growth_since_restore": 0,
+        "status": "exited_retained",
+        "log_age_seconds": 164238.1859345436
+      },
+      "FetchType/B/s1": {
+        "pid": 789542,
+        "identity_alive": false,
+        "steps": 1559552,
+        "growth_since_restore": 0,
+        "status": "exited_retained",
+        "log_age_seconds": 31127.261303663254
+      },
+      "FetchType/A/s2": {
+        "pid": 2244228,
+        "identity_alive": true,
+        "steps": 651264,
+        "growth_since_restore": 0,
+        "status": "live_pending_growth",
+        "log_age_seconds": 834.3628437519073
+      },
+      "FetchType/B/s3": {
+        "pid": 2316648,
+        "identity_alive": true,
+        "steps": 715776,
+        "growth_since_restore": 0,
+        "status": "live_pending_growth",
+        "log_age_seconds": 538.2757706642151
+      }
+    },
+    "disk_free_bytes": 3123290112
   },
   "diagnostic_cleanup": {
     "created": 1789312035.4290993,
@@ -155,7 +200,7 @@
     "semantic_gate": "Native outputs exactly match observed baseline RGB/agent/canonical-object outputs in limited reset test; no full-task equivalence claim."
   },
   "schema_version": 1,
-  "updated_unix": 1789454505.9245374,
+  "updated_unix": 1789489898.1863317,
   "original_failed_attempts_retained": 9,
   "original_running_jobs_untouched": [
     "PickupType/B/s1",
@@ -163,8 +208,8 @@
     "PickupType/B/s3"
   ],
   "recovery_attempts_started": 4,
-  "recovery_policies_with_new_steps": 3,
-  "root_cause_status": "unresolved_native_failures_under_instrumented_recovery",
+  "recovery_policies_with_new_steps": 0,
+  "root_cause_status": "Fetch B1 ENOSPC proven; v5 exit unrecorded, disk exhaustion inferred; GPU4 admission blocked below35GiB",
   "notes": [
     "Original failures remain failures; recovery is a separate operational attempt.",
     "Simulator trajectories are not exact checkpoint continuations.",
@@ -187,11 +232,11 @@
       "original_attempt_status": "failed_retained",
       "original_logged_steps": 0,
       "original_checkpoint_count": 0,
-      "recovery_status": "trainer_exited_pending_artifact_and_exit_status_audit",
+      "recovery_status": "exited_retained",
       "recovery_attempts": [
         {
           "attempt": 1,
-          "status": "trainer_exited_pending_artifact_and_exit_status_audit",
+          "status": "exited_retained",
           "process_identity_matches": false,
           "reported_total_rollout_steps": 92160,
           "checkpoint_start_steps": 0,
@@ -207,7 +252,8 @@
           "step_evidence_sources": [
             "TRAIN summary and/or SOTD post-collection update log"
           ],
-          "native_log_count": 11
+          "native_log_count": 11,
+          "growth_since_controller_restore": 0
         }
       ],
       "recovery_evaluation": {
@@ -241,15 +287,15 @@
       "original_attempt_status": "failed_retained",
       "original_logged_steps": 76800,
       "original_checkpoint_count": 0,
-      "recovery_status": "running_with_reported_steps",
+      "recovery_status": "exited_retained",
       "recovery_attempts": [
         {
           "attempt": 1,
-          "status": "running",
-          "process_identity_matches": true,
-          "reported_total_rollout_steps": 1552384,
+          "status": "exited_retained",
+          "process_identity_matches": false,
+          "reported_total_rollout_steps": 1559552,
           "checkpoint_start_steps": 0,
-          "new_reported_rollout_steps": 1552384,
+          "new_reported_rollout_steps": 1559552,
           "host": "mainskill",
           "gpu": 4,
           "algorithm_state_resume": false,
@@ -261,7 +307,8 @@
           "step_evidence_sources": [
             "TRAIN summary and/or SOTD post-collection update log"
           ],
-          "native_log_count": 8
+          "native_log_count": 8,
+          "growth_since_controller_restore": 0
         }
       ],
       "recovery_evaluation": {
@@ -273,15 +320,15 @@
       "original_attempt_status": "failed_retained",
       "original_logged_steps": 0,
       "original_checkpoint_count": 0,
-      "recovery_status": "running_with_reported_steps",
+      "recovery_status": "live_pending_growth",
       "recovery_attempts": [
         {
           "attempt": 1,
-          "status": "running",
+          "status": "live_pending_growth",
           "process_identity_matches": true,
-          "reported_total_rollout_steps": 610304,
+          "reported_total_rollout_steps": 651264,
           "checkpoint_start_steps": 0,
-          "new_reported_rollout_steps": 610304,
+          "new_reported_rollout_steps": 651264,
           "host": "mainskill",
           "gpu": 3,
           "algorithm_state_resume": false,
@@ -293,7 +340,8 @@
           "step_evidence_sources": [
             "TRAIN summary and/or SOTD post-collection update log"
           ],
-          "native_log_count": 8
+          "native_log_count": 8,
+          "growth_since_controller_restore": 0
         }
       ],
       "recovery_evaluation": {
@@ -327,15 +375,15 @@
       "original_attempt_status": "failed_retained",
       "original_logged_steps": 564224,
       "original_checkpoint_count": 1,
-      "recovery_status": "running_with_reported_steps",
+      "recovery_status": "live_pending_growth",
       "recovery_attempts": [
         {
           "attempt": 1,
-          "status": "running",
+          "status": "live_pending_growth",
           "process_identity_matches": true,
-          "reported_total_rollout_steps": 655360,
+          "reported_total_rollout_steps": 715776,
           "checkpoint_start_steps": 200704,
-          "new_reported_rollout_steps": 454656,
+          "new_reported_rollout_steps": 515072,
           "host": "mainskill",
           "gpu": 7,
           "algorithm_state_resume": true,
@@ -347,7 +395,8 @@
           "step_evidence_sources": [
             "TRAIN summary and/or SOTD post-collection update log"
           ],
-          "native_log_count": 8
+          "native_log_count": 8,
+          "growth_since_controller_restore": 0
         }
       ],
       "recovery_evaluation": {
@@ -355,6 +404,6 @@
       }
     }
   ],
-  "observation_age_seconds": 35292.89566254616,
-  "fresh_observation": false
+  "observation_age_seconds": 17.248796224594116,
+  "fresh_observation": true
 }
