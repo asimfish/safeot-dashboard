@@ -47,6 +47,7 @@ Use one checkbox per stage. Do not delete completed stages; append changed or ne
 - [ ] Stage 4: Publish immutable evidence then additive homepage feed, verify HTTP/cache/report SHA.
 
 ## Stage Log
+- 2026-09-16 17:31:30 Immutable evidence published as79022f6: full report/36-row results/paired contrasts/three-point PNG SVG/900-cycle audit. Preparing separate visible homepage feed commit with original owner and all old entries retained.
 - 2026-09-16 17:30:33 12smoke+36development verified exit0; six KL_s1 controls exactly reproduce T1589 through312eval;900cycles/1800distance audit PASS. No common safe-beneficial W2 scale; HOLD. Curves rendered and checked; preparing evidence/feed publication.
 - 2026-09-16 17:18:29 12smoke passed including two-cycle KL_s1 exact replay and common6-arm firstbatch/PPO/anchor/D/calibration; 36 development running. Independent distance audit/curve watcher detached.
 - 2026-09-16 17:14:32 Algebra gate passed including supplied anisotropic fixture; all36 offline metric-scale cases passed, six nondegenerate anchors and exact old KL_s1 actor/D. Detached smoke/controller launched.
@@ -65,6 +66,6 @@ Format: `- YYYY-MM-DD HH:MM:SS <short factual update>`.
   - Workflow checks pass and task-specific acceptance criteria are met.
 
 ## Completion Record
-- Summary: T1590 local joint metric experiment complete:36 development/432000 interactions, exact controls, full distance gates and curves; HOLD no expansion; publication prepared.
-- Tests: math/offline/risk/transaction gates; verify smoke/development; distance1800; neural derivative6; constraints1800; source hashes; synthesis; agentctl manual PASS
-- Completed-at: 2026-09-16 17:30:33
+- Summary: T1590 evidence79022f6 published; visible feed entry prepared with HOLD and complete six-point task results; no further training.
+- Tests: All numerical/replay/data gates PASS; local feed preservation and stable-id insertion PASS; agentctl manual PASS
+- Completed-at: 2026-09-16 17:31:30

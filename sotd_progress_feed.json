@@ -2,6 +2,22 @@
   "owner": "T-1484 SafeOT-Dual session (cursor)",
   "entries": [
     {
+      "id": "T-1590-final-20260916",
+      "task_id": "T-1590",
+      "time": "09-16 17:31",
+      "timestamp": "2026-09-16T17:31:30.357828+08:00",
+      "goal": "T-1590 联合距离求解 · HOLD_NO_EXPANSION",
+      "text": "[T-1590，诊断基准] 12项烟测、36项开发完成，每项12000真实交互+312独立官方det评估；KL/W2共同Fisher子空间，距离直接参与同一奖励/成本局部求解，外层excess筛选固定。KL_s1六次完整训练/最终评估精确复现T1589；900cycle/1800距离审计通过。K2 KL(s=.5/1/2)原始奖励=9.348/9.215/9.049，任一通道回合超限率=2.78%/0.00%/0.21%；K2 W2(s=.5/1/2)原始奖励=9.424/9.250/8.969，任一通道回合超限率=1.07%/1.39%/0.21%；K3 KL(s=.5/1/2)原始奖励=9.365/9.485/9.442，任一通道回合超限率=2.14%/0.00%/1.28%；K3 W2(s=.5/1/2)原始奖励=9.541/9.384/9.591，任一通道回合超限率=7.37%/0.00%/2.14%。未过探索性额外收益门槛，HOLD，不扩种子。三训练种子仅为探索，有限评估零违规不证明总体安全；Gaussian W2/OT信赖域已有先例，不声称完整SafeOT或SOTA。T1589原HOLD保留。完整三点曲线、成功率及配对差值见data分支sotd_joint_metric_T1590_report.md/findings/results/contrasts/curves。",
+      "evidence": [
+        "sotd_joint_metric_T1590_report.md",
+        "sotd_joint_metric_T1590_findings.json",
+        "sotd_joint_metric_T1590_results.csv",
+        "sotd_joint_metric_T1590_contrasts.csv",
+        "sotd_joint_metric_T1590_curves.png",
+        "sotd_joint_metric_T1590_curves.svg"
+      ]
+    },
+    {
       "time": "09-09 02:07",
       "goal": "G3/G5 算法改进",
       "text": "为让 SafeOT-Dual 直接作用于硬通道，新增「可行性一致的动作过滤」：每步采 K 个候选动作，用 FDPI 学到的可行性评论家 g(s,a)（未来撞硬物的折现概率）打分，veto 模式在策略自身动作可行时不干预、不可行时换成可行候选中 Q 最高的（没有可行候选则取 g 最小）；greedy 模式总选 Q 最高的可行候选。两条验证线并行：① 用已训好的 CG2 检查点（固定 0.76、日程 0.78、日程 0.8，各 3 种子）在 312 集严格评测里比较过滤前/后的泄漏与回报（约 2 h 出）；② 训练采样步内置过滤器，CG2 日程 0.78 上的 2×2 筛选（FDPI 阈值 ε∈{0.1,0.02} × 过滤 {greedy, veto}），1–2 种子，volc 与 mainskill 各 2 个 run。同时：mainskill 被重新置备（GPU 全部恢复），G4 seed 0 两臂从 1.70M 检查点续训（修复了看门狗从零重启的 bug），seed 1 两臂在空卡上重新开始。"
