@@ -64,3 +64,5 @@ Format: `- YYYY-MM-DD HH:MM:SS <short factual update>`.
 - Completed-at: 2026-09-16 18:32:16
 
 - Publication update: immutable evidence commit 20d0413aa419cdbd54a8334256b4c903b89253ed pushed after task review. Persistent source entry preserves T1484 owner/all35 entries; homepage feed publication/HTTP check follows.
+
+- Final publication verified: evidence 20d0413aa419cdbd54a8334256b4c903b89253ed; feed c0011caa8f517589480b61f591c06e76e32c4db0. HTTP200 cache-busted feed first14 includesT1591, all35 prior entries preserved, report hash equals local. Receipt: diagnostic_runs/surrogate_gap_decomposition/v1/publication_receipt.json. No new training pending; next estimator experiment awaits separately frozen instruction.
