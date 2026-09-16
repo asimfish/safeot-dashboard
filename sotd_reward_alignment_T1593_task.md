@@ -42,9 +42,10 @@ Use one checkbox per stage. Do not delete completed stages; append changed or ne
 
 - [x] Stage 1: Protocol/source freeze and numerical/SS/raw reward gates.
 - [x] Stage 2: Detached16smoke→48development→12mechanism, allnegative results retained.
-- [ ] Stage 3: Factorial effects, safety-failure attribution bounds, synthesis and durable publication.
+- [x] Stage 3: Factorial effects, safety-failure attribution bounds, synthesis and durable publication.
 
 ## Stage Log
+- 2026-09-16 22:07:46 T1593 closed scientificHOLD; immutable0990b7a and durablefeed0a9735c published. HTTP200 reportSHA02b5b915... matches local; first14 T1593, all37 priorentries/owner retained, T1591/T1592 retained. Producer dashboard_push.py:651 reads persistent source. No follow-on experiments.
 - 2026-09-16 22:02:43 All76jobs exit0;12SS exactfullreplay;864528 actualsteps. HOLD_OBJECTIVE_RECIPE:24outer pairs identical; rawinner improves bankdetreward but worsens rawoptimism in12/12seed summaries, and nofixedconfig passesbothenvs.16finalunsafe jobs have checkpoint-matched4screen missed events. Publication scope narrowly expanded to durablefeed.
 - 2026-09-16 21:47:51 T1593 gates and16smoke PASS; controller4151444 running fixed48development then12mechanism, final watcher detached. Raw/shaped gate144steps separately charged; 42/14/23 prior signs and new383 seed block verified. No PPO shaping/risk changes.
 
@@ -63,6 +64,10 @@ Format: `- YYYY-MM-DD HH:MM:SS <short factual update>`.
   - Workflow checks pass and task-specific acceptance criteria are met.
 
 ## Completion Record
-- Summary: T1593 fixed inner/outer reward2x2 complete:76exit0,12SS exactreplays,864528steps; HOLD_OBJECTIVE_RECIPE. Immutable evidence and source-backed feed publication follow review.
+- Summary: T1593 fixed inner/outer reward2x2 complete:76exit0,12SS exactreplays,864528steps; HOLD_OBJECTIVE_RECIPE. Immutable evidence 0990b7a4e8ae72deaeb777df96a8843f0c975ea5 and persistent-source feed 0a9735c377f27a2a50c329b95ecd17f0bc4765f4 published after review; HTTP200/first14/report SHA match verified.
 - Tests: gate.py;verify.py smoke/development;verify_final.py;outer_replay_audit.py;accounting.py;agentctl check --mode manual
 - Completed-at: 2026-09-16 22:04:48
+
+- Artifacts: diagnostic_runs/reward_objective_alignment/v1/report.md, findings.json, results.csv, factorial_seed_effects.csv, mechanism_seed_pairs.csv, mechanism_risk_seed_pairs.csv, safety_failures.json, final_verification.json, run_accounting.json, publication_receipt.json; all76 job data/checkpoints retained.
+- Risks: 3 training seeds are exploratory; four-episode screens missed final events in16 jobs (outer duplicates included). No zero-risk or OT/SOTA/native/VLA claim; old HOLD records unchanged.
+- Follow-ups: None automatically scheduled. Fixed recipe closed HOLD_OBJECTIVE_RECIPE; mentor decides any next scientifically distinct task.
