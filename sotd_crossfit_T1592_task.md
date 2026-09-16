@@ -62,3 +62,5 @@ Format: `- YYYY-MM-DD HH:MM:SS <short factual update>`.
 - Summary: T1592 completed8smoke/24development/12mechanism with12 exact controls; HOLD_THIS_RECIPE; persistent feed prepared for post-review publication
 - Tests: gate.py; verify.py smoke/development; verify_final.py PASS; source/hash/CRN/OOF/optimizer and312episode exact replay; agentctl check manual
 - Completed-at: 2026-09-16 21:07:16
+
+- Evidence publication: 7e50e439a98775aa1fcdde70b44a0d17a10f0046 rebased onto latest data after task review; publication receipt will verify push. Durable source keepsT1591 and all35 earlier entries (36 preserved); feed/HTTP verification follows.
