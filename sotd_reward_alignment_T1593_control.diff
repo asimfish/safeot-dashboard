@@ -1,0 +1,126 @@
+--- T1592/joint_solver.py
++++ T1593/joint_solver.py
+@@ -40,12 +40,13 @@
+   full=np.zeros(len(B)+1);full[active]=dual[:sum(active)];prices=full[:-1].tolist();kkt=float(err)
+  return z,dict(accepted=valid,recovery=recovery,slack=slack,solver_success=bool(res.success),solver_message=str(res.message),iterations=int(res.nit),lambda_raw=prices,kkt_stationarity_subspace=kkt,predicted_cost=v[1:-1].tolist(),KL=float(v[-1]),reward_gain=float(v[0]),constraint_residual=float(np.maximum(v[1:-1]-B,0).max()),coordinates=z.tolist())
+ 
+-def update(agent,data,B,geometry="fisher",metric="KL",scale=1.,c_w=1.,estimator="time_loo"):
++def update(agent,data,B,geometry="fisher",metric="KL",scale=1.,c_w=1.,estimator="time_loo",actor_reward_target="shaped"):
+  assert metric in ["KL","W2"] and c_w>0
++ assert estimator=="time_loo" and actor_reward_target in ["shaped","raw"]
+  radius=.01*scale
+  start=time.time();H=12;N=len(data['states'])//H
+  done=data['dones'].reshape(N,H);assert done[:,-1].bool().all() and not done[:,:-1].bool().any()
+- rt=finite_targets(data['rewards']);ct=finite_targets(data['costs']);ar=centered(rt).double();ac=centered(ct).double();agent.audit_reward_baseline=dict(estimator=estimator,targets=rt.detach().cpu(),advantage=ar.detach().cpu())
++ rt=finite_targets(data['rewards']);ct=finite_targets(data['costs']);actor_rt=rt if actor_reward_target=='shaped' else finite_targets(data['raw_rewards']);ar=centered(actor_rt).double();ac=centered(ct).double();agent.audit_reward_baseline=dict(estimator=estimator,actor_reward_target=actor_reward_target,targets=actor_rt.detach().cpu(),critic_targets=rt.detach().cpu(),advantage=ar.detach().cpu())
+  if estimator=='cf_state':
+   ar,baseline=fit_predict(data['states'].cpu().numpy(),rt.cpu().numpy(),len(B));agent.audit_reward_baseline=baseline;agent.audit_reward_baseline['estimator']=estimator
+  elif estimator!='time_loo':raise ValueError(estimator)
+@@ -111,5 +112,5 @@
+   agent.critic_optimizer.zero_grad();loss.backward();agent.critic_optimizer.step()
+  with torch.no_grad():after=[float(((agent.reward_critic(data['states']).squeeze(-1)-rt)**2).mean()),float(((agent.cost_critic(data['states'])-ct)**2).mean())]
+  info.update(Jhat=Jhat.tolist(),B=list(B),actual_KL=rawkl,actual_predicted_cost=checked[1:-1].tolist(),parameter_delta=float((actual-base).norm()),critic_MSE_before=before,critic_MSE_after=after,seconds=time.time()-start,extra_environment_steps=0,finite_reward_return_mean=float(rt.reshape(N,H)[:,0].mean()),finite_cost_return_mean=ct.reshape(N,H,-1)[:,0].mean(0).tolist(),discounted_GAE_used=False)
+- info.update(reward_estimator=estimator,baseline_seconds=agent.audit_reward_baseline.get("seconds",0.),reward_advantage_std=float(ar.std()),reward_advantage_mean=float(ar.mean()),cost_advantage_std=ac.std(0).tolist())
++ info.update(actor_reward_target=actor_reward_target,actor_target_return_mean=float(actor_rt.reshape(N,H)[:,0].mean()),reward_estimator=estimator,baseline_seconds=agent.audit_reward_baseline.get("seconds",0.),reward_advantage_std=float(ar.std()),reward_advantage_mean=float(ar.mean()),cost_advantage_std=ac.std(0).tolist())
+  return info
+--- T1592/worker.py
++++ T1593/worker.py
+@@ -13,10 +13,11 @@
+  penalty=sum(x['penalty'] for x in trace);v=np.array(ep['costs'])>B;row=dict(phase=phase,cycle=cycle,seed=seed,raw_reward=ep['reward']+penalty,shaped_reward=ep['reward'],penalty=penalty,costs=np.asarray(ep['costs']).tolist(),success=ep['success'],joint=bool(ep['success'] and not v.any()),violation=v.tolist(),trace=trace.copy());episodes.append(row)
+  with (out/'training_episodes.jsonl').open('a') as f:f.write(json.dumps(row)+'\n')
+  return np.r_[ep['reward'],ep['costs']]
+-orig_step=env.step;explore=[]
++orig_step=env.step;explore=[];raw_batch=[];penalty_batch=[]
+ def measured(action):
+  global steps
+  before=env._ep_costs.copy();ns,r,c,done,info=orig_step(action);steps+=1;pen=5*float(np.maximum((before+c)/B.astype(np.float32)-env._step/12,0).sum());explore.append(dict(proposal=np.asarray(action).tolist(),executed_action=info['executed_action'].tolist(),raw_reward=r+pen,shaped_reward=r,penalty=pen,cost=c.tolist()))
++ raw_batch.append(r+pen);penalty_batch.append(pen)
+  if done:record_episode('exploration',len(events),explore,info['episode']);explore.clear()
+  return ns,r,c,done,info
+ env.step=measured
+@@ -31,7 +32,7 @@
+ 
+ def update(data,*,total_step=0):
+  global beta,c_w,accepted_updates,proposal_steps
+- cycle=len(events);oldactor=copy.deepcopy(agent.actor.state_dict());oldopt=copy.deepcopy(agent.actor_optimizer.state_dict());save(agent,out/f'cycle_{cycle:03d}_old.pt');torch.save(data,out/f'cycle_{cycle:03d}_batch.pt');shadow=copy.deepcopy(agent);grads=[]
++ cycle=len(events);assert len(raw_batch)==240;raw_tensor=torch.tensor(raw_batch,dtype=torch.float32);pen_tensor=torch.tensor(penalty_batch,dtype=torch.float32);raw_batch.clear();penalty_batch.clear();assert torch.allclose(data['rewards'],raw_tensor-pen_tensor,atol=1e-5,rtol=2e-7);joint_data=dict(data,raw_rewards=raw_tensor);torch.save(dict(raw=raw_tensor,shaped=data['rewards'].clone(),penalty=pen_tensor),out/f'cycle_{cycle:03d}_rewards.pt');oldactor=copy.deepcopy(agent.actor.state_dict());oldopt=copy.deepcopy(agent.actor_optimizer.state_dict());save(agent,out/f'cycle_{cycle:03d}_old.pt');torch.save(data,out/f'cycle_{cycle:03d}_batch.pt');shadow=copy.deepcopy(agent);grads=[]
+  def grad_hook(*args):grads.append({n:float(p.grad.norm()) if p.grad is not None else None for n,p in shadow.actor.named_parameters()})
+  hook=shadow.actor_optimizer.register_step_pre_hook(grad_hook);result=PPOLagrangian._update(shadow,data,total_step=total_step);hook.remove();proposal_steps+=len(grads);save(shadow,out/f'cycle_{cycle:03d}_proposal.pt');proposal_delta=deltas(oldactor,shadow.actor.state_dict());assert any(v>0 for k,v in proposal_delta.items() if k.startswith('backbone')) and proposal_delta['mu_head.weight']>0 and proposal_delta['log_std_head.weight']>0
+  rng_t=torch.get_rng_state();rng_n=np.random.get_state()
+@@ -44,7 +45,7 @@
+  joint_shadows={};joint_infos={}
+  for met in ['KL','W2']:
+   joint=copy.deepcopy(agent);joint.actor_optimizer=torch.optim.SGD(joint.actor.parameters(),lr=1)
+-  ji=joint_update(joint,data,B,metric=met,scale=j['scale'],c_w=c_w,estimator=j['estimator']);torch.save(joint.audit_reward_baseline,out/f'cycle_{cycle:03d}_{met}_baseline.pt');joint_shadows[met]=joint;joint_infos[met]=ji
++  ji=joint_update(joint,joint_data,B,metric=met,scale=j['scale'],c_w=c_w,estimator='time_loo',actor_reward_target=j['inner_reward']);torch.save(joint.audit_reward_baseline,out/f'cycle_{cycle:03d}_{met}_baseline.pt');joint_shadows[met]=joint;joint_infos[met]=ji
+   torch.set_rng_state(rng_t);np.random.set_state(rng_n);save(joint,out/f'cycle_{cycle:03d}_{met}.pt');torch.save(dict(D=joint.audit_directions,delta=joint.audit_delta),out/f'cycle_{cycle:03d}_{met}_basis.pt')
+  assert torch.equal(joint_shadows['KL'].audit_directions,joint_shadows['W2'].audit_directions)
+  with torch.no_grad():
+@@ -55,20 +56,22 @@
+  beta=0.;regvalues=[0.,0.,0.];seedbase=3100000000+j['seed']*100000+cycle*100
+  sample_sets=[[rollout(c,seedbase+k,'select_'+str(alpha),cycle) for k in range(4)] for c,alpha in zip(candidates,alphas)];selection=[np.mean(x,0) for x in sample_sets]
+  mode='excess';eligible=[0,2] if not finfo['accepted'] else [0,1,2]
+- chosen,selection_recovery,selection_risks=choose(sample_sets,B,mode,eligible);scores=[float(x[0]) for x in selection]
++ raw_sets=[[np.r_[ep['raw_reward'],np.array(ep['costs'],np.float32)] for ep in episodes if ep['cycle']==cycle and ep['phase']=='select_'+str(alpha)] for alpha in alphas]
++ chosen,selection_recovery,selection_risks=choose(sample_sets,B,mode,eligible,reward_key=j['outer_reward'],raw_samples=raw_sets);scores=[x['actual_score'] for x in selection_risks];other_key='raw' if j['outer_reward']=='shaped' else 'shaped';other_selection=choose(sample_sets,B,mode,eligible,reward_key=other_key,raw_samples=raw_sets)[0]
+  va=[];vo=[]
+  for k in range(4):vo.append(rollout(agent.actor,seedbase+20+k,'accept_old',cycle));va.append(rollout(candidates[chosen],seedbase+20+k,'accept_candidate',cycle))
+- accepted,recovery,oldrisk,newrisk=accept(vo,va,B,mode);va=np.mean(va,0);vo=np.mean(vo,0)
++ raw_vo=[np.r_[ep['raw_reward'],np.array(ep['costs'],np.float32)] for ep in episodes if ep['cycle']==cycle and ep['phase']=='accept_old'];raw_va=[np.r_[ep['raw_reward'],np.array(ep['costs'],np.float32)] for ep in episodes if ep['cycle']==cycle and ep['phase']=='accept_candidate']
++ accepted,recovery,oldrisk,newrisk=accept(vo,va,B,mode,reward_key=j['outer_reward'],raw_old=raw_vo,raw_new=raw_va);other_accept=accept(vo,va,B,mode,reward_key=other_key,raw_old=raw_vo,raw_new=raw_va)[0];va=np.mean(va,0);vo=np.mean(vo,0)
+  # Middle slot always resets Adam; install copies candidate, never Fisher SGD state.
+  rule=install(agent,shadow,candidates[chosen],alphas[chosen],accepted,oldactor,oldopt);ad=deltas(oldactor,agent.actor.state_dict());effective=bool(accepted and chosen>0 and any(v>0 for v in ad.values()));accepted_updates+=int(effective)
+ 
+  oldmodule=copy.deepcopy(agent.actor);oldmodule.load_state_dict(oldactor);actual=metrics(oldmodule,agent.actor,data['states'])
+  if accepted and alphas[chosen]>0:assert same(agent.actor.state_dict(),candidates[chosen].state_dict())
+- info=dict(c_W=c_w,joint_infos=joint_infos,joint_difference=difference,source=sources[chosen],candidate_sources=sources,eligible=eligible,fisher_info=finfo,selection_risks=selection_risks,acceptance_old_risk=oldrisk,acceptance_new_risk=newrisk,channel_excess_change=(np.array(newrisk["excess"])-np.array(oldrisk["excess"])).tolist(),cycle=cycle,alpha=alphas[chosen],accepted=accepted,effective_update=effective,selection_recovery=selection_recovery,recovery=bool(recovery),optimizer_rule=rule,actual_regularizer=actual,beta=beta,regularizers=regs,selection=np.array(selection).tolist(),selection_scores=scores,validation_old=vo.tolist(),validation_new=va.tolist(),selection_error=(va-selection[chosen]).tolist(),proposal_parameter_deltas=proposal_delta,accepted_parameter_deltas=ad,gradient_norms=grads,requires_grad={n:p.requires_grad for n,p in agent.actor.named_parameters()},steps=steps,duals_before=agent.lambdas.tolist())
++ info=dict(inner_reward=j["inner_reward"],outer_reward=j["outer_reward"],actual_score=scores,raw_selection=np.array([np.mean(x,0) for x in raw_sets]).tolist(),counterfactual_other_key=other_key,counterfactual_selection=other_selection,selection_reward_flip=bool(other_selection!=chosen),acceptance_reward_flip=bool(other_accept!=accepted),c_W=c_w,joint_infos=joint_infos,joint_difference=difference,source=sources[chosen],candidate_sources=sources,eligible=eligible,fisher_info=finfo,selection_risks=selection_risks,acceptance_old_risk=oldrisk,acceptance_new_risk=newrisk,channel_excess_change=(np.array(newrisk["excess"])-np.array(oldrisk["excess"])).tolist(),cycle=cycle,alpha=alphas[chosen],accepted=accepted,effective_update=effective,selection_recovery=selection_recovery,recovery=bool(recovery),optimizer_rule=rule,actual_regularizer=actual,beta=beta,regularizers=regs,selection=np.array(selection).tolist(),selection_scores=scores,validation_old=vo.tolist(),validation_new=va.tolist(),selection_error=(va-selection[chosen]).tolist(),proposal_parameter_deltas=proposal_delta,accepted_parameter_deltas=ad,gradient_norms=grads,requires_grad={n:p.requires_grad for n,p in agent.actor.named_parameters()},steps=steps,duals_before=agent.lambdas.tolist())
+  events.append(info);save(agent,out/f'cycle_{cycle:03d}_postselection.pt');(out/'epochs.json').write_text(json.dumps(events,indent=2));print(json.dumps({k:info[k] for k in ['cycle','alpha','accepted','effective_update','optimizer_rule','validation_new','steps']}),flush=True);return result
+ agent._update=update;origdual=agent._update_lambdas
+ def dual(cost):
+  origdual(cost);events[-1]['duals_after']=agent.lambdas.tolist();save(agent,out/f"cycle_{len(events)-1:03d}_after.pt");(out/'epochs.json').write_text(json.dumps(events,indent=2))
+ agent._update_lambdas=dual
+ history=agent.train();assert steps==j['steps'];save(agent,out/'training_checkpoint.pt');torch.save(agent.actor.state_dict(),out/'actor.pt');restored=copy.deepcopy(agent.actor);restored.load_state_dict(torch.load(out/'actor.pt',weights_only=True));assert same(restored.state_dict(),agent.actor.state_dict());checkopt=torch.optim.Adam(restored.parameters());checkopt.load_state_dict(agent.actor_optimizer.state_dict());assert same(checkopt.state_dict(),agent.actor_optimizer.state_dict())
+-e=runner.evaluate_actor(j['env'],j['seed']+1000,agent.actor,'cpu',j['eval_episodes']);final=deltas(initial,agent.actor.state_dict());d=dict(effective_config=dict(arm=j['arm'],reward_estimator=j['estimator'],risk_mode='excess',metric=j['metric'],scale=j['scale'],c_W=c_w,actual_steps=steps,exploration_steps=j['steps']//2,selection_steps=j['steps']*3//10,acceptance_steps=j['steps']//5,actor_optimizer_steps=accepted_updates,proposal_optimizer_steps=proposal_steps,actor_parameter_delta_l2=float(np.sqrt(sum(v*v for v in final.values()))),module_deltas=final,checkpoint_reload_equal=True,optimizer_reload_equal=True,seed=j['seed'],beta=beta,shaping=5),eval=e,cost_limits=B.tolist(),training_seconds=time.time()-start,training_summary=dict(episodes=len(episodes),raw_reward_mean=float(np.mean([x['raw_reward'] for x in episodes])),shaped_reward_mean=float(np.mean([x['shaped_reward'] for x in episodes])),penalty_mean=float(np.mean([x['penalty'] for x in episodes]))));(out/'result.json').write_text(json.dumps(d,indent=2))
++e=runner.evaluate_actor(j['env'],j['seed']+1000,agent.actor,'cpu',j['eval_episodes']);final=deltas(initial,agent.actor.state_dict());d=dict(effective_config=dict(arm=j['arm'],reward_estimator='time_loo',inner_reward=j['inner_reward'],outer_reward=j['outer_reward'],risk_mode='excess',metric=j['metric'],scale=j['scale'],c_W=c_w,actual_steps=steps,exploration_steps=j['steps']//2,selection_steps=j['steps']*3//10,acceptance_steps=j['steps']//5,actor_optimizer_steps=accepted_updates,proposal_optimizer_steps=proposal_steps,actor_parameter_delta_l2=float(np.sqrt(sum(v*v for v in final.values()))),module_deltas=final,checkpoint_reload_equal=True,optimizer_reload_equal=True,seed=j['seed'],beta=beta,shaping=5),eval=e,cost_limits=B.tolist(),training_seconds=time.time()-start,training_summary=dict(episodes=len(episodes),raw_reward_mean=float(np.mean([x['raw_reward'] for x in episodes])),shaped_reward_mean=float(np.mean([x['shaped_reward'] for x in episodes])),penalty_mean=float(np.mean([x['penalty'] for x in episodes]))));(out/'result.json').write_text(json.dumps(d,indent=2))
+--- T1592/risk.py
++++ T1593/risk.py
+@@ -1,24 +1,26 @@
+ import numpy as np
+ 
+-def risk(samples,B):
++def risk(samples,B,reward_key="shaped",raw_samples=None):
+  c=np.asarray(samples)[:,1:];B=np.asarray(B);ex=np.maximum(c/B-1,0).mean(0)
+- return dict(mean_cost=c.mean(0).tolist(),event_probability=(c>B).mean(0).tolist(),excess=ex.tolist(),mean_feasible=bool(np.all(c.mean(0)<=B)),event_free=bool(not (c>B).any()),risk_pair=(float(ex.max()),float(ex.sum())),shaped_reward=float(np.asarray(samples)[:,0].mean()))
+-def choose(samples,B,mode,eligible=None):
++ assert reward_key in ['shaped','raw'];shaped=float(np.asarray(samples)[:,0].mean());raw=float(np.asarray(raw_samples)[:,0].mean()) if raw_samples is not None else None
++ assert reward_key=='shaped' or raw is not None
++ return dict(reward_key=reward_key,actual_score=shaped if reward_key=='shaped' else raw,raw_reward=raw,mean_cost=c.mean(0).tolist(),event_probability=(c>B).mean(0).tolist(),excess=ex.tolist(),mean_feasible=bool(np.all(c.mean(0)<=B)),event_free=bool(not (c>B).any()),risk_pair=(float(ex.max()),float(ex.sum())),shaped_reward=float(np.asarray(samples)[:,0].mean()))
++def choose(samples,B,mode,eligible=None,reward_key="shaped",raw_samples=None):
+  eligible=list(range(3)) if eligible is None else eligible
+- rs=[risk(x,B) for x in samples];sel=[np.mean(x,0) for x in samples]
++ rs=[risk(x,B,reward_key,None if raw_samples is None else raw_samples[i]) for i,x in enumerate(samples)];sel=[np.mean(x,0) for x in samples]
+  if mode=='mean':
+   feasible=[i for i in eligible if np.all(sel[i][1:]<=B)]
+-  if feasible:return max(feasible,key=lambda i:(sel[i][0],i)),False,rs
+-  return min(eligible,key=lambda i:(np.maximum(sel[i][1:]/B-1,0).sum(),-sel[i][0])),True,rs
++  if feasible:return max(feasible,key=lambda i:(rs[i]["actual_score"],i)),False,rs
++  return min(eligible,key=lambda i:(np.maximum(sel[i][1:]/B-1,0).sum(),-rs[i]["actual_score"])),True,rs
+  feasible=[i for i in eligible if rs[i]['event_free']]
+- if feasible:return max(feasible,key=lambda i:(rs[i]['shaped_reward'],i)),False,rs
+- return min(eligible,key=lambda i:(*rs[i]['risk_pair'],-rs[i]['shaped_reward'],-i)),True,rs
++ if feasible:return max(feasible,key=lambda i:(rs[i]['actual_score'],i)),False,rs
++ return min(eligible,key=lambda i:(*rs[i]['risk_pair'],-rs[i]['actual_score'],-i)),True,rs
+ 
+-def accept(old,new,B,mode):
+- o,n=risk(old,B),risk(new,B);vo=np.mean(old,0);va=np.mean(new,0)
++def accept(old,new,B,mode,reward_key="shaped",raw_old=None,raw_new=None):
++ o,n=risk(old,B,reward_key,raw_old),risk(new,B,reward_key,raw_new);vo=np.mean(old,0);va=np.mean(new,0)
+  if mode=='mean':
+   oldex=np.maximum(vo[1:]/B-1,0).sum();newex=np.maximum(va[1:]/B-1,0).sum();recovery=oldex>0
+-  yes=bool(newex<oldex-1e-8 if recovery else np.all(va[1:]<=B) and va[0]>=vo[0])
++  yes=bool(newex<oldex-1e-8 if recovery else np.all(va[1:]<=B) and n['actual_score']>=o['actual_score'])
+  else:
+-  recovery=not o['event_free'];yes=n['risk_pair']<o['risk_pair'] if recovery else n['event_free'] and n['shaped_reward']>=o['shaped_reward']
++  recovery=not o['event_free'];yes=n['risk_pair']<o['risk_pair'] if recovery else n['event_free'] and n['actual_score']>=o['actual_score']
+  return bool(yes),bool(recovery),o,n

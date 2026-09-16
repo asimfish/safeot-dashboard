@@ -1,0 +1,1 @@
+Analysis uses strict K2 endpoint reward >9.365684, as user requested. The protocol shorthand >= is superseded by this stricter literal endpoint test; no outcome was inspected for this correction. No experimental code or recipe changed.
