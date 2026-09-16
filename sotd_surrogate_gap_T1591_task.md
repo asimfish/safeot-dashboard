@@ -62,3 +62,5 @@ Format: `- YYYY-MM-DD HH:MM:SS <short factual update>`.
 - Summary: T1591 fixed-bank evaluation and decomposition verified; producer-source feed entry prepared, evidence publication follows review
 - Tests: verify_final.py PASS; agentctl check --mode manual PASS; prediction/selection replay; paired CRN/LOO identities; immutable checkpoint hashes; reward precision audit
 - Completed-at: 2026-09-16 18:32:16
+
+- Publication update: immutable evidence commit 20d0413aa419cdbd54a8334256b4c903b89253ed pushed after task review. Persistent source entry preserves T1484 owner/all35 entries; homepage feed publication/HTTP check follows.
