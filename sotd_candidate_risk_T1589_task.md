@@ -43,9 +43,13 @@ Use one checkbox per stage. Do not delete completed stages; append changed or ne
 - [x] Stage 1: Reproduce all supplied stall counts, freeze protocol and pass mathematical/transaction gates.
 - [x] Stage 2: 8 two-cycle smoke and exact original first-cycle/paired-shadow verification.
 - [x] Stage 3: Complete 24 development and full original A_mean replay; summarize paired factorial effects.
-- [ ] Stage 4: Workflow verification and additive dashboard publication.
+- [x] Stage 4: Workflow verification and additive dashboard publication.
+
+- [ ] Stage 5: Correct homepage visibility with additive progress-feed entry; preserve owner/all historical entries and verify live HTTP plus report hash. No training.
 
 ## Stage Log
+- 2026-09-16 16:50:36 Homepage feed gap confirmed. Prepared one stable T1589 head entry, preserves owner/metadata and all35 old entries; no status/gap_plan changes. HTTP verification follows push.
+- 2026-09-16 16:47:27 Dashboard additive commit9aefc51 published; final_receipt records completed controller/synthesis exit0, UTC and exact training/eval accounting. All artifacts final; frozen gate HOLD.
 - 2026-09-16 16:46:34 All24 development verified with exact six A_mean replays; 600 transaction/RNG/episode audits passed. B_excess joint1 both environments but lower reward vs A_mean; frozen gate fails, no expansion.
 - 2026-09-16 16:42:26 Exact stall audit and 8 smoke gates passed; bounded 24 development running with paired PPO/Fisher shadows, detached synthesis watcher, no baseline reruns.
 
@@ -56,6 +60,8 @@ Format: `- YYYY-MM-DD HH:MM:SS <short factual update>`.
 
 - 2026-09-16: Controller3027027 exit0; synthesis watcher exit0. All24 development completed; source hashes match; 600 optimizer/RNG/risk audits PASS. B_excess K2 reward9.215463/joint1, K3 reward9.485178/joint1. Mean reward differences versus A_mean −.095883/−.051711: HOLD.
 
+- 2026-09-16: Additive dashboard commit9aefc51 published on data, preserving current concurrent data. Local Completion Record finalized; published task snapshot predates publication receipt.
+
 ## Verification
 
 - Commands to run:
@@ -64,6 +70,6 @@ Format: `- YYYY-MM-DD HH:MM:SS <short factual update>`.
   - Workflow checks pass and task-specific acceptance criteria are met.
 
 ## Completion Record
-- Summary: Completed 2x2 candidate/risk factorial, 8 smoke+24 development, exact controls and 600-cycle audits; retained failed reward gate and prepared additive dashboard.
-- Tests: audit.py; gate.py; risk_gate.py; verify.py smoke/development; extra_audit.py; synthesize.py; py_compile; agentctl check manual: all PASS
-- Completed-at: 2026-09-16 16:46:34
+- Summary: T1589 homepage feed supplement prepared: stable deduplicated head entry; original owner and35 entries retained. Online acceptance pending push.
+- Tests: Local feed assertions PASS; homepage source confirms raw data feed; agentctl manual PASS
+- Completed-at: 2026-09-16 16:50:36
