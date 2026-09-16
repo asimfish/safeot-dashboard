@@ -2,20 +2,6 @@
   "owner": "T-1484 SafeOT-Dual session (cursor)",
   "entries": [
     {
-      "id": "T-1589-final-20260916",
-      "task_id": "T-1589",
-      "time": "09-16 16:50",
-      "timestamp": "2026-09-16T16:50:36.382865+08:00",
-      "goal": "T-1589 诊断基准 · HOLD",
-      "text": "[T-1589，诊断基准] 8项烟测、24项开发全部完成（K2/K3，各3训练种子，每模型12000真实交互+312独立det评估）；原对照6次完整训练精确复现，600cycle审计通过。候选集合+逐回合超限筛选组合：K2原始奖励9.215/联合成功率100%，K3 9.485/100%；Fisher对照为8.825/100%、9.230/100%。旧候选均值筛选对应9.311/82.69%、9.537/85.79%；组合牺牲部分奖励换来观测安全，K2仍低于安全PPOLag奖励9.366。原因证据：旧版15次接受在验收样本里引入新超限；正则扣分仅解释2次选旧停滞。新组合消除了“old样本无违规却接受new有违规”的记录，但有限评估零违规不证明总体零风险；Fisher收益也不证明OT贡献。预注册奖励不下降门槛未过，HOLD，不扩种子；下一研究重点是固定风险口径下补回奖励，并让OT真正参与联合更新生成。完整证据在data分支sotd_candidate_risk_T1589_report.md及findings/results/contrasts。",
-      "evidence": [
-        "sotd_candidate_risk_T1589_report.md",
-        "sotd_candidate_risk_T1589_findings.json",
-        "sotd_candidate_risk_T1589_results.csv",
-        "sotd_candidate_risk_T1589_contrasts.csv"
-      ]
-    },
-    {
       "time": "09-09 02:07",
       "goal": "G3/G5 算法改进",
       "text": "为让 SafeOT-Dual 直接作用于硬通道，新增「可行性一致的动作过滤」：每步采 K 个候选动作，用 FDPI 学到的可行性评论家 g(s,a)（未来撞硬物的折现概率）打分，veto 模式在策略自身动作可行时不干预、不可行时换成可行候选中 Q 最高的（没有可行候选则取 g 最小）；greedy 模式总选 Q 最高的可行候选。两条验证线并行：① 用已训好的 CG2 检查点（固定 0.76、日程 0.78、日程 0.8，各 3 种子）在 312 集严格评测里比较过滤前/后的泄漏与回报（约 2 h 出）；② 训练采样步内置过滤器，CG2 日程 0.78 上的 2×2 筛选（FDPI 阈值 ε∈{0.1,0.02} × 过滤 {greedy, veto}），1–2 种子，volc 与 mainskill 各 2 个 run。同时：mainskill 被重新置备（GPU 全部恢复），G4 seed 0 两臂从 1.70M 检查点续训（修复了看门狗从零重启的 bug），seed 1 两臂在空卡上重新开始。"
