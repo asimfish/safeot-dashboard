@@ -46,6 +46,8 @@ Use one checkbox per stage. Do not delete completed stages; append changed or ne
 - [x] Stage 3: Two fixed candidate counterexample-repair smoke, synthesis and next single-factor protocol.
 
 ## Stage Log
+- 2026-09-18 03:44:08 T1604 corrected actual-env smoke: first attempt invalid due accidental original_actor copy, retained as attempt1; restored immutable T1600 cycle012 pathwise actors and reran 4 frozen pairs/48 real steps, zero events, no training. Updated summary/report and hashes; no old result changed.
+- 2026-09-18 03:40:07 Remote cleanup completed: removed 23 diagnostic checkpoints (~25.9GB) with manifest and 12 failed gate checkpoints (~12.7GB) with manifest; formal/data/recovery untouched. Remote free space now ~42GB, above 35GiB admission gate; requested recovery supervisor restart/verification.
 - 2026-09-18 03:26:16 T1604 bounded audit and two fixed repair smoke complete. T1603 finalizer verified before task reacquisition. No performance improvement claim; original risk budgets/HOLD and all negative results retained.
 - 2026-09-18 03:10:03 T1604 isolated real actor/Adam mask branches PASS. Residual K2s187 pathwisecycle22: admission0events, later cycle24 oldbank event1 yet fallback retained; K3s180 pathwisecycle24 likewise finite-bank miss. Eight final failures reproduced,96real+2496model auditsteps. Two fixed smoke exit0: K2one repair22forwards/reward-.065126,heldout0->0events;K3no trigger. No new training; T1603finalizer still owns its closeout.
 
@@ -60,6 +62,6 @@ Format: `- YYYY-MM-DD HH:MM:SS <short factual update>`.
   - Workflow checks pass and task-specific acceptance criteria are met.
 
 ## Completion Record
-- Summary: Residual formulation audit and bounded repair smoke complete; no new training matrix
-- Tests: branch gates; residual frozen actor replay; two smoke receipts exit0; source exact; upstream publication verified
-- Completed-at: 2026-09-18 03:26:16
+- Summary: T1604 final evidence includes corrected real smoke and published formulation audit
+- Tests: real_smoke PASS 48 steps; model smoke PASS; residual audit; hashes
+- Completed-at: 2026-09-18 03:44:26

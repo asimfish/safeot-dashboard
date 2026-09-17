@@ -113,3 +113,6 @@ No automatic matrix. next_protocol.md gives equal-resource ranked-vs-random trai
   "training_steps": 0
 }
 All original inputs unchanged; source exact=True
+
+## Real environment smoke correction
+A first attempt accidentally copied returned_actor as original and is retained as `real_smoke_attempt1.json`, excluded from evidence. Corrected run restored each original actor from the immutable T1600 cycle012 pathwise checkpoint. Four frozen actor/task pairs, 12 H12 episodes each, used 48 real environment steps, zero events, no training; `real_smoke.json` is the valid receipt. This is an interface smoke, not a safety estimate.
