@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-18T12:28:02+08:00",
+  "updated": "2026-09-18T14:02:00+08:00",
   "task": "T-1484/T-1490 — 五目标差距与解决办法（数据驱动，每 30 分钟刷新）",
   "gap_plan": [
     {
@@ -199,12 +199,17 @@
     }
   ],
   "supervision": {
-    "observed": "2026-09-18T12:26:51+08:00",
-    "next_check": "2026-09-18T12:31:51+08:00",
+    "observed": "2026-09-18T14:01:51+08:00",
+    "next_check": "2026-09-18T14:06:51+08:00",
     "interval_seconds": 300,
     "overall": "critical",
     "coverage": "冻结 beta 修复队列与共享采集/发布链路；远端其他队列仅由原采集器覆盖。",
     "alerts": [
+      {
+        "code": "publication_stale",
+        "level": "warning",
+        "detail": "面板超过 75 分钟没有成功发布记录。"
+      },
       {
         "code": "system_disk_low",
         "level": "critical",
@@ -216,15 +221,15 @@
       "active": null,
       "completed": 8
     },
-    "summary": "后台监督：异常；None。system 剩余空间 0.07 GiB。",
+    "summary": "后台监督：异常；None。面板超过 75 分钟没有成功发布记录。；system 剩余空间 0.07 GiB。",
     "harvest": {
-      "last_published": "2026-09-18T12:18:11.028981+08:00",
-      "log_updated": "2026-09-18T12:22:27+08:00",
-      "commit": "3b9b0a606435afb169e869636dd738a023cbf4bd"
+      "last_published": "2026-09-18T12:28:27.050125+08:00",
+      "log_updated": "2026-09-18T13:57:06+08:00",
+      "commit": "74a5c33b1a2ba7c46a8caab1437ebdefb2587bb0"
     }
   },
   "post_repair_evaluations": {
-    "observed": "2026-09-18T12:27:56+08:00",
+    "observed": "2026-09-18T14:01:54+08:00",
     "training_done": 145,
     "complete_evaluations": 145,
     "evaluation_episodes": 45240,
@@ -253,7 +258,7 @@
     "protocol": "Validated serial evaluator, 3 x104 final-checkpoint episodes; no retraining"
   },
   "g4_connection": {
-    "observed": "2026-09-18T04:27:54+00:00",
+    "observed": "2026-09-18T06:01:52+00:00",
     "host": "30314",
     "status": "connected",
     "training_steps": {
@@ -269,24 +274,24 @@
     "metric_scope": "training only; last 10 log windows of completed-episode averages",
     "final_evaluation_complete": false,
     "latest_connection_check": {
-      "observed_unix": 1789705675.7996438,
+      "observed_unix": 1789711313.702375,
       "status": "connected"
     }
   },
   "isolated_formal_evaluations": {
-    "observed": "2026-09-18T12:27:56+08:00",
+    "observed": "2026-09-18T14:01:54+08:00",
     "complete_evaluations": 6,
     "evaluation_episodes": 1872,
     "integrity_errors": []
   },
   "data_observed_at": {
     "legacy_audit": "2026-09-05T19:21:47.615992+08:00",
-    "refs_table": "2026-09-18T12:27:03.469460+08:00",
+    "refs_table": "2026-09-18T13:56:13.401126+08:00",
     "repair_queue": "2026-09-10T11:37:54.984063+08:00",
     "pilot_audit": "2026-09-05T21:25:56.853232+08:00",
     "terminal_component": "2026-09-05T21:46:22.695030+08:00",
-    "supervision": "2026-09-18T12:26:51+08:00",
-    "post_repair_evaluations": "2026-09-18T12:27:56+08:00"
+    "supervision": "2026-09-18T14:01:51+08:00",
+    "post_repair_evaluations": "2026-09-18T14:01:54+08:00"
   },
   "goals": [
     {
@@ -498,7 +503,7 @@
     "已逐回合复算PG2全部24个开发策略/7488回合，发布完整非单调epsilon曲线。distance eps0.1回报8.846、硬接触0.321%、软预算3/3达标；仅为待独立确认候选，不是SOTA或零风险证据。",
     "正在为VLA释放CPU56–71：指定PPO槽位完成当前训练和312回合评测后不再补位，其余槽位继续队列。预留资源不计为已启动的VLA正式训练。",
     "新增正式执行槽：aliyun原生队列24→27、5090原生队列20→23；6个新增任务已记录真实训练步数。全部77原生及77PPO轨道统一采用96小时训练/24小时终档评测时限，仍为2M步/312回合；原失败保留。",
-    "加速现有队列：核实正式运行15路，已完成5825个训练+终档评测单元。aliyun目标32→128路，mainskill PPO目标24→32路；原活跃训练进程保留，仅替换队列调度器。未宣称等比例实际提速。",
+    "加速现有队列：核实正式运行13路，已完成5828个训练+终档评测单元。aliyun目标32→128路，mainskill PPO目标24→32路；原活跃训练进程保留，仅替换队列调度器。未宣称等比例实际提速。",
     "失败保留：SafetyCarFormulaOne1-v0 / safeot_eps0.1 / seed1，最后记录160000步，MuJoCo物理求解器异常；未计入完成、未自动重跑。",
     "Safe Vision全部105向量轨道统一延长运行时限：训练96小时、终档评测24小时。已观测慢任务按当前速度约需47–57小时；仍为2M训练步和312评测回合，失败尝试不重跑。",
     "全基准尚未全跑：Safety-Gymnasium 390/402轨道已冻结排队，12个不同任务当前有训练/评测进程，12轨道尚未冻结；CHORES三类全任务父协议已列入面板，Pickup171/Fetch172的正式训练仍在准备。",
@@ -533,7 +538,7 @@
     "原 VLA 评测在 359/400 回合因模拟器超时结束；新进程复现检查动作不一致，因此另跑两臂执行条件一致的完整400回合，不混合旧数据。",
     "VLA 配对终档评测已收取 396/400 回合；两臂均通过全部模型权重严格加载，原始逐动作数据持续核验。",
     "CG2 刹车候选完整审计：0/5 配置通过联合门槛；逐种子软预算、硬违规和相对原策略的奖励变化同时公开，低平均违规不能替代联合通过。",
-    "2026-09-18 12:28：按独立种子、完整训练预算和终档评测分别验收。五台允许服务器的产物进度见下表；进程状态以实际监督记录为准。看板约每 30 分钟刷新。",
+    "2026-09-18 14:02：按独立种子、完整训练预算和终档评测分别验收。五台允许服务器的产物进度见下表；进程状态以实际监督记录为准。看板约每 30 分钟刷新。",
     "G1 差距：三导航任务曲线已覆盖；速度任务点位与终档覆盖见逐项检查。现有点位数量不等于多引擎统一性全部验收。 → 解决：保留已完成曲线，复核匹配种子终档前沿与独立种子不确定性；补充多引擎统一性证据，只对确实缺失且无重复的点位安排算力。（曲线覆盖按当前产物更新；剩余分析与跨引擎验收待完成。）",
     "G2 差距：三导航任务训练筛选两端点已达；终档复核单列；独立种子计数已去重；训练完成度与终档覆盖分开验收。按 owner 09-08 要求，两端点各自接近。 → 解决：先补齐 CPO 参考的终档评测，尤其 CG1/PB1；对已有完整旋钮点按终档回报和成本复核。缺口若是性能不足，再做配置筛选；若是产物缺失，先找回允许服务器上的原检查点，避免重复训练。（训练队列完成数见下表；参考终档补齐和安全验收时间以产物为准。）",
     "G3 差距：已有候选改善，SOTA 完整复核仍待完成。PG2 筛选点 15.5 @ 1.6% 观测硬违规率；CG2 低违规侧筛选点 8.6 @ 0.3%。观测均值达标不等于逐种子风险上界达标。 → 解决：（a）边距日程（0.95 起、前 0.5–1.5M 步线性收紧到目标阈值）：56 个 run，已完成 52；（b）执行时可行性筛选：从策略分布采 K=16 个候选动作，在 g≤pf 的集合内选最高 q；集合为空时选最低 g（同权重、不重训、随机采样对照组用于排除随机性）；已有增补种子与评测继续按产物收集；后加块保留为探索性数据，不能承诺加块后达标。PG2 m0.83 日程候选已冻结新评测块，与无筛选/随机动作配对复验；未分型 FDPI 的同筛选对照仍需完整收齐。（PG2 冻结复验已完成；CG2 按逐训练种子的奖励、硬风险上界与软预算共同验收，探索队列进度不等于通过。）",
@@ -685,10 +690,10 @@
       "task": "全部多智能体向量注册项：23任务 × 8设置 × 3种子",
       "status": "run",
       "n": 552,
-      "done": 247,
-      "running": 8,
-      "pending": 25,
-      "failed": 56,
+      "done": 250,
+      "running": 6,
+      "pending": 23,
+      "failed": 57,
       "blocked": 216,
       "eta": "14可运行任务的336单元按固定队列接续；9项缺官方XML的216单元保留阻塞",
       "note": "MAPPO/HAPPO/MAPPO-Lag/MACPO与四档SafeOT；门禁进程单列，未计为正式运行。"
@@ -756,7 +761,7 @@
       "failed": 1,
       "blocked": 0,
       "eta": "每策略2M训练步及312终档回合；各机器固定队列逐项接续",
-      "note": "30109/5090/阿里云分别624/624/600个任务单元；已观测训练步数3,695,980,000。观测2026-09-18T12:26:24.234166+08:00；失败保留，整基准验收仍未通过。"
+      "note": "30109/5090/阿里云分别624/624/600个任务单元；已观测训练步数3,695,980,000。观测2026-09-18T13:59:22.778797+08:00；失败保留，整基准验收仍未通过。"
     },
     {
       "goal": "G1–G5",
@@ -1057,7 +1062,7 @@
   ],
   "changelog": [
     {
-      "time": "09-18 12:28",
+      "time": "09-18 14:02",
       "text": "五目标卡片、焦点、队列改为由 sotd_gap_plan.py 从收割表实时生成（差距 / 原因 / 解决办法 / 预计）；新增 sotd_gap_plan.json 与 sotd_gap_plan.md。"
     },
     {
@@ -4187,7 +4192,7 @@
     "backlog": "sotd_benchmark_backlog.csv"
   },
   "full_native_queue": {
-    "updated": "2026-09-18T12:26:24.234166+08:00",
+    "updated": "2026-09-18T13:59:22.778797+08:00",
     "task_count": 77,
     "total": 1848,
     "completed": 1847,
@@ -4200,7 +4205,7 @@
       "30109": {
         "status": "incomplete",
         "observed": "2026-09-17T15:40:09.897608+08:00",
-        "process_observed": "2026-09-18T12:26:20.814707+08:00",
+        "process_observed": "2026-09-18T13:59:19.448772+08:00",
         "fresh_observation": true,
         "mirror_sync": null,
         "artifact_sync": null,
@@ -4261,14 +4266,15 @@
       "5090": {
         "status": "complete",
         "observed": "2026-09-13T22:32:55.303256+08:00",
-        "process_observed": "2026-09-18T12:26:17.555882+08:00",
-        "fresh_observation": true,
+        "process_observed": null,
+        "fresh_observation": false,
         "mirror_sync": {
-          "ok": true,
-          "observed": "2026-09-18T12:26:15.097386+08:00"
+          "ok": false,
+          "error": "CalledProcessError",
+          "observed": "2026-09-18T13:59:18.495997+08:00"
         },
         "artifact_sync": null,
-        "controller_alive": false,
+        "controller_alive": null,
         "tasks": 26,
         "jobs": 624,
         "completed": 624,
@@ -4325,14 +4331,14 @@
       "aliyun": {
         "status": "complete",
         "observed": "2026-09-15T03:04:22.508928+00:00",
-        "process_observed": "2026-09-18T04:26:20.761605+00:00",
-        "fresh_observation": true,
+        "process_observed": null,
+        "fresh_observation": false,
         "mirror_sync": {
           "ok": true,
-          "observed": "2026-09-18T12:26:19.847793+08:00"
+          "observed": "2026-09-18T13:59:19.239488+08:00"
         },
         "artifact_sync": null,
-        "controller_alive": false,
+        "controller_alive": null,
         "tasks": 25,
         "jobs": 600,
         "completed": 600,
@@ -4397,7 +4403,7 @@
     "whole_benchmark_complete": false
   },
   "full_native_ppo": {
-    "updated": "2026-09-18T12:27:00.057989+08:00",
+    "updated": "2026-09-18T13:59:59.178486+08:00",
     "total": 1848,
     "completed": 1660,
     "running": 16,
@@ -4409,7 +4415,7 @@
       "30109": {
         "status": "complete",
         "observed": "2026-09-17T17:06:38.786035+08:00",
-        "process_observed": "2026-09-18T12:26:56.603479+08:00",
+        "process_observed": "2026-09-18T13:59:55.651067+08:00",
         "fresh_observation": true,
         "mirror_sync": null,
         "artifact_sync": null,
@@ -4470,11 +4476,11 @@
       "30314": {
         "status": "running",
         "observed": "2026-09-15T06:39:11.341365+00:00",
-        "process_observed": "2026-09-18T04:26:56.408086+00:00",
+        "process_observed": "2026-09-18T05:59:55.595982+00:00",
         "fresh_observation": true,
         "mirror_sync": {
           "ok": true,
-          "observed": "2026-09-18T12:26:54.815748+08:00"
+          "observed": "2026-09-18T13:59:54.970589+08:00"
         },
         "artifact_sync": null,
         "controller_alive": false,
@@ -4536,7 +4542,7 @@
     "observed_training_steps": 3340520000
   },
   "full_vision_vector": {
-    "updated": "2026-09-18T12:26:58.031027+08:00",
+    "updated": "2026-09-18T14:00:01.452520+08:00",
     "total": 2520,
     "completed": 1885,
     "running": 7,
@@ -4547,8 +4553,8 @@
     "hosts": {
       "30109": {
         "status": "running",
-        "observed": "2026-09-18T10:13:20.908975+08:00",
-        "process_observed": "2026-09-18T12:26:53.657226+08:00",
+        "observed": "2026-09-18T13:49:36.479854+08:00",
+        "process_observed": "2026-09-18T13:59:56.791425+08:00",
         "fresh_observation": true,
         "controller_alive": true,
         "tasks": 15,
@@ -4607,7 +4613,7 @@
       "30314": {
         "status": "running",
         "observed": "2026-09-18T03:22:46.225427+00:00",
-        "process_observed": "2026-09-18T04:26:35.034393+00:00",
+        "process_observed": "2026-09-18T05:59:36.924845+00:00",
         "fresh_observation": true,
         "controller_alive": true,
         "tasks": 10,
@@ -4666,7 +4672,7 @@
       "aliyun": {
         "status": "incomplete",
         "observed": "2026-09-17T20:08:48.088722+00:00",
-        "process_observed": "2026-09-18T04:26:53.601866+00:00",
+        "process_observed": "2026-09-18T05:59:56.735487+00:00",
         "fresh_observation": true,
         "controller_alive": false,
         "tasks": 80,
@@ -5723,30 +5729,30 @@
     }
   },
   "full_multi_agent_queue": {
-    "updated": "2026-09-18T04:21:34.589286+00:00",
+    "updated": "2026-09-18T06:00:12.330236+00:00",
     "task_count": 23,
     "total": 552,
-    "completed": 247,
-    "running": 8,
-    "live_running": 8,
-    "failed": 56,
+    "completed": 250,
+    "running": 6,
+    "live_running": 6,
+    "failed": 57,
     "blocked": 216,
-    "pending": 25,
+    "pending": 23,
     "hosts": {
       "aliyun": {
         "status": "running",
-        "observed": "2026-09-18T04:20:53.597981+00:00",
-        "process_observed": "2026-09-18T04:21:34.347211+00:00",
+        "observed": "2026-09-18T05:44:35.770154+00:00",
+        "process_observed": "2026-09-18T06:00:12.065538+00:00",
         "fresh_observation": true,
         "controller_alive": true,
         "tasks": 23,
         "jobs": 552,
-        "completed": 247,
-        "running": 8,
-        "pending": 25,
+        "completed": 250,
+        "running": 6,
+        "pending": 23,
         "blocked": 216,
-        "failed": 56,
-        "live_running": 8,
+        "failed": 57,
+        "live_running": 6,
         "probes_passed": 14,
         "probes_failed": 9,
         "gates_passed": 8,
@@ -5762,7 +5768,7 @@
             "status": "complete",
             "live": false,
             "observed_steps": 20000,
-            "progress_age_seconds": 588913.7114162445,
+            "progress_age_seconds": 594831.4272065163,
             "started": "2026-09-11T08:41:38.270446+00:00",
             "finished": "2026-09-11T08:46:49.805280+00:00",
             "training_reward": -2.340659319952711,
@@ -5783,7 +5789,7 @@
             "status": "complete",
             "live": false,
             "observed_steps": 20000,
-            "progress_age_seconds": 588934.1380431652,
+            "progress_age_seconds": 594851.8540706635,
             "started": "2026-09-11T08:41:38.276032+00:00",
             "finished": "2026-09-11T08:46:31.991164+00:00",
             "training_reward": -3.36865164956022,
@@ -5804,7 +5810,7 @@
             "status": "complete",
             "live": false,
             "observed_steps": 20000,
-            "progress_age_seconds": 588930.9606125355,
+            "progress_age_seconds": 594848.6771140099,
             "started": "2026-09-11T08:41:38.276227+00:00",
             "finished": "2026-09-11T08:46:33.777607+00:00",
             "training_reward": -0.6548681061126888,
@@ -5825,7 +5831,7 @@
             "status": "complete",
             "live": false,
             "observed_steps": 20000,
-            "progress_age_seconds": 588905.5813450813,
+            "progress_age_seconds": 594823.2981300354,
             "started": "2026-09-11T08:41:38.276113+00:00",
             "finished": "2026-09-11T08:46:57.262450+00:00",
             "training_reward": -0.9979978848437587,
@@ -5846,7 +5852,7 @@
             "status": "complete",
             "live": false,
             "observed_steps": 20000,
-            "progress_age_seconds": 588617.4680299759,
+            "progress_age_seconds": 594535.1848962307,
             "started": "2026-09-11T08:46:32.024190+00:00",
             "finished": "2026-09-11T08:51:48.635627+00:00",
             "training_reward": 1.6367097079698016,
@@ -5867,7 +5873,7 @@
             "status": "complete",
             "live": false,
             "observed_steps": 20000,
-            "progress_age_seconds": 588622.8575754166,
+            "progress_age_seconds": 594540.5747966766,
             "started": "2026-09-11T08:46:33.806905+00:00",
             "finished": "2026-09-11T08:51:43.619546+00:00",
             "training_reward": -1.0304727962920595,
@@ -5888,7 +5894,7 @@
             "status": "complete",
             "live": false,
             "observed_steps": 20000,
-            "progress_age_seconds": 588605.8910374641,
+            "progress_age_seconds": 594523.6085608006,
             "started": "2026-09-11T08:46:49.838631+00:00",
             "finished": "2026-09-11T08:51:58.402386+00:00",
             "training_reward": 0.05886094760360305,
@@ -5909,7 +5915,7 @@
             "status": "complete",
             "live": false,
             "observed_steps": 20000,
-            "progress_age_seconds": 588596.1324057579,
+            "progress_age_seconds": 594513.8503367901,
             "started": "2026-09-11T08:46:57.302842+00:00",
             "finished": "2026-09-11T08:52:05.996378+00:00",
             "training_reward": -2.588830806461623,
@@ -6630,7 +6636,7 @@
           "group": "Safe Multi-Agent / MultiGoal",
           "required": 30,
           "frozen": 30,
-          "active_now": 2,
+          "active_now": 3,
           "complete_frozen_matrix": 0,
           "with_failed_or_blocked_cells": 24,
           "unfrozen": 0
@@ -6639,7 +6645,7 @@
           "group": "Safe Multi-Agent / Velocity",
           "required": 8,
           "frozen": 8,
-          "active_now": 3,
+          "active_now": 2,
           "complete_frozen_matrix": 0,
           "with_failed_or_blocked_cells": 8,
           "unfrozen": 0
@@ -6708,23 +6714,23 @@
       "all_families_running": false
     },
     "cohort_cells": 11208,
-    "completed_cells": 5825,
-    "live_workers": 15,
+    "completed_cells": 5828,
+    "live_workers": 13,
     "whole_benchmark_complete": false,
     "scientific_goal_acceptance": "open",
     "counting_note": "Frozen means a protocol and queue exist, not that every task is training now. Completion here covers frozen cells only; SOTA and full benchmark acceptance remain separate.",
-    "updated": "2026-09-18T12:28:02+08:00",
+    "updated": "2026-09-18T14:02:00+08:00",
     "cohort_observations": {
-      "T1484-full-native-vector-20260910-v2": "2026-09-18T12:26:24.234166+08:00",
-      "T1484-full-native-ppo-20260910": "2026-09-18T12:27:00.057989+08:00",
-      "T1484-full-vision-vector-20260910": "2026-09-18T12:26:58.031027+08:00",
-      "full_multi_agent_vector_20260911": "2026-09-18T04:21:34.589286+00:00",
+      "T1484-full-native-vector-20260910-v2": "2026-09-18T13:59:22.778797+08:00",
+      "T1484-full-native-ppo-20260910": "2026-09-18T13:59:59.178486+08:00",
+      "T1484-full-vision-vector-20260910": "2026-09-18T14:00:01.452520+08:00",
+      "full_multi_agent_vector_20260911": "2026-09-18T06:00:12.330236+00:00",
       "full_multi_agent_vision_20260911_formal_v1": "2026-09-14T19:34:01.544135+00:00",
       "T1484-full-pixel-20260911": "2026-09-16T16:30:10.788900+08:00"
     }
   },
   "queue_acceleration": {
-    "updated": "2026-09-18T12:25:18.476450+08:00",
+    "updated": "2026-09-18T14:01:48.183032+08:00",
     "changes": [
       {
         "at": "2026-09-10T14:57:14.829442+00:00",
@@ -6739,7 +6745,7 @@
         "current_host": {
           "status": "incomplete",
           "observed": "2026-09-17T20:08:48.088722+00:00",
-          "process_observed": "2026-09-18T04:26:53.601866+00:00",
+          "process_observed": "2026-09-18T05:59:56.735487+00:00",
           "fresh_observation": true,
           "controller_alive": false,
           "tasks": 80,
@@ -6810,11 +6816,11 @@
         "current_host": {
           "status": "running",
           "observed": "2026-09-15T06:39:11.341365+00:00",
-          "process_observed": "2026-09-18T04:26:56.408086+00:00",
+          "process_observed": "2026-09-18T05:59:55.595982+00:00",
           "fresh_observation": true,
           "mirror_sync": {
             "ok": true,
-            "observed": "2026-09-18T12:26:54.815748+08:00"
+            "observed": "2026-09-18T13:59:54.970589+08:00"
           },
           "artifact_sync": null,
           "controller_alive": false,
@@ -6882,8 +6888,8 @@
     "whole_benchmark_complete": false,
     "scientific_goal_acceptance": "open",
     "actual_speedup": "unmeasured; added concurrency is not a measured throughput ratio",
-    "formal_live_total": 15,
-    "completed_cells": 5825,
+    "formal_live_total": 13,
+    "completed_cells": 5828,
     "wall_budget_amendment": {
       "observed": "2026-09-10T23:27:04.411539+08:00",
       "reason": "Observed slow native FormulaOne physics exceeds generic wall-clock watchdog despite steady progress.",
@@ -7003,8 +7009,8 @@
           "host": "aliyun",
           "previous_lanes": 24,
           "target_lanes": 27,
-          "process_observed": "2026-09-18T04:26:20.761605+00:00",
-          "fresh_observation": true,
+          "process_observed": null,
+          "fresh_observation": false,
           "current_verified_live": 0,
           "new_jobs": [
             {
@@ -7031,8 +7037,8 @@
           "host": "5090",
           "previous_lanes": 20,
           "target_lanes": 23,
-          "process_observed": "2026-09-18T12:26:17.555882+08:00",
-          "fresh_observation": true,
+          "process_observed": null,
+          "fresh_observation": false,
           "current_verified_live": 0,
           "new_jobs": [
             {
@@ -7221,7 +7227,7 @@
           "The other16 lanes continue all pending host-owned jobs.",
           "Future controller replacement must preserve the retirement implementation and allocation fields."
         ],
-        "current_process_observed": "2026-09-18T04:26:56.408086+00:00",
+        "current_process_observed": "2026-09-18T05:59:55.595982+00:00",
         "fresh_observation": true,
         "verified_retired_cpu_count": 16
       },
@@ -30344,7 +30350,7 @@
     "failed": 0,
     "running": 0,
     "pending": 0,
-    "observed": "2026-09-18T04:25:18.305130+00:00",
+    "observed": "2026-09-18T06:01:48.009517+00:00",
     "controller_alive": false,
     "fresh_observation": true
   },
@@ -30366,8 +30372,8 @@
         "host": "aliyun",
         "previous_lanes": 24,
         "target_lanes": 27,
-        "process_observed": "2026-09-18T04:26:20.761605+00:00",
-        "fresh_observation": true,
+        "process_observed": null,
+        "fresh_observation": false,
         "current_verified_live": 0,
         "new_jobs": [
           {
@@ -30394,8 +30400,8 @@
         "host": "5090",
         "previous_lanes": 20,
         "target_lanes": 23,
-        "process_observed": "2026-09-18T12:26:17.555882+08:00",
-        "fresh_observation": true,
+        "process_observed": null,
+        "fresh_observation": false,
         "current_verified_live": 0,
         "new_jobs": [
           {
@@ -30584,7 +30590,7 @@
         "The other16 lanes continue all pending host-owned jobs.",
         "Future controller replacement must preserve the retirement implementation and allocation fields."
       ],
-      "current_process_observed": "2026-09-18T04:26:56.408086+00:00",
+      "current_process_observed": "2026-09-18T05:59:55.595982+00:00",
       "fresh_observation": true,
       "verified_retired_cpu_count": 16
     },
@@ -34711,9 +34717,9 @@
     "tasks_with_failures": 59,
     "complete_frozen_tasks": 110,
     "total_cells": 14466,
-    "completed_cells": 6620,
-    "running_cells": 15,
-    "failed_cells": 654,
+    "completed_cells": 6623,
+    "running_cells": 13,
+    "failed_cells": 655,
     "cell_units_note": "Training-policy runs and evaluation-instance cells are counted separately by cohort_cell_units; total_cells is a queue inventory, not a policy count."
   },
   "resource_expansion": {
@@ -34770,7 +34776,7 @@
     "cpu_counter_convention": "thread_group_total_once_per_pid",
     "fresh_observation": false,
     "new_ppo_queue": {
-      "updated": "2026-09-18T12:27:00.057989+08:00",
+      "updated": "2026-09-18T13:59:59.178486+08:00",
       "total": 1848,
       "completed": 1660,
       "running": 16,
@@ -34782,7 +34788,7 @@
         "30109": {
           "status": "complete",
           "observed": "2026-09-17T17:06:38.786035+08:00",
-          "process_observed": "2026-09-18T12:26:56.603479+08:00",
+          "process_observed": "2026-09-18T13:59:55.651067+08:00",
           "fresh_observation": true,
           "mirror_sync": null,
           "artifact_sync": null,
@@ -34843,11 +34849,11 @@
         "30314": {
           "status": "running",
           "observed": "2026-09-15T06:39:11.341365+00:00",
-          "process_observed": "2026-09-18T04:26:56.408086+00:00",
+          "process_observed": "2026-09-18T05:59:55.595982+00:00",
           "fresh_observation": true,
           "mirror_sync": {
             "ok": true,
-            "observed": "2026-09-18T12:26:54.815748+08:00"
+            "observed": "2026-09-18T13:59:54.970589+08:00"
           },
           "artifact_sync": null,
           "controller_alive": false,
@@ -34909,7 +34915,7 @@
       "observed_training_steps": 3340520000
     },
     "new_vision_vector_queue": {
-      "updated": "2026-09-18T12:26:58.031027+08:00",
+      "updated": "2026-09-18T14:00:01.452520+08:00",
       "total": 2520,
       "completed": 1885,
       "running": 7,
@@ -34920,8 +34926,8 @@
       "hosts": {
         "30109": {
           "status": "running",
-          "observed": "2026-09-18T10:13:20.908975+08:00",
-          "process_observed": "2026-09-18T12:26:53.657226+08:00",
+          "observed": "2026-09-18T13:49:36.479854+08:00",
+          "process_observed": "2026-09-18T13:59:56.791425+08:00",
           "fresh_observation": true,
           "controller_alive": true,
           "tasks": 15,
@@ -34980,7 +34986,7 @@
         "30314": {
           "status": "running",
           "observed": "2026-09-18T03:22:46.225427+00:00",
-          "process_observed": "2026-09-18T04:26:35.034393+00:00",
+          "process_observed": "2026-09-18T05:59:36.924845+00:00",
           "fresh_observation": true,
           "controller_alive": true,
           "tasks": 10,
@@ -35039,7 +35045,7 @@
         "aliyun": {
           "status": "incomplete",
           "observed": "2026-09-17T20:08:48.088722+00:00",
-          "process_observed": "2026-09-18T04:26:53.601866+00:00",
+          "process_observed": "2026-09-18T05:59:56.735487+00:00",
           "fresh_observation": true,
           "controller_alive": false,
           "tasks": 80,
@@ -35099,7 +35105,7 @@
       "protocol_sha256": "b6eef0edcc546ab70feed741a45dc5691e19195e870d0aea99db413dca59c4d9"
     },
     "queue_acceleration": {
-      "updated": "2026-09-18T12:25:18.476450+08:00",
+      "updated": "2026-09-18T14:01:48.183032+08:00",
       "changes": [
         {
           "at": "2026-09-10T14:57:14.829442+00:00",
@@ -35114,7 +35120,7 @@
           "current_host": {
             "status": "incomplete",
             "observed": "2026-09-17T20:08:48.088722+00:00",
-            "process_observed": "2026-09-18T04:26:53.601866+00:00",
+            "process_observed": "2026-09-18T05:59:56.735487+00:00",
             "fresh_observation": true,
             "controller_alive": false,
             "tasks": 80,
@@ -35185,11 +35191,11 @@
           "current_host": {
             "status": "running",
             "observed": "2026-09-15T06:39:11.341365+00:00",
-            "process_observed": "2026-09-18T04:26:56.408086+00:00",
+            "process_observed": "2026-09-18T05:59:55.595982+00:00",
             "fresh_observation": true,
             "mirror_sync": {
               "ok": true,
-              "observed": "2026-09-18T12:26:54.815748+08:00"
+              "observed": "2026-09-18T13:59:54.970589+08:00"
             },
             "artifact_sync": null,
             "controller_alive": false,
@@ -35257,8 +35263,8 @@
       "whole_benchmark_complete": false,
       "scientific_goal_acceptance": "open",
       "actual_speedup": "unmeasured; added concurrency is not a measured throughput ratio",
-      "formal_live_total": 15,
-      "completed_cells": 5825,
+      "formal_live_total": 13,
+      "completed_cells": 5828,
       "wall_budget_amendment": {
         "observed": "2026-09-10T23:27:04.411539+08:00",
         "reason": "Observed slow native FormulaOne physics exceeds generic wall-clock watchdog despite steady progress.",
@@ -35378,8 +35384,8 @@
             "host": "aliyun",
             "previous_lanes": 24,
             "target_lanes": 27,
-            "process_observed": "2026-09-18T04:26:20.761605+00:00",
-            "fresh_observation": true,
+            "process_observed": null,
+            "fresh_observation": false,
             "current_verified_live": 0,
             "new_jobs": [
               {
@@ -35406,8 +35412,8 @@
             "host": "5090",
             "previous_lanes": 20,
             "target_lanes": 23,
-            "process_observed": "2026-09-18T12:26:17.555882+08:00",
-            "fresh_observation": true,
+            "process_observed": null,
+            "fresh_observation": false,
             "current_verified_live": 0,
             "new_jobs": [
               {
@@ -35596,7 +35602,7 @@
             "The other16 lanes continue all pending host-owned jobs.",
             "Future controller replacement must preserve the retirement implementation and allocation fields."
           ],
-          "current_process_observed": "2026-09-18T04:26:56.408086+00:00",
+          "current_process_observed": "2026-09-18T05:59:55.595982+00:00",
           "fresh_observation": true,
           "verified_retired_cpu_count": 16
         },
@@ -38947,7 +38953,7 @@
     "guard_expires": "2026-09-16T17:05:12+08:00",
     "guard_lifecycle": "expired",
     "expiry_semantics": "Guard expiry stops this observer only; training queues continue independently.",
-    "observation_age_seconds": 156166,
+    "observation_age_seconds": 161804,
     "fresh_observation": false,
     "monitoring_active": false,
     "monitoring_note": "This guard is not currently active; training queues run independently."
@@ -39358,7 +39364,7 @@
         }
       }
     ],
-    "observation_age_seconds": 215787.99159431458,
+    "observation_age_seconds": 221425.8409781456,
     "fresh_observation": false
   }
 }
