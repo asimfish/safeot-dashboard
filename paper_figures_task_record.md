@@ -29,3 +29,10 @@ Validation: selected SuperImg2PPT builds pass; representative group movement/lab
 Assets and hashes: `assets/paper-figures/20260923-pricing/manifest.json`.
 
 Portable source-package follow-up: the combined-deck reconstruction script now locates deliveries from the extracted ZIP root. The extracted package was exercised: native combination preserved all figure text/font sizes and contained no raster images. Scene checks pass for both extracted individual sources.
+
+
+## T-1621 · Preserve figure history
+
+The user requested retaining historical versions for analysis. Added a byte-identical September23 page snapshot and a version registry spanning September16 design, September18 editable, September23 generated and September23 native figures. A new history page supports left/right version selection and Figure1/Figure2 comparison, with original download links and shareable query parameters. Existing versioned assets and the September18 snapshot are unchanged. Current figure and homepage navigation expose the history page. New revisions must use new dated paths; prior assets remain available.
+
+Validation: historical Git-blob preservation, snapshot equality, local/online links and desktop/mobile comparison controls are recorded in SafeTransport task T-1621.
