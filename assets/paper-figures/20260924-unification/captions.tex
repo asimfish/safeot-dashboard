@@ -1,0 +1,15 @@
+% Proposed captions for the revised concept/framework pair.
+% The graph limits require the assumptions in the pricing section.
+\textbf{One price rule connects two views.} SafeOT-Dual jointly prices empirical
+graph constraints and combines the clipped, filtered prices with realized-cost
+feedback in a shared policy-update rule. Setting the graph clip to zero gives
+fixed-penalty or Lagrangian feedback settings. The graph-price limits are conditional
+and retain clipping and feedback; external algorithms such as CPO are not recovered.
+Graphs are schematic and do not certify deployed-policy feasibility.
+
+\textbf{From joint graph constraints to policy learning.} Rollouts supply an
+empirical graph, GAE advantages and episode-cost feedback. The dual solve uses
+per-step budgets $b_k=B_k/L$, while feedback uses episodic budgets $B_k$. Only
+prices pass from the graph construction to the PPO/TRPO update. GAE follows an
+independent path, and the updated policy generates the next rollout. The figure
+depicts the on-policy instantiation; separate off-policy executors are omitted.
