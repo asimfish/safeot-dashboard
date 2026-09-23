@@ -16,3 +16,14 @@ Continued the user-requested figure conversion using image-to-editable-ppt. Adde
 Both page builds, records and deck finalization passed; the exported vector PDF has zero raster images. Source-matched small labels remain 3–6pt at paper width, disclosed on the page. Formula SVG objects are editable as separate objects with retained LaTeX, not native Office equations. No full-manuscript ICLR compliance claim is made.
 
 Checksums of all new assets are in assets/paper-figures/20260918-editable/manifest.json.
+
+
+## T-FIG-20260923 · 2026-09-23 SafeOT-Dual price framework
+
+Updated Figure 1 to show one shared price rule and its qualified endpoint regimes. Figure 2 now transfers graph-solved prices into the on-policy update, with a separate GAE branch and episode-cost feedback. The retired flow-ratio update is removed. Teal/charcoal, line weights and ordinary label sizes are consistent. The page defaults to actual editable-PPT exports and keeps the image-generated drafts and September18 page available for comparison.
+
+Added independent and combined native PPTX, vector PDF/SVG, source scenes and audits, captions, editing notes and an actual-size placement proof compiled with the unmodified ICLR2027 style. The native figures contain 222 and 240 leaf objects with no raster artwork. The combined deck preserves individual physical font sizes. Ordinary labels are at least 7.11/7.06pt at 5.5in; smaller mathematical scripts are documented. Equations use editable grouped parts, not OMML. Fonts are not embedded and PowerPoint/WPS GUI appearance is unverified.
+
+Validation: selected SuperImg2PPT builds pass; representative group movement/label edits pass; combined PDF text/fonts match independent exports; official-template proof has no overflow; ZIP/source paths and delivery checksums verified. Browser/download publication checks are recorded in the parent SafeTransport task. No experiment files, collection code or root manuscripts changed; full-paper page-limit/citation compliance and graph-solver efficacy are not claimed.
+
+Assets and hashes: `assets/paper-figures/20260923-pricing/manifest.json`.

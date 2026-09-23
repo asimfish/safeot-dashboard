@@ -1,0 +1,5 @@
+# Figure claims audit
+PASS: price-only graph-to-policy transfer; cap and epsilon distinguished; conditional graph LP and active-set limits; cost feedback uses episode budget B while graph uses rate b=B/L; policy-origin feedback; normalized policy advantage.
+REMOVED: fixed shared capacity min(S_k) for all constraints; flow-ratio PPO weighting; assumed exact CPO equivalence; general safety or superiority arrows; realized policy depicted as F-star.
+LIMITS: charts/graphs are partial schematic transition excerpts, not complete balanced-flow solutions; no generated experiment values; graph model has abstraction/flow-estimation mismatch; safety claims require actual evaluation; current controls do not isolate a graph-solve advantage. Local manuscript wording is older in parts; captions follow recovered corrected method and identify scope.
+Citations: no new external bibliographic entries introduced. Method-source anchors recorded in state/figure-contract.json. This is not a completed full-bibliography SuperRef audit or an ICLR submission certification.
