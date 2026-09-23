@@ -27,3 +27,5 @@ Added independent and combined native PPTX, vector PDF/SVG, source scenes and au
 Validation: selected SuperImg2PPT builds pass; representative group movement/label edits pass; combined PDF text/fonts match independent exports; official-template proof has no overflow; ZIP/source paths and delivery checksums verified. Browser/download publication checks are recorded in the parent SafeTransport task. No experiment files, collection code or root manuscripts changed; full-paper page-limit/citation compliance and graph-solver efficacy are not claimed.
 
 Assets and hashes: `assets/paper-figures/20260923-pricing/manifest.json`.
+
+Portable source-package follow-up: the combined-deck reconstruction script now locates deliveries from the extracted ZIP root. The extracted package was exercised: native combination preserved all figure text/font sizes and contained no raster images. Scene checks pass for both extracted individual sources.
