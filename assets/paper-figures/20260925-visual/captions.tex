@@ -1,0 +1,26 @@
+% Proposed expanded captions; full mathematics belongs in the paper, not the image.
+\textbf{One algorithm connects penalty and constraint views.} Multiple cost maps
+share one empirical state graph. SafeOT-Dual solves for graph prices, clips and
+filters them, then adds realized-cost feedback to obtain coefficients for one
+policy update. The graph column denotes conditioned prices, not raw dual prices.
+With a zero graph-price cap, fixed or adaptive feedback recovers the corresponding
+fixed-penalty or Lagrangian setting. Constraint-side graph-price limits require
+the assumptions in the pricing section and retain clipping and feedback; they do
+not recover an external method such as CPO. Three channels and all track values
+are schematic. Graph feasibility does not certify deployed-policy safety.
+
+\textbf{From observations to a shared priced update.} Rollouts provide the empirical
+graph, reward and cost GAE advantages, and episode costs. The graph solve jointly
+uses discounted flow balance, entropy regularization, soft budgets $b_k=B_k/L$,
+and hard support exclusions. Damped Newton in $u$ and coordinate bisection in
+$\lambda$ yield $\lambda^\star$. Clipping and filtering produce
+$\bar\lambda^\star_k\leftarrow(1-\alpha)\bar\lambda^\star_k+
+\alpha\min(\lambda^\star_k,\bar\lambda_{\max})$; the cost-feedback branch uses
+$\beta_k\leftarrow[\beta_k+\eta(\bar J_k-B_k)]_+$. These combine as
+$\lambda_k=\bar\lambda^\star_k+\beta_k$. The multiplication gate denotes the
+weighted sum $\sum_k\lambda_k A_{c_k}$; reward advantage minus this term is
+normalized by $1+\sum_k\lambda_k$ before the PPO/TRPO step. GAE reaches the two
+advantage inputs independently; the gapped blue crossing is not a price junction.
+Only prices pass from the graph to the actor. Hard graph support is excluded;
+the finite on-policy hard-channel penalty does not enforce policy support. The
+updated policy supplies the next rollout. The off-policy executor is not shown.
