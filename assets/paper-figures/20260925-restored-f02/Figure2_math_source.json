@@ -1,0 +1,353 @@
+[
+  {
+    "id": "pi_t",
+    "expression": {
+      "base": "\u03c0",
+      "sub": "t"
+    },
+    "box": [
+      28,
+      22,
+      23,
+      16
+    ],
+    "size": 11,
+    "color": "#24343D",
+    "group": "rollout"
+  },
+  {
+    "id": "gae",
+    "expression": [
+      {
+        "base": {
+          "hat": "A"
+        },
+        "sub": "r"
+      },
+      ", ",
+      {
+        "base": {
+          "hat": "A"
+        },
+        "sub": {
+          "base": "c",
+          "sub": "k"
+        }
+      }
+    ],
+    "box": [
+      11,
+      111,
+      61,
+      13
+    ],
+    "size": 11,
+    "color": "#24343D",
+    "group": "rollout"
+  },
+  {
+    "id": "edge_inputs",
+    "expression": [
+      {
+        "hat": "F"
+      },
+      ", A, ",
+      {
+        "base": "C",
+        "sub": "k"
+      }
+    ],
+    "box": [
+      97,
+      108,
+      51,
+      17
+    ],
+    "size": 11,
+    "color": "#24343D",
+    "group": "inputs"
+  },
+  {
+    "id": "soft_eq",
+    "expression": [
+      "\u27e8",
+      {
+        "base": "C",
+        "sub": "k"
+      },
+      ",F\u27e9\u2264",
+      {
+        "base": "b",
+        "sub": "k"
+      }
+    ],
+    "box": [
+      172,
+      36,
+      72,
+      19
+    ],
+    "size": 11,
+    "color": "#24343D",
+    "group": "budgets"
+  },
+  {
+    "id": "hard_eq",
+    "expression": [
+      {
+        "base": "F",
+        "sub": "H"
+      },
+      "=0"
+    ],
+    "box": [
+      181,
+      101,
+      50,
+      15
+    ],
+    "size": 11,
+    "color": "#24343D",
+    "group": "budgets"
+  },
+  {
+    "id": "objective",
+    "expression": [
+      {
+        "base": "min",
+        "sub": "F\u22650"
+      },
+      " \u2212\u27e8A,F\u27e9+\u03b5 KL(F\u2225",
+      {
+        "hat": "F"
+      },
+      ")"
+    ],
+    "box": [
+      260,
+      24,
+      128,
+      22
+    ],
+    "size": 10.7,
+    "color": "#24343D",
+    "group": "projection"
+  },
+  {
+    "id": "before_F",
+    "expression": {
+      "hat": "F"
+    },
+    "box": [
+      274,
+      86,
+      23,
+      13
+    ],
+    "size": 11,
+    "color": "#24343D",
+    "group": "projection"
+  },
+  {
+    "id": "after_F",
+    "expression": {
+      "base": "F",
+      "sup": "*"
+    },
+    "box": [
+      345,
+      86,
+      23,
+      13
+    ],
+    "size": 11,
+    "color": "#24343D",
+    "group": "projection"
+  },
+  {
+    "id": "beta_update",
+    "expression": [
+      {
+        "base": "\u03b2",
+        "sub": "k"
+      },
+      "\u2190",
+      {
+        "base": [
+          "[",
+          {
+            "base": "\u03b2",
+            "sub": "k"
+          },
+          "+\u03b7(",
+          {
+            "base": {
+              "accent": "bar",
+              "value": "J"
+            },
+            "sub": "k"
+          },
+          "\u2212",
+          {
+            "base": "B",
+            "sub": "k"
+          },
+          ")]"
+        ],
+        "sub": "+"
+      }
+    ],
+    "box": [
+      8,
+      173,
+      101,
+      19
+    ],
+    "size": 10.7,
+    "color": "#BA5B20",
+    "group": "update"
+  },
+  {
+    "id": "lambda_out",
+    "expression": [
+      {
+        "base": "\u03bb",
+        "sub": "k"
+      },
+      "=",
+      {
+        "base": {
+          "accent": "bar",
+          "value": "\u03bb"
+        },
+        "sub": "k",
+        "sup": "*"
+      },
+      "+",
+      {
+        "base": "\u03b2",
+        "sub": "k"
+      }
+    ],
+    "box": [
+      145,
+      174,
+      61,
+      17
+    ],
+    "size": 10.7,
+    "color": "#24343D",
+    "group": "update"
+  },
+  {
+    "id": "advantage",
+    "expression": [
+      {
+        "accent": "tilde",
+        "value": "A"
+      },
+      "=",
+      {
+        "num": [
+          {
+            "base": {
+              "hat": "A"
+            },
+            "sub": "r"
+          },
+          "\u2212",
+          {
+            "base": "\u2211",
+            "sub": "k"
+          },
+          {
+            "base": "\u03bb",
+            "sub": "k"
+          },
+          {
+            "base": {
+              "hat": "A"
+            },
+            "sub": {
+              "base": "c",
+              "sub": "k"
+            }
+          }
+        ],
+        "den": [
+          "1+",
+          {
+            "base": "\u2211",
+            "sub": "k"
+          },
+          {
+            "base": "\u03bb",
+            "sub": "k"
+          }
+        ]
+      }
+    ],
+    "box": [
+      214,
+      166,
+      94,
+      30
+    ],
+    "size": 11.5,
+    "color": "#24343D",
+    "group": "update"
+  },
+  {
+    "id": "pi_next",
+    "expression": {
+      "base": "\u03c0",
+      "sub": "t+1"
+    },
+    "box": [
+      375,
+      174,
+      18,
+      16
+    ],
+    "size": 11,
+    "color": "#24343D",
+    "group": "update"
+  },
+  {
+    "id": "filter_raw",
+    "expression": {
+      "base": "\u03bb",
+      "sub": "k",
+      "sup": "*"
+    },
+    "box": [
+      263,
+      127,
+      19,
+      14
+    ],
+    "size": 11,
+    "color": "#087F8C",
+    "group": null
+  },
+  {
+    "id": "filter_processed",
+    "expression": {
+      "base": {
+        "accent": "bar",
+        "value": "\u03bb"
+      },
+      "sub": "k",
+      "sup": "*"
+    },
+    "box": [
+      154,
+      127,
+      23,
+      14
+    ],
+    "size": 11,
+    "color": "#087F8C",
+    "group": null
+  }
+]
