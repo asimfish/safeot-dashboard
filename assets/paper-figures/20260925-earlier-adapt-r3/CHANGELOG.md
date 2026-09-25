@@ -1,0 +1,9 @@
+# R3 changes keyed to the 10:57Z brief
+
+0. Every mathematical label is compiled with newtx in native TikZ; accents and script positioning no longer depend on text glyph composition. Min actual font 7.1731 pt; PDFs contain no raster images.
+1. F1: removed the right budget panel and bottom spectrum. The focal solve is wider than the feedback schematic. Every label attaches to a module, graph, arrow or plotted statistic. One feedback-only schematic replaces two failure plots. Graph reference is visible midgray; rerouting teal; explicit budget-dual arrow reaches the combined price and actor. No hard edge or card stack remains.
+2. F1: both training axes use log scales, each method has its supplied task IQR, and V is explicitly defined. Final-evaluation normalized return differences and 95% intervals come from the claims-ledger-backed intake rows, not training-return endpoints. The caption and estimand contract preserve cohort/operator distinctions.
+3. F2: graph inputs and budgets form a stacked pair; the projection is the largest colored module. One before/after graph pair supports the objective and budget/balance constraints. Graph semantics are explicit. Hard edges are omitted in the benchmark view; H is defined as empty in the caption.
+4. F2: standard rollout, GAE, feedback routes and PPO/TRPO are gray. Only the leading feedback beta is orange. The actual priced advantage fraction receives a separate GAE arrow; the target is explicitly not executed. No dangling bracket, floating cost label, grid icons or solver internals remain.
+5. Fixed palette semantics: teal graph solve/prices, orange feedback, blue SafeOT-Dual curves, purple TRPO-Lag, gray standard RL. Both figures have anonymous vector, 300-dpi, grayscale and CVD exports.
+6. Mechanical checks and three bounded internal visual passes completed. Independent cold-reader scores are pending; no acceptance claim or manuscript replacement is made by drawing.
