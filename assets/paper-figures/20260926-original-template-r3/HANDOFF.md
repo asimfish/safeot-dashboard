@@ -1,0 +1,11 @@
+# Original-template R3: visual reduction after author approval of R2 direction
+
+The author asked for less clutter, lower saturation, better-looking nodes and fewer formulas. Native R2 PPTs are the source. The three-column teaser and five numbered framework modules remain. This direct request supersedes older requests to display the full projection/feedback algebra inside the diagram; those details are preserved in FORMULA_DETAILS.md for the text/caption.
+
+Figure1 has one core price equation plus compact endpoint conditions and variable labels. Figure2 has two core equations: price combination and normalized priced advantage. Typeset math groups (including small symbols) fall from18 to9 and18 to11 respectively. Six-node, two-route motifs replace circuit-like ten-node diagrams; the hard-mask panel shows only a crossed edge. Original schematic traces are unchanged. No experimental data is included or changed.
+
+Blue-gray/teal/warm-cost colors have lower saturation than R2; neutral borders and native line icons remove competing accents. All diagrams, graphs, icons, labels and routes are native editable PPT objects. Formulas are grouped native vector contours plus LaTeX source, not semantic OfficeMath. No raster objects remain in PPTX/PDF/SVG. Each graph and icon is grouped independently. External connectors do not auto-reroute.
+
+Both exports are5.5×3.3in; actual LibreOffice text>=8.192pt and math/scripts>=8.169pt. Label widths, formula fits, page bounds, metadata, source hashes, XML IDs, editable graph/icon/text probes and grouping-only pixel preservation pass. Color/grayscale and CVD previews are supplied. PowerPoint rendering and author appearance acceptance remain unverified. No independent-reader score is claimed. The owner controls manuscript promotion; no manuscript/data file was edited.
+
+All pictograms, route masses and side curves are schematic. State-cluster nodes and transition-flow edges are illustrative, not a measured benchmark graph. The hard mask is a graph constraint, not a policy-execution guarantee; action-time enforcement requires a separate executor. The benchmark uses an empty excluded-edge set. The bottom unification band is conceptual, not a numeric scale; limits remain conditional.
