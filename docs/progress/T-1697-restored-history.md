@@ -7,3 +7,5 @@ The two U2 F01 explorations are retained as unselected history. U2 F02 hit the i
 Native conversions, when present, are separate editable candidates with actual Office-render evidence, not a claim of reviewer acceptance. The old experiment-containing intent mock remains in historical pages and is removed from the current default comparison.
 
 Refs: T-1697
+
+Follow-up:155 lightweight WebP previews reduce gallery image transfer from97.7MB to14.4MB; links retain original files. Added print accessibility proofs. Corrected alternate-branch PPTX object identifiers without changing figure content; earlier source packages retained as pre_id_fix downloads.
