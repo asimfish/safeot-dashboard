@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SafeOT 进度看板</title>
+<style>
+  :root { color-scheme: light; --blue:#2563eb; --green:#059669; --amber:#d97706; --red:#dc2626; --muted:#64748b; --line:#d7dbe0; --purple:#7c3aed; }
+  * { box-sizing: border-box; }
+  body { margin:0; color:#1a1a2e; background:#fafbfc; font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif; line-height:1.5; }
+  .layout { display:flex; max-width:1760px; margin:0 auto; }
+  nav.sidebar { position:sticky; top:0; align-self:flex-start; width:215px; min-height:100vh; padding:16px 10px; border-right:1px solid var(--line); background:#f8fafc; font-size:12.5px; }
+  nav.sidebar a { display:block; padding:4px 8px; color:#334155; text-decoration:none; border-radius:4px; }
+  nav.sidebar a:hover { background:#e2e8f0; }
+  nav.sidebar .nav-title { font-weight:700; margin:8px 0 4px; color:#1e293b; }
+  main.content { flex:1; padding:22px 18px 40px; max-width:1540px; }
+  h1 { font-size:23px; border-bottom:3px solid var(--blue); padding-bottom:8px; margin-bottom:6px; }
+  h2 { margin-top:28px; padding:7px 10px; border-left:4px solid var(--blue); background:#eef2ff; font-size:17px; }
+  h3 { margin:16px 0 6px; font-size:14px; color:#334155; }
+  .meta,.small { color:var(--muted); font-size:12px; }
+  .cards { display:grid; grid-template-columns:repeat(5,1fr); gap:10px; margin:12px 0; }
+  @media (max-width:1100px) { .cards { grid-template-columns:repeat(2,1fr); } }
+  .card { padding:10px 12px; border:1px solid var(--line); border-radius:8px; background:#fff; }
+  .card .t { font-weight:700; font-size:13px; color:#1e293b; }
+  .card .pct { font-size:21px; font-weight:700; margin:2px 0; }
+  .bar { height:7px; background:#e5e7eb; border-radius:4px; overflow:hidden; margin:3px 0 5px; }
+  .bar > i { display:block; height:100%; background:var(--blue); }
+  .pill { display:inline-block; padding:1px 7px; border-radius:10px; font-size:11px; font-weight:600; color:#fff; white-space:nowrap; }
+  .pill.done { background:var(--green); } .pill.training,.pill.run { background:var(--blue); } .pill.verifying,.pill.wait,.pill.verified_partial { background:var(--amber); } .pill.negative,.pill.neg { background:var(--red); } .pill.planned,.pill.idle { background:var(--muted); }
+  .table-wrap { overflow-x:auto; border:1px solid var(--line); background:#fff; margin-bottom:8px; border-radius:6px; }
+  table { width:100%; border-collapse:collapse; font-size:12.3px; }
+  th { padding:5px 7px; color:#fff; background:#1e293b; text-align:left; white-space:nowrap; position:sticky; top:0; }
+  td { padding:4px 7px; border-top:1px solid #eef0f3; vertical-align:top; }
+  tr:hover td { background:#f8fafc; }
+  td.num { text-align:right; font-variant-numeric:tabular-nums; white-space:nowrap; }
+  tr.grp td { background:#f1f5f9; font-weight:700; color:#1e293b; }
+  .ok { color:var(--green); font-weight:600; } .bad { color:var(--red); font-weight:600; } .warn { color:var(--amber); font-weight:600; }
+  .mbar { display:inline-block; width:90px; height:9px; background:#e5e7eb; border-radius:3px; vertical-align:middle; overflow:hidden; margin-right:5px; }
+  .mbar > i { display:block; height:100%; background:#94a3b8; } .mbar.hot > i { background:var(--blue); } .mbar.util > i { background:var(--green); }
+  .tag { display:inline-block; padding:0 5px; border-radius:3px; font-size:11px; margin:1px 2px 1px 0; background:#e2e8f0; color:#334155; }
+  .tag.safeot { background:#dbeafe; color:#1e40af; font-weight:600; } .tag.other { background:#f3e8ff; color:#5b21b6; }
+  figure { margin:10px 0; background:#fff; border:1px solid var(--line); border-radius:6px; padding:8px; }
+  figure img { width:100%; max-width:1200px; display:block; }
+  figcaption { font-size:12px; color:var(--muted); margin-top:6px; }
+  ul.q { margin:6px 0; padding-left:20px; font-size:13px; } ul.q li { margin:3px 0; }
+  code { background:#f1f5f9; padding:1px 4px; border-radius:3px; font-size:12px; }
+  .stale { color:var(--red); }
+  details.grp { border:1px solid var(--line); border-radius:6px; background:#fff; margin:8px 0; }
+  details.grp > summary { cursor:pointer; padding:8px 12px; font-weight:700; color:#1e293b; list-style:none; display:flex; gap:12px; align-items:center; }
+  details.grp > summary::before { content:"▸"; color:var(--muted); font-size:12px; }
+  details.grp[open] > summary::before { content:"▾"; }
+  details.grp > summary .sum { font-weight:400; color:var(--muted); font-size:12px; }
+  details.grp > .body { padding:0 10px 10px; }
+  details.suite { border:2px solid #c7d2fe; margin:12px 0; }
+  details.suite > summary { background:#eef2ff; font-size:15px; }
+  .cov { display:inline-block; min-width:52px; text-align:center; padding:1px 6px; border-radius:4px; font-size:11px; font-weight:600; background:#e2e8f0; }
+  .cov.full { background:#d1fae5; color:#065f46; } .cov.part { background:#fef3c7; color:#92400e; } .cov.none { background:#f1f5f9; color:#64748b; }
+  .srvhead { display:flex; gap:14px; align-items:baseline; margin:12px 0 4px; }
+  .srvhead b { font-size:14px; }
+</style>
+</head>
+<body>
+<div class="layout">
+<nav class="sidebar">
+  <a href="paper-figures.html" style="font-weight:700;color:#367e83">论文图 1 / 图 2 →</a>
+  <a href="all-tasks.html" style="font-weight:700;color:#087d83">全部基准 · 全部945项任务 →</a>
+  <div class="nav-title">大纲</div>
+  <a href="#secS">S 服务器与算力(实时)</a>
+  <a href="#secM">1 实验矩阵(基准 x 方法 x 旋钮)</a>
+  <a href="#secD">2 基准数据集与协议</a>
+  <a href="#secF">3 前沿图与总表</a>
+  <a href="#sec0">4 五目标进度</a>
+  <a href="#secP">5 并行 agent(SafeOT-Dual)</a>
+  <a href="#secV">6 判决记录</a>
+  <a href="#secQ">7 工作队列</a>
+  <a href="#secC">8 变更日志</a>
+  <a href="#secX">9 维护契约</a>
+  <div class="nav-title" style="margin-top:14px">并行主线</div>
+  <a href="sotd.html">SafeOT-Dual 主线（T-1484）→</a>
+  <a href="agentic_robotics.html">Agentic Robotics（GPT-6 Astra 直控）→</a>
+  <div class="nav-title" style="margin-top:14px">数据源</div>
+  <a href="https://github.com/asimfish/safeot-dashboard/tree/data" target="_blank">data 分支(JSON 快照)</a>
+  <a href="https://github.com/asimfish/safeot-dashboard" target="_blank">仓库</a>
+</nav>
+<main class="content">
+  <h1>SafeOT 进度看板</h1>
+  <div class="meta">内容快照 <span id="upd-status">-</span> · 服务器快照 <span id="upd-runs">-</span> · 每 60 秒自动刷新 · <span id="stale" class="stale"></span></div>
+
+  <section id="paper-figures" aria-labelledby="paper-figures-title"><h2 id="paper-figures-title">论文图 1 / 图 2 · V14 两端视角与小字精修</h2><p class="small">09-25 更新：基于已认可的 V13 细化两端区别与小字。<a href="paper-figures.html">V14 大图与前后切换 →</a> · <a href="paper-figures-gallery.html">全部历史 V00–V14</a> · <a href="paper-figures-history.html">历史文件与左右对照</a> · <a href="assets/paper-figures/20260925-refine/V13_V14_same_width.pdf">V13 / V14 等宽 PDF</a>。当前为生成图，原生可编辑稿保留在历史中。</p><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));gap:12px"><figure style="margin:0"><a href="paper-figures.html?version=V14#V14-figure1"><img src="assets/paper-figures/20260925-refine/Figure1.png" alt="V14 图1精修" loading="lazy" style="width:100%;height:auto"></a><figcaption>图 1 · 统一算法的两种视角</figcaption></figure><figure style="margin:0"><a href="paper-figures.html?version=V14#V14-figure2"><img src="assets/paper-figures/20260925-refine/Figure2.png" alt="V14 图2精修" loading="lazy" style="width:100%;height:auto"></a><figcaption>图 2 · 求价与策略更新框架</figcaption></figure></div></section>
+
+  <h2 id="secS">S 服务器与算力(实时:每卡显存 / 利用率 / 正在跑的实验)</h2>
+  <div id="servers"></div>
+  <h3>在跑评估车道(30109)</h3>
+  <ul class="q" id="lanes"></ul>
+
+  <h2 id="secM">1 实验矩阵(基准 x 方法 x 旋钮;多 agent 对齐用)</h2>
+  <div class="meta" id="msum"></div>
+  <div class="small" style="margin:4px 0 8px">默认折叠;点标题展开。每格 = (任务 x 方法 x 旋钮),列出计划/已训/已验证种子数与 312 集/种子终档结果。</div>
+  <div id="matrix"></div>
+
+  <h2 id="secD">2 基准套件与覆盖(哪些是完整基准、哪些只是单任务)</h2>
+  <div class="small" style="margin:6px 0 8px">口径:<b>基准套件</b> = 官方发布的整套环境;<b>任务族</b> = 套件内按机器人/任务类型/难度划分的子集;<b>覆盖率</b> = 我们在严格协议(终档、312 集/种子、逐集硬通道)下完成的任务数 / 该任务族任务数。只声称已覆盖的部分;未覆盖的任务不外推。</div>
+  <div id="datasets"></div>
+
+  <h2 id="secF">3 前沿图与总表(终档、312 集/种子、逐集硬通道)</h2>
+  <div class="small" style="margin:6px 0 8px">图例:实心圆 = typed(预算内),空心 = 软成本超 25/集(仅 Level-2);红方 = FDPI,品红菱 = SAC-Lag,紫三角 = SAC-Pen,绿倒三角 = SDAC,青十字 = SRCPO;虚线 = 基线沿自身旋钮的扫描;蓝实线 = typed Pareto 前沿。每套件的图与 LaTeX 表由合并后的 <code>frontier_arms.csv</code> 每 10 分钟自动重绘;无终档验证的面板显示 pending。</div>
+  <details class="suite" open><summary>Level-2 异构(硬 + 软通道,6 任务)<span class="small"> · fig_frontier_l2.png · tab_frontier_l2.tex</span></summary><figure><img class="sfig" data-suite="l2" alt="L2 frontier"></figure></details>
+  <details class="suite"><summary>Level-1 单通道导航(hazards,6 任务)<span class="small"> · fig_frontier_l1.png · tab_frontier_l1.tex(含 J_c / CSR@25)</span></summary><figure><img class="sfig" data-suite="l1" alt="L1 frontier"></figure></details>
+  <details class="suite"><summary>Circle(越界成本,4 任务)<span class="small"> · fig_frontier_circle.png · tab_frontier_circle.tex</span></summary><figure><img class="sfig" data-suite="circle" alt="Circle frontier"></figure></details>
+  <details class="suite"><summary>Velocity(速度上限,6 任务)<span class="small"> · fig_frontier_velocity.png · tab_frontier_velocity.tex</span></summary><figure><img class="sfig" data-suite="velocity" alt="Velocity frontier"></figure></details>
+  <div class="small" style="margin:8px 0 4px">总表列口径:<b>违规率</b> = 逐集任一硬通道接触(单通道任务即该通道任一成本)的集占比;<b>软成本/集</b> 与 <b>预算内</b> 仅对 Level-2 有意义;<b>J_c</b> = 官方口径每集总成本均值,<b>CSR@25</b> = 每集总成本 ≤ 25 的集占比(Safety-Gymnasium 标准预算)。</div>
+  <div class="table-wrap"><table id="frontier"><thead><tr><th>任务</th><th>方法</th><th>旋钮</th><th>n</th><th>集数</th><th>违规率</th><th>回报 J_r</th><th>软成本/集</th><th>预算内</th><th>J_c</th><th>CSR@25</th></tr></thead><tbody></tbody></table></div>
+
+  <h2 id="sec0">4 五目标进度</h2>
+  <div class="cards" id="goals"></div>
+  <h3>今日焦点</h3>
+  <ul class="q" id="focus"></ul>
+
+  <h2 id="secP">5 并行 agent:SafeOT-Dual(只读镜像)</h2>
+  <div class="meta" id="pmeta"></div>
+  <div class="table-wrap"><table id="parallel"><thead><tr><th>run</th><th>最新步</th><th>训完</th><th>strict_eval 文件</th><th>最近更新</th></tr></thead><tbody></tbody></table></div>
+  <h3>SafeOT-Dual 主线进度（T-1484，自报口径；详情见 <a href="sotd.html">sotd.html</a>）</h3>
+  <div class="meta" id="sotd-meta"></div>
+  <div class="cards" id="sotd-goals"></div>
+  <h3>差距与解决办法（每 30 分钟由收割表自动生成，<code>sotd_gap_plan.json</code>；全文见 <a href="sotd.html#gap">sotd.html</a>）</h3>
+  <div class="table-wrap"><table id="sotd-gap"><thead><tr><th>目标</th><th>差距</th><th>原因</th><th>解决办法（在跑）</th><th>预计</th></tr></thead><tbody></tbody></table></div>
+  <h3>SafeOT-Dual 在跑队列（五台机器）</h3>
+  <div class="table-wrap"><table id="sotd-queue"><thead><tr><th>目标</th><th>任务</th><th>状态</th><th>进度</th><th>预计</th></tr></thead><tbody></tbody></table></div>
+  <h3>最近推进（SafeOT-Dual 会话手写，<code>sotd_progress_feed.json</code>）</h3>
+  <div class="table-wrap"><table id="sotd-feed"><thead><tr><th>时间</th><th>目标</th><th>内容</th></tr></thead><tbody></tbody></table></div>
+  <h3>Agentic Robotics：GPT-6 Astra 直控机器人（RoboCurve 路线；详情、证据视频与判决见 <a href="agentic_robotics.html">agentic_robotics.html</a>）</h3>
+  <div class="table-wrap"><table><thead><tr><th>日期</th><th>试验</th><th>结果</th><th>判决</th></tr></thead><tbody>
+    <tr><td style="white-space:nowrap">2026-09-08</td><td><b>E1</b> PsiBot 单臂灵巧手抓取 100 ml 玻璃烧杯 · Codex CLI（gpt-6-astra, xhigh）从零搭装置并执行；策略 = Astra 每步一次 <code>execute_motion</code>（腕位姿 + 11 手指目标）→ Jacobian IK 伺服</td><td>Phase 0/1 通过（腕 IK 误差 2.3 mm）；标定正确的有效批次 <b class="bad">0/5</b>：识别 ✓ 接近 ✓ 抓取构型 ✗（两集碰倒杯子仍自报完成、一集掌部穿透硬中止）；153 s/请求、3.9 万 token/集；Codex 自查修复 4 个装置缺陷</td><td><span class="pill negative">负结果</span> <span class="small">不推广到 FR3/UR5e 正式采集，保留 cuRobo 主线；Codex 作采集工程代理可用</span></td></tr>
+    <tr><td style="white-space:nowrap">2026-09-08</td><td><b>E2</b> 腕相机 + 不透明试剂瓶 + medium/xhigh 配对（seed 9101–9105 × 两档），FR3 与 PsiBot 两路 Codex 并行；bjxy 中途重启后以 resume 续跑</td><td><b>FR3 平行夹爪 <span class="ok">6/10</span></b>（medium 3/5 = xhigh 3/5，medium 快 2.8×；9/10 集抬起 ≥75 mm）；<b>PsiBot 灵巧手 <span class="bad">0/10</span></b>（xhigh 3/5 抬起但倾斜/速度超阈，medium 3 集碰倒）；保持门的 PhysX 速度口径待溯源</td><td><span class="pill wait">条件正结果 / 负结果</span> <span class="small">末端形态是决定性变量；维持 cuRobo 主线；FR3 可开 N=20 + 放置任务对照</span></td></tr>
+    <tr><td style="white-space:nowrap">2026-09-09</td><td><b>E3</b> 保持门口径定稿（1/30 s 质心位置差分 ≤50 mm/s，透明重评 E2）+ 真不透明 overlay + FR3 N=20 抓取 medium / N=20 放置 medium + 10 集 xhigh 配对（看图放到可见圆垫上，目标坐标不给模型）+ PsiBot xhigh N=10 加 6 维手型语义与对向措辞；两路 Codex 并行，中途 TLS 抖动各损失 3–4 集</td><td><b>FR3 放置 <span class="ok">xhigh 9/10</span></b>、medium 6/20（配对 3/10 vs 9/10）；<b>FR3 抓取 medium 12/20</b>；50 集里 18 集 medium 接近碰撞硬中止，而抬起且不掉网的放置集 15/15 成功；<b>PsiBot 灵巧手 <span class="warn">3/10</span></b>（首批严格成功，4 集推倒）；E2 重评 FR3 9/10 · PsiBot 1/10</td><td><span class="pill wait">条件正结果 / 有限进展</span> <span class="small">瓶颈是安全接近；放置/多步与灵巧手默认 xhigh，单步抓取 medium 可用；维持 cuRobo 主线，下一步做接近阶段悬停–下降原语</span></td></tr>
+    <tr><td style="white-space:nowrap">2026-09-08</td><td><b>E0</b> SafeDuo 四臂 pilot（并行会话）：rod_pick / rack_colift / beaker_relay 各 1 集</td><td>几何安全中止 / 预算耗尽（架子抬 6.4 cm 但位置误差 5.7 cm）/ 预算耗尽（烧杯抬 0.4 cm）</td><td><span class="pill wait">未完成</span> <span class="small">单集，不构成成功率</span></td></tr>
+  </tbody></table></div>
+
+  <h2 id="secV">6 判决记录</h2>
+  <div class="table-wrap"><table id="verdicts"><thead><tr><th>日期</th><th>主题</th><th>判词</th><th>证据</th></tr></thead><tbody></tbody></table></div>
+
+  <h2 id="secQ">7 工作队列(agent 按此干活)</h2>
+  <div class="table-wrap"><table id="queue"><thead><tr><th>#</th><th>目标</th><th>任务</th><th>状态</th><th>预计</th><th>备注</th></tr></thead><tbody></tbody></table></div>
+
+  <h2 id="secC">8 变更日志</h2>
+  <div class="table-wrap"><table id="changelog"><thead><tr><th>时间</th><th>变更</th></tr></thead><tbody></tbody></table></div>
+
+  <h2 id="secX">9 维护契约</h2>
+  <ul class="q">
+    <li>服务器快照(<code>runs.json</code>:两台服务器每卡显存/利用率/进程标签、全部 run 目录状态、评估车道、并行 agent 目录)由 Mac 端 <code>update_dashboard.sh</code> 每 10 分钟采集推送到 <code>data</code> 分支;Mac 休眠期间停更并标红。</li>
+    <li>实验矩阵 = <code>plan.json</code>(计划网格:基准 x 方法 x 旋钮 x 种子数,由 agent 维护)与服务器快照自动合并(<code>build_matrix.py</code>);新增实验先写进 plan.json 再发车。</li>
+    <li>内容快照(<code>status.json</code>:五目标、焦点、判决、队列、变更日志、数据集表)由 agent 在里程碑手工更新;所有数字回溯到 <code>frontier_arms.csv</code> 或服务器日志。</li>
+    <li>协议:终档、零选点、每种子 3 独立块 x 104 集、逐集硬通道计数、软预算 25/集;认证选点仅作附录。</li>
+  </ul>
+</main>
+</div>
+<script>
+const RAW = "https://raw.githubusercontent.com/asimfish/safeot-dashboard/data/";
+const $ = (s) => document.querySelector(s);
+const esc = (s) => String(s ?? "").replace(/[&<>]/g, (c) => ({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+const PILL = {done:"完成", run:"在跑", training:"训练中", verifying:"验证中", verified_partial:"缺种子", wait:"排队", negative:"负结果", neg:"负结果", planned:"未开始", idle:"空闲"};
+const pill = (st) => `<span class="pill ${st}">${PILL[st] || st}</span>`;
+const fmtAge = (iso) => { if (!iso) return "-"; const m = Math.round((Date.now() - new Date(iso)) / 60000); return `${iso.replace("T"," ").slice(0,16)}(${m < 60 ? m + " 分钟前" : (m/60).toFixed(1) + " 小时前"})`; };
+const T = {pg2:"PointGoal2", cg2:"CarGoal2", pp2:"PointPush2", cp2:"CarPush2", pb2:"PointButton2", cb2:"CarButton2", pg1:"PointGoal1", cg1:"CarGoal1", pp1:"PointPush1", cp1:"CarPush1", pb1:"PointButton1", cb1:"CarButton1", pc1:"PointCircle1", pc2:"PointCircle2", cc1:"CarCircle1", cc2:"CarCircle2", hcv:"HalfCheetahVelocity", hov:"HopperVelocity", swv:"SwimmerVelocity", wav:"Walker2dVelocity", anv:"AntVelocity", huv:"HumanoidVelocity"};
+const f2 = (x, d=2) => (x === null || x === undefined || isNaN(x)) ? "-" : Number(x).toFixed(d);
+async function getJSON(f) { const r = await fetch(RAW + f + "?v=" + Math.floor(Date.now()/60000), {cache:"no-store"}); if (!r.ok) throw new Error(f); return r.json(); }
+const rateCls = (r) => r === null ? "" : (r <= 1 ? "ok" : (r <= 5 ? "warn" : "bad"));
+
+function renderServers(r) {
+  $("#upd-runs").textContent = fmtAge(r.updated);
+  const ageMin = (Date.now() - new Date(r.updated)) / 60000;
+  $("#stale").textContent = ageMin > 40 ? `服务器快照已过期 ${(ageMin/60).toFixed(1)} 小时(Mac 端采集停摆或服务器不可达)` : "";
+  $("#servers").innerHTML = (r.servers || []).map(s => {
+    const busy = s.cards.filter(c => c.used_mb > 2000).length, mine = s.cards.filter(c => c.mine).length;
+    const rows = s.cards.map(c => {
+      const mem = Math.round(100 * c.used_mb / Math.max(1, c.total_mb));
+      const tags = (c.procs || []).map(p => `<span class="tag ${p.startsWith("safeot") ? "safeot" : "other"}">${esc(p)}</span>`).join("") || `<span class="small">空闲</span>`;
+      return `<tr><td class="num">g${c.idx}</td><td><span class="mbar ${c.mine ? "hot" : ""}"><i style="width:${mem}%"></i></span><span class="small">${Math.round(c.used_mb/1024)} / ${Math.round(c.total_mb/1024)} G</span></td><td><span class="mbar util"><i style="width:${Math.max(0,c.util)}%"></i></span><span class="small">${c.util < 0 ? "-" : c.util + "%"}</span></td><td>${tags}</td></tr>`;
+    }).join("");
+    return `<div class="srvhead"><b>${esc(s.name)}</b><span class="small">${esc(s.desc || "")}</span><span class="small">load ${esc(s.load || "-")} / ${s.ncpu || "-"} 核 · ${busy}/${s.cards.length} 卡在用 · SafeOT 占 ${mine} 卡${s.snap_time ? " · 快照 " + s.snap_time.slice(11,16) : ""}</span></div>
+      <div class="table-wrap"><table><thead><tr><th style="width:40px">卡</th><th style="width:190px">显存</th><th style="width:160px">利用率</th><th>正在跑(蓝 = SafeOT;紫 = 其它项目)</th></tr></thead><tbody>${rows}</tbody></table></div>`;
+  }).join("");
+  $("#lanes").innerHTML = (r.lanes && r.lanes.length) ? r.lanes.map(l => `<li><code>${esc(l)}</code></li>`).join("") : "<li class='small'>无在跑评估</li>";
+  const p = r.parallel || {runs: []};
+  const recent = p.runs.slice().sort((a,b) => b.mtime - a.mtime).slice(0, 25);
+  $("#pmeta").textContent = `工作区 ${p.workspace || "-"} · 进程 ${p.n_procs ?? "-"} · run 目录 ${p.runs.length}(显示最近 25 个)`;
+  $("#parallel tbody").innerHTML = recent.map(x => `<tr><td><code>${esc(x.name)}</code></td><td class="num">${x.latest_step ? (x.latest_step/1000).toFixed(0) + "k" : "-"}</td><td>${x.done ? "✓" : ""}</td><td class="num">${x.strict_evals}</td><td class="small">${new Date(x.mtime*1000).toISOString().slice(5,16).replace("T"," ")}</td></tr>`).join("") || "<tr><td colspan=5 class='small'>无</td></tr>";
+}
+function renderMatrix(m) {
+  const s = m.summary || {};
+  $("#msum").textContent = `共 ${s.total} 格 · 完成 ${s.done} · 训练中 ${s.training} · 未开始 ${s.planned} · 更新 ${fmtAge(m.updated)}`;
+  const SUITES = [["Safety-Gymnasium · Level-2 导航(Point/Car x Goal/Button/Push)", ["pg2", "cg2", "pp2", "cp2", "pb2", "cb2"]], ["Safety-Gymnasium · Level-1 导航(Point/Car x Goal/Button/Push)", ["pg1", "cg1", "pp1", "cp1", "pb1", "cb1"]], ["Safety-Gymnasium · Circle(Point/Car x Level 1/2)", ["pc1", "pc2", "cc1", "cc2"]], ["Safety-Gymnasium · 速度控制", ["hcv", "hov", "swv", "wav", "anv", "huv"]]];
+  const TN = {pg2:"PointGoal2", cg2:"CarGoal2", pp2:"PointPush2", cp2:"CarPush2", pb2:"PointButton2", cb2:"CarButton2", pg1:"PointGoal1", cg1:"CarGoal1", pp1:"PointPush1", cp1:"CarPush1", pb1:"PointButton1", cb1:"CarButton1", pc1:"PointCircle1", pc2:"PointCircle2", cc1:"CarCircle1", cc2:"CarCircle2", hcv:"HalfCheetahVelocity", hov:"HopperVelocity", swv:"SwimmerVelocity", wav:"Walker2dVelocity", anv:"AntVelocity", huv:"HumanoidVelocity"};
+  const thead = `<thead><tr><th>目标</th><th>方法</th><th>旋钮</th><th>计划种子</th><th>已训</th><th>已验证</th><th>集数</th><th>硬泄漏</th><th>回报</th><th>软/集</th><th>状态</th><th>负责</th><th>备注</th></tr></thead>`;
+  let html = "";
+  for (const [suite, tasks] of SUITES) {
+    let inner = "", sTot = 0, sDone = 0;
+    for (const t of tasks) {
+      const rows = m.rows.filter(r => r.task === t).sort((a, b) => (a.rate ?? 99) - (b.rate ?? 99));
+      if (!rows.length) continue;
+      const done = rows.filter(r => r.status === "done").length, zero = rows.filter(r => r.rate === 0 && r.status === "done").length, run = rows.filter(r => r.status === "training" || r.status === "verifying").length;
+      sTot += rows.length; sDone += done;
+      const body = rows.map(r => `<tr><td class="small">${esc(r.goal)}</td><td>${esc(r.method)}</td><td>${esc(r.knob)}</td><td class="num">${r.seeds_plan}</td><td class="num">${r.seeds_done}</td><td class="num">${r.seeds_verified}</td><td class="num">${r.eps || "-"}</td><td class="num ${rateCls(r.rate)}">${r.rate === null ? "-" : f2(r.rate) + "%"}</td><td class="num">${f2(r.ret)}</td><td class="num">${f2(r.soft,1)}</td><td>${pill(r.status)} <span class="small">${esc(r.detail)}</span></td><td class="small">${esc(r.owner)}</td><td class="small">${esc(r.note)}</td></tr>`).join("");
+      inner += `<details class="grp"><summary>${TN[t] || t} <span class="sum">${rows.length} 格 · 完成 ${done} · 在跑 ${run} · 零违规臂 ${zero}${t === "pb2" ? " · 三族趴地(不做主张)" : ""}</span></summary><div class="body"><div class="table-wrap"><table>${thead}<tbody>${body}</tbody></table></div></div></details>`;
+    }
+    html += `<details class="suite" open><summary>${suite} <span class="sum">${sTot} 格 · 完成 ${sDone}</span></summary><div class="body">${inner}</div></details>`;
+  }
+  $("#matrix").innerHTML = html;
+}
+function renderStatus(s) {
+  $("#upd-status").textContent = fmtAge(s.updated);
+  $("#goals").innerHTML = s.goals.map(g => `<div class="card"><div class="t">${esc(g.id)} ${esc(g.name)}</div><div class="pct">${g.pct}%</div><div class="bar"><i style="width:${g.pct}%"></i></div>${pill(g.status)} <span class="small">${esc(g.summary)}</span><div class="small" style="margin-top:4px">证据:${esc(g.evidence)}</div>${g.next ? `<div class="small">下一步:${esc(g.next)}</div>` : ""}</div>`).join("");
+  $("#focus").innerHTML = s.focus.map(x => `<li>${esc(x)}</li>`).join("");
+  $("#datasets").innerHTML = (s.suites || []).map(su => {
+    const fams = su.families.map(f => {
+      const covCls = f.covered === f.total ? "full" : (f.covered > 0 ? "part" : "none");
+      const rows = f.tasks.map(t => `<tr><td><b>${esc(t.id)}</b> <span class="small">${esc(t.name)}</span></td><td class="small">${esc(t.channels)}</td><td class="small">${esc(t.budget)}</td><td class="small">${esc(t.baselines)}</td><td>${t.covered ? pill(t.status_kind || "done") : pill("planned")} <span class="small">${esc(t.status)}</span></td></tr>`).join("");
+      return `<details class="grp"><summary>${esc(f.name)} <span class="cov ${covCls}">${f.covered}/${f.total}</span><span class="sum">${esc(f.note)}</span></summary><div class="body"><div class="table-wrap"><table><thead><tr><th>任务</th><th>成本通道(硬/软类型)</th><th>预算 / 训练步数</th><th>基线</th><th>状态</th></tr></thead><tbody>${rows}</tbody></table></div></div></details>`;
+    }).join("");
+    return `<details class="suite" open><summary>${esc(su.name)} <span class="sum">${esc(su.desc)}</span></summary><div class="body"><div class="small" style="margin:6px 0">${esc(su.protocol)}</div>${fams}</div></details>`;
+  }).join("");
+  $("#verdicts tbody").innerHTML = s.verdicts.map(v => `<tr><td style="white-space:nowrap">${esc(v.date)}</td><td>${esc(v.topic)}</td><td>${esc(v.verdict)}</td><td class="small">${esc(v.evidence)}</td></tr>`).join("");
+  $("#queue tbody").innerHTML = s.queue.map((q, i) => `<tr><td>${i+1}</td><td>${esc(q.goal)}</td><td>${esc(q.task)}</td><td>${pill(q.status)}</td><td>${esc(q.eta)}</td><td class="small">${esc(q.note)}</td></tr>`).join("");
+  $("#changelog tbody").innerHTML = s.changelog.map(c => `<tr><td style="white-space:nowrap">${esc(c.time)}</td><td>${esc(c.text)}</td></tr>`).join("");
+}
+function renderFrontier(f) {
+  document.querySelectorAll("img.sfig").forEach(im => { im.src = RAW + "figs/fig_frontier_" + im.dataset.suite + ".png?v=" + Math.floor(Date.now()/600000); });
+  $("#frontier tbody").innerHTML = f.rows.map(x => `<tr><td>${T[x.task] || x.task}</td><td>${esc(x.method)}</td><td>${esc(x.knob)}</td><td class="num">${x.n}</td><td class="num">${x.eps}</td><td class="num ${rateCls(x.rate)}">${x.rate.toFixed(2)}%</td><td class="num">${x.ret.toFixed(2)}</td><td class="num">${x.soft.toFixed(1)}</td><td>${x.soft <= 25 ? "✓" : "✗"}</td><td class="num">${x.jc == null ? "–" : x.jc.toFixed(2)}</td><td class="num">${x.csr == null ? "–" : x.csr.toFixed(3)}</td></tr>`).join("");
+}
+async function refresh() {
+  try { renderServers(await getJSON("runs.json")); } catch (e) { $("#upd-runs").textContent = "加载失败"; }
+  try { renderMatrix(await getJSON("matrix.json")); } catch (e) { console.warn(e); }
+  try { renderStatus(await getJSON("status.json")); } catch (e) { $("#upd-status").textContent = "加载失败"; }
+  try { renderFrontier(await getJSON("frontier_pooled.json")); } catch (e) { console.warn(e); }
+}
+refresh(); setInterval(refresh, 60000);
+async function refreshSotd() {
+  try {
+    const st = await getJSON("sotd_status.json");
+    document.querySelector("#sotd-meta").textContent = "状态更新：" + fmtAge(st.updated) + (st.task ? "（" + st.task + "）" : "");
+    document.querySelector("#sotd-goals").innerHTML = (st.goals || []).map(g => `<div class="card"><div class="t">${esc(g.id)} ${esc(g.name)}</div><div class="pct">${g.pct}%</div><div class="bar"><i style="width:${g.pct}%"></i></div>${pill(g.status)}<div class="small" style="margin-top:6px">${esc(g.summary)}</div></div>`).join("");
+  } catch (e) { document.querySelector("#sotd-meta").textContent = "sotd_status.json 加载失败"; }
+  try {
+    const gp = await getJSON("sotd_gap_plan.json");
+    document.querySelector("#sotd-gap tbody").innerHTML = (gp.gap_plan || []).map(g => `<tr><td style="white-space:nowrap"><b>${esc(g.goal)}</b><div class="small">${esc(g.name)}</div></td><td>${esc(g.gap)}</td><td class="small">${esc(g.cause)}</td><td>${esc(g.remedy)}</td><td style="white-space:nowrap">${esc(g.eta)}</td></tr>`).join("");
+    document.querySelector("#sotd-queue tbody").innerHTML = (gp.queue || []).map(q => `<tr><td>${esc(q.goal)}</td><td>${esc(q.task)}</td><td>${pill(q.status)}</td><td class="small">${esc(q.note || "")}</td><td style="white-space:nowrap">${esc(q.eta || "")}</td></tr>`).join("");
+  } catch (e) { document.querySelector("#sotd-gap tbody").innerHTML = "<tr><td colspan=5 class='small'>sotd_gap_plan.json 加载失败</td></tr>"; }
+  try {
+    const f = await getJSON("sotd_progress_feed.json");
+    document.querySelector("#sotd-feed tbody").innerHTML = (f.entries || []).slice(0, 14).map(x => `<tr><td style="white-space:nowrap">${esc(x.time)}</td><td>${esc(x.goal || "")}</td><td>${esc(x.text)}</td></tr>`).join("");
+  } catch (e) { document.querySelector("#sotd-feed tbody").innerHTML = "<tr><td colspan=3 class='small'>sotd_progress_feed.json 加载失败</td></tr>"; }
+}
+refreshSotd(); setInterval(refreshSotd, 120000);
+
+</script>
+</body>
+</html>
