@@ -1,0 +1,119 @@
+\documentclass[border=0bp]{standalone}
+\usepackage{newtxtext,newtxmath}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,calc}
+\definecolor{teal}{HTML}{167C80}
+\definecolor{orange}{HTML}{D55E00}
+\definecolor{blue}{HTML}{0072B2}
+\definecolor{purple}{HTML}{8064A2}
+\definecolor{gray}{HTML}{59636A}
+\definecolor{ink}{HTML}{23343B}
+\definecolor{midgray}{HTML}{7C858B}
+\DeclareMathSizes{7.2}{7.2}{7.2}{7.2}
+\DeclareMathSizes{7.5}{7.5}{7.2}{7.2}
+\DeclareMathSizes{8}{8}{7.2}{7.2}
+\DeclareMathSizes{8.5}{8.5}{7.2}{7.2}
+\DeclareMathSizes{9}{9}{7.2}{7.2}
+\newcommand{\bodyfont}{\fontsize{7.5}{8.7}\selectfont}
+\newcommand{\smallfont}{\fontsize{7.2}{8.2}\selectfont}
+\newcommand{\titlefont}{\fontsize{8.5}{9.7}\selectfont\bfseries}
+\newcommand{\mathfont}{\fontsize{9}{10}\selectfont}
+\tikzset{every node/.style={font=\bodyfont,text=ink,inner sep=0pt,outer sep=0pt},
+ module/.style={rounded corners=3bp,line width=.6bp},
+ flow/.style={line width=.8bp,-{Stealth[length=3bp,width=2.6bp]}},
+ title/.style={font=\titlefont},formula/.style={font=\mathfont}}
+\begin{document}
+\begin{tikzpicture}[x=1bp,y=-1bp]
+\path[use as bounding box] (0,0) rectangle (396,165.6);
+\draw[module,draw=gray!55,fill=gray!2,] (3,3) rectangle (68,129);
+\draw[module,draw=gray!55,fill=white,] (76,3) rectangle (154,72);
+\draw[module,draw=gray!55,fill=white,] (76,79) rectangle (154,129);
+\draw[module,draw=teal,fill=teal!7,] (163,3) rectangle (286,129);
+\draw[module,draw=gray!55,fill=white,] (295,3) rectangle (393,129);
+\node[title,text=gray] at (35.5,14) {1  Rollout};
+\node[title] at (115,14) {2  Rollout graph};
+\node[title] at (115,89) {3  Soft budgets};
+\node[title,text=teal] at (220,14) {4  SafeOT projection};
+\node[anchor=east,text=teal,font=\smallfont] at (280,23) {new};
+\node[title,text=gray] at (344,14) {5  Actor update};
+\node[formula,text=gray] at (35.5,35) {$\pi_t$};
+\draw[flow,draw=gray,] (17.0000,51.0000) -- (31.0000,51.0000);
+\draw[flow,draw=gray,] (36.0000,51.0000) -- (51.0000,51.0000);
+\filldraw[draw=gray,fill=white,line width=.55bp] (15,51) circle (2bp);
+\filldraw[draw=gray,fill=white,line width=.55bp] (33,51) circle (2bp);
+\filldraw[draw=gray,fill=white,line width=.55bp] (53,51) circle (2bp);
+\draw[module,draw=gray!50,fill=white,] (11,69) rectangle (60,103);
+\node[title,text=gray] at (35.5,78) {GAE};
+\node[] at (35.5,94) {$\widehat A_r,\ \widehat A_{c_k}$};
+\node[] at (35.5,117) {Costs $\bar J_k$};
+\draw[draw=midgray,line width=1.8bp] (96.0000,32.0000) -- (107.0200,26.0000);
+\draw[draw=midgray,line width=1.8bp] (107.0200,26.0000) -- (121.8400,26.0000);
+\draw[draw=midgray,line width=1.8bp] (121.8400,26.0000) -- (134.0000,32.0000);
+\draw[draw=midgray,line width=0.5bp] (96.0000,32.0000) -- (107.0200,38.0000);
+\draw[draw=midgray,line width=0.5bp] (107.0200,38.0000) -- (121.8400,38.0000);
+\draw[draw=midgray,line width=0.5bp] (121.8400,38.0000) -- (134.0000,32.0000);
+\filldraw[draw=midgray,fill=white,line width=.55bp] (96,32.0) circle (1.55bp);
+\filldraw[draw=midgray,fill=white,line width=.55bp] (107.02,26) circle (1.55bp);
+\filldraw[draw=midgray,fill=white,line width=.55bp] (121.84,26) circle (1.55bp);
+\filldraw[draw=midgray,fill=midgray,line width=.55bp] (134,32.0) circle (1.55bp);
+\filldraw[draw=midgray,fill=white,line width=.55bp] (121.84,38) circle (1.55bp);
+\filldraw[draw=midgray,fill=white,line width=.55bp] (107.02,38) circle (1.55bp);
+\node[font=\smallfont] at (115,45) {nodes = state clusters};
+\node[font=\smallfont] at (115,54) {edges = transitions};
+\node[font=\smallfont] at (115,65) {per edge: $\widehat F, A, C_k$};
+\draw[flow,draw=gray,] (68.0000,42.0000) -- (76.0000,42.0000);
+\draw[flow,draw=teal,] (154.0000,42.0000) -- (163.0000,42.0000);
+\node[formula] at (115,108) {$b_k=B_k/L$};
+\node[font=\smallfont] at (115,121) {one bound per cost};
+\draw[flow,draw=teal,] (154.0000,101.0000) -- (163.0000,101.0000);
+\node[] at (224.5,35) {$\displaystyle\min_{F\geq0}\ -\langle A,F\rangle$};
+\node[] at (224.5,49) {$+\,\varepsilon\,\mathrm{KL}(F\,\|\,\widehat F)$};
+\node[] at (224.5,66) {$\begin{gathered}\text{s.t. }F\mathbf1-\gamma F^\top\mathbf1\\=(1-\gamma)\mu_0\end{gathered}$};
+\node[] at (224.5,85) {$\langle C_k,F\rangle\leq b_k\quad\forall k$};
+\draw[draw=midgray,line width=1.8bp] (174.0000,105.5000) -- (184.1500,99.0000);
+\draw[draw=midgray,line width=1.8bp] (184.1500,99.0000) -- (197.8000,99.0000);
+\draw[draw=midgray,line width=1.8bp] (197.8000,99.0000) -- (209.0000,105.5000);
+\draw[draw=midgray,line width=0.5bp] (174.0000,105.5000) -- (184.1500,112.0000);
+\draw[draw=midgray,line width=0.5bp] (184.1500,112.0000) -- (197.8000,112.0000);
+\draw[draw=midgray,line width=0.5bp] (197.8000,112.0000) -- (209.0000,105.5000);
+\filldraw[draw=midgray,fill=white,line width=.55bp] (174,105.5) circle (1.55bp);
+\filldraw[draw=midgray,fill=white,line width=.55bp] (184.15,99) circle (1.55bp);
+\filldraw[draw=midgray,fill=white,line width=.55bp] (197.8,99) circle (1.55bp);
+\filldraw[draw=midgray,fill=midgray,line width=.55bp] (209,105.5) circle (1.55bp);
+\filldraw[draw=midgray,fill=white,line width=.55bp] (197.8,112) circle (1.55bp);
+\filldraw[draw=midgray,fill=white,line width=.55bp] (184.15,112) circle (1.55bp);
+\draw[draw=teal,line width=0.5bp] (242.0000,105.5000) -- (252.1500,99.0000);
+\draw[draw=teal,line width=0.5bp] (252.1500,99.0000) -- (265.8000,99.0000);
+\draw[draw=teal,line width=0.5bp] (265.8000,99.0000) -- (277.0000,105.5000);
+\draw[draw=teal,line width=1.8bp] (242.0000,105.5000) -- (252.1500,112.0000);
+\draw[draw=teal,line width=1.8bp] (252.1500,112.0000) -- (265.8000,112.0000);
+\draw[draw=teal,line width=1.8bp] (265.8000,112.0000) -- (277.0000,105.5000);
+\filldraw[draw=teal,fill=white,line width=.55bp] (242,105.5) circle (1.55bp);
+\filldraw[draw=teal,fill=white,line width=.55bp] (252.15,99) circle (1.55bp);
+\filldraw[draw=teal,fill=white,line width=.55bp] (265.8,99) circle (1.55bp);
+\filldraw[draw=teal,fill=teal,line width=.55bp] (277,105.5) circle (1.55bp);
+\filldraw[draw=teal,fill=white,line width=.55bp] (265.8,112) circle (1.55bp);
+\filldraw[draw=teal,fill=white,line width=.55bp] (252.15,112) circle (1.55bp);
+\draw[flow,draw=teal,] (214.0000,105.5000) -- (237.0000,105.5000);
+\node[font=\smallfont] at (192,94) {$\widehat F$};
+\node[font=\smallfont,text=teal] at (261,94) {$F^\star$};
+\node[font=\smallfont,text=teal] at (224.5,122) {$F^\star$: target, not executed};
+\draw[flow,draw=teal,] (280.0000,105.5000) -- (290.0000,105.5000) -- (290.0000,33.0000) -- (300.0000,33.0000);
+\node[anchor=west,font=\smallfont,text=teal] at (306,33) {clip $c$ + EMA};
+\node[anchor=east,font=\smallfont,text=teal] at (285,97) {$\lambda_k^\star$};
+\draw[flow,draw=teal,] (344.0000,39.0000) -- (344.0000,45.0000);
+\node[formula] at (344,54) {$\lambda_k=\bar\lambda_k^\star+{\color{orange}\beta_k}$};
+\draw[flow,draw=gray,] (344.0000,62.0000) -- (344.0000,67.0000);
+\node[] at (344,81) {$\displaystyle\widetilde A=\frac{\widehat A_r-\sum_k\lambda_k\widehat A_{c_k}}{1+\sum_k\lambda_k}$};
+\draw[flow,draw=gray,] (344.0000,94.0000) -- (344.0000,100.0000);
+\draw[module,draw=gray!45,fill=gray!3,] (313,102) rectangle (378,118);
+\node[text=gray] at (345.5,110) {PPO / TRPO};
+\node[font=\smallfont,text=gray] at (345.5,124) {$\pi_{t+1}$};
+\draw[flow,draw=gray,] (60.0000,95.0000) -- (72.0000,95.0000) -- (72.0000,136.0000) -- (303.0000,136.0000) -- (303.0000,84.0000) -- (308.0000,84.0000);
+\node[fill=white,inner xsep=4bp,font=\smallfont] at (167,136) {GAE advantages $\widehat A_r,\widehat A_{c_k}$};
+\draw[flow,draw=gray,] (35.5000,122.0000) -- (35.5000,148.0000) -- (389.0000,148.0000) -- (389.0000,54.0000) -- (383.0000,54.0000);
+\node[fill=white,inner xsep=4bp,font=\smallfont] at (212,148) {${\color{orange}\beta_k}\!\leftarrow\![\beta_k+\eta(\bar J_k-B_k)]_+$};
+\draw[flow,draw=gray,] (345.5000,129.0000) -- (345.5000,160.0000) -- (7.0000,160.0000) -- (7.0000,35.0000) -- (23.0000,35.0000);
+\node[fill=white,inner xsep=4bp,font=\smallfont] at (163,160) {next rollout};
+\end{tikzpicture}
+\end{document}
