@@ -1,0 +1,1 @@
+One typography-only round. Four labels replaced in native a:t nodes without reserializing the other package parts. Exact XML reversal and 300dpi pixel masks prove no changes elsewhere. No math rebuild or layout changes were needed.
