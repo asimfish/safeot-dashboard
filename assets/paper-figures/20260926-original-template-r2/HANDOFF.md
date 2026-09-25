@@ -1,0 +1,11 @@
+# Original-template SafeOT revision R2
+
+The author requested continuing from the faithfully reconstructed earlier-PDF PPT template. This revision opens the existing native current-content copy from that template, edits its objects, and retains the three-column teaser, five numbered method modules, original schematic traces, cost pictograms, rollout icons and matrix motifs. It is a separate branch; no previous figure is overwritten.
+
+Figure 1 explains the unified price perspective without experiments. It now connects the entropic flow solve to its safety prices explicitly, distinguishes observed/target flow, and separates exact settings from conditional limits. The original blue/green/warm visual language remains, with reduced saturation and coordinated strokes. Figure 2 keeps five vertical stages and emphasizes the projection; observed-cost feedback is dashed and GAE advantages have their own path. Current terminology and star/alpha/advantage notation follow the current method sections.
+
+Both figures are 5.5 x 3.3 inches. Actual LibreOffice exports have text >= 8.192 pt; typeset math including scripts is >= 8.169 pt at 1:1. Label-width, formula-fit, page-boundary, metadata, XML-ID, source-preservation and editable-module checks pass. Color and grayscale exports were inspected. No independent cold-reader acceptance is claimed; owner promotion is pending. No manuscript or data files were changed.
+
+Editable boundaries: text, modules, matrices, graph nodes/edges and routes are native PPT objects. Math is grouped native vector contours with LaTeX source, not semantic OfficeMath. Four small cost icons in Figure 1 and two rollout icons in Figure 2 remain independently movable raster objects. Thus PDF/SVG are mostly vector, with these small images. PowerPoint rendering is unverified. Connectors do not auto-reroute when modules move.
+
+The source figures are illustrative. Graph conservation/budget constraints and hard masks are specified by the main projection equation; action-time enforcement requires a separate executor. The conceptual bottom band is not a numeric scale. The side curves and matrix/edge weights are schematic, not experimental results. The current benchmark uses no hard-excluded edges.
