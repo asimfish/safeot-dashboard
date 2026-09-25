@@ -1,0 +1,3 @@
+Round1: retypeset six starred formula groups; lower-route-only target match; increase header gap; noun-phrase callout; dashed feedback and weighted observed flow. Actual PPTX render: labels8.107pt/math8.169pt, no clipping; main layout preserved. Grayscale concern: the5pt beta-to-sum arrow could hide the dash behind the arrowhead.
+
+Round2: extend that short arrow3pt left and use a1.65pt dash/gap at1.1pt stroke; endpoint unchanged. Grayscale enlargement confirms visible gap and dash before the arrowhead. No other design edits. Formula/label fit, native object diff, zero outside-region pixel differences, source preservation and editability probes pass. No independent cold-read score assigned.
