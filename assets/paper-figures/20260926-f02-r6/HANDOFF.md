@@ -1,0 +1,1 @@
+R6 delivered: R5 copies change only “clip + EMA” to “clip + smooth” in Figures1–2; native editable contours, layout/fonts/colors preserved; PDF/SVG/300dpi/gray/CVD and edit probes included; actual LibreOffice render and zero outside-label pixel differences PASS; R5 unchanged fallback.
