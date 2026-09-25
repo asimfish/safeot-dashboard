@@ -1,0 +1,11 @@
+# Identity-restoration revision: process notes
+
+The direct user feedback rejects the generic appearance despite R3's mechanical improvements. This branch reuses current SafeOT content and notation while recovering meaningful pictorial variety from the earlier originals. S4 contracts were rebuilt on isolated copies, with two row-atomic S5 calls per figure; both provenance guards and cumulative checkpoint gates pass. Original rasters are immutable. B/F02 was used provisionally for editable development; no human selection or cold-reader acceptance is claimed.
+
+Print review1: retained cost patterns, asymmetric rerouting, clustering and a dominant solve; text/math floors passed. Figure1's actor link and right-axis spacing were weak. Its two unattached explanation-leader fragments did not communicate a relationship. Figure2's graph-space module borders were too pale. These observations were based on actual LibreOffice PNGs.
+
+Print review2: connected solved prices to the priced actor, restored pi(t+1), removed dangling leaders, separated the axis labels, added an excluded-edge key and exact-setting/conditional-limit brackets. Navy borders now distinguish graph construction/constraints from neutral rollout/update. Inspected color and grayscale; source math and routing checks pass. First print previews remain in history. No aesthetic score is assigned.
+
+Content corrections relative to generated B: remove unsupported physical-cost examples; remove the teaser's incorrect unnormalized priced-advantage expression; identify raw budget duals independently of F*; route GAE to the normalized advantage, never the sum; retain alpha and unhatted advantages; create exactly one exterior return path. The generated A/B rasters remain visual candidates with known semantic defects, not submission figures.
+
+Runtime preflight first identified text widths and named parent/connector intersections. Labels were wrapped/shortened without reducing the 8pt floor; intended parent/motif relationships were declared individually. An invalid appearance-plan format was rejected before rendering; actual builds used explicit redesign mode. Final flat color samples cover only two regions per figure and do not certify full source fidelity. This is an intentional semantic redraw.

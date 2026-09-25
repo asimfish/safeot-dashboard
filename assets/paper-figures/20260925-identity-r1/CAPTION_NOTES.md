@@ -1,0 +1,5 @@
+# Caption drafts for owner review
+
+Figure1: One price rule connects penalized objectives with budget-constrained flow. SafeOT prices all soft budgets in one entropic projection, excludes hard-event edges, filters budget duals and adds observed-cost feedback for the actor. The geometry illustrates binding and slack graph budgets. Fixed penalties and Lagrangian feedback are exact settings; LP and saturated-clip connections are conditional limits under the stated assumptions. All miniatures are schematic.
+
+Figure2: Rollouts supply the graph inputs, advantage estimates and observed episode costs. One projection yields a target flow and budget duals. Clipped, averaged duals combine with observed-cost feedback to weight the normalized policy advantage. GAE bypasses the price sum and enters the advantage directly. Only prices cross into the actor; the target flow is not executed. Hard-edge masking alone does not enforce action-time exclusions, which require the separate executor described in the text.
